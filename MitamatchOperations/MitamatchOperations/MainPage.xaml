@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="Mitamatch2.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid x:Name="AppTitleBar">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Image Source="/Assets/Images/MitamaLabLogo.png"
+                   HorizontalAlignment="Left"
+                   Width="16" Height="16" 
+                   Margin="8,0"/>
+            <TextBlock Grid.Row="0" Text="Mitamatch 2"
+                       TextWrapping="NoWrap"
+                       Style="{StaticResource CaptionTextBlockStyle}" 
+                       VerticalAlignment="Center"
+                       Margin="28,0,0,0"/>
+        </Grid>
+        <Grid Grid.Row="1" x:Name="MainContent">
+            <NavigationView x:Name="NavigationViewControl"
+                            ItemInvoked="NavView_ItemInvoked" >
+                <NavigationView.MenuItems>
+                    <NavigationViewItem Icon="Home" Content ="ホーム" Tag="home"/>
+                    <NavigationViewItem Icon="Play" Content ="オーダー編成" Tag="order composer"/>
+                </NavigationView.MenuItems>
+                <Frame x:Name="RootFrame" Navigated="OnRootFrameNavigated" Navigating="OnRootFrameNavigating"/>
+            </NavigationView>
+        </Grid>
+    </Grid>
+</Page>
