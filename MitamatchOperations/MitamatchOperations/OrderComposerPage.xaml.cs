@@ -239,49 +239,49 @@ public sealed partial class OrderComposerPage
         {
             case "属性":
                 {
-                    foreach (var item in Sources.Where(item => item.Kind is Elemental))
+                    foreach (var item in Sources.Where(item => item.Kind is Elemental).ToArray())
                         Sources.Remove(item);
                     break;
                 }
             case "バフ":
                 {
-                    foreach (var item in Sources.Where(item => item.Kind is Buff))
+                    foreach (var item in Sources.Where(item => item.Kind is Buff).ToArray())
                         Sources.Remove(item);
                     break;
                 }
             case "デバフ":
                 {
-                    foreach (var item in Sources.Where(item => item.Kind is DeBuff))
+                    foreach (var item in Sources.Where(item => item.Kind is DeBuff).ToArray())
                         Sources.Remove(item);
                     break;
                 }
             case "MP":
                 {
-                    foreach (var item in Sources.Where(item => item.Kind is Mp))
+                    foreach (var item in Sources.Where(item => item.Kind is Mp).ToArray())
                         Sources.Remove(item);
                     break;
                 }
             case "発動率":
                 {
-                    foreach (var item in Sources.Where(item => item.Kind is TriggerRateFluctuation))
+                    foreach (var item in Sources.Where(item => item.Kind is TriggerRateFluctuation).ToArray())
                         Sources.Remove(item);
                     break;
                 }
             case "再編":
                 {
-                    foreach (var item in Sources.Where(item => item.Kind is Formation))
+                    foreach (var item in Sources.Where(item => item.Kind is Formation).ToArray())
                         Sources.Remove(item);
                     break;
                 }
             case "盾":
                 {
-                    foreach (var item in Sources.Where(item => item.Kind is Shield))
+                    foreach (var item in Sources.Where(item => item.Kind is Shield).ToArray())
                         Sources.Remove(item);
                     break;
                 }
             case "その他":
                 {
-                    foreach (var item in Sources.Where(item => item.Kind is Stack or Other))
+                    foreach (var item in Sources.Where(item => item.Kind is Stack or Other).ToArray())
                         Sources.Remove(item);
                     break;
                 }
