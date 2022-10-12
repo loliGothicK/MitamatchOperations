@@ -21,7 +21,7 @@
                    HorizontalAlignment="Left"
                    Width="16" Height="16" 
                    Margin="8,0"/>
-            <TextBlock Grid.Row="0" Text="Mitamatch 2"
+            <TextBlock Grid.Row="0" Text="Mitamatch Operations"
                        TextWrapping="NoWrap"
                        Style="{StaticResource CaptionTextBlockStyle}" 
                        VerticalAlignment="Center"
