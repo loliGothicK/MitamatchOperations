@@ -12,7 +12,7 @@
     Version="0.1.0.0" />
 
   <Properties>
-    <DisplayName>Mitamatch2</DisplayName>
+    <DisplayName>Mitamatch Operations</DisplayName>
     <PublisherDisplayName>Mitama</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
