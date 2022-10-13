@@ -4,19 +4,19 @@ using mitama.OrderKinds;
 
 namespace mitama
 {
-    public abstract record Kind();
+    public abstract record Kind;
 
     namespace OrderKinds
     {
         public record Elemental(Element Element) : Kind;
-        public record Buff() : Kind;
-        public record DeBuff() : Kind;
-        public record Mp() : Kind;
-        public record TriggerRateFluctuation() : Kind;
-        public record Shield() : Kind;
-        public record Formation() : Kind;
-        public record Stack() : Kind;
-        public record Other() : Kind;
+        public record Buff : Kind;
+        public record DeBuff : Kind;
+        public record Mp : Kind;
+        public record TriggerRateFluctuation : Kind;
+        public record Shield : Kind;
+        public record Formation : Kind;
+        public record Stack : Kind;
+        public record Other : Kind;
     }
 
     public class Kinds

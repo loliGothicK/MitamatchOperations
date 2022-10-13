@@ -9,7 +9,7 @@ public sealed partial class MainWindow
     {
         InitializeComponent();
 
-        var mainPage = new mitama.MainPage();
+        var mainPage = new MainPage();
         Content = mainPage;
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(mainPage.GetAppTitleBar);

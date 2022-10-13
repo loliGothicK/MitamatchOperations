@@ -10,7 +10,7 @@ namespace mitama;
 /// </summary>
 public sealed partial class MainPage
 {
-    public UIElement GetAppTitleBar => this.AppTitleBar;
+    public UIElement GetAppTitleBar => AppTitleBar;
 
     public MainPage()
     {
@@ -63,18 +63,18 @@ public sealed partial class MainPage
         {
             case "home":
             {
-                if (RootFrame.CurrentSourcePageType != typeof(mitama.OrderComposerPage))
+                if (RootFrame.CurrentSourcePageType != typeof(OrderComposerPage))
                 {
-                    Navigate(typeof(mitama.OrderComposerPage));
+                    Navigate(typeof(OrderComposerPage));
                 }
 
                 break;
             }
             case "order composer":
             {
-                if (RootFrame.CurrentSourcePageType != typeof(mitama.OrderComposerPage))
+                if (RootFrame.CurrentSourcePageType != typeof(OrderComposerPage))
                 {
-                    Navigate(typeof(mitama.OrderComposerPage));
+                    Navigate(typeof(OrderComposerPage));
                 }
 
                 break;
