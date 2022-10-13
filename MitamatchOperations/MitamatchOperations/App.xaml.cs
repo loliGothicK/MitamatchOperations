@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 
-namespace Mitamatch2;
+namespace mitama;
 
 /// <summary>
 /// Provides application-specific behavior to supplement the default Application class.

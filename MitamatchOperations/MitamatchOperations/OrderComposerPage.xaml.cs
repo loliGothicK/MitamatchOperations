@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using Windows.ApplicationModel.DataTransfer;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
-using Windows.ApplicationModel.DataTransfer;
-using Mitamatch2.OrderKinds;
+using mitama.OrderKinds;
 
-namespace Mitamatch2;
+namespace mitama;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
@@ -19,7 +19,7 @@ public sealed partial class OrderComposerPage
     public static readonly int[] TimeSource = Enumerable.Range(0, 12).Select(t => t * 5).ToArray();
     private ObservableCollection<TimeTableItem> Deck { get; } = new();
     private ObservableCollection<Order> Sources { get; } = new();
-    private uint Margin { get; set; } = 5;
+    private new uint Margin { get; set; } = 5;
 
     public OrderComposerPage()
     {

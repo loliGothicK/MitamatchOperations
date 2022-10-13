@@ -1,4 +1,4 @@
-﻿namespace Mitamatch2;
+﻿namespace mitama;
 
 /// <summary>
 /// An empty window that can be used on its own or navigated to within a Frame.
@@ -9,7 +9,7 @@ public sealed partial class MainWindow
     {
         InitializeComponent();
 
-        var mainPage = new MainPage();
+        var mainPage = new mitama.MainPage();
         Content = mainPage;
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(mainPage.GetAppTitleBar);

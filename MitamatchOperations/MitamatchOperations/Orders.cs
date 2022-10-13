@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Mitamatch2.OrderKinds;
+using mitama.OrderKinds;
 
-namespace Mitamatch2
+namespace mitama
 {
     public abstract record Kind();
 

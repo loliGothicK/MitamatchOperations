@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-namespace Mitamatch2;
+﻿namespace mitama;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.

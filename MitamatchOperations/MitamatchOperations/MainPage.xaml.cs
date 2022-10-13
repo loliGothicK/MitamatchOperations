@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
-namespace Mitamatch2;
+namespace mitama;
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
 public sealed partial class MainPage
 {
-    private string AppTitleText => "Mitamatch 2";
     public UIElement GetAppTitleBar => this.AppTitleBar;
 
     public MainPage()
@@ -65,18 +63,18 @@ public sealed partial class MainPage
         {
             case "home":
             {
-                if (RootFrame.CurrentSourcePageType != typeof(OrderComposerPage))
+                if (RootFrame.CurrentSourcePageType != typeof(mitama.OrderComposerPage))
                 {
-                    Navigate(typeof(OrderComposerPage));
+                    Navigate(typeof(mitama.OrderComposerPage));
                 }
 
                 break;
             }
             case "order composer":
             {
-                if (RootFrame.CurrentSourcePageType != typeof(OrderComposerPage))
+                if (RootFrame.CurrentSourcePageType != typeof(mitama.OrderComposerPage))
                 {
-                    Navigate(typeof(OrderComposerPage));
+                    Navigate(typeof(mitama.OrderComposerPage));
                 }
 
                 break;
