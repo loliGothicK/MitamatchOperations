@@ -52,32 +52,17 @@
 
                     <Grid.ContextFlyout>
                         <Flyout x:Name="DeckItemFlyout">
-                            <StackPanel MinWidth="400">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal"
-                                                HorizontalAlignment="Right"
-                                                VerticalAlignment="Center"
-                                                Margin="0, 10">
-                                        <SymbolIcon Symbol="Clock"/>
-                                        <TextBlock Text="ディレイ時間（秒）" Margin="10, 0, 20, 0"/>
-                                    </StackPanel>
-                                    <ComboBox x:Name="ComboBox"
-                                              IsEditable="True"
-                                              ItemsSource="{x:Bind mitama:OrderComposerPage.TimeSource}"
-                                              AccessKey="{x:Bind Order.Index}"
-                                              Width="200"
-                                              Loaded="Delay_Loaded"/>
-                                </Grid>
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal"
-                                                HorizontalAlignment="Right"
-                                                VerticalAlignment="Center"
-                                                Margin="0, 10">
-                                        <SymbolIcon Symbol="Manage"/>
-                                        <TextBlock Text="担当プレイヤー" Margin="10, 0, 20, 0"/>
-                                    </StackPanel>
-                                    <TextBox x:Name="PicEditor" AccessKey="{x:Bind Order.Index}"/>
-                                </Grid>
+                            <StackPanel MinWidth="400" Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <SymbolIcon Symbol="Clock"/>
+                                </StackPanel>
+                                <ComboBox x:Name="ComboBox"
+                                          IsEditable="True"
+                                          ItemsSource="{x:Bind mitama:OrderComposerPage.TimeSource}"
+                                          AccessKey="{x:Bind Order.Index}"
+                                          Width="200"
+                                          PlaceholderText="{x:Bind Delay}"/>
+                                <TextBox x:Name="PicEditor" AccessKey="{x:Bind Order.Index}" PlaceholderText="{x:Bind PicPlaceholder}"/>
                                 <Button x:Name="TimelineFlyoutConfirmationButton"
                                         Content="Confirm"
                                         Style="{StaticResource AccentButtonStyle}"
@@ -154,7 +139,6 @@
                   MinWidth="500"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Top"
-                  Background="DarkBlue"
                   CornerRadius="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -164,12 +148,29 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                    <AppBarButton Icon="Clock" Label="Delay Seconds"/>
-                    <AppBarToggleButton Icon="Shuffle" Label="Timeline Mode"/>
-                </CommandBar>
+                <Grid Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Row="1">
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Text="Default Margin=" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox x:Name="GlobalMargin"
+                                 PlaceholderText="{x:Bind Margin}"
+                                 Margin="0 5"/>
+                        <TextBlock Text=" sec" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <CommandBar Grid.Column="1">
+                        <AppBarButton Icon="Clock" Label="Apply Margin" Margin="0 0 5 5" Click="ApplyMargin_OnClick"/>
+                        <AppBarToggleButton Icon="Shuffle" Label="Timeline Mode" Margin="0 0 5 5"/>
+                    </CommandBar>
+                </Grid>
+
+                <StackPanel Grid.Row="1" Background="DarkBlue">
                     <ListView
                         x:Name="OrderDeck"
                         MinHeight="400"

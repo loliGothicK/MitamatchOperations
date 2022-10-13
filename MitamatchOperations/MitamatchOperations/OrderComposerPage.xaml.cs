@@ -19,7 +19,7 @@ public sealed partial class OrderComposerPage
     public static readonly int[] TimeSource = Enumerable.Range(0, 12).Select(t => t * 5).ToArray();
     private ObservableCollection<TimeTableItem> Deck { get; } = new();
     private ObservableCollection<Order> Sources { get; } = new();
-    private uint DelayTime { get; set; } = 5;
+    private uint Margin { get; set; } = 5;
 
     public OrderComposerPage()
     {
@@ -67,7 +67,7 @@ public sealed partial class OrderComposerPage
     {
         if (Deck.Count == 0)
         {
-            Deck.Add(new TimeTableItem(ordered, 0, 15 * 60, 15 * 60 - ordered.PrepareTIme - ordered.ActiveTime, null));
+            Deck.Add(new TimeTableItem(ordered, 0, 15 * 60, 15 * 60 - ordered.PrepareTIme - ordered.ActiveTime));
         }
         else
         {
@@ -77,8 +77,8 @@ public sealed partial class OrderComposerPage
                 52 => 5u, // レギオンマッチスキル準備時間短縮Lv.3
                 _ => ordered.PrepareTIme,
             };
-            Deck.Add(new TimeTableItem(ordered, DelayTime, prev.End - DelayTime,
-                prev.End - DelayTime - prepareTime - ordered.ActiveTime, null));
+            Deck.Add(new TimeTableItem(ordered, Margin, prev.End - Margin,
+                prev.End - Margin - prepareTime - ordered.ActiveTime));
         }
     }
 
@@ -100,7 +100,7 @@ public sealed partial class OrderComposerPage
             var curr = item with
             {
                 Start = prev.End - item.Delay,
-                End = prev.End - DelayTime - item.Order.PrepareTIme - item.Order.ActiveTime
+                End = prev.End - Margin - item.Order.PrepareTIme - item.Order.ActiveTime
             };
             Deck.Add(curr);
             prev = curr;
@@ -357,18 +357,13 @@ public sealed partial class OrderComposerPage
         OrderSources.ItemsSource = Sources;
     }
 
-    private void Delay_Loaded(object sender, RoutedEventArgs e)
-    {
-        ((ComboBox)sender).SelectedIndex = 1;
-    }
-
     private void TimelineFlyoutConfirmationButton_OnClick(object sender, RoutedEventArgs e)
     {
         if (sender is not Button button) return;
 
         if (button.Parent is StackPanel panel)
         {
-            foreach (var elem in panel.Children.Where(elem => elem is Grid).SelectMany(elem => ((Grid)elem).Children))
+            foreach (var elem in panel.Children)
             {
                 switch (elem)
                 {
@@ -433,18 +428,34 @@ public sealed partial class OrderComposerPage
         if (button.IsEnabled) return;
         button.Content = "同系統の属性オーダーを編成済み";
     }
+
+    private void ApplyMargin_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (!uint.TryParse(GlobalMargin.Text, out var seconds)) return;
+        
+        foreach (var item in Deck)
+        {
+            if (item.Delay == Margin) item.Delay = seconds;
+        }
+
+        Margin = seconds;
+        ReCalcTimeTable();
+    }
 }
 
-internal record TimeTableItem(Order Order, uint Delay, uint Start, uint End, string? Pic)
+internal record TimeTableItem(Order Order, uint Delay, uint Start, uint End, string Pic = "")
 {
     internal string StartTime => $"{Start / 60:00}:{Start % 60:00}";
     internal string EndTime => $"{End / 60:00}:{End % 60:00}";
+    internal string PicFmt => Pic != "" ? $"[{Pic}]" : "";
+    internal string PicPlaceholder => Pic != "" ? Pic : @"担当プレイヤーを入力してください";
 
-    internal string? PicFmt => Pic != null ? $"[{Pic}]" : null;
+    internal uint Delay { get; set; } = Delay;
+    internal string Pic { get; set; } = Pic;
 
     bool IEquatable<TimeTableItem?>.Equals(TimeTableItem? other) => Order.Index == other?.Order.Index;
 
-    public static implicit operator TimeTableItem(Order order) => new(order, 0, 0, 0, null);
+    public static implicit operator TimeTableItem(Order order) => new(order, 0, 0, 0);
 
-    internal static TimeTableItem Proxy(Order order) => new(order, 0, 0, 0, null);
+    internal static TimeTableItem Proxy(Order order) => new(order, 0, 0, 0);
 };
