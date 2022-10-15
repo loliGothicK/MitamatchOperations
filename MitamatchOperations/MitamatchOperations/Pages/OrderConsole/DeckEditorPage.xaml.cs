@@ -64,6 +64,11 @@ public sealed partial class DeckEditorPage
             PushOrder(ordered);
         }
 
+        Update();
+    }
+
+    private void Update()
+    {
         OrderSources.ItemsSource = Sources;
         OrderDeck.ItemsSource = Deck;
     }
@@ -102,15 +107,18 @@ public sealed partial class DeckEditorPage
 
         foreach (var item in table.Skip(1))
         {
-            var current = item with
+            var prepareTime = previous.Order.Index switch
+            {
+                52 => 5u, // レギオンマッチスキル準備時間短縮Lv.3
+                _ => item.Order.PrepareTIme
+            };
+            previous = item with
             {
                 Start = previous.End - item.Delay,
-                End = previous.End - Margin - item.Order.PrepareTIme - item.Order.ActiveTime
+                End = (previous.End - item.Delay) - prepareTime - item.Order.ActiveTime
             };
-            Deck.Add(current);
-            previous = current;
+            Deck.Add(previous);
         }
-
         OrderDeck.ItemsSource = Deck;
     }
 
@@ -492,8 +500,10 @@ public sealed partial class DeckEditorPage
         foreach (var item in deck.Items.Select(item => (TimeTableItem)item))
         {
             Deck.Add(item);
+            Sources.Remove(item.Order);
         }
-        OrderDeck.ItemsSource = Deck;
+
+        Update();
     }
 }
 

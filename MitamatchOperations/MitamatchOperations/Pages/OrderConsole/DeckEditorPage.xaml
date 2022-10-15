@@ -199,10 +199,10 @@
                         </CommandBar>
                     </Grid>
 
-                    <StackPanel Grid.Row="1" Background="DarkBlue" CornerRadius="10">
+                    <Grid Grid.Row="1" Background="DarkBlue" CornerRadius="10">
                         <ListView
                             x:Name="OrderDeck"
-                            MinHeight="400"
+                            MinHeight="500"
                             Width="500"
                             Background="Transparent"
                             BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
@@ -213,8 +213,9 @@
                             Drop="View_Drop"
                             DragItemsStarting="Target_DragItemsStarting"
                             DragEnter="Target_DragEnter"
-                            DragItemsCompleted="OrderDeck_OnChanged"/>
-                    </StackPanel>
+                            DragItemsCompleted="OrderDeck_OnChanged"
+                            HorizontalAlignment="Left"/>
+                    </Grid>
                 </Grid>
             </StackPanel>
             <Grid Grid.Column="0">

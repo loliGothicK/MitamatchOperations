@@ -13,7 +13,7 @@ namespace mitama.Pages.OrderConsole;
 /// </summary>
 public sealed partial class LoadDialogContent
 {
-    public delegate void OnChanged(string selected);
+    public delegate void OnChanged(Selected selected);
 
     private Dictionary<string, List<string>> RegionToMembersMap = new();
     private OnChanged OnChangedAction;
@@ -49,12 +49,12 @@ public sealed partial class LoadDialogContent
             MemberComboBox.PlaceholderText = "メンバーを選択してください";
         }
 
-        OnChangedAction.Invoke(region);
+        OnChangedAction.Invoke(new Region(region));
     }
 
     private void MemberComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var member = e.AddedItems[0].ToString();
-        if (member != null) OnChangedAction.Invoke(member);
+        if (member != null) OnChangedAction.Invoke(new Member(member));
     }
 }

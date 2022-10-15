@@ -1,7 +1,5 @@
 ﻿using System;
-using ABI.System.Windows.Input;
-using mitama.Pages.OrderConsole;
-using static System.Collections.Specialized.BitVector32;
+using System.Windows.Input;
 
 namespace mitama;
 
@@ -11,7 +9,7 @@ internal record Defer(Action Action) : IDisposable, ICommand
 
     public event EventHandler? CanExecuteChanged;
 
-    bool System.Windows.Input.ICommand.CanExecute(object? _) => true;
+    bool ICommand.CanExecute(object? _) => true;
 
-    void System.Windows.Input.ICommand.Execute(object? _) => Action.Invoke();
+    void ICommand.Execute(object? _) => Action.Invoke();
 }

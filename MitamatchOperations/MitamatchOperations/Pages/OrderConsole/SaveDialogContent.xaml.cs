@@ -6,59 +6,86 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.UI.Xaml.Controls;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+namespace mitama.Pages.OrderConsole;
 
-namespace mitama.Pages.OrderConsole
+public abstract record Selected;
+public record Region(string Name) : Selected;
+public record Member(string Name) : Selected;
+
+/// <summary>
+/// An empty page that can be used on its own or navigated to within a Frame.
+/// </summary>
+public sealed partial class SaveDialogContent
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class SaveDialogContent
+    public delegate void OnChanged(Selected selected);
+
+    private readonly Dictionary<string, List<string>> _regionToMembersMap = new();
+    private readonly OnChanged _onChangedAction;
+    private string? _region = null;
+    private string? _member = null;
+
+    public SaveDialogContent(OnChanged onChanged)
     {
-        public delegate void OnChanged(string selected);
+        _onChangedAction = onChanged;
+        InitializeComponent();
 
-        private Dictionary<string, List<string>> RegionToMembersMap = new();
-        private OnChanged OnChangedAction;
+        InitComboBox();
+    }
 
-        public SaveDialogContent(OnChanged onChanged)
+    internal void UpdateComboBox()
+    {
+        if (_region is null) { return; }
+        if (_member is null) { return; }
+
+        if (!_regionToMembersMap.ContainsKey(_region))
         {
-            OnChangedAction = onChanged;
-            InitializeComponent();
-
-            var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var regions = Directory.GetDirectories(@$"{desktop}\MitamatchOperations\Regions").ToArray();
-
-            foreach (var regionPath in regions)
+            _regionToMembersMap[_region] = new List<string>{ _member };
+        }
+        else
+        {
+            if (!_regionToMembersMap[_region].Contains(_member))
             {
-                var regionName = regionPath.Split(@"\").Last();
-                RegionToMembersMap.Add(regionName, Directory.GetFiles(regionPath, "*.json").Select(path =>
-                {
-                    using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
-                    var json = sr.ReadToEnd();
-                    return JsonSerializer.Deserialize<OrderPossession>(json).Name;
-                }).ToList());
-                RegionComboBox.Items.Add(regionName);
+                _regionToMembersMap[_region].Add(_member);
             }
         }
+    }
 
-        private void RegionComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void InitComboBox()
+    {
+        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        var regions = Directory.GetDirectories(@$"{desktop}\MitamatchOperations\Regions").ToArray();
+
+        foreach (var regionPath in regions)
         {
-            var region = e.AddedItems[0].ToString();
-            if (region == null) return;
-            foreach (var member in RegionToMembersMap[region])
+            var regionName = regionPath.Split(@"\").Last();
+            _regionToMembersMap.Add(regionName, Directory.GetFiles(regionPath, "*.json").Select(path =>
             {
-                MemberComboBox.Items.Add(member);
-                MemberComboBox.PlaceholderText = "メンバーを選択または入力してください";
-            }
-
-            OnChangedAction.Invoke(region);
+                using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+                var json = sr.ReadToEnd();
+                return JsonSerializer.Deserialize<OrderPossession>(json).Name;
+            }).ToList());
+            RegionComboBox.Items.Add(regionName);
         }
+    }
 
-        private void MemberComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void RegionComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var region = e.AddedItems[0].ToString();
+        if (region == null) return;
+        foreach (var member in _regionToMembersMap[region])
         {
-            var member = e.AddedItems[0].ToString();
-            if (member != null) OnChangedAction.Invoke(member);
+            MemberComboBox.Items.Add(member);
+            MemberComboBox.PlaceholderText = "メンバーを選択または入力してください";
         }
+
+        _onChangedAction.Invoke(new Region(region));
+        _region = region;
+    }
+
+    private void MemberComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var member = e.AddedItems[0].ToString();
+        if (member != null) _onChangedAction.Invoke(new Member(member));
+        _member = member;
     }
 }

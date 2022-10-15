@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -13,7 +12,6 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using mitama.OrderKinds;
 using WinRT;
 using mitama.Pages.Common;
-using Microsoft.UI.Xaml.Shapes;
 
 namespace mitama.Pages.OrderConsole;
 
@@ -24,7 +22,8 @@ public sealed partial class OrderManagerPage
 {
     private ObservableCollection<Order> Sources { get; } = new();
     private ObservableCollection<Order> OrdersInPossession { get; } = new();
-    public readonly List<string> Selected = new();
+    public string? SelectedRegion;
+    public string? SelectedMember;
 
     public OrderManagerPage()
     {
@@ -39,6 +38,12 @@ public sealed partial class OrderManagerPage
             = OthersCheckBox.IsChecked = true;
 
         InitRegionsMenuFlyout();
+    }
+
+    private void Update()
+    {
+        OrderSources.ItemsSource = Sources;
+        OrdersInPossessionView.ItemsSource = OrdersInPossession;
     }
 
     private void AddConfirmation_Click(object sender, RoutedEventArgs e)
@@ -268,39 +273,6 @@ public sealed partial class OrderManagerPage
         OrderSources.ItemsSource = Sources;
     }
 
-    private void SaveButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        // TODO
-
-        if (((Button)sender).Parent is StackPanel { Parent: FlyoutPresenter { Parent: Popup popup } })
-        {
-            popup.IsOpen = false;
-        }
-
-        OnDeckSavedTips.IsOpen = true;
-    }
-
-    private void LoadComboBox_OnLoaded(object sender, RoutedEventArgs e)
-    {
-        if (sender is not ComboBox box) return;
-
-        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var decks = Directory.GetFiles(@$"{desktop}\MitamatchOperations\decks", "*.json").Select(path =>
-        {
-            using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
-            var json = sr.ReadToEnd();
-            return JsonSerializer.Deserialize<DeckJson>(json);
-        }).ToList();
-
-        box.ItemsSource = decks;
-    }
-
-    private void LoadButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        // TODO
-        OrdersInPossessionView.ItemsSource = OrdersInPossession;
-    }
-
     private void InitRegionsMenuFlyout()
     {
         var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -330,9 +302,19 @@ public sealed partial class OrderManagerPage
             .WithTitle("レギオンとメンバー名を選択してください")
             .WithBody(new LoadDialogContent((item) =>
             {
-                if (string.IsNullOrEmpty(item))
-                    throw new ArgumentException(@"Value cannot be null or empty.", nameof(item));
-                Selected.Add(item);
+                switch (item)
+                {
+                    case Region region:
+                    {
+                        SelectedRegion = region.Name;
+                        break;
+                    }
+                    case Member member:
+                    {
+                        SelectedMember = member.Name;
+                        break;
+                    }
+                }
             }))
             .WithPrimary("Load")
             .WithCancel("Cancel")
@@ -341,7 +323,7 @@ public sealed partial class OrderManagerPage
         dialog.PrimaryButtonCommand = new Defer(delegate
         {
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var path = $@"{desktop}\MitamatchOperations\Regions\{Selected[0]}\{Selected[1]}.json";
+            var path = $@"{desktop}\MitamatchOperations\Regions\{SelectedRegion}\{SelectedMember}.json";
 
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var json = sr.ReadToEnd();
@@ -349,8 +331,11 @@ public sealed partial class OrderManagerPage
             OrdersInPossession.Clear();
             foreach (var index in de.OrderIndices)
             {
+                Sources.Remove(Order.List[index]);
                 OrdersInPossession.Add(Order.List[index]);
             }
+
+            Update();
         });
 
         await dialog.ShowAsync();
@@ -362,9 +347,19 @@ public sealed partial class OrderManagerPage
             .WithTitle("レギオンとメンバー名を選択してください")
             .WithBody(new SaveDialogContent((item) =>
             {
-                if (string.IsNullOrEmpty(item))
-                    throw new ArgumentException(@"Value cannot be null or empty.", nameof(item));
-                Selected.Add(item);
+                switch (item)
+                {
+                    case Region region:
+                    {
+                        SelectedRegion = region.Name;
+                        break;
+                    }
+                    case Member member:
+                    {
+                        SelectedMember = member.Name;
+                        break;
+                    }
+                }
             }))
             .WithPrimary("Save")
             .WithCancel("Cancel")
@@ -373,14 +368,19 @@ public sealed partial class OrderManagerPage
         dialog.PrimaryButtonCommand = new Defer(delegate
         {
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var path = $@"{desktop}\MitamatchOperations\Regions\{Selected[0]}\{Selected[1]}.json";
+            var path = $@"{desktop}\MitamatchOperations\Regions\{SelectedRegion}\{SelectedMember}.json";
 
             Director.CreateDirectory(@$"{desktop}\MitamatchOperations\decks");
             using var fs = Director.CreateFile(path);
-            var proxy = new OrderPossession(Selected[1], DateTime.Now,
-                OrdersInPossession.Select(order => order.Index).ToArray());
-            var save = new UTF8Encoding(true).GetBytes(JsonSerializer.Serialize(proxy));
-            fs.Write(save, 0, save.Length);
+            if (SelectedMember != null)
+            {
+                var proxy = new OrderPossession(SelectedMember, DateTime.Now,
+                    OrdersInPossession.Select(order => order.Index).ToArray());
+                var save = new UTF8Encoding(true).GetBytes(JsonSerializer.Serialize(proxy));
+                fs.Write(save, 0, save.Length);
+            }
+
+            dialog.Content.As<SaveDialogContent>().UpdateComboBox();
         });
 
         await dialog.ShowAsync();
