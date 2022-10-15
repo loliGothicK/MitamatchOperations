@@ -15,6 +15,7 @@
     <Authors>Mitama</Authors>
     <Company>MitamaLab</Company>
     <PackAsTool>True</PackAsTool>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <WarningLevel>7</WarningLevel>
@@ -34,6 +35,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|arm64'">
     <WarningLevel>7</WarningLevel>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Pages\consolePage.xaml" />
+    <None Remove="Pages\console\OrderManagePage.xaml" />
+    <None Remove="Pages\OrderConsole\LoadDialogContent.xaml" />
+    <None Remove="Pages\OrderConsole\SaveDialogContent.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.4" />
@@ -61,5 +68,33 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\OrderConsole\SaveDialogContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\OrderConsole\LoadDialogContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\console\OrderManagePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\consolePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
