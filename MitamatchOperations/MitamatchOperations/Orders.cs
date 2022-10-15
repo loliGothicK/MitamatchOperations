@@ -48,7 +48,7 @@ namespace mitama
         Wind,
         Light,
         Dark,
-        Special,
+        Special
     }
 
     public readonly record struct Order(
@@ -64,11 +64,11 @@ namespace mitama
         public static implicit operator Order(ValueTuple<ushort, string, string, string, uint, uint, Kind> from) =>
             new(from.Item1, from.Item2, from.Item3, from.Item4, from.Item5, from.Item6, from.Item7);
 
-        public string Path => $@"Assets/orders/{Index}.png";
+        public string Path => $@"../../Assets/orders/{Index}.png";
 
         public string TimeFmt => ActiveTime switch {
             0 => $"({PrepareTIme} sec)",
-            _ => $"({PrepareTIme} + {ActiveTime} sec)",
+            _ => $"({PrepareTIme} + {ActiveTime} sec)"
         };
 
         public static readonly Order[] List = Init();
@@ -455,7 +455,7 @@ namespace mitama
                     "味方が次に使うオーダースキルの準備時間を5秒に変更する。",
                     5, 0,
                     Kinds.Stack
-                ),
+                )
             };
 
             return orders.Select((v, index) =>

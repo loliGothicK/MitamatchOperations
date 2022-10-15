@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using mitama.Pages;
+using mitama.Pages.OrderConsole;
 
 namespace mitama;
 /// <summary>
@@ -59,26 +62,15 @@ public sealed partial class MainPage
 
     private void NavView_Navigate(FrameworkElement item)
     {
-        switch (item.Tag)
+        var mapping = new Dictionary<string, Type>()
         {
-            case "home":
-            {
-                if (RootFrame.CurrentSourcePageType != typeof(OrderComposerPage))
-                {
-                    Navigate(typeof(OrderComposerPage));
-                }
+            {"home", typeof(HomePage)},
+            {"order console", typeof(OrderConsolePage)},
+        };
 
-                break;
-            }
-            case "order composer":
-            {
-                if (RootFrame.CurrentSourcePageType != typeof(OrderComposerPage))
-                {
-                    Navigate(typeof(OrderComposerPage));
-                }
-
-                break;
-            }
+        if (RootFrame.CurrentSourcePageType != mapping[(string)item.Tag])
+        {
+            Navigate(mapping[(string)item.Tag]);
         }
     }
 }

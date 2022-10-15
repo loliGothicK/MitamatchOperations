@@ -32,7 +32,7 @@
                             ItemInvoked="NavView_ItemInvoked" >
                 <NavigationView.MenuItems>
                     <NavigationViewItem Icon="Home" Content ="ホーム" Tag="home"/>
-                    <NavigationViewItem Icon="Play" Content ="オーダー編成" Tag="order composer"/>
+                    <NavigationViewItem Icon="Play" Content ="オーダーコンソール" Tag="order console"/>
                 </NavigationView.MenuItems>
                 <Frame x:Name="RootFrame" Navigated="OnRootFrameNavigated" Navigating="OnRootFrameNavigating"/>
             </NavigationView>
