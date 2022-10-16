@@ -18,6 +18,7 @@ public sealed partial class MainPage
     public MainPage()
     {
         InitializeComponent();
+        Navigate(typeof(HomePage));
     }
 
     public void Navigate(

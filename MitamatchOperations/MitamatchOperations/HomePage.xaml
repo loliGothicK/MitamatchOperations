@@ -8,6 +8,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Source="./Assets/Images/MO_LOGO_WHITE.png" Margin="50 50 50 50"/>
+        </StackPanel>
+        <GridView>
 
+        </GridView>
     </Grid>
 </Page>
