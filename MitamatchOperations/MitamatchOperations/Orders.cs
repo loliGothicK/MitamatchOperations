@@ -293,7 +293,7 @@ namespace mitama
                     "レギオンマッチスキル闇・水属性効果増加Lv.3",
                     "闇属性メモリアのスキル効果が特大増加し、水属性メモリアのスキル効果が増加する。",
                     15, 60,
-                    Kinds.Elemental.Water
+                    Kinds.Elemental.Dark
                 ),
                 (
                     "黒貂威風",
