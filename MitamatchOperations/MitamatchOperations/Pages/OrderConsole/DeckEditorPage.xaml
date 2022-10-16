@@ -133,7 +133,7 @@
                 <SymbolIcon Symbol="Sort" Rotation="90"/>
             </Grid>
 
-            <StackPanel Grid.Column="2" Orientation="Vertical">
+            <Grid Grid.Column="2">
                 <Grid MinHeight="400"
                       MinWidth="500"
                       HorizontalAlignment="Center"
@@ -199,11 +199,11 @@
                         </CommandBar>
                     </Grid>
 
-                    <Grid Grid.Row="1" Background="DarkBlue" CornerRadius="10">
+                    <Grid Grid.Row="1" Background="DarkBlue" CornerRadius="10" VerticalAlignment="Stretch">
                         <ListView
                             x:Name="OrderDeck"
                             MinHeight="500"
-                            Width="500"
+                            MinWidth="500"
                             Background="Transparent"
                             BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
                             ItemsSource="{x:Bind Deck}"
@@ -214,10 +214,11 @@
                             DragItemsStarting="Target_DragItemsStarting"
                             DragEnter="Target_DragEnter"
                             DragItemsCompleted="OrderDeck_OnChanged"
+                            VerticalAlignment="Stretch"
                             HorizontalAlignment="Left"/>
                     </Grid>
                 </Grid>
-            </StackPanel>
+            </Grid>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
