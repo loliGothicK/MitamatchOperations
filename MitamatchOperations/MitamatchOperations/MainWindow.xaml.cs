@@ -1,4 +1,6 @@
-﻿namespace mitama;
+﻿using mitama.Pages;
+
+namespace mitama;
 
 /// <summary>
 /// An empty window that can be used on its own or navigated to within a Frame.
