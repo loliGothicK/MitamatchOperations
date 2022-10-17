@@ -40,6 +40,7 @@
     <None Remove="Pages\console\OrderManagePage.xaml" />
     <None Remove="Pages\OrderConsole\LoadDialogContent.xaml" />
     <None Remove="Pages\OrderConsole\SaveDialogContent.xaml" />
+    <None Remove="Pages\RegionConsolePage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,6 +73,12 @@
 
   <ItemGroup>
     <Folder Include="Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\RegionConsolePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

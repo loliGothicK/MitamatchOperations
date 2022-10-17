@@ -5,13 +5,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:mitama="using:mitama" 
-    xmlns:console="using:mitama.Pages.OrderConsole"
+    xmlns:console="using:mitama.Pages.OrderConsole" 
+    xmlns:domain="using:mitama.Domain"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <Grid.Resources>
-            <DataTemplate x:Key="OrderItemTemplate" x:DataType="mitama:Order">
+            <DataTemplate x:Key="OrderItemTemplate" x:DataType="domain:Order">
                 <Grid>
                     <Grid.ContextFlyout>
                         <Flyout x:Name="OrderFlyout">
@@ -58,12 +59,17 @@
                                     <SymbolIcon Symbol="Clock"/>
                                 </StackPanel>
                                 <ComboBox x:Name="ComboBox"
+                                          Header="ディレイ時間（秒）"
                                           IsEditable="True"
                                           ItemsSource="{x:Bind console:DeckEditorPage.TimeSource}"
                                           AccessKey="{x:Bind Order.Index}"
                                           Width="200"
-                                          PlaceholderText="{x:Bind Delay}"/>
-                                <TextBox x:Name="PicEditor" AccessKey="{x:Bind Order.Index}" PlaceholderText="{x:Bind PicPlaceholder}"/>
+                                          Loaded="MarginSecondsComboBox_OnLoaded"/>
+                                <StackPanel Orientation="Horizontal" Margin="20 0 0 0" >
+                                    <DropDownButton Content="Select Player"
+                                                    AllowFocusOnInteraction="True"
+                                                    Loaded="SelectPlayerButton_OnLoaded"/>
+                                </StackPanel>
                                 <Button x:Name="TimelineFlyoutConfirmationButton"
                                         Content="Confirm"
                                         Style="{StaticResource AccentButtonStyle}"
@@ -199,7 +205,7 @@
                         </CommandBar>
                     </Grid>
 
-                    <Grid Grid.Row="1" Background="DarkBlue" CornerRadius="10" VerticalAlignment="Stretch">
+                    <Grid Grid.Row="1" Background="#111111" CornerRadius="10" VerticalAlignment="Stretch">
                         <ListView
                             x:Name="OrderDeck"
                             MinHeight="500"
@@ -251,7 +257,7 @@
                     Grid.Row="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    ItemsSource="{x:Bind mitama:Order.List}"
+                    ItemsSource="{x:Bind domain:Order.List}"
                     ItemTemplate="{StaticResource OrderItemTemplate}"
                     IsItemClickEnabled="True"
                     CanDragItems="True"

@@ -11,7 +11,8 @@ using Windows.ApplicationModel.DataTransfer;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
-using mitama.OrderKinds;
+using mitama.Domain;
+using mitama.Domain.OrderKinds;
 using WinRT;
 
 namespace mitama.Pages.OrderConsole;
@@ -25,6 +26,7 @@ public sealed partial class DeckEditorPage
     private ObservableCollection<TimeTableItem> Deck { get; } = new();
     private ObservableCollection<Order> Sources { get; } = new();
     private new uint Margin { get; set; } = 5;
+    private Dictionary<string, List<string>> RegionToMembersDict { get; set; } = new();
 
     public DeckEditorPage()
     {
@@ -37,6 +39,33 @@ public sealed partial class DeckEditorPage
             = FormationCheckBox.IsChecked
             = ShieldCheckBox.IsChecked
             = OthersCheckBox.IsChecked = true;
+
+        InitRegionToMembersDict();
+    }
+
+    private void InitRegionToMembersDict()
+    {
+        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        var regions = Directory.GetDirectories(@$"{desktop}\MitamatchOperations\Regions").ToArray();
+
+        foreach (var regionPath in regions)
+        {
+            var regionName = regionPath.Split(@"\").Last();
+            var names = Directory.GetFiles(regionPath, "*.json").Select(path =>
+            {
+                using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+                var json = sr.ReadToEnd();
+                return JsonSerializer.Deserialize<OrderPossession>(json).Name;
+            });
+            if (!RegionToMembersDict.ContainsKey(regionName))
+            {
+                RegionToMembersDict[regionName] = new List<string>();
+            }
+            foreach (var name in names)
+            {
+                RegionToMembersDict[regionName].Add(name);
+            }
+        }
     }
 
     private void AddConfirmation_Click(object sender, RoutedEventArgs e)
@@ -504,6 +533,40 @@ public sealed partial class DeckEditorPage
         }
 
         Update();
+    }
+
+    private void MarginSecondsComboBox_OnLoaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not ComboBox box) return;
+        var index = Deck.IndexOf(Order.List[int.Parse(box.AccessKey)]);
+        var item = Deck[index];
+        box.SelectedItem = item.Delay.ToString();
+    }
+
+    private void PicEditor_OnLoaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not TextBox box) return;
+        var index = Deck.IndexOf(Order.List[int.Parse(box.AccessKey)]);
+        var item = Deck[index];
+        box.Text = item.Pic;
+    }
+
+    private void SelectPlayerButton_OnLoaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not DropDownButton button) return;
+        
+        var flyout = new MenuFlyout();
+        foreach (var menuFlyoutSubItem in RegionToMembersDict.Select(kv =>
+                 {
+                     var (region, members) = kv;
+                     var subItem = new MenuFlyoutSubItem { Text = region };
+                     foreach (var member in members) subItem.Items.Add(new MenuFlyoutItem { Text = member });
+                     return subItem;
+                 }))
+        {
+            flyout.Items.Add(menuFlyoutSubItem);
+        }
+        button.Flyout = flyout;
     }
 }
 

@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using mitama.Pages;
-using mitama.Pages.OrderConsole;
 
 namespace mitama;
 /// <summary>
@@ -66,6 +65,7 @@ public sealed partial class MainPage
         var mapping = new Dictionary<string, Type>()
         {
             {"home", typeof(HomePage)},
+            {"region console", typeof(RegionConsolePage)},
             {"order console", typeof(OrderConsolePage)},
         };
 

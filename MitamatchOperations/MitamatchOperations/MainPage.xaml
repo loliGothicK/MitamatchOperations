@@ -32,7 +32,8 @@
                             ItemInvoked="NavView_ItemInvoked" >
                 <NavigationView.MenuItems>
                     <NavigationViewItem Icon="Home" Content ="ホーム" Tag="home"/>
-                    <NavigationViewItem Icon="Play" Content ="オーダーコンソール" Tag="order console"/>
+                    <NavigationViewItem Icon="People" Content ="レギオン コンソール" Tag="region console"/>
+                    <NavigationViewItem Icon="XboxOneConsole" Content ="オーダー コンソール" Tag="order console"/>
                 </NavigationView.MenuItems>
                 <Frame x:Name="RootFrame" Navigated="OnRootFrameNavigated" Navigating="OnRootFrameNavigating"/>
             </NavigationView>

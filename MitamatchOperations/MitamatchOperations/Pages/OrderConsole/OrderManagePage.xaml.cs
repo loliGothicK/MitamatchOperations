@@ -9,7 +9,8 @@ using Windows.ApplicationModel.DataTransfer;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
-using mitama.OrderKinds;
+using mitama.Domain;
+using mitama.Domain.OrderKinds;
 using WinRT;
 using mitama.Pages.Common;
 
@@ -36,8 +37,6 @@ public sealed partial class OrderManagerPage
             = FormationCheckBox.IsChecked
             = ShieldCheckBox.IsChecked
             = OthersCheckBox.IsChecked = true;
-
-        InitRegionsMenuFlyout();
     }
 
     private void Update()
@@ -271,29 +270,6 @@ public sealed partial class OrderManagerPage
         }
 
         OrderSources.ItemsSource = Sources;
-    }
-
-    private void InitRegionsMenuFlyout()
-    {
-        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var regions = Directory.GetDirectories(@$"{desktop}\MitamatchOperations\Regions").ToArray();
-
-        foreach (var regionPath in regions)
-        {
-            var regionName = regionPath.Split(@"\").Last();
-            var names = Directory.GetFiles(regionPath, "*.json").Select(path =>
-            {
-                using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
-                var json = sr.ReadToEnd();
-                return JsonSerializer.Deserialize<OrderPossession>(json).Name;
-            });
-            var region = new MenuFlyoutSubItem { Text = regionName };
-            foreach (var name in names)
-            {
-                region.Items.Add(new MenuFlyoutItem { Text = name });
-            }
-            RegionsMenuFlyout.Items.Add(region);
-        }
     }
 
     private async void Load_OnClick(object sender, RoutedEventArgs e)
