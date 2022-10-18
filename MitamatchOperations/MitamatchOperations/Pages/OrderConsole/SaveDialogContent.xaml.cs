@@ -62,7 +62,7 @@ public sealed partial class SaveDialogContent
             {
                 using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                 var json = sr.ReadToEnd();
-                return JsonSerializer.Deserialize<OrderPossession>(json).Name;
+                return Domain.Member.FromJson(json).Name;
             }).ToList());
             RegionComboBox.Items.Add(regionName);
         }

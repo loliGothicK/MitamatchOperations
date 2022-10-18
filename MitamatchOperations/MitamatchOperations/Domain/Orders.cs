@@ -51,12 +51,12 @@ namespace mitama.Domain
         Special
     }
 
-    public readonly record struct Status(uint Atk, uint SpAkt, uint Def, uint SpDef)
+    public readonly record struct Status(uint Atk, uint SpAtk, uint Def, uint SpDef)
     {
         public static implicit operator Status(ValueTuple<uint, uint, uint, uint> from) => new()
         {
             Atk = from.Item1,
-            SpAkt = from.Item2,
+            SpAtk = from.Item2,
             Def = from.Item3,
             SpDef = from.Item4,
         };
@@ -91,6 +91,13 @@ namespace mitama.Domain
         public static readonly Order[] FormationOrders = List.Where(order => order.Kind is Formation).ToArray();
         public static readonly Order[] StackOrders = List.Where(order => order.Kind is Stack).ToArray();
         public static readonly Order[] OtherOrders = List.Where(order => order.Kind is Other).ToArray();
+
+        // For Automate Assign
+        public static readonly Order[] AtkTop5 = List.OrderByDescending(order => order.Status.Atk).Take(5).ToArray();
+        public static readonly Order[] SpAtkTop5 = List.OrderByDescending(order => order.Status.SpAtk).Take(5).ToArray();
+        public static readonly Order[] DefTop5 = List.OrderByDescending(order => order.Status.Def).Take(5).ToArray();
+        public static readonly Order[] SpDefTop5 = List.OrderByDescending(order => order.Status.SpDef).Take(5).ToArray();
+        public static readonly Order[] DefSumTop5 = List.OrderByDescending(order => order.Status.Def + order.Status.SpDef).Take(5).ToArray();
 
         private Order((ushort, string, string, string, (uint, uint, uint, uint), (uint, uint), Kind) raw)
             : this(raw.Item1, raw.Item2, raw.Item3, raw.Item4, raw.Item5, raw.Item6.Item1, raw.Item6.Item2, raw.Item7)

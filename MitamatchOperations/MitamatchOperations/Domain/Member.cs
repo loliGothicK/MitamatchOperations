@@ -39,7 +39,7 @@ internal enum BackCategory
     Healer = 4
 }
 
-internal record struct Member(
+internal record Member(
     DateTime CreatedAt,
     DateTime UpdatedAt,
     string Name,
@@ -80,12 +80,11 @@ internal record struct Member(
         ushort[] OrderIndices
     )
     {
-        public static implicit operator Member(MemberDto dto) => new()
-        {
-            CreatedAt = dto.CreatedAt,
-            UpdatedAt = dto.UpdatedAt,
-            Name = dto.Name,
-            Position = dto.Position switch
+        public static implicit operator Member(MemberDto dto) => new Member(
+            dto.CreatedAt,
+            dto.UpdatedAt,
+            dto.Name,
+            dto.Position switch
             {
                 0 => new Front(FrontCategory.Normal),
                 1 => new Front(FrontCategory.Special),
@@ -94,8 +93,8 @@ internal record struct Member(
                 4 => new Back(BackCategory.Healer),
                 _ => throw new ArgumentOutOfRangeException(nameof(dto.Position)),
             },
-            OrderIndices = dto.OrderIndices,
-        };
+            dto.OrderIndices
+        );
     }
 
     internal static ObservableCollection<GroupInfoList> LoadMembersGrouped(string region)

@@ -53,29 +53,40 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.ContextFlyout>
-                        <Flyout x:Name="DeckItemFlyout">
-                            <StackPanel MinWidth="400" Orientation="Vertical">
-                                <StackPanel Orientation="Horizontal">
-                                    <SymbolIcon Symbol="Clock"/>
+                        <Flyout x:Name="DeckItemFlyout" Closed="DeckItemFlyout_OnClosed">
+                            <Grid MinWidth="400" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto "/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <ComboBox x:Name="ComboBox"
+                                              Header="ディレイ時間（秒）"
+                                              IsEditable="True"
+                                              AccessKey="{x:Bind Order.Index}"
+                                              ItemsSource="{x:Bind console:DeckEditorPage.TimeSource}"
+                                              Width="200"
+                                              SelectionChanged="MarginComboBox_OnSelectionChanged"/>
+                                    <TextBlock Text="オーダー担当" Margin="2 10"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <DropDownButton Content="Select"
+                                                        AllowFocusOnInteraction="True"
+                                                        AccessKey="{x:Bind Order.Index}"
+                                                        Loaded="SelectPlayerButton_OnLoaded"/>
+                                        <Button Content="Remove" Margin="20 0 0 0" Click="RemovePicButton_OnClick" AccessKey="{x:Bind Order.Index}"/>
+                                    </StackPanel>
                                 </StackPanel>
-                                <ComboBox x:Name="ComboBox"
-                                          Header="ディレイ時間（秒）"
-                                          IsEditable="True"
-                                          ItemsSource="{x:Bind console:DeckEditorPage.TimeSource}"
-                                          AccessKey="{x:Bind Order.Index}"
-                                          Width="200"
-                                          Loaded="MarginSecondsComboBox_OnLoaded"/>
-                                <StackPanel Orientation="Horizontal" Margin="20 0 0 0" >
-                                    <DropDownButton Content="Select Player"
-                                                    AllowFocusOnInteraction="True"
-                                                    Loaded="SelectPlayerButton_OnLoaded"/>
-                                </StackPanel>
-                                <Button x:Name="TimelineFlyoutConfirmationButton"
+                                <TextBlock Grid.Column="1" x:Name="ChangesOnHold"/>
+                                <Button Grid.Column="1" x:Name="TimelineFlyoutConfirmationButton"
                                         Content="Confirm"
                                         Style="{StaticResource AccentButtonStyle}"
                                         Click="TimelineFlyoutConfirmationButton_OnClick"
+                                        AccessKey="{x:Bind Order.Index}"
                                         Margin="10"/>
-                            </StackPanel>
+                            </Grid>
                         </Flyout>
                     </Grid.ContextFlyout>
 
@@ -169,15 +180,17 @@
                             <TextBlock Text=" sec" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         </StackPanel>
                         <CommandBar Grid.Column="1" x:Name="DeckCommandBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                            <AppBarButton Icon="People" Label="Assign" Click="Assign_OnClick">
+                            </AppBarButton>
                             <AppBarButton Icon="Save" Label="Save" AllowFocusOnInteraction="True">
                                 <AppBarButton.Flyout>
                                     <Flyout>
                                         <StackPanel MinWidth="400" Orientation="Vertical">
                                             <TextBox x:Name="DeckName" PlaceholderText="デッキ名を入力してください"/>
                                             <Button Content="Confirm"
-                                            Style="{StaticResource AccentButtonStyle}"
-                                            Click="SaveButton_OnClick"
-                                            Margin="10"/>
+                                                    Style="{StaticResource AccentButtonStyle}"
+                                                    Click="SaveButton_OnClick"
+                                                    Margin="10"/>
                                         </StackPanel>
                                     </Flyout>
                                 </AppBarButton.Flyout>
@@ -187,15 +200,15 @@
                                     <Flyout>
                                         <StackPanel MinWidth="800" Orientation="Vertical">
                                             <ComboBox
-                                        x:Name="DeckLoadBox"
-                                        AllowFocusOnInteraction="True"
-                                        PlaceholderText="デッキを選択してください"
-                                        ItemTemplate="{StaticResource DeckJsonTemplate}"
-                                        Loaded="LoadComboBox_OnLoaded"/>
+                                                x:Name="DeckLoadBox"
+                                                AllowFocusOnInteraction="True"
+                                                PlaceholderText="デッキを選択してください"
+                                                ItemTemplate="{StaticResource DeckJsonTemplate}"
+                                                Loaded="LoadComboBox_OnLoaded"/>
                                             <Button Content="Load"
-                                            Style="{StaticResource AccentButtonStyle}"
-                                            Click="LoadButton_OnClick"
-                                            Margin="10"/>
+                                                    Style="{StaticResource AccentButtonStyle}"
+                                                    Click="LoadButton_OnClick"
+                                                    Margin="10"/>
                                         </StackPanel>
                                     </Flyout>
                                 </AppBarButton.Flyout>

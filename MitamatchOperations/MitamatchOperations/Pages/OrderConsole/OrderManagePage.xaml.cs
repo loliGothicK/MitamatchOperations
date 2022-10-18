@@ -76,10 +76,7 @@ public sealed partial class OrderManagerPage
 
     private void PushOrder(Order ordered)
     {
-        if (OrdersInPossession.Count == 0)
-        {
-            OrdersInPossession.Add(ordered);
-        }
+        OrdersInPossession.Add(ordered);
     }
 
     //===================================================================================================================
@@ -136,7 +133,7 @@ public sealed partial class OrderManagerPage
     {
         if (e.Items.Count != 1) return;
 
-        e.Data.SetText(((TimeTableItem)e.Items[0]).Order.Index.ToString());
+        e.Data.SetText(((Order)e.Items[0]).Index.ToString());
         e.Data.RequestedOperation = DataPackageOperation.Move;
     }
 
@@ -303,9 +300,8 @@ public sealed partial class OrderManagerPage
 
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var json = sr.ReadToEnd();
-            var de = JsonSerializer.Deserialize<OrderPossession>(json);
             OrdersInPossession.Clear();
-            foreach (var index in de.OrderIndices)
+            foreach (var index in Domain.Member.FromJson(json).OrderIndices)
             {
                 Sources.Remove(Order.List[index]);
                 OrdersInPossession.Add(Order.List[index]);
@@ -350,9 +346,9 @@ public sealed partial class OrderManagerPage
             using var fs = Director.CreateFile(path);
             if (SelectedMember != null)
             {
-                var proxy = new OrderPossession(SelectedMember, DateTime.Now,
-                    OrdersInPossession.Select(order => order.Index).ToArray());
-                var save = new UTF8Encoding(true).GetBytes(JsonSerializer.Serialize(proxy));
+                var json = new Domain.Member(DateTime.Now, DateTime.Now, SelectedMember,
+                    new Front(FrontCategory.Normal), OrdersInPossession.Select(order => order.Index).ToArray()).ToJson();
+                var save = new UTF8Encoding(true).GetBytes(json);
                 fs.Write(save, 0, save.Length);
             }
 
@@ -362,5 +358,3 @@ public sealed partial class OrderManagerPage
         await dialog.ShowAsync();
     }
 }
-
-internal record struct OrderPossession(string Name, DateTime? UpdatedAt, ushort[] OrderIndices);

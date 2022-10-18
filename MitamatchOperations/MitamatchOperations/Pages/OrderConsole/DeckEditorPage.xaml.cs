@@ -13,6 +13,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using mitama.Domain;
 using mitama.Domain.OrderKinds;
+using mitama.Pages.Common;
 using WinRT;
 
 namespace mitama.Pages.OrderConsole;
@@ -23,10 +24,18 @@ namespace mitama.Pages.OrderConsole;
 public sealed partial class DeckEditorPage
 {
     public static readonly int[] TimeSource = Enumerable.Range(0, 12).Select(t => t * 5).ToArray();
-    private ObservableCollection<TimeTableItem> Deck { get; } = new();
+    private ObservableCollection<TimeTableItem> Deck = new();
     private ObservableCollection<Order> Sources { get; } = new();
     private new uint Margin { get; set; } = 5;
     private Dictionary<string, List<string>> RegionToMembersDict { get; set; } = new();
+    private string? AutomateAssignRequest = null;
+    private List<HoldOn> holdOns = new();
+
+    private abstract record HoldOn;
+
+    private record ChangeMargin(uint Margin) : HoldOn;
+    private record ChangePic(string Name) : HoldOn;
+    private record RemovePic : HoldOn;
 
     public DeckEditorPage()
     {
@@ -55,7 +64,7 @@ public sealed partial class DeckEditorPage
             {
                 using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                 var json = sr.ReadToEnd();
-                return JsonSerializer.Deserialize<OrderPossession>(json).Name;
+                return Domain.Member.FromJson(json).Name;
             });
             if (!RegionToMembersDict.ContainsKey(regionName))
             {
@@ -402,29 +411,29 @@ public sealed partial class DeckEditorPage
     private void TimelineFlyoutConfirmationButton_OnClick(object sender, RoutedEventArgs e)
     {
         if (sender is not Button button) return;
+        var _ = new Defer(() => holdOns.Clear());
 
-        if (button.Parent is StackPanel panel)
+        var target = Deck[Deck.IndexOf(Order.List[int.Parse(button.AccessKey)])];
+
+        foreach (var onHold in holdOns)
         {
-            foreach (var elem in panel.Children)
+            switch (onHold)
             {
-                switch (elem)
-                {
-                    case ComboBox box:
-                        {
-                            if (!uint.TryParse(box.Text, out var newValue)) return;
-                            var index = Deck.IndexOf(Order.List[int.Parse(box.AccessKey)]);
-                            var item = Deck[index];
-                            Deck[index] = item with { Delay = newValue };
-                            break;
-                        }
-                    case TextBox box:
-                        {
-                            var index = Deck.IndexOf(Order.List[int.Parse(box.AccessKey)]);
-                            var item = Deck[index];
-                            Deck[index] = item with { Pic = box.Text };
-                            break;
-                        }
-                }
+                case ChangeMargin(Margin: var margin):
+                    {
+                        target.Delay = margin;
+                        break;
+                    }
+                case ChangePic(Name: var pic):
+                    {
+                        target.Pic = pic;
+                        break;
+                    }
+                case RemovePic:
+                    {
+                        target.Pic = string.Empty;
+                        break;
+                    }
             }
         }
 
@@ -488,6 +497,7 @@ public sealed partial class DeckEditorPage
 
     private void SaveButton_OnClick(object sender, RoutedEventArgs e)
     {
+        if (DeckName.Text.Length == 0) return;
         var dt = DateTime.Now;
         var proxy = new DeckJson(DeckName.Text, dt, Deck.Select(item => (DeckJsonProxy)item).ToArray());
         var jsonStr = JsonSerializer.Serialize(proxy);
@@ -533,40 +543,179 @@ public sealed partial class DeckEditorPage
         }
 
         Update();
-    }
 
-    private void MarginSecondsComboBox_OnLoaded(object sender, RoutedEventArgs e)
-    {
-        if (sender is not ComboBox box) return;
-        var index = Deck.IndexOf(Order.List[int.Parse(box.AccessKey)]);
-        var item = Deck[index];
-        box.SelectedItem = item.Delay.ToString();
-    }
-
-    private void PicEditor_OnLoaded(object sender, RoutedEventArgs e)
-    {
-        if (sender is not TextBox box) return;
-        var index = Deck.IndexOf(Order.List[int.Parse(box.AccessKey)]);
-        var item = Deck[index];
-        box.Text = item.Pic;
+        if (((Button)sender).Parent is StackPanel { Parent: FlyoutPresenter { Parent: Popup popup } })
+        {
+            popup.IsOpen = false;
+        }
     }
 
     private void SelectPlayerButton_OnLoaded(object sender, RoutedEventArgs e)
     {
         if (sender is not DropDownButton button) return;
-        
+
         var flyout = new MenuFlyout();
         foreach (var menuFlyoutSubItem in RegionToMembersDict.Select(kv =>
                  {
                      var (region, members) = kv;
                      var subItem = new MenuFlyoutSubItem { Text = region };
-                     foreach (var member in members) subItem.Items.Add(new MenuFlyoutItem { Text = member });
+                     foreach (var member in members) subItem.Items.Add(new MenuFlyoutItem
+                     {
+                         Text = member,
+                         Command = new Defer(delegate
+                         {
+                             holdOns.RemoveAll(item => item is ChangePic or RemovePic);
+                             holdOns.Add(new ChangePic(member));
+                             var index = uint.Parse(button.AccessKey);
+                             UpdateChangesOnHold(index, button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children);
+
+                             var exists = Deck.Where(item => item.Order.Index != index)
+                                 .Where(item => item.Pic == member).ToArray();
+
+                             switch (exists.Length)
+                             {
+                                 case 2:
+                                     OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Disable("一人に3回以上の担当が割り振られいます"));
+                                     break;
+                                 case 1:
+                                     {
+                                         var exist = exists.First();
+                                         var added = Deck.First(item => item.Order.Index == index)!;
+                                         var existIndex = Deck.IndexOf(exist);
+                                         var addedIndex = Deck.IndexOf(added);
+
+                                         if (Math.Abs(existIndex- addedIndex) == 1)
+                                         {
+                                             OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Disable("クロノを挟まずに2回の担当が割り振られいます"));
+                                             break;
+                                         }
+
+                                         var span = (existIndex > addedIndex) switch
+                                         {
+                                             true => Deck.ToList().GetRange(addedIndex, existIndex - addedIndex - 1),
+                                             false => Deck.ToList().GetRange(existIndex, addedIndex - existIndex - 1),
+                                         };
+                                         if (span.Any(item => item.Order.Name == "刻戻りのクロノグラフ"))
+                                         {
+                                             OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Enable("適用する"));
+                                         }
+                                         else
+                                         {
+                                             OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Disable("クロノを挟まずに2回の担当が割り振られいます"));
+                                         }
+
+                                         break;
+                                     }
+                                 default:
+                                     OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Enable("適用する"));
+                                     break;
+                             }
+                         })
+                     });
                      return subItem;
                  }))
         {
             flyout.Items.Add(menuFlyoutSubItem);
         }
         button.Flyout = flyout;
+    }
+
+    private void RemovePicButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button) return;
+        holdOns.RemoveAll(item => item is ChangePic);
+        holdOns.Add(new RemovePic());
+        UpdateChangesOnHold(uint.Parse(button.AccessKey), button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children);
+    }
+
+    private void MarginComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (sender is not ComboBox box) return;
+        holdOns.RemoveAll(item => item is ChangeMargin);
+        holdOns.Add(new ChangeMargin(uint.Parse(e.AddedItems[0].ToString()!)));
+        UpdateChangesOnHold(uint.Parse(box.AccessKey), box.Parent.As<StackPanel>().Parent.As<Grid>().Children);
+    }
+
+    private void UpdateChangesOnHold(uint index, IEnumerable<object> controls)
+    {
+        var msgBlock = controls
+            .Where(ctrl => ctrl is TextBlock)
+            .Select(ctrl => ctrl.As<TextBlock>())
+            .First(block => block.Name == "ChangesOnHold");
+
+        if (msgBlock is null) return;
+
+        msgBlock.Text = holdOns.Select(hold => hold switch
+        {
+            ChangeMargin changeMargin => $@"ディレイ => {changeMargin.Margin} 秒",
+            ChangePic changePic => $@"オーダー担当 => {changePic.Name}",
+            RemovePic => @"オーダー担当をリセット",
+        }).Aggregate((a, b) => $@"{a}\n{b}");
+    }
+
+    private abstract record Validated
+    {
+        internal abstract (bool, string) IntoTuple();
+    }
+
+    private record Enable(string Msg) : Validated
+    {
+        internal override (bool, string) IntoTuple() => (true, Msg);
+    }
+    private record Disable(string Msg) : Validated
+    {
+        internal override (bool, string) IntoTuple() => (false, Msg);
+    }
+
+
+    private void OnValidateChangesOnHold(IEnumerable<object> controls, Validated validated)
+    {
+        var (isEnabled, msg) = validated.IntoTuple();
+        var confirmButton = controls
+            .Where(ctrl => ctrl is Button)
+            .Select(ctrl => ctrl.As<Button>())
+            .First(block => block.Name == "TimelineFlyoutConfirmationButton");
+
+        if (confirmButton is null) return;
+        confirmButton.Content = msg;
+        confirmButton.IsEnabled = isEnabled;
+    }
+
+    private void DeckItemFlyout_OnClosed(object? sender, object e)
+    {
+        holdOns.Clear();
+    }
+
+    private async void Assign_OnClick(object sender, RoutedEventArgs _e)
+    {
+        var builder = new DialogBuilder(XamlRoot);
+
+        var box = new ComboBox();
+
+        foreach (var region in RegionToMembersDict.Keys)
+        {
+            box.Items.Add(region);
+        }
+
+        box.SelectionChanged += (object _, SelectionChangedEventArgs e) =>
+        {
+            AutomateAssignRequest = e.AddedItems[0].ToString();
+        };
+
+        var dialog = builder
+            .WithTitle("自動オーダー担当者割当てを実行しますか？")
+            .WithBody(box)
+            .WithPrimary("実行")
+            .WithCancel("やっぱりやめる")
+            .Build();
+
+        dialog.PrimaryButtonCommand = new Defer(delegate
+        {
+            _ = AutomateAssign.AutomateAssign.ExecAutoAssign(AutomateAssignRequest, ref Deck);
+            OrderDeck.ItemsSource = Deck;
+        });
+
+        await dialog.ShowAsync();
     }
 }
 
