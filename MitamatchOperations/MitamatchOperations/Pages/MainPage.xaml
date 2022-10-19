@@ -40,16 +40,8 @@
             </Grid>
 
             <InfoBar Grid.Row="1"
-                     x:Name="SavedInfoBar"
-                     IsOpen="False"
-                     Severity="Success"
-                     Title="Successfully saved!" />
-
-            <InfoBar Grid.Row="1"
-                     x:Name="LoginInfoBar"
-                     IsOpen="False"
-                     Severity="Success"
-                     Title="Successfully logged in!" />
+                     x:Name="InfoBar"
+                     IsOpen="False"/>
 
             <Pivot Grid.Row="2" x:Name="AppNavBar">
                 <PivotItem Header="Project">
@@ -74,9 +66,8 @@
                     </AppBarButton>
                 </PivotItem>
             </Pivot>
-            <Grid Grid.Row="3" x:Name="MainContent">
-                <NavigationView x:Name="NavigationViewControl"
-                                ItemInvoked="NavView_ItemInvoked" >
+            <Grid Grid.Row="3">
+                <NavigationView ItemInvoked="NavView_ItemInvoked" >
                     <NavigationView.MenuItems>
                         <NavigationViewItem Icon="Home" Content ="ホーム" Tag="home"/>
                         <NavigationViewItem Icon="People" Content ="レギオン コンソール" Tag="region console"/>

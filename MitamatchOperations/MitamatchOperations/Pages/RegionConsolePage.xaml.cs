@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using mitama.Domain;
+using mitama.Pages.Common;
 
 namespace mitama.Pages;
 
@@ -24,10 +25,10 @@ public sealed partial class RegionConsolePage
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
-        if (e.Parameter is NavigationRootPageArgs { Parameter: string parameter } && !string.IsNullOrWhiteSpace(parameter))
+        if (e.Parameter is NavigationRootPageProps { Parameter: Props { Project: { } regionName } })
         {
-            _regionName = parameter;
-            MemberCvs.Source = Member.LoadMembersGrouped(parameter);
+            _regionName = regionName;
+            MemberCvs.Source = Member.LoadMembersGrouped(regionName);
         }
         base.OnNavigatedTo(e);
     }

@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:mitama="using:mitama" 
     xmlns:console="using:mitama.Pages.OrderConsole" 
     xmlns:domain="using:mitama.Domain"
     mc:Ignorable="d"
@@ -174,8 +173,7 @@
 
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
                             <TextBlock Text="Margin=" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"/>
-                            <TextBox x:Name="GlobalMargin"
-                                     PlaceholderText="{x:Bind Margin}"
+                            <TextBox PlaceholderText="{x:Bind Margin}"
                                      Margin="0 5"/>
                             <TextBlock Text=" sec" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         </StackPanel>
@@ -225,7 +223,7 @@
                             MinWidth="500"
                             Background="Transparent"
                             BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
-                            ItemsSource="{x:Bind Deck}"
+                            ItemsSource="{x:Bind _deck}"
                             ItemTemplate="{StaticResource DeckItemTemplate}"
                             CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="Single"
                             DragOver="Target_DragOver"

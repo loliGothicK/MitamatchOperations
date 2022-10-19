@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -15,7 +14,6 @@ using mitama.Domain;
 using mitama.Domain.OrderKinds;
 using mitama.Pages.Common;
 using WinRT;
-using Microsoft.UI.Xaml.Shapes;
 
 namespace mitama.Pages.OrderConsole;
 
@@ -25,12 +23,12 @@ namespace mitama.Pages.OrderConsole;
 public sealed partial class DeckEditorPage
 {
     public static readonly int[] TimeSource = Enumerable.Range(0, 12).Select(t => t * 5).ToArray();
-    private ObservableCollection<TimeTableItem> Deck = new();
+    private ObservableCollection<TimeTableItem> _deck = new();
     private ObservableCollection<Order> Sources { get; } = new();
     private new uint Margin { get; set; } = 5;
     private Dictionary<string, List<string>> RegionToMembersDict { get; set; } = new();
-    private string? AutomateAssignRequest = null;
-    private List<HoldOn> holdOns = new();
+    private string? _automateAssignRequest;
+    private readonly List<HoldOn> _holdOns = new();
 
     private abstract record HoldOn;
 
@@ -111,40 +109,40 @@ public sealed partial class DeckEditorPage
     private void Update()
     {
         OrderSources.ItemsSource = Sources;
-        OrderDeck.ItemsSource = Deck;
+        OrderDeck.ItemsSource = _deck;
     }
 
     private void PushOrder(Order ordered)
     {
-        if (Deck.Count == 0)
+        if (_deck.Count == 0)
         {
-            Deck.Add(new TimeTableItem(ordered, 0, 15 * 60, 15 * 60 - ordered.PrepareTIme - ordered.ActiveTime));
+            _deck.Add(new TimeTableItem(ordered, 0, 15 * 60, 15 * 60 - ordered.PrepareTIme - ordered.ActiveTime));
         }
         else
         {
-            var prev = Deck.Last();
+            var prev = _deck.Last();
             var prepareTime = prev.Order.Index switch
             {
                 52 => 5u, // レギオンマッチスキル準備時間短縮Lv.3
                 _ => ordered.PrepareTIme
             };
-            Deck.Add(new TimeTableItem(ordered, Margin, prev.End - Margin,
+            _deck.Add(new TimeTableItem(ordered, Margin, prev.End - Margin,
                 prev.End - Margin - prepareTime - ordered.ActiveTime));
         }
     }
 
     private void ReCalcTimeTable()
     {
-        if (Deck.Count == 0) return;
-        var table = Deck.ToArray();
-        Deck.Clear();
+        if (_deck.Count == 0) return;
+        var table = _deck.ToArray();
+        _deck.Clear();
         var first = table.First();
         var previous = first with
         {
             Start = 15 * 60 - first.Delay,
             End = 15 * 60 - first.Order.PrepareTIme - first.Order.ActiveTime
         };
-        Deck.Add(previous);
+        _deck.Add(previous);
 
         foreach (var item in table.Skip(1))
         {
@@ -158,9 +156,9 @@ public sealed partial class DeckEditorPage
                 Start = previous.End - item.Delay,
                 End = (previous.End - item.Delay) - prepareTime - item.Order.ActiveTime
             };
-            Deck.Add(previous);
+            _deck.Add(previous);
         }
-        OrderDeck.ItemsSource = Deck;
+        OrderDeck.ItemsSource = _deck;
     }
 
     //===================================================================================================================
@@ -246,7 +244,7 @@ public sealed partial class DeckEditorPage
                 {
                     foreach (var order in items)
                     {
-                        Deck.Remove(TimeTableItem.Proxy(order));
+                        _deck.Remove(TimeTableItem.Proxy(order));
                         Push(Sources, order, (x, y) => x.Index > y.Index);
                     }
 
@@ -414,11 +412,11 @@ public sealed partial class DeckEditorPage
     private void TimelineFlyoutConfirmationButton_OnClick(object sender, RoutedEventArgs e)
     {
         if (sender is not Button button) return;
-        var _ = new Defer(() => holdOns.Clear());
+        var _ = new Defer(() => _holdOns.Clear());
 
-        var target = Deck[Deck.IndexOf(Order.List[int.Parse(button.AccessKey)])];
+        var target = _deck[_deck.IndexOf(Order.List[int.Parse(button.AccessKey)])];
 
-        foreach (var onHold in holdOns)
+        foreach (var onHold in _holdOns)
         {
             switch (onHold)
             {
@@ -450,7 +448,7 @@ public sealed partial class DeckEditorPage
 
     private bool CheckAvailable(Kind kind) => kind switch
     {
-        Elemental elemental => !Deck
+        Elemental elemental => !_deck
             .Where(o => o.Order.Kind is Elemental)
             .Where(o => o.Order.Kind.As<Elemental>().Element is not Element.Special)
             .Select(o => ((Elemental)o.Order.Kind).Element)
@@ -485,24 +483,11 @@ public sealed partial class DeckEditorPage
         button.Content = "同系統の属性オーダーを編成済み";
     }
 
-    private void ApplyMargin_OnClick(object sender, RoutedEventArgs e)
-    {
-        if (!uint.TryParse(GlobalMargin.Text, out var seconds)) return;
-
-        foreach (var item in Deck)
-        {
-            if (item.Delay == Margin) item.Delay = seconds;
-        }
-
-        Margin = seconds;
-        ReCalcTimeTable();
-    }
-
     private void SaveButton_OnClick(object sender, RoutedEventArgs e)
     {
         if (DeckName.Text.Length == 0) return;
         var dt = DateTime.Now;
-        var proxy = new DeckJson(DeckName.Text, dt, Deck.Select(item => (DeckJsonProxy)item).ToArray());
+        var proxy = new DeckJson(DeckName.Text, dt, _deck.Select(item => (DeckJsonProxy)item).ToArray());
         var jsonStr = JsonSerializer.Serialize(proxy);
         var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         Director.CreateDirectory(@$"{desktop}\MitamatchOperations\decks");
@@ -538,10 +523,10 @@ public sealed partial class DeckEditorPage
     private void LoadButton_OnClick(object sender, RoutedEventArgs e)
     {
         var deck = DeckLoadBox.SelectedItem.As<DeckJson>();
-        Deck.Clear();
+        _deck.Clear();
         foreach (var item in deck.Items.Select(item => (TimeTableItem)item))
         {
-            Deck.Add(item);
+            _deck.Add(item);
             Sources.Remove(item.Order);
         }
 
@@ -567,12 +552,12 @@ public sealed partial class DeckEditorPage
                          Text = member,
                          Command = new Defer(delegate
                          {
-                             holdOns.RemoveAll(item => item is ChangePic or RemovePic);
-                             holdOns.Add(new ChangePic(member));
+                             _holdOns.RemoveAll(item => item is ChangePic or RemovePic);
+                             _holdOns.Add(new ChangePic(member));
                              var index = uint.Parse(button.AccessKey);
-                             UpdateChangesOnHold(index, button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children);
+                             UpdateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children);
 
-                             var exists = Deck.Where(item => item.Order.Index != index)
+                             var exists = _deck.Where(item => item.Order.Index != index)
                                  .Where(item => item.Pic == member).ToArray();
 
                              switch (exists.Length)
@@ -583,9 +568,9 @@ public sealed partial class DeckEditorPage
                                  case 1:
                                      {
                                          var exist = exists.First();
-                                         var added = Deck.First(item => item.Order.Index == index)!;
-                                         var existIndex = Deck.IndexOf(exist);
-                                         var addedIndex = Deck.IndexOf(added);
+                                         var added = _deck.First(item => item.Order.Index == index);
+                                         var existIndex = _deck.IndexOf(exist);
+                                         var addedIndex = _deck.IndexOf(added);
 
                                          if (Math.Abs(existIndex- addedIndex) == 1)
                                          {
@@ -595,8 +580,8 @@ public sealed partial class DeckEditorPage
 
                                          var span = (existIndex > addedIndex) switch
                                          {
-                                             true => Deck.ToList().GetRange(addedIndex, existIndex - addedIndex - 1),
-                                             false => Deck.ToList().GetRange(existIndex, addedIndex - existIndex - 1),
+                                             true => _deck.ToList().GetRange(addedIndex, existIndex - addedIndex - 1),
+                                             false => _deck.ToList().GetRange(existIndex, addedIndex - existIndex - 1),
                                          };
                                          if (span.Any(item => item.Order.Name == "刻戻りのクロノグラフ"))
                                          {
@@ -626,20 +611,20 @@ public sealed partial class DeckEditorPage
     private void RemovePicButton_OnClick(object sender, RoutedEventArgs e)
     {
         if (sender is not Button button) return;
-        holdOns.RemoveAll(item => item is ChangePic);
-        holdOns.Add(new RemovePic());
-        UpdateChangesOnHold(uint.Parse(button.AccessKey), button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children);
+        _holdOns.RemoveAll(item => item is ChangePic);
+        _holdOns.Add(new RemovePic());
+        UpdateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children);
     }
 
     private void MarginComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (sender is not ComboBox box) return;
-        holdOns.RemoveAll(item => item is ChangeMargin);
-        holdOns.Add(new ChangeMargin(uint.Parse(e.AddedItems[0].ToString()!)));
-        UpdateChangesOnHold(uint.Parse(box.AccessKey), box.Parent.As<StackPanel>().Parent.As<Grid>().Children);
+        _holdOns.RemoveAll(item => item is ChangeMargin);
+        _holdOns.Add(new ChangeMargin(uint.Parse(e.AddedItems[0].ToString()!)));
+        UpdateChangesOnHold(box.Parent.As<StackPanel>().Parent.As<Grid>().Children);
     }
 
-    private void UpdateChangesOnHold(uint index, IEnumerable<object> controls)
+    private void UpdateChangesOnHold(IEnumerable<object> controls)
     {
         var msgBlock = controls
             .Where(ctrl => ctrl is TextBlock)
@@ -648,11 +633,12 @@ public sealed partial class DeckEditorPage
 
         if (msgBlock is null) return;
 
-        msgBlock.Text = holdOns.Select(hold => hold switch
+        msgBlock.Text = _holdOns.Select(hold => hold switch
         {
             ChangeMargin changeMargin => $@"ディレイ => {changeMargin.Margin} 秒",
             ChangePic changePic => $@"オーダー担当 => {changePic.Name}",
             RemovePic => @"オーダー担当をリセット",
+            _ => throw new ArgumentOutOfRangeException(nameof(hold), hold, null)
         }).Aggregate((a, b) => $@"{a}\n{b}");
     }
 
@@ -686,10 +672,10 @@ public sealed partial class DeckEditorPage
 
     private void DeckItemFlyout_OnClosed(object? sender, object e)
     {
-        holdOns.Clear();
+        _holdOns.Clear();
     }
 
-    private async void Assign_OnClick(object sender, RoutedEventArgs _e)
+    private async void Assign_OnClick(object sender, RoutedEventArgs args)
     {
         var builder = new DialogBuilder(XamlRoot);
 
@@ -702,7 +688,7 @@ public sealed partial class DeckEditorPage
 
         box.SelectionChanged += (_, e) =>
         {
-            AutomateAssignRequest = e.AddedItems[0].ToString();
+            _automateAssignRequest = e.AddedItems[0].ToString();
         };
 
         var dialog = builder
@@ -714,60 +700,13 @@ public sealed partial class DeckEditorPage
 
         dialog.PrimaryButtonCommand = new Defer(delegate
         {
-            _ = AutomateAssign.AutomateAssign.ExecAutoAssign(AutomateAssignRequest, ref Deck);
-            OrderDeck.ItemsSource = Deck;
+            if (_automateAssignRequest != null)
+                _ = AutomateAssign.AutomateAssign.ExecAutoAssign(_automateAssignRequest, ref _deck);
+            OrderDeck.ItemsSource = _deck;
         });
 
         await dialog.ShowAsync();
     }
-}
-
-internal class Director
-{
-    public static void CreateDirectory(string path)
-    {
-        using var isoStore = IsolatedStorageFile.GetStore(
-            IsolatedStorageScope.User | IsolatedStorageScope.Domain | IsolatedStorageScope.Assembly, null, null);
-        try
-        {
-            isoStore.CreateDirectory(path);
-        }
-        catch (Exception e)
-        {
-            throw new Exception(@$"The process failed: {e}");
-        }
-    }
-
-    public static IsolatedStorageFileStream CreateFile(string path)
-    {
-        using var isoStore = IsolatedStorageFile.GetStore(
-            IsolatedStorageScope.User | IsolatedStorageScope.Domain | IsolatedStorageScope.Assembly, null, null);
-        try
-        {
-            return isoStore.CreateFile(path);
-        }
-        catch (Exception e)
-        {
-            throw new Exception(@$"The process failed: {e}");
-        }
-    }
-
-    internal static string MitamatchDir()
-        => $@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\MitamatchOperations";
-
-    internal static void CacheWrite(byte[] json)
-    {
-        using var fs = CreateFile($@"{MitamatchDir()}\Cache\cache.json");
-        fs.Write(json, 0, json.Length);
-    }
-
-    internal static Cache ReadCache()
-    {
-        using var sr = new StreamReader($@"{MitamatchDir()}\Cache\cache.json", Encoding.GetEncoding("UTF-8"));
-        var json = sr.ReadToEnd();
-        return JsonSerializer.Deserialize<Cache>(json);
-    }
-
 }
 
 internal record struct DeckJson(string Name, DateTime DateTime, DeckJsonProxy[] Items)

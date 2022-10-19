@@ -4,15 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ABI.Microsoft.UI.Xaml.Shapes;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
 using mitama.Domain;
 using mitama.Pages.Common;
 using mitama.Pages.Main;
-using mitama.Pages.OrderConsole;
 
 namespace mitama.Pages;
 /// <summary>
@@ -55,7 +52,7 @@ public sealed partial class MainPage
         object? targetPageArguments = null,
         Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo? navigationTransitionInfo = null)
     {
-        var args = new NavigationRootPageArgs
+        var args = new NavigationRootPageProps
         {
             NavigationRootPage = this,
             Parameter = targetPageArguments
@@ -92,10 +89,20 @@ public sealed partial class MainPage
 
     private void NavView_Navigate(FrameworkElement item)
     {
+        async void InvokeInfo(InfoProps props)
+        {
+            InfoBar.IsOpen = true;
+            InfoBar.Severity = props.Severity;
+            InfoBar.Title = props.Title;
+            await Task.Delay(2000);
+            InfoBar.IsOpen = false;
+        }
+
+        var props = new Props(Project) { InvokeInfo = InvokeInfo };
         var mapping = new Dictionary<string, (Type, object?)>()
         {
             {"home", (typeof(HomePage), null)},
-            {"region console", (typeof(RegionConsolePage), Project)},
+            {"region console", (typeof(RegionConsolePage), props)},
             {"order console", (typeof(OrderConsolePage), null)},
         };
 
@@ -120,19 +127,23 @@ public sealed partial class MainPage
             .WithCancel("Cancel")
             .Build();
 
-        dialog.PrimaryButtonCommand = new Defer(async delegate
+        async void PrimaryAction()
         {
             LoginRegion.Text = Project = selected;
             await LoginInfo();
-        });
+        }
 
-        dialog.SecondaryButtonCommand = new Defer(async delegate
+        dialog.PrimaryButtonCommand = new Defer(PrimaryAction);
+
+        async void SecondaryAction()
         {
             LoginRegion.Text = Project = selected;
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             Director.CreateDirectory($@"{desktop}\MitamatchOperations\Regions\{Project}");
             await LoginInfo();
-        });
+        }
+
+        dialog.SecondaryButtonCommand = new Defer(SecondaryAction);
 
         await dialog.ShowAsync();
     }
@@ -160,35 +171,41 @@ public sealed partial class MainPage
             .WithCancel("Cancel")
             .Build();
 
-        dialog.PrimaryButtonCommand = new Defer(async delegate
+        async void Action()
         {
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             var fs = Director.CreateFile($@"{desktop}\MitamatchOperations\Regions\{Project}\{name}.json");
-            var memberJson = new Domain.Member(DateTime.Now, DateTime.Now, name!, position!, new ushort[]{}).ToJson();
+            var memberJson = new Member(DateTime.Now, DateTime.Now, name!, position!, new ushort[] { }).ToJson();
             var save = new UTF8Encoding(true).GetBytes(memberJson);
             fs.Write(save, 0, save.Length);
             await SavedInfo();
-        });
+        }
+
+        dialog.PrimaryButtonCommand = new Defer(Action);
 
         await dialog.ShowAsync();
     }
 
     private async Task SavedInfo()
     {
-        SavedInfoBar.IsOpen = true;
+        InfoBar.IsOpen = true;
+        InfoBar.Severity = InfoBarSeverity.Success;
+        InfoBar.Title = "successfully saved!";
         await Task.Delay(2000);
-        SavedInfoBar.IsOpen = false;
+        InfoBar.IsOpen = false;
     }
     private async Task LoginInfo()
     {
-        LoginInfoBar.IsOpen = true;
-        await Task.Delay(2000);
+        InfoBar.IsOpen = true;
+        InfoBar.Severity = InfoBarSeverity.Success;
+        InfoBar.Title = "successfully logged in!";
         Director.CacheWrite(new Cache(Project).ToJsonBytes());
-        LoginInfoBar.IsOpen = false;
+        await Task.Delay(2000);
+        InfoBar.IsOpen = false;
     }
 }
 
-public class NavigationRootPageArgs
+public class NavigationRootPageProps
 {
     public MainPage? NavigationRootPage;
     public object? Parameter;
