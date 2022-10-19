@@ -1,11 +1,12 @@
-using System.Collections.Generic;
-using Microsoft.UI.Xaml.Controls;
-using Windows.ApplicationModel.Contacts;
-using Microsoft.UI.Xaml;
-using mitama.Domain;
-using System.IO;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
+using mitama.Domain;
 
 namespace mitama.Pages;
 
@@ -14,32 +15,21 @@ namespace mitama.Pages;
 /// </summary>
 public sealed partial class RegionConsolePage
 {
+    private string? _regionName;
 
     public RegionConsolePage()
     {
         InitializeComponent();
     }
 
-
-    private void RegionSelectButton_OnLoaded(object sender, RoutedEventArgs e)
+    protected override void OnNavigatedTo(NavigationEventArgs e)
     {
-        if (sender is not DropDownButton button) return;
-        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-        var regions = Directory.GetDirectories(@$"{desktop}\MitamatchOperations\Regions")
-            .Select(path => path.Split('\\').Last());
-
-        foreach (var region in regions)
+        if (e.Parameter is NavigationRootPageArgs { Parameter: string parameter } && !string.IsNullOrWhiteSpace(parameter))
         {
-            RegionSelectOptions.Items.Add(new MenuFlyoutItem
-            {
-                Text = region,
-                Command = new Defer(() =>
-                {
-                    MemberCvs.Source = Member.LoadMembersGrouped(region);
-                })
-            });
+            _regionName = parameter;
+            MemberCvs.Source = Member.LoadMembersGrouped(parameter);
         }
+        base.OnNavigatedTo(e);
     }
 }
 

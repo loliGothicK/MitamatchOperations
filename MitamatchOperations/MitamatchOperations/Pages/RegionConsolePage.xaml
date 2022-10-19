@@ -49,15 +49,7 @@
 
     <Grid>
         <StackPanel>
-            <TextBlock TextWrapping="Wrap" Margin="0 0 0 15">
-                Region Manage Console
-            </TextBlock>
-            <DropDownButton Content="Select Region" Loaded="RegionSelectButton_OnLoaded">
-                <DropDownButton.Flyout>
-                    <MenuFlyout x:Name="RegionSelectOptions" Placement="Bottom">
-                    </MenuFlyout>
-                </DropDownButton.Flyout>
-            </DropDownButton>
+            <TextBlock Text="{x:Bind _regionName}" TextWrapping="NoWrap" Margin="0 0 0 15" FontSize="20"/>
             <ListView ItemsSource="{x:Bind MemberCvs.View, Mode=OneWay}"
                       ItemTemplate="{StaticResource MemberListViewTemplate}"
                       SelectionMode="Single"

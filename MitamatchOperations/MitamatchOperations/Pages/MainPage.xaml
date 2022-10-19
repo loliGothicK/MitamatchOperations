@@ -9,25 +9,56 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="120"/>
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid x:Name="AppTitleBar">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="32" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Image Source="/Assets/Images/MitamaLabLogo.png"
-                   HorizontalAlignment="Left"
-                   Width="16" Height="16" 
-                   Margin="8,0"/>
-            <TextBlock Grid.Row="0" Text="Mitamatch Operations"
-                       TextWrapping="NoWrap"
-                       Style="{StaticResource CaptionTextBlockStyle}" 
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Image Source="/Assets/Images/MitamaLabLogo.png"
+                       HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="28,0,0,0"/>
+                       Width="30" Height="30"
+                       Margin="5 0"/>
+                <TextBlock Text="Mitamatch Operations"
+                           TextWrapping="NoWrap"
+                           Style="{StaticResource CaptionTextBlockStyle}" 
+                           VerticalAlignment="Center"
+                           FontSize="20"
+                           Margin="10 0 0 0"/>
+                <Button Margin="28 0 0 0" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="People"/>
+                        <TextBlock x:Name="LoginRegion" Text="{x:Bind Project}" Margin="28 0 0 0"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE73E;" Margin="28 0 0 0"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
         </Grid>
-        <Grid Grid.Row="1" x:Name="MainContent">
+        <Pivot Grid.Row="1" x:Name="AppNavBar">
+            <PivotItem Header="Project">
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <AppBarButton Label="change project" Click="ChangeProjectButton_Click">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE748;"/>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                    <AppBarButton Label="add member">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8FA;"/>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                </StackPanel>
+            </PivotItem>
+            <PivotItem Header="Home">
+                <AppBarButton Label="Manage">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8FA;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </PivotItem>
+        </Pivot>
+        <Grid Grid.Row="2" x:Name="MainContent">
             <NavigationView x:Name="NavigationViewControl"
                             ItemInvoked="NavView_ItemInvoked" >
                 <NavigationView.MenuItems>

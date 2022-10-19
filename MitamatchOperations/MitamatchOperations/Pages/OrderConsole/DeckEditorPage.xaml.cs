@@ -40,6 +40,8 @@ public sealed partial class DeckEditorPage
     public DeckEditorPage()
     {
         InitializeComponent();
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+ 
         ElementalCheckBox.IsChecked
             = BuffCheckBox.IsChecked
             = DeBuffCheckBox.IsChecked

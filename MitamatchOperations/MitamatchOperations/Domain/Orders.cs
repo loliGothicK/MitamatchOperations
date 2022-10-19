@@ -97,6 +97,7 @@ namespace mitama.Domain
         public static readonly Order[] SpAtkTop5 = List.OrderByDescending(order => order.Status.SpAtk).Take(5).ToArray();
         public static readonly Order[] DefTop5 = List.OrderByDescending(order => order.Status.Def).Take(5).ToArray();
         public static readonly Order[] SpDefTop5 = List.OrderByDescending(order => order.Status.SpDef).Take(5).ToArray();
+        public static readonly Order[] AtkSumTop5 = List.OrderByDescending(order => order.Status.Atk + order.Status.SpAtk).Take(5).ToArray();
         public static readonly Order[] DefSumTop5 = List.OrderByDescending(order => order.Status.Def + order.Status.SpDef).Take(5).ToArray();
 
         private Order((ushort, string, string, string, (uint, uint, uint, uint), (uint, uint), Kind) raw)

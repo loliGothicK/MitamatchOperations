@@ -67,7 +67,7 @@
                 <SymbolIcon Symbol="Sort" Rotation="90"/>
             </Grid>
 
-            <Grid Grid.Column="2">
+            <Grid Grid.Column="0">
                 <Grid MinHeight="400"
                       MinWidth="500"
                       HorizontalAlignment="Center"
@@ -81,15 +81,8 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Background="Transparent">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <CommandBar Grid.Column="1" x:Name="DeckCommandBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                        <TextBlock Text="所持オーダー登録" Margin="20 0 0 0" VerticalAlignment="Center"/>
+                        <CommandBar x:Name="DeckCommandBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
                             <AppBarButton Icon="Save" Label="Save" Click="Save_OnClick"/>
                             <AppBarButton Icon="Folder" Label="Load" Click="Load_OnClick"/>
                         </CommandBar>
@@ -117,7 +110,7 @@
                         BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"/>
                 </Grid>
             </Grid>
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>

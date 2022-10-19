@@ -28,6 +28,7 @@ public sealed partial class SaveDialogContent
     {
         _onChangedAction = onChanged;
         InitializeComponent();
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
 
         InitComboBox();
     }

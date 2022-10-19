@@ -10,12 +10,20 @@ using WinRT;
 
 namespace mitama.AutomateAssign;
 
+internal abstract record AutomateAssignResult
+{
+    public static Success Success => new();
+    public static Failure Failure(string msg) => new(msg);
+}
+internal record Success : AutomateAssignResult;
+internal record Failure(string Msg) : AutomateAssignResult;
+
 internal class AutomateAssign
 {
-    internal static (bool, string) ExecAutoAssign(string region, ref ObservableCollection<TimeTableItem> timeTable)
+    internal static AutomateAssignResult ExecAutoAssign(string region, ref ObservableCollection<TimeTableItem> timeTable)
     {
-        Dictionary<ushort, int> orderIndexToTimeTableIndexMap = new Dictionary<ushort, int>();
-        Dictionary<ushort, PicStat> stat = new Dictionary<ushort, PicStat>();
+        var orderIndexToTimeTableIndexMap = new Dictionary<ushort, int>();
+        var stat = new Dictionary<ushort, PicStat>();
 
         foreach (var (number, (item, index)) in timeTable.Select((item, index) => (item, index)).ToDictionary(tuple => tuple.item.Order.Index))
         {
@@ -25,7 +33,7 @@ internal class AutomateAssign
 
         var orderList = timeTable.Select(item => item.Order).ToArray();
 
-        if (orderList.Length == 0) return (true, "Successfully assigned");
+        if (orderList.Length == 0) return AutomateAssignResult.Success;
 
         var (result, msg) = orderList.Any(order => order.Name == "刻戻りのクロノグラフ") switch
         {
@@ -33,7 +41,7 @@ internal class AutomateAssign
             false => NoChronograph(region, stat, orderList.AsReadOnly()),
         };
 
-        if (msg != string.Empty) return (false, msg);
+        if (msg != string.Empty) return AutomateAssignResult.Failure(msg);
 
         foreach (var (index, pic) in result)
         {
@@ -45,7 +53,7 @@ internal class AutomateAssign
             };
         }
 
-        return (true, "Successfully assigned");
+        return AutomateAssignResult.Success;
     }
 
     private abstract record Assginability : IComparable<Assginability>
@@ -59,6 +67,7 @@ internal class AutomateAssign
             Before => new Unassignable(),
             After => Assign.After,
             Unassignable => new Unassignable(),
+            _ => throw new ArgumentOutOfRangeException(nameof(assginability), assginability, null)
         };
         public static Assginability operator +(Assginability assginability, After _) => assginability switch
         {
@@ -66,6 +75,7 @@ internal class AutomateAssign
             Before => Assign.Before,
             After => new Unassignable(),
             Unassignable => new Unassignable(),
+            _ => throw new ArgumentOutOfRangeException(nameof(assginability), assginability, null)
         };
 
         public abstract int CompareTo(Assginability? other);
@@ -196,8 +206,12 @@ internal class AutomateAssign
         }
         var nAttackers = members.Where(m => m.Position is Front { Category: FrontCategory.Normal } && assginabilities[m.Name] is not Unassignable).ToList();
         var spAttackers = members.Where(m => m.Position is Front { Category: FrontCategory.Special } && assginabilities[m.Name] is not Unassignable).ToList();
+        var buffers = members.Where(m => m.Position is Back { Category: BackCategory.Buffer } && assginabilities[m.Name] is not Unassignable).ToList();
+        var debuffers = members.Where(m => m.Position is Back { Category: BackCategory.DeBuffer } && assginabilities[m.Name] is not Unassignable).ToList();
         var healers = members.Where(m => m.Position is Back { Category: BackCategory.Healer } && assginabilities[m.Name] is not Unassignable).ToList();
-        var others = members.Where(m => m.Position is Back { Category: BackCategory.DeBuffer or BackCategory.Buffer } && assginabilities[m.Name] is not Unassignable).ToList();
+
+        List<Domain.Member> Attackers() => nAttackers!.Concat(spAttackers!).ToList();
+        List<Domain.Member> BuffDebuff() => buffers!.Concat(debuffers!).ToList();
 
         bool Check()
         {
@@ -213,18 +227,21 @@ internal class AutomateAssign
             {
                 spAttackers.Remove(spAttacker);
             }
-            foreach (var other in others.Where(other => assginabilities[other.Name] is Unassignable).ToList())
+            foreach (var buffer in buffers.Where(buffer => assginabilities[buffer.Name] is Unassignable).ToList())
             {
-                others.Remove(other);
+                buffers.Remove(buffer);
+            }
+            foreach (var debuffer in debuffers.Where(debuffer => assginabilities[debuffer.Name] is Unassignable).ToList())
+            {
+                debuffers.Remove(debuffer);
             }
             healers = healers.OrderBy(healer => assginabilities[healer.Name]).ToList();
             nAttackers = nAttackers.OrderBy(attacker => assginabilities[attacker.Name]).ToList();
             spAttackers = spAttackers.OrderBy(spAttacker => assginabilities[spAttacker.Name]).ToList();
-            others = others.OrderBy(other => assginabilities[other.Name]).ToList();
+            buffers = buffers.OrderBy(buffer => assginabilities[buffer.Name]).ToList();
+            debuffers = debuffers.OrderBy(debuffer => assginabilities[debuffer.Name]).ToList();
             return result.Values.All(pic => pic is Assigned);
         }
-
-        List<Domain.Member> Attackers() => nAttackers!.Concat(spAttackers!).ToList();
 
         // 初手オーダーを優先して前衛に割り当てる
         if (result[list[0].Index] is NotAssigned)
@@ -251,7 +268,7 @@ internal class AutomateAssign
         // 最後のオーダーを優先して支援妨害に割り当てる
         if (result[list.Last().Index] is NotAssigned)
         {
-            var other = others.FirstOrDefault(other => other.OrderIndices.Contains(list.Last().Index));
+            var other = BuffDebuff().FirstOrDefault(other => other.OrderIndices.Contains(list.Last().Index));
             if (other == null) return (result, "最後のオーダーは支援妨害に割り当ててください");
             afterReset.Remove(list.Last());
             result[list.Last().Index] = new Assigned(other.Name);
@@ -259,17 +276,41 @@ internal class AutomateAssign
             if (Check()) return (result, string.Empty);
         }
 
-        // 最後のオーダーの前が施術加速の場合も優先して支援妨害に割り当てる
+        // 最後のオーダーの前が施術加速の場合も優先して妨害に割り当てる
+        // Note (2022-10-19):
+        //  戦術加速は現状総攻撃でトップだが、一応分けて記述しておく
         if (list[^2].Name == "戦術加速の陣" && result[list[list.Last().Index - 1].Index] is NotAssigned)
         {
-            var other = others.FirstOrDefault(other => other.OrderIndices.Contains((ushort)52));
-            if (other == null) return (result, "最後の直前の戦術加速は支援妨害に割り当ててください");
+            var debuffer = debuffers.FirstOrDefault(debuffer => debuffer.OrderIndices.Contains((ushort)52));
+            if (debuffer == null) return (result, "最後の直前の戦術加速は支援妨害に割り当ててください");
             afterReset.Remove(list[^2]);
-            result[list[^2].Index] = new Assigned(other.Name);
-            assginabilities[other.Name] += Assign.After;
+            result[list[^2].Index] = new Assigned(debuffer.Name);
+            assginabilities[debuffer.Name] += Assign.After;
             if (Check()) return (result, string.Empty);
         }
 
+        // 両攻撃系を妨害に割り当てる
+        foreach (var order in beforeReset.Where(order => Order.AtkSumTop5.Contains(order) && result[order.Index] is NotAssigned).ToList())
+        {
+            var debuffer = debuffers.FirstOrDefault(debuffer => debuffer.OrderIndices.Contains(order.Index));
+            if (debuffer == null) continue;
+            beforeReset.Remove(order);
+            result[order.Index] = new Assigned(debuffer.Name);
+            assginabilities[debuffer.Name] += Assign.Before;
+            if (Check()) return (result, string.Empty);
+        }
+
+        foreach (var order in afterReset.Where(order => Order.AtkSumTop5.Contains(order) && result[order.Index] is NotAssigned).ToList())
+        {
+            var debuffer = debuffers.FirstOrDefault(debuffer => debuffer.OrderIndices.Contains(order.Index));
+            if (debuffer == null) continue;
+            afterReset.Remove(order);
+            result[order.Index] = new Assigned(debuffer.Name);
+            assginabilities[debuffer.Name] += Assign.After;
+            if (Check()) return (result, string.Empty);
+        }
+
+        #region 回復への割当
         // 次に御ステが最も高いオーダーをそれぞれ前後から回復に割り当てる
         for (var i = healers.Count; i > 0; i--)
         {
@@ -301,13 +342,15 @@ internal class AutomateAssign
 
         if (healers.Count > 0)
             return (result, @$"{string.Join("さん, ", healers.Select(healer => healer.Name))} はオーダーを買ってください");
+        #endregion
+
 
         // 回復以外の後衛でオーダーをまかないきれない場合:
         // まかないきれないぶんは攻撃が高いものを優先して前衛に割り当てる
 
-        if (beforeReset.Count > others.Count(p => assginabilities[p.Name].IsAssignableBefore()))
+        if (beforeReset.Count > BuffDebuff().Count(p => assginabilities[p.Name].IsAssignableBefore()))
         {
-            var required = beforeReset.Count - others.Count(p => assginabilities[p.Name].IsAssignableBefore());
+            var required = beforeReset.Count - BuffDebuff().Count(p => assginabilities[p.Name].IsAssignableBefore());
             for (; required > 0; required--)
             {
                 var attacker = Attackers().FirstOrDefault(
@@ -326,9 +369,9 @@ internal class AutomateAssign
             }
         }
 
-        if (afterReset.Count > others.Count(p => assginabilities[p.Name].IsAssignableAfter()))
+        if (afterReset.Count > BuffDebuff().Count(p => assginabilities[p.Name].IsAssignableAfter()))
         {
-            var required = afterReset.Count - others.Count(p => assginabilities[p.Name].IsAssignableAfter());
+            var required = afterReset.Count - BuffDebuff().Count(p => assginabilities[p.Name].IsAssignableAfter());
             for (; required > 0; required--)
             {
                 var attacker = Attackers().FirstOrDefault(attacker => assginabilities[attacker.Name].IsAssignableAfter());
@@ -348,7 +391,7 @@ internal class AutomateAssign
         // 最後に支援妨害に適当に割り当ててみる
         while (beforeReset.Count > 0)
         {
-            var other = others.FirstOrDefault(other => assginabilities[other.Name].IsAssignableBefore());
+            var other = BuffDebuff().FirstOrDefault(other => assginabilities[other.Name].IsAssignableBefore());
             if (other == null) return (result, "理論的に不可能な編成をするな 4");
             var candidate = beforeReset.First();
             beforeReset.Remove(candidate);
@@ -359,7 +402,7 @@ internal class AutomateAssign
 
         while (afterReset.Count > 0)
         {
-            var other = others.FirstOrDefault(other => assginabilities[other.Name].IsAssignableAfter());
+            var other = BuffDebuff().FirstOrDefault(other => assginabilities[other.Name].IsAssignableAfter());
             if (other == null) return (result, "理論的に不可能な編成をするな 5");
             var candidate = afterReset.First();
             afterReset.Remove(candidate);
@@ -368,7 +411,7 @@ internal class AutomateAssign
             Check();
         }
 
-        return (result, string.Empty);
+        return (result, Check() ? string.Empty : "");
     }
 
     private static Domain.Member[] LoadRegionMemberInformation(string region)

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using mitama.Pages.Common;
+using mitama.Pages.Main;
 
 namespace mitama.Pages;
 /// <summary>
@@ -11,12 +14,15 @@ namespace mitama.Pages;
 /// </summary>
 public sealed partial class MainPage
 {
+    public string Project = "ちっちゃい娘FC";
+
     public UIElement GetAppTitleBar => AppTitleBar;
 
     public MainPage()
     {
         InitializeComponent();
-        Navigate(typeof(HomePage));
+        RootFrame.Navigate(typeof(HomePage));
+        AppNavBar.SelectedIndex = 1;
     }
 
     public void Navigate(
@@ -61,18 +67,42 @@ public sealed partial class MainPage
 
     private void NavView_Navigate(FrameworkElement item)
     {
-        var mapping = new Dictionary<string, Type>()
+        var mapping = new Dictionary<string, (Type, object?)>()
         {
-            {"home", typeof(HomePage)},
-            {"region console", typeof(RegionConsolePage)},
-            {"order console", typeof(OrderConsolePage)},
+            {"home", (typeof(HomePage), null)},
+            {"region console", (typeof(RegionConsolePage), Project)},
+            {"order console", (typeof(OrderConsolePage), null)},
         };
 
-        if (RootFrame.CurrentSourcePageType != mapping[(string)item.Tag])
+        var (pageType, args) = mapping[(string)item.Tag];
+        if (RootFrame.CurrentSourcePageType != pageType)
         {
-            Navigate(mapping[(string)item.Tag]);
+            Navigate(pageType, args);
         }
     }
+
+    private async void ChangeProjectButton_Click(object sender, RoutedEventArgs e)
+    {
+        var builder = new DialogBuilder(XamlRoot);
+
+        var selected = Project;
+
+        var dialog = builder
+            .WithTitle("ログインレギオンを変更")
+            .WithBody(new ChangeProjectDialogContent(s => selected = s))
+            .WithPrimary("Login")
+            .WithSecondary("Create New")
+            .WithCancel("Cancel")
+            .Build();
+
+        dialog.PrimaryButtonCommand = new Defer(delegate
+        {
+            LoginRegion.Text = Project = selected;
+        });
+
+        await dialog.ShowAsync();
+    }
+
 }
 
 public class NavigationRootPageArgs
