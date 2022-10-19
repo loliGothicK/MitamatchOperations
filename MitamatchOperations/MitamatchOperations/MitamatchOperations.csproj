@@ -38,6 +38,7 @@
   <ItemGroup>
     <None Remove="Pages\consolePage.xaml" />
     <None Remove="Pages\console\OrderManagePage.xaml" />
+    <None Remove="Pages\Main\AddNewMemberDialogContent.xaml" />
     <None Remove="Pages\Main\ChangeProjectDialogContent.xaml" />
     <None Remove="Pages\OrderConsole\LoadDialogContent.xaml" />
     <None Remove="Pages\OrderConsole\SaveDialogContent.xaml" />
@@ -67,6 +68,12 @@
 
   <ItemGroup>
     <Folder Include="Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\Main\AddNewMemberDialogContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

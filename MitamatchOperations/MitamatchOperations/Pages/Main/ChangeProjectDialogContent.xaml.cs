@@ -2,6 +2,8 @@ using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using mitama.Pages.Common;
+using mitama.Pages.OrderConsole;
+using WinRT;
 
 namespace mitama.Pages.Main;
 
@@ -20,10 +22,6 @@ public sealed partial class ChangeProjectDialogContent
         {
             RegionComboBox.Items.Add(region);
         }
-    }
-
-    private void CreateNewRegionButton_OnClick(object sender, RoutedEventArgs e)
-    {
     }
 
     private void RegionComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

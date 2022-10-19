@@ -8,66 +8,85 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="120"/>
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid x:Name="AppTitleBar">
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <Image Source="/Assets/Images/MitamaLabLogo.png"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Width="30" Height="30"
-                       Margin="5 0"/>
-                <TextBlock Text="Mitamatch Operations"
-                           TextWrapping="NoWrap"
-                           Style="{StaticResource CaptionTextBlockStyle}" 
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="120"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="AppTitleBar">
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Image Source="/Assets/Images/MitamaLabLogo.png"
+                           HorizontalAlignment="Left"
                            VerticalAlignment="Center"
-                           FontSize="20"
-                           Margin="10 0 0 0"/>
-                <Button Margin="28 0 0 0" VerticalAlignment="Center">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Symbol="People"/>
-                        <TextBlock x:Name="LoginRegion" Text="{x:Bind Project}" Margin="28 0 0 0"/>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE73E;" Margin="28 0 0 0"/>
+                           Width="30" Height="30"
+                           Margin="5 0"/>
+                    <TextBlock Text="Mitamatch Operations"
+                               TextWrapping="NoWrap"
+                               Style="{StaticResource CaptionTextBlockStyle}" 
+                               VerticalAlignment="Center"
+                               FontSize="20"
+                               Margin="10 0 0 0"/>
+                    <Button Margin="28 0 0 0" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="People"/>
+                            <TextBlock x:Name="LoginRegion" Text="{x:Bind Project}" Margin="28 0 0 0"/>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE73E;" Margin="28 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <InfoBar Grid.Row="1"
+                     x:Name="SavedInfoBar"
+                     IsOpen="False"
+                     Severity="Success"
+                     Title="Successfully saved!" />
+
+            <InfoBar Grid.Row="1"
+                     x:Name="LoginInfoBar"
+                     IsOpen="False"
+                     Severity="Success"
+                     Title="Successfully logged in!" />
+
+            <Pivot Grid.Row="2" x:Name="AppNavBar">
+                <PivotItem Header="Project">
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                        <AppBarButton Label="change project" Click="ChangeProjectButton_Click">
+                            <AppBarButton.Icon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE748;"/>
+                            </AppBarButton.Icon>
+                        </AppBarButton>
+                        <AppBarButton Label="add member" Click="AddMemberButton_OnClick">
+                            <AppBarButton.Icon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8FA;"/>
+                            </AppBarButton.Icon>
+                        </AppBarButton>
                     </StackPanel>
-                </Button>
-            </StackPanel>
-        </Grid>
-        <Pivot Grid.Row="1" x:Name="AppNavBar">
-            <PivotItem Header="Project">
-                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                    <AppBarButton Label="change project" Click="ChangeProjectButton_Click">
-                        <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE748;"/>
-                        </AppBarButton.Icon>
-                    </AppBarButton>
-                    <AppBarButton Label="add member">
+                </PivotItem>
+                <PivotItem Header="Home">
+                    <AppBarButton Label="Manage">
                         <AppBarButton.Icon>
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8FA;"/>
                         </AppBarButton.Icon>
                     </AppBarButton>
-                </StackPanel>
-            </PivotItem>
-            <PivotItem Header="Home">
-                <AppBarButton Label="Manage">
-                    <AppBarButton.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8FA;"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-            </PivotItem>
-        </Pivot>
-        <Grid Grid.Row="2" x:Name="MainContent">
-            <NavigationView x:Name="NavigationViewControl"
-                            ItemInvoked="NavView_ItemInvoked" >
-                <NavigationView.MenuItems>
-                    <NavigationViewItem Icon="Home" Content ="ホーム" Tag="home"/>
-                    <NavigationViewItem Icon="People" Content ="レギオン コンソール" Tag="region console"/>
-                    <NavigationViewItem Icon="XboxOneConsole" Content ="オーダー コンソール" Tag="order console"/>
-                </NavigationView.MenuItems>
-                <Frame x:Name="RootFrame" Navigated="OnRootFrameNavigated" Navigating="OnRootFrameNavigating"/>
-            </NavigationView>
+                </PivotItem>
+            </Pivot>
+            <Grid Grid.Row="3" x:Name="MainContent">
+                <NavigationView x:Name="NavigationViewControl"
+                                ItemInvoked="NavView_ItemInvoked" >
+                    <NavigationView.MenuItems>
+                        <NavigationViewItem Icon="Home" Content ="ホーム" Tag="home"/>
+                        <NavigationViewItem Icon="People" Content ="レギオン コンソール" Tag="region console"/>
+                        <NavigationViewItem Icon="XboxOneConsole" Content ="オーダー コンソール" Tag="order console"/>
+                    </NavigationView.MenuItems>
+                    <Frame x:Name="RootFrame" Navigated="OnRootFrameNavigated" Navigating="OnRootFrameNavigating"/>
+                </NavigationView>
+            </Grid>
+
+
         </Grid>
     </Grid>
 </Page>

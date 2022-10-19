@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using ABI.Microsoft.UI.Xaml.Shapes;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml.Shapes;
+using mitama.Domain;
 using mitama.Pages.Common;
 using mitama.Pages.Main;
+using mitama.Pages.OrderConsole;
 
 namespace mitama.Pages;
 /// <summary>
@@ -14,15 +20,35 @@ namespace mitama.Pages;
 /// </summary>
 public sealed partial class MainPage
 {
-    public string Project = "ちっちゃい娘FC";
+    public string Project = "新規プロジェクト";
 
     public UIElement GetAppTitleBar => AppTitleBar;
 
     public MainPage()
     {
         InitializeComponent();
-        RootFrame.Navigate(typeof(HomePage));
         AppNavBar.SelectedIndex = 1;
+        LoadCache();
+        RootFrame.Navigate(typeof(HomePage));
+    }
+
+    private void LoadCache()
+    {
+        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        var cache = $@"{desktop}\MitamatchOperations\Cache\cache.json";
+        var exists = File.Exists(cache);
+        if (exists)
+        {
+            var json = File.ReadAllText(cache);
+            Project = Cache.FromJson(json).LoggedIn;
+        }
+        else
+        {
+            Director.CreateDirectory($@"{desktop}\MitamatchOperations\Cache");
+            using var fs = Director.CreateFile($@"{desktop}\MitamatchOperations\Cache\cache.json");
+            var save = new UTF8Encoding(true).GetBytes(new Cache(Project).ToJson());
+            fs.Write(save, 0, save.Length);
+        }
     }
 
     public void Navigate(
@@ -88,21 +114,78 @@ public sealed partial class MainPage
         var selected = Project;
 
         var dialog = builder
-            .WithTitle("ログインレギオンを変更")
+            .WithTitle("ログインレギオンを変更または作成します")
             .WithBody(new ChangeProjectDialogContent(s => selected = s))
             .WithPrimary("Login")
             .WithSecondary("Create New")
             .WithCancel("Cancel")
             .Build();
 
-        dialog.PrimaryButtonCommand = new Defer(delegate
+        dialog.PrimaryButtonCommand = new Defer(async delegate
         {
             LoginRegion.Text = Project = selected;
+            await LoginInfo();
+        });
+
+        dialog.SecondaryButtonCommand = new Defer(async delegate
+        {
+            LoginRegion.Text = Project = selected;
+            var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            Director.CreateDirectory($@"{desktop}\MitamatchOperations\Regions\{Project}");
+            await LoginInfo();
         });
 
         await dialog.ShowAsync();
     }
 
+    private async void AddMemberButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var builder = new DialogBuilder(XamlRoot);
+
+        string? name = null;
+        Position? position = null;
+
+        var dialog = builder
+            .WithTitle("レギオンメンバを追加します")
+            .WithBody(new AddNewMemberDialogContent(fragment =>
+            {
+                switch (fragment)
+                {
+                    case NewMemberName(var s):
+                        name = s; break;
+                    case NewMemberPosition(var p):
+                        position = p; break;
+                }
+            }))
+            .WithPrimary("Add")
+            .WithCancel("Cancel")
+            .Build();
+
+        dialog.PrimaryButtonCommand = new Defer(async delegate
+        {
+            var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var fs = Director.CreateFile($@"{desktop}\MitamatchOperations\Regions\{Project}\name.json");
+            var memberJson = new Domain.Member(DateTime.Now, DateTime.Now, name!, position!, new ushort[]{}).ToJson();
+            var save = new UTF8Encoding(true).GetBytes(memberJson);
+            fs.Write(save, 0, save.Length);
+            await SavedInfo();
+        });
+
+        await dialog.ShowAsync();
+    }
+
+    private async Task SavedInfo()
+    {
+        SavedInfoBar.IsOpen = true;
+        await Task.Delay(2000);
+        SavedInfoBar.IsOpen = false;
+    }
+    private async Task LoginInfo()
+    {
+        LoginInfoBar.IsOpen = true;
+        await Task.Delay(2000);
+        LoginInfoBar.IsOpen = false;
+    }
 }
 
 public class NavigationRootPageArgs

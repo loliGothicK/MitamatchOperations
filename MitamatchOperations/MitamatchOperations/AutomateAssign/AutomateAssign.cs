@@ -420,7 +420,7 @@ internal class AutomateAssign
 
         return Directory.GetFiles(@$"{desktop}\MitamatchOperations\Regions\{region}", "*.json").Select(path =>
         {
-            using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+            using var sr = new StreamReader(path);
             var json = sr.ReadToEnd();
             return Domain.Member.FromJson(json);
         }).ToArray();

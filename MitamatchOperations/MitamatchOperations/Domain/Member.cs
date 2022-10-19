@@ -4,42 +4,49 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using mitama.Pages;
-using mitama.Pages.OrderConsole;
-using Windows.ApplicationModel.Contacts;
 
 namespace mitama.Domain;
 
-internal abstract record Position
+public abstract record Position
 {
     internal abstract int GetCategory();
+
+    public static Position FromStr(string pos) => pos switch
+    {
+        "Sp.Attacker" => new Front(FrontCategory.Normal),
+        "N.Attacker" => new Front(FrontCategory.Special),
+        "Buffer" => new Back(BackCategory.Buffer),
+        "DeBuffer" => new Back(BackCategory.DeBuffer),
+        "Healer" => new Back(BackCategory.Healer),
+    };
+
 }
 
-internal record Front(FrontCategory Category) : Position
+public record Front(FrontCategory Category) : Position
 {
     internal override int GetCategory() => (int)Category;
 }
 
-internal enum FrontCategory
+public enum FrontCategory
 {
     Normal = 0,
     Special = 1
 }
 
-internal record Back(BackCategory Category) : Position
+public record Back(BackCategory Category) : Position
 {
     internal override int GetCategory() => (int)Category;
 }
 
-internal enum BackCategory
+public enum BackCategory
 {
     Buffer = 2,
     DeBuffer = 3,
     Healer = 4
 }
 
-internal record Member(
+public record Member(
     DateTime CreatedAt,
     DateTime UpdatedAt,
     string Name,
@@ -103,7 +110,7 @@ internal record Member(
 
         var members = new ObservableCollection<Member>(Directory.GetFiles(@$"{desktop}\MitamatchOperations\Regions\{region}", "*.json").Select(path =>
         {
-            using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+            using var sr = new StreamReader(path);
             var json = sr.ReadToEnd();
             return FromJson(json);
         }));

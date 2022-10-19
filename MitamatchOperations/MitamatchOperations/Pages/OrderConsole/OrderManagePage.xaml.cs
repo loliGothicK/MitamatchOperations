@@ -298,7 +298,7 @@ public sealed partial class OrderManagerPage
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             var path = $@"{desktop}\MitamatchOperations\Regions\{SelectedRegion}\{SelectedMember}.json";
 
-            using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+            using var sr = new StreamReader(path);
             var json = sr.ReadToEnd();
             OrdersInPossession.Clear();
             foreach (var index in Domain.Member.FromJson(json).OrderIndices)

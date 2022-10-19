@@ -64,7 +64,7 @@ public sealed partial class DeckEditorPage
             var regionName = regionPath.Split(@"\").Last();
             var names = Directory.GetFiles(regionPath, "*.json").Select(path =>
             {
-                using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+                using var sr = new StreamReader(path);
                 var json = sr.ReadToEnd();
                 return Domain.Member.FromJson(json).Name;
             });
@@ -526,7 +526,7 @@ public sealed partial class DeckEditorPage
         var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var decks = Directory.GetFiles(@$"{desktop}\MitamatchOperations\decks", "*.json").Select(path =>
         {
-            using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+            using var sr = new StreamReader(path);
             var json = sr.ReadToEnd();
             return JsonSerializer.Deserialize<DeckJson>(json);
         }).ToList();
