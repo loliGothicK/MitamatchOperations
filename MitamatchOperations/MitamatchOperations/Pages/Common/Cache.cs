@@ -1,9 +1,11 @@
-﻿using System.Text.Json;
+﻿using System.Text;
+using System.Text.Json;
 
 namespace mitama.Pages.Common;
 
 internal record struct Cache(string LoggedIn)
 {
     internal static Cache FromJson(string json) => JsonSerializer.Deserialize<Cache>(json);
-    internal string ToJson() => JsonSerializer.Serialize(this);
+
+    internal byte[] ToJsonBytes() => new UTF8Encoding(true).GetBytes("{" + "\"LoggedIn\":\"" + LoggedIn + "\"}");
 }

@@ -39,14 +39,13 @@ public sealed partial class MainPage
         var exists = File.Exists(cache);
         if (exists)
         {
-            var json = File.ReadAllText(cache);
-            Project = Cache.FromJson(json).LoggedIn;
+            Project = Director.ReadCache().LoggedIn;
         }
         else
         {
             Director.CreateDirectory($@"{desktop}\MitamatchOperations\Cache");
             using var fs = Director.CreateFile($@"{desktop}\MitamatchOperations\Cache\cache.json");
-            var save = new UTF8Encoding(true).GetBytes(new Cache(Project).ToJson());
+            var save = new Cache(Project).ToJsonBytes();
             fs.Write(save, 0, save.Length);
         }
     }
@@ -164,7 +163,7 @@ public sealed partial class MainPage
         dialog.PrimaryButtonCommand = new Defer(async delegate
         {
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var fs = Director.CreateFile($@"{desktop}\MitamatchOperations\Regions\{Project}\name.json");
+            var fs = Director.CreateFile($@"{desktop}\MitamatchOperations\Regions\{Project}\{name}.json");
             var memberJson = new Domain.Member(DateTime.Now, DateTime.Now, name!, position!, new ushort[]{}).ToJson();
             var save = new UTF8Encoding(true).GetBytes(memberJson);
             fs.Write(save, 0, save.Length);
@@ -184,6 +183,7 @@ public sealed partial class MainPage
     {
         LoginInfoBar.IsOpen = true;
         await Task.Delay(2000);
+        Director.CacheWrite(new Cache(Project).ToJsonBytes());
         LoginInfoBar.IsOpen = false;
     }
 }

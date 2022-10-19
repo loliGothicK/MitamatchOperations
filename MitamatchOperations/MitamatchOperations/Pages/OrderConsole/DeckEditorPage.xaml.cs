@@ -15,6 +15,7 @@ using mitama.Domain;
 using mitama.Domain.OrderKinds;
 using mitama.Pages.Common;
 using WinRT;
+using Microsoft.UI.Xaml.Shapes;
 
 namespace mitama.Pages.OrderConsole;
 
@@ -64,7 +65,7 @@ public sealed partial class DeckEditorPage
             var regionName = regionPath.Split(@"\").Last();
             var names = Directory.GetFiles(regionPath, "*.json").Select(path =>
             {
-                using var sr = new StreamReader(path);
+                using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                 var json = sr.ReadToEnd();
                 return Domain.Member.FromJson(json).Name;
             });
@@ -526,7 +527,7 @@ public sealed partial class DeckEditorPage
         var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var decks = Directory.GetFiles(@$"{desktop}\MitamatchOperations\decks", "*.json").Select(path =>
         {
-            using var sr = new StreamReader(path);
+            using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var json = sr.ReadToEnd();
             return JsonSerializer.Deserialize<DeckJson>(json);
         }).ToList();
@@ -699,7 +700,7 @@ public sealed partial class DeckEditorPage
             box.Items.Add(region);
         }
 
-        box.SelectionChanged += (object _, SelectionChangedEventArgs e) =>
+        box.SelectionChanged += (_, e) =>
         {
             AutomateAssignRequest = e.AddedItems[0].ToString();
         };
@@ -750,6 +751,23 @@ internal class Director
             throw new Exception(@$"The process failed: {e}");
         }
     }
+
+    internal static string MitamatchDir()
+        => $@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\MitamatchOperations";
+
+    internal static void CacheWrite(byte[] json)
+    {
+        using var fs = CreateFile($@"{MitamatchDir()}\Cache\cache.json");
+        fs.Write(json, 0, json.Length);
+    }
+
+    internal static Cache ReadCache()
+    {
+        using var sr = new StreamReader($@"{MitamatchDir()}\Cache\cache.json", Encoding.GetEncoding("UTF-8"));
+        var json = sr.ReadToEnd();
+        return JsonSerializer.Deserialize<Cache>(json);
+    }
+
 }
 
 internal record struct DeckJson(string Name, DateTime DateTime, DeckJsonProxy[] Items)
