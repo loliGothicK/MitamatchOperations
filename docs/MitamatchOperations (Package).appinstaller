@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppInstaller
+	Uri="file://mitama/MitamatchOperations/MitamatchOperations (Package).appinstaller"
+	Version="0.1.7.0" xmlns="http://schemas.microsoft.com/appx/appinstaller/2017/2">
+	<MainBundle
+		Name="da53e8ef-afbd-46fd-bd68-b3b5f2b9017e"
+		Version="0.1.7.0"
+		Publisher="CN=Mitama"
+		Uri="file://mitama/MitamatchOperations/MitamatchOperations (Package)_0.1.7.0_Test/MitamatchOperations (Package)_0.1.7.0_x86_x64.msixbundle" />
+	<Dependencies>
+		<Package
+			Name="Microsoft.WindowsAppRuntime.1.1"
+			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+			ProcessorArchitecture="x86"
+			Uri="file://mitama/MitamatchOperations/MitamatchOperations (Package)_0.1.7.0_Test/Dependencies/x86/Microsoft.WindowsAppRuntime.1.1.msix"
+			Version="1004.584.2120.0" />
+		<Package
+			Name="Microsoft.WindowsAppRuntime.1.1"
+			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+			ProcessorArchitecture="x64"
+			Uri="file://mitama/MitamatchOperations/MitamatchOperations (Package)_0.1.7.0_Test/Dependencies/x64/Microsoft.WindowsAppRuntime.1.1.msix"
+			Version="1004.584.2120.0" />
+		<Package
+			Name="Microsoft.VCLibs.140.00"
+			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+			ProcessorArchitecture="x64"
+			Uri="file://mitama/MitamatchOperations/MitamatchOperations (Package)_0.1.7.0_Test/Dependencies/x64/Microsoft.VCLibs.x64.14.00.appx"
+			Version="14.0.30704.0" />
+		<Package
+			Name="Microsoft.VCLibs.140.00"
+			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+			ProcessorArchitecture="x86"
+			Uri="file://mitama/MitamatchOperations/MitamatchOperations (Package)_0.1.7.0_Test/Dependencies/x86/Microsoft.VCLibs.x86.14.00.appx"
+			Version="14.0.30704.0" />
+		<Package
+			Name="Microsoft.VCLibs.140.00.UWPDesktop"
+			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+			ProcessorArchitecture="x64"
+			Uri="file://mitama/MitamatchOperations/MitamatchOperations (Package)_0.1.7.0_Test/Dependencies/x64/Microsoft.VCLibs.x64.14.00.Desktop.appx"
+			Version="14.0.30704.0" />
+		<Package
+			Name="Microsoft.VCLibs.140.00.UWPDesktop"
+			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+			ProcessorArchitecture="x86"
+			Uri="file://mitama/MitamatchOperations/MitamatchOperations (Package)_0.1.7.0_Test/Dependencies/x86/Microsoft.VCLibs.x86.14.00.Desktop.appx"
+			Version="14.0.30704.0" />
+	</Dependencies>
+	<UpdateSettings>
+		<OnLaunch
+			HoursBetweenUpdateChecks="0" />
+	</UpdateSettings>
+</AppInstaller>
