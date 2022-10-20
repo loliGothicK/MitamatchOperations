@@ -21,6 +21,7 @@ public sealed partial class RegionConsolePage
     public RegionConsolePage()
     {
         InitializeComponent();
+        NavigationCacheMode = NavigationCacheMode.Enabled;
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)

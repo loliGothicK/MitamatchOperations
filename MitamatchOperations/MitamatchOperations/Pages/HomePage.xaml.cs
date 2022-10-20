@@ -8,5 +8,6 @@ public sealed partial class HomePage
     public HomePage()
     {
         InitializeComponent();
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
     }
 }

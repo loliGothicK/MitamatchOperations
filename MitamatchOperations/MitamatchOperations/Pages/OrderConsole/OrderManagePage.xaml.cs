@@ -28,6 +28,8 @@ public sealed partial class OrderManagerPage
     public OrderManagerPage()
     {
         InitializeComponent();
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+
         ElementalCheckBox.IsChecked
             = BuffCheckBox.IsChecked
             = DeBuffCheckBox.IsChecked

@@ -8,5 +8,6 @@ public sealed partial class OrderConsolePage
     public OrderConsolePage()
     {
         InitializeComponent();
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
     }
 }

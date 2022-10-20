@@ -22,6 +22,7 @@ public sealed partial class LoadDialogContent
     {
         OnChangedAction = onChanged;
         InitializeComponent();
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
 
         var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var regions = Directory.GetDirectories(@$"{desktop}\MitamatchOperations\Regions").ToArray();

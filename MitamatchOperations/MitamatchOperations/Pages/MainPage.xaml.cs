@@ -24,6 +24,7 @@ public sealed partial class MainPage
     public MainPage()
     {
         InitializeComponent();
+        NavigationCacheMode = NavigationCacheMode.Enabled;
         AppNavBar.SelectedIndex = 1;
         LoadCache();
         RootFrame.Navigate(typeof(HomePage));
@@ -130,6 +131,7 @@ public sealed partial class MainPage
         async void PrimaryAction()
         {
             LoginRegion.Text = Project = selected;
+            Navigate(typeof(RegionConsolePage), new Props(Project));
             await LoginInfo();
         }
 
@@ -140,6 +142,7 @@ public sealed partial class MainPage
             LoginRegion.Text = Project = selected;
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             Director.CreateDirectory($@"{desktop}\MitamatchOperations\Regions\{Project}");
+            Navigate(typeof(RegionConsolePage), new Props(Project));
             await LoginInfo();
         }
 
