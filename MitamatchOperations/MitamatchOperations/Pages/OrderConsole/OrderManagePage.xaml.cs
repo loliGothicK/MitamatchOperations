@@ -22,7 +22,7 @@ public sealed partial class OrderManagerPage
 {
     private ObservableCollection<Order> Sources { get; } = new();
     private ObservableCollection<Order> OrdersInPossession { get; } = new();
-    public string? SelectedRegion;
+    public string SelectedRegion = Director.ReadCache().LoggedIn;
     public string? SelectedMember;
 
     public OrderManagerPage()
@@ -46,7 +46,20 @@ public sealed partial class OrderManagerPage
         OrdersInPossessionView.ItemsSource = OrdersInPossession;
     }
 
-    private void AddConfirmation_Click(object sender, RoutedEventArgs e)
+    private void Move_OnLoaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button) return;
+        if (OrdersInPossessionView.SelectedItems.Count > 0 || OrderSources.SelectedItems.Count > 0)
+        {
+            button.IsEnabled = true;
+        }
+        else
+        {
+            button.IsEnabled = false;
+        }
+    }
+
+    private void Move_Click(object sender, RoutedEventArgs e)
     {
         if (sender is not Button button) return;
 
@@ -55,29 +68,22 @@ public sealed partial class OrderManagerPage
             popup.IsOpen = false;
         }
 
-        if (OrderSources.SelectedItems.Count > 0)
+        var left = OrdersInPossessionView.SelectedItems
+            .Select(item => (Order)item).ToArray();
+        var right = OrderSources.SelectedItems
+            .Select(item => (Order)item).ToArray();
+        foreach (var ordered in right)
         {
-            foreach (var ordered in OrderSources.SelectedItems
-                         .Select(item => (Order)item).ToArray())
-            {
-                Sources.Remove(ordered);
-                PushOrder(ordered);
-            }
-        }
-        else
-        {
-            var ordered = Order.List[uint.Parse(button.AccessKey)];
             Sources.Remove(ordered);
-            PushOrder(ordered);
+            OrdersInPossession.Add(ordered);
+        }
+        foreach (var ordered in left)
+        {
+            OrdersInPossession.Remove(ordered);
+            Sources.Add(ordered);
         }
 
-        OrderSources.ItemsSource = Sources;
-        OrdersInPossessionView.ItemsSource = OrdersInPossession;
-    }
-
-    private void PushOrder(Order ordered)
-    {
-        OrdersInPossession.Add(ordered);
+        Update();
     }
 
     //===================================================================================================================

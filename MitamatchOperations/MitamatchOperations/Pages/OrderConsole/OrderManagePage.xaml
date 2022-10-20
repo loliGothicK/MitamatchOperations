@@ -21,7 +21,8 @@
                                     <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind TimeFmt}" Margin="0,0,0,0" />
                                 </StackPanel>
                                 <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Description}" Margin="0,0,0,0" />
-                                <Button Click="AddConfirmation_Click" 
+                                <Button Click="Move_Click"
+                                        Loaded="Move_OnLoaded"
                                         Content="移動する"
                                         Style="{StaticResource AccentButtonStyle}"
                                         AccessKey="{x:Bind Index}"
@@ -81,7 +82,7 @@
 
                     <Grid Background="Transparent">
                         <TextBlock Text="所持オーダー登録" Margin="20 0 0 0" VerticalAlignment="Center"/>
-                        <CommandBar x:Name="DeckCommandBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
                             <AppBarButton Icon="Save" Label="Save" Click="Save_OnClick"/>
                             <AppBarButton Icon="Folder" Label="Load" Click="Load_OnClick"/>
                         </CommandBar>
@@ -157,14 +158,5 @@
                     BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"/>
             </Grid>
         </Grid>
-
-        <TeachingTip x:Name="OnDeckSavedTips"
-                     Target="{x:Bind DeckCommandBar}"
-                     Title="保存しました">
-            <TeachingTip.IconSource>
-                <SymbolIconSource Symbol="Cancel" />
-            </TeachingTip.IconSource>
-        </TeachingTip>
-
     </Grid>
 </Page>

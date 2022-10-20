@@ -99,18 +99,18 @@ public sealed partial class MainPage
             InfoBar.IsOpen = false;
         }
 
-        var props = new Props(Project) { InvokeInfo = InvokeInfo };
-        var mapping = new Dictionary<string, (Type, object?)>()
+        var mapping = new Dictionary<string, Type>()
         {
-            {"home", (typeof(HomePage), null)},
-            {"region console", (typeof(RegionConsolePage), props)},
-            {"order console", (typeof(OrderConsolePage), null)},
+            {"home", typeof(HomePage)},
+            {"region console",typeof(RegionConsolePage)},
+            {"order console", typeof(OrderConsolePage)},
         };
 
-        var (pageType, args) = mapping[(string)item.Tag];
+        var pageType = mapping[(string)item.Tag];
         if (RootFrame.CurrentSourcePageType != pageType)
         {
-            Navigate(pageType, args);
+            Navigate(pageType, Project);
+            Navigate(pageType, InvokeInfo);
         }
     }
 

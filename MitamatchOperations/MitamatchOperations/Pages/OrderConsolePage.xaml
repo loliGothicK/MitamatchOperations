@@ -11,17 +11,17 @@
     <Grid>
         <TabView x:Name="ConsoleTabView" SelectedIndex="0" Margin="10" IsAddTabButtonVisible="False" MinHeight="475">
             <TabView.TabItems>
-                <TabViewItem  Header="Deck Editor" IsClosable="False" Background="DarkGray">
+                <TabViewItem Header="Deck Editor" IsClosable="False" Background="DarkGray">
                     <TabViewItem.IconSource>
                         <SymbolIconSource Symbol="Edit" />
                     </TabViewItem.IconSource>
-                    <console:DeckEditorPage />
+                    <Frame x:Name="EditFrame" />
                 </TabViewItem>
-                <TabViewItem  Header="Order Manager" IsClosable="False">
+                <TabViewItem Header="Order Manager" IsClosable="False">
                     <TabViewItem.IconSource>
                         <SymbolIconSource Symbol="Manage" />
                     </TabViewItem.IconSource>
-                    <console:OrderManagerPage />
+                    <Frame x:Name="ManageFrame" />
                 </TabViewItem>
             </TabView.TabItems>
         </TabView>

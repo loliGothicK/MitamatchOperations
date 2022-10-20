@@ -14,6 +14,7 @@ using mitama.Domain;
 using mitama.Domain.OrderKinds;
 using mitama.Pages.Common;
 using WinRT;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace mitama.Pages.OrderConsole;
 
@@ -24,14 +25,15 @@ public sealed partial class DeckEditorPage
 {
     public static readonly int[] TimeSource = Enumerable.Range(0, 12).Select(t => t * 5).ToArray();
     private ObservableCollection<TimeTableItem> _deck = new();
-    private ObservableCollection<Order> Sources { get; } = new();
+    private ObservableCollection<Order> Sources { get; set; } = new();
     private new uint Margin { get; set; } = 5;
-    private Dictionary<string, List<string>> RegionToMembersDict { get; set; } = new();
+    private Dictionary<string, List<string>> RegionToMembersDict { get; } = new();
     private string? _automateAssignRequest;
     private readonly List<HoldOn> _holdOns = new();
+    private string? _loginRegion;
+
 
     private abstract record HoldOn;
-
     private record ChangeMargin(uint Margin) : HoldOn;
     private record ChangePic(string Name) : HoldOn;
     private record RemovePic : HoldOn;
@@ -39,7 +41,7 @@ public sealed partial class DeckEditorPage
     public DeckEditorPage()
     {
         InitializeComponent();
-        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+        NavigationCacheMode = NavigationCacheMode.Enabled;
  
         ElementalCheckBox.IsChecked
             = BuffCheckBox.IsChecked
@@ -51,6 +53,11 @@ public sealed partial class DeckEditorPage
             = OthersCheckBox.IsChecked = true;
 
         InitRegionToMembersDict();
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        _loginRegion = Director.ReadCache().LoggedIn;
     }
 
     private void InitRegionToMembersDict()
@@ -524,6 +531,8 @@ public sealed partial class DeckEditorPage
     {
         var deck = DeckLoadBox.SelectedItem.As<DeckJson>();
         _deck.Clear();
+        Sources.Clear();
+        Sources = new ObservableCollection<Order>(Order.List);
         foreach (var item in deck.Items.Select(item => (TimeTableItem)item))
         {
             _deck.Add(item);
@@ -543,67 +552,60 @@ public sealed partial class DeckEditorPage
         if (sender is not DropDownButton button) return;
 
         var flyout = new MenuFlyout();
-        foreach (var menuFlyoutSubItem in RegionToMembersDict.Select(kv =>
-                 {
-                     var (region, members) = kv;
-                     var subItem = new MenuFlyoutSubItem { Text = region };
-                     foreach (var member in members) subItem.Items.Add(new MenuFlyoutItem
-                     {
-                         Text = member,
-                         Command = new Defer(delegate
-                         {
-                             _holdOns.RemoveAll(item => item is ChangePic or RemovePic);
-                             _holdOns.Add(new ChangePic(member));
-                             var index = uint.Parse(button.AccessKey);
-                             UpdateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children);
+        foreach (var member in RegionToMembersDict[_loginRegion!]){
+            flyout.Items.Add(new MenuFlyoutItem
+            {
+                Text = member,
+                Command = new Defer(delegate
+                {
+                    _holdOns.RemoveAll(item => item is ChangePic or RemovePic);
+                    _holdOns.Add(new ChangePic(member));
+                    var index = uint.Parse(button.AccessKey);
+                    UpdateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children);
 
-                             var exists = _deck.Where(item => item.Order.Index != index)
-                                 .Where(item => item.Pic == member).ToArray();
+                    var exists = _deck.Where(item => item.Order.Index != index)
+                        .Where(item => item.Pic == member).ToArray();
 
-                             switch (exists.Length)
-                             {
-                                 case 2:
-                                     OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Disable("一人に3回以上の担当が割り振られいます"));
-                                     break;
-                                 case 1:
-                                     {
-                                         var exist = exists.First();
-                                         var added = _deck.First(item => item.Order.Index == index);
-                                         var existIndex = _deck.IndexOf(exist);
-                                         var addedIndex = _deck.IndexOf(added);
+                    switch (exists.Length)
+                    {
+                        case 2:
+                            OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Disable("一人に3回以上の担当が割り振られいます"));
+                            break;
+                        case 1:
+                            {
+                                var exist = exists.First();
+                                var added = _deck.First(item => item.Order.Index == index);
+                                var existIndex = _deck.IndexOf(exist);
+                                var addedIndex = _deck.IndexOf(added);
 
-                                         if (Math.Abs(existIndex- addedIndex) == 1)
-                                         {
-                                             OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Disable("クロノを挟まずに2回の担当が割り振られいます"));
-                                             break;
-                                         }
+                                if (Math.Abs(existIndex - addedIndex) == 1)
+                                {
+                                    OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Disable("クロノを挟まずに2回の担当が割り振られいます"));
+                                    break;
+                                }
 
-                                         var span = (existIndex > addedIndex) switch
-                                         {
-                                             true => _deck.ToList().GetRange(addedIndex, existIndex - addedIndex - 1),
-                                             false => _deck.ToList().GetRange(existIndex, addedIndex - existIndex - 1),
-                                         };
-                                         if (span.Any(item => item.Order.Name == "刻戻りのクロノグラフ"))
-                                         {
-                                             OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Enable("適用する"));
-                                         }
-                                         else
-                                         {
-                                             OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Disable("クロノを挟まずに2回の担当が割り振られいます"));
-                                         }
+                                var span = (existIndex > addedIndex) switch
+                                {
+                                    true => _deck.ToList().GetRange(addedIndex, existIndex - addedIndex - 1),
+                                    false => _deck.ToList().GetRange(existIndex, addedIndex - existIndex - 1),
+                                };
+                                if (span.Any(item => item.Order.Name == "刻戻りのクロノグラフ"))
+                                {
+                                    OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Enable("適用する"));
+                                }
+                                else
+                                {
+                                    OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Disable("クロノを挟まずに2回の担当が割り振られいます"));
+                                }
 
-                                         break;
-                                     }
-                                 default:
-                                     OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Enable("適用する"));
-                                     break;
-                             }
-                         })
-                     });
-                     return subItem;
-                 }))
-        {
-            flyout.Items.Add(menuFlyoutSubItem);
+                                break;
+                            }
+                        default:
+                            OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Enable("適用する"));
+                            break;
+                    }
+                })
+            });
         }
         button.Flyout = flyout;
     }
@@ -657,7 +659,7 @@ public sealed partial class DeckEditorPage
     }
 
 
-    private void OnValidateChangesOnHold(IEnumerable<object> controls, Validated validated)
+    private static void OnValidateChangesOnHold(IEnumerable<object> controls, Validated validated)
     {
         var (isEnabled, msg) = validated.IntoTuple();
         var confirmButton = controls
@@ -706,6 +708,17 @@ public sealed partial class DeckEditorPage
         });
 
         await dialog.ShowAsync();
+    }
+
+    private void Margin_OnSelectionChanged(object sender, RoutedEventArgs e)
+    {
+        if (!uint.TryParse(GlobalMargin.Text, out var seconds)) return;
+        foreach (var item in _deck)
+        {
+            if (item.Delay == Margin) item.Delay = seconds;
+        }
+        Margin = seconds;
+        ReCalcTimeTable();
     }
 }
 

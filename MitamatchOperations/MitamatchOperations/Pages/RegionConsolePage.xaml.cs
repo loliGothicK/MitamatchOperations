@@ -1,10 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection.Metadata;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using mitama.Domain;
 using mitama.Pages.Common;
@@ -16,22 +10,16 @@ namespace mitama.Pages;
 /// </summary>
 public sealed partial class RegionConsolePage
 {
-    private string? _regionName;
+    private string _regionName = Director.ReadCache().LoggedIn;
 
     public RegionConsolePage()
     {
         InitializeComponent();
         NavigationCacheMode = NavigationCacheMode.Enabled;
     }
-
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
-        if (e.Parameter is NavigationRootPageProps { Parameter: Props { Project: { } regionName } })
-        {
-            _regionName = regionName;
-            MemberCvs.Source = Member.LoadMembersGrouped(regionName);
-        }
-        base.OnNavigatedTo(e);
+        _regionName = Director.ReadCache().LoggedIn;
     }
 }
 

@@ -173,8 +173,10 @@
 
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
                             <TextBlock Text="Margin=" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"/>
-                            <TextBox PlaceholderText="{x:Bind Margin}"
-                                     Margin="0 5"/>
+                            <TextBox x:Name="GlobalMargin"
+                                     PlaceholderText="{x:Bind Margin}"
+                                     Margin="0 5"
+                                     SelectionChanged="Margin_OnSelectionChanged"/>
                             <TextBlock Text=" sec" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         </StackPanel>
                         <CommandBar Grid.Column="1" x:Name="DeckCommandBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">

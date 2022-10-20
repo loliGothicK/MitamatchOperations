@@ -9,7 +9,7 @@
   <Identity
     Name="da53e8ef-afbd-46fd-bd68-b3b5f2b9017e"
     Publisher="CN=Mitama"
-    Version="0.1.9.0" />
+    Version="0.1.10.0" />
 
   <Properties>
     <DisplayName>Mitamatch Operations</DisplayName>
