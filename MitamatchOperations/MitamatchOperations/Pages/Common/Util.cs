@@ -12,9 +12,17 @@ namespace mitama.Pages.Common;
 internal class Util
 {
     internal static string[] LoadRegionNames()
-        => GetDirectories(@$"{GetFolderPath(SpecialFolder.Desktop)}\MitamatchOperations\Regions")
-            .Select(path => path.Split('\\').Last())
-            .ToArray();
+    {
+        if (Exists(@$"{Director.MitamatchDir()}\Regions"))
+        {
+            return GetDirectories(@$"{Director.MitamatchDir()}\Regions")
+                .Select(path => path.Split('\\').Last())
+                .ToArray();
+        }
+
+        Director.CreateDirectory(@$"{Director.MitamatchDir()}\Regions");
+        return new string[] { };
+    }
 }
 
 internal class Director

@@ -38,16 +38,26 @@
   <ItemGroup>
     <None Remove="Pages\consolePage.xaml" />
     <None Remove="Pages\console\OrderManagePage.xaml" />
+    <None Remove="Pages\ControlRoomPage.xaml" />
     <None Remove="Pages\Main\AddNewMemberDialogContent.xaml" />
     <None Remove="Pages\Main\ChangeProjectDialogContent.xaml" />
     <None Remove="Pages\OrderConsole\LoadDialogContent.xaml" />
     <None Remove="Pages\OrderConsole\SaveDialogContent.xaml" />
     <None Remove="Pages\RegionConsolePage.xaml" />
   </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="{d37e2a3e-8545-3a39-9f4f-31827c9124ab}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>d37e2a3e-8545-3a39-9f4f-31827c9124ab</Guid>
+    </COMReference>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.5" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
@@ -68,6 +78,12 @@
 
   <ItemGroup>
     <Folder Include="Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\ControlRoomPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

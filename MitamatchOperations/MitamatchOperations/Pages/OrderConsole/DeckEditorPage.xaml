@@ -218,7 +218,7 @@
                         </CommandBar>
                     </Grid>
 
-                    <Grid Grid.Row="1" Background="#111111" CornerRadius="10" VerticalAlignment="Stretch">
+                    <Grid x:Name="DeckGrid" Grid.Row="1" CornerRadius="10" VerticalAlignment="Stretch">
                         <ListView
                             x:Name="OrderDeck"
                             MinHeight="500"

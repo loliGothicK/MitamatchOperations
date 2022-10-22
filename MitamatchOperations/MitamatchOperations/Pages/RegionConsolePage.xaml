@@ -49,7 +49,7 @@
 
     <Grid>
         <StackPanel>
-            <TextBlock Text="{x:Bind _regionName}" TextWrapping="NoWrap" Margin="0 0 0 15" FontSize="20"/>
+            <TextBlock x:Name="Project" Text="{x:Bind _regionName}" TextWrapping="NoWrap" Margin="0 0 0 15" FontSize="20"/>
             <ListView ItemsSource="{x:Bind MemberCvs.View, Mode=OneWay}"
                       ItemTemplate="{StaticResource MemberListViewTemplate}"
                       SelectionMode="Single"

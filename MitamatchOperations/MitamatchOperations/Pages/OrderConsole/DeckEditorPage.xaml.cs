@@ -7,9 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Media;
 using mitama.Domain;
 using mitama.Domain.OrderKinds;
 using mitama.Pages.Common;
@@ -53,6 +55,10 @@ public sealed partial class DeckEditorPage
             = OthersCheckBox.IsChecked = true;
 
         InitRegionToMembersDict();
+
+        DeckGrid.Background = ((FrameworkElement)Content).ActualTheme == ElementTheme.Dark
+            ? new AcrylicBrush { TintColor = Color.FromArgb(90, 200, 200, 200) }
+            : new AcrylicBrush { TintColor = Color.FromArgb(90, 20, 20, 20) };
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -62,13 +68,9 @@ public sealed partial class DeckEditorPage
 
     private void InitRegionToMembersDict()
     {
-        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var regions = Directory.GetDirectories(@$"{desktop}\MitamatchOperations\Regions").ToArray();
-
-        foreach (var regionPath in regions)
+        foreach (var regionName in Util.LoadRegionNames())
         {
-            var regionName = regionPath.Split(@"\").Last();
-            var names = Directory.GetFiles(regionPath, "*.json").Select(path =>
+            var names = Directory.GetFiles($@"{Director.MitamatchDir()}\Regions", "*.json").Select(path =>
             {
                 using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                 var json = sr.ReadToEnd();

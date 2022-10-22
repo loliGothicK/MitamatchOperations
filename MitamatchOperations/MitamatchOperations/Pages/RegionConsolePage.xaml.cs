@@ -19,7 +19,7 @@ public sealed partial class RegionConsolePage
     }
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
-        _regionName = Director.ReadCache().LoggedIn;
+        Project.Text = _regionName = Director.ReadCache().LoggedIn;
     }
 }
 

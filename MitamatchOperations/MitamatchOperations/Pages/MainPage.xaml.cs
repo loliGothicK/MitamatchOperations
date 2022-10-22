@@ -90,28 +90,17 @@ public sealed partial class MainPage
 
     private void NavView_Navigate(FrameworkElement item)
     {
-        async void InvokeInfo(InfoProps props)
-        {
-            InfoBar.IsOpen = true;
-            InfoBar.Severity = props.Severity;
-            InfoBar.Title = props.Title;
-            await Task.Delay(2000);
-            InfoBar.IsOpen = false;
-        }
-
         var mapping = new Dictionary<string, Type>()
         {
             {"home", typeof(HomePage)},
             {"region console",typeof(RegionConsolePage)},
             {"order console", typeof(OrderConsolePage)},
+            {"control room", typeof(ControlRoomPage)},
         };
 
         var pageType = mapping[(string)item.Tag];
-        if (RootFrame.CurrentSourcePageType != pageType)
-        {
-            Navigate(pageType, Project);
-            Navigate(pageType, InvokeInfo);
-        }
+        if (RootFrame.CurrentSourcePageType == pageType) return;
+        Navigate(pageType);
     }
 
     private async void ChangeProjectButton_Click(object sender, RoutedEventArgs e)
@@ -143,6 +132,7 @@ public sealed partial class MainPage
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             Director.CreateDirectory($@"{desktop}\MitamatchOperations\Regions\{Project}");
             Navigate(typeof(RegionConsolePage), new Props(Project));
+            RegionView.IsSelected = true;
             await LoginInfo();
         }
 
