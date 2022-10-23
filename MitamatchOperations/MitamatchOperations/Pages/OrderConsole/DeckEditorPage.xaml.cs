@@ -29,8 +29,7 @@ public sealed partial class DeckEditorPage
     private ObservableCollection<TimeTableItem> _deck = new();
     private ObservableCollection<Order> Sources { get; set; } = new();
     private new uint Margin { get; set; } = 5;
-    private Dictionary<string, List<string>> RegionToMembersDict { get; } = new();
-    private string? _automateAssignRequest;
+    private Domain.Member[] _members = { };
     private readonly List<HoldOn> _holdOns = new();
     private string? _loginRegion;
 
@@ -44,7 +43,7 @@ public sealed partial class DeckEditorPage
     {
         InitializeComponent();
         NavigationCacheMode = NavigationCacheMode.Enabled;
- 
+
         ElementalCheckBox.IsChecked
             = BuffCheckBox.IsChecked
             = DeBuffCheckBox.IsChecked
@@ -54,8 +53,6 @@ public sealed partial class DeckEditorPage
             = ShieldCheckBox.IsChecked
             = OthersCheckBox.IsChecked = true;
 
-        InitRegionToMembersDict();
-
         DeckGrid.Background = ((FrameworkElement)Content).ActualTheme == ElementTheme.Dark
             ? new AcrylicBrush { TintColor = Color.FromArgb(90, 200, 200, 200) }
             : new AcrylicBrush { TintColor = Color.FromArgb(90, 20, 20, 20) };
@@ -64,27 +61,13 @@ public sealed partial class DeckEditorPage
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         _loginRegion = Director.ReadCache().LoggedIn;
-    }
-
-    private void InitRegionToMembersDict()
-    {
-        foreach (var regionName in Util.LoadRegionNames())
-        {
-            var names = Directory.GetFiles($@"{Director.MitamatchDir()}\Regions", "*.json").Select(path =>
+        _members = Directory.GetFiles($@"{Director.RegionDir()}\{_loginRegion}", "*.json")
+            .Select(path =>
             {
                 using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                 var json = sr.ReadToEnd();
-                return Domain.Member.FromJson(json).Name;
-            });
-            if (!RegionToMembersDict.ContainsKey(regionName))
-            {
-                RegionToMembersDict[regionName] = new List<string>();
-            }
-            foreach (var name in names)
-            {
-                RegionToMembersDict[regionName].Add(name);
-            }
-        }
+                return Domain.Member.FromJson(json);
+            }).ToArray();
     }
 
     private void AddConfirmation_Click(object sender, RoutedEventArgs e)
@@ -498,9 +481,11 @@ public sealed partial class DeckEditorPage
         var dt = DateTime.Now;
         var proxy = new DeckJson(DeckName.Text, dt, _deck.Select(item => (DeckJsonProxy)item).ToArray());
         var jsonStr = JsonSerializer.Serialize(proxy);
-        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        Director.CreateDirectory(@$"{desktop}\MitamatchOperations\decks");
-        var file = @$"{desktop}\MitamatchOperations\decks\{dt.Year:0000}-{dt.Month:00}-{dt.Day:00}-{dt.Hour:00}{dt.Minute:00}{dt.Second:00}.json";
+        if (!Directory.Exists(Director.DeckDir()))
+        {
+            Director.CreateDirectory(Director.DeckDir());
+        }
+        var file = @$"{Director.DeckDir()}\{dt.Year:0000}-{dt.Month:00}-{dt.Day:00}-{dt.Hour:00}{dt.Minute:00}{dt.Second:00}.json";
         using var fs = Director.CreateFile(file);
         var save = new UTF8Encoding(true).GetBytes(jsonStr);
         fs.Write(save, 0, save.Length);
@@ -518,8 +503,11 @@ public sealed partial class DeckEditorPage
     {
         if (sender is not ComboBox box) return;
 
-        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var decks = Directory.GetFiles(@$"{desktop}\MitamatchOperations\decks", "*.json").Select(path =>
+        if (!Directory.Exists(Director.DeckDir()))
+        {
+            Director.CreateDirectory(Director.DeckDir());
+        }
+        var decks = Directory.GetFiles(Director.DeckDir(), "*.json").Select(path =>
         {
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var json = sr.ReadToEnd();
@@ -554,7 +542,8 @@ public sealed partial class DeckEditorPage
         if (sender is not DropDownButton button) return;
 
         var flyout = new MenuFlyout();
-        foreach (var member in RegionToMembersDict[_loginRegion!]){
+        foreach (var member in _members.Select(mem => mem.Name))
+        {
             flyout.Items.Add(new MenuFlyoutItem
             {
                 Text = member,
@@ -683,29 +672,15 @@ public sealed partial class DeckEditorPage
     {
         var builder = new DialogBuilder(XamlRoot);
 
-        var box = new ComboBox();
-
-        foreach (var region in RegionToMembersDict.Keys)
-        {
-            box.Items.Add(region);
-        }
-
-        box.SelectionChanged += (_, e) =>
-        {
-            _automateAssignRequest = e.AddedItems[0].ToString();
-        };
-
         var dialog = builder
             .WithTitle("自動オーダー担当者割当てを実行しますか？")
-            .WithBody(box)
             .WithPrimary("実行")
             .WithCancel("やっぱりやめる")
             .Build();
 
         dialog.PrimaryButtonCommand = new Defer(delegate
         {
-            if (_automateAssignRequest != null)
-                _ = AutomateAssign.AutomateAssign.ExecAutoAssign(_automateAssignRequest, ref _deck);
+            _ = AutomateAssign.AutomateAssign.ExecAutoAssign(_loginRegion!, ref _deck);
             OrderDeck.ItemsSource = _deck;
         });
 
@@ -743,7 +718,20 @@ internal record TimeTableItem(Order Order, uint Delay, uint Start, uint End, str
     internal string StartTime => $"{Start / 60:00}:{Start % 60:00}";
     internal string EndTime => $"{End / 60:00}:{End % 60:00}";
     internal string PicFmt => Pic != "" ? $"[{Pic}]" : "";
-    internal string PicPlaceholder => Pic != "" ? Pic : @"担当プレイヤーを入力してください";
+
+    internal int Deviation
+    {
+        get
+        {
+            var target = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 23, 00, 00) + new TimeSpan(0, 0, (int)(15 * 60 - Start));
+            var actual = DateTime.Now;
+            return (target < actual) switch
+            {
+                true => -((actual - target).Minutes * 60 + (actual - target).Seconds),
+                false => ((actual - target).Minutes * 60 + (actual - target).Seconds),
+            };
+        }
+    }
 
     internal uint Delay { get; set; } = Delay;
     internal string Pic { get; set; } = Pic;

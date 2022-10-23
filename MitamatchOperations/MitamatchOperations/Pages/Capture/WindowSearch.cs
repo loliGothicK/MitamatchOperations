@@ -61,7 +61,8 @@ public class Search
         // ウィンドウの列挙を開始
         EnumWindows((hWnd, lParam) =>
         {
-            if (IsWindowVisible(hWnd) && Caption(hWnd) == target)
+            var caption = Caption(hWnd);
+            if (IsWindowVisible(hWnd) && caption.Contains(target))
             {
                 result = hWnd;
             }

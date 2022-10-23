@@ -36,18 +36,18 @@ internal class WindowCapture
     [DllImport("user32.dll")]
     private static extern bool GetWindowRect(IntPtr hwnd, out Rect lpRect);
 
-    public Bitmap Capture()
+    public Bitmap SnapShot()
     {
         // ウィンドウサイズ取得
         GetWindowRect(_handle, out var rect);
 
-        var bmp = new Bitmap(500, 80);
+        var bmp = new Bitmap(500, 100);
 
         //Graphicsの作成
         using var g = Graphics.FromImage(bmp);
         try
         {
-            g.CopyFromScreen(new Point(rect.left + 250, rect.top + 120), new Point(0, 0), bmp.Size);
+            g.CopyFromScreen(new Point(rect.left + 260, rect.top + 120), new Point(0, 0), bmp.Size);
         }
         catch
         {
@@ -75,11 +75,11 @@ internal class WindowCapture
     {
         var ocrEngine = OcrEngine.TryCreateFromLanguage(new Language("ja-JP"));
         var ocrResult = await ocrEngine?.RecognizeAsync(snap);
-        return ocrResult.Text;
+        return ocrResult.Text.Replace(" ", string.Empty);
     }
 
     public async Task<string> TryCaptureOrderInfo()
     {
-        return await RecognizeText(await GetSoftwareSnapShot(Capture()));
+        return await RecognizeText(await GetSoftwareSnapShot(SnapShot()));
     }
 }

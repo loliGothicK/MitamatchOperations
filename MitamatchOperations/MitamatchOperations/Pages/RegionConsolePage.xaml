@@ -61,7 +61,7 @@
                       HorizontalAlignment="Left">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <ItemsStackPanel x:Name="GroupedStackPanel" AreStickyGroupHeadersEnabled="True"/>
+                        <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
 
@@ -70,7 +70,7 @@
                         <GroupStyle.HeaderTemplate>
                             <DataTemplate x:DataType="local:GroupInfoList">
                                 <Border AutomationProperties.AccessibilityView="Raw">
-                                    <TextBlock Text="{x:Bind Key}"
+                                    <TextBlock Text="{x:Bind ((domain:Position)Key).Display}"
                                                Style="{ThemeResource TitleTextBlockStyle}"
                                                AutomationProperties.AccessibilityView="Raw"/>
                                 </Border>

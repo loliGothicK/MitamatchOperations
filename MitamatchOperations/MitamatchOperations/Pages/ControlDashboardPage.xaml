@@ -1,0 +1,126 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License. See LICENSE in the project root for license information. -->
+
+<Page
+    x:Class="mitama.Pages.ControlDashboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:console="using:mitama.Pages.OrderConsole"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:mitama.Pages"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate x:Key="RemainderListViewTemplate" x:DataType="console:TimeTableItem">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.RowSpan="3"
+                             Width ="100"
+                             Height="100"
+                             Margin="6"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             Source="{x:Bind Order.Path}" />
+                    <TextBlock Grid.Column="1"
+                               Text="{x:Bind StartTime}"
+                               x:Phase="1"
+                               Style="{ThemeResource BaseTextBlockStyle}"
+                               Margin="12,6,0,0"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1"
+                               Text="{x:Bind Order.Name}"
+                               x:Phase="1"
+                               Style="{ThemeResource BaseTextBlockStyle}"
+                               Margin="12,6,0,0"/>
+                    <TextBlock  Grid.Column="1"
+                                Grid.Row="2"
+                                Text="{x:Bind Pic}"
+                                x:Phase="2"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Margin="12,0,0,6"/>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="ResultListViewTemplate" x:DataType="pages:ResultItem">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.RowSpan="2"
+                           Width ="36"
+                           Height="36"
+                           Margin="6"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Source="{x:Bind Order.Path}" />
+                    <TextBlock Grid.RowSpan="2" Text="{x:Bind DeviationFmt}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="2"
+                               Text="{x:Bind Order.Name}"
+                               x:Phase="1"
+                               Style="{ThemeResource BaseTextBlockStyle}"
+                               Margin="12,6,0,0"/>
+                    <TextBlock  Grid.Column="2"
+                                Grid.Row="1"
+                                Text="{x:Bind Pic}"
+                                x:Phase="2"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Margin="12,0,0,6"/>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="DeckJsonTemplate" x:DataType="console:DeckJson">
+                <TextBlock Text="{x:Bind Display}"/>
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <CommandBar>
+            <AppBarButton Icon="Folder" Label="Load">
+                <AppBarButton.Flyout>
+                    <Flyout>
+                        <StackPanel MinWidth="800" Orientation="Vertical">
+                            <ComboBox
+                                x:Name="DeckLoadBox"
+                                AllowFocusOnInteraction="True"
+                                PlaceholderText="デッキを選択してください"
+                                ItemTemplate="{StaticResource DeckJsonTemplate}"
+                                Loaded="LoadComboBox_OnLoaded"/>
+                            <Button Content="Load"
+                                    Style="{StaticResource AccentButtonStyle}"
+                                    Click="LoadButton_OnClick"
+                                    Margin="10"/>
+                        </StackPanel>
+                    </Flyout>
+                </AppBarButton.Flyout>
+
+            </AppBarButton>
+        </CommandBar>
+
+        <ListView Grid.Row="1"
+                  x:Name="RemainderBoard"
+                  ItemsSource="{x:Bind _reminds}"
+                  ItemTemplate="{StaticResource RemainderListViewTemplate}"/>
+        <ListView Grid.Row="1"
+                  HorizontalAlignment="Right"
+                  x:Name="ResultBoard"
+                  Background="{StaticResource AcrylicInAppFillColorDefaultBrush}"
+                  ItemsSource="{x:Bind _results}"
+                  ItemTemplate="{StaticResource ResultListViewTemplate}"/>
+    </Grid>
+</Page>

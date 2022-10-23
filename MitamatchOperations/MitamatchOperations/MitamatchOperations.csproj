@@ -38,7 +38,7 @@
   <ItemGroup>
     <None Remove="Pages\consolePage.xaml" />
     <None Remove="Pages\console\OrderManagePage.xaml" />
-    <None Remove="Pages\ControlRoomPage.xaml" />
+    <None Remove="Pages\ControlDashboardPage.xaml" />
     <None Remove="Pages\Main\AddNewMemberDialogContent.xaml" />
     <None Remove="Pages\Main\ChangeProjectDialogContent.xaml" />
     <None Remove="Pages\OrderConsole\LoadDialogContent.xaml" />
@@ -81,7 +81,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Pages\ControlRoomPage.xaml">
+    <Page Update="Pages\ControlDashboardPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

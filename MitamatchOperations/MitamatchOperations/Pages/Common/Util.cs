@@ -13,14 +13,15 @@ internal class Util
 {
     internal static string[] LoadRegionNames()
     {
-        if (Exists(@$"{Director.MitamatchDir()}\Regions"))
+        if (Exists(Director.RegionDir()))
         {
-            return GetDirectories(@$"{Director.MitamatchDir()}\Regions")
+            var dirs = GetDirectories(Director.RegionDir());
+            return dirs
                 .Select(path => path.Split('\\').Last())
                 .ToArray();
         }
 
-        Director.CreateDirectory(@$"{Director.MitamatchDir()}\Regions");
+        Director.CreateDirectory(Director.RegionDir());
         return new string[] { };
     }
 }
@@ -57,6 +58,10 @@ internal class Director
 
     internal static string MitamatchDir()
         => $@"{GetFolderPath(SpecialFolder.Desktop)}\MitamatchOperations";
+    internal static string DeckDir()
+        => $@"{GetFolderPath(SpecialFolder.Desktop)}\MitamatchOperations\Decks";
+    internal static string RegionDir()
+        => $@"{GetFolderPath(SpecialFolder.Desktop)}\MitamatchOperations\Regions";
 
     internal static void CacheWrite(byte[] json)
     {

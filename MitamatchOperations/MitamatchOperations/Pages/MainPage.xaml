@@ -72,7 +72,7 @@
                         <NavigationViewItem x:Name="HomeView" Icon="Home" Content ="ホーム" Tag="home"/>
                         <NavigationViewItem x:Name="RegionView" Icon="People" Content ="レギオン コンソール" Tag="region console"/>
                         <NavigationViewItem x:Name="OrderView" Icon="XboxOneConsole" Content ="オーダー コンソール" Tag="order console"/>
-                        <NavigationViewItem x:Name="ControlView" Icon="Remote" Content ="コントロール ルーム" Tag="control room"/>
+                        <NavigationViewItem x:Name="ControlView" Icon="Remote" Content ="コントロール ダッシュボード" Tag="control dashboard"/>
                     </NavigationView.MenuItems>
                     <Frame x:Name="RootFrame" Navigated="OnRootFrameNavigated" Navigating="OnRootFrameNavigating"/>
                 </NavigationView>
