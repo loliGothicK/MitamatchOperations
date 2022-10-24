@@ -108,7 +108,7 @@ public sealed partial class DeckEditorPage
     {
         if (_deck.Count == 0)
         {
-            _deck.Add(new TimeTableItem(ordered, 0, 15 * 60, 15 * 60 - ordered.PrepareTIme - ordered.ActiveTime));
+            _deck.Add(new TimeTableItem(ordered, 0, 15 * 60, 15 * 60 - ordered.PrepareTime - ordered.ActiveTime));
         }
         else
         {
@@ -116,7 +116,7 @@ public sealed partial class DeckEditorPage
             var prepareTime = prev.Order.Index switch
             {
                 52 => 5u, // レギオンマッチスキル準備時間短縮Lv.3
-                _ => ordered.PrepareTIme
+                _ => ordered.PrepareTime
             };
             _deck.Add(new TimeTableItem(ordered, Margin, prev.End - Margin,
                 prev.End - Margin - prepareTime - ordered.ActiveTime));
@@ -132,7 +132,7 @@ public sealed partial class DeckEditorPage
         var previous = first with
         {
             Start = 15 * 60 - first.Delay,
-            End = 15 * 60 - first.Order.PrepareTIme - first.Order.ActiveTime
+            End = 15 * 60 - first.Order.PrepareTime - first.Order.ActiveTime
         };
         _deck.Add(previous);
 
@@ -141,7 +141,7 @@ public sealed partial class DeckEditorPage
             var prepareTime = previous.Order.Index switch
             {
                 52 => 5u, // レギオンマッチスキル準備時間短縮Lv.3
-                _ => item.Order.PrepareTIme
+                _ => item.Order.PrepareTime
             };
             previous = item with
             {
@@ -718,21 +718,6 @@ internal record TimeTableItem(Order Order, uint Delay, uint Start, uint End, str
     internal string StartTime => $"{Start / 60:00}:{Start % 60:00}";
     internal string EndTime => $"{End / 60:00}:{End % 60:00}";
     internal string PicFmt => Pic != "" ? $"[{Pic}]" : "";
-
-    internal int Deviation
-    {
-        get
-        {
-            var target = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 23, 00, 00) + new TimeSpan(0, 0, (int)(15 * 60 - Start));
-            var actual = DateTime.Now;
-            return (target < actual) switch
-            {
-                true => -((actual - target).Minutes * 60 + (actual - target).Seconds),
-                false => ((actual - target).Minutes * 60 + (actual - target).Seconds),
-            };
-        }
-    }
-
     internal uint Delay { get; set; } = Delay;
     internal string Pic { get; set; } = Pic;
 

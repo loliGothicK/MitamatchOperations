@@ -68,7 +68,7 @@ namespace mitama.Domain
         string Effect,
         string Description,
         Status Status,
-        uint PrepareTIme,
+        uint PrepareTime,
         uint ActiveTime,
         Kind Kind
     )
@@ -77,8 +77,8 @@ namespace mitama.Domain
 
         public string TimeFmt => ActiveTime switch
         {
-            0 => $"({PrepareTIme} sec)",
-            _ => $"({PrepareTIme} + {ActiveTime} sec)"
+            0 => $"({PrepareTime} sec)",
+            _ => $"({PrepareTime} + {ActiveTime} sec)"
         };
 
         public static readonly Order[] List = Init();

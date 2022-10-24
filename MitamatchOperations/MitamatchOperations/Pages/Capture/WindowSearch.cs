@@ -1,4 +1,5 @@
-﻿using static mitama.Pages.Capture.Interop;
+﻿using System.Collections.Generic;
+using static mitama.Pages.Capture.Interop;
 
 namespace mitama.Pages.Capture;
 
@@ -57,7 +58,7 @@ public class Search
 {
     public static IntPtr WindowHandleFromCaption(string target)
     {
-        nint result = 0;
+        nint result = -1;
         // ウィンドウの列挙を開始
         EnumWindows((hWnd, lParam) =>
         {
@@ -70,7 +71,7 @@ public class Search
             return true;
         }, IntPtr.Zero);
 
-        return result;
+        return result > 0 ? result : throw new KeyNotFoundException("Assaultlily Not Found");
     }
 
     private static string Caption(IntPtr hWnd)
