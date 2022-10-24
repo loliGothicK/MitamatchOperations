@@ -12,7 +12,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid KeyDown="Grid_KeyDown" KeyUp="Grid_KeyUp">
         <Grid.Resources>
             <DataTemplate x:Key="RemainderListViewTemplate" x:DataType="console:TimeTableItem">
                 <Grid>
@@ -86,7 +86,7 @@
                             <ComboBox
                                 x:Name="DeckLoadBox"
                                 AllowFocusOnInteraction="True"
-                                PlaceholderText="デッキを選択してください"
+                                PlaceholderText="Select Deck"
                                 ItemTemplate="{StaticResource DeckJsonTemplate}"
                                 Loaded="LoadComboBox_OnLoaded"/>
                             <Button Content="Load"

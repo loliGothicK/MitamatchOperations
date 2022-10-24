@@ -9,7 +9,7 @@
   <Identity
     Name="da53e8ef-afbd-46fd-bd68-b3b5f2b9017e"
     Publisher="CN=lolig"
-    Version="0.1.12.0" />
+    Version="0.1.13.0" />
 
   <Properties>
     <DisplayName>Mitamatch Operations</DisplayName>

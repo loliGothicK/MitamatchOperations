@@ -32,6 +32,7 @@ public sealed partial class DeckEditorPage
     private Domain.Member[] _members = { };
     private readonly List<HoldOn> _holdOns = new();
     private string? _loginRegion;
+    private Order[] _selectedOrder = { };
 
 
     private abstract record HoldOn;
@@ -187,8 +188,7 @@ public sealed partial class DeckEditorPage
             return;
         }
 
-        // Set the content of the DataPackage
-        e.Data.SetText(string.Join(',', orders.Select(order => order.Index)));
+        _selectedOrder = e.Items.Select(item => (Order)item).ToArray();
 
         e.Data.RequestedOperation = DataPackageOperation.Move;
     }
@@ -214,9 +214,6 @@ public sealed partial class DeckEditorPage
         };
         var def = e.GetDeferral();
 
-        var text = await e.DataView.GetTextAsync();
-        var items = text.Split(',').Select(index => Order.List[int.Parse(index)]);
-
         static void Push<T>(IList<T> col, T item, Func<T, T, bool> cmp)
         {
             var i = 0;
@@ -234,7 +231,7 @@ public sealed partial class DeckEditorPage
             // Find correct source list
             case "OrderSources":
                 {
-                    foreach (var order in items)
+                    foreach (var order in _selectedOrder)
                     {
                         _deck.Remove(TimeTableItem.Proxy(order));
                         Push(Sources, order, (x, y) => x.Index > y.Index);
@@ -244,7 +241,7 @@ public sealed partial class DeckEditorPage
                 }
             case "OrderDeck" or "DeckPanel":
                 {
-                    foreach (var item in items)
+                    foreach (var item in _selectedOrder)
                     {
                         Sources.Remove(item);
                         PushOrder(item);
@@ -265,7 +262,7 @@ public sealed partial class DeckEditorPage
     {
         if (e.Items.Count != 1) return;
 
-        e.Data.SetText(((TimeTableItem)e.Items[0]).Order.Index.ToString());
+        _selectedOrder = e.Items.Select(item => ((TimeTableItem)item).Order).ToArray();
         e.Data.RequestedOperation = DataPackageOperation.Move;
     }
 

@@ -16,7 +16,8 @@ using mitama.Pages.Common;
 using mitama.Pages.OrderConsole;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using WinRT;
-using mitama.Domain.OrderKinds;
+using Microsoft.UI.Xaml.Input;
+using Windows.System;
 
 namespace mitama.Pages;
 
@@ -37,6 +38,22 @@ public sealed partial class ControlDashboardPage
     private List<TimeTableItem> _deck = new();
     private DateTime _nextTimePoint;
     private DateTime? _firstTimePoint;
+
+    public bool isCtrlKeyPressed { get; set; }
+
+    private void Grid_KeyDown(object sender, KeyRoutedEventArgs e)
+    {
+        if (e.Key == VirtualKey.Control) isCtrlKeyPressed = true;
+        else if (isCtrlKeyPressed && e.Key == VirtualKey.Q)
+        {
+            ManualTrigger();
+        }
+    }
+
+    private void Grid_KeyUp(object sender, KeyRoutedEventArgs e)
+    {
+        if (e.Key == VirtualKey.Control) isCtrlKeyPressed = false;
+    }
 
     public ControlDashboardPage()
     {
@@ -69,7 +86,7 @@ public sealed partial class ControlDashboardPage
             {
                 case SuccessResult(_, var order):
                     {
-                        if (_deck.Count <= _cursor) break;
+                        if (_reminds.Count == 0) break;
                         var ordered = Order.List.MinBy(o => Algo.LevenshteinRate(o.Name, order));
                         if (ordered == _reminds.First().Order)
                         {
@@ -96,7 +113,7 @@ public sealed partial class ControlDashboardPage
                     {
                         InfoBar.IsOpen = true;
                         InfoBar.Severity = InfoBarSeverity.Informational;
-                        InfoBar.Title = "raw";
+                        InfoBar.Title = raw;
                         break;
                     }
             };
@@ -158,13 +175,14 @@ public sealed partial class ControlDashboardPage
         _reminds.Clear();
         _results.Clear();
         _cursor = 4;
+        _firstTimePoint = null;
 
         foreach (var item in _deck.GetRange(0, 4))
         {
             _reminds.Add(item);
         }
 
-        RemainderBoard.SelectedIndex = 1;
+        RemainderBoard.SelectedIndex = 0;
 
         if (((Button)sender).Parent is StackPanel { Parent: FlyoutPresenter { Parent: Popup popup } })
         {
@@ -174,7 +192,12 @@ public sealed partial class ControlDashboardPage
 
     private void ManualTriggerButton_OnClick(object sender, RoutedEventArgs e)
     {
-        if (_deck.Count <= _cursor) return;
+        ManualTrigger();
+    }
+
+    private void ManualTrigger()
+    {
+        if (_reminds.Count == 0) return;
         var popped = _reminds.First();
         var now = DateTime.Now;
         _firstTimePoint ??= now;
@@ -191,6 +214,7 @@ public sealed partial class ControlDashboardPage
         RemainderBoard.ItemsSource = _reminds;
         ResultBoard.ItemsSource = _results;
         RemainderBoard.SelectedIndex = 0;
+
     }
 }
 
