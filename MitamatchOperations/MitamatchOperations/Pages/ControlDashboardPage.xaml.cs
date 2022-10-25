@@ -235,7 +235,7 @@ public sealed partial class ControlDashboardPage
         box.ItemsSource = decks;
     }
 
-    private void LoadButton_OnClick(object sender, RoutedEventArgs e)
+    private async void LoadButton_OnClick(object sender, RoutedEventArgs e)
     {
         var deck = DeckLoadBox.SelectedItem.As<DeckJson>();
 
@@ -256,6 +256,10 @@ public sealed partial class ControlDashboardPage
         {
             popup.IsOpen = false;
         }
+
+        TeachingInfoBar.IsOpen = true;
+        await Task.Delay(2000);
+        TeachingInfoBar.IsOpen = false;
     }
 
     private void ManualTriggerButton_OnClick(object sender, RoutedEventArgs e)
@@ -281,6 +285,11 @@ public sealed partial class ControlDashboardPage
         await Task.Delay(1000);
 
         ElementSoundPlayer.State = ElementSoundPlayerState.Off;
+    }
+
+    private void DeckLoadBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        LoadButton.IsEnabled = true;
     }
 }
 

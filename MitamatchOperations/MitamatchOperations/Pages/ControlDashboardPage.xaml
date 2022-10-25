@@ -88,8 +88,11 @@
                                 AllowFocusOnInteraction="True"
                                 PlaceholderText="Select Deck"
                                 ItemTemplate="{StaticResource DeckJsonTemplate}"
+                                SelectionChanged="DeckLoadBox_OnSelectionChanged"
                                 Loaded="LoadComboBox_OnLoaded"/>
-                            <Button Content="Load"
+                            <Button x:Name="LoadButton"
+                                    IsEnabled="False"
+                                    Content="Load"
                                     Style="{StaticResource AccentButtonStyle}"
                                     Click="LoadButton_OnClick"
                                     Margin="10"/>
@@ -107,6 +110,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
             <InfoBar Grid.Row="0"
@@ -117,6 +121,11 @@
                      IsOpen="False"/>
             <InfoBar Grid.Row="2"
                      x:Name="ConditionalOrderInfo"
+                     IsOpen="False"/>
+            <InfoBar Grid.Row="3"
+                     x:Name="TeachingInfoBar"
+                     Title="Automatically start to navigate when first order is prepared."
+                     Severity="Informational"
                      IsOpen="False"/>
         </Grid>
         <ListView Grid.Row="2"
