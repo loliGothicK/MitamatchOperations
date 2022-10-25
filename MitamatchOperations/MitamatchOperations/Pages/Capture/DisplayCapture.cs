@@ -41,7 +41,7 @@ internal class WindowCapture
         // ウィンドウサイズ取得
         GetWindowRect(_handle, out var rect);
 
-        var bmp = new Bitmap(500, 100);
+        var bmp = new Bitmap(500, 120);
 
         //Graphicsの作成
         using var g = Graphics.FromImage(bmp);

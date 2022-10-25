@@ -74,6 +74,23 @@ public class Search
         return result > 0 ? result : throw new KeyNotFoundException("Assaultlily Not Found");
     }
 
+    public static List<(string , IntPtr)> GetWindowList()
+    {
+        List<(string, IntPtr)> result = new();
+        // ウィンドウの列挙を開始
+        EnumWindows((hWnd, lParam) =>
+        {
+            if (IsWindowVisible(hWnd))
+            {
+                result.Add((Caption(hWnd), hWnd));
+            }
+
+            return true;
+        }, IntPtr.Zero);
+
+        return result;
+    }
+
     private static string Caption(IntPtr hWnd)
     {
         GetWindowThreadProcessId(hWnd, out var processId);

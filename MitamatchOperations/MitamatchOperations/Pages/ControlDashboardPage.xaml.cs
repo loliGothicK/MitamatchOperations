@@ -65,7 +65,7 @@ public sealed partial class ControlDashboardPage
             {
                 try
                 {
-                    _capture = new WindowCapture(Search.WindowHandleFromCaption("メディア"));
+                    _capture = new WindowCapture(Search.WindowHandleFromCaption("Assaultlily"));
                     if (InfoBar.AccessKey == "ERROR")
                     {
                         InfoBar.AccessKey = "SUCCESS";
@@ -74,10 +74,31 @@ public sealed partial class ControlDashboardPage
                 }
                 catch
                 {
-                    InfoBar.IsOpen = true;
-                    InfoBar.AccessKey = "ERROR";
-                    InfoBar.Severity = InfoBarSeverity.Error;
-                    InfoBar.Title = "ラスバレのウィンドウが見つかりませんでした、起動して最前面の状態にしてください";
+                    if (InfoBar.AccessKey != "ERROR")
+                    {
+                        InfoBar.IsOpen = true;
+                        InfoBar.AccessKey = "ERROR";
+                        InfoBar.Severity = InfoBarSeverity.Error;
+                        InfoBar.Title = "ラスバレのウィンドウが見つかりませんでした、起動して最前面の状態にしてください";
+
+                        var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
+                        foreach (var (caption, handle) in Search.GetWindowList())
+                        {
+                            if (caption == string.Empty) continue;
+                            var item = new MenuFlyoutItem
+                            {
+                                Text = caption,
+                                Command = new Defer(delegate { _capture = new WindowCapture(handle); }),
+                            };
+                            menu.Items.Add(item);
+                        }
+
+                        InfoBar.Content = new DropDownButton
+                        {
+                            Content = "または画面を選択する",
+                            Flyout = menu,
+                        };
+                    }
                 }
                 return;
             }
