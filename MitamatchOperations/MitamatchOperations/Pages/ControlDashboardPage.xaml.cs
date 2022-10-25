@@ -122,22 +122,7 @@ public sealed partial class ControlDashboardPage
                         var ordered = Order.List.MinBy(o => Algo.LevenshteinRate(o.Name, order));
                         if (ordered == _reminds.First().Order)
                         {
-                            var popped = _reminds.First();
-                            var now = DateTime.Now;
-                            _firstTimePoint ??= now;
-                            var totalTime = (int)(popped.Order.PrepareTime + popped.Order.ActiveTime);
-                            _nextTimePoint = now + new TimeSpan(0, 0, totalTime / 60, totalTime % 60);
-
-                            _reminds.RemoveAt(0);
-                            if (_deck.Count > _cursor) _reminds.Add(_deck[_cursor++]);
-
-                            var span = now - _firstTimePoint;
-                            var deviation = span.Value.Minutes * 60 + span.Value.Seconds - (15 * 60 - popped.Start);
-                            _results.Add(new ResultItem(popped.Pic, popped.Order, (int)deviation));
-
-                            RemainderBoard.ItemsSource = _reminds;
-                            ResultBoard.ItemsSource = _results;
-                            RemainderBoard.SelectedIndex = 0;
+                            Update();
                         }
                         break;
                     }
@@ -181,6 +166,39 @@ public sealed partial class ControlDashboardPage
             }
         };
         _timer.Start();
+    }
+
+    private void Update()
+    {
+        var popped = _reminds.First();
+        var now = DateTime.Now;
+        _firstTimePoint ??= now;
+        var totalTime = (int)(popped.Order.PrepareTime + popped.Order.ActiveTime);
+        _nextTimePoint = now + new TimeSpan(0, 0, totalTime / 60, totalTime % 60);
+        var span = now - _firstTimePoint;
+        var deviation = span.Value.Minutes * 60 + span.Value.Seconds - (15 * 60 - popped.Start);
+        _reminds.RemoveAt(0);
+        if (_deck.Count > _cursor) _reminds.Add(_deck[_cursor++]);
+
+        if (_reminds.Count > 0 && _reminds.First().Conditional && deviation >= 10)
+        {
+            var skip = _reminds.First();
+            _reminds.RemoveAt(0);
+            if (_deck.Count > _cursor) _reminds.Add(_deck[_cursor++]);
+            ConditionalOrderInfo.IsOpen = true;
+            ConditionalOrderInfo.Severity = InfoBarSeverity.Warning;
+            ConditionalOrderInfo.Title = $"{skip.Order.Name} はスキップしてください";
+        }
+        else
+        {
+            ConditionalOrderInfo.IsOpen = false;
+        }
+
+        _results.Add(new ResultItem(popped.Pic, popped.Order, (int)deviation));
+
+        RemainderBoard.ItemsSource = _reminds;
+        ResultBoard.ItemsSource = _results;
+        RemainderBoard.SelectedIndex = 0;
     }
 
     private static Task<AnalyzeResult> Analyze(string raw)
@@ -248,22 +266,7 @@ public sealed partial class ControlDashboardPage
     private void ManualTrigger()
     {
         if (_reminds.Count == 0) return;
-        var popped = _reminds.First();
-        var now = DateTime.Now;
-        _firstTimePoint ??= now;
-        var totalTime = (int)(popped.Order.PrepareTime + popped.Order.ActiveTime);
-        _nextTimePoint = now + new TimeSpan(0, 0, totalTime / 60, totalTime % 60);
-
-        _reminds.RemoveAt(0);
-        if (_deck.Count > _cursor) _reminds.Add(_deck[_cursor++]);
-
-        var span = now - _firstTimePoint;
-        var deviation = span.Value.Minutes * 60 + span.Value.Seconds - (15 * 60 - popped.Start);
-        _results.Add(new ResultItem(popped.Pic, popped.Order, (int)deviation));
-
-        RemainderBoard.ItemsSource = _reminds;
-        ResultBoard.ItemsSource = _results;
-        RemainderBoard.SelectedIndex = 0;
+        Update();
     }
 
     private static async void PlayAlert(ElementSoundKind soundKind)
@@ -277,7 +280,7 @@ public sealed partial class ControlDashboardPage
         ElementSoundPlayer.Play(soundKind);
         await Task.Delay(1000);
 
-        ElementSoundPlayer.State = ElementSoundPlayerState.On;
+        ElementSoundPlayer.State = ElementSoundPlayerState.Off;
     }
 }
 

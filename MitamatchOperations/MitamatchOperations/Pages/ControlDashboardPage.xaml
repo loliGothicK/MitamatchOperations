@@ -59,7 +59,6 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Bind DeviationFmt}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <Image Grid.Row="0" Grid.Column="1"
                            Width ="36"
                            Height="36"
@@ -67,6 +66,7 @@
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            Source="{x:Bind Order.Path}" />
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Bind DeviationFmt}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
             </DataTemplate>
             <DataTemplate x:Key="DeckJsonTemplate" x:DataType="console:DeckJson">
@@ -74,7 +74,6 @@
             </DataTemplate>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
@@ -104,18 +103,27 @@
                 AutomationProperties.AcceleratorKey="Control T"/>
         </CommandBar>
 
-        <InfoBar Grid.Row="1"
-                 x:Name="FormationInfoBar"
-                 IsOpen="False"/>
-        <InfoBar Grid.Row="2"
-                 x:Name="InfoBar"
-                 IsOpen="False"/>
-
-        <ListView Grid.Row="3"
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <InfoBar Grid.Row="0"
+                     x:Name="InfoBar"
+                     IsOpen="False"/>
+            <InfoBar Grid.Row="1"
+                     x:Name="FormationInfoBar"
+                     IsOpen="False"/>
+            <InfoBar Grid.Row="2"
+                     x:Name="ConditionalOrderInfo"
+                     IsOpen="False"/>
+        </Grid>
+        <ListView Grid.Row="2"
                   x:Name="RemainderBoard"
                   ItemsSource="{x:Bind _reminds}"
                   ItemTemplate="{StaticResource RemainderListViewTemplate}"/>
-        <ListView Grid.Row="3"
+        <ListView Grid.Row="2"
                   HorizontalAlignment="Right"
                   x:Name="ResultBoard"
                   Background="{StaticResource AcrylicInAppFillColorDefaultBrush}"
