@@ -118,7 +118,7 @@ public sealed partial class ControlDashboardPage
                             _nextTimePoint = now + new TimeSpan(0, 0, totalTime / 60, totalTime % 60);
 
                             _reminds.RemoveAt(0);
-                            if (_deck.Count > ++_cursor) _reminds.Add(_deck[_cursor]);
+                            if (_deck.Count > _cursor) _reminds.Add(_deck[_cursor++]);
 
                             var span = now - _firstTimePoint;
                             var deviation = span.Value.Minutes * 60 + span.Value.Seconds - (15 * 60 - popped.Start);
@@ -226,7 +226,7 @@ public sealed partial class ControlDashboardPage
         _nextTimePoint = now + new TimeSpan(0, 0, totalTime / 60, totalTime % 60);
 
         _reminds.RemoveAt(0);
-        if (_deck.Count > ++_cursor) _reminds.Add(_deck[_cursor]);
+        if (_deck.Count > _cursor) _reminds.Add(_deck[_cursor++]);
 
         var span = now - _firstTimePoint;
         var deviation = span.Value.Minutes * 60 + span.Value.Seconds - (15 * 60 - popped.Start);
@@ -235,7 +235,6 @@ public sealed partial class ControlDashboardPage
         RemainderBoard.ItemsSource = _reminds;
         ResultBoard.ItemsSource = _results;
         RemainderBoard.SelectedIndex = 0;
-
     }
 }
 
