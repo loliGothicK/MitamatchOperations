@@ -59,14 +59,14 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Row="0" Grid.Column="1"
+                    <Image Grid.Row="0" Grid.Column="0"
                            Width ="36"
                            Height="36"
                            Margin="6"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            Source="{x:Bind Order.Path}" />
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Bind DeviationFmt}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind DeviationFmt}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
             </DataTemplate>
             <DataTemplate x:Key="DeckJsonTemplate" x:DataType="console:DeckJson">

@@ -282,7 +282,7 @@ public sealed partial class ControlDashboardPage
         ElementSoundPlayer.Play(soundKind);
         await Task.Delay(400);
         ElementSoundPlayer.Play(soundKind);
-        await Task.Delay(1000);
+        await Task.Delay(800);
 
         ElementSoundPlayer.State = ElementSoundPlayerState.Off;
     }
