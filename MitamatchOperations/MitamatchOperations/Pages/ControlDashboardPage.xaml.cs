@@ -39,12 +39,14 @@ public sealed partial class ControlDashboardPage
     private DateTime _nextTimePoint;
     private DateTime? _firstTimePoint;
 
-    public bool isCtrlKeyPressed { get; set; }
+    private bool _reFormation;
+
+    public bool IsCtrlKeyPressed { get; set; }
 
     private void Grid_KeyDown(object sender, KeyRoutedEventArgs e)
     {
-        if (e.Key == VirtualKey.Control) isCtrlKeyPressed = true;
-        else if (isCtrlKeyPressed && e.Key == VirtualKey.Q)
+        if (e.Key == VirtualKey.Control) IsCtrlKeyPressed = true;
+        else if (IsCtrlKeyPressed && e.Key == VirtualKey.Q)
         {
             ManualTrigger();
         }
@@ -52,7 +54,7 @@ public sealed partial class ControlDashboardPage
 
     private void Grid_KeyUp(object sender, KeyRoutedEventArgs e)
     {
-        if (e.Key == VirtualKey.Control) isCtrlKeyPressed = false;
+        if (e.Key == VirtualKey.Control) IsCtrlKeyPressed = false;
     }
 
     public ControlDashboardPage()
@@ -61,6 +63,7 @@ public sealed partial class ControlDashboardPage
 
         _timer.Tick += async (_, _) =>
         {
+            // Capture Initialisation
             if (_capture == null)
             {
                 try
@@ -70,6 +73,7 @@ public sealed partial class ControlDashboardPage
                     {
                         InfoBar.AccessKey = "SUCCESS";
                         InfoBar.IsOpen = false;
+                        InfoBar.Content = null;
                     }
                 }
                 catch
@@ -88,7 +92,13 @@ public sealed partial class ControlDashboardPage
                             var item = new MenuFlyoutItem
                             {
                                 Text = caption,
-                                Command = new Defer(delegate { _capture = new WindowCapture(handle); }),
+                                Command = new Defer(delegate
+                                {
+                                    _capture = new WindowCapture(handle);
+                                    InfoBar.AccessKey = "SUCCESS";
+                                    InfoBar.IsOpen = false;
+                                    InfoBar.Content = null;
+                                }),
                             };
                             menu.Items.Add(item);
                         }
@@ -103,6 +113,7 @@ public sealed partial class ControlDashboardPage
                 return;
             }
 
+            // Text Recognition
             switch (await Analyze(await _capture!.TryCaptureOrderInfo()))
             {
                 case SuccessResult(_, var order):
@@ -130,25 +141,43 @@ public sealed partial class ControlDashboardPage
                         }
                         break;
                     }
-                case FailureResult(var raw) when raw != string.Empty:
-                    {
-                        InfoBar.IsOpen = true;
-                        InfoBar.Severity = InfoBarSeverity.Informational;
-                        InfoBar.Title = raw;
-                        break;
-                    }
+                case FailureResult(var raw) when raw != string.Empty: break;
             };
+
+            // Next Reminder Checking
             if (_reminds.Count > 0 && _nextTimePoint - DateTime.Now <= new TimeSpan(0, 0, 0, 10))
             {
                 if (_reminds.First().Start == 15u * 60u) return;
                 InfoBar.IsOpen = true;
-                InfoBar.Severity = InfoBarSeverity.Warning;
+                var flag = InfoBar.Severity == InfoBarSeverity.Warning;
+                InfoBar.Severity = _nextTimePoint - DateTime.Now >= new TimeSpan() ? InfoBarSeverity.Warning : InfoBarSeverity.Error;
                 InfoBar.Title =
                     $"{_reminds.First().Pic} ‚³‚ñ‚Ì {_reminds.First().Order.Name} ”­“®‚Ü‚Å‚ ‚Æ {(_nextTimePoint - DateTime.Now).Seconds} •b";
+                if (flag && InfoBar.Severity == InfoBarSeverity.Error) PlayAlert(ElementSoundKind.Hide);
             }
             else
             {
                 InfoBar.IsOpen = false;
+            }
+
+            // Re-Formation Information
+            if (_reminds.Count > 0 && _reminds.First().Order.Kind == Kinds.Formation)
+            {
+                FormationInfoBar.IsOpen = true;
+                FormationInfoBar.Severity = InfoBarSeverity.Informational;
+                FormationInfoBar.Title = $"ŽŸ‚Í {_reminds.First().Order.Name} ‚Å‚·";
+
+                if (_nextTimePoint - DateTime.Now > new TimeSpan(0, 0, 0, 15)) return;
+                FormationInfoBar.Severity = InfoBarSeverity.Warning;
+                FormationInfoBar.Title = $"{_reminds.First().Order.Name} ”­“®‚Ü‚Å‚ ‚Æ {(_nextTimePoint - DateTime.Now).Seconds} •b";
+                if (_reFormation) return;
+                PlayAlert(ElementSoundKind.Show);
+                _reFormation = true;
+            }
+            else
+            {
+                FormationInfoBar.IsOpen = false;
+                _reFormation = false;
             }
         };
         _timer.Start();
@@ -235,6 +264,20 @@ public sealed partial class ControlDashboardPage
         RemainderBoard.ItemsSource = _reminds;
         ResultBoard.ItemsSource = _results;
         RemainderBoard.SelectedIndex = 0;
+    }
+
+    private static async void PlayAlert(ElementSoundKind soundKind)
+    {
+        ElementSoundPlayer.State = ElementSoundPlayerState.On;
+
+        ElementSoundPlayer.Play(soundKind);
+        await Task.Delay(400);
+        ElementSoundPlayer.Play(soundKind);
+        await Task.Delay(400);
+        ElementSoundPlayer.Play(soundKind);
+        await Task.Delay(1000);
+
+        ElementSoundPlayer.State = ElementSoundPlayerState.On;
     }
 }
 

@@ -56,31 +56,42 @@
                             <Grid MinWidth="400" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto "/>
+                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel>
+                                <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
                                     <ComboBox x:Name="ComboBox"
                                               Header="ディレイ時間（秒）"
                                               IsEditable="True"
                                               AccessKey="{x:Bind Order.Index}"
                                               ItemsSource="{x:Bind console:DeckEditorPage.TimeSource}"
                                               Width="200"
+                                              SelectedIndex="{x:Bind DelayIndex}"
                                               SelectionChanged="MarginComboBox_OnSelectionChanged"/>
                                     <TextBlock Text="オーダー担当" Margin="2 10"/>
                                     <StackPanel Orientation="Horizontal">
-                                        <DropDownButton Content="Select"
+                                        <DropDownButton Content="{x:Bind PicPlaceholder}"
                                                         AllowFocusOnInteraction="True"
                                                         AccessKey="{x:Bind Order.Index}"
                                                         Loaded="SelectPlayerButton_OnLoaded"/>
                                         <Button Content="Remove" Margin="20 0 0 0" Click="RemovePicButton_OnClick" AccessKey="{x:Bind Order.Index}"/>
                                     </StackPanel>
                                 </StackPanel>
-                                <TextBlock Grid.Column="1" x:Name="ChangesOnHold"/>
-                                <Button Grid.Column="1" x:Name="TimelineFlyoutConfirmationButton"
+                                <CheckBox Grid.Row="0" Grid.Column="1"
+                                          x:Name="ConditionalCheckBox"
+                                          Content="Conditional"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          IsChecked="{x:Bind Conditional}"
+                                          Checked="ConditionalCheckBox_OnChecked"/>
+                                <Button Grid.Row="1" Grid.Column="1"
+                                        x:Name="TimelineFlyoutConfirmationButton"
                                         Content="Confirm"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
                                         Style="{StaticResource AccentButtonStyle}"
                                         Click="TimelineFlyoutConfirmationButton_OnClick"
                                         AccessKey="{x:Bind Order.Index}"
@@ -204,8 +215,11 @@
                                                 AllowFocusOnInteraction="True"
                                                 PlaceholderText="デッキを選択してください"
                                                 ItemTemplate="{StaticResource DeckJsonTemplate}"
+                                                SelectionChanged="DeckLoadBox_OnSelectionChanged"
                                                 Loaded="LoadComboBox_OnLoaded"/>
-                                            <Button Content="Load"
+                                            <Button x:Name="DeckLoadButton"
+                                                    Content="Load"
+                                                    IsEnabled="False"
                                                     Style="{StaticResource AccentButtonStyle}"
                                                     Click="LoadButton_OnClick"
                                                     Margin="10"/>

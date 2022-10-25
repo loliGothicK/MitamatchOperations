@@ -39,6 +39,7 @@ public sealed partial class DeckEditorPage
     private record ChangeMargin(uint Margin) : HoldOn;
     private record ChangePic(string Name) : HoldOn;
     private record RemovePic : HoldOn;
+    private record IntoConditional : HoldOn;
 
     public DeckEditorPage()
     {
@@ -424,12 +425,17 @@ public sealed partial class DeckEditorPage
                         target.Pic = string.Empty;
                         break;
                     }
+                case IntoConditional:
+                    {
+                        target.Conditional = true;
+                        break;
+                    }
             }
         }
 
         ReCalcTimeTable();
 
-        if (button.Parent is StackPanel { Parent: FlyoutPresenter { Parent: Popup popup } })
+        if (button.Parent is Grid { Parent: FlyoutPresenter { Parent: Popup popup } })
         {
             popup.IsOpen = false;
         }
@@ -537,6 +543,7 @@ public sealed partial class DeckEditorPage
     private void SelectPlayerButton_OnLoaded(object sender, RoutedEventArgs e)
     {
         if (sender is not DropDownButton button) return;
+        var index = uint.Parse(button.AccessKey);
 
         var flyout = new MenuFlyout();
         foreach (var member in _members.Select(mem => mem.Name))
@@ -548,8 +555,6 @@ public sealed partial class DeckEditorPage
                 {
                     _holdOns.RemoveAll(item => item is ChangePic or RemovePic);
                     _holdOns.Add(new ChangePic(member));
-                    var index = uint.Parse(button.AccessKey);
-                    UpdateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children);
 
                     var exists = _deck.Where(item => item.Order.Index != index)
                         .Where(item => item.Pic == member).ToArray();
@@ -603,7 +608,6 @@ public sealed partial class DeckEditorPage
         if (sender is not Button button) return;
         _holdOns.RemoveAll(item => item is ChangePic);
         _holdOns.Add(new RemovePic());
-        UpdateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children);
     }
 
     private void MarginComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -611,25 +615,13 @@ public sealed partial class DeckEditorPage
         if (sender is not ComboBox box) return;
         _holdOns.RemoveAll(item => item is ChangeMargin);
         _holdOns.Add(new ChangeMargin(uint.Parse(e.AddedItems[0].ToString()!)));
-        UpdateChangesOnHold(box.Parent.As<StackPanel>().Parent.As<Grid>().Children);
     }
 
-    private void UpdateChangesOnHold(IEnumerable<object> controls)
+    private void ConditionalCheckBox_OnChecked(object sender, RoutedEventArgs e)
     {
-        var msgBlock = controls
-            .Where(ctrl => ctrl is TextBlock)
-            .Select(ctrl => ctrl.As<TextBlock>())
-            .First(block => block.Name == "ChangesOnHold");
-
-        if (msgBlock is null) return;
-
-        msgBlock.Text = _holdOns.Select(hold => hold switch
-        {
-            ChangeMargin changeMargin => $@"ディレイ => {changeMargin.Margin} 秒",
-            ChangePic changePic => $@"オーダー担当 => {changePic.Name}",
-            RemovePic => @"オーダー担当をリセット",
-            _ => throw new ArgumentOutOfRangeException(nameof(hold), hold, null)
-        }).Aggregate((a, b) => $@"{a}\n{b}");
+        if (sender is not CheckBox box) return;
+        _holdOns.RemoveAll(item => item is ChangeMargin);
+        _holdOns.Add(new IntoConditional());
     }
 
     private abstract record Validated
@@ -645,7 +637,6 @@ public sealed partial class DeckEditorPage
     {
         internal override (bool, string) IntoTuple() => (false, Msg);
     }
-
 
     private static void OnValidateChangesOnHold(IEnumerable<object> controls, Validated validated)
     {
@@ -694,6 +685,11 @@ public sealed partial class DeckEditorPage
         Margin = seconds;
         ReCalcTimeTable();
     }
+
+    private void DeckLoadBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        DeckLoadButton.IsEnabled = true;
+    }
 }
 
 internal record struct DeckJson(string Name, DateTime DateTime, DeckJsonProxy[] Items)
@@ -702,21 +698,25 @@ internal record struct DeckJson(string Name, DateTime DateTime, DeckJsonProxy[] 
         @$"{Name} ({DateTime.Year}-{DateTime.Month}-{DateTime.Day}-{DateTime.Hour}:{DateTime.Minute})";
 };
 
-internal record struct DeckJsonProxy(uint Index, uint Delay, uint Start, uint End, string Pic)
+internal record struct DeckJsonProxy(uint Index, uint Delay, uint Start, uint End, string Pic, bool Conditional)
 {
     public static implicit operator DeckJsonProxy(TimeTableItem item)
-        => new(item.Order.Index, item.Delay, item.Start, item.End, item.Pic);
+        => new(item.Order.Index, item.Delay, item.Start, item.End, item.Pic, item.Conditional);
     public static implicit operator TimeTableItem(DeckJsonProxy item)
-        => new(Order.List[item.Index], item.Delay, item.Start, item.End, item.Pic);
+        => new(Order.List[item.Index], item.Delay, item.Start, item.End, item.Pic, item.Conditional);
 }
 
-internal record TimeTableItem(Order Order, uint Delay, uint Start, uint End, string Pic = "")
+internal record TimeTableItem(Order Order, uint Delay, uint Start, uint End, string Pic = "", bool Conditional = false)
 {
     internal string StartTime => $"{Start / 60:00}:{Start % 60:00}";
     internal string EndTime => $"{End / 60:00}:{End % 60:00}";
     internal string PicFmt => Pic != "" ? $"[{Pic}]" : "";
+    internal string PicPlaceholder => Pic != "" ? $"{Pic}" : "Select";
+
     internal uint Delay { get; set; } = Delay;
+    internal int DelayIndex = (int)Delay / 5;
     internal string Pic { get; set; } = Pic;
+    internal bool Conditional { get; set; } = Conditional;
 
     bool IEquatable<TimeTableItem?>.Equals(TimeTableItem? other) => Order.Index == other?.Order.Index;
 

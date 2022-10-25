@@ -76,6 +76,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
         <CommandBar>
@@ -104,14 +105,17 @@
         </CommandBar>
 
         <InfoBar Grid.Row="1"
+                 x:Name="FormationInfoBar"
+                 IsOpen="False"/>
+        <InfoBar Grid.Row="2"
                  x:Name="InfoBar"
                  IsOpen="False"/>
 
-        <ListView Grid.Row="2"
+        <ListView Grid.Row="3"
                   x:Name="RemainderBoard"
                   ItemsSource="{x:Bind _reminds}"
                   ItemTemplate="{StaticResource RemainderListViewTemplate}"/>
-        <ListView Grid.Row="2"
+        <ListView Grid.Row="3"
                   HorizontalAlignment="Right"
                   x:Name="ResultBoard"
                   Background="{StaticResource AcrylicInAppFillColorDefaultBrush}"
