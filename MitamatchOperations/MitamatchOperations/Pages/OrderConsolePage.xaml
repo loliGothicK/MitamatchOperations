@@ -4,12 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:console="using:mitama.Pages.OrderConsole"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TabView x:Name="ConsoleTabView" SelectedIndex="0" Margin="10" IsAddTabButtonVisible="False" MinHeight="475">
+        <TabView SelectedIndex="0" Margin="10" IsAddTabButtonVisible="False" MinHeight="475">
             <TabView.TabItems>
                 <TabViewItem Header="Deck Editor" IsClosable="False" Background="DarkGray">
                     <TabViewItem.IconSource>

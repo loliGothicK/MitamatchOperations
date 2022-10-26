@@ -1,7 +1,7 @@
 ﻿namespace mitama.Pages;
 
 /// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
+/// Settings Page navigated to within a Main Page.
 /// </summary>
 public sealed partial class SettingsPage
 {

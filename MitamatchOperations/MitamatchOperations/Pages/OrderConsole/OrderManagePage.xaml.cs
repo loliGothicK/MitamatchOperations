@@ -16,7 +16,7 @@ using mitama.Pages.Common;
 namespace mitama.Pages.OrderConsole;
 
 /// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
+/// Order Manager Page navigated to within a Order Console Tab.
 /// </summary>
 public sealed partial class OrderManagerPage
 {

@@ -62,6 +62,7 @@ internal class AutomateAssign
         public abstract bool IsAssignableBefore();
         public abstract bool IsAssignableAfter();
 
+        // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         public static Assginability operator +(Assginability assginability, Before before)
         {
             if (before == null) throw new ArgumentNullException(nameof(before));
@@ -75,6 +76,7 @@ internal class AutomateAssign
             };
         }
 
+        // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         public static Assginability operator +(Assginability assginability, After after)
         {
             if (after == null) throw new ArgumentNullException(nameof(after));

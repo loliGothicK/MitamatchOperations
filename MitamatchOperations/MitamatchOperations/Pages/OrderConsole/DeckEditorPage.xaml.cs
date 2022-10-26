@@ -21,7 +21,7 @@ using Microsoft.UI.Xaml.Navigation;
 namespace mitama.Pages.OrderConsole;
 
 /// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
+/// Deck Editor Page navigated to within a Order Console Tab.
 /// </summary>
 public sealed partial class DeckEditorPage
 {

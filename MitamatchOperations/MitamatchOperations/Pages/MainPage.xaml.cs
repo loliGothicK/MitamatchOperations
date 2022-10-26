@@ -13,7 +13,7 @@ using mitama.Pages.Main;
 
 namespace mitama.Pages;
 /// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
+/// Top Page
 /// </summary>
 public sealed partial class MainPage
 {
@@ -129,8 +129,7 @@ public sealed partial class MainPage
         async void SecondaryAction()
         {
             LoginRegion.Text = Project = selected;
-            var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            Director.CreateDirectory($@"{desktop}\MitamatchOperations\Regions\{Project}");
+            Director.CreateDirectory($@"{Director.RegionDir()}\{Project}");
             Navigate(typeof(RegionConsolePage), new Props(Project));
             RegionView.IsSelected = true;
             await LoginInfo();
@@ -166,8 +165,7 @@ public sealed partial class MainPage
 
         async void Action()
         {
-            var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var fs = Director.CreateFile($@"{desktop}\MitamatchOperations\Regions\{Project}\{name}.json");
+            var fs = Director.CreateFile($@"{Director.RegionDir()}\{Project}\{name}.json");
             var memberJson = new Member(DateTime.Now, DateTime.Now, name!, position!, new ushort[] { }).ToJson();
             var save = new UTF8Encoding(true).GetBytes(memberJson);
             fs.Write(save, 0, save.Length);

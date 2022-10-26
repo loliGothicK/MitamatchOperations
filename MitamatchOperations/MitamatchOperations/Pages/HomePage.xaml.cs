@@ -1,13 +1,9 @@
-﻿using System;
-using Windows.Storage;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Imaging;
+﻿using Microsoft.UI.Xaml;
 
 namespace mitama.Pages;
 
 /// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
+/// Home Page navigated to within a Main Page.
 /// </summary>
 public sealed partial class HomePage
 {

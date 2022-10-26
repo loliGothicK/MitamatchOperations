@@ -22,7 +22,7 @@ using Windows.System;
 namespace mitama.Pages;
 
 /// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
+/// Control Dashboard Page navigated to within a Main Page.
 /// </summary>
 public sealed partial class ControlDashboardPage
 {
@@ -63,7 +63,7 @@ public sealed partial class ControlDashboardPage
 
         _timer.Tick += async (_, _) =>
         {
-            // Capture Initialisation
+            #region Window Capture Initialisation
             if (_capture == null)
             {
                 try
@@ -112,8 +112,9 @@ public sealed partial class ControlDashboardPage
                 }
                 return;
             }
+            #endregion
 
-            // Text Recognition
+            #region Text Recognition
             switch (await Analyze(await _capture!.TryCaptureOrderInfo()))
             {
                 case SuccessResult(_, var order):
@@ -127,9 +128,10 @@ public sealed partial class ControlDashboardPage
                         break;
                     }
                 case FailureResult(var raw) when raw != string.Empty: break;
-            };
+            }
+            #endregion
 
-            // Next Reminder Checking
+            #region Next Reminder Checking
             if (_reminds.Count > 0 && _nextTimePoint - DateTime.Now <= new TimeSpan(0, 0, 0, 10))
             {
                 if (_reminds.First().Start == 15u * 60u) return;
@@ -144,8 +146,9 @@ public sealed partial class ControlDashboardPage
             {
                 InfoBar.IsOpen = false;
             }
+            #endregion
 
-            // Re-Formation Information
+            #region Re-Formation Information
             if (_reminds.Count > 0 && _reminds.First().Order.Kind == Kinds.Formation)
             {
                 FormationInfoBar.IsOpen = true;
@@ -164,6 +167,7 @@ public sealed partial class ControlDashboardPage
                 FormationInfoBar.IsOpen = false;
                 _reFormation = false;
             }
+            #endregion
         };
         _timer.Start();
     }
@@ -213,6 +217,7 @@ public sealed partial class ControlDashboardPage
 
     private abstract record AnalyzeResult;
 
+    // ReSharper disable once NotAccessedPositionalProperty.Local
     private record SuccessResult(string User, string Order) : AnalyzeResult;
 
     private record FailureResult(string Raw) : AnalyzeResult;
@@ -240,6 +245,8 @@ public sealed partial class ControlDashboardPage
         var deck = DeckLoadBox.SelectedItem.As<DeckJson>();
 
         _deck = deck.Items.Select(item => (TimeTableItem)item).ToList();
+
+        // Initialisation
         _reminds.Clear();
         _results.Clear();
         _cursor = 4;

@@ -9,7 +9,7 @@ using Microsoft.UI.Xaml.Controls;
 namespace mitama.Pages.OrderConsole;
 
 /// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
+/// Load Dialog Content used in the Load button flyout in Deck Editor Page.
 /// </summary>
 public sealed partial class LoadDialogContent
 {

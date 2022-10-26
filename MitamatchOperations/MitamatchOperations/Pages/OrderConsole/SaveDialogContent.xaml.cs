@@ -13,7 +13,7 @@ public record Region(string Name) : Selected;
 public record Member(string Name) : Selected;
 
 /// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
+/// Save Dialog Content used in the Save button flyout in Deck Editor Page.
 /// </summary>
 public sealed partial class SaveDialogContent
 {
