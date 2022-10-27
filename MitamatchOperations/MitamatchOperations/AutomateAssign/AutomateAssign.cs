@@ -6,6 +6,7 @@ using mitama.Pages.OrderConsole;
 using mitama.Domain;
 using System.IO;
 using System.Text;
+using mitama.Pages.Common;
 using WinRT;
 using Member = mitama.Domain.Member;
 
@@ -430,9 +431,7 @@ internal class AutomateAssign
 
     private static Member[] LoadRegionMemberInformation(string region)
     {
-        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-        return Directory.GetFiles(@$"{desktop}\MitamatchOperations\Regions\{region}", "*.json").Select(path =>
+        return Directory.GetFiles(Director.MemberDir(region), "*.json").Select(path =>
         {
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var json = sr.ReadToEnd();

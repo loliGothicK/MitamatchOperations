@@ -13,15 +13,15 @@ internal class Util
 {
     internal static string[] LoadRegionNames()
     {
-        if (Exists(Director.RegionDir()))
+        if (Exists(Director.ProjectDir()))
         {
-            var dirs = GetDirectories(Director.RegionDir());
+            var dirs = GetDirectories(Director.ProjectDir());
             return dirs
                 .Select(path => path.Split('\\').Last())
                 .ToArray();
         }
 
-        Director.CreateDirectory(Director.RegionDir());
+        Director.CreateDirectory(Director.ProjectDir());
         return new string[] { };
     }
 }
@@ -57,11 +57,29 @@ internal class Director
     }
 
     internal static string MitamatchDir()
-        => $@"{GetFolderPath(SpecialFolder.Desktop)}\MitamatchOperations";
-    internal static string DeckDir()
-        => $@"{GetFolderPath(SpecialFolder.Desktop)}\MitamatchOperations\Decks";
-    internal static string RegionDir()
-        => $@"{GetFolderPath(SpecialFolder.Desktop)}\MitamatchOperations\Regions";
+    {
+        var dir = $@"{GetFolderPath(SpecialFolder.Desktop)}\MitamatchOperations";
+        if (!Exists(dir)) CreateDirectory(dir);
+        return dir;
+    }
+    internal static string ProjectDir()
+    {
+        var dir = $@"{MitamatchDir()}\Projects";
+        if (!Exists(dir)) CreateDirectory(dir);
+        return dir;
+    }
+    internal static string DeckDir(string project)
+    {
+        var dir = $@"{ProjectDir()}\{project}\Decks";
+        if (!Exists(dir)) CreateDirectory(dir);
+        return dir;
+    }
+    internal static string MemberDir(string project)
+    {
+        var dir = $@"{ProjectDir()}\{project}\Members";
+        if (!Exists(dir)) CreateDirectory(dir);
+        return dir;
+    }
 
     internal static void CacheWrite(byte[] json)
     {

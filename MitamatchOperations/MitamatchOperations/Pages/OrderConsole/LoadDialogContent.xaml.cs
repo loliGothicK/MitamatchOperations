@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using Microsoft.UI.Xaml.Controls;
+using mitama.Pages.Common;
 
 namespace mitama.Pages.OrderConsole;
 
@@ -24,13 +23,12 @@ public sealed partial class LoadDialogContent
         InitializeComponent();
         NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
 
-        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var regions = Directory.GetDirectories(@$"{desktop}\MitamatchOperations\Regions").ToArray();
+        var regions = Directory.GetDirectories(Director.ProjectDir()).ToArray();
 
         foreach (var regionPath in regions)
         {
             var regionName = regionPath.Split(@"\").Last();
-            RegionToMembersMap.Add(regionName, Directory.GetFiles(regionPath, "*.json").Select(path =>
+            RegionToMembersMap.Add(regionName, Directory.GetFiles(Director.MemberDir(regionName), "*.json").Select(path =>
             {
                 using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                 var json = sr.ReadToEnd();

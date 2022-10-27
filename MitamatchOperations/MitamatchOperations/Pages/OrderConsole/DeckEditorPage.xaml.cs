@@ -31,7 +31,7 @@ public sealed partial class DeckEditorPage
     private new uint Margin { get; set; } = 5;
     private Domain.Member[] _members = { };
     private readonly List<HoldOn> _holdOns = new();
-    private string? _loginRegion;
+    private readonly string _project = Director.ReadCache().Region;
     private Order[] _selectedOrder = { };
 
 
@@ -62,8 +62,7 @@ public sealed partial class DeckEditorPage
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
-        _loginRegion = Director.ReadCache().Region;
-        _members = Directory.GetFiles($@"{Director.RegionDir()}\{_loginRegion}", "*.json")
+        _members = Directory.GetFiles($@"{Director.ProjectDir()}\{_project}", "*.json")
             .Select(path =>
             {
                 using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
@@ -266,7 +265,7 @@ public sealed partial class DeckEditorPage
                     {
                         Sources.Remove(item);
 
-                        _deck.Insert(index, item);
+                        _deck.Insert(index, (TimeTableItem)item with { Delay = Margin });
                     }
 
                     break;
@@ -505,11 +504,11 @@ public sealed partial class DeckEditorPage
         var dt = DateTime.Now;
         var proxy = new DeckJson(DeckName.Text, dt, _deck.Select(item => (DeckJsonProxy)item).ToArray());
         var jsonStr = JsonSerializer.Serialize(proxy);
-        if (!Directory.Exists(Director.DeckDir()))
+        if (!Directory.Exists(Director.DeckDir(_project)))
         {
-            Director.CreateDirectory(Director.DeckDir());
+            Director.CreateDirectory(Director.DeckDir(_project));
         }
-        var file = @$"{Director.DeckDir()}\{dt.Year:0000}-{dt.Month:00}-{dt.Day:00}-{dt.Hour:00}{dt.Minute:00}{dt.Second:00}.json";
+        var file = @$"{Director.DeckDir(_project)}\{dt.Year:0000}-{dt.Month:00}-{dt.Day:00}-{dt.Hour:00}{dt.Minute:00}{dt.Second:00}.json";
         using var fs = Director.CreateFile(file);
         var save = new UTF8Encoding(true).GetBytes(jsonStr);
         fs.Write(save, 0, save.Length);
@@ -527,11 +526,11 @@ public sealed partial class DeckEditorPage
     {
         if (sender is not ComboBox box) return;
 
-        if (!Directory.Exists(Director.DeckDir()))
+        if (!Directory.Exists(Director.DeckDir(_project)))
         {
-            Director.CreateDirectory(Director.DeckDir());
+            Director.CreateDirectory(Director.DeckDir(_project));
         }
-        var decks = Directory.GetFiles(Director.DeckDir(), "*.json").Select(path =>
+        var decks = Directory.GetFiles(Director.DeckDir(_project), "*.json").Select(path =>
         {
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var json = sr.ReadToEnd();
@@ -689,7 +688,7 @@ public sealed partial class DeckEditorPage
 
         dialog.PrimaryButtonCommand = new Defer(delegate
         {
-            _ = AutomateAssign.AutomateAssign.ExecAutoAssign(_loginRegion!, ref _deck);
+            _ = AutomateAssign.AutomateAssign.ExecAutoAssign(_project!, ref _deck);
             OrderDeck.ItemsSource = _deck;
         });
 
@@ -710,6 +709,43 @@ public sealed partial class DeckEditorPage
     private void DeckLoadBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         DeckLoadButton.IsEnabled = true;
+    }
+
+    private async void Delete_OnClick(object sender, RoutedEventArgs e)
+    {
+        var content = new StackPanel();
+
+        foreach (var (path, name) in Directory.GetFiles(Director.DeckDir(_project)).Select(path =>
+                 {
+                     using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+                     var json = sr.ReadToEnd();
+                     var deck = JsonSerializer.Deserialize<DeckJson>(json);
+                     return (path, deck.Name);
+                 }))
+        {
+            content.Children.Add(new CheckBox
+            {
+                Content = name,
+                AccessKey = path
+            });
+        }
+
+        var dialog = new DialogBuilder(XamlRoot)
+            .WithTitle("削除するデッキを選ぶ")
+            .WithBody(content)
+            .WithPrimary("消しさる")
+            .WithCancel("やっぱりやめる")
+            .Build();
+
+        dialog.PrimaryButtonCommand = new Defer(delegate
+        {
+            foreach (var box in content.Children.Where(item => item is CheckBox box && (box.IsChecked ?? false)))
+            {
+                File.Delete(box.AccessKey);
+            }
+        });
+
+        await dialog.ShowAsync();
     }
 }
 

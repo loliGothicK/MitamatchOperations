@@ -226,9 +226,10 @@
                                         </StackPanel>
                                     </Flyout>
                                 </AppBarButton.Flyout>
-
                             </AppBarButton>
-                            <AppBarButton Icon="Share" Label="Share"/>
+
+                            <AppBarButton Icon="Delete" Label="Delete" Click="Delete_OnClick">
+                            </AppBarButton>
                         </CommandBar>
                     </Grid>
 

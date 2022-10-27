@@ -28,7 +28,7 @@ public sealed partial class MainPage
     {
         InitializeComponent();
         NavigationCacheMode = NavigationCacheMode.Enabled;
-        AppNavBar.SelectedIndex = 1;
+        AppNavBar.SelectedIndex = 0;
         LoadCache();
         RootFrame.Navigate(typeof(HomePage));
     }
@@ -129,7 +129,7 @@ public sealed partial class MainPage
 
         async void PrimaryAction()
         {
-            if (!Directory.Exists($@"{Director.RegionDir()}\{selected}"))
+            if (!Directory.Exists($@"{Director.ProjectDir()}\{selected}"))
             {
                 await FailureInfo(selected!);
                 return;
@@ -145,7 +145,7 @@ public sealed partial class MainPage
         async void SecondaryAction()
         {
             LoginRegion.Text = Project = selected;
-            Director.CreateDirectory($@"{Director.RegionDir()}\{Project}");
+            Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}");
             Director.CacheWrite(new Cache(Project, User).ToJsonBytes());
             Navigate(typeof(RegionConsolePage), Project);
             RegionView.IsSelected = true;
@@ -185,13 +185,13 @@ public sealed partial class MainPage
 
         async void Action()
         {
-            if (!Directory.Exists($@"{Director.RegionDir()}\{Project}"))
+            if (!Directory.Exists($@"{Director.ProjectDir()}\{Project}"))
             {
                 await FailureInfo($"{Project} は作成されていないレギオン名です、新規作成してください");
                 return;
             }
 
-            await using var fs = Director.CreateFile($@"{Director.RegionDir()}\{Project}\{name}.json");
+            await using var fs = Director.CreateFile($@"{Director.ProjectDir()}\{Project}\{name}.json");
             var memberJson = new Member(DateTime.Now, DateTime.Now, name!, position!, new ushort[] { }).ToJson();
             var save = new UTF8Encoding(true).GetBytes(memberJson);
             fs.Write(save, 0, save.Length);
@@ -253,7 +253,7 @@ public sealed partial class MainPage
         var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
 
         // init flyout items
-        foreach (var member in Directory.GetFiles($@"{Director.RegionDir()}\{Project}", "*.json")
+        foreach (var member in Directory.GetFiles($@"{Director.ProjectDir()}\{Project}", "*.json")
                      .Select(path => path.Split('\\').Last().Replace(".json", string.Empty)))
         {
             menu.Items.Add(new MenuFlyoutItem
@@ -299,7 +299,7 @@ public sealed partial class MainPage
         var body = new StackPanel();
 
         // init flyout items
-        foreach (var member in Directory.GetFiles($@"{Director.RegionDir()}\{Project}", "*.json")
+        foreach (var member in Directory.GetFiles($@"{Director.ProjectDir()}\{Project}", "*.json")
                      .Select(path => path.Split('\\').Last().Replace(".json", string.Empty)))
         {
             body.Children.Add(new CheckBox
@@ -324,7 +324,7 @@ public sealed partial class MainPage
         {
             foreach (var member in body.Children.Select(box => box.As<CheckBox>()).Where(box => box.IsChecked ?? false).Select(box => box.AccessKey!))
             {
-                File.Delete($@"{Director.RegionDir()}\{Project}\{member}.json");
+                File.Delete($@"{Director.ProjectDir()}\{Project}\{member}.json");
             }
             await SuccessInfo("Successfully deleted!");
         });

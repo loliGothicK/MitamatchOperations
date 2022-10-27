@@ -24,7 +24,7 @@ public sealed partial class RegionConsolePage
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         Project.Text = _regionName = Director.ReadCache().Region;
-        var query = from item in Directory.GetFiles($@"{Director.RegionDir()}\{_regionName}", "*.json")
+        var query = from item in Directory.GetFiles($@"{Director.ProjectDir()}\{_regionName}", "*.json")
                 .Select(path =>
                 {
                     using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));

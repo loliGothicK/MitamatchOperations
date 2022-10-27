@@ -38,7 +38,8 @@ public sealed partial class ControlDashboardPage
     private List<TimeTableItem> _deck = new();
     private DateTime _nextTimePoint;
     private DateTime? _firstTimePoint;
-    private readonly string? _logInUser = Director.ReadCache().User;
+    private readonly string? _user = Director.ReadCache().User;
+    private readonly string _project = Director.ReadCache().Region;
     private bool _picFlag = true;
 
     private bool _reFormation;
@@ -142,7 +143,7 @@ public sealed partial class ControlDashboardPage
                 InfoBar.Severity = _nextTimePoint - DateTime.Now >= new TimeSpan() ? InfoBarSeverity.Warning : InfoBarSeverity.Error;
                 InfoBar.Title =
                     $"{_reminds.First().Pic} ‚³‚ñ‚Ì {_reminds.First().Order.Name} ”­“®‚Ü‚Å‚ ‚Æ {(_nextTimePoint - DateTime.Now).Seconds} •b";
-                if (_picFlag && _logInUser == _reminds.First().Pic)
+                if (_picFlag && _user == _reminds.First().Pic)
                 {
                     _picFlag = false;
                     PlayAlert(ElementSoundKind.Hide, ElementSoundKind.Invoke, ElementSoundKind.Show, ElementSoundKind.Invoke);
@@ -233,11 +234,11 @@ public sealed partial class ControlDashboardPage
     {
         if (sender is not ComboBox box) return;
 
-        if (!Directory.Exists(Director.DeckDir()))
+        if (!Directory.Exists(Director.DeckDir(_project)))
         {
-            Director.CreateDirectory(Director.DeckDir());
+            Director.CreateDirectory(Director.DeckDir(_project));
         }
-        var decks = Directory.GetFiles(Director.DeckDir(), "*.json").Select(path =>
+        var decks = Directory.GetFiles(Director.DeckDir(_project), "*.json").Select(path =>
         {
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var json = sr.ReadToEnd();

@@ -279,7 +279,7 @@ public sealed partial class OrderManagerPage
     private async void Load_OnClick(object sender, RoutedEventArgs e)
     {
         var dialog = Dialog.Builder(XamlRoot)
-            .WithTitle("レギオンとメンバー名を選択してください")
+            .WithTitle("レギオンとメンバーを選択してください")
             .WithBody(new LoadDialogContent((item) =>
             {
                 switch (item)
@@ -302,8 +302,7 @@ public sealed partial class OrderManagerPage
 
         dialog.PrimaryButtonCommand = new Defer(delegate
         {
-            var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var path = $@"{desktop}\MitamatchOperations\Regions\{SelectedRegion}\{SelectedMember}.json";
+            var path = $@"{Director.MemberDir(SelectedRegion)}\{SelectedMember}.json";
 
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var json = sr.ReadToEnd();
@@ -346,10 +345,8 @@ public sealed partial class OrderManagerPage
 
         dialog.PrimaryButtonCommand = new Defer(delegate
         {
-            var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var path = $@"{desktop}\MitamatchOperations\Regions\{SelectedRegion}\{SelectedMember}.json";
-
-            Director.CreateDirectory(@$"{desktop}\MitamatchOperations\decks");
+            var path = $@"{Director.MemberDir(SelectedRegion)}\{SelectedMember}.json";
+            Director.CreateDirectory($@"{Director.MemberDir(SelectedRegion)}");
             using var fs = Director.CreateFile(path);
             if (SelectedMember != null)
             {
