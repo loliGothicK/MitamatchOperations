@@ -56,14 +56,30 @@
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8FA;"/>
                             </AppBarButton.Icon>
                         </AppBarButton>
+                        <AppBarButton Label="remove member" Click="RemoveMemberButton_OnClick">
+                            <AppBarButton.Icon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE748;"/>
+                            </AppBarButton.Icon>
+                        </AppBarButton>
                     </StackPanel>
                 </PivotItem>
                 <PivotItem Header="Home">
-                    <AppBarButton Label="Manage">
-                        <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8FA;"/>
-                        </AppBarButton.Icon>
-                    </AppBarButton>
+                    <Grid VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <AppBarButton Label="Manage">
+                                <AppBarButton.Icon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8FA;"/>
+                                </AppBarButton.Icon>
+                            </AppBarButton>
+                        </StackPanel>
+                        <AppBarButton x:Name="LogInUser" Grid.Column="1" Label="Anonymous" HorizontalAlignment="Right" Click="LogInUser_OnClick">
+                            <PersonPicture/>
+                        </AppBarButton>
+                    </Grid>
                 </PivotItem>
             </Pivot>
             <Grid Grid.Row="3">

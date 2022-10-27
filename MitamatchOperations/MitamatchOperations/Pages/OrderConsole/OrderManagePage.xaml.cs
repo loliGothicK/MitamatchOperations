@@ -22,7 +22,7 @@ public sealed partial class OrderManagerPage
 {
     private ObservableCollection<Order> Sources { get; } = new();
     private ObservableCollection<Order> OrdersInPossession { get; } = new();
-    public string SelectedRegion = Director.ReadCache().LoggedIn;
+    public string SelectedRegion = Director.ReadCache().Region;
     public string? SelectedMember;
 
     public OrderManagerPage()

@@ -38,6 +38,8 @@ public sealed partial class ControlDashboardPage
     private List<TimeTableItem> _deck = new();
     private DateTime _nextTimePoint;
     private DateTime? _firstTimePoint;
+    private readonly string? _logInUser = Director.ReadCache().User;
+    private bool _picFlag = true;
 
     private bool _reFormation;
 
@@ -140,6 +142,11 @@ public sealed partial class ControlDashboardPage
                 InfoBar.Severity = _nextTimePoint - DateTime.Now >= new TimeSpan() ? InfoBarSeverity.Warning : InfoBarSeverity.Error;
                 InfoBar.Title =
                     $"{_reminds.First().Pic} ‚³‚ñ‚Ì {_reminds.First().Order.Name} ”­“®‚Ü‚Å‚ ‚Æ {(_nextTimePoint - DateTime.Now).Seconds} •b";
+                if (_picFlag && _logInUser == _reminds.First().Pic)
+                {
+                    _picFlag = false;
+                    PlayAlert(ElementSoundKind.Hide, ElementSoundKind.Invoke, ElementSoundKind.Show, ElementSoundKind.Invoke);
+                }
                 if (flag && InfoBar.Severity == InfoBarSeverity.Error) PlayAlert(ElementSoundKind.Hide);
             }
             else
@@ -198,7 +205,7 @@ public sealed partial class ControlDashboardPage
             ConditionalOrderInfo.IsOpen = false;
         }
 
-        _results.Add(new ResultItem(popped.Pic, popped.Order, (int)deviation));
+        _results.Insert(0, new ResultItem(popped.Pic, popped.Order, (int)deviation));
 
         RemainderBoard.ItemsSource = _reminds;
         ResultBoard.ItemsSource = _results;
@@ -290,6 +297,20 @@ public sealed partial class ControlDashboardPage
         await Task.Delay(400);
         ElementSoundPlayer.Play(soundKind);
         await Task.Delay(800);
+
+        ElementSoundPlayer.State = ElementSoundPlayerState.Off;
+    }
+
+    private static async void PlayAlert(params ElementSoundKind[] soundKinds)
+    {
+        ElementSoundPlayer.State = ElementSoundPlayerState.On;
+
+        foreach (var soundKind in soundKinds)
+        {
+            ElementSoundPlayer.Play(soundKind);
+            await Task.Delay(400);
+        }
+        await Task.Delay(400);
 
         ElementSoundPlayer.State = ElementSoundPlayerState.Off;
     }

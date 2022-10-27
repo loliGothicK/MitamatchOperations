@@ -62,7 +62,7 @@ public sealed partial class DeckEditorPage
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
-        _loginRegion = Director.ReadCache().LoggedIn;
+        _loginRegion = Director.ReadCache().Region;
         _members = Directory.GetFiles($@"{Director.RegionDir()}\{_loginRegion}", "*.json")
             .Select(path =>
             {

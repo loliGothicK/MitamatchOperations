@@ -14,7 +14,7 @@ namespace mitama.Pages;
 /// </summary>
 public sealed partial class RegionConsolePage
 {
-    private string _regionName = Director.ReadCache().LoggedIn;
+    private string _regionName = Director.ReadCache().Region;
 
     public RegionConsolePage()
     {
@@ -23,7 +23,7 @@ public sealed partial class RegionConsolePage
     }
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
-        Project.Text = _regionName = Director.ReadCache().LoggedIn;
+        Project.Text = _regionName = Director.ReadCache().Region;
         var query = from item in Directory.GetFiles($@"{Director.RegionDir()}\{_regionName}", "*.json")
                 .Select(path =>
                 {

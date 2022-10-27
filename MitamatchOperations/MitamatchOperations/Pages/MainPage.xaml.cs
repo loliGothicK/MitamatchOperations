@@ -6,10 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Navigation;
 using mitama.Domain;
 using mitama.Pages.Common;
 using mitama.Pages.Main;
+using WinRT;
 
 namespace mitama.Pages;
 /// <summary>
@@ -18,6 +20,7 @@ namespace mitama.Pages;
 public sealed partial class MainPage
 {
     public string Project = "新規プロジェクト";
+    public string User = "不明なユーザー";
 
     public UIElement GetAppTitleBar => AppTitleBar;
 
@@ -37,7 +40,8 @@ public sealed partial class MainPage
         var exists = File.Exists(cache);
         if (exists)
         {
-            Project = Director.ReadCache().LoggedIn;
+            Project = Director.ReadCache().Region;
+            LogInUser.Label = User = Director.ReadCache().User ?? "不明なユーザー";
         }
         else
         {
@@ -111,16 +115,28 @@ public sealed partial class MainPage
 
         var dialog = builder
             .WithTitle("ログインレギオンを変更または作成します")
-            .WithBody(new ChangeProjectDialogContent(s => selected = s))
             .WithPrimary("Login")
             .WithSecondary("Create New")
             .WithCancel("Cancel")
             .Build();
+        dialog.IsPrimaryButtonEnabled = false;
+
+        dialog.Content = new ChangeProjectDialogContent(s =>
+        {
+            selected = s;
+            dialog.IsPrimaryButtonEnabled = true;
+        });
 
         async void PrimaryAction()
         {
+            if (!Directory.Exists($@"{Director.RegionDir()}\{selected}"))
+            {
+                await FailureInfo(selected!);
+                return;
+            }
             LoginRegion.Text = Project = selected;
-            Navigate(typeof(RegionConsolePage), new Props(Project));
+            Director.CacheWrite(new Cache(Project, User).ToJsonBytes());
+            Navigate(typeof(RegionConsolePage), Project);
             await LoginInfo();
         }
 
@@ -130,7 +146,8 @@ public sealed partial class MainPage
         {
             LoginRegion.Text = Project = selected;
             Director.CreateDirectory($@"{Director.RegionDir()}\{Project}");
-            Navigate(typeof(RegionConsolePage), new Props(Project));
+            Director.CacheWrite(new Cache(Project, User).ToJsonBytes());
+            Navigate(typeof(RegionConsolePage), Project);
             RegionView.IsSelected = true;
             await LoginInfo();
         }
@@ -142,46 +159,63 @@ public sealed partial class MainPage
 
     private async void AddMemberButton_OnClick(object sender, RoutedEventArgs e)
     {
-        var builder = new DialogBuilder(XamlRoot);
+        var dialog = new DialogBuilder(XamlRoot)
+            .WithTitle("レギオンメンバを追加します")
+            .WithPrimary("Add")
+            .WithCancel("Cancel")
+            .Build();
+        dialog.IsPrimaryButtonEnabled = false;
 
         string? name = null;
         Position? position = null;
 
-        var dialog = builder
-            .WithTitle("レギオンメンバを追加します")
-            .WithBody(new AddNewMemberDialogContent(fragment =>
+        var body = new AddNewMemberDialogContent(fragment =>
+        {
+            switch (fragment)
             {
-                switch (fragment)
-                {
-                    case NewMemberName(var s):
-                        name = s; break;
-                    case NewMemberPosition(var p):
-                        position = p; break;
-                }
-            }))
-            .WithPrimary("Add")
-            .WithCancel("Cancel")
-            .Build();
+                case NewMemberName(var s):
+                    name = s;
+                    break;
+                case NewMemberPosition(var p):
+                    position = p;
+                    break;
+            }
+            if (name != null && position != null) dialog.IsPrimaryButtonEnabled = true;
+        });
 
         async void Action()
         {
+            if (!Directory.Exists($@"{Director.RegionDir()}\{Project}"))
+            {
+                await FailureInfo($"{Project} は作成されていないレギオン名です、新規作成してください");
+                return;
+            }
             var fs = Director.CreateFile($@"{Director.RegionDir()}\{Project}\{name}.json");
             var memberJson = new Member(DateTime.Now, DateTime.Now, name!, position!, new ushort[] { }).ToJson();
             var save = new UTF8Encoding(true).GetBytes(memberJson);
             fs.Write(save, 0, save.Length);
-            await SavedInfo();
+            await SuccessInfo("Successfully saved!");
         }
 
+        dialog.Content = body;
         dialog.PrimaryButtonCommand = new Defer(Action);
 
         await dialog.ShowAsync();
     }
 
-    private async Task SavedInfo()
+    private async Task SuccessInfo(string msg)
     {
         InfoBar.IsOpen = true;
         InfoBar.Severity = InfoBarSeverity.Success;
-        InfoBar.Title = "successfully saved!";
+        InfoBar.Title = msg;
+        await Task.Delay(2000);
+        InfoBar.IsOpen = false;
+    }
+    private async Task FailureInfo(string msg)
+    {
+        InfoBar.IsOpen = true;
+        InfoBar.Severity = InfoBarSeverity.Error;
+        InfoBar.Title = msg;
         await Task.Delay(2000);
         InfoBar.IsOpen = false;
     }
@@ -189,10 +223,112 @@ public sealed partial class MainPage
     {
         InfoBar.IsOpen = true;
         InfoBar.Severity = InfoBarSeverity.Success;
-        InfoBar.Title = "successfully logged in!";
-        Director.CacheWrite(new Cache(Project).ToJsonBytes());
+        InfoBar.Title = "Successfully logged in!";
+        Director.CacheWrite(new Cache(Project, User).ToJsonBytes());
         await Task.Delay(2000);
         InfoBar.IsOpen = false;
+    }
+
+    private async void LogInUser_OnClick(object sender, RoutedEventArgs e)
+    {
+        // placeholder
+        string? loggedIn = null;
+
+        // dialog forward definition
+        var dialog = new DialogBuilder(XamlRoot)
+            .WithTitle("ログインユーザーを選択してください")
+            .WithPrimary("ログイン")
+            .WithCancel("やっぱりやめる")
+            .Build();
+        dialog.IsPrimaryButtonEnabled = false;
+
+        // dialog content forward definition
+        var body = new DropDownButton
+        {
+            Content = Project,
+        };
+
+        // dialog content flyout
+        var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
+
+        // init flyout items
+        foreach (var member in Directory.GetFiles($@"{Director.RegionDir()}\{Project}", "*.json")
+                     .Select(path => path.Split('\\').Last().Replace(".json", string.Empty)))
+        {
+            menu.Items.Add(new MenuFlyoutItem
+            {
+                Text = member,
+                Command = new Defer(delegate
+                {
+                    // store
+                    loggedIn = member;
+                    // show selected member name for UX
+                    body.Content = member;
+                    // enable when member is selected
+                    dialog.IsPrimaryButtonEnabled = true;
+                })
+            });
+        }
+
+        // inject controls
+        body.Flyout = menu;
+        dialog.Content = body;
+
+        // ReSharper disable once AsyncVoidLambda
+        dialog.PrimaryButtonCommand = new Defer(async delegate
+        {
+            LogInUser.Label = User = loggedIn!;
+            await LoginInfo();
+        });
+
+        await dialog.ShowAsync();
+    }
+
+    private async void RemoveMemberButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        // dialog forward definition
+        var dialog = new DialogBuilder(XamlRoot)
+            .WithTitle("おわかれするユーザーを選択してください")
+            .WithPrimary("おわかれする")
+            .WithCancel("やっぱりやめる")
+            .Build();
+        dialog.IsPrimaryButtonEnabled = false;
+
+        // dialog content forward definition
+        var body = new StackPanel();
+
+        // init flyout items
+        foreach (var member in Directory.GetFiles($@"{Director.RegionDir()}\{Project}", "*.json")
+                     .Select(path => path.Split('\\').Last().Replace(".json", string.Empty)))
+        {
+            body.Children.Add(new CheckBox
+            {
+                AccessKey = member,
+                Content = member,
+                Command = new Defer(delegate
+                {
+                    if (body.Children.Select(box => box.As<CheckBox>()).Any(box => box.IsChecked ?? false))
+                    {
+                        dialog.IsPrimaryButtonEnabled = true;
+                    }
+                })
+            });
+        }
+
+        // inject controls
+        dialog.Content = body;
+
+        // ReSharper disable once AsyncVoidLambda
+        dialog.PrimaryButtonCommand = new Defer(async delegate
+        {
+            foreach (var member in body.Children.Select(box => box.As<CheckBox>()).Where(box => box.IsChecked ?? false).Select(box => box.AccessKey!))
+            {
+                File.Delete($@"{Director.RegionDir()}\{Project}\{member}.json");
+            }
+            await SuccessInfo("Successfully deleted!");
+        });
+
+        await dialog.ShowAsync();
     }
 }
 
