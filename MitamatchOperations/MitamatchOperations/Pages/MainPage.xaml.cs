@@ -190,7 +190,8 @@ public sealed partial class MainPage
                 await FailureInfo($"{Project} は作成されていないレギオン名です、新規作成してください");
                 return;
             }
-            var fs = Director.CreateFile($@"{Director.RegionDir()}\{Project}\{name}.json");
+
+            await using var fs = Director.CreateFile($@"{Director.RegionDir()}\{Project}\{name}.json");
             var memberJson = new Member(DateTime.Now, DateTime.Now, name!, position!, new ushort[] { }).ToJson();
             var save = new UTF8Encoding(true).GetBytes(memberJson);
             fs.Write(save, 0, save.Length);

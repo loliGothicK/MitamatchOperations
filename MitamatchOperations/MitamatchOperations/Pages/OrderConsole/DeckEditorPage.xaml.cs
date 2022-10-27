@@ -204,7 +204,7 @@ public sealed partial class DeckEditorPage
         e.AcceptedOperation = DataPackageOperation.Move;
     }
 
-    private async void View_Drop(object sender, DragEventArgs e)
+    private void View_Drop(object sender, DragEventArgs e)
     {
         var name = sender switch
         {
@@ -242,10 +242,31 @@ public sealed partial class DeckEditorPage
                 }
             case "OrderDeck" or "DeckPanel":
                 {
-                    foreach (var item in _selectedOrder)
+                    var pos = e.GetPosition(OrderDeck);
+                    var index = 0;
+
+                    if (OrderDeck.Items.Count != 0)
+                    {
+
+                        var topItem = OrderDeck.ContainerFromIndex(0).As<ListViewItem>();
+                        var itemHeight = topItem.ActualHeight + topItem.Margin.Top + topItem.Margin.Bottom;
+                        index = Math.Min(OrderDeck.Items.Count - 1, (int)(pos.Y / itemHeight));
+                        var targetItem = OrderDeck.ContainerFromIndex(index).As<ListViewItem>();
+                        var positionInItem = e.GetPosition(targetItem);
+
+                        if (positionInItem.Y > itemHeight / 2)
+                        {
+                            index++;
+                        }
+
+                        index = Math.Min(OrderDeck.Items.Count, index);
+                    }
+
+                    foreach (var item in _selectedOrder.Reverse())
                     {
                         Sources.Remove(item);
-                        PushOrder(item);
+
+                        _deck.Insert(index, item);
                     }
 
                     break;
@@ -605,21 +626,21 @@ public sealed partial class DeckEditorPage
 
     private void RemovePicButton_OnClick(object sender, RoutedEventArgs e)
     {
-        if (sender is not Button button) return;
+        if (sender is not Button) return;
         _holdOns.RemoveAll(item => item is ChangePic);
         _holdOns.Add(new RemovePic());
     }
 
     private void MarginComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (sender is not ComboBox box) return;
+        if (sender is not ComboBox) return;
         _holdOns.RemoveAll(item => item is ChangeMargin);
         _holdOns.Add(new ChangeMargin(uint.Parse(e.AddedItems[0].ToString()!)));
     }
 
     private void ConditionalCheckBox_OnChecked(object sender, RoutedEventArgs e)
     {
-        if (sender is not CheckBox box) return;
+        if (sender is not CheckBox) return;
         _holdOns.RemoveAll(item => item is ChangeMargin);
         _holdOns.Add(new IntoConditional());
     }

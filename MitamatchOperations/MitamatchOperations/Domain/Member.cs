@@ -97,15 +97,20 @@ public record Member(
     };
 
     internal static Member FromJson(string json) => JsonSerializer.Deserialize<MemberDto>(json);
-    internal string ToJson() => JsonSerializer.Serialize(new MemberDto
-    {
-        CreatedAt = CreatedAt,
-        UpdatedAt = UpdatedAt,
-        Name = Name,
-        Position = Position.GetCategory(),
-        OrderIndices = OrderIndices,
 
-    });
+    internal string ToJson()
+    {
+        var dto = new MemberDto
+        {
+            CreatedAt = CreatedAt,
+            UpdatedAt = UpdatedAt,
+            Name = Name,
+            Position = Position.GetCategory(),
+            OrderIndices = OrderIndices,
+        };
+        var json = JsonSerializer.Serialize(dto);
+        return json;
+    }
     private record struct MemberDto(
         DateTime CreatedAt,
         DateTime UpdatedAt,
