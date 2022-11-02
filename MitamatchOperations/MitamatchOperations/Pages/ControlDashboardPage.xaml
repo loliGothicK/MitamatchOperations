@@ -88,7 +88,7 @@
                                 SelectionChanged="DeckLoadBox_OnSelectionChanged"
                                 Loaded="LoadComboBox_OnLoaded"/>
                             <Button x:Name="LoadButton"
-                                    IsEnabled="False"
+                                    
                                     Content="Load"
                                     Style="{StaticResource AccentButtonStyle}"
                                     Click="LoadButton_OnClick"

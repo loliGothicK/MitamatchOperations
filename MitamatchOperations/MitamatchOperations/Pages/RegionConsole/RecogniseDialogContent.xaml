@@ -1,0 +1,61 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License. See LICENSE in the project root for license information. -->
+
+<Page
+    x:Class="mitama.Pages.RegionConsole.RecogniseDialogContent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:mitama.Pages.RegionConsole"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:domain="using:mitama.Domain"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate x:Name="MemoriaTemplate" x:DataType="domain:Memoria">
+                <Grid Width="100">
+                    <Image Source="{x:Bind Path}" Stretch="UniformToFill"/>
+                    <Grid.ContextFlyout>
+                        <Flyout>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Button Content="{x:Bind Name}" Margin="5" FontSize="20"/>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                                    <StackPanel Orientation="Vertical" Margin="0 0 5 0">
+                                        <TextBlock Text="ATK"/>
+                                        <Button Content="{x:Bind Status[0]}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="5 0">
+                                        <TextBlock Text="DEF"/>
+                                        <Button Content="{x:Bind Status[1]}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="5 0">
+                                        <TextBlock Text="Sp.ATK"/>
+                                        <Button Content="{x:Bind Status[2]}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="5 0">
+                                        <TextBlock Text="Sp.DEF"/>
+                                        <Button Content="{x:Bind Status[3]}" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <Button Grid.Row="2" Content="{x:Bind Skill.Name}" Margin="5"/>
+                                <Button Grid.Row="3" Content="{x:Bind Support.Name}" Margin="5"/>
+                            </Grid>
+                        </Flyout>
+                    </Grid.ContextFlyout>
+                </Grid>
+            </DataTemplate>
+        </Grid.Resources>
+        <GridView
+            x:Name="ResultView"
+            Margin=" 10"
+            ItemTemplate="{StaticResource MemoriaTemplate}"/>
+    </Grid>
+</Page>

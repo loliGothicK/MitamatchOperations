@@ -73,7 +73,7 @@ namespace mitama.Domain
         Kind Kind
     )
     {
-        public string Path => $@"../../Assets/orders/{Index}.png";
+        public string Path => $@"/Assets/orders/{Index}.png";
 
         public string TimeFmt => ActiveTime switch
         {

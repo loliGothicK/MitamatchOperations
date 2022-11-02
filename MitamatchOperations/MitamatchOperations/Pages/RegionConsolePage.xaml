@@ -48,17 +48,22 @@
     </Page.Resources>
 
     <Grid>
-        <StackPanel>
-            <TextBlock x:Name="Project" Text="{x:Bind _regionName}" TextWrapping="NoWrap" Margin="0 0 0 15" FontSize="20"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
             <ListView ItemsSource="{x:Bind MemberCvs.View, Mode=OneWay}"
                       ItemTemplate="{StaticResource MemberListViewTemplate}"
                       SelectionMode="Single"
                       ShowsScrollingPlaceholders="True"
                       MinHeight="500"
                       MinWidth="400"
+                      Margin="1 1 1 50"
                       BorderThickness="1"
                       BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
-                      HorizontalAlignment="Left">
+                      HorizontalAlignment="Left"
+                      SelectionChanged="Selector_OnSelectionChanged">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>
@@ -79,6 +84,18 @@
                     </GroupStyle>
                 </ListView.GroupStyle>
             </ListView>
-        </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="TargetMember" Text="{x:Bind _selectedMember.Name ,FallbackValue='Please select a member.'}" Margin="5"/>
+            <Grid Grid.Row="1" AllowDrop="True" DragOver="Grid_DragOver" Drop="Grid_Drop"
+                  MinHeight="300"
+                  Background="LightBlue" Margin="10,10,10,50">
+                <Image Source="/Assets/Images/drag-and-drop.svg" MaxWidth="100" MaxHeight="80"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

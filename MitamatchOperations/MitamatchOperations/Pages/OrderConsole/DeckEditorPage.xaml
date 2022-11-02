@@ -142,6 +142,7 @@
             Margin="10,10,10,50">
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -156,104 +157,104 @@
                 </DataTemplate>
             </Grid.Resources>
 
-            <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <InfoBar x:Name="GeneralInfoBar" />
+
+            <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <SymbolIcon Symbol="Sort" Rotation="90"/>
             </Grid>
 
-            <Grid Grid.Column="0">
-                <Grid MinHeight="400"
-                      MinWidth="500"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Top">
+            <Grid Grid.Row="1" Grid.Column="0" MinHeight="400"
+                  MinWidth="500"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Background="Transparent">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Background="Transparent">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Text="Margin=" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                        <TextBox x:Name="GlobalMargin"
+                                 PlaceholderText="{x:Bind Margin}"
+                                 Margin="0 5"
+                                 SelectionChanged="Margin_OnSelectionChanged"/>
+                        <TextBlock Text=" sec" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <CommandBar Grid.Column="1" x:Name="DeckCommandBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                        <AppBarButton Icon="People" Label="Assign" Click="Assign_OnClick">
+                        </AppBarButton>
+                        <AppBarButton Icon="Save" Label="Save" AllowFocusOnInteraction="True">
+                            <AppBarButton.Flyout>
+                                <Flyout>
+                                    <StackPanel MinWidth="400" Orientation="Vertical">
+                                        <TextBox x:Name="DeckName" PlaceholderText="デッキ名を入力してください"/>
+                                        <Button Content="Confirm"
+                                                Style="{StaticResource AccentButtonStyle}"
+                                                Click="SaveButton_OnClick"
+                                                Margin="10"/>
+                                    </StackPanel>
+                                </Flyout>
+                            </AppBarButton.Flyout>
+                        </AppBarButton>
+                        <AppBarButton Icon="Folder" Label="Load">
+                            <AppBarButton.Flyout>
+                                <Flyout>
+                                    <StackPanel MinWidth="800" Orientation="Vertical">
+                                        <ComboBox
+                                            x:Name="DeckLoadBox"
+                                            AllowFocusOnInteraction="True"
+                                            PlaceholderText="デッキを選択してください"
+                                            ItemTemplate="{StaticResource DeckJsonTemplate}"
+                                            SelectionChanged="DeckLoadBox_OnSelectionChanged"
+                                            Loaded="LoadComboBox_OnLoaded"/>
+                                        <Button x:Name="DeckLoadButton"
+                                                Content="Load"
+                                                
+                                                Style="{StaticResource AccentButtonStyle}"
+                                                Click="LoadButton_OnClick"
+                                                Margin="10"/>
+                                    </StackPanel>
+                                </Flyout>
+                            </AppBarButton.Flyout>
+                        </AppBarButton>
 
-                        <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <TextBlock Text="Margin=" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"/>
-                            <TextBox x:Name="GlobalMargin"
-                                     PlaceholderText="{x:Bind Margin}"
-                                     Margin="0 5"
-                                     SelectionChanged="Margin_OnSelectionChanged"/>
-                            <TextBlock Text=" sec" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                        </StackPanel>
-                        <CommandBar Grid.Column="1" x:Name="DeckCommandBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                            <AppBarButton Icon="People" Label="Assign" Click="Assign_OnClick">
-                            </AppBarButton>
-                            <AppBarButton Icon="Save" Label="Save" AllowFocusOnInteraction="True">
-                                <AppBarButton.Flyout>
-                                    <Flyout>
-                                        <StackPanel MinWidth="400" Orientation="Vertical">
-                                            <TextBox x:Name="DeckName" PlaceholderText="デッキ名を入力してください"/>
-                                            <Button Content="Confirm"
-                                                    Style="{StaticResource AccentButtonStyle}"
-                                                    Click="SaveButton_OnClick"
-                                                    Margin="10"/>
-                                        </StackPanel>
-                                    </Flyout>
-                                </AppBarButton.Flyout>
-                            </AppBarButton>
-                            <AppBarButton Icon="Folder" Label="Load">
-                                <AppBarButton.Flyout>
-                                    <Flyout>
-                                        <StackPanel MinWidth="800" Orientation="Vertical">
-                                            <ComboBox
-                                                x:Name="DeckLoadBox"
-                                                AllowFocusOnInteraction="True"
-                                                PlaceholderText="デッキを選択してください"
-                                                ItemTemplate="{StaticResource DeckJsonTemplate}"
-                                                SelectionChanged="DeckLoadBox_OnSelectionChanged"
-                                                Loaded="LoadComboBox_OnLoaded"/>
-                                            <Button x:Name="DeckLoadButton"
-                                                    Content="Load"
-                                                    IsEnabled="False"
-                                                    Style="{StaticResource AccentButtonStyle}"
-                                                    Click="LoadButton_OnClick"
-                                                    Margin="10"/>
-                                        </StackPanel>
-                                    </Flyout>
-                                </AppBarButton.Flyout>
-                            </AppBarButton>
+                        <AppBarButton Icon="Delete" Label="Delete" Click="Delete_OnClick">
+                        </AppBarButton>
+                    </CommandBar>
+                </Grid>
 
-                            <AppBarButton Icon="Delete" Label="Delete" Click="Delete_OnClick">
-                            </AppBarButton>
-                        </CommandBar>
-                    </Grid>
-
-                    <Grid x:Name="DeckGrid" Grid.Row="1" CornerRadius="10" VerticalAlignment="Stretch">
-                        <ListView
-                            x:Name="OrderDeck"
-                            MinHeight="500"
-                            MinWidth="500"
-                            Background="Transparent"
-                            BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
-                            ItemsSource="{x:Bind _deck}"
-                            ItemTemplate="{StaticResource DeckItemTemplate}"
-                            CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="Single"
-                            DragOver="Target_DragOver"
-                            Drop="View_Drop"
-                            DragItemsStarting="Target_DragItemsStarting"
-                            DragEnter="Target_DragEnter"
-                            DragItemsCompleted="OrderDeck_OnChanged"
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Left"/>
-                    </Grid>
+                <Grid x:Name="DeckGrid" Grid.Row="1" CornerRadius="10" VerticalAlignment="Stretch">
+                    <ListView
+                        x:Name="OrderDeck"
+                        MinHeight="500"
+                        MinWidth="500"
+                        Background="Transparent"
+                        BorderBrush="{StaticResource SystemControlForegroundBaseMediumLowBrush}"
+                        ItemsSource="{x:Bind _deck}"
+                        ItemTemplate="{StaticResource DeckItemTemplate}"
+                        CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="Single"
+                        DragOver="Target_DragOver"
+                        Drop="View_Drop"
+                        DragItemsStarting="Target_DragItemsStarting"
+                        DragEnter="Target_DragEnter"
+                        DragItemsCompleted="OrderDeck_OnChanged"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Left"/>
                 </Grid>
             </Grid>
-            <Grid Grid.Column="2">
+            <Grid Grid.Row="1" Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>

@@ -270,7 +270,7 @@ internal class AutomateAssign
         if (stats[17] is NotAssigned)
         {
             var healer = healers.FirstOrDefault(healer => assginabilities[healer.Name] is Assignable && healer.OrderIndices.Contains((ushort)17));
-            if (healer == null) return (result, "回復にクロノグラフを割り当ててください（過激派）");
+            if (healer == null) return (result, "回復の誰かが刻戻りのクロノグラフを買ってください");
             assginabilities[healer.Name] = new Unassignable();
             healers.Remove(healer);
             result[17] = new Assigned(healer.Name);
@@ -281,7 +281,7 @@ internal class AutomateAssign
         if (result[list.Last().Index] is NotAssigned)
         {
             var other = BuffDebuff().FirstOrDefault(other => other.OrderIndices.Contains(list.Last().Index));
-            if (other == null) return (result, "最後のオーダーは支援妨害に割り当ててください");
+            if (other == null) return (result, $"最後のオーダーは支援妨害に割り当ててください、支援妨害の誰かが{list.Last().Name}を買ってください");
             afterReset.Remove(list.Last());
             result[list.Last().Index] = new Assigned(other.Name);
             assginabilities[other.Name] += Assign.After;
@@ -294,11 +294,13 @@ internal class AutomateAssign
         if (list[^2].Name == "戦術加速の陣" && result[list[list.Last().Index - 1].Index] is NotAssigned)
         {
             var debuffer = debuffers.FirstOrDefault(debuffer => debuffer.OrderIndices.Contains((ushort)52));
-            if (debuffer == null) return (result, "最後の直前の戦術加速は支援妨害に割り当ててください");
-            afterReset.Remove(list[^2]);
-            result[list[^2].Index] = new Assigned(debuffer.Name);
-            assginabilities[debuffer.Name] += Assign.After;
-            if (Check()) return (result, string.Empty);
+            if (debuffer != null)
+            {
+                afterReset.Remove(list[^2]);
+                result[list[^2].Index] = new Assigned(debuffer.Name);
+                assginabilities[debuffer.Name] += Assign.After;
+                if (Check()) return (result, string.Empty);
+            }
         }
 
         // 両攻撃系を妨害に割り当てる

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI;
 using Microsoft.UI.Xaml;
@@ -17,6 +18,7 @@ using mitama.Domain.OrderKinds;
 using mitama.Pages.Common;
 using WinRT;
 using Microsoft.UI.Xaml.Navigation;
+using mitama.AutomateAssign;
 
 namespace mitama.Pages.OrderConsole;
 
@@ -686,9 +688,40 @@ public sealed partial class DeckEditorPage
             .WithCancel("やっぱりやめる")
             .Build();
 
-        dialog.PrimaryButtonCommand = new Defer(delegate
+        dialog.PrimaryButtonCommand = new Defer(async delegate
         {
-            _ = AutomateAssign.AutomateAssign.ExecAutoAssign(_project!, ref _deck);
+            try
+            {
+                switch (AutomateAssign.AutomateAssign.ExecAutoAssign(_project!, ref _deck))
+                {
+                    case Failure(var msg):
+                        {
+                            GeneralInfoBar.IsOpen = true;
+                            GeneralInfoBar.Title = msg;
+                            GeneralInfoBar.Severity = InfoBarSeverity.Error;
+                            await Task.Delay(2000);
+                            GeneralInfoBar.IsOpen = false;
+                            break;
+                        }
+                    case Success:
+                        {
+                            GeneralInfoBar.IsOpen = true;
+                            GeneralInfoBar.Title = "Successfully assigned";
+                            GeneralInfoBar.Severity = InfoBarSeverity.Success;
+                            await Task.Delay(2000);
+                            GeneralInfoBar.IsOpen = false;
+                            break;
+                        }
+                }
+            }
+            catch (Exception e)
+            {
+                GeneralInfoBar.IsOpen = true;
+                GeneralInfoBar.Title = e.ToString();
+                GeneralInfoBar.Severity = InfoBarSeverity.Error;
+                await Task.Delay(2000);
+                GeneralInfoBar.IsOpen = false;
+            }
             OrderDeck.ItemsSource = _deck;
         });
 
