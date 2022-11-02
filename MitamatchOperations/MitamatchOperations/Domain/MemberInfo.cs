@@ -70,7 +70,7 @@ public enum BackCategory
     Healer = 4
 }
 
-public record Member(
+public record MemberInfo(
     DateTime CreatedAt,
     DateTime UpdatedAt,
     string Name,
@@ -96,7 +96,7 @@ public record Member(
         _ => throw new ArgumentOutOfRangeException()
     };
 
-    internal static Member FromJson(string json) => JsonSerializer.Deserialize<MemberDto>(json);
+    internal static MemberInfo FromJson(string json) => JsonSerializer.Deserialize<MemberDto>(json);
 
     internal string ToJson()
     {
@@ -119,7 +119,7 @@ public record Member(
         ushort[] OrderIndices
     )
     {
-        public static implicit operator Member(MemberDto dto) => new(
+        public static implicit operator MemberInfo(MemberDto dto) => new(
             dto.CreatedAt,
             dto.UpdatedAt,
             dto.Name,

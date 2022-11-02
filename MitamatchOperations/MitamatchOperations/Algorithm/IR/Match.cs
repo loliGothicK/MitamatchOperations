@@ -127,7 +127,6 @@ internal class Match
             lines.Add(line);
         }
 
-
         var margin = lines[0].Zip(lines[0].Skip(1)).Select(a => a.Second.Left - a.First.Right).Min();
 
         foreach (var line in lines)

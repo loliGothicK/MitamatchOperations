@@ -31,7 +31,7 @@ public sealed partial class DeckEditorPage
     private ObservableCollection<TimeTableItem> _deck = new();
     private ObservableCollection<Order> Sources { get; set; } = new();
     private new uint Margin { get; set; } = 5;
-    private Domain.Member[] _members = { };
+    private MemberInfo[] _members = { };
     private readonly List<HoldOn> _holdOns = new();
     private readonly string _project = Director.ReadCache().Region;
     private Order[] _selectedOrder = { };
@@ -64,13 +64,7 @@ public sealed partial class DeckEditorPage
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
-        _members = Directory.GetFiles($@"{Director.ProjectDir()}\{_project}", "*.json")
-            .Select(path =>
-            {
-                using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
-                var json = sr.ReadToEnd();
-                return Domain.Member.FromJson(json);
-            }).ToArray();
+        _members = Util.LoadMembersInfo(_project);
     }
 
     private void AddConfirmation_Click(object sender, RoutedEventArgs e)
@@ -692,7 +686,7 @@ public sealed partial class DeckEditorPage
         {
             try
             {
-                switch (AutomateAssign.AutomateAssign.ExecAutoAssign(_project!, ref _deck))
+                switch (AutomateAssign.AutomateAssign.ExecAutoAssign(_project, ref _deck))
                 {
                     case Failure(var msg):
                         {

@@ -24,7 +24,7 @@ namespace mitama.Pages;
 public sealed partial class RegionConsolePage
 {
     private string _regionName = Director.ReadCache().Region;
-    private Member? _selectedMember;
+    private MemberInfo? _selectedMember;
 
     public RegionConsolePage()
     {
@@ -39,13 +39,7 @@ public sealed partial class RegionConsolePage
     private void Init()
     {
         _regionName = Director.ReadCache().Region;
-        var query = from item in Directory.GetFiles($@"{Director.MemberDir(_regionName)}", "*.json")
-                .Select(path =>
-                {
-                    using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
-                    var json = sr.ReadToEnd();
-                    return Member.FromJson(json);
-                })
+        var query = from item in Util.LoadMembersInfo(_regionName)
             group item by item.Position into g
             orderby g.Key
             select new GroupInfoList(g) { Key = g.Key };
@@ -79,15 +73,15 @@ public sealed partial class RegionConsolePage
 
     private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        _selectedMember = e.AddedItems[0].As<Member>();
+        _selectedMember = e.AddedItems[0].As<MemberInfo>();
         TargetMember.Text = _selectedMember.Name;
     }
 }
 
 // GroupInfoList class definition:
-internal class GroupInfoList : List<Member>
+internal class GroupInfoList : List<MemberInfo>
 {
-    public GroupInfoList(IEnumerable<Member> items) : base(items)
+    public GroupInfoList(IEnumerable<MemberInfo> items) : base(items)
     {
     }
     public object Key { get; set; } = null!;

@@ -4,6 +4,7 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using mitama.Domain;
 using static System.IO.Directory;
 using static System.Environment;
 
@@ -24,6 +25,39 @@ internal class Util
         Director.CreateDirectory(Director.ProjectDir());
         return new string[] { };
     }
+
+    internal static string[] LoadMemberNames(string project)
+    {
+        var membersDir = @$"{Director.ProjectDir()}\{project}\Members";
+        if (Exists(membersDir))
+        {
+            return GetDirectories(membersDir)
+                .Select(path => path.Split('\\').Last())
+                .ToArray();
+        }
+
+        Director.CreateDirectory(membersDir);
+        return new string[] { };
+    }
+    internal static MemberInfo[] LoadMembersInfo(string project)
+    {
+        var membersDir = @$"{Director.ProjectDir()}\{project}\Members";
+        if (Exists(membersDir))
+        {
+            return GetDirectories(membersDir)
+                .Select(dir =>
+                {
+                    using var sr = new StreamReader($@"{dir}\info.json", Encoding.GetEncoding("UTF-8"));
+                    var json = sr.ReadToEnd();
+                    return MemberInfo.FromJson(json);
+                })
+                .ToArray();
+        }
+
+        Director.CreateDirectory(membersDir);
+        return new MemberInfo[] { };
+    }
+
 }
 
 internal class Director
@@ -74,9 +108,16 @@ internal class Director
         if (!Exists(dir)) CreateDirectory(dir);
         return dir;
     }
-    internal static string MemberDir(string project)
+    internal static string IndividualDir(string project, string member)
     {
-        var dir = $@"{ProjectDir()}\{project}\Members";
+        var dir = $@"{ProjectDir()}\{project}\Members\{member}";
+        if (!Exists(dir)) CreateDirectory(dir);
+        return dir;
+    }
+
+    internal static string UnitDir(string project, string member)
+    {
+        var dir = $@"{ProjectDir()}\{project}\Members\{member}\Units";
         if (!Exists(dir)) CreateDirectory(dir);
         return dir;
     }

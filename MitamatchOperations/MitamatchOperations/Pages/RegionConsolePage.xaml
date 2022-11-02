@@ -14,7 +14,7 @@
 
     <Page.Resources>
         <CollectionViewSource x:Name="MemberCvs" IsSourceGrouped="True" />
-        <DataTemplate x:Key="MemberListViewTemplate" x:DataType="domain:Member">
+        <DataTemplate x:Key="MemberListViewTemplate" x:DataType="domain:MemberInfo">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>

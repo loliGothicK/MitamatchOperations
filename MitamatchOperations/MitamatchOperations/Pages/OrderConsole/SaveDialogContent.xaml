@@ -10,12 +10,8 @@
     <StackPanel VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Orientation="Horizontal">
-        <ComboBox x:Name="RegionComboBox"
-                  IsEditable="True"
-                  SelectionChanged="RegionComboBox_OnSelectionChanged"
-                  PlaceholderText="レギオンを選択または入力してください"/>
         <ComboBox x:Name="MemberComboBox"
-                  IsEditable="True"
+                  PlaceholderText="メンバーを選択してください"
                   SelectionChanged="MemberComboBox_OnSelectionChanged"/>
     </StackPanel>
 </Page>

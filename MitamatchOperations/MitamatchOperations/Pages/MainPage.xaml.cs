@@ -131,7 +131,7 @@ public sealed partial class MainPage
         {
             if (!Directory.Exists($@"{Director.ProjectDir()}\{selected}"))
             {
-                await FailureInfo(selected!);
+                await FailureInfo(selected);
                 return;
             }
             LoginRegion.Text = Project = selected;
@@ -146,6 +146,8 @@ public sealed partial class MainPage
         {
             LoginRegion.Text = Project = selected;
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}");
+            Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Decks");
+            Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Members");
             Director.CacheWrite(new Cache(Project, User).ToJsonBytes());
             Navigate(typeof(RegionConsolePage), Project);
             RegionView.IsSelected = true;
@@ -190,9 +192,9 @@ public sealed partial class MainPage
                 await FailureInfo($"{Project} は作成されていないレギオン名です、新規作成してください");
                 return;
             }
-
-            await using var fs = Director.CreateFile($@"{Director.ProjectDir()}\{Project}\{name}.json");
-            var memberJson = new Member(DateTime.Now, DateTime.Now, name!, position!, new ushort[] { }).ToJson();
+            Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Members\{name}");
+            await using var fs = Director.CreateFile($@"{Director.ProjectDir()}\{Project}\Members\{name}\info.json");
+            var memberJson = new MemberInfo(DateTime.Now, DateTime.Now, name!, position!, new ushort[] { }).ToJson();
             var save = new UTF8Encoding(true).GetBytes(memberJson);
             fs.Write(save, 0, save.Length);
             await SuccessInfo("Successfully saved!");
@@ -299,8 +301,7 @@ public sealed partial class MainPage
         var body = new StackPanel();
 
         // init flyout items
-        foreach (var member in Directory.GetFiles($@"{Director.ProjectDir()}\{Project}", "*.json")
-                     .Select(path => path.Split('\\').Last().Replace(".json", string.Empty)))
+        foreach (var member in Util.LoadMemberNames(Project))
         {
             body.Children.Add(new CheckBox
             {
@@ -324,7 +325,7 @@ public sealed partial class MainPage
         {
             foreach (var member in body.Children.Select(box => box.As<CheckBox>()).Where(box => box.IsChecked ?? false).Select(box => box.AccessKey!))
             {
-                File.Delete($@"{Director.ProjectDir()}\{Project}\{member}.json");
+                new DirectoryInfo($@"{Director.ProjectDir()}\{Project}\Members\{member}").Delete(true);
             }
             await SuccessInfo("Successfully deleted!");
         });

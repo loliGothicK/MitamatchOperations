@@ -8,7 +8,6 @@ using System.IO;
 using System.Text;
 using mitama.Pages.Common;
 using WinRT;
-using Member = mitama.Domain.Member;
 
 namespace mitama.AutomateAssign;
 
@@ -184,7 +183,7 @@ internal class AutomateAssign
             .Where(o => stats[o.Index] is NotAssigned)
             .ToList();
 
-        var members = LoadRegionMemberInformation(region);
+        var members = Util.LoadMembersInfo(region).ToList();
 
         // オーダー担当可能数
         var assginabilities = new Dictionary<string, Assginability>();
@@ -222,8 +221,8 @@ internal class AutomateAssign
         var debuffers = members.Where(m => m.Position is Back { Category: BackCategory.DeBuffer } && assginabilities[m.Name] is not Unassignable).ToList();
         var healers = members.Where(m => m.Position is Back { Category: BackCategory.Healer } && assginabilities[m.Name] is not Unassignable).ToList();
 
-        IEnumerable<Member> Attackers() => nAttackers!.Concat(spAttackers!).ToList();
-        IEnumerable<Member> BuffDebuff() => buffers!.Concat(debuffers!).ToList();
+        IEnumerable<MemberInfo> Attackers() => nAttackers!.Concat(spAttackers!).ToList();
+        IEnumerable<MemberInfo> BuffDebuff() => buffers!.Concat(debuffers!).ToList();
 
         bool Check()
         {
@@ -431,18 +430,7 @@ internal class AutomateAssign
         return (result, Check() ? string.Empty : "failed to assign");
     }
 
-    private static Member[] LoadRegionMemberInformation(string region)
-    {
-        return Directory.GetFiles(Director.MemberDir(region), "*.json").Select(path =>
-        {
-            using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
-            var json = sr.ReadToEnd();
-            return Member.FromJson(json);
-        }).ToArray();
-    }
-
-    private static (Dictionary<ushort, PicStat>, string) NoChronograph(string region,
-        Dictionary<ushort, PicStat> stats, ReadOnlyCollection<Order> list)
+    private static (Dictionary<ushort, PicStat>, string) NoChronograph(string region, Dictionary<ushort, PicStat> stats, ReadOnlyCollection<Order> list)
     {
         var result = stats;
         var orders = list.ToList();
@@ -451,7 +439,7 @@ internal class AutomateAssign
         var assginabilities = new Dictionary<string, Assginability>();
 
         // オーダー担当可能数の初期化
-        var members = LoadRegionMemberInformation(region).ToList();
+        var members = Util.LoadMembersInfo(region).ToList();
         foreach (var member in members)
         {
             assginabilities[member.Name] = new Assignable();
@@ -469,8 +457,8 @@ internal class AutomateAssign
         var debuffers = members.Where(m => m.Position is Back { Category: BackCategory.DeBuffer } && assginabilities[m.Name] is not Unassignable).ToList();
         var healers = members.Where(m => m.Position is Back { Category: BackCategory.Healer } && assginabilities[m.Name] is not Unassignable).ToList();
 
-        IEnumerable<Member> Attackers() => nAttackers.Concat(spAttackers).ToList();
-        IEnumerable<Member> BuffDebuff() => buffers.Concat(debuffers).ToList();
+        IEnumerable<MemberInfo> Attackers() => nAttackers.Concat(spAttackers).ToList();
+        IEnumerable<MemberInfo> BuffDebuff() => buffers.Concat(debuffers).ToList();
 
         bool Check()
         {

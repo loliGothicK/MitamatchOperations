@@ -1,29 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.Json;
 using Microsoft.UI.Xaml.Controls;
 using mitama.Pages.Common;
 
 namespace mitama.Pages.OrderConsole;
-
-public abstract record Selected;
-public record Region(string Name) : Selected;
-public record Member(string Name) : Selected;
 
 /// <summary>
 /// Save Dialog Content used in the Save button flyout in Deck Editor Page.
 /// </summary>
 public sealed partial class SaveDialogContent
 {
-    public delegate void OnChanged(Selected selected);
+    public delegate void OnChanged(string member);
 
-    private readonly Dictionary<string, List<string>> _regionToMembersMap = new();
     private readonly OnChanged _onChangedAction;
-    private string? _region = null;
-    private string? _member = null;
 
     public SaveDialogContent(OnChanged onChanged)
     {
@@ -34,59 +24,17 @@ public sealed partial class SaveDialogContent
         InitComboBox();
     }
 
-    internal void UpdateComboBox()
-    {
-        if (_region is null) { return; }
-        if (_member is null) { return; }
-
-        if (!_regionToMembersMap.ContainsKey(_region))
-        {
-            _regionToMembersMap[_region] = new List<string>{ _member };
-        }
-        else
-        {
-            if (!_regionToMembersMap[_region].Contains(_member))
-            {
-                _regionToMembersMap[_region].Add(_member);
-            }
-        }
-    }
-
     private void InitComboBox()
     {
-        var regions = Directory.GetDirectories($"{Director.ProjectDir()}").ToArray();
-
-        foreach (var regionPath in regions)
+        foreach (var name in Util.LoadMemberNames(Director.ReadCache().Region))
         {
-            var regionName = regionPath.Split(@"\").Last();
-            _regionToMembersMap.Add(regionName, Directory.GetFiles(Director.MemberDir(regionName), "*.json").Select(path =>
-            {
-                using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
-                var json = sr.ReadToEnd();
-                return Domain.Member.FromJson(json).Name;
-            }).ToList());
-            RegionComboBox.Items.Add(regionName);
+            MemberComboBox.Items.Add(name);
         }
-    }
-
-    private void RegionComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        var region = e.AddedItems[0].ToString();
-        if (region == null) return;
-        foreach (var member in _regionToMembersMap[region])
-        {
-            MemberComboBox.Items.Add(member);
-            MemberComboBox.PlaceholderText = "メンバーを選択または入力してください";
-        }
-
-        _onChangedAction.Invoke(new Region(region));
-        _region = region;
     }
 
     private void MemberComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var member = e.AddedItems[0].ToString();
-        if (member != null) _onChangedAction.Invoke(new Member(member));
-        _member = member;
+        if (member != null) _onChangedAction.Invoke(member);
     }
 }

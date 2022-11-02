@@ -22,8 +22,6 @@ public sealed partial class OrderManagerPage
 {
     private ObservableCollection<Order> Sources { get; } = new();
     private ObservableCollection<Order> OrdersInPossession { get; } = new();
-    public string SelectedRegion = Director.ReadCache().Region;
-    public string? SelectedMember;
 
     public OrderManagerPage()
     {
@@ -278,36 +276,31 @@ public sealed partial class OrderManagerPage
 
     private async void Load_OnClick(object sender, RoutedEventArgs e)
     {
+        string? selectedMember = null;
+
         var dialog = Dialog.Builder(XamlRoot)
-            .WithTitle("レギオンとメンバーを選択してください")
-            .WithBody(new LoadDialogContent((item) =>
-            {
-                switch (item)
-                {
-                    case Region region:
-                    {
-                        SelectedRegion = region.Name;
-                        break;
-                    }
-                    case Member member:
-                    {
-                        SelectedMember = member.Name;
-                        break;
-                    }
-                }
-            }))
+            .WithTitle("メンバーを選択してください")
             .WithPrimary("Load")
             .WithCancel("Cancel")
             .Build();
+        dialog.IsPrimaryButtonEnabled = false;
+
+        var body = new LoadDialogContent((item) =>
+        {
+            selectedMember = item;
+            dialog.IsPrimaryButtonEnabled = true;
+        });
+
+        dialog.Content = body;
 
         dialog.PrimaryButtonCommand = new Defer(delegate
         {
-            var path = $@"{Director.MemberDir(SelectedRegion)}\{SelectedMember}.json";
+            var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Region}\Members\{selectedMember}\info.json";
 
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var json = sr.ReadToEnd();
             OrdersInPossession.Clear();
-            foreach (var index in Domain.Member.FromJson(json).OrderIndices)
+            foreach (var index in MemberInfo.FromJson(json).OrderIndices)
             {
                 Sources.Remove(Order.List[index]);
                 OrdersInPossession.Add(Order.List[index]);
@@ -321,42 +314,36 @@ public sealed partial class OrderManagerPage
 
     private async void Save_OnClick(object sender, RoutedEventArgs e)
     {
+        var selectedRegion = Director.ReadCache().Region;
+        string? selectedMember = null;
+
         var dialog = Dialog.Builder(XamlRoot)
-            .WithTitle("レギオンとメンバー名を選択してください")
-            .WithBody(new SaveDialogContent((item) =>
-            {
-                switch (item)
-                {
-                    case Region region:
-                    {
-                        SelectedRegion = region.Name;
-                        break;
-                    }
-                    case Member member:
-                    {
-                        SelectedMember = member.Name;
-                        break;
-                    }
-                }
-            }))
+            .WithTitle("メンバーを選択してください")
             .WithPrimary("Save")
             .WithCancel("Cancel")
             .Build();
+        dialog.IsPrimaryButtonEnabled = false;
+
+        var body = new SaveDialogContent((item) =>
+        {
+            selectedMember = item;
+            dialog.IsPrimaryButtonEnabled = true;
+        });
+
+        dialog.Content = body;
 
         dialog.PrimaryButtonCommand = new Defer(delegate
         {
-            var path = $@"{Director.MemberDir(SelectedRegion)}\{SelectedMember}.json";
-            Director.CreateDirectory($@"{Director.MemberDir(SelectedRegion)}");
+            var path = $@"{Director.ProjectDir()}\{selectedRegion}\Members\{selectedMember}\info.json";
+            if (selectedMember == null) return;
+            using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+            var readJson = sr.ReadToEnd();
+            var info = MemberInfo.FromJson(readJson);
+            var writeJson = (info with { UpdatedAt = DateTime.Now, OrderIndices = OrdersInPossession.Select(order => order.Index).ToArray() }).ToJson();
+            var save = new UTF8Encoding(true).GetBytes(writeJson);
+            sr.Close();
             using var fs = Director.CreateFile(path);
-            if (SelectedMember != null)
-            {
-                var json = new Domain.Member(DateTime.Now, DateTime.Now, SelectedMember,
-                    new Front(FrontCategory.Normal), OrdersInPossession.Select(order => order.Index).ToArray()).ToJson();
-                var save = new UTF8Encoding(true).GetBytes(json);
-                fs.Write(save, 0, save.Length);
-            }
-
-            dialog.Content.As<SaveDialogContent>().UpdateComboBox();
+            fs.Write(save, 0, save.Length);
         });
 
         await dialog.ShowAsync();
