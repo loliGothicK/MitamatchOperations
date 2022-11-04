@@ -1,12 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace mitama.Domain;
 
 public record struct Skill(string Name, string Description);
-
 public record struct Support(string Name, string Description);
+
+public record struct Unit(string UnitName, List<Memoria> Memorias)
+{
+    public string ToJson() => JsonSerializer.Serialize(new UnitDto(UnitName, Memorias.Select(m => m.Name).ToArray()));
+
+    public static Unit FromJson(string json)
+    {
+        var dto = JsonSerializer.Deserialize<UnitDto>(json);
+        var selector = Memoria.List.ToDictionary(m => m.Name);
+        return new Unit(dto.UnitName, dto.Names.Select(name => selector[name]).ToList());
+    }
+}
+public record struct UnitDto(string UnitName, string[] Names);
 
 public record struct Memoria(
     string Name,
@@ -22,137 +35,135 @@ public record struct Memoria(
 
     public static Memoria[] List => new Memoria[]
     {
-        #region ファンタズム
-        //new(
-        //    "CHARMという兵器",
-        //    "支援	",
-        //    "風",
-        //    new[]
-        //    {
-        //        4506,
-        //        1679,
-        //        3492,
-        //        1669
-        //    },
-        //    19,
-        //    new Skill(
-        //        "レギオンマッチスキルライフアシストB Ⅱ",
-        //        "味方1～2体の最大HPをアップさせる。"
-        //    ),
-        //    new Support(
-        //        "レギオンマッチ補助スキル援:支援UP Ⅲ",
-        //        "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
-        //    )
-        //),
-        //new(
-        //    "CHARMという兵器",
-        //    "通常範囲	",
-        //    "風",
-        //    new[]
-        //    {
-        //        4506,
-        //        1679,
-        //        3492,
-        //        1669
-        //    },
-        //    19,
-        //    new Skill(
-        //        "レギオンマッチスキルウィンドガードブレイクB Ⅲ",
-        //        "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力を小ダウンさせる。"
-        //    ),
-        //    new Support(
-        //        "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
-        //        "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
-        //    )
-        //),
-        //new(
-        //    "ワーオ！　エキサイティン！！",
-        //    "妨害	",
-        //    "風",
-        //    new[]
-        //    {
-        //        4472,
-        //        1657,
-        //        3502,
-        //        1667
-        //    },
-        //    19,
-        //    new Skill(
-        //        "レギオンマッチスキルウィンドガードフォールC Ⅲ",
-        //        "敵1～3体のDEFと風属性防御力をダウンさせる。"
-        //    ),
-        //    new Support(
-        //        "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
-        //        "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
-        //    )
-        //),
-        //new(
-        //    "ワーオ！　エキサイティン！！",
-        //    "通常範囲	",
-        //    "風",
-        //    new[]
-        //    {
-        //        4472,
-        //        1657,
-        //        3502,
-        //        1667
-        //    },
-        //    19,
-        //    new Skill(
-        //        "レギオンマッチスキルウィンドパワーストライクB Ⅲ",
-        //        "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力を小アップさせる。"
-        //    ),
-        //    new Support(
-        //        "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
-        //        "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
-        //    )
-        //),
-        //new(
-        //    "束の間の休息",
-        //    "回復	",
-        //    "風",
-        //    new[]
-        //    {
-        //        1665,
-        //        1683,
-        //        3490,
-        //        4493
-        //    },
-        //    19,
-        //    new Skill(
-        //        "レギオンマッチスキルSp.ガードヒールC Ⅲ+",
-        //        "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。"
-        //    ),
-        //    new Support(
-        //        "レギオンマッチ補助スキル回:回復UP Ⅲ",
-        //        "HP回復時、一定確率でHPの回復量を特大アップさせる。"
-        //    )
-        //),
-        //new(
-        //    "束の間の休息",
-        //    "特殊範囲	",
-        //    "風",
-        //    new[]
-        //    {
-        //        1665,
-        //        1683,
-        //        3490,
-        //        4493
-        //    },
-        //    19,
-        //    new Skill(
-        //        "レギオンマッチスキルSp.ウィンドガードバーストB Ⅲ",
-        //        "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力を小ダウンさせる。"
-        //    ),
-        //    new Support(
-        //        "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
-        //        "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
-        //    )
-        //),
-        #endregion
+        new(
+            "CHARMという兵器",
+            "支援",
+            "風",
+            new[]
+            {
+                4506,
+                1679,
+                3492,
+                1669
+            },
+            19,
+            new Skill(
+                "レギオンマッチスキルライフアシストB Ⅱ",
+                "味方1～2体の最大HPをアップさせる。"
+            ),
+            new Support(
+                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
+            )
+        ),
+        new(
+            "CHARMという兵器",
+            "通常範囲",
+            "風",
+            new[]
+            {
+                4506,
+                1679,
+                3492,
+                1669
+            },
+            19,
+            new Skill(
+                "レギオンマッチスキルウィンドガードブレイクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力を小ダウンさせる。"
+            ),
+            new Support(
+                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "ワーオ！　エキサイティン！！",
+            "妨害",
+            "風",
+            new[]
+            {
+                4472,
+                1657,
+                3502,
+                1667
+            },
+            19,
+            new Skill(
+                "レギオンマッチスキルウィンドガードフォールC Ⅲ",
+                "敵1～3体のDEFと風属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "ワーオ！　エキサイティン！！",
+            "通常範囲",
+            "風",
+            new[]
+            {
+                4472,
+                1657,
+                3502,
+                1667
+            },
+            19,
+            new Skill(
+                "レギオンマッチスキルウィンドパワーストライクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力を小アップさせる。"
+            ),
+            new Support(
+                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "束の間の休息",
+            "回復",
+            "風",
+            new[]
+            {
+                1665,
+                1683,
+                3490,
+                4493
+            },
+            19,
+            new Skill(
+                "レギオンマッチスキルSp.ガードヒールC Ⅲ+",
+                "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。"
+            ),
+            new Support(
+                "レギオンマッチ補助スキル回:回復UP Ⅲ",
+                "HP回復時、一定確率でHPの回復量を特大アップさせる。"
+            )
+        ),
+        new(
+            "束の間の休息",
+            "特殊範囲",
+            "風",
+            new[]
+            {
+                1665,
+                1683,
+                3490,
+                4493
+            },
+            19,
+            new Skill(
+                "レギオンマッチスキルSp.ウィンドガードバーストB Ⅲ",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力を小ダウンさせる。"
+            ),
+            new Support(
+                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
+            )
+        ),
         new(
             "作戦会議です！",
-            "支援	",
+            "支援",
             "風",
             new[]
             {
@@ -173,7 +184,7 @@ public record struct Memoria(
         ),
         new(
             "作戦会議です！",
-            "特殊単体	",
+            "特殊単体",
             "風",
             new[]
             {
@@ -194,7 +205,7 @@ public record struct Memoria(
         ),
         new(
             "予想外の事態",
-            "通常範囲	",
+            "通常範囲",
             "風",
             new[]
             {
@@ -215,7 +226,7 @@ public record struct Memoria(
         ),
         new(
             "予想外の事態",
-            "回復	",
+            "回復",
             "風",
             new[]
             {
@@ -236,7 +247,7 @@ public record struct Memoria(
         ),
         new(
             "優雅なティータイム",
-            "特殊範囲	",
+            "特殊範囲",
             "風",
             new[]
             {
@@ -257,7 +268,7 @@ public record struct Memoria(
         ),
         new(
             "優雅なティータイム",
-            "支援	",
+            "支援",
             "風",
             new[]
             {
@@ -278,7 +289,7 @@ public record struct Memoria(
         ),
         new(
             "西住流の誇り",
-            "特殊範囲	",
+            "特殊範囲",
             "風",
             new[]
             {
@@ -299,7 +310,7 @@ public record struct Memoria(
         ),
         new(
             "西住流の誇り",
-            "妨害	",
+            "妨害",
             "風",
             new[]
             {
@@ -320,7 +331,7 @@ public record struct Memoria(
         ),
         new(
             "形勢逆転！！",
-            "通常範囲	",
+            "通常範囲",
             "風",
             new[]
             {
@@ -341,7 +352,7 @@ public record struct Memoria(
         ),
         new(
             "形勢逆転！！",
-            "支援	",
+            "支援",
             "風",
             new[]
             {

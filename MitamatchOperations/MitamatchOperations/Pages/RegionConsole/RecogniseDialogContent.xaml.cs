@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using mitama.Domain;
 
 namespace mitama.Pages.RegionConsole;
@@ -8,9 +11,10 @@ namespace mitama.Pages.RegionConsole;
 /// </summary>
 public sealed partial class RecogniseDialogContent
 {
+    private List<Memoria> memoriaList;
     public RecogniseDialogContent(IEnumerable<Memoria> memorias)
     {
         InitializeComponent();
-        ResultView.ItemsSource = memorias;
+        ResultView.ItemsSource = memoriaList = memorias.ToList();
     }
 }

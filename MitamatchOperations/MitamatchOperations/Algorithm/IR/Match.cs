@@ -14,7 +14,7 @@ namespace mitama.Algorithm.IR;
 
 internal class Match
 {
-    public static async Task<(Bitmap, Memoria[])> Recognise(Bitmap img)
+    public static async Task<(Bitmap, Memoria[])> Recognise(Bitmap img, Position position)
     {
         var target = img.ToMat();
         var grayMat = target.CvtColor(ColorConversionCodes.BGR2GRAY);
@@ -40,41 +40,46 @@ internal class Match
                     }
             }
         }
+
         var akaze = AKAZE.Create();
-        Costume? detectedCostume;
-        {
-            var costume = rects.MinBy(memoria => memoria.Top)!;
-            // remove costume
-            rects.Remove(costume);
 
-            var source = new Mat();
-            akaze.DetectAndCompute(target.Clone(costume), null, out _, source);
+        //Costume? detectedCostume;
+        //{
+        //    var source = new Mat();
+        //    akaze.DetectAndCompute(target.Clone(costume), null, out _, source);
 
-            var templates = await Task.WhenAll(Costume.List.Select(async c =>
-            {
-                var file = await StorageFile.GetFileFromApplicationUriAsync(c.Uri);
-                var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
-                var descriptors = new Mat();
-                akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
-                return (costume: c, descriptors);
-            }));
+        //    var templates = await Task.WhenAll(Costume.List.Select(async c =>
+        //    {
+        //        var file = await StorageFile.GetFileFromApplicationUriAsync(c.Uri);
+        //        var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
+        //        var descriptors = new Mat();
+        //        akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
+        //        return (costume: c, descriptors);
+        //    }));
 
-            detectedCostume = templates.MinBy(template =>
-            {
-                var (_, train) = template;
-                var matcher = new BFMatcher(NormTypes.Hamming);
-                var matches = matcher.Match(source, train);
-                var sum = matches.Sum(x => x.Distance);
-                return sum / matches.Length;
-            }).costume;
-        }
+        //    detectedCostume = templates.MinBy(template =>
+        //    {
+        //        var (_, train) = template;
+        //        var matcher = new BFMatcher(NormTypes.Hamming);
+        //        var matches = matcher.Match(source, train);
+        //        var sum = matches.Sum(x => x.Distance);
+        //        return sum / matches.Length;
+        //    }).costume;
+        //}
 
+        // remove costume
+        var maybeCostume = rects.MinBy(memoria => memoria.Top)!;
+        rects.Remove(maybeCostume);
+
+        rects = Clean(rects);
         rects = Interpolation(rects, img.Width);
+
+        var dummyCostume = position is Front ? Costume.List[0] : Costume.List[1];
 
         foreach (var rect in rects) Cv2.Rectangle(target, rect, Scalar.Aquamarine, 5);
 
         {
-            var templates = await Task.WhenAll(Memoria.List.Where(detectedCostume.Value.CanBeEquipped).Select(async memoria =>
+            var templates = await Task.WhenAll(Memoria.List.Where(dummyCostume.CanBeEquipped).Select(async memoria =>
             {
                 var file = await StorageFile.GetFileFromApplicationUriAsync(memoria.Uri);
                 var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
@@ -108,6 +113,41 @@ internal class Match
     private static bool IsSquare(Rect rect)
         => Math.Min(Math.Abs(rect.Height), Math.Abs(rect.Width)) > 0.95 * Math.Max(Math.Abs(rect.Height), Math.Abs(rect.Width));
 
+    private static List<Rect> Clean(List<Rect> memorias)
+    {
+        var size = (int)memorias.Select(memoria => (memoria.Width + memoria.Height) / 2.0).Mean();
+
+        List<List<Rect>> lines = new();
+        while (memorias.Count != 0)
+        {
+            var top = memorias.MinBy(memoria => memoria.Top)!;
+            var line = new List<Rect> { top };
+            memorias.Remove(top);
+            foreach (var memoria in memorias.Where(memoria => Math.Abs(memoria.Top - top.Top) < 10).ToArray())
+            {
+                line.Add(memoria);
+                memorias.Remove(memoria);
+            }
+            line.Sort((x, y) => x.Left.CompareTo(y.Left));
+            lines.Add(line);
+        }
+
+        var margin = (int)lines[0].Zip(lines[0].Skip(1)).Select(a => (double)(a.Second.Left - a.First.Right)).Mean();
+
+        foreach (var line in lines)
+        {
+            foreach (var (a, b) in line.Zip(line.Skip(1)).ToArray())
+            {
+                var space = b.Left - a.Right;
+                if (space > margin && space < margin + size)
+                {
+                    line.Remove(b);
+                }
+            }
+        }
+        return lines.SelectMany(xs => xs).ToList();
+    }
+
     private static List<Rect> Interpolation(ICollection<Rect> memorias, int width)
     {
         var size = (int)memorias.Select(memoria => (memoria.Width + memoria.Height) / 2.0).Mean();
@@ -127,28 +167,30 @@ internal class Match
             lines.Add(line);
         }
 
-        var margin = lines[0].Zip(lines[0].Skip(1)).Select(a => a.Second.Left - a.First.Right).Min();
+        var margins = lines[0].Zip(lines[0].Skip(1)).Select(a => (double)(a.Second.Left - a.First.Right)).ToList();
+        margins.Sort();
+        var margin = (int)margins[margins.Count / 2];
 
         foreach (var line in lines)
         {
             foreach (var (a, b) in line.Zip(line.Skip(1)).ToArray())
             {
                 var space = b.Left - a.Right;
-                if (space < a.Width) continue;
+                if (space < size) continue;
 
-                var num = space / (margin + a.Width);
-                var bottomLeft = a.BottomRight;
+                var num = space / (margin + size);
+                var basis = a.BottomRight;
 
                 for (var i = 0; i < num; i++)
                 {
-                    bottomLeft = bottomLeft with
+                    var bottomLeft = basis with
                     {
-                        X = bottomLeft.X + margin
+                        X = basis.X + margin * (i + 1) + size * i,
                     };
                     var topRight = bottomLeft with
                     {
-                        X = bottomLeft.X + a.Width,
-                        Y = bottomLeft.Y - a.Width
+                        X = bottomLeft.X + size,
+                        Y = bottomLeft.Y - size
                     };
                     line.Add(Cv2.BoundingRect(new[] { topRight, bottomLeft }));
                 }
