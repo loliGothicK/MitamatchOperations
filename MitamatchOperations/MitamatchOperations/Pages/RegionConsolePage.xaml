@@ -49,8 +49,8 @@
     </Page.Resources>
 
     <Grid>
-        <controls:Expander VerticalAlignment="Top" Margin="0,0,0,10"
-                           Header="Load a new unit image."
+        <controls:Expander x:Name="SwitchExpander"
+                           VerticalAlignment="Top" Margin="0,0,0,10"
                            HorizontalContentAlignment="Stretch"
                            IsExpanded="True"
                            ExpandDirection="Down">

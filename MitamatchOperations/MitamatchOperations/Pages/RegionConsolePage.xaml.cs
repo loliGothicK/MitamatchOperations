@@ -32,6 +32,7 @@ public sealed partial class RegionConsolePage
     {
         InitializeComponent();
         NavigationCacheMode = NavigationCacheMode.Enabled;
+        SwitchExpander.Header = "ユニットマネージコンソール";
     }
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
