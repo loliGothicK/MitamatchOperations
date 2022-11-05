@@ -8,18 +8,19 @@ namespace mitama.Domain;
 public record struct Skill(string Name, string Description);
 public record struct Support(string Name, string Description);
 
-public record struct Unit(string UnitName, List<Memoria> Memorias)
+public record struct Unit(string UnitName, bool IsFront, List<Memoria> Memorias)
 {
-    public string ToJson() => JsonSerializer.Serialize(new UnitDto(UnitName, Memorias.Select(m => m.Name).ToArray()));
+    public string ToJson() => JsonSerializer.Serialize(new UnitDto(UnitName, IsFront, Memorias.Select(m => m.Name).ToArray()));
 
     public static Unit FromJson(string json)
     {
         var dto = JsonSerializer.Deserialize<UnitDto>(json);
-        var selector = Memoria.List.ToDictionary(m => m.Name);
-        return new Unit(dto.UnitName, dto.Names.Select(name => selector[name]).ToList());
+        var dummyCostume = dto.IsFront ? Costume.List[0] : Costume.List[1];
+        var selector = Memoria.List.Where(dummyCostume.CanBeEquipped).ToDictionary(m => m.Name);
+        return new Unit(dto.UnitName, dto.IsFront, dto.Names.Select(name => selector[name]).ToList());
     }
 }
-public record struct UnitDto(string UnitName, string[] Names);
+public record struct UnitDto(string UnitName, bool IsFront, string[] Names);
 
 public record struct Memoria(
     string Name,

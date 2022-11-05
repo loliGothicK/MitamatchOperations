@@ -101,6 +101,7 @@ public sealed partial class ControlDashboardPage
                                     InfoBar.AccessKey = "SUCCESS";
                                     InfoBar.IsOpen = false;
                                     InfoBar.Content = null;
+                                    return Task.CompletedTask;
                                 }),
                             };
                             menu.Items.Add(item);

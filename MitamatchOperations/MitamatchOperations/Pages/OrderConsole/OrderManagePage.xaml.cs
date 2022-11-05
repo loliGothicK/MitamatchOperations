@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -307,6 +308,7 @@ public sealed partial class OrderManagerPage
             }
 
             Update();
+            return Task.CompletedTask;
         });
 
         await dialog.ShowAsync();
@@ -335,7 +337,7 @@ public sealed partial class OrderManagerPage
         dialog.PrimaryButtonCommand = new Defer(delegate
         {
             var path = $@"{Director.ProjectDir()}\{selectedRegion}\Members\{selectedMember}\info.json";
-            if (selectedMember == null) return;
+            if (selectedMember == null) return Task.CompletedTask;
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var readJson = sr.ReadToEnd();
             var info = MemberInfo.FromJson(readJson);
@@ -344,6 +346,7 @@ public sealed partial class OrderManagerPage
             sr.Close();
             using var fs = Director.CreateFile(path);
             fs.Write(save, 0, save.Length);
+            return Task.CompletedTask;
         });
 
         await dialog.ShowAsync();

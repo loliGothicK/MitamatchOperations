@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Navigation;
 using mitama.Domain;
@@ -15,6 +16,7 @@ using Microsoft.UI.Xaml.Controls;
 using mitama.Algorithm.IR;
 using mitama.Pages.RegionConsole;
 using WinRT;
+using System.ComponentModel;
 
 namespace mitama.Pages;
 
@@ -71,7 +73,7 @@ public sealed partial class RegionConsolePage
             .WithCancel("‚â‚Á‚Ï‚è‚â‚ß‚é")
             .WithBody(new RecogniseDialogContent(detected))
             .Build();
-        dialog.PrimaryButtonCommand = new Defer(delegate
+        dialog.PrimaryButtonCommand = new Defer(() =>
         {
             dialog.Closed += async (_, _) =>
             {
@@ -87,12 +89,12 @@ public sealed partial class RegionConsolePage
                     new DirectoryInfo($@"{Director.ProjectDir()}\{_regionName}\Members\{_selectedMember?.Name}\Units").Create();
                     var path = $@"{Director.ProjectDir()}\{_regionName}\Members\{_selectedMember?.Name}\Units\{body.Text}.json";
                     await using var unit = File.Create(path);
-                    await unit.WriteAsync(new UTF8Encoding(true).GetBytes(new Unit(body.Text, detected.ToList()).ToJson()));
+                    await unit.WriteAsync(new UTF8Encoding(true).GetBytes(new Unit(body.Text, _selectedMember!.Position is Front, detected.ToList()).ToJson()));
                 });
 
                 await naming.ShowAsync();
             };
-
+            return Task.CompletedTask;
         });
 
         await dialog.ShowAsync();
@@ -102,6 +104,39 @@ public sealed partial class RegionConsolePage
     {
         _selectedMember = e.AddedItems[0].As<MemberInfo>();
         TargetMember.Text = _selectedMember.Name;
+    }
+
+    private void UnitTreeView_OnItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
+    {
+        using var sr =
+            new StreamReader(@$"{Director.UnitDir(_regionName, args.InvokedItem.As<ExplorerItem>().Parent!)}\{args.InvokedItem.As<ExplorerItem>().Name!}.json");
+        var json = sr.ReadToEnd();
+        var unit = Unit.FromJson(json);
+        UnitView.ItemsSource = unit.Memorias;
+    }
+
+    private void UnitTreeView_OnLoaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not TreeView view) return;
+        view.ItemsSource = new ObservableCollection<ExplorerItem>(Util.LoadMemberNames(_regionName).Select(name =>
+        {
+            return new ExplorerItem
+            {
+                Name = name,
+                Type = ExplorerItem.ExplorerItemType.Folder,
+                Children = new ObservableCollection<ExplorerItem>(Directory.GetFiles($"{Director.UnitDir(_regionName, name)}").Select(path =>
+                {
+                    using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+                    var json = sr.ReadToEnd();
+                    return new ExplorerItem
+                    {
+                        Parent = name,
+                        Name = Unit.FromJson(json).UnitName,
+                        Type = ExplorerItem.ExplorerItemType.File
+                    };
+                }))
+            };
+        }));
     }
 }
 
@@ -114,3 +149,34 @@ internal class GroupInfoList : List<MemberInfo>
     public object Key { get; set; } = null!;
 }
 
+public class ExplorerItem : INotifyPropertyChanged
+{
+    public event PropertyChangedEventHandler? PropertyChanged;
+    public enum ExplorerItemType { Folder, File };
+    public string? Parent { get; set; }
+    public string? Name { get; set; }
+    public ExplorerItemType Type { get; set; }
+    private ObservableCollection<ExplorerItem>? _children;
+    public ObservableCollection<ExplorerItem> Children
+    {
+        get => _children ??= new ObservableCollection<ExplorerItem>();
+        set => _children = value;
+    }
+
+    private bool _isExpanded;
+    public bool IsExpanded
+    {
+        get => _isExpanded;
+        set
+        {
+            if (_isExpanded == value) return;
+            _isExpanded = value;
+            NotifyPropertyChanged("IsExpanded");
+        }
+    }
+
+    private void NotifyPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}

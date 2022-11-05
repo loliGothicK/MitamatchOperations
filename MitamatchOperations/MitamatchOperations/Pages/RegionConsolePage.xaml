@@ -9,6 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:domain="using:mitama.Domain"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -48,54 +49,146 @@
     </Page.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <ListView ItemsSource="{x:Bind MemberCvs.View, Mode=OneWay}"
-                      ItemTemplate="{StaticResource MemberListViewTemplate}"
-                      SelectionMode="Single"
-                      ShowsScrollingPlaceholders="True"
-                      MinHeight="500"
-                      MinWidth="400"
-                      Margin="1 1 1 50"
-                      BorderThickness="1"
-                      BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
-                      HorizontalAlignment="Left"
-                      SelectionChanged="Selector_OnSelectionChanged">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
+        <controls:Expander VerticalAlignment="Top" Margin="0,0,0,10"
+                           Header="Load a new unit image."
+                           HorizontalContentAlignment="Stretch"
+                           IsExpanded="True"
+                           ExpandDirection="Down">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <ListView ItemsSource="{x:Bind MemberCvs.View, Mode=OneWay}"
+                              ItemTemplate="{StaticResource MemberListViewTemplate}"
+                              SelectionMode="Single"
+                              ShowsScrollingPlaceholders="True"
+                              MinHeight="500"
+                              MinWidth="400"
+                              Margin="1 1 1 50"
+                              BorderThickness="1"
+                              BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                              HorizontalAlignment="Left"
+                              SelectionChanged="Selector_OnSelectionChanged">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
 
-                <ListView.GroupStyle>
-                    <GroupStyle >
-                        <GroupStyle.HeaderTemplate>
-                            <DataTemplate x:DataType="local:GroupInfoList">
-                                <Border AutomationProperties.AccessibilityView="Raw">
-                                    <TextBlock Text="{x:Bind ((domain:Position)Key).Display}"
-                                               Style="{ThemeResource TitleTextBlockStyle}"
-                                               AutomationProperties.AccessibilityView="Raw"/>
-                                </Border>
-                            </DataTemplate>
-                        </GroupStyle.HeaderTemplate>
-                    </GroupStyle>
-                </ListView.GroupStyle>
-            </ListView>
-        </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <TextBlock x:Name="TargetMember" Text="{x:Bind _selectedMember.Name ,FallbackValue='Please select a member.'}" Margin="5"/>
-            <Grid Grid.Row="1" AllowDrop="True" DragOver="Grid_DragOver" Drop="Grid_Drop"
-                  MinHeight="300"
-                  Background="LightBlue" Margin="10,10,10,50">
-                <Image Source="/Assets/Images/drag-and-drop.svg" MaxWidth="100" MaxHeight="80"/>
+                        <ListView.GroupStyle>
+                            <GroupStyle >
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate x:DataType="local:GroupInfoList">
+                                        <Border AutomationProperties.AccessibilityView="Raw">
+                                            <TextBlock Text="{x:Bind ((domain:Position)Key).Display}"
+                                                       Style="{ThemeResource TitleTextBlockStyle}"
+                                                       AutomationProperties.AccessibilityView="Raw"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </ListView.GroupStyle>
+                    </ListView>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="TargetMember" Text="{x:Bind _selectedMember.Name, FallbackValue='Please select a member.'}" Margin="5"/>
+                    <Grid Grid.Row="1" AllowDrop="True" DragOver="Grid_DragOver" Drop="Grid_Drop"
+                          MinHeight="300"
+                          Background="LightBlue" Margin="10,10,10,50">
+                        <Image Source="/Assets/Images/drag-and-drop.svg" MaxWidth="100" MaxHeight="80"/>
+                    </Grid>
+                </Grid>
             </Grid>
-        </Grid>
+
+            <controls:Expander.ContentOverlay>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TreeView Margin="0,12,0,0"
+                              HorizontalAlignment="Center" VerticalAlignment="Top" ItemInvoked="UnitTreeView_OnItemInvoked" Loaded="UnitTreeView_OnLoaded">
+                        <TreeView.ItemTemplate>
+                            <DataTemplate x:DataType="local:ExplorerItem">
+                                <TreeViewItem ItemsSource="{x:Bind Children}" Content="{x:Bind Name}" IsExpanded="True"/>
+                            </DataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.Resources>
+                            <DataTemplate x:Name="MemoriaTemplate" x:DataType="domain:Memoria">
+                                <Grid Width="100">
+                                    <Image Source="{x:Bind Path}" Stretch="UniformToFill"/>
+                                    <Grid.ContextFlyout>
+                                        <Flyout>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                    <RowDefinition />
+                                                    <RowDefinition />
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <StackPanel>
+                                                    <Button Content="{x:Bind Name}" Margin="5" FontSize="20"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                                                    <StackPanel Orientation="Vertical" Margin="0 0 5 0">
+                                                        <TextBlock Text="ATK"/>
+                                                        <Button Content="{x:Bind Status[0]}" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="5 0">
+                                                        <TextBlock Text="DEF"/>
+                                                        <Button Content="{x:Bind Status[1]}" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="5 0">
+                                                        <TextBlock Text="Sp.ATK"/>
+                                                        <Button Content="{x:Bind Status[2]}" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="5 0">
+                                                        <TextBlock Text="Sp.DEF"/>
+                                                        <Button Content="{x:Bind Status[3]}" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                <Button Grid.Row="2" Content="{x:Bind Skill.Name}" Margin="5"/>
+                                                <Button Grid.Row="3" Content="{x:Bind Support.Name}" Margin="5"/>
+                                            </Grid>
+                                        </Flyout>
+                                    </Grid.ContextFlyout>
+                                </Grid>
+                            </DataTemplate>
+                        </Grid.Resources>
+                        <GridView
+                            Grid.Row="1" 
+                            x:Name="UnitView"
+                            Margin=" 10"
+                            ItemTemplate="{StaticResource MemoriaTemplate}"/>
+                    </Grid>
+
+                    <controls:GridSplitter
+                        GripperCursor="Default"
+                        HorizontalAlignment="Left"
+                        Grid.Column="1"
+                        ResizeDirection="Auto"
+                        ResizeBehavior="BasedOnAlignment"
+                        CursorBehavior="ChangeOnSplitterHover"
+                        Width="16">
+                        <controls:GridSplitter.RenderTransform>
+                            <TranslateTransform X="-8" />
+                        </controls:GridSplitter.RenderTransform>
+
+                    </controls:GridSplitter>
+                </Grid>
+            </controls:Expander.ContentOverlay>
+        </controls:Expander>
     </Grid>
 </Page>

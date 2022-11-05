@@ -113,7 +113,7 @@ internal class Match
     private static bool IsSquare(Rect rect)
         => Math.Min(Math.Abs(rect.Height), Math.Abs(rect.Width)) > 0.95 * Math.Max(Math.Abs(rect.Height), Math.Abs(rect.Width));
 
-    private static List<Rect> Clean(List<Rect> memorias)
+    private static List<Rect> Clean(ICollection<Rect> memorias)
     {
         var size = (int)memorias.Select(memoria => (memoria.Width + memoria.Height) / 2.0).Mean();
 

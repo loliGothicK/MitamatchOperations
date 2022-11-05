@@ -418,7 +418,11 @@ public sealed partial class DeckEditorPage
     private void TimelineFlyoutConfirmationButton_OnClick(object sender, RoutedEventArgs e)
     {
         if (sender is not Button button) return;
-        var _ = new Defer(() => _holdOns.Clear());
+        var _ = new Defer(delegate
+        {
+            _holdOns.Clear();
+            return Task.CompletedTask;
+        });
 
         var target = _deck[_deck.IndexOf(Order.List[int.Parse(button.AccessKey)])];
 
@@ -613,6 +617,7 @@ public sealed partial class DeckEditorPage
                             OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Enable("適用する"));
                             break;
                     }
+                    return Task.CompletedTask;
                 })
             });
         }
@@ -770,6 +775,7 @@ public sealed partial class DeckEditorPage
             {
                 File.Delete(box.AccessKey);
             }
+            return Task.CompletedTask;
         });
 
         await dialog.ShowAsync();

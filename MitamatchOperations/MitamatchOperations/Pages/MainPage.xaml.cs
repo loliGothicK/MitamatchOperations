@@ -127,7 +127,7 @@ public sealed partial class MainPage
             dialog.IsPrimaryButtonEnabled = true;
         });
 
-        async void PrimaryAction()
+        dialog.PrimaryButtonCommand = new Defer(async delegate
         {
             if (!Directory.Exists($@"{Director.ProjectDir()}\{selected}"))
             {
@@ -138,12 +138,9 @@ public sealed partial class MainPage
             Director.CacheWrite(new Cache(Project, User).ToJsonBytes());
             Navigate(typeof(RegionConsolePage), Project);
             await LoginInfo();
-        }
+        });
 
-        dialog.PrimaryButtonCommand = new Defer(PrimaryAction);
-
-        async void SecondaryAction()
-        {
+        dialog.SecondaryButtonCommand = new Defer(async delegate {
             LoginRegion.Text = Project = selected;
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}");
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Decks");
@@ -152,9 +149,7 @@ public sealed partial class MainPage
             Navigate(typeof(RegionConsolePage), Project);
             RegionView.IsSelected = true;
             await LoginInfo();
-        }
-
-        dialog.SecondaryButtonCommand = new Defer(SecondaryAction);
+        });
 
         await dialog.ShowAsync();
     }
@@ -185,8 +180,8 @@ public sealed partial class MainPage
             if (name != null && position != null) dialog.IsPrimaryButtonEnabled = true;
         });
 
-        async void Action()
-        {
+        dialog.Content = body;
+        dialog.PrimaryButtonCommand = new Defer(async delegate {
             if (!Directory.Exists($@"{Director.ProjectDir()}\{Project}"))
             {
                 await FailureInfo($"{Project} は作成されていないレギオン名です、新規作成してください");
@@ -198,10 +193,7 @@ public sealed partial class MainPage
             var save = new UTF8Encoding(true).GetBytes(memberJson);
             fs.Write(save, 0, save.Length);
             await SuccessInfo("Successfully saved!");
-        }
-
-        dialog.Content = body;
-        dialog.PrimaryButtonCommand = new Defer(Action);
+        });
 
         await dialog.ShowAsync();
     }
@@ -269,6 +261,7 @@ public sealed partial class MainPage
                     body.Content = member;
                     // enable when member is selected
                     dialog.IsPrimaryButtonEnabled = true;
+                    return Task.CompletedTask;
                 })
             });
         }
@@ -313,6 +306,7 @@ public sealed partial class MainPage
                     {
                         dialog.IsPrimaryButtonEnabled = true;
                     }
+                    return Task.CompletedTask;
                 })
             });
         }
