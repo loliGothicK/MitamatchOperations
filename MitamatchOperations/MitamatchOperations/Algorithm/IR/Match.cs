@@ -225,6 +225,28 @@ internal class Match
             }
         }
 
-        return lines.SelectMany(xs => xs).ToList();
+        var verticalMargins = lines[0].Zip(lines[1]).Select(t => t.Second.Top - t.First.Bottom).ToList();
+        verticalMargins.Sort();
+        var verticalMargin = verticalMargins[verticalMargins.Count / 2];
+        lines.Insert(2, new List<Rect>
+        {
+            Cv2.BoundingRect(new[]
+            {
+                lines[1][0].TopLeft with { Y = lines[1][0].TopLeft.Y + verticalMargin + size },
+                lines[1][0].BottomRight with { Y = lines[1][0].BottomRight.Y + verticalMargin + size }
+            }),
+            Cv2.BoundingRect(new[]
+            {
+                lines[1][1].TopLeft with { Y = lines[1][1].TopLeft.Y + verticalMargin + size },
+                lines[1][1].BottomRight with { Y = lines[1][1].BottomRight.Y + verticalMargin + size }
+            }),
+            Cv2.BoundingRect(new[]
+            {
+                lines[1][2].TopLeft with { Y = lines[1][2].TopLeft.Y + verticalMargin + size },
+                lines[1][2].BottomRight with { Y = lines[1][2].BottomRight.Y + verticalMargin + size }
+            })
+        });
+
+        return lines.Take(3).SelectMany(xs => xs).ToList();
     }
 }

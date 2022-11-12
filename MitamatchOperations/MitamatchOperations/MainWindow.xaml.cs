@@ -1,4 +1,5 @@
 ﻿using mitama.Pages;
+using mitama.SQLite;
 
 namespace mitama;
 
@@ -15,5 +16,6 @@ public sealed partial class MainWindow
         Content = mainPage;
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(mainPage.GetAppTitleBar);
+        Repository.Migrate.Up();
     }
 }

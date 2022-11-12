@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace mitama.Domain;
-
-public record struct Skill(string Name, string Description);
-public record struct Support(string Name, string Description);
 
 public record struct Unit(string UnitName, bool IsFront, List<Memoria> Memorias)
 {
@@ -21,6 +19,501 @@ public record struct Unit(string UnitName, bool IsFront, List<Memoria> Memorias)
     }
 }
 public record struct UnitDto(string UnitName, bool IsFront, string[] Names);
+
+internal class MemoriaUtil
+{
+    internal static Stat[] StatsFromRaw(string trimed)
+    {
+        if (trimed.EndsWith("ライトパワー")) return new[] { Stat.Atk, Stat.LightPower };
+        else if (trimed.EndsWith("ライトガード")) return new[] { Stat.Def, Stat.LightGuard };
+        else if (trimed.EndsWith("Sp.ライトパワー")) return new[] { Stat.SpAtk, Stat.LightPower };
+        else if (trimed.EndsWith("Sp.ライトガード")) return new[] { Stat.SpDef, Stat.LightGuard };
+
+        else if (trimed.EndsWith("ダークパワー")) return new[] { Stat.Atk, Stat.DarkPower };
+        else if (trimed.EndsWith("ダークガード")) return new[] { Stat.Def, Stat.DarkGuard };
+        else if (trimed.EndsWith("Sp.ダークパワー")) return new[] { Stat.SpAtk, Stat.DarkPower };
+        else if (trimed.EndsWith("Sp.ダークガード")) return new[] { Stat.SpDef, Stat.DarkGuard };
+
+        else if (trimed.EndsWith("ウォーターパワー")) return new[] { Stat.Atk, Stat.WaterPower };
+        else if (trimed.EndsWith("ウォーターガード")) return new[] { Stat.Def, Stat.WaterGuard };
+        else if (trimed.EndsWith("Sp.ウォーターパワー")) return new[] { Stat.SpAtk, Stat.WaterPower };
+        else if (trimed.EndsWith("Sp.ウォーターガード")) return new[] { Stat.SpDef, Stat.WaterGuard };
+
+        else if (trimed.EndsWith("ウィンドパワー")) return new[] { Stat.Atk, Stat.WindPower };
+        else if (trimed.EndsWith("ウィンドガード")) return new[] { Stat.Def, Stat.WindGuard };
+        else if (trimed.EndsWith("Sp.ウィンドパワー")) return new[] { Stat.SpAtk, Stat.WindPower };
+        else if (trimed.EndsWith("Sp.ウィンドガード")) return new[] { Stat.SpDef, Stat.WindGuard };
+
+        else if (trimed.EndsWith("マイト")) return new[] { Stat.Atk, Stat.Def };
+        else if (trimed.EndsWith("Sp.マイト")) return new[] { Stat.SpAtk, Stat.SpDef };
+
+        else if (trimed.EndsWith("ディファー")) return new[] { Stat.SpAtk, Stat.Def };
+        else if (trimed.EndsWith("Sp.ディファー")) return new[] { Stat.Atk, Stat.SpDef };
+
+        else if (trimed.EndsWith("Wパワー")) return new[] { Stat.Atk, Stat.SpAtk };
+        else if (trimed.EndsWith("Wガード")) return new[] { Stat.Def, Stat.SpDef };
+
+        else if (trimed.EndsWith("Sp.パワー")) return new[] { Stat.SpAtk };
+        else if (trimed.EndsWith("パワー")) return new[] { Stat.Atk };
+
+        else if (trimed.EndsWith("Sp.ガード")) return new[] { Stat.SpDef };
+        else if (trimed.EndsWith("ガード")) return new[] { Stat.Def };
+
+        else return new Stat[] { };
+    }
+
+    internal static string StatsToString(Stat[] Stats)
+    {
+        return Stats switch
+        {
+            [Stat.Atk, Stat.LightPower] => "ライトパワー",
+            [Stat.Def, Stat.LightGuard] => "ライトガード",
+            [Stat.SpAtk, Stat.LightPower] => "Sp.ライトパワー",
+            [Stat.SpDef, Stat.LightGuard] => "Sp.ライトガード",
+
+            [Stat.Atk, Stat.DarkPower] => "ダークパワー",
+            [Stat.Def, Stat.DarkGuard] => "ダークガード",
+            [Stat.SpAtk, Stat.DarkPower] => "Sp.ダークパワー",
+            [Stat.SpDef, Stat.DarkGuard] => "Sp.ダークガード",
+
+            [Stat.Atk, Stat.WaterPower] => "ウォーターパワー",
+            [Stat.Def, Stat.WaterGuard] => "ウォーターガード",
+            [Stat.SpAtk, Stat.WaterPower] => "Sp.ウォーターパワー",
+            [Stat.SpDef, Stat.WaterGuard] => "Sp.ウォーターガード",
+
+            [Stat.Atk, Stat.WindPower] => "ウィンドパワー",
+            [Stat.Def, Stat.WindGuard] => "ウィンドガード",
+            [Stat.SpAtk, Stat.WindPower] => "Sp.ウィンドパワー",
+            [Stat.SpDef, Stat.WindGuard] => "Sp.ウィンドガード",
+
+            [Stat.Atk, Stat.Def] => "マイト",
+            [Stat.SpAtk, Stat.SpDef] => "Sp.マイト",
+
+            [Stat.SpAtk, Stat.Def] => "ディファー",
+            [Stat.Atk, Stat.SpDef] => "Sp.ディファー",
+
+            [Stat.Atk, Stat.SpAtk] => "Wパワー",
+            [Stat.Def, Stat.SpDef] => "Wガード",
+
+            [Stat.SpAtk] => "Sp.パワー",
+            [Stat.Atk] => "パワー",
+
+            [Stat.SpDef] => "Sp.ガード",
+            [Stat.Def] => "ガード",
+
+            [] => string.Empty,
+            _ => throw new NotImplementedException()
+        };
+    }
+}
+
+public enum Stat
+{
+    Atk, Def, SpAtk, SpDef,
+    DarkPower, LightPower, WaterPower, WindPower, FirePower,
+    DarkGuard, LightGuard, WaterGuard, WindGuard, FireGuard,
+    Life
+}
+
+public enum Range
+{
+    A, B, C, D, E
+}
+
+public enum Level
+{
+    One,
+    Two,
+    Three,
+    ThreePlus,
+    Four,
+    FourPlus,
+    Five,
+    LG,
+}
+
+public enum PrefixEffect
+{
+    Non,
+    Charge,
+    Heal,
+    Water,
+    Wind,
+    Fire,
+    WaterSpread,
+    WindSpread,
+    FireSpread
+}
+
+public abstract record MemoriaSkill
+{
+    private static Regex regex = new Regex(@"(?<body>.+?)(?<range>[A|B|C|D|E]) (?<level>.+)", RegexOptions.Compiled);
+
+    public static implicit operator MemoriaSkill(string skill)
+    {
+        var matches = regex.Matches(skill);
+
+        var range = matches[0].Groups["range"].Value switch
+        {
+            "A" => Range.A,
+            "B" => Range.B,
+            "C" => Range.C,
+            "D" => Range.D,
+            "E" => Range.E,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        var level = matches[0].Groups["level"].Value switch
+        {
+            "Ⅰ" => Level.One,
+            "Ⅱ" => Level.Two,
+            "Ⅲ" => Level.Three,
+            "Ⅲ+" => Level.ThreePlus,
+            "Ⅳ" => Level.Four,
+            "Ⅳ+" => Level.FourPlus,
+            "Ⅴ" => Level.Five,
+            "LG" => Level.LG,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        PrefixEffect intoElementalEffect(string body)
+        {
+            if (body.StartsWith("チャージ"))
+            {
+                return PrefixEffect.Charge;
+            }
+            else if (body.StartsWith("ヒール"))
+            {
+                return PrefixEffect.Heal;
+            }
+            else if (body.StartsWith("水："))
+            {
+                return PrefixEffect.Water;
+            }
+            else if (body.StartsWith("風："))
+            {
+                return PrefixEffect.Wind;
+            }
+            else if (body.StartsWith("火："))
+            {
+                return PrefixEffect.Fire;
+            }
+            else if (body.StartsWith("水拡："))
+            {
+                return PrefixEffect.WaterSpread;
+            }
+            else if (body.StartsWith("風拡："))
+            {
+                return PrefixEffect.WindSpread;
+            }
+            else if (body.StartsWith("火拡："))
+            {
+                return PrefixEffect.FireSpread;
+            }
+            else
+            {
+                return PrefixEffect.Non;
+            }
+        }
+
+        var body = matches[0].Groups["body"].Value;
+
+        if (body.EndsWith("ストライク"))
+        {
+            return new Strike(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("ストライク", string.Empty)), intoElementalEffect(body)));
+        }
+        else if (body.EndsWith("ブレイク"))
+        {
+            return new Break(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("ブレイク", string.Empty)), intoElementalEffect(body)));
+        }
+        else if (body.EndsWith("スマッシュ"))
+        {
+            return new Smash(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("スマッシュ", string.Empty)), intoElementalEffect(body)));
+        }
+        else if (body.EndsWith("バースト"))
+        {
+            return new Burst(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("バースト", string.Empty)), intoElementalEffect(body)));
+        }
+        else if (body.EndsWith("アシスト"))
+        {
+            return new Assist(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("アシスト", string.Empty)), intoElementalEffect(body)));
+        }
+        else if (body.EndsWith("フォール"))
+        {
+            return new Fall(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("フォール", string.Empty)), intoElementalEffect(body)));
+        }
+        else if (body.EndsWith("ヒール"))
+        {
+            return new Heal(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("ヒール", string.Empty)), intoElementalEffect(body)));
+        }
+
+        throw new ArgumentOutOfRangeException($"{body}");
+    }
+
+    public virtual string? Name { get; }
+}
+
+public static class Meta
+{
+    public static string GetName(this PrefixEffect eff) => eff switch
+    {
+        PrefixEffect.Non => string.Empty,
+        PrefixEffect.Charge => "チャージ",
+        PrefixEffect.Heal => "ヒール",
+        PrefixEffect.Water => "水: ",
+        PrefixEffect.Wind => "風: ",
+        PrefixEffect.Fire => "火: ",
+        PrefixEffect.WaterSpread => "水拡: ",
+        PrefixEffect.WindSpread => "風拡: ",
+        PrefixEffect.FireSpread => "火拡: ",
+        _ => throw new NotImplementedException(),
+    };
+    public static string GetName(this Level level) => level switch
+    {
+        Level.One => "Ⅰ",
+        Level.Two => "Ⅱ",
+        Level.Three => "Ⅲ",
+        Level.ThreePlus => "Ⅲ+",
+        Level.Four => "Ⅳ",
+        Level.FourPlus => "Ⅳ+",
+        Level.Five => "Ⅴ",
+        Level.LG => "LG",
+    };
+    public static string GetName(this Passive pa) => pa switch
+    {
+        Passive.Attack => "攻",
+        Passive.Assist => "援",
+        Passive.Heal => "回",
+        Passive.SubAssist => "副援",
+        Passive.Command => "コ",
+    };
+    public static string GetName(this PassiveKind pk) => pk switch
+    {
+        PassiveKind.DamageUp => "ダメージUP",
+        PassiveKind.AssistUp => "支援UP",
+        PassiveKind.HealUp => "回復UP",
+        PassiveKind.MpConsumptionDown => "MP消費DOWN",
+    };
+}
+
+public record struct MemoriaData(Range Range, Level Level, Stat[] Stats, PrefixEffect Prefix = PrefixEffect.Non)
+{
+    public MemoriaData(Range Range, Level Level, PrefixEffect prefix = PrefixEffect.Non) : this(Range, Level, new Stat[] { }, prefix)
+    {
+    }
+
+    public string Name(string category) => $"{Prefix.GetName()}{MemoriaUtil.StatsToString(Stats)}{category}{Range} {Level.GetName()}";
+}
+
+public record Strike(MemoriaData Data) : MemoriaSkill
+{
+    public override string Name => Data.Name("ストライク");
+}
+
+public record Break(MemoriaData Data) : MemoriaSkill
+{
+    public override string Name => Data.Name("ブレイク");
+}
+public record Smash(MemoriaData Data) : MemoriaSkill
+{
+    public override string Name => Data.Name("スマッシュ");
+}
+public record Burst(MemoriaData Data) : MemoriaSkill
+{
+    public override string Name => Data.Name("バースト");
+}
+public record Assist(MemoriaData Data) : MemoriaSkill
+{
+    public override string Name => Data.Name("アシスト");
+}
+public record Fall(MemoriaData Data) : MemoriaSkill
+{
+    public override string Name => Data.Name("フォール");
+}
+public record Heal(MemoriaData Data) : MemoriaSkill
+{
+    public override string Name => Data.Name("ヒール");
+}
+
+public record struct Skill(MemoriaSkill MemoriaSkill, string Description)
+{
+    public string? Name => MemoriaSkill.Name;
+}
+
+public record SupportSkills(SupportSkill[] Skills, Level Level)
+{
+    private static Regex regex = new Regex(@"(?<kind>.+?):(?<body>.+)", RegexOptions.Compiled);
+    private static Regex compound = new Regex(@"(?<first>.+?)/(?<second>.+) (?<level>.+)", RegexOptions.Compiled);
+    private static Regex single = new Regex(@"(?<effect>.+?) (?<level>.+)", RegexOptions.Compiled);
+
+    public string Name
+    {
+        get
+        {
+            if (Skills.All(skill => skill.PassivePrefix == Skills.First().PassivePrefix))
+            {
+                var name = string.Join("/", Skills.Select(skill => skill.Name));
+                return $"{Skills.First().PassivePrefix.GetName()}: {name} {Level.GetName()}";
+            }
+            else
+            {
+                var name = string.Join("/", Skills.Select(skill => skill.FullName));
+                return $"{name} {Level.GetName()}";
+            }
+        }
+    }
+
+    public static implicit operator SupportSkills(string text)
+    {
+        static Level LevelFromRaw(string raw) => raw switch
+        {
+            "Ⅰ" => Level.One,
+            "Ⅱ" => Level.Two,
+            "Ⅲ" => Level.Three,
+            "Ⅲ+" => Level.ThreePlus,
+            "Ⅳ" => Level.Four,
+            "Ⅳ+" => Level.FourPlus,
+            "Ⅴ" => Level.Five,
+            "LG" => Level.LG,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        if (text == "回:回復UP/副援:支援UP Ⅱ") return new(new SupportSkill[] { new PassiveSupportSkill(Passive.Heal, PassiveKind.HealUp), new PassiveSupportSkill(Passive.SubAssist, PassiveKind.AssistUp) }, Level.Two);
+        else
+        {
+            var matches = regex.Matches(text);
+
+            switch (matches[0].Groups["kind"].Value)
+            {
+                case "攻":
+                    {
+                        var effects = matches[0].Groups["body"].Value;
+                        if (effects.Contains('/'))
+                        {
+                            matches = compound.Matches(effects);
+                            var first = SupportSkill.FromStr(Passive.Attack, matches[0].Groups["first"].Value);
+                            var second = SupportSkill.FromStr(Passive.Attack, matches[0].Groups["second"].Value);
+                            var level = LevelFromRaw(matches[0].Groups["level"].Value);
+                            return new(new SupportSkill[] { first, second }, level);
+                        }
+                        else
+                        {
+                            matches = single.Matches(effects);
+                            var effect = SupportSkill.FromStr(Passive.Attack, matches[0].Groups["effect"].Value);
+                            var level = LevelFromRaw(matches[0].Groups["level"].Value);
+                            return new(new SupportSkill[] { effect }, level);
+                        }
+                    }
+                case "援":
+                    {
+                        var effects = matches[0].Groups["body"].Value;
+                        if (effects.Contains('/'))
+                        {
+                            matches = compound.Matches(effects);
+                            var first = SupportSkill.FromStr(Passive.Assist, matches[0].Groups["first"].Value);
+                            var second = SupportSkill.FromStr(Passive.Assist, matches[0].Groups["second"].Value);
+                            var level = LevelFromRaw(matches[0].Groups["level"].Value);
+                            return new(new SupportSkill[] { first, second }, level);
+                        }
+                        else
+                        {
+                            matches = single.Matches(effects);
+                            var effect = SupportSkill.FromStr(Passive.Assist, matches[0].Groups["effect"].Value);
+                            var level = LevelFromRaw(matches[0].Groups["level"].Value);
+                            return new(new SupportSkill[] { effect }, level);
+                        }
+                    }
+                case "回":
+                    {
+                        var effects = matches[0].Groups["body"].Value;
+                        if (effects.Contains('/'))
+                        {
+                            matches = compound.Matches(effects);
+                            var first = SupportSkill.FromStr(Passive.Heal, matches[0].Groups["first"].Value);
+                            var second = SupportSkill.FromStr(Passive.Heal, matches[0].Groups["second"].Value);
+                            var level = LevelFromRaw(matches[0].Groups["level"].Value);
+                            return new(new SupportSkill[] { first, second }, level);
+                        }
+                        else
+                        {
+                            matches = single.Matches(effects);
+                            var effect = SupportSkill.FromStr(Passive.Heal, matches[0].Groups["effect"].Value);
+                            var level = LevelFromRaw(matches[0].Groups["level"].Value);
+                            return new(new SupportSkill[] { effect }, level);
+                        }
+                    }
+                case "コ":
+                    {// 現状、コマンド実行時サポート効果はこれしかない
+                        return new(new SupportSkill[] { new PassiveSupportSkill(Passive.Command, PassiveKind.MpConsumptionDown) }, Level.Two);
+                    }
+                default: throw new ArgumentException();
+            }
+
+        }
+    }
+}
+
+public enum PassiveKind
+{
+    DamageUp,
+    AssistUp,
+    HealUp,
+    MpConsumptionDown,
+}
+
+public enum Passive
+{
+    Attack,
+    Assist,
+    Heal,
+    SubAssist,
+    Command,
+}
+
+public enum UpDown
+{
+    UP,
+    DOWN,
+}
+
+public abstract record SupportSkill
+{
+    public static SupportSkill FromStr(Passive passive, string text)
+    {
+        if (text.StartsWith("ダメージUP")) return new PassiveSupportSkill(passive, PassiveKind.DamageUp);
+        else if (text.StartsWith("支援UP")) return new PassiveSupportSkill(passive, PassiveKind.AssistUp);
+        else if (text.StartsWith("回復UP")) return new PassiveSupportSkill(passive, PassiveKind.HealUp);
+        else if (text.StartsWith("MP消費DOWN")) return new PassiveSupportSkill(passive, PassiveKind.MpConsumptionDown);
+        else return new StatSupportSkill(passive, MemoriaUtil.StatsFromRaw(text.Replace(text.EndsWith("UP") ? "UP" : "DOWN", string.Empty)), text.EndsWith("UP") ? UpDown.UP : UpDown.DOWN);
+    }
+
+    public abstract string? Name { get; }
+    public abstract string? FullName { get; }
+    public abstract Passive PassivePrefix { get; }
+}
+
+public record StatSupportSkill(Passive Passive, Stat[] Stats, UpDown Type) : SupportSkill
+{
+    public override string? Name => $"{MemoriaUtil.StatsToString(Stats)}{Type}";
+    public override string? FullName => $"{Passive.GetName()}:{MemoriaUtil.StatsToString(Stats)}{Type}";
+    public override Passive PassivePrefix => Passive;
+
+    public static implicit operator StatSupportSkill((Passive, Stat[], UpDown) from) => new(from.Item1, from.Item2, from.Item3);
+}
+
+public record PassiveSupportSkill(Passive Passive, PassiveKind PassiveKind) : SupportSkill
+{
+    public override string? Name => $"{PassiveKind.GetName()}";
+    public override string? FullName => $"{Passive.GetName()}:{PassiveKind.GetName()}";
+    public override Passive PassivePrefix => Passive;
+
+    public static implicit operator PassiveSupportSkill((Passive, PassiveKind) from) => new(from.Item1, from.Item2);
+}
+
+public record struct Support(SupportSkills SupportSkill, string Description)
+{
+    public string? Name => SupportSkill.Name;
+}
 
 public record struct Memoria(
     string Name,
@@ -49,11 +542,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルライフアシストB Ⅱ",
+                "ライフアシストB Ⅱ",
                 "味方1～2体の最大HPをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -70,11 +563,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルウィンドガードブレイクB Ⅲ",
+                "ウィンドガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -91,11 +584,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルウィンドガードフォールC Ⅲ",
+                "ウィンドガードフォールC Ⅲ",
                 "敵1～3体のDEFと風属性防御力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
+                "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
             )
         ),
@@ -112,11 +605,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルウィンドパワーストライクB Ⅲ",
+                "ウィンドパワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -133,11 +626,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルSp.ガードヒールC Ⅲ+",
+                "Sp.ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅲ",
+                "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。"
             )
         ),
@@ -154,11 +647,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルSp.ウィンドガードバーストB Ⅲ",
+                "Sp.ウィンドガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -175,11 +668,11 @@ public record struct Memoria(
             },
             17,
             new Skill(
-                "レギオンマッチスキルライフアシストB Ⅱ",
+                "ライフアシストB Ⅱ",
                 "味方1～2体の最大HPをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅲ",
+                "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -196,11 +689,11 @@ public record struct Memoria(
             },
             17,
             new Skill(
-                "レギオンマッチスキルSp.ウィンドパワースマッシュA Ⅳ",
+                "Sp.ウィンドパワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと風属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -217,11 +710,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルマイトブレイクB Ⅲ+",
+                "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -238,11 +731,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルガードヒールC Ⅲ+",
+                "ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のDEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅲ",
+                "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -259,11 +752,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルSp.ウィンドガードバーストB Ⅲ+",
+                "Sp.ウィンドガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -280,11 +773,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルライフアシストB Ⅱ",
+                "ライフアシストB Ⅱ",
                 "味方1～2体の最大HPをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:WガードUP Ⅲ",
+                "援:WガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFとSp.DEFを特大アップさせる。"
             )
         ),
@@ -301,11 +794,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルSp.ウィンドパワースマッシュB Ⅲ+",
+                "Sp.ウィンドパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -322,11 +815,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルWパワーフォールB Ⅲ",
+                "WパワーフォールB Ⅲ",
                 "敵1～2体のATKとSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅲ",
+                "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
             )
         ),
@@ -343,11 +836,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルマイトストライクB Ⅲ+",
+                "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -364,11 +857,11 @@ public record struct Memoria(
             },
             19,
             new Skill(
-                "レギオンマッチスキルウィンドパワーアシストC Ⅲ",
+                "ウィンドパワーアシストC Ⅲ",
                 "味方1～3体のATKと風属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -389,7 +882,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -410,7 +903,7 @@ public record struct Memoria(
                 "敵1～2体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:WガードDOWN Ⅲ",
+                "援:WガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFとSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -431,7 +924,7 @@ public record struct Memoria(
                 "敵2～3体のATKとSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -452,7 +945,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、敵のSp.DEFと水属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -473,7 +966,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅲ",
+                "回:Sp.パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -494,7 +987,7 @@ public record struct Memoria(
                 "味方1～3体のATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -515,7 +1008,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -536,7 +1029,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -557,7 +1050,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを特大ダウンさせる。オーダースキル「水属性効果増加」を発動中は敵2体のSp.ATKを特大ダウンさせる。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅲ",
+                "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
             )
         ),
@@ -578,7 +1071,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -599,7 +1092,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -620,7 +1113,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFと水属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP/副援:支援UP Ⅱ",
+                "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
             )
         ),
@@ -641,7 +1134,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -662,7 +1155,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -683,7 +1176,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅲ",
+                "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -704,7 +1197,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/パワーUP Ⅲ",
+                "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -725,7 +1218,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅲ",
+                "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -746,7 +1239,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -767,7 +1260,7 @@ public record struct Memoria(
                 "味方1～3体のATKとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -788,7 +1281,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のSp.ATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -809,7 +1302,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKとSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅲ",
+                "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -830,7 +1323,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -851,7 +1344,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -872,7 +1365,7 @@ public record struct Memoria(
                 "味方1～2体のATKとDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -893,7 +1386,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKと水属性攻撃力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅲ",
+                "回:Sp.パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -914,7 +1407,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -935,7 +1428,7 @@ public record struct Memoria(
                 "敵1～3体のATKと水属性攻撃力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -956,7 +1449,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -977,7 +1470,7 @@ public record struct Memoria(
                 "味方1～3体のSp.ATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -998,7 +1491,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -1019,7 +1512,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -1040,7 +1533,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅲ",
+                "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -1061,7 +1554,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/パワーUP Ⅲ",
+                "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -1082,7 +1575,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFと水属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅲ",
+                "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -1103,7 +1596,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -1124,7 +1617,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅲ",
+                "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -1145,7 +1638,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -1166,7 +1659,7 @@ public record struct Memoria(
                 "味方1～3体のATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -1187,7 +1680,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -1208,7 +1701,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKをダウンさせる。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅲ",
+                "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
             )
         ),
@@ -1229,7 +1722,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -1250,7 +1743,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFと水属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅲ",
+                "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -1271,7 +1764,7 @@ public record struct Memoria(
                 "味方1～3体のATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -1292,7 +1785,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -1313,7 +1806,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -1334,7 +1827,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅲ",
+                "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -1355,7 +1848,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -1376,7 +1869,7 @@ public record struct Memoria(
                 "味方1～3体のSp.ATKとDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅲ",
+                "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -1397,7 +1890,7 @@ public record struct Memoria(
                 "敵1～3体のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
+                "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
             )
         ),
@@ -1418,7 +1911,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -1439,7 +1932,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP/副援:支援UP Ⅱ",
+                "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
             )
         ),
@@ -1460,7 +1953,7 @@ public record struct Memoria(
                 "味方1～3体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -1481,7 +1974,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -1502,7 +1995,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/パワーUP Ⅲ",
+                "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -1523,7 +2016,7 @@ public record struct Memoria(
                 "味方1～3体のSp.ATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅲ",
+                "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -1544,7 +2037,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -1565,7 +2058,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -1586,7 +2079,7 @@ public record struct Memoria(
                 "敵1～3体のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
+                "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
             )
         ),
@@ -1607,7 +2100,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅲ",
+                "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -1628,7 +2121,7 @@ public record struct Memoria(
                 "敵1体に通常超特大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/パワーUP Ⅲ",
+                "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -1649,7 +2142,7 @@ public record struct Memoria(
                 "敵1～3体のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
+                "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
             )
         ),
@@ -1670,7 +2163,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -1691,7 +2184,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFと水属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP/副援:支援UP Ⅱ",
+                "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
             )
         ),
@@ -1712,7 +2205,7 @@ public record struct Memoria(
                 "味方1～3体のATKとSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -1733,7 +2226,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -1754,7 +2247,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/パワーUP Ⅲ",
+                "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -1775,7 +2268,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -1796,7 +2289,7 @@ public record struct Memoria(
                 "敵1～2体のSp.DEFと水属性防御力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -1817,7 +2310,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -1838,7 +2331,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -1859,7 +2352,7 @@ public record struct Memoria(
                 "味方1～2体のATKを特大アップさせる。オーダースキル「水属性効果増加」を発動中は味方2体のATKを特大アップさせる。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -1880,7 +2373,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のATKと水属性攻撃力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅲ",
+                "回:パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -1901,7 +2394,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -1922,7 +2415,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -1943,7 +2436,7 @@ public record struct Memoria(
                 "敵1～2体のSp.DEFと水属性防御力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅲ",
+                "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -1964,7 +2457,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -1985,7 +2478,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKと水属性攻撃力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅲ",
+                "回:Sp.パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -2006,7 +2499,7 @@ public record struct Memoria(
                 "味方1～2体のATKと水属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -2027,7 +2520,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -2048,7 +2541,7 @@ public record struct Memoria(
                 "敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -2069,7 +2562,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと光属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -2090,7 +2583,7 @@ public record struct Memoria(
                 "敵1～2体のATKと闇属性攻撃力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -2111,7 +2604,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFと光属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/パワーUP Ⅲ",
+                "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -2132,7 +2625,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと闇属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -2153,7 +2646,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFと闇属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅲ",
+                "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。"
             )
         ),
@@ -2174,7 +2667,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKと光属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -2195,7 +2688,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKと光属性攻撃力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -2216,7 +2709,7 @@ public record struct Memoria(
                 "味方1～2体のSp.DEFと光属性防御力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅲ",
+                "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -2237,7 +2730,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKと光属性攻撃力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -2258,7 +2751,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFと光属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP/副援:支援UP Ⅱ",
+                "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
             )
         ),
@@ -2279,7 +2772,7 @@ public record struct Memoria(
                 "味方1～2体のDEFと闇属性防御力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -2300,7 +2793,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと闇属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/パワーUP Ⅲ",
+                "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -2321,7 +2814,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと光属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -2342,7 +2835,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFと闇属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -2363,7 +2856,7 @@ public record struct Memoria(
                 "敵1～2体のDEFと闇属性防御力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
+                "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
             )
         ),
@@ -2384,7 +2877,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと光属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -2405,7 +2898,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKと闇属性攻撃力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅲ",
+                "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
             )
         ),
@@ -2426,7 +2919,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -2447,7 +2940,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅲ",
+                "回:Sp.パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -2468,7 +2961,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -2489,7 +2982,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅲ",
+                "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -2510,7 +3003,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -2531,7 +3024,7 @@ public record struct Memoria(
                 "敵1～3体のATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -2552,7 +3045,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと光属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -2573,7 +3066,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと光属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅲ",
+                "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -2594,7 +3087,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと闇属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -2615,7 +3108,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと光属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -2636,7 +3129,7 @@ public record struct Memoria(
                 "味方1～2体のDEFと闇属性防御力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅲ",
+                "援:ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -2657,7 +3150,7 @@ public record struct Memoria(
                 "味方1～2体のDEFと闇属性防御力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -2678,7 +3171,7 @@ public record struct Memoria(
                 "敵1～2体のATKと光属性攻撃力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -2699,7 +3192,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと光属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -2720,7 +3213,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFと闇属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/パワーUP Ⅲ",
+                "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -2741,7 +3234,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと闇属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -2762,7 +3255,7 @@ public record struct Memoria(
                 "味方1～2体のSp.DEFと光属性防御力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅲ",
+                "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -2783,7 +3276,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと闇属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -2804,7 +3297,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKと光属性攻撃力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅲ",
+                "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
             )
         ),
@@ -2825,7 +3318,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと闇属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -2846,7 +3339,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFと光属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅲ",
+                "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。"
             )
         ),
@@ -2867,7 +3360,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと光属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -2888,7 +3381,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。さらに味方のDEFと闇属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅲ",
+                "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -2909,7 +3402,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKと闇属性攻撃力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅲ",
+                "攻:パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のATKを特大ダウンさせる。"
             )
         ),
@@ -2930,7 +3423,7 @@ public record struct Memoria(
                 "敵1～2体のATKと闇属性攻撃力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅲ",
+                "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
             )
         ),
@@ -2951,7 +3444,7 @@ public record struct Memoria(
                 "味方1体のATKとSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:WパワーUP Ⅱ",
+                "援:WパワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKとSp.ATKを大アップさせる。"
             )
         ),
@@ -2972,7 +3465,7 @@ public record struct Memoria(
                 "味方1～2体のSp.DEFと闇属性防御力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅲ",
+                "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -2993,7 +3486,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと光属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -3014,7 +3507,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFと闇属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -3035,7 +3528,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと闇属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -3056,7 +3549,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFと闇属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅲ",
+                "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -3077,7 +3570,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKと光属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -3098,7 +3591,7 @@ public record struct Memoria(
                 "敵1～2体のATKと闇属性攻撃力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅲ",
+                "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
             )
         ),
@@ -3119,7 +3612,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFと光属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -3140,7 +3633,7 @@ public record struct Memoria(
                 "敵1～2体のATKと光属性攻撃力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -3161,7 +3654,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFと闇属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -3182,7 +3675,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと闇属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅲ",
+                "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。"
             )
         ),
@@ -3203,7 +3696,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと光属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -3224,7 +3717,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと闇属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -3245,7 +3738,7 @@ public record struct Memoria(
                 "味方1～2体のSp.DEFと光属性防御力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅲ",
+                "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -3266,7 +3759,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと光属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -3287,7 +3780,7 @@ public record struct Memoria(
                 "味方1～2体のATKと光属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -3308,7 +3801,7 @@ public record struct Memoria(
                 "敵2体のDEFとSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP/ガードDOWN Ⅲ",
+                "援:支援UP/ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。さらに、支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -3329,7 +3822,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと光属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -3350,7 +3843,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと闇属性防御力を小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅲ",
+                "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -3371,7 +3864,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKと闇属性攻撃力を小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -3392,7 +3885,7 @@ public record struct Memoria(
                 "敵1～2体のDEFと闇属性防御力をダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
+                "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
             )
         ),
@@ -3413,7 +3906,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKと闇属性攻撃力をアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅲ",
+                "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -3434,7 +3927,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと闇属性防御力を小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -3455,7 +3948,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとSp.ATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -3476,7 +3969,7 @@ public record struct Memoria(
                 "味方1～3体のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -3497,7 +3990,7 @@ public record struct Memoria(
                 "敵1体のSp.DEFを超特大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅲ",
+                "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -3518,7 +4011,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -3539,7 +4032,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -3560,7 +4053,7 @@ public record struct Memoria(
                 "敵1～2体のATKとDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅲ",
+                "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
             )
         ),
@@ -3581,7 +4074,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。さらに味方のSp.DEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅲ",
+                "回:Sp.パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -3602,7 +4095,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -3623,7 +4116,7 @@ public record struct Memoria(
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅲ",
+                "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
             )
         ),
@@ -3644,7 +4137,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のSp.ATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -3665,7 +4158,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -3686,7 +4179,7 @@ public record struct Memoria(
                 "味方1～3体のSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅲ",
+                "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -3707,7 +4200,7 @@ public record struct Memoria(
                 "敵2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -3728,7 +4221,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -3749,7 +4242,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のATKとSp.ATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅲ",
+                "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。"
             )
         ),
@@ -3770,7 +4263,7 @@ public record struct Memoria(
                 "敵1～3体のSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅲ",
+                "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -3791,7 +4284,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -3812,7 +4305,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。さらに味方のATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅲ",
+                "回:パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -3833,7 +4326,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -3854,7 +4347,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -3875,7 +4368,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅲ",
+                "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -3896,7 +4389,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のSp.ATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -3917,7 +4410,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKとDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
+                "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
             )
         ),
@@ -3938,7 +4431,7 @@ public record struct Memoria(
                 "敵1～2体に通常ダメージを与える。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -3959,7 +4452,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -3980,7 +4473,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKをダウンさせる。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -4001,7 +4494,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -4022,7 +4515,7 @@ public record struct Memoria(
                 "味方1～2体のATKとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -4043,7 +4536,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -4064,7 +4557,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -4085,7 +4578,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。さらに味方のSp.DEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP/副援:支援UP Ⅱ",
+                "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
             )
         ),
@@ -4106,7 +4599,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -4127,7 +4620,7 @@ public record struct Memoria(
                 "敵1～3体のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
+                "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
             )
         ),
@@ -4148,7 +4641,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -4169,7 +4662,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -4190,7 +4683,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -4211,7 +4704,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅲ",
+                "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
             )
         ),
@@ -4232,7 +4725,7 @@ public record struct Memoria(
                 "味方1～3体のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -4253,7 +4746,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -4274,7 +4767,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅲ",
+                "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。"
             )
         ),
@@ -4295,7 +4788,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -4316,7 +4809,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -4337,7 +4830,7 @@ public record struct Memoria(
                 "味方1～2体のATKとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -4358,7 +4851,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅲ",
+                "攻:ガードUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のDEFを特大アップさせる。"
             )
         ),
@@ -4379,7 +4872,7 @@ public record struct Memoria(
                 "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
+                "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
             )
         ),
@@ -4400,7 +4893,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -4421,7 +4914,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅲ",
+                "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -4442,7 +4935,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -4463,7 +4956,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKとDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅲ",
+                "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -4484,7 +4977,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードUP Ⅲ",
+                "攻:Sp.ガードUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを特大アップさせる。"
             )
         ),
@@ -4505,7 +4998,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅲ",
+                "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。"
             )
         ),
@@ -4526,7 +5019,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKをダウンさせる。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅲ",
+                "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
             )
         ),
@@ -4547,7 +5040,7 @@ public record struct Memoria(
                 "敵1～2体に特殊ダメージを与える。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -4568,7 +5061,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -4589,7 +5082,7 @@ public record struct Memoria(
                 "味方1～2体のATKとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -4610,7 +5103,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -4631,7 +5124,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。さらに味方のSp.DEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅲ",
+                "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -4652,7 +5145,7 @@ public record struct Memoria(
                 "味方1～2体のATKとSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -4673,7 +5166,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -4694,7 +5187,7 @@ public record struct Memoria(
                 "敵1～2体のATKとSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -4715,7 +5208,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -4736,7 +5229,7 @@ public record struct Memoria(
                 "味方2体のDEFとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP/Sp.ガードUP Ⅲ",
+                "援:支援UP/Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。さらに、支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -4757,7 +5250,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:マイトDOWN Ⅱ",
+                "攻:マイトDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKとDEFを大ダウンさせる。"
             )
         ),
@@ -4778,7 +5271,7 @@ public record struct Memoria(
                 "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:マイトUP Ⅱ",
+                "援:マイトUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKとDEFを大アップさせる。"
             )
         ),
@@ -4799,7 +5292,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のATKとSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ディファーDOWN Ⅱ",
+                "攻:Sp.ディファーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKとSp.DEFを大ダウンさせる。"
             )
         ),
@@ -4820,7 +5313,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKとSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.マイトDOWN Ⅱ",
+                "援:Sp.マイトDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKとSp.DEFを大ダウンさせる。"
             )
         ),
@@ -4841,7 +5334,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -4862,7 +5355,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅲ",
+                "回:パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -4883,7 +5376,7 @@ public record struct Memoria(
                 "敵1～2体のATKとSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:WパワーDOWN Ⅱ",
+                "援:WパワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを大ダウンさせる。"
             )
         ),
@@ -4904,7 +5397,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -4925,7 +5418,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:WガードUP Ⅱ",
+                "攻:WガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFとSp.DEFを大アップさせる。"
             )
         ),
@@ -4946,7 +5439,7 @@ public record struct Memoria(
                 "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -4967,7 +5460,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -4988,7 +5481,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -5009,7 +5502,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与える。さらに自身のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅱ",
+                "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。"
             )
         ),
@@ -5030,7 +5523,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅱ",
+                "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -5051,7 +5544,7 @@ public record struct Memoria(
                 "敵1～2体に通常ダメージを与える。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -5072,7 +5565,7 @@ public record struct Memoria(
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅲ",
+                "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
             )
         ),
@@ -5093,7 +5586,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅲ",
+                "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。"
             )
         ),
@@ -5114,7 +5607,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -5135,7 +5628,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -5156,7 +5649,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅲ",
+                "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -5177,7 +5670,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -5198,7 +5691,7 @@ public record struct Memoria(
                 "敵1～2体のDEFをダウンさせる。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
+                "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
             )
         ),
@@ -5219,7 +5712,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKとDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅲ",
+                "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -5240,7 +5733,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -5261,7 +5754,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅲ",
+                "回:パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -5282,7 +5775,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -5303,7 +5796,7 @@ public record struct Memoria(
                 "敵1～2体に特殊ダメージを与える。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -5324,7 +5817,7 @@ public record struct Memoria(
                 "味方1～2体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:WガードUP Ⅱ",
+                "援:WガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFとSp.DEFを大アップさせる。"
             )
         ),
@@ -5345,7 +5838,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -5366,7 +5859,7 @@ public record struct Memoria(
                 "敵1体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅲ",
+                "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -5387,7 +5880,7 @@ public record struct Memoria(
                 "味方1～2体のDEFを大アップさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅲ",
+                "援:ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -5408,7 +5901,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅲ",
+                "攻:パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のATKを特大ダウンさせる。"
             )
         ),
@@ -5429,7 +5922,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -5450,7 +5943,7 @@ public record struct Memoria(
                 "味方1～3体のHPを小回復する。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅲ",
+                "回:パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -5471,7 +5964,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -5492,7 +5985,7 @@ public record struct Memoria(
                 "敵1～2体のSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅲ",
+                "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
             )
         ),
@@ -5513,7 +6006,7 @@ public record struct Memoria(
                 "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP/副援:支援UP Ⅱ",
+                "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
             )
         ),
@@ -5534,7 +6027,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -5555,7 +6048,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、敵のATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅲ",
+                "攻:ガードUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のDEFを特大アップさせる。"
             )
         ),
@@ -5576,7 +6069,7 @@ public record struct Memoria(
                 "味方1～2体のHPを大回復する。さらに味方のDEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:WガードUP Ⅱ",
+                "回:WガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFとSp.DEFを大アップさせる。"
             )
         ),
@@ -5597,7 +6090,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -5618,7 +6111,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -5639,7 +6132,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅲ",
+                "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
             )
         ),
@@ -5660,7 +6153,7 @@ public record struct Memoria(
                 "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -5681,7 +6174,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -5702,7 +6195,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -5723,7 +6216,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅲ",
+                "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -5744,7 +6237,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -5765,7 +6258,7 @@ public record struct Memoria(
                 "敵1～2体のATKをダウンさせる。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅲ",
+                "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
             )
         ),
@@ -5786,7 +6279,7 @@ public record struct Memoria(
                 "敵1～3体に特殊ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -5807,7 +6300,7 @@ public record struct Memoria(
                 "敵1体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅲ",
+                "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -5828,7 +6321,7 @@ public record struct Memoria(
                 "敵1～2体に通常ダメージを与える。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -5849,7 +6342,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。さらに味方のATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅲ",
+                "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。"
             )
         ),
@@ -5870,7 +6363,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -5891,7 +6384,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -5912,7 +6405,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -5933,7 +6426,7 @@ public record struct Memoria(
                 "敵1～2体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -5954,7 +6447,7 @@ public record struct Memoria(
                 "敵1～2体に特殊ダメージを与える。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -5975,7 +6468,7 @@ public record struct Memoria(
                 "味方1～3体のSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅲ",
+                "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -5996,7 +6489,7 @@ public record struct Memoria(
                 "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -6017,7 +6510,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -6038,7 +6531,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -6059,7 +6552,7 @@ public record struct Memoria(
                 "味方1～2体のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -6080,7 +6573,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:WガードUP Ⅱ",
+                "援:WガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFとSp.DEFを大アップさせる。"
             )
         ),
@@ -6101,7 +6594,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.マイトDOWN Ⅱ",
+                "攻:Sp.マイトDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKとSp.DEFを大ダウンさせる。"
             )
         ),
@@ -6122,7 +6615,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -6143,7 +6636,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、敵のATKとSp.ATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:WパワーDOWN Ⅱ",
+                "攻:WパワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKとSp.ATKを大ダウンさせる。"
             )
         ),
@@ -6164,7 +6657,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、敵のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -6185,7 +6678,7 @@ public record struct Memoria(
                 "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -6206,7 +6699,7 @@ public record struct Memoria(
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -6227,7 +6720,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -6248,7 +6741,7 @@ public record struct Memoria(
                 "敵1～2体に特殊ダメージを与える。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -6269,7 +6762,7 @@ public record struct Memoria(
                 "味方1～3体のSp.DEFをアップさせる。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅲ",
+                "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -6290,7 +6783,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -6311,7 +6804,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKとSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅲ",
+                "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -6332,7 +6825,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -6353,7 +6846,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。さらに味方のSp.ATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅲ",
+                "回:Sp.パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -6374,7 +6867,7 @@ public record struct Memoria(
                 "敵1～2体に通常ダメージを与える。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -6395,7 +6888,7 @@ public record struct Memoria(
                 "味方1～3体のDEFをアップさせる。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅲ",
+                "援:ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -6416,7 +6909,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -6437,7 +6930,7 @@ public record struct Memoria(
                 "味方1体のATKとSp.ATKを大アップさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:WパワーUP Ⅱ",
+                "援:WパワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKとSp.ATKを大アップさせる。"
             )
         ),
@@ -6458,7 +6951,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -6479,7 +6972,7 @@ public record struct Memoria(
                 "味方2体のHPを小回復する。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅲ",
+                "回:パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -6500,7 +6993,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -6521,7 +7014,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -6542,7 +7035,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -6563,7 +7056,7 @@ public record struct Memoria(
                 "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅲ",
+                "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
             )
         ),
@@ -6584,7 +7077,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKをアップさせる。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅲ",
+                "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -6605,7 +7098,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -6626,7 +7119,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.マイトUP Ⅱ",
+                "攻:Sp.マイトUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKとSp.DEFを大アップさせる。"
             )
         ),
@@ -6647,7 +7140,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.マイトUP Ⅱ",
+                "援:Sp.マイトUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKとSp.DEFを大アップさせる。"
             )
         ),
@@ -6668,7 +7161,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:WガードUP Ⅱ",
+                "攻:WガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFとSp.DEFを大アップさせる。"
             )
         ),
@@ -6689,7 +7182,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ディファーDOWN Ⅱ",
+                "援:ディファーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKとDEFを大ダウンさせる。"
             )
         ),
@@ -6710,7 +7203,7 @@ public record struct Memoria(
                 "敵1体に通常超特大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:マイトUP Ⅱ",
+                "攻:マイトUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKとDEFを大アップさせる。"
             )
         ),
@@ -6731,7 +7224,7 @@ public record struct Memoria(
                 "敵1体のATKとSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:WパワーDOWN Ⅱ",
+                "援:WパワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを大ダウンさせる。"
             )
         ),
@@ -6752,7 +7245,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKとSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -6773,7 +7266,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -6794,7 +7287,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -6815,7 +7308,7 @@ public record struct Memoria(
                 "味方1～2体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -6836,7 +7329,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -6857,7 +7350,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP/副援:支援UP Ⅰ",
+                "回:回復UP/副援:支援UP Ⅰ",
                 "HP回復時、一定確率でHPの回復量をアップさせる。さらに、支援/妨害時、一定確率で支援/妨害時効果を小アップさせる。"
             )
         ),
@@ -6878,7 +7371,7 @@ public record struct Memoria(
                 "敵1体に特殊超特大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.マイトUP Ⅱ",
+                "攻:Sp.マイトUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKとSp.DEFを大アップさせる。"
             )
         ),
@@ -6899,7 +7392,7 @@ public record struct Memoria(
                 "敵1～3体のSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.マイトDOWN Ⅱ",
+                "援:Sp.マイトDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKとSp.DEFを大ダウンさせる。"
             )
         ),
@@ -6920,7 +7413,7 @@ public record struct Memoria(
                 "敵1～2体に特殊ダメージを与える。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -6941,7 +7434,7 @@ public record struct Memoria(
                 "味方1～2体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:WガードUP Ⅱ",
+                "援:WガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFとSp.DEFを大アップさせる。"
             )
         ),
@@ -6962,7 +7455,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -6983,7 +7476,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅲ",
+                "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -7004,7 +7497,7 @@ public record struct Memoria(
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅲ",
+                "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
             )
         ),
@@ -7025,7 +7518,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -7046,7 +7539,7 @@ public record struct Memoria(
                 "敵2体に特殊大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -7067,7 +7560,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP/副援:支援UP Ⅱ",
+                "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
             )
         ),
@@ -7088,7 +7581,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -7109,7 +7602,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -7130,7 +7623,7 @@ public record struct Memoria(
                 "味方1～3体のDEFとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:WガードUP Ⅱ",
+                "援:WガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFとSp.DEFを大アップさせる。"
             )
         ),
@@ -7151,7 +7644,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -7172,7 +7665,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅲ",
+                "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
             )
         ),
@@ -7193,7 +7686,7 @@ public record struct Memoria(
                 "敵1体のATKとSp.ATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:WパワーDOWN Ⅱ",
+                "援:WパワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを大ダウンさせる。"
             )
         ),
@@ -7214,7 +7707,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、敵のATKとSp.ATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:WパワーDOWN Ⅱ",
+                "攻:WパワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKとSp.ATKを大ダウンさせる。"
             )
         ),
@@ -7235,7 +7728,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKをダウンさせる。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅲ",
+                "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
             )
         ),
@@ -7256,7 +7749,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与える。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -7277,7 +7770,7 @@ public record struct Memoria(
                 "味方1～2体のATKをアップさせる。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -7298,7 +7791,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与える。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -7319,7 +7812,7 @@ public record struct Memoria(
                 "敵1～2体に通常ダメージを与える。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -7340,7 +7833,7 @@ public record struct Memoria(
                 "味方1～3体のHPを小回復する。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅲ",
+                "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -7361,7 +7854,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のATKとSp.ATKを小ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -7382,7 +7875,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -7403,7 +7896,7 @@ public record struct Memoria(
                 "味方1～3体のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅲ",
+                "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
             )
         ),
@@ -7424,7 +7917,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -7445,7 +7938,7 @@ public record struct Memoria(
                 "味方1～3体のDEFを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅲ",
+                "援:ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -7466,7 +7959,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:マイトUP Ⅰ",
+                "攻:マイトUP Ⅰ",
                 "前衛から攻撃時、一定確率で自身のATKとDEFをアップさせる。"
             )
         ),
@@ -7487,7 +7980,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -7508,7 +8001,7 @@ public record struct Memoria(
                 "敵1～3体のSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅲ",
+                "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
             )
         ),
@@ -7529,7 +8022,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -7550,7 +8043,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -7571,7 +8064,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。さらに味方のSp.DEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅱ",
+                "回:回復UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。"
             )
         ),
@@ -7592,7 +8085,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -7613,7 +8106,7 @@ public record struct Memoria(
                 "味方2体のATKとSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅱ",
+                "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -7634,7 +8127,7 @@ public record struct Memoria(
                 "敵1～3体のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -7655,7 +8148,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、敵のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -7676,7 +8169,7 @@ public record struct Memoria(
                 "味方2体のSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅲ",
+                "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -7697,7 +8190,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -7718,7 +8211,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のATKとSp.ATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅲ",
+                "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。"
             )
         ),
@@ -7739,7 +8232,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅲ",
+                "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
             )
         ),
@@ -7760,7 +8253,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅲ",
+                "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
             )
         ),
@@ -7781,7 +8274,7 @@ public record struct Memoria(
                 "味方2体のHPを大回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:WガードUP Ⅰ",
+                "回:WガードUP Ⅰ",
                 "HP回復時、一定確率で味方前衛1体のDEFとSp.DEFをアップさせる。"
             )
         ),
@@ -7802,7 +8295,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -7823,7 +8316,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとSp.ATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅲ",
+                "攻:パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のATKを特大ダウンさせる。"
             )
         ),
@@ -7844,7 +8337,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。さらに味方のSp.DEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅲ",
+                "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
             )
         ),
@@ -7865,7 +8358,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -7886,7 +8379,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -7907,7 +8400,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKとSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅱ",
+                "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -7928,7 +8421,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、敵のSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.マイトUP Ⅰ",
+                "攻:Sp.マイトUP Ⅰ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKとSp.DEFをアップさせる。"
             )
         ),
@@ -7949,7 +8442,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードUP Ⅱ",
+                "攻:Sp.ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを大アップさせる。"
             )
         ),
@@ -7970,7 +8463,7 @@ public record struct Memoria(
                 "味方1～3体のSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅱ",
+                "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -7991,7 +8484,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -8012,7 +8505,7 @@ public record struct Memoria(
                 "敵1～3体のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -8033,7 +8526,7 @@ public record struct Memoria(
                 "味方1～2体のDEFとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅱ",
+                "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -8054,7 +8547,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -8075,7 +8568,7 @@ public record struct Memoria(
                 "味方1～3体のDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅲ",
+                "援:ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。"
             )
         ),
@@ -8096,7 +8589,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、自身のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅲ",
+                "攻:ガードUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のDEFを特大アップさせる。"
             )
         ),
@@ -8117,7 +8610,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅲ",
+                "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
             )
         ),
@@ -8138,7 +8631,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -8159,7 +8652,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅲ",
+                "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
             )
         ),
@@ -8180,7 +8673,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -8201,7 +8694,7 @@ public record struct Memoria(
                 "味方1～2体のHPを大回復する。さらに味方のDEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅱ",
+                "回:ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -8222,7 +8715,7 @@ public record struct Memoria(
                 "味方1～2体のHPを大回復する。さらに味方のATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅱ",
+                "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -8243,7 +8736,7 @@ public record struct Memoria(
                 "味方1～2体のATKとDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -8264,7 +8757,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -8285,7 +8778,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -8306,7 +8799,7 @@ public record struct Memoria(
                 "敵1～3体のATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅲ",
+                "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
             )
         ),
@@ -8327,7 +8820,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -8348,7 +8841,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅲ",
+                "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
             )
         ),
@@ -8369,7 +8862,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅲ",
+                "攻:パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のATKを特大ダウンさせる。"
             )
         ),
@@ -8390,7 +8883,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅱ",
+                "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -8411,7 +8904,7 @@ public record struct Memoria(
                 "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅱ",
+                "援:ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを大ダウンさせる。"
             )
         ),
@@ -8432,7 +8925,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅱ",
+                "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。"
             )
         ),
@@ -8453,7 +8946,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーDOWN Ⅱ",
+                "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -8474,7 +8967,7 @@ public record struct Memoria(
                 "敵1体のATKとDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅱ",
+                "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -8495,7 +8988,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードUP Ⅱ",
+                "攻:Sp.ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを大アップさせる。"
             )
         ),
@@ -8516,7 +9009,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅱ",
+                "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -8537,7 +9030,7 @@ public record struct Memoria(
                 "味方1～2体のSp.DEFを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅱ",
+                "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -8558,7 +9051,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅱ",
+                "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -8579,7 +9072,7 @@ public record struct Memoria(
                 "敵2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -8600,7 +9093,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -8621,7 +9114,7 @@ public record struct Memoria(
                 "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅱ",
+                "援:ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを大ダウンさせる。"
             )
         ),
@@ -8642,7 +9135,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -8663,7 +9156,7 @@ public record struct Memoria(
                 "敵1～3体に特殊ダメージを与える。さらに自身のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -8684,7 +9177,7 @@ public record struct Memoria(
                 "味方1～3体のSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅱ",
+                "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -8705,7 +9198,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。さらに味方のDEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅱ",
+                "回:回復UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。"
             )
         ),
@@ -8726,7 +9219,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -8747,7 +9240,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅱ",
+                "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。"
             )
         ),
@@ -8768,7 +9261,7 @@ public record struct Memoria(
                 "敵1～2体のATKとSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅱ",
+                "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。"
             )
         ),
@@ -8789,7 +9282,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -8810,7 +9303,7 @@ public record struct Memoria(
                 "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -8831,7 +9324,7 @@ public record struct Memoria(
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅱ",
+                "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。"
             )
         ),
@@ -8852,7 +9345,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅱ",
+                "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。"
             )
         ),
@@ -8873,7 +9366,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅱ",
+                "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -8894,7 +9387,7 @@ public record struct Memoria(
                 "味方1～3体のSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅱ",
+                "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -8915,7 +9408,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅱ",
+                "回:ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -8936,7 +9429,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、敵のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -8957,7 +9450,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、敵のATKとSp.ATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードUP Ⅱ",
+                "攻:Sp.ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを大アップさせる。"
             )
         ),
@@ -8978,7 +9471,7 @@ public record struct Memoria(
                 "敵1～2体のSp.DEFを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅱ",
+                "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -8999,7 +9492,7 @@ public record struct Memoria(
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -9020,7 +9513,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、敵のATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -9041,7 +9534,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅱ",
+                "回:回復UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。"
             )
         ),
@@ -9062,7 +9555,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -9083,7 +9576,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅱ",
+                "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -9104,7 +9597,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -9125,7 +9618,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -9146,7 +9639,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅱ",
+                "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。"
             )
         ),
@@ -9167,7 +9660,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -9188,7 +9681,7 @@ public record struct Memoria(
                 "味方1～2体のDEFとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅱ",
+                "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。"
             )
         ),
@@ -9209,7 +9702,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -9230,7 +9723,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅱ",
+                "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -9251,7 +9744,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -9272,7 +9765,7 @@ public record struct Memoria(
                 "敵1～2体のDEFとSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅱ",
+                "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -9293,7 +9786,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -9314,7 +9807,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅱ",
+                "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -9335,7 +9828,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -9356,7 +9849,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -9377,7 +9870,7 @@ public record struct Memoria(
                 "味方1体のSp.ATKを超特大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅱ",
+                "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -9398,7 +9891,7 @@ public record struct Memoria(
                 "味方1～3体のDEFを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅱ",
+                "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -9419,7 +9912,7 @@ public record struct Memoria(
                 "敵1～3体に通常ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -9440,7 +9933,7 @@ public record struct Memoria(
                 "敵1～3体のSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅱ",
+                "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -9461,7 +9954,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与え、自身のSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -9482,7 +9975,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -9503,7 +9996,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅱ",
+                "回:ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -9524,7 +10017,7 @@ public record struct Memoria(
                 "敵1～2体のATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅱ",
+                "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。"
             )
         ),
@@ -9545,7 +10038,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -9566,7 +10059,7 @@ public record struct Memoria(
                 "敵1体に特殊超特大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -9587,7 +10080,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅱ",
+                "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -9608,7 +10101,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、敵のSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -9629,7 +10122,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与える。さらに自身のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -9650,7 +10143,7 @@ public record struct Memoria(
                 "味方1～2体のATKとDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅱ",
+                "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -9671,7 +10164,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -9692,7 +10185,7 @@ public record struct Memoria(
                 "味方1～2体のDEFを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅱ",
+                "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -9713,7 +10206,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -9734,7 +10227,7 @@ public record struct Memoria(
                 "敵1体のATKとSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅱ",
+                "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。"
             )
         ),
@@ -9755,7 +10248,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーDOWN Ⅱ",
+                "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -9776,7 +10269,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅱ",
+                "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -9797,7 +10290,7 @@ public record struct Memoria(
                 "味方1～2体のATKとDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅱ",
+                "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -9818,7 +10311,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -9839,7 +10332,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -9860,7 +10353,7 @@ public record struct Memoria(
                 "敵1～2体のATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅱ",
+                "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。"
             )
         ),
@@ -9881,7 +10374,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -9902,7 +10395,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、敵のSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -9923,7 +10416,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅱ",
+                "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -9944,7 +10437,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -9965,7 +10458,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅱ",
+                "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -9986,7 +10479,7 @@ public record struct Memoria(
                 "味方1～3体のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅱ",
+                "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -10007,7 +10500,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -10028,7 +10521,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -10049,7 +10542,7 @@ public record struct Memoria(
                 "敵1体のSp.ATKとSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅱ",
+                "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -10070,7 +10563,7 @@ public record struct Memoria(
                 "敵1～3体のSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅱ",
+                "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -10091,7 +10584,7 @@ public record struct Memoria(
                 "味方1～3体のSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅱ",
+                "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -10112,7 +10605,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -10133,7 +10626,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -10154,7 +10647,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅱ",
+                "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -10175,7 +10668,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。さらに自身のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -10196,7 +10689,7 @@ public record struct Memoria(
                 "敵1体のDEFを超特大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅱ",
+                "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -10217,7 +10710,7 @@ public record struct Memoria(
                 "敵1体に通常超特大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -10238,7 +10731,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -10259,7 +10752,7 @@ public record struct Memoria(
                 "味方1～2体のHPを大回復する。さらに味方のDEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅱ",
+                "回:Sp.ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -10280,7 +10773,7 @@ public record struct Memoria(
                 "味方2体のDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅱ",
+                "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -10301,7 +10794,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅱ",
+                "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。"
             )
         ),
@@ -10322,7 +10815,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、敵のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -10343,7 +10836,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のDEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅱ",
+                "回:ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -10364,7 +10857,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のDEFとSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅱ",
+                "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。"
             )
         ),
@@ -10385,7 +10878,7 @@ public record struct Memoria(
                 "敵1～2体のSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅱ",
+                "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -10406,7 +10899,7 @@ public record struct Memoria(
                 "味方1～3体のSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅱ",
+                "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -10427,7 +10920,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅱ",
+                "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -10448,7 +10941,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.マイトUP Ⅰ",
+                "攻:Sp.マイトUP Ⅰ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKとSp.DEFをアップさせる。"
             )
         ),
@@ -10469,7 +10962,7 @@ public record struct Memoria(
                 "味方1～2体のATKとSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅱ",
+                "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。"
             )
         ),
@@ -10490,7 +10983,7 @@ public record struct Memoria(
                 "敵1～3体に通常ダメージを与える。さらに味方がオーダースキル「風属性効果増加」を発動中は威力がアップする。※..."
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅱ",
+                "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。"
             )
         ),
@@ -10511,7 +11004,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFを小アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -10532,7 +11025,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、自身のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -10553,7 +11046,7 @@ public record struct Memoria(
                 "味方1～2体のDEFとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅱ",
+                "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -10574,7 +11067,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅱ",
+                "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -10595,7 +11088,7 @@ public record struct Memoria(
                 "味方1～2体のHPを大回復する。さらに味方のATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅱ",
+                "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -10616,7 +11109,7 @@ public record struct Memoria(
                 "味方1～2体のATKとDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅱ",
+                "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -10637,7 +11130,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:マイトUP Ⅰ",
+                "攻:マイトUP Ⅰ",
                 "前衛から攻撃時、一定確率で自身のATKとDEFをアップさせる。"
             )
         ),
@@ -10658,7 +11151,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -10679,7 +11172,7 @@ public record struct Memoria(
                 "敵1～2体のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅱ",
+                "援:ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを大ダウンさせる。"
             )
         ),
@@ -10700,7 +11193,7 @@ public record struct Memoria(
                 "敵1～3体に通常ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -10721,7 +11214,7 @@ public record struct Memoria(
                 "味方1～2体のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅱ",
+                "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -10742,7 +11235,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅰ",
+                "攻:ダメージUP Ⅰ",
                 "攻撃時、一定確率で攻撃ダメージをアップさせる。"
             )
         ),
@@ -10763,7 +11256,7 @@ public record struct Memoria(
                 "敵1体のSp.ATKを特大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅱ",
+                "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -10784,7 +11277,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーDOWN Ⅱ",
+                "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -10805,7 +11298,7 @@ public record struct Memoria(
                 "味方2～3体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅱ",
+                "回:ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -10826,7 +11319,7 @@ public record struct Memoria(
                 "味方1～2体のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅱ",
+                "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -10847,7 +11340,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。さらに味方のDEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅱ",
+                "回:回復UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。"
             )
         ),
@@ -10868,7 +11361,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -10889,7 +11382,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅱ",
+                "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -10910,7 +11403,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅱ",
+                "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -10931,7 +11424,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -10952,7 +11445,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅱ",
+                "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。"
             )
         ),
@@ -10973,7 +11466,7 @@ public record struct Memoria(
                 "敵1～2体のSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅱ",
+                "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -10994,7 +11487,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のSp.ATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーDOWN Ⅱ",
+                "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -11015,7 +11508,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅱ",
+                "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -11036,7 +11529,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。さらに味方のSp.DEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅱ",
+                "回:Sp.ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -11057,7 +11550,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -11078,7 +11571,7 @@ public record struct Memoria(
                 "味方1～3体のSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅱ",
+                "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -11099,7 +11592,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -11120,7 +11613,7 @@ public record struct Memoria(
                 "敵1～3体のATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅱ",
+                "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。"
             )
         ),
@@ -11141,7 +11634,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -11162,7 +11655,7 @@ public record struct Memoria(
                 "敵1～2体のSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅱ",
+                "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -11183,7 +11676,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -11204,7 +11697,7 @@ public record struct Memoria(
                 "味方1～2体のHPを大回復する。さらに味方のDEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅱ",
+                "回:回復UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。"
             )
         ),
@@ -11225,7 +11718,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードUP Ⅱ",
+                "攻:Sp.ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを大アップさせる。"
             )
         ),
@@ -11246,7 +11739,7 @@ public record struct Memoria(
                 "味方1体のSp.ATKとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅱ",
+                "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -11267,7 +11760,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与え、自身のDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -11288,7 +11781,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -11309,7 +11802,7 @@ public record struct Memoria(
                 "敵2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -11330,7 +11823,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅱ",
+                "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。"
             )
         ),
@@ -11351,7 +11844,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与える。さらに自身のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -11372,7 +11865,7 @@ public record struct Memoria(
                 "敵1～3体に通常ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -11393,7 +11886,7 @@ public record struct Memoria(
                 "敵1～2体のATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅰ",
+                "援:支援UP Ⅰ",
                 "支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
             )
         ),
@@ -11414,7 +11907,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -11435,7 +11928,7 @@ public record struct Memoria(
                 "味方1体のATKとSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -11456,7 +11949,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅱ",
+                "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -11477,7 +11970,7 @@ public record struct Memoria(
                 "味方1～2体のHPを大回復する。さらに味方のSp.DEFを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅱ",
+                "回:Sp.ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -11498,7 +11991,7 @@ public record struct Memoria(
                 "敵1～3体に特殊ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -11519,7 +12012,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -11540,7 +12033,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与える。さらに自身のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -11561,7 +12054,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -11582,7 +12075,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、敵のSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーDOWN Ⅱ",
+                "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -11603,7 +12096,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅱ",
+                "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -11624,7 +12117,7 @@ public record struct Memoria(
                 "味方1～2体のHPを大回復する。さらに味方のSp.ATKを小アップする。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅱ",
+                "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -11645,7 +12138,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、自身のSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードUP Ⅱ",
+                "攻:Sp.ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを大アップさせる。"
             )
         ),
@@ -11666,7 +12159,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -11687,7 +12180,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -11708,7 +12201,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -11729,7 +12222,7 @@ public record struct Memoria(
                 "敵1～3体のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅱ",
+                "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。"
             )
         ),
@@ -11750,7 +12243,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -11771,7 +12264,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅱ",
+                "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。"
             )
         ),
@@ -11792,7 +12285,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のATKをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅱ",
+                "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。"
             )
         ),
@@ -11813,7 +12306,7 @@ public record struct Memoria(
                 "味方1体のDEFとSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅱ",
+                "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -11834,7 +12327,7 @@ public record struct Memoria(
                 "味方1～3体のDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅱ",
+                "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。"
             )
         ),
@@ -11855,7 +12348,7 @@ public record struct Memoria(
                 "敵1～2体のSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅱ",
+                "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -11876,7 +12369,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅱ",
+                "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -11897,7 +12390,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキルコ:MP消費DOWN Ⅱ",
+                "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。"
             )
         ),
@@ -11918,7 +12411,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅱ",
+                "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -11939,7 +12432,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -11960,7 +12453,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅱ",
+                "回:ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -11981,7 +12474,7 @@ public record struct Memoria(
                 "敵1～2体のATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅱ",
+                "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。"
             )
         ),
@@ -12002,7 +12495,7 @@ public record struct Memoria(
                 "味方1体のATKとDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅱ",
+                "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。"
             )
         ),
@@ -12023,7 +12516,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与える。さらに自身のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -12044,7 +12537,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -12065,7 +12558,7 @@ public record struct Memoria(
                 "味方1体のDEFを特大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅱ",
+                "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。"
             )
         ),
@@ -12086,7 +12579,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーDOWN Ⅱ",
+                "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -12107,7 +12600,7 @@ public record struct Memoria(
                 "味方1体のHPを特大回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅱ",
+                "回:ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -12128,7 +12621,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -12149,7 +12642,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -12170,7 +12663,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅱ",
+                "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。"
             )
         ),
@@ -12191,7 +12684,7 @@ public record struct Memoria(
                 "味方1～2体のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅱ",
+                "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。"
             )
         ),
@@ -12212,7 +12705,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅱ",
+                "回:回復UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。"
             )
         ),
@@ -12233,7 +12726,7 @@ public record struct Memoria(
                 "敵1体のATKとSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅱ",
+                "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。"
             )
         ),
@@ -12254,7 +12747,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、自身のDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅱ",
+                "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。"
             )
         ),
@@ -12275,7 +12768,7 @@ public record struct Memoria(
                 "敵1体のDEFを特大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅱ",
+                "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -12296,7 +12789,7 @@ public record struct Memoria(
                 "味方1～2体のHPを大回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅱ",
+                "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -12317,7 +12810,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅱ",
+                "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -12338,7 +12831,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -12359,7 +12852,7 @@ public record struct Memoria(
                 "味方1体のSp.DEFを特大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅱ",
+                "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -12380,7 +12873,7 @@ public record struct Memoria(
                 "敵1体のSp.ATKを特大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅱ",
+                "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -12401,7 +12894,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与え、自身のSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -12422,7 +12915,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -12443,7 +12936,7 @@ public record struct Memoria(
                 "味方1体のSp.ATKを特大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅱ",
+                "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -12464,7 +12957,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -12485,7 +12978,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与える。さらに自身のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅱ",
+                "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。"
             )
         ),
@@ -12506,7 +12999,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅱ",
+                "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -12527,7 +13020,7 @@ public record struct Memoria(
                 "敵1～2体のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅱ",
+                "援:ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを大ダウンさせる。"
             )
         ),
@@ -12548,7 +13041,7 @@ public record struct Memoria(
                 "味方1～2体のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅱ",
+                "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -12569,7 +13062,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅱ",
+                "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -12590,7 +13083,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、自身のSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードUP Ⅱ",
+                "攻:Sp.ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを大アップさせる。"
             )
         ),
@@ -12611,7 +13104,7 @@ public record struct Memoria(
                 "敵1～2体のATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅱ",
+                "援:ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを大ダウンさせる。"
             )
         ),
@@ -12632,7 +13125,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -12653,7 +13146,7 @@ public record struct Memoria(
                 "味方1体のHPを特大回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅱ",
+                "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -12674,7 +13167,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -12695,7 +13188,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -12716,7 +13209,7 @@ public record struct Memoria(
                 "味方1～2体のHPを大回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅱ",
+                "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -12737,7 +13230,7 @@ public record struct Memoria(
                 "味方1体のATKを特大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅱ",
+                "援:ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを大ダウンさせる。"
             )
         ),
@@ -12758,7 +13251,7 @@ public record struct Memoria(
                 "敵1体のSp.ATKを特大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅱ",
+                "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -12779,7 +13272,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -12800,7 +13293,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅱ",
+                "回:Sp.ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -12821,7 +13314,7 @@ public record struct Memoria(
                 "敵1～2体のSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅰ",
+                "援:支援UP Ⅰ",
                 "支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
             )
         ),
@@ -12842,7 +13335,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.パワーUP Ⅱ",
+                "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -12863,7 +13356,7 @@ public record struct Memoria(
                 "味方1体のDEFを特大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅱ",
+                "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。"
             )
         ),
@@ -12884,7 +13377,7 @@ public record struct Memoria(
                 "敵1体に特殊特大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -12905,7 +13398,7 @@ public record struct Memoria(
                 "敵1体のATKを特大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅱ",
+                "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -12926,7 +13419,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ダメージUP Ⅰ",
+                "攻:ダメージUP Ⅰ",
                 "攻撃時、一定確率で攻撃ダメージをアップさせる。"
             )
         ),
@@ -12947,7 +13440,7 @@ public record struct Memoria(
                 "敵1体に通常ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅰ",
+                "攻:ガードDOWN Ⅰ",
                 "攻撃時、一定確率で敵のDEFをダウンさせる。"
             )
         ),
@@ -12968,7 +13461,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -12989,7 +13482,7 @@ public record struct Memoria(
                 "敵1～2体のSp.DEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅱ",
+                "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -13010,7 +13503,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、自身のDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -13031,7 +13524,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅱ",
+                "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。"
             )
         ),
@@ -13052,7 +13545,7 @@ public record struct Memoria(
                 "味方1～2体のHPを大回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:パワーUP Ⅱ",
+                "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -13073,7 +13566,7 @@ public record struct Memoria(
                 "味方1体のSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅰ",
+                "援:Sp.ガードDOWN Ⅰ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFをダウンさせる。"
             )
         ),
@@ -13094,7 +13587,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与え、自身のSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -13115,7 +13608,7 @@ public record struct Memoria(
                 "敵1～2体に特殊ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅰ",
+                "攻:Sp.ガードDOWN Ⅰ",
                 "攻撃時、一定確率で敵のSp.DEFをダウンさせる。"
             )
         ),
@@ -13136,7 +13629,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -13157,7 +13650,7 @@ public record struct Memoria(
                 "味方1～2体のSp.ATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードDOWN Ⅱ",
+                "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -13178,7 +13671,7 @@ public record struct Memoria(
                 "味方1体のDEFを特大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードUP Ⅱ",
+                "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -13199,7 +13692,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅱ",
+                "回:ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -13220,7 +13713,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -13241,7 +13734,7 @@ public record struct Memoria(
                 "敵1体のATKを特大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーDOWN Ⅱ",
+                "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。"
             )
         ),
@@ -13262,7 +13755,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅱ",
+                "回:Sp.ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -13283,7 +13776,7 @@ public record struct Memoria(
                 "敵1～2体のSp.ATKを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーDOWN Ⅱ",
+                "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -13304,7 +13797,7 @@ public record struct Memoria(
                 "味方1～2体のATKを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:パワーUP Ⅱ",
+                "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。"
             )
         ),
@@ -13325,7 +13818,7 @@ public record struct Memoria(
                 "味方1～3体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:Sp.ガードUP Ⅱ",
+                "回:Sp.ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -13346,7 +13839,7 @@ public record struct Memoria(
                 "味方1体のSp.ATKを特大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.パワーUP Ⅱ",
+                "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。"
             )
         ),
@@ -13367,7 +13860,7 @@ public record struct Memoria(
                 "敵1～2体のDEFを大ダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:ガードDOWN Ⅱ",
+                "援:ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを大ダウンさせる。"
             )
         ),
@@ -13388,7 +13881,7 @@ public record struct Memoria(
                 "味方2体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:ガードUP Ⅱ",
+                "回:ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
@@ -13409,7 +13902,7 @@ public record struct Memoria(
                 "味方1～2体のSp.DEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:Sp.ガードUP Ⅱ",
+                "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
             )
         ),
@@ -13430,7 +13923,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与え、自身のSp.DEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーDOWN Ⅱ",
+                "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -13451,7 +13944,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅱ",
+                "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。"
             )
         ),
@@ -13472,7 +13965,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅱ",
+                "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。"
             )
         ),
@@ -13493,7 +13986,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -13514,7 +14007,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅱ",
+                "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -13535,7 +14028,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードUP Ⅱ",
+                "攻:Sp.ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを大アップさせる。"
             )
         ),
@@ -13556,7 +14049,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅱ",
+                "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -13577,7 +14070,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーDOWN Ⅱ",
+                "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -13598,7 +14091,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、敵のDEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -13619,7 +14112,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -13640,7 +14133,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードDOWN Ⅱ",
+                "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。"
             )
         ),
@@ -13661,7 +14154,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -13682,7 +14175,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.ガードUP Ⅱ",
+                "攻:Sp.ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを大アップさせる。"
             )
         ),
@@ -13703,7 +14196,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、自身のDEFをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードUP Ⅱ",
+                "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。"
             )
         ),
@@ -13724,7 +14217,7 @@ public record struct Memoria(
                 "敵1～2体に特殊大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーDOWN Ⅱ",
+                "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。"
             )
         ),
@@ -13745,7 +14238,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーDOWN Ⅱ",
+                "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。"
             )
         ),
@@ -13766,7 +14259,7 @@ public record struct Memoria(
                 "敵1～2体に通常大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:ガードDOWN Ⅱ",
+                "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。"
             )
         ),
@@ -13787,7 +14280,7 @@ public record struct Memoria(
                 "敵1体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:Sp.パワーUP Ⅱ",
+                "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
             )
         ),
@@ -13808,7 +14301,7 @@ public record struct Memoria(
                 "敵1体に通常大ダメージを与え、自身のATKをアップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -13829,7 +14322,7 @@ public record struct Memoria(
                 "敵1体に通常特大ダメージを与える。"
             ),
             new Support(
-                "レギオンマッチ補助スキル攻:パワーUP Ⅱ",
+                "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
             )
         ),
@@ -13850,7 +14343,7 @@ public record struct Memoria(
                 "味方1～2体のHPを回復する。"
             ),
             new Support(
-                "レギオンマッチ補助スキル回:回復UP Ⅰ",
+                "回:回復UP Ⅰ",
                 "HP回復時、一定確率でHPの回復量をアップさせる。"
             )
         ),
@@ -13871,7 +14364,7 @@ public record struct Memoria(
                 "味方1体のDEFを大アップさせる。"
             ),
             new Support(
-                "レギオンマッチ補助スキル援:支援UP Ⅰ",
+                "援:支援UP Ⅰ",
                 "支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
             )
         )
