@@ -44,7 +44,9 @@
     <None Remove="Pages\OrderConsole\LoadDialogContent.xaml" />
     <None Remove="Pages\OrderConsole\SaveDialogContent.xaml" />
     <None Remove="Pages\RegionConsolePage.xaml" />
+    <None Remove="Pages\RegionConsole\MemberManageConsole.xaml" />
     <None Remove="Pages\RegionConsole\RecogniseDialogContent.xaml" />
+    <None Remove="Pages\RegionConsole\UnitViewer.xaml" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="{d37e2a3e-8545-3a39-9f4f-31827c9124ab}">
@@ -87,6 +89,18 @@
 
   <ItemGroup>
     <Folder Include="Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\RegionConsole\UnitViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\RegionConsole\MemberManageConsole.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

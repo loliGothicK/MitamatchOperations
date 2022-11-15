@@ -591,7 +591,7 @@ public sealed partial class DeckEditorPage
                                 var existIndex = _deck.IndexOf(exist);
                                 var addedIndex = _deck.IndexOf(added);
 
-                                if (Math.Abs(existIndex - addedIndex) == 1)
+                                if (Math.Abs(existIndex - addedIndex) == 0)
                                 {
                                     OnValidateChangesOnHold(button.Parent.As<StackPanel>().Parent.As<StackPanel>().Parent.As<Grid>().Children, new Disable("クロノを挟まずに2回の担当が割り振られいます"));
                                     break;
@@ -599,8 +599,8 @@ public sealed partial class DeckEditorPage
 
                                 var span = (existIndex > addedIndex) switch
                                 {
-                                    true => _deck.ToList().GetRange(addedIndex, existIndex - addedIndex - 1),
-                                    false => _deck.ToList().GetRange(existIndex, addedIndex - existIndex - 1),
+                                    true => _deck.ToList().GetRange(addedIndex, existIndex - addedIndex),
+                                    false => _deck.ToList().GetRange(existIndex, addedIndex - existIndex),
                                 };
                                 if (span.Any(item => item.Order.Name == "刻戻りのクロノグラフ"))
                                 {

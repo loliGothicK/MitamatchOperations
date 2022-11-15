@@ -43,34 +43,6 @@ internal class Match
 
         var akaze = AKAZE.Create();
 
-        //Costume? detectedCostume;
-        //{
-        //    var source = new Mat();
-        //    akaze.DetectAndCompute(target.Clone(costume), null, out _, source);
-
-        //    var templates = await Task.WhenAll(Costume.List.Select(async c =>
-        //    {
-        //        var file = await StorageFile.GetFileFromApplicationUriAsync(c.Uri);
-        //        var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
-        //        var descriptors = new Mat();
-        //        akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
-        //        return (costume: c, descriptors);
-        //    }));
-
-        //    detectedCostume = templates.MinBy(template =>
-        //    {
-        //        var (_, train) = template;
-        //        var matcher = new BFMatcher(NormTypes.Hamming);
-        //        var matches = matcher.Match(source, train);
-        //        var sum = matches.Sum(x => x.Distance);
-        //        return sum / matches.Length;
-        //    }).costume;
-        //}
-
-        // remove costume
-        var maybeCostume = rects.MinBy(memoria => memoria.Top)!;
-        rects.Remove(maybeCostume);
-
         rects = Clean(rects);
         rects = Interpolation(rects, img.Width);
 
@@ -123,7 +95,7 @@ internal class Match
             var top = memorias.MinBy(memoria => memoria.Top)!;
             var line = new List<Rect> { top };
             memorias.Remove(top);
-            foreach (var memoria in memorias.Where(memoria => Math.Abs(memoria.Top - top.Top) < 10).ToArray())
+            foreach (var memoria in memorias.Where(memoria => Math.Abs(memoria.Top - top.Top) < size / 10).ToArray())
             {
                 line.Add(memoria);
                 memorias.Remove(memoria);
@@ -132,16 +104,27 @@ internal class Match
             lines.Add(line);
         }
 
-        var margin = (int)lines[0].Zip(lines[0].Skip(1)).Select(a => (double)(a.Second.Left - a.First.Right)).Mean();
+        var margin = double.PositiveInfinity;
+
+        for (var i = 1; i < lines[0].Count; i++)
+        {
+            var s = lines[0][i].Left - lines[0][i - 1].Right;
+            if (s > 1 && s < margin) margin = s;
+        }
+        for (var i = 1; i < lines[1].Count; i++)
+        {
+            var s = lines[1][i].Left - lines[1][i - 1].Right;
+            if (s > 1 && s < margin) margin = s;
+        }
 
         foreach (var line in lines)
         {
-            foreach (var (a, b) in line.Zip(line.Skip(1)).ToArray())
+            for (var i = 1; i < line.Count; i++)
             {
-                var space = b.Left - a.Right;
-                if (space > margin && space < margin + size)
+                var space = line[i].TopLeft.X - line[i - 1].BottomRight.X;
+                if (space <= 0 || (margin + 10 < space && space < margin + size))
                 {
-                    line.Remove(b);
+                    line.Remove(line[i]);
                 }
             }
         }
@@ -158,7 +141,7 @@ internal class Match
             var top = memorias.MinBy(memoria => memoria.Top)!;
             var line = new List<Rect> { top };
             memorias.Remove(top);
-            foreach (var memoria in memorias.Where(memoria => Math.Abs(memoria.Top - top.Top) < 10).ToArray())
+            foreach (var memoria in memorias.Where(memoria => Math.Abs(memoria.Top - top.Top) < size / 10).ToArray())
             {
                 line.Add(memoria);
                 memorias.Remove(memoria);
@@ -167,9 +150,20 @@ internal class Match
             lines.Add(line);
         }
 
-        var margins = lines[0].Zip(lines[0].Skip(1)).Select(a => (double)(a.Second.Left - a.First.Right)).ToList();
-        margins.Sort();
-        var margin = (int)margins[margins.Count / 2];
+        var marginD = double.PositiveInfinity;
+
+        for (var i = 1; i < lines[0].Count; i++)
+        {
+            var s = lines[0][i].Left - lines[0][i - 1].Right;
+            if (s > 1 && s < marginD) marginD = s;
+        }
+        for (var i = 1; i < lines[1].Count; i++)
+        {
+            var s = lines[1][i].Left - lines[1][i - 1].Right;
+            if (s > 1 && s < marginD) marginD = s;
+        }
+
+        var margin = (int)marginD;
 
         foreach (var line in lines)
         {
