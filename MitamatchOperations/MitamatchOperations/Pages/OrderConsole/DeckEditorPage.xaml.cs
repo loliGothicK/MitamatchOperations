@@ -30,7 +30,7 @@ public sealed partial class DeckEditorPage
     public static readonly int[] TimeSource = Enumerable.Range(0, 12).Select(t => t * 5).ToArray();
     private ObservableCollection<TimeTableItem> _deck = new();
     private ObservableCollection<Order> Sources { get; set; } = new();
-    private new uint Margin { get; set; } = 5;
+    private new int Margin { get; set; } = 5;
     private MemberInfo[] _members = { };
     private readonly List<HoldOn> _holdOns = new();
     private readonly string _project = Director.ReadCache().Region;
@@ -38,7 +38,7 @@ public sealed partial class DeckEditorPage
 
 
     private abstract record HoldOn;
-    private record ChangeMargin(uint Margin) : HoldOn;
+    private record ChangeMargin(int Margin) : HoldOn;
     private record ChangePic(string Name) : HoldOn;
     private record RemovePic : HoldOn;
     private record IntoConditional : HoldOn;
@@ -87,7 +87,7 @@ public sealed partial class DeckEditorPage
         }
         else
         {
-            var ordered = Order.List[uint.Parse(button.AccessKey)];
+            var ordered = Order.List[int.Parse(button.AccessKey)];
             Sources.Remove(ordered);
             PushOrder(ordered);
         }
@@ -112,7 +112,7 @@ public sealed partial class DeckEditorPage
             var prev = _deck.Last();
             var prepareTime = prev.Order.Index switch
             {
-                52 => 5u, // レギオンマッチスキル準備時間短縮Lv.3
+                52 => 5, // レギオンマッチスキル準備時間短縮Lv.3
                 _ => ordered.PrepareTime
             };
             _deck.Add(new TimeTableItem(ordered, Margin, prev.End - Margin,
@@ -137,7 +137,7 @@ public sealed partial class DeckEditorPage
         {
             var prepareTime = previous.Order.Index switch
             {
-                52 => 5u, // レギオンマッチスキル準備時間短縮Lv.3
+                52 => 5, // レギオンマッチスキル準備時間短縮Lv.3
                 _ => item.Order.PrepareTime
             };
             previous = item with
@@ -563,7 +563,7 @@ public sealed partial class DeckEditorPage
     private void SelectPlayerButton_OnLoaded(object sender, RoutedEventArgs e)
     {
         if (sender is not DropDownButton button) return;
-        var index = uint.Parse(button.AccessKey);
+        var index = int.Parse(button.AccessKey);
 
         var flyout = new MenuFlyout();
         foreach (var member in _members.Select(mem => mem.Name))
@@ -635,7 +635,7 @@ public sealed partial class DeckEditorPage
     {
         if (sender is not ComboBox) return;
         _holdOns.RemoveAll(item => item is ChangeMargin);
-        _holdOns.Add(new ChangeMargin(uint.Parse(e.AddedItems[0].ToString()!)));
+        _holdOns.Add(new ChangeMargin(int.Parse(e.AddedItems[0].ToString()!)));
     }
 
     private void ConditionalCheckBox_OnChecked(object sender, RoutedEventArgs e)
@@ -729,7 +729,7 @@ public sealed partial class DeckEditorPage
 
     private void Margin_OnSelectionChanged(object sender, RoutedEventArgs e)
     {
-        if (!uint.TryParse(GlobalMargin.Text, out var seconds)) return;
+        if (!int.TryParse(GlobalMargin.Text, out var seconds)) return;
         foreach (var item in _deck)
         {
             if (item.Delay == Margin) item.Delay = seconds;
@@ -788,7 +788,7 @@ internal record struct DeckJson(string Name, DateTime DateTime, DeckJsonProxy[] 
         @$"{Name} ({DateTime.Year}-{DateTime.Month}-{DateTime.Day}-{DateTime.Hour}:{DateTime.Minute})";
 };
 
-internal record struct DeckJsonProxy(uint Index, uint Delay, uint Start, uint End, string Pic, bool Conditional)
+internal record struct DeckJsonProxy(int Index, int Delay, int Start, int End, string Pic, bool Conditional)
 {
     public static implicit operator DeckJsonProxy(TimeTableItem item)
         => new(item.Order.Index, item.Delay, item.Start, item.End, item.Pic, item.Conditional);
@@ -796,15 +796,15 @@ internal record struct DeckJsonProxy(uint Index, uint Delay, uint Start, uint En
         => new(Order.List[item.Index], item.Delay, item.Start, item.End, item.Pic, item.Conditional);
 }
 
-internal record TimeTableItem(Order Order, uint Delay, uint Start, uint End, string Pic = "", bool Conditional = false)
+internal record TimeTableItem(Order Order, int Delay, int Start, int End, string Pic = "", bool Conditional = false)
 {
     internal string StartTime => $"{Start / 60:00}:{Start % 60:00}";
     internal string EndTime => $"{End / 60:00}:{End % 60:00}";
     internal string PicFmt => Pic != "" ? $"[{Pic}]" : "";
     internal string PicPlaceholder => Pic != "" ? $"{Pic}" : "Select";
 
-    internal uint Delay { get; set; } = Delay;
-    internal int DelayIndex = (int)Delay / 5;
+    internal int Delay { get; set; } = Delay;
+    internal int DelayIndex = Delay / 5;
     internal string Pic { get; set; } = Pic;
     internal bool Conditional { get; set; } = Conditional;
 

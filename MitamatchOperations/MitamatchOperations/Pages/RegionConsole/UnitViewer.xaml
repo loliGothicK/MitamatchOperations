@@ -16,17 +16,36 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TreeView Margin="0,12,0,0"
+
+        <Grid.Resources>
+            <DataTemplate x:Key="FileTemplate" x:DataType="local:ExplorerItem">
+                <TextBlock Text="{x:Bind Name}">
+                    <TextBlock.ContextFlyout>
+                        <Flyout>
+                            <StackPanel>
+                                <Button Click="DeleteConfirmation_Click" Content="Delete" AccessKey="{x:Bind Path}"/>
+                            </StackPanel>
+                        </Flyout>
+                    </TextBlock.ContextFlyout>
+                </TextBlock>
+            </DataTemplate>
+            <DataTemplate x:Key="FolderTemplate" x:DataType="local:ExplorerItem">
+                <TreeViewItem ItemsSource="{x:Bind Children}" Content="{x:Bind Name}" IsExpanded="True"/>
+            </DataTemplate>
+            <local:ExplorerItemTemplateSelector
+                x:Key="ExplorerItemTemplateSelector"
+                FolderTemplate="{StaticResource FolderTemplate}"
+                FileTemplate="{StaticResource FileTemplate}" />
+        </Grid.Resources>
+ 
+        <TreeView x:Name="UnitTreeView"
+                  Margin="0,12,0,0"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Top"
                   ItemInvoked="UnitTreeView_OnItemInvoked"
-                  Loaded="UnitTreeView_OnLoaded">
-            <TreeView.ItemTemplate>
-                <DataTemplate x:DataType="local:ExplorerItem">
-                    <TreeViewItem ItemsSource="{x:Bind Children}" Content="{x:Bind Name}" IsExpanded="True"/>
-                </DataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
+                  ItemTemplateSelector="{StaticResource ExplorerItemTemplateSelector}"
+                  Loaded="UnitTreeView_OnLoaded"/>
+
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>

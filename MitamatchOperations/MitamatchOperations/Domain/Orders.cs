@@ -51,9 +51,9 @@ namespace mitama.Domain
         Special
     }
 
-    public readonly record struct Status(uint Atk, uint SpAtk, uint Def, uint SpDef)
+    public readonly record struct Status(int Atk, int SpAtk, int Def, int SpDef)
     {
-        public static implicit operator Status(ValueTuple<uint, uint, uint, uint> from) => new()
+        public static implicit operator Status(ValueTuple<int, int, int, int> from) => new()
         {
             Atk = from.Item1,
             SpAtk = from.Item2,
@@ -68,12 +68,13 @@ namespace mitama.Domain
         string Effect,
         string Description,
         Status Status,
-        uint PrepareTime,
-        uint ActiveTime,
+        int PrepareTime,
+        int ActiveTime,
         Kind Kind
     )
     {
         public string Path => $@"/Assets/orders/{Index}.png";
+        public Uri Uri => new($"ms-appx:///Assets/orders/{Index}.png");
 
         public string TimeFmt => ActiveTime switch
         {
@@ -100,13 +101,13 @@ namespace mitama.Domain
         public static readonly Order[] AtkSumTop5 = List.OrderByDescending(order => order.Status.Atk + order.Status.SpAtk).Take(5).ToArray();
         public static readonly Order[] DefSumTop5 = List.OrderByDescending(order => order.Status.Def + order.Status.SpDef).Take(5).ToArray();
 
-        private Order((ushort, string, string, string, (uint, uint, uint, uint), (uint, uint), Kind) raw)
+        private Order((ushort, string, string, string, (int, int, int, int), (int, int), Kind) raw)
             : this(raw.Item1, raw.Item2, raw.Item3, raw.Item4, raw.Item5, raw.Item6.Item1, raw.Item6.Item2, raw.Item7)
         { }
 
         private static Order[] Init()
         {
-            var orders = new ValueTuple<string, string, string, ValueTuple<uint, uint, uint, uint>, ValueTuple<uint, uint>, Kind>[]
+            var orders = new ValueTuple<string, string, string, ValueTuple<int, int, int, int>, ValueTuple<int, int>, Kind>[]
             {
                 (
                     "天翼のしらべ",

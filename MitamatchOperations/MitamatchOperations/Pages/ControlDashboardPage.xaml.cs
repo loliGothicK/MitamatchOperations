@@ -121,13 +121,13 @@ public sealed partial class ControlDashboardPage
             #region Text Recognition
             switch (await Analyze(await _capture!.TryCaptureOrderInfo()))
             {
-                case SuccessResult(_, var order):
+                case SuccessResult(var user, var order):
                     {
                         if (_reminds.Count == 0) break;
                         var ordered = Order.List.MinBy(o => Algo.LevenshteinRate(o.Name, order));
-                        if (ordered == _reminds.First().Order)
+                        if (_reminds.Select(item => item.Order).Contains(ordered))
                         {
-                            Update();
+                            Update(user, ordered);
                         }
                         break;
                     }
@@ -181,16 +181,15 @@ public sealed partial class ControlDashboardPage
         _timer.Start();
     }
 
-    private void Update()
+    private void Update(string user, Order ordered)
     {
-        var popped = _reminds.First();
         var now = DateTime.Now;
         _firstTimePoint ??= now;
-        var totalTime = (int)(popped.Order.PrepareTime + popped.Order.ActiveTime);
+        var totalTime = ordered.PrepareTime + ordered.ActiveTime;
         _nextTimePoint = now + new TimeSpan(0, 0, totalTime / 60, totalTime % 60);
         var span = now - _firstTimePoint;
-        var deviation = span.Value.Minutes * 60 + span.Value.Seconds - (15 * 60 - popped.Start);
-        _reminds.RemoveAt(0);
+        var deviation = span.Value.Minutes * 60 + span.Value.Seconds - (15 * 60 - _reminds.First().Start);
+        _reminds.Remove(ordered);
         if (_deck.Count > _cursor) _reminds.Add(_deck[_cursor++]);
 
         if (_reminds.Count > 0 && _reminds.First().Conditional && deviation >= 10)
@@ -207,7 +206,7 @@ public sealed partial class ControlDashboardPage
             ConditionalOrderInfo.IsOpen = false;
         }
 
-        _results.Insert(0, new ResultItem(popped.Pic, popped.Order, (int)deviation));
+        _results.Insert(0, new ResultItem(user, ordered, deviation));
 
         RemainderBoard.ItemsSource = _reminds;
         ResultBoard.ItemsSource = _results;
@@ -286,7 +285,7 @@ public sealed partial class ControlDashboardPage
     private void ManualTrigger()
     {
         if (_reminds.Count == 0) return;
-        Update();
+        Update(_reminds.First().Pic, _reminds.First().Order);
     }
 
     private static async void PlayAlert(ElementSoundKind soundKind)

@@ -46,6 +46,7 @@
     <None Remove="Pages\RegionConsolePage.xaml" />
     <None Remove="Pages\RegionConsole\MemberManageConsole.xaml" />
     <None Remove="Pages\RegionConsole\RecogniseDialogContent.xaml" />
+    <None Remove="Pages\RegionConsole\TimelineTools.xaml" />
     <None Remove="Pages\RegionConsole\UnitViewer.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +90,12 @@
 
   <ItemGroup>
     <Folder Include="Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\RegionConsole\TimelineTools.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

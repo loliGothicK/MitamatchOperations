@@ -17,7 +17,7 @@ namespace mitama.Pages.RegionConsole;
 /// </summary>
 public sealed partial class UnitViewer
 {
-    string _regionName;
+    private readonly string _regionName;
 
     public UnitViewer()
     {
@@ -38,25 +38,40 @@ public sealed partial class UnitViewer
     private void UnitTreeView_OnLoaded(object sender, RoutedEventArgs e)
     {
         if (sender is not TreeView view) return;
+        Init(ref view);
+    }
+
+    private void Init(ref TreeView view)
+    {
         view.ItemsSource = new ObservableCollection<ExplorerItem>(Util.LoadMemberNames(_regionName).Select(name =>
         {
             return new ExplorerItem
             {
                 Name = name,
                 Type = ExplorerItem.ExplorerItemType.Folder,
-                Children = new ObservableCollection<ExplorerItem>(Directory.GetFiles($"{Director.UnitDir(_regionName, name)}").Select(path =>
-                {
-                    using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
-                    var json = sr.ReadToEnd();
-                    return new ExplorerItem
+                Children = new ObservableCollection<ExplorerItem>(
+                    Directory.GetFiles($"{Director.UnitDir(_regionName, name)}").Select(path =>
                     {
-                        Parent = name,
-                        Name = Unit.FromJson(json).UnitName,
-                        Type = ExplorerItem.ExplorerItemType.File
-                    };
-                }))
+                        using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+                        var json = sr.ReadToEnd();
+                        return new ExplorerItem
+                        {
+                            Parent = name,
+                            Name = Unit.FromJson(json).UnitName,
+                            Path = path,
+                            Type = ExplorerItem.ExplorerItemType.File
+                        };
+                    }))
             };
         }));
+
+    }
+
+    private void DeleteConfirmation_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button  button) return;
+        File.Delete(button.AccessKey);
+        Init(ref UnitTreeView);
     }
 }
 
@@ -66,6 +81,8 @@ public class ExplorerItem : INotifyPropertyChanged
     public enum ExplorerItemType { Folder, File };
     public string? Parent { get; set; }
     public string? Name { get; set; }
+    public string? Path { get; set; }
+
     public ExplorerItemType Type { get; set; }
     private ObservableCollection<ExplorerItem>? _children;
     public ObservableCollection<ExplorerItem> Children
@@ -89,5 +106,17 @@ public class ExplorerItem : INotifyPropertyChanged
     private void NotifyPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}
+
+class ExplorerItemTemplateSelector : DataTemplateSelector
+{
+    public DataTemplate FolderTemplate { get; set; }
+    public DataTemplate FileTemplate { get; set; }
+
+    protected override DataTemplate SelectTemplateCore(object item)
+    {
+        var explorerItem = (ExplorerItem)item;
+        return explorerItem.Type == ExplorerItem.ExplorerItemType.Folder ? FolderTemplate : FileTemplate;
     }
 }
