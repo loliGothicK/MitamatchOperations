@@ -53,10 +53,19 @@ internal class Match
         {
             var templates = await Task.WhenAll(Memoria.List.Where(dummyCostume.CanBeEquipped).Select(async memoria =>
             {
+                try
+                {
+                    var a = await StorageFile.GetFileFromApplicationUriAsync(memoria.Uri);
+                }
+                catch
+                {
+                    Console.WriteLine(memoria.ToString());
+                }
                 var file = await StorageFile.GetFileFromApplicationUriAsync(memoria.Uri);
                 var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
                 var descriptors = new Mat();
                 akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
+
                 return (memoria, descriptors);
             }));
 
@@ -238,6 +247,11 @@ internal class Match
             {
                 lines[1][2].TopLeft with { Y = lines[1][2].TopLeft.Y + verticalMargin + size },
                 lines[1][2].BottomRight with { Y = lines[1][2].BottomRight.Y + verticalMargin + size }
+            }),
+            Cv2.BoundingRect(new[]
+            {
+                lines[1][3].TopLeft with { Y = lines[1][3].TopLeft.Y + verticalMargin + size },
+                lines[1][3].BottomRight with { Y = lines[1][3].BottomRight.Y + verticalMargin + size }
             })
         });
 
