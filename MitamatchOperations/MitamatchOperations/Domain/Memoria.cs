@@ -22,42 +22,42 @@ public record struct UnitDto(string UnitName, bool IsFront, string[] Names);
 
 internal class MemoriaUtil
 {
-    internal static Stat[] StatsFromRaw(string trimed)
+    internal static Stat[] StatsFromRaw(string trimmed)
     {
-        if (trimed.EndsWith("ライトパワー")) return new[] { Stat.Atk, Stat.LightPower };
-        else if (trimed.EndsWith("ライトガード")) return new[] { Stat.Def, Stat.LightGuard };
-        else if (trimed.EndsWith("Sp.ライトパワー")) return new[] { Stat.SpAtk, Stat.LightPower };
-        else if (trimed.EndsWith("Sp.ライトガード")) return new[] { Stat.SpDef, Stat.LightGuard };
+        if (trimmed.EndsWith("ライトパワー")) return new[] { Stat.Atk, Stat.LightPower };
+        else if (trimmed.EndsWith("ライトガード")) return new[] { Stat.Def, Stat.LightGuard };
+        else if (trimmed.EndsWith("Sp.ライトパワー")) return new[] { Stat.SpAtk, Stat.LightPower };
+        else if (trimmed.EndsWith("Sp.ライトガード")) return new[] { Stat.SpDef, Stat.LightGuard };
 
-        else if (trimed.EndsWith("ダークパワー")) return new[] { Stat.Atk, Stat.DarkPower };
-        else if (trimed.EndsWith("ダークガード")) return new[] { Stat.Def, Stat.DarkGuard };
-        else if (trimed.EndsWith("Sp.ダークパワー")) return new[] { Stat.SpAtk, Stat.DarkPower };
-        else if (trimed.EndsWith("Sp.ダークガード")) return new[] { Stat.SpDef, Stat.DarkGuard };
+        else if (trimmed.EndsWith("ダークパワー")) return new[] { Stat.Atk, Stat.DarkPower };
+        else if (trimmed.EndsWith("ダークガード")) return new[] { Stat.Def, Stat.DarkGuard };
+        else if (trimmed.EndsWith("Sp.ダークパワー")) return new[] { Stat.SpAtk, Stat.DarkPower };
+        else if (trimmed.EndsWith("Sp.ダークガード")) return new[] { Stat.SpDef, Stat.DarkGuard };
 
-        else if (trimed.EndsWith("ウォーターパワー")) return new[] { Stat.Atk, Stat.WaterPower };
-        else if (trimed.EndsWith("ウォーターガード")) return new[] { Stat.Def, Stat.WaterGuard };
-        else if (trimed.EndsWith("Sp.ウォーターパワー")) return new[] { Stat.SpAtk, Stat.WaterPower };
-        else if (trimed.EndsWith("Sp.ウォーターガード")) return new[] { Stat.SpDef, Stat.WaterGuard };
+        else if (trimmed.EndsWith("ウォーターパワー")) return new[] { Stat.Atk, Stat.WaterPower };
+        else if (trimmed.EndsWith("ウォーターガード")) return new[] { Stat.Def, Stat.WaterGuard };
+        else if (trimmed.EndsWith("Sp.ウォーターパワー")) return new[] { Stat.SpAtk, Stat.WaterPower };
+        else if (trimmed.EndsWith("Sp.ウォーターガード")) return new[] { Stat.SpDef, Stat.WaterGuard };
 
-        else if (trimed.EndsWith("ウィンドパワー")) return new[] { Stat.Atk, Stat.WindPower };
-        else if (trimed.EndsWith("ウィンドガード")) return new[] { Stat.Def, Stat.WindGuard };
-        else if (trimed.EndsWith("Sp.ウィンドパワー")) return new[] { Stat.SpAtk, Stat.WindPower };
-        else if (trimed.EndsWith("Sp.ウィンドガード")) return new[] { Stat.SpDef, Stat.WindGuard };
+        else if (trimmed.EndsWith("ウィンドパワー")) return new[] { Stat.Atk, Stat.WindPower };
+        else if (trimmed.EndsWith("ウィンドガード")) return new[] { Stat.Def, Stat.WindGuard };
+        else if (trimmed.EndsWith("Sp.ウィンドパワー")) return new[] { Stat.SpAtk, Stat.WindPower };
+        else if (trimmed.EndsWith("Sp.ウィンドガード")) return new[] { Stat.SpDef, Stat.WindGuard };
 
-        else if (trimed.EndsWith("マイト")) return new[] { Stat.Atk, Stat.Def };
-        else if (trimed.EndsWith("Sp.マイト")) return new[] { Stat.SpAtk, Stat.SpDef };
+        else if (trimmed.EndsWith("マイト")) return new[] { Stat.Atk, Stat.Def };
+        else if (trimmed.EndsWith("Sp.マイト")) return new[] { Stat.SpAtk, Stat.SpDef };
 
-        else if (trimed.EndsWith("ディファー")) return new[] { Stat.SpAtk, Stat.Def };
-        else if (trimed.EndsWith("Sp.ディファー")) return new[] { Stat.Atk, Stat.SpDef };
+        else if (trimmed.EndsWith("ディファー")) return new[] { Stat.SpAtk, Stat.Def };
+        else if (trimmed.EndsWith("Sp.ディファー")) return new[] { Stat.Atk, Stat.SpDef };
 
-        else if (trimed.EndsWith("Wパワー")) return new[] { Stat.Atk, Stat.SpAtk };
-        else if (trimed.EndsWith("Wガード")) return new[] { Stat.Def, Stat.SpDef };
+        else if (trimmed.EndsWith("Wパワー")) return new[] { Stat.Atk, Stat.SpAtk };
+        else if (trimmed.EndsWith("Wガード")) return new[] { Stat.Def, Stat.SpDef };
 
-        else if (trimed.EndsWith("Sp.パワー")) return new[] { Stat.SpAtk };
-        else if (trimed.EndsWith("パワー")) return new[] { Stat.Atk };
+        else if (trimmed.EndsWith("Sp.パワー")) return new[] { Stat.SpAtk };
+        else if (trimmed.EndsWith("パワー")) return new[] { Stat.Atk };
 
-        else if (trimed.EndsWith("Sp.ガード")) return new[] { Stat.SpDef };
-        else if (trimed.EndsWith("ガード")) return new[] { Stat.Def };
+        else if (trimmed.EndsWith("Sp.ガード")) return new[] { Stat.SpDef };
+        else if (trimmed.EndsWith("ガード")) return new[] { Stat.Def };
 
         else return new Stat[] { };
     }
@@ -281,7 +281,9 @@ public static class Meta
         Level.Four => "Ⅳ",
         Level.FourPlus => "Ⅳ+",
         Level.Five => "Ⅴ",
+        Level.FivePlus => "Ⅴ+",
         Level.LG => "LG",
+        Level.LGPlus => "LG+",
     };
     public static string GetName(this Passive pa) => pa switch
     {
