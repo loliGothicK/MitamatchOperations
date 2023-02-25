@@ -2,12 +2,10 @@
 using System.Linq;
 using mitama.Domain.OrderKinds;
 
-namespace mitama.Domain
-{
+namespace mitama.Domain {
     public abstract record Kind;
 
-    namespace OrderKinds
-    {
+    namespace OrderKinds {
         public record Elemental(Element Element) : Kind;
         public record Buff : Kind;
         public record DeBuff : Kind;
@@ -19,10 +17,8 @@ namespace mitama.Domain
         public record Other : Kind;
     }
 
-    public class Kinds
-    {
-        public class Elemental
-        {
+    public class Kinds {
+        public class Elemental {
             public static OrderKinds.Elemental Fire => new(Element.Fire);
             public static OrderKinds.Elemental Water => new(Element.Water);
             public static OrderKinds.Elemental Wind => new(Element.Wind);
@@ -41,8 +37,7 @@ namespace mitama.Domain
         public static Other Other => new();
     }
 
-    public enum Element
-    {
+    public enum Element {
         Fire,
         Water,
         Wind,
@@ -51,10 +46,8 @@ namespace mitama.Domain
         Special
     }
 
-    public readonly record struct Status(int Atk, int SpAtk, int Def, int SpDef)
-    {
-        public static implicit operator Status(ValueTuple<int, int, int, int> from) => new()
-        {
+    public readonly record struct Status(int Atk, int SpAtk, int Def, int SpDef) {
+        public static implicit operator Status(ValueTuple<int, int, int, int> from) => new() {
             Atk = from.Item1,
             SpAtk = from.Item2,
             Def = from.Item3,
@@ -71,13 +64,11 @@ namespace mitama.Domain
         int PrepareTime,
         int ActiveTime,
         Kind Kind
-    )
-    {
+    ) {
         public string Path => $@"/Assets/orders/{Index}.png";
         public Uri Uri => new($"ms-appx:///Assets/orders/{Index}.png");
 
-        public string TimeFmt => ActiveTime switch
-        {
+        public string TimeFmt => ActiveTime switch {
             0 => $"({PrepareTime} sec)",
             _ => $"({PrepareTime} + {ActiveTime} sec)"
         };
@@ -102,11 +93,9 @@ namespace mitama.Domain
         public static readonly Order[] DefSumTop5 = List.OrderByDescending(order => order.Status.Def + order.Status.SpDef).Take(5).ToArray();
 
         private Order((ushort, string, string, string, (int, int, int, int), (int, int), Kind) raw)
-            : this(raw.Item1, raw.Item2, raw.Item3, raw.Item4, raw.Item5, raw.Item6.Item1, raw.Item6.Item2, raw.Item7)
-        { }
+            : this(raw.Item1, raw.Item2, raw.Item3, raw.Item4, raw.Item5, raw.Item6.Item1, raw.Item6.Item2, raw.Item7) { }
 
-        private static Order[] Init()
-        {
+        private static Order[] Init() {
             var orders = new ValueTuple<string, string, string, ValueTuple<int, int, int, int>, ValueTuple<int, int>, Kind>[]
             {
                 (

@@ -7,8 +7,7 @@ using System;
 using System.Diagnostics;
 using System.Text;
 
-public class Interop
-{
+public class Interop {
     /// <summary>
     /// ウィンドウを列挙します。
     /// </summary>
@@ -54,17 +53,13 @@ public class Interop
     public static extern bool IsWindowVisible(IntPtr hWnd);
 }
 
-public class Search
-{
-    public static IntPtr WindowHandleFromCaption(string target)
-    {
+public class Search {
+    public static IntPtr WindowHandleFromCaption(string target) {
         nint result = -1;
         // ウィンドウの列挙を開始
-        EnumWindows((hWnd, lParam) =>
-        {
+        EnumWindows((hWnd, lParam) => {
             var caption = Caption(hWnd);
-            if (IsWindowVisible(hWnd) && caption.Contains(target))
-            {
+            if (IsWindowVisible(hWnd) && caption.Contains(target)) {
                 result = hWnd;
             }
 
@@ -74,14 +69,11 @@ public class Search
         return result > 0 ? result : throw new KeyNotFoundException("Assaultlily Not Found");
     }
 
-    public static List<(string , IntPtr)> GetWindowList()
-    {
+    public static List<(string, IntPtr)> GetWindowList() {
         List<(string, IntPtr)> result = new();
         // ウィンドウの列挙を開始
-        EnumWindows((hWnd, lParam) =>
-        {
-            if (IsWindowVisible(hWnd))
-            {
+        EnumWindows((hWnd, lParam) => {
+            if (IsWindowVisible(hWnd)) {
                 result.Add((Caption(hWnd), hWnd));
             }
 
@@ -91,8 +83,7 @@ public class Search
         return result;
     }
 
-    private static string Caption(IntPtr hWnd)
-    {
+    private static string Caption(IntPtr hWnd) {
         GetWindowThreadProcessId(hWnd, out var processId);
 
         // プロセスIDからProcessクラスのインスタンスを取得
