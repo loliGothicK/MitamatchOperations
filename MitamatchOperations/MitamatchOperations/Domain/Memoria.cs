@@ -6,12 +6,10 @@ using System.Text.RegularExpressions;
 
 namespace mitama.Domain;
 
-public record struct Unit(string UnitName, bool IsFront, List<Memoria> Memorias)
-{
+public record struct Unit(string UnitName, bool IsFront, List<Memoria> Memorias) {
     public string ToJson() => JsonSerializer.Serialize(new UnitDto(UnitName, IsFront, Memorias.Select(m => m.Name).ToArray()));
 
-    public static Unit FromJson(string json)
-    {
+    public static Unit FromJson(string json) {
         var dto = JsonSerializer.Deserialize<UnitDto>(json);
         var dummyCostume = dto.IsFront ? Costume.List[0] : Costume.List[1];
         var selector = Memoria.List.Where(dummyCostume.CanBeEquipped).ToDictionary(m => m.Name);
@@ -20,10 +18,8 @@ public record struct Unit(string UnitName, bool IsFront, List<Memoria> Memorias)
 }
 public record struct UnitDto(string UnitName, bool IsFront, string[] Names);
 
-internal class MemoriaUtil
-{
-    internal static Stat[] StatsFromRaw(string trimmed)
-    {
+internal class MemoriaUtil {
+    internal static Stat[] StatsFromRaw(string trimmed) {
         if (trimmed.EndsWith("ライトパワー")) return new[] { Stat.Atk, Stat.LightPower };
         else if (trimmed.EndsWith("ライトガード")) return new[] { Stat.Def, Stat.LightGuard };
         else if (trimmed.EndsWith("Sp.ライトパワー")) return new[] { Stat.SpAtk, Stat.LightPower };
@@ -62,10 +58,8 @@ internal class MemoriaUtil
         else return new Stat[] { };
     }
 
-    internal static string StatsToString(Stat[] Stats)
-    {
-        return Stats switch
-        {
+    internal static string StatsToString(Stat[] Stats) {
+        return Stats switch {
             [Stat.Atk, Stat.LightPower] => "ライトパワー",
             [Stat.Def, Stat.LightGuard] => "ライトガード",
             [Stat.SpAtk, Stat.LightPower] => "Sp.ライトパワー",
@@ -107,21 +101,18 @@ internal class MemoriaUtil
     }
 }
 
-public enum Stat
-{
+public enum Stat {
     Atk, Def, SpAtk, SpDef,
     DarkPower, LightPower, WaterPower, WindPower, FirePower,
     DarkGuard, LightGuard, WaterGuard, WindGuard, FireGuard,
     Life
 }
 
-public enum Range
-{
+public enum Range {
     A, B, C, D, E
 }
 
-public enum Level
-{
+public enum Level {
     One,
     Two,
     Three,
@@ -134,8 +125,7 @@ public enum Level
     LGPlus,
 }
 
-public enum PrefixEffect
-{
+public enum PrefixEffect {
     Non,
     Charge,
     Heal,
@@ -147,16 +137,13 @@ public enum PrefixEffect
     FireSpread
 }
 
-public abstract record MemoriaSkill
-{
+public abstract record MemoriaSkill {
     private static Regex regex = new Regex(@"(?<body>.+?)(?<range>[A|B|C|D|E]) (?<level>.+)", RegexOptions.Compiled);
 
-    public static implicit operator MemoriaSkill(string skill)
-    {
+    public static implicit operator MemoriaSkill(string skill) {
         var matches = regex.Matches(skill);
 
-        var range = matches[0].Groups["range"].Value switch
-        {
+        var range = matches[0].Groups["range"].Value switch {
             "A" => Range.A,
             "B" => Range.B,
             "C" => Range.C,
@@ -165,8 +152,7 @@ public abstract record MemoriaSkill
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        var level = matches[0].Groups["level"].Value switch
-        {
+        var level = matches[0].Groups["level"].Value switch {
             "Ⅰ" => Level.One,
             "Ⅱ" => Level.Two,
             "Ⅲ" => Level.Three,
@@ -180,74 +166,57 @@ public abstract record MemoriaSkill
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        PrefixEffect intoElementalEffect(string body)
-        {
-            if (body.StartsWith("チャージ"))
-            {
+        PrefixEffect intoElementalEffect(string body) {
+            if (body.StartsWith("チャージ")) {
                 return PrefixEffect.Charge;
             }
-            else if (body.StartsWith("ヒール"))
-            {
+            else if (body.StartsWith("ヒール")) {
                 return PrefixEffect.Heal;
             }
-            else if (body.StartsWith("水："))
-            {
+            else if (body.StartsWith("水：")) {
                 return PrefixEffect.Water;
             }
-            else if (body.StartsWith("風："))
-            {
+            else if (body.StartsWith("風：")) {
                 return PrefixEffect.Wind;
             }
-            else if (body.StartsWith("火："))
-            {
+            else if (body.StartsWith("火：")) {
                 return PrefixEffect.Fire;
             }
-            else if (body.StartsWith("水拡："))
-            {
+            else if (body.StartsWith("水拡：")) {
                 return PrefixEffect.WaterSpread;
             }
-            else if (body.StartsWith("風拡："))
-            {
+            else if (body.StartsWith("風拡：")) {
                 return PrefixEffect.WindSpread;
             }
-            else if (body.StartsWith("火拡："))
-            {
+            else if (body.StartsWith("火拡：")) {
                 return PrefixEffect.FireSpread;
             }
-            else
-            {
+            else {
                 return PrefixEffect.Non;
             }
         }
 
         var body = matches[0].Groups["body"].Value;
 
-        if (body.EndsWith("ストライク"))
-        {
+        if (body.EndsWith("ストライク")) {
             return new Strike(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("ストライク", string.Empty)), intoElementalEffect(body)));
         }
-        else if (body.EndsWith("ブレイク"))
-        {
+        else if (body.EndsWith("ブレイク")) {
             return new Break(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("ブレイク", string.Empty)), intoElementalEffect(body)));
         }
-        else if (body.EndsWith("スマッシュ"))
-        {
+        else if (body.EndsWith("スマッシュ")) {
             return new Smash(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("スマッシュ", string.Empty)), intoElementalEffect(body)));
         }
-        else if (body.EndsWith("バースト"))
-        {
+        else if (body.EndsWith("バースト")) {
             return new Burst(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("バースト", string.Empty)), intoElementalEffect(body)));
         }
-        else if (body.EndsWith("アシスト"))
-        {
+        else if (body.EndsWith("アシスト")) {
             return new Assist(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("アシスト", string.Empty)), intoElementalEffect(body)));
         }
-        else if (body.EndsWith("フォール"))
-        {
+        else if (body.EndsWith("フォール")) {
             return new Fall(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("フォール", string.Empty)), intoElementalEffect(body)));
         }
-        else if (body.EndsWith("ヒール"))
-        {
+        else if (body.EndsWith("ヒール")) {
             return new Heal(new MemoriaData(range, level, MemoriaUtil.StatsFromRaw(body.Replace("ヒール", string.Empty)), intoElementalEffect(body)));
         }
 
@@ -257,10 +226,8 @@ public abstract record MemoriaSkill
     public virtual string? Name { get; }
 }
 
-public static class Meta
-{
-    public static string GetName(this PrefixEffect eff) => eff switch
-    {
+public static class Meta {
+    public static string GetName(this PrefixEffect eff) => eff switch {
         PrefixEffect.Non => string.Empty,
         PrefixEffect.Charge => "チャージ",
         PrefixEffect.Heal => "ヒール",
@@ -272,8 +239,7 @@ public static class Meta
         PrefixEffect.FireSpread => "火拡: ",
         _ => throw new NotImplementedException(),
     };
-    public static string GetName(this Level level) => level switch
-    {
+    public static string GetName(this Level level) => level switch {
         Level.One => "Ⅰ",
         Level.Two => "Ⅱ",
         Level.Three => "Ⅲ",
@@ -285,16 +251,14 @@ public static class Meta
         Level.LG => "LG",
         Level.LGPlus => "LG+",
     };
-    public static string GetName(this Passive pa) => pa switch
-    {
+    public static string GetName(this Passive pa) => pa switch {
         Passive.Attack => "攻",
         Passive.Assist => "援",
         Passive.Heal => "回",
         Passive.SubAssist => "副援",
         Passive.Command => "コ",
     };
-    public static string GetName(this PassiveKind pk) => pk switch
-    {
+    public static string GetName(this PassiveKind pk) => pk switch {
         PassiveKind.DamageUp => "ダメージUP",
         PassiveKind.AssistUp => "支援UP",
         PassiveKind.HealUp => "回復UP",
@@ -302,77 +266,60 @@ public static class Meta
     };
 }
 
-public record struct MemoriaData(Range Range, Level Level, Stat[] Stats, PrefixEffect Prefix = PrefixEffect.Non)
-{
-    public MemoriaData(Range Range, Level Level, PrefixEffect prefix = PrefixEffect.Non) : this(Range, Level, new Stat[] { }, prefix)
-    {
+public record struct MemoriaData(Range Range, Level Level, Stat[] Stats, PrefixEffect Prefix = PrefixEffect.Non) {
+    public MemoriaData(Range Range, Level Level, PrefixEffect prefix = PrefixEffect.Non) : this(Range, Level, new Stat[] { }, prefix) {
     }
 
     public string Name(string category) => $"{Prefix.GetName()}{MemoriaUtil.StatsToString(Stats)}{category}{Range} {Level.GetName()}";
 }
 
-public record Strike(MemoriaData Data) : MemoriaSkill
-{
+public record Strike(MemoriaData Data) : MemoriaSkill {
     public override string Name => Data.Name("ストライク");
 }
 
-public record Break(MemoriaData Data) : MemoriaSkill
-{
+public record Break(MemoriaData Data) : MemoriaSkill {
     public override string Name => Data.Name("ブレイク");
 }
-public record Smash(MemoriaData Data) : MemoriaSkill
-{
+public record Smash(MemoriaData Data) : MemoriaSkill {
     public override string Name => Data.Name("スマッシュ");
 }
-public record Burst(MemoriaData Data) : MemoriaSkill
-{
+public record Burst(MemoriaData Data) : MemoriaSkill {
     public override string Name => Data.Name("バースト");
 }
-public record Assist(MemoriaData Data) : MemoriaSkill
-{
+public record Assist(MemoriaData Data) : MemoriaSkill {
     public override string Name => Data.Name("アシスト");
 }
-public record Fall(MemoriaData Data) : MemoriaSkill
-{
+public record Fall(MemoriaData Data) : MemoriaSkill {
     public override string Name => Data.Name("フォール");
 }
-public record Heal(MemoriaData Data) : MemoriaSkill
-{
+public record Heal(MemoriaData Data) : MemoriaSkill {
     public override string Name => Data.Name("ヒール");
 }
 
-public record struct Skill(MemoriaSkill MemoriaSkill, string Description)
-{
+public record struct Skill(MemoriaSkill MemoriaSkill, string Description) {
     public string? Name => MemoriaSkill.Name;
 }
 
-public record SupportSkills(SupportSkill[] Skills, Level Level)
-{
+public record SupportSkills(SupportSkill[] Skills, Level Level) {
     private static Regex regex = new Regex(@"(?<kind>.+?):(?<body>.+)", RegexOptions.Compiled);
     private static Regex compound = new Regex(@"(?<first>.+?)/(?<second>.+) (?<level>.+)", RegexOptions.Compiled);
     private static Regex single = new Regex(@"(?<effect>.+?) (?<level>.+)", RegexOptions.Compiled);
 
-    public string Name
-    {
-        get
-        {
-            if (Skills.All(skill => skill.PassivePrefix == Skills.First().PassivePrefix))
-            {
+    public string Name {
+        get {
+            if (Skills.All(skill => skill.PassivePrefix == Skills.First().PassivePrefix)) {
                 var name = string.Join("/", Skills.Select(skill => skill.Name));
                 return $"{Skills.First().PassivePrefix.GetName()}: {name} {Level.GetName()}";
             }
-            else
-            {
+            else {
                 var name = string.Join("/", Skills.Select(skill => skill.FullName));
                 return $"{name} {Level.GetName()}";
             }
         }
     }
 
-    public static implicit operator SupportSkills(string text)
-    {
-        static Level LevelFromRaw(string raw) => raw switch
-        {
+    public static implicit operator SupportSkills(string text) {
+        static Level LevelFromRaw(string raw) => raw switch {
             "Ⅰ" => Level.One,
             "Ⅱ" => Level.Two,
             "Ⅲ" => Level.Three,
@@ -387,71 +334,59 @@ public record SupportSkills(SupportSkill[] Skills, Level Level)
         };
 
         if (text == "回:回復UP/副援:支援UP Ⅱ") return new(new SupportSkill[] { new PassiveSupportSkill(Passive.Heal, PassiveKind.HealUp), new PassiveSupportSkill(Passive.SubAssist, PassiveKind.AssistUp) }, Level.Two);
-        else
-        {
+        else {
             var matches = regex.Matches(text);
 
-            switch (matches[0].Groups["kind"].Value)
-            {
-                case "攻":
-                    {
+            switch (matches[0].Groups["kind"].Value) {
+                case "攻": {
                         var effects = matches[0].Groups["body"].Value;
-                        if (effects.Contains('/'))
-                        {
+                        if (effects.Contains('/')) {
                             matches = compound.Matches(effects);
                             var first = SupportSkill.FromStr(Passive.Attack, matches[0].Groups["first"].Value);
                             var second = SupportSkill.FromStr(Passive.Attack, matches[0].Groups["second"].Value);
                             var level = LevelFromRaw(matches[0].Groups["level"].Value);
                             return new(new SupportSkill[] { first, second }, level);
                         }
-                        else
-                        {
+                        else {
                             matches = single.Matches(effects);
                             var effect = SupportSkill.FromStr(Passive.Attack, matches[0].Groups["effect"].Value);
                             var level = LevelFromRaw(matches[0].Groups["level"].Value);
                             return new(new SupportSkill[] { effect }, level);
                         }
                     }
-                case "援":
-                    {
+                case "援": {
                         var effects = matches[0].Groups["body"].Value;
-                        if (effects.Contains('/'))
-                        {
+                        if (effects.Contains('/')) {
                             matches = compound.Matches(effects);
                             var first = SupportSkill.FromStr(Passive.Assist, matches[0].Groups["first"].Value);
                             var second = SupportSkill.FromStr(Passive.Assist, matches[0].Groups["second"].Value);
                             var level = LevelFromRaw(matches[0].Groups["level"].Value);
                             return new(new SupportSkill[] { first, second }, level);
                         }
-                        else
-                        {
+                        else {
                             matches = single.Matches(effects);
                             var effect = SupportSkill.FromStr(Passive.Assist, matches[0].Groups["effect"].Value);
                             var level = LevelFromRaw(matches[0].Groups["level"].Value);
                             return new(new SupportSkill[] { effect }, level);
                         }
                     }
-                case "回":
-                    {
+                case "回": {
                         var effects = matches[0].Groups["body"].Value;
-                        if (effects.Contains('/'))
-                        {
+                        if (effects.Contains('/')) {
                             matches = compound.Matches(effects);
                             var first = SupportSkill.FromStr(Passive.Heal, matches[0].Groups["first"].Value);
                             var second = SupportSkill.FromStr(Passive.Heal, matches[0].Groups["second"].Value);
                             var level = LevelFromRaw(matches[0].Groups["level"].Value);
                             return new(new SupportSkill[] { first, second }, level);
                         }
-                        else
-                        {
+                        else {
                             matches = single.Matches(effects);
                             var effect = SupportSkill.FromStr(Passive.Heal, matches[0].Groups["effect"].Value);
                             var level = LevelFromRaw(matches[0].Groups["level"].Value);
                             return new(new SupportSkill[] { effect }, level);
                         }
                     }
-                case "コ":
-                    {// 現状、コマンド実行時サポート効果はこれしかない
+                case "コ": {// 現状、コマンド実行時サポート効果はこれしかない
                         return new(new SupportSkill[] { new PassiveSupportSkill(Passive.Command, PassiveKind.MpConsumptionDown) }, Level.Two);
                     }
                 default: throw new ArgumentException();
@@ -461,16 +396,14 @@ public record SupportSkills(SupportSkill[] Skills, Level Level)
     }
 }
 
-public enum PassiveKind
-{
+public enum PassiveKind {
     DamageUp,
     AssistUp,
     HealUp,
     MpConsumptionDown,
 }
 
-public enum Passive
-{
+public enum Passive {
     Attack,
     Assist,
     Heal,
@@ -478,16 +411,13 @@ public enum Passive
     Command,
 }
 
-public enum UpDown
-{
+public enum UpDown {
     UP,
     DOWN,
 }
 
-public abstract record SupportSkill
-{
-    public static SupportSkill FromStr(Passive passive, string text)
-    {
+public abstract record SupportSkill {
+    public static SupportSkill FromStr(Passive passive, string text) {
         if (text.StartsWith("ダメージUP")) return new PassiveSupportSkill(passive, PassiveKind.DamageUp);
         else if (text.StartsWith("支援UP")) return new PassiveSupportSkill(passive, PassiveKind.AssistUp);
         else if (text.StartsWith("回復UP")) return new PassiveSupportSkill(passive, PassiveKind.HealUp);
@@ -500,8 +430,7 @@ public abstract record SupportSkill
     public abstract Passive PassivePrefix { get; }
 }
 
-public record StatSupportSkill(Passive Passive, Stat[] Stats, UpDown Type) : SupportSkill
-{
+public record StatSupportSkill(Passive Passive, Stat[] Stats, UpDown Type) : SupportSkill {
     public override string? Name => $"{MemoriaUtil.StatsToString(Stats)}{Type}";
     public override string? FullName => $"{Passive.GetName()}:{MemoriaUtil.StatsToString(Stats)}{Type}";
     public override Passive PassivePrefix => Passive;
@@ -509,8 +438,7 @@ public record StatSupportSkill(Passive Passive, Stat[] Stats, UpDown Type) : Sup
     public static implicit operator StatSupportSkill((Passive, Stat[], UpDown) from) => new(from.Item1, from.Item2, from.Item3);
 }
 
-public record PassiveSupportSkill(Passive Passive, PassiveKind PassiveKind) : SupportSkill
-{
+public record PassiveSupportSkill(Passive Passive, PassiveKind PassiveKind) : SupportSkill {
     public override string? Name => $"{PassiveKind.GetName()}";
     public override string? FullName => $"{Passive.GetName()}:{PassiveKind.GetName()}";
     public override Passive PassivePrefix => Passive;
@@ -518,8 +446,7 @@ public record PassiveSupportSkill(Passive Passive, PassiveKind PassiveKind) : Su
     public static implicit operator PassiveSupportSkill((Passive, PassiveKind) from) => new(from.Item1, from.Item2);
 }
 
-public record struct Support(SupportSkills SupportSkill, string Description)
-{
+public record struct Support(SupportSkills SupportSkill, string Description) {
     public string? Name => SupportSkill.Name;
 }
 
@@ -530,13 +457,516 @@ public record struct Memoria(
     int[] Status,
     int Cost,
     Skill Skill,
-    Support Support)
-{
+    Support Support) {
     public Uri Uri => new($"ms-appx:///Assets/memoria/{Name}.jpg");
     public string Path = $"/Assets/memoria/{Name}.jpg";
 
     public static Memoria[] List => new Memoria[]
     {
+        new(
+            "氷嵐を断つ劔",
+            "特殊単体",
+            "火",
+            new[]
+            {
+                1959,
+                5163,
+                1958,
+                4043
+            },
+            20,
+            new Skill(
+                "Sp.ファイアパワースマッシュA Ⅳ+",
+                "敵1体に特殊特大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "氷嵐を断つ劔",
+            "妨害",
+            "火",
+            new[]
+            {
+                1959,
+                5163,
+                1958,
+                4043
+            },
+            20,
+            new Skill(
+                "WパワーフォールA Ⅲ",
+                "敵1体のATKとSp.ATKを大ダウンさせる。"
+            ),
+            new Support(
+                "援:WパワーDOWN Ⅱ",
+                "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを大ダウンさせる。"
+            )
+        ),
+        new(
+            "一意専心",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                5165,
+                1954,
+                4061,
+                1920
+            },
+            20,
+            new Skill(
+                "ファイアガードブレイクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力を小ダウンさせる。"
+            ),
+            new Support(
+                "攻:ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "一意専心",
+            "妨害",
+            "火",
+            new[]
+            {
+                5165,
+                1954,
+                4061,
+                1920
+            },
+            20,
+            new Skill(
+                "ファイアガードフォールB Ⅱ",
+                "敵1～2体のDEFと火属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "援:ガードDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "六花、胡蝶の如く舞う",
+            "回復",
+            "火",
+            new[]
+            {
+                1944,
+                1935,
+                5174,
+                4071
+            },
+            20,
+            new Skill(
+                "ファイアガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のDEFと火属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
+            )
+        ),
+        new(
+            "六花、胡蝶の如く舞う",
+            "通常単体",
+            "火",
+            new[]
+            {
+                1944,
+                1935,
+                5174,
+                4071
+            },
+            20,
+            new Skill(
+                "ファイアパワーストライクA Ⅳ+",
+                "敵1体に通常特大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:獲得マッチPtUP/通常単体 Ⅱ",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※..."
+            )
+        ),
+        new(
+            "輝ける流星",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                1926,
+                5175,
+                1952,
+                4056
+            },
+            20,
+            new Skill(
+                "Sp.ファイアガードバーストB Ⅲ",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力を小ダウンさせる。"
+            ),
+            new Support(
+                "攻:Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "輝ける流星",
+            "支援",
+            "火",
+            new[]
+            {
+                1926,
+                5175,
+                1952,
+                4056
+            },
+            20,
+            new Skill(
+                "Sp.ガードライフアシストD Ⅱ",
+                "味方2体のSp.DEFと最大HPをアップさせる。"
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "クリエイターズコラボ-とろけるハート-",
+            "回復",
+            "火",
+            new[]
+            {
+                2585,
+                2597,
+                4168,
+                4938
+            },
+            22,
+            new Skill(
+                "Sp.ファイアガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:回復UP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。"
+            )
+        ),
+        new(
+            "クリエイターズコラボ-甘いきらめき-",
+            "支援",
+            "火",
+            new[]
+            {
+                2610,
+                4958,
+                2594,
+                4148
+            },
+            22,
+            new Skill(
+                "Sp.ファイアパワーアシストC Ⅲ",
+                "味方1～3体のSp.ATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "クリエイターズコラボ-ショコラのゆうわく-",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                2616,
+                4941,
+                2596,
+                4140
+            },
+            22,
+            new Skill(
+                "Sp.ファイアパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。"
+            )
+        ),
+        new(
+            "クリエイターズコラボ-いただきだゾ♪-",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                4968,
+                2616,
+                4153,
+                2586
+            },
+            22,
+            new Skill(
+                "ファイアパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。"
+            )
+        ),
+        new(
+            "あなたにお茶を",
+            "通常範囲",
+            "風",
+            new[]
+            {
+                5154,
+                1921,
+                4066,
+                1946
+            },
+            20,
+            new Skill(
+                "ウィンドパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "あなたにお茶を",
+            "回復",
+            "風",
+            new[]
+            {
+                5154,
+                1921,
+                4066,
+                1946
+            },
+            20,
+            new Skill(
+                "ウィンドガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
+            )
+        ),
+        new(
+            "安らぎをあなたに",
+            "特殊範囲",
+            "風",
+            new[]
+            {
+                1948,
+                5174,
+                1931,
+                4053
+            },
+            20,
+            new Skill(
+                "Sp.ウィンドガードバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。"
+            )
+        ),
+        new(
+            "安らぎをあなたに",
+            "妨害",
+            "風",
+            new[]
+            {
+                1948,
+                5174,
+                1931,
+                4053
+            },
+            20,
+            new Skill(
+                "Sp.ウィンドガードフォールC Ⅲ",
+                "敵1～3体のSp.DEFと風属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "援:Sp.ガードDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "触れ合う吐息",
+            "回復",
+            "風",
+            new[]
+            {
+                1928,
+                5168,
+                1946,
+                4040
+            },
+            20,
+            new Skill(
+                "Sp.ウィンドガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のSp.DEFと風属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:回復UP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。"
+            )
+        ),
+        new(
+            "触れ合う吐息",
+            "特殊範囲",
+            "風",
+            new[]
+            {
+                1928,
+                5168,
+                1946,
+                4040
+            },
+            20,
+            new Skill(
+                "Sp.ウィンドパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "チョコを知らない君へ",
+            "支援",
+            "風",
+            new[]
+            {
+                5164,
+                1934,
+                4050,
+                1931
+            },
+            20,
+            new Skill(
+                "ウィンドパワーアシストC Ⅲ",
+                "味方1～3体のATKと風属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "チョコを知らない君へ",
+            "通常範囲",
+            "風",
+            new[]
+            {
+                5164,
+                1934,
+                4050,
+                1931
+            },
+            20,
+            new Skill(
+                "ウィンドガードブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。"
+            )
+        ),
+        new(
+            "運命のトリニティ",
+            "支援",
+            "火",
+            new[]
+            {
+                1927,
+                5157,
+                1933,
+                4046
+            },
+            20,
+            new Skill(
+                "Sp.ファイアパワーアシストB Ⅱ",
+                "味方1～2体のSp.ATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "援:Sp.パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "運命のトリニティ",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                1927,
+                5157,
+                1933,
+                4046
+            },
+            20,
+            new Skill(
+                "Sp.マイトスマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
+            ),
+            new Support(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "貴女と共にあるために",
+            "回復",
+            "火",
+            new[]
+            {
+                5141,
+                1949,
+                4076,
+                1926
+            },
+            20,
+            new Skill(
+                "ガードヒールC Ⅲ+",
+                "味方1～3体のHPを回復する。さらに味方のDEFをアップする。"
+            ),
+            new Support(
+                "回:ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
+            )
+        ),
+        new(
+            "貴女と共にあるために",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                5141,
+                1949,
+                4076,
+                1926
+            },
+            20,
+            new Skill(
+                "マイトブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
+            ),
+            new Support(
+                "攻:ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
+            )
+        ),
         new(
             "貴女の笑顔を守るために",
             "支援",
