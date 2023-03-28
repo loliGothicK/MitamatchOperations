@@ -55,42 +55,61 @@ public sealed partial class MemberManageConsole
 
         if (items.Count <= 0) return;
 
-        using var img = new Bitmap(items[0].As<StorageFile>()!.Path);
-        var (result, detected) = await Match.Recognise(img, _selectedMember!.Position);
-
-        result.Save($@"{Director.MitamatchDir()}\.temp\result.jpg");
-
-        var dialog = new DialogBuilder(XamlRoot)
-            .WithTitle("読込結果")
-            .WithPrimary("名前をつけて保存")
-            .WithCancel("やっぱりやめる")
-            .WithBody(new RecogniseDialogContent(detected))
-            .Build();
-        dialog.PrimaryButtonCommand = new Defer(() =>
+        try
         {
-            dialog.Closed += async (_, _) =>
+            using var img = new Bitmap(items[0].As<StorageFile>()!.Path);
+            var (result, detected) = await Match.Recognise(img, _selectedMember!.Position);
+
+            result.Save($@"{Director.MitamatchDir()}\.temp\result.jpg");
+
+            var dialog = new DialogBuilder(XamlRoot)
+                .WithTitle("読込結果")
+                .WithPrimary("名前をつけて保存")
+                .WithCancel("やっぱりやめる")
+                .WithBody(new RecogniseDialogContent(detected))
+                .Build();
+            dialog.PrimaryButtonCommand = new Defer(() =>
             {
-                var body = new TextBox();
-                var naming = new DialogBuilder(XamlRoot)
-                    .WithTitle("ユニット名")
-                    .WithPrimary("保存")
-                    .WithCancel("やっぱりやめる")
-                    .WithBody(body)
-                    .Build();
-                naming.PrimaryButtonCommand = new Defer(async delegate
+                dialog.Closed += async (_, _) =>
                 {
-                    new DirectoryInfo($@"{Director.ProjectDir()}\{_regionName}\Members\{_selectedMember?.Name}\Units").Create();
-                    var path = $@"{Director.ProjectDir()}\{_regionName}\Members\{_selectedMember?.Name}\Units\{body.Text}.json";
-                    await using var unit = File.Create(path);
-                    await unit.WriteAsync(new UTF8Encoding(true).GetBytes(new Unit(body.Text, _selectedMember!.Position is Front, detected.ToList()).ToJson()));
-                });
+                    var body = new TextBox();
+                    var naming = new DialogBuilder(XamlRoot)
+                        .WithTitle("ユニット名")
+                        .WithPrimary("保存")
+                        .WithCancel("やっぱりやめる")
+                        .WithBody(body)
+                        .Build();
+                    naming.PrimaryButtonCommand = new Defer(async delegate
+                    {
+                        new DirectoryInfo(
+                            $@"{Director.ProjectDir()}\{_regionName}\Members\{_selectedMember?.Name}\Units").Create();
+                        var path =
+                            $@"{Director.ProjectDir()}\{_regionName}\Members\{_selectedMember?.Name}\Units\{body.Text}.json";
+                        await using var unit = File.Create(path);
+                        await unit.WriteAsync(new UTF8Encoding(true).GetBytes(
+                            new Unit(body.Text, _selectedMember!.Position is Front, detected.ToList()).ToJson()));
+                    });
 
-                await naming.ShowAsync();
-            };
-            return Task.CompletedTask;
-        });
+                    await naming.ShowAsync();
+                };
+                return Task.CompletedTask;
+            });
 
-        await dialog.ShowAsync();
+            await dialog.ShowAsync();
+        }
+        catch (Exception ex)
+        {
+            var dialog = new DialogBuilder(XamlRoot)
+                .WithTitle("読込失敗")
+                .WithPrimary("OK")
+                .WithBody(new TextBlock
+                {
+                    Text = ex.ToString()
+                })
+                .Build();
+
+            await dialog.ShowAsync();
+        }
     }
 
     private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
