@@ -48,15 +48,14 @@ internal class Match {
             var templates = await Task.WhenAll(Memoria.List.Where(dummyCostume.CanBeEquipped).Select(async memoria => {
                 try {
                     var a = await StorageFile.GetFileFromApplicationUriAsync(memoria.Uri);
-                }
-                catch {
+                } catch {
                     Console.WriteLine(memoria.ToString());
                 }
+
                 var file = await StorageFile.GetFileFromApplicationUriAsync(memoria.Uri);
                 var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
                 var descriptors = new Mat();
                 akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
-
                 return (memoria, descriptors);
             }));
 
