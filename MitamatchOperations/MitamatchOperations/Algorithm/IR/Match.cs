@@ -46,11 +46,7 @@ internal class Match {
 
         {
             var templates = await Task.WhenAll(Memoria.List.Where(dummyCostume.CanBeEquipped).Select(async memoria => {
-                try {
-                    var a = await StorageFile.GetFileFromApplicationUriAsync(memoria.Uri);
-                } catch {
-                    Console.WriteLine(memoria.ToString());
-                }
+                var a = await StorageFile.GetFileFromApplicationUriAsync(memoria.Uri);
 
                 var file = await StorageFile.GetFileFromApplicationUriAsync(memoria.Uri);
                 var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
