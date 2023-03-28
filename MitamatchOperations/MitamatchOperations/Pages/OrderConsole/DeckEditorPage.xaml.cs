@@ -798,8 +798,20 @@ internal record struct DeckJsonProxy(int Index, int Delay, int Start, int End, s
 
 internal record TimeTableItem(Order Order, int Delay, int Start, int End, string Pic = "", bool Conditional = false)
 {
-    internal string StartTime => $"{Start / 60:00}:{Start % 60:00}";
-    internal string EndTime => $"{End / 60:00}:{End % 60:00}";
+    private static string TimeFormat(int time)
+    {
+        var min = time / 60;
+        var sec = time % 60;
+
+        if (min < 0 || sec < 0)
+        {
+            return $"-{Math.Abs(min):00}:{Math.Abs(sec):00}";
+        }
+
+        return $" {min:00}:{sec:00}";
+    }
+    internal string StartTime => TimeFormat(Start);
+    internal string EndTime => TimeFormat(End);
     internal string PicFmt => Pic != "" ? $"[{Pic}]" : "";
     internal string PicPlaceholder => Pic != "" ? $"{Pic}" : "Select";
 
