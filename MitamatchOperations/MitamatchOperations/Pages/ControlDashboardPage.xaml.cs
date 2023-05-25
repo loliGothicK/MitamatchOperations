@@ -219,7 +219,10 @@ public sealed partial class ControlDashboardPage
 
         if (ordered.Kind is Elemental)
         {
-            foreach (var item in _deck.GetRange(_cursor - _reminds.Count, _deck.Count - _cursor + _reminds.Count).Where(item => item.Order.Kind is Elemental).ToArray())
+            foreach (var item in _deck
+                         .GetRange(_cursor - _reminds.Count, _deck.Count - _cursor + _reminds.Count)
+                         .Where(item => item.Order.Kind is Elemental)
+                         .ToArray())
             {
                 if (item.Order.Kind.As<Elemental>().Element == ordered.Kind.As<Elemental>().Element)
                 {
