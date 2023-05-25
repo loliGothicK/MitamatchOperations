@@ -479,25 +479,11 @@ public sealed partial class DeckEditorPage
             .Select(item => (Order)item)
             .ToArray();
 
-        button.IsEnabled = selected.Length == 0
-            ? CheckAvailable(Order.List[int.Parse(button.AccessKey)].Kind)
-            : selected.Select(o => o.Kind).All(CheckAvailable);
-
-        if (!button.IsEnabled)
-        {
-            button.Content = "同系統の属性オーダーを編成済み";
-            return;
-        }
-
         var elemental = selected.Where(order => order.Kind is Elemental).Select(order => (Elemental)order.Kind).ToArray();
         var distinct = elemental.Distinct().ToArray();
 
         button.IsEnabled = elemental.Length == distinct.Length;
-
-        if (button.IsEnabled) return;
-        button.Content = "同系統の属性オーダーを編成済み";
     }
-
     private void SaveButton_OnClick(object sender, RoutedEventArgs e)
     {
         if (DeckName.Text.Length == 0) return;

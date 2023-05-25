@@ -18,6 +18,8 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using WinRT;
 using Microsoft.UI.Xaml.Input;
 using Windows.System;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using mitama.Domain.OrderKinds;
 
 namespace mitama.Pages;
 
@@ -28,10 +30,10 @@ public sealed partial class ControlDashboardPage
 {
     private WindowCapture? _capture;
     private readonly ObservableCollection<TimeTableItem> _reminds = new();
-    private readonly ObservableCollection<ResultItem> _results = new();
+    private readonly ObservableHashSet<ResultItem> _results = new();
     private readonly DispatcherTimer _timer = new()
     {
-        Interval = new TimeSpan(0, 0, 0, 0, 200)
+        Interval = new TimeSpan(0, 0, 0, 1)
     };
 
     private int _cursor = 4;
@@ -41,6 +43,7 @@ public sealed partial class ControlDashboardPage
     private readonly string? _user = Director.ReadCache().User;
     private readonly string _project = Director.ReadCache().Region;
     private bool _picFlag = true;
+    private readonly object _syncObject = new();
 
     private bool _reFormation;
 
@@ -125,7 +128,7 @@ public sealed partial class ControlDashboardPage
                     {
                         if (_reminds.Count == 0) break;
                         var ordered = Order.List.MinBy(o => Algo.LevenshteinRate(o.Name, order));
-                        if (_reminds.Select(item => item.Order).Contains(ordered))
+                        if (_deck.Contains(ordered) && !_results.Select(r => r.Order).Contains(ordered))
                         {
                             Update(user, ordered);
                         }
@@ -181,18 +184,88 @@ public sealed partial class ControlDashboardPage
         _timer.Start();
     }
 
+    private void ReCalcTimeTable()
+    {
+        if (_deck.Count == 0) return;
+        var table = _deck.ToArray();
+        _deck.Clear();
+        var first = table.First();
+        var previous = first with
+        {
+            Start = 15 * 60 - first.Delay,
+            End = 15 * 60 - first.Order.PrepareTime - first.Order.ActiveTime
+        };
+        _deck.Add(previous);
+
+        foreach (var item in table.Skip(1))
+        {
+            var prepareTime = previous.Order.Index switch
+            {
+                52 => 5, // レギオンマッチスキル準備時間短縮Lv.3
+                _ => item.Order.PrepareTime
+            };
+            previous = item with
+            {
+                Start = previous.End - item.Delay,
+                End = (previous.End - item.Delay) - prepareTime - item.Order.ActiveTime
+            };
+            _deck.Add(previous);
+        }
+    }
+
     private void Update(string user, Order ordered)
     {
+        if (_results.Select(r => r.Order).Contains(ordered)) return;
+
+        if (ordered.Kind is Elemental)
+        {
+            foreach (var item in _deck.GetRange(_cursor - _reminds.Count, _deck.Count - _cursor + _reminds.Count).Where(item => item.Order.Kind is Elemental).ToArray())
+            {
+                if (item.Order.Kind.As<Elemental>().Element == ordered.Kind.As<Elemental>().Element)
+                {
+                    _deck.Remove(item);
+                }
+            }
+            ReCalcTimeTable();
+        }
+
+        // タイムテーブル再計算
+        lock (_syncObject)
+        {
+            if (_reminds.First().Order != ordered)
+            {
+                var idx = _deck.IndexOf(ordered);
+                _deck.Insert(_cursor - _reminds.Count, _deck[idx]);
+                _deck.RemoveAt(idx + 1);
+
+                ReCalcTimeTable();
+                var remaining = _reminds.Count;
+                _reminds.Clear();
+                foreach (var item in _deck.GetRange(_cursor - remaining, remaining))
+                {
+                    _reminds.Add(item);
+                }
+            }
+        }
+
+        // 差分計算
         var now = DateTime.Now;
         _firstTimePoint ??= now;
         var totalTime = ordered.PrepareTime + ordered.ActiveTime;
         _nextTimePoint = now + new TimeSpan(0, 0, totalTime / 60, totalTime % 60);
         var span = now - _firstTimePoint;
         var deviation = span.Value.Minutes * 60 + span.Value.Seconds - (15 * 60 - _reminds.First().Start);
-        _reminds.Remove(ordered);
-        if (_deck.Count > _cursor) _reminds.Add(_deck[_cursor++]);
 
-        if (_reminds.Count > 0 && _reminds.First().Conditional && deviation >= 10)
+        lock (_syncObject)
+        {
+            // 発動済みオーダーを取り除き、
+            _reminds.Remove(ordered);
+            // 次のオーダーがあれば追加する
+            if (_deck.Count > _cursor) _reminds.Add(_deck[_cursor++]);
+        }
+
+        // 条件付きオーダーがあればチェックする
+        if (_reminds.Count > 0 && _reminds.First().Conditional && deviation >= 30)
         {
             var skip = _reminds.First();
             _reminds.RemoveAt(0);
@@ -206,11 +279,14 @@ public sealed partial class ControlDashboardPage
             ConditionalOrderInfo.IsOpen = false;
         }
 
-        _results.Insert(0, new ResultItem(user, ordered, deviation));
-
-        RemainderBoard.ItemsSource = _reminds;
-        ResultBoard.ItemsSource = _results;
-        RemainderBoard.SelectedIndex = 0;
+        lock (_syncObject) {
+            // 発動結果に追加
+            _results.Add(new ResultItem(user, ordered, deviation, now));
+            // 画面更新
+            RemainderBoard.ItemsSource = _reminds;
+            ResultBoard.ItemsSource = _results.Distinct().OrderByDescending(r => r.ActivatedAt).ToList();
+            RemainderBoard.SelectedIndex = 0;
+        }
     }
 
     private static Task<AnalyzeResult> Analyze(string raw)
@@ -322,7 +398,9 @@ public sealed partial class ControlDashboardPage
     }
 }
 
-internal record struct ResultItem(string Pic, Order Order, int Deviation)
+internal record ResultItem(string Pic, Order Order, int Deviation, DateTime ActivatedAt)
 {
-    public readonly string DeviationFmt => $"({Deviation})";
+    public string DeviationFmt => $"({Deviation})";
+    bool IEquatable<ResultItem?>.Equals(ResultItem? other) => Order.Index == other?.Order.Index;
+
 }

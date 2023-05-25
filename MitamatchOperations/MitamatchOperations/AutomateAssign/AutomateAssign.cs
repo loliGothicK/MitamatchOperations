@@ -447,8 +447,6 @@ internal class AutomateAssign {
         }
 
         // 最後のオーダーの前が施術加速の場合も優先して妨害に割り当てる
-        // Note (2022-10-19):
-        //  戦術加速は現状総攻撃でトップだが、一応分けて記述しておく
         if (list[^2].Name == "戦術加速の陣" && result[list[list.Last().Index - 1].Index] is NotAssigned) {
             var debuffer = debuffers.FirstOrDefault(debuffer => debuffer.OrderIndices.Contains((ushort)52));
             if (debuffer == null) return (result, "最後の直前の戦術加速は支援妨害に割り当ててください");
