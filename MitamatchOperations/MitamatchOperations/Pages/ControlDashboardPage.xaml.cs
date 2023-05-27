@@ -33,7 +33,7 @@ public sealed partial class ControlDashboardPage
     private readonly ObservableHashSet<ResultItem> _results = new();
     private readonly DispatcherTimer _timer = new()
     {
-        Interval = new TimeSpan(0, 0, 0, 1)
+        Interval = TimeSpan.FromSeconds(1)
     };
 
     private int _cursor = 4;
@@ -43,8 +43,6 @@ public sealed partial class ControlDashboardPage
     private readonly string? _user = Director.ReadCache().User;
     private readonly string _project = Director.ReadCache().Region;
     private bool _picFlag = true;
-    private readonly object _syncObject = new();
-
     private bool _reFormation;
 
     public bool IsCtrlKeyPressed { get; set; }
@@ -69,6 +67,8 @@ public sealed partial class ControlDashboardPage
 
         _timer.Tick += async (_, _) =>
         {
+            _timer.Stop();
+
             #region Window Capture Initialisation
             if (_capture == null)
             {
@@ -117,6 +117,7 @@ public sealed partial class ControlDashboardPage
                         };
                     }
                 }
+                _timer.Start();
                 return;
             }
             #endregion
@@ -137,6 +138,7 @@ public sealed partial class ControlDashboardPage
                 case FailureResult(var raw) when raw != string.Empty: break;
             }
             #endregion
+            _timer.Start();
 
             #region Next Reminder Checking
             if (_reminds.Count > 0 && _nextTimePoint - DateTime.Now <= new TimeSpan(0, 0, 0, 10))
@@ -215,12 +217,29 @@ public sealed partial class ControlDashboardPage
 
     private void Update(string user, Order ordered)
     {
-        if (_results.Select(r => r.Order).Contains(ordered)) return;
+        var now = DateTime.Now;
+
+        // タイムテーブル再計算
+        if (_reminds.First().Order != ordered)
+        {
+            var idx = _deck.IndexOf(ordered);
+            _deck.Insert(_cursor - _reminds.Count, _deck[idx]);
+            _deck.RemoveAt(idx + 1);
+
+            ReCalcTimeTable();
+            var remaining = _reminds.Count;
+            _reminds.Clear();
+            foreach (var item in _deck.GetRange(_cursor - remaining - 1, remaining))
+            {
+                _reminds.Add(item);
+            }
+        }
 
         if (ordered.Kind is Elemental)
         {
             foreach (var item in _deck
                          .GetRange(_cursor - _reminds.Count, _deck.Count - _cursor + _reminds.Count)
+                         .Where(item => item.Order != ordered)
                          .Where(item => item.Order.Kind is Elemental)
                          .ToArray())
             {
@@ -229,43 +248,26 @@ public sealed partial class ControlDashboardPage
                     _deck.Remove(item);
                 }
             }
+            var remaining = _reminds.Count;
+            _reminds.Clear();
+            foreach (var item in _deck.GetRange(_cursor - remaining, remaining))
+            {
+                _reminds.Add(item);
+            }
             ReCalcTimeTable();
         }
 
-        // タイムテーブル再計算
-        lock (_syncObject)
-        {
-            if (_reminds.First().Order != ordered)
-            {
-                var idx = _deck.IndexOf(ordered);
-                _deck.Insert(_cursor - _reminds.Count, _deck[idx]);
-                _deck.RemoveAt(idx + 1);
-
-                ReCalcTimeTable();
-                var remaining = _reminds.Count;
-                _reminds.Clear();
-                foreach (var item in _deck.GetRange(_cursor - remaining, remaining))
-                {
-                    _reminds.Add(item);
-                }
-            }
-        }
-
         // 差分計算
-        var now = DateTime.Now;
         _firstTimePoint ??= now;
         var totalTime = ordered.PrepareTime + ordered.ActiveTime;
         _nextTimePoint = now + new TimeSpan(0, 0, totalTime / 60, totalTime % 60);
         var span = now - _firstTimePoint;
         var deviation = span.Value.Minutes * 60 + span.Value.Seconds - (15 * 60 - _reminds.First().Start);
 
-        lock (_syncObject)
-        {
-            // 発動済みオーダーを取り除き、
-            _reminds.Remove(ordered);
-            // 次のオーダーがあれば追加する
-            if (_deck.Count > _cursor) _reminds.Add(_deck[_cursor++]);
-        }
+        // 発動済みオーダーを取り除き、
+        _reminds.Remove(ordered);
+        // 次のオーダーがあれば追加する
+        if (_deck.Count > _cursor && _reminds.Count < 4) _reminds.Add(_deck[_cursor++]);
 
         // 条件付きオーダーがあればチェックする
         if (_reminds.Count > 0 && _reminds.First().Conditional && deviation >= 30)
@@ -282,14 +284,12 @@ public sealed partial class ControlDashboardPage
             ConditionalOrderInfo.IsOpen = false;
         }
 
-        lock (_syncObject) {
-            // 発動結果に追加
-            _results.Add(new ResultItem(user, ordered, deviation, now));
-            // 画面更新
-            RemainderBoard.ItemsSource = _reminds;
-            ResultBoard.ItemsSource = _results.Distinct().OrderByDescending(r => r.ActivatedAt).ToList();
-            RemainderBoard.SelectedIndex = 0;
-        }
+        // 発動結果に追加
+        _results.Add(new ResultItem(user, ordered, deviation, now));
+        // 画面更新
+        RemainderBoard.ItemsSource = _reminds;
+        ResultBoard.ItemsSource = _results.Distinct().OrderByDescending(r => r.ActivatedAt).ToList();
+        RemainderBoard.SelectedIndex = 0;
     }
 
     private static Task<AnalyzeResult> Analyze(string raw)
