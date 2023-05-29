@@ -168,4 +168,13 @@ internal partial class WindowCapture {
 
         return circles.Length > 0;
     }
+
+    public async Task<string> CaptureOrderInfo()
+    {
+        var snapShot = SnapShot((1040, 370), (250, 40));
+        snapShot.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\debug_order_info.png");
+
+        return await RecognizeText(await GetSoftwareSnapShot(snapShot));
+    }
+
 }
