@@ -36,6 +36,14 @@
     <WarningLevel>7</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Controls\**" />
+    <Content Remove="Controls\**" />
+    <EmbeddedResource Remove="Controls\**" />
+    <None Remove="Controls\**" />
+    <Page Remove="Controls\**" />
+    <PRIResource Remove="Controls\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Pages\consolePage.xaml" />
     <None Remove="Pages\console\OrderManagePage.xaml" />
     <None Remove="Pages\ControlDashboardPage.xaml" />
@@ -57,23 +65,24 @@
       <Guid>d37e2a3e-8545-3a39-9f4f-31827c9124ab</Guid>
     </COMReference>
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.WinUI" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="Microsoft.ML" Version="1.7.1" />
+    <PackageReference Include="Microsoft.ML.Vision" Version="1.7.1" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.3.230502000" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
     <PackageReference Include="OpenCvSharp4" Version="4.7.0.20230115" />
     <PackageReference Include="OpenCvSharp4.Extensions" Version="4.7.0.20230115" />
     <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.7.0.20230115" />
     <PackageReference Include="OpenCvSharp4.Windows" Version="4.7.0.20230115" />
+    <PackageReference Include="SciSharp.TensorFlow.Redist" Version="2.3.1" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.117" />
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -81,87 +90,94 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
-
   <ItemGroup>
     <Page Update="Pages\RegionConsole\TimelineTools.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Page Update="Pages\RegionConsole\UnitViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Page Update="Pages\RegionConsole\MemberManageConsole.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Page Update="Pages\RegionConsole\RecogniseDialogContent.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Page Update="Pages\ControlDashboardPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Page Update="Pages\Main\AddNewMemberDialogContent.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Page Update="Pages\Main\ChangeProjectDialogContent.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Page Update="Pages\RegionConsolePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Page Update="Pages\OrderConsole\SaveDialogContent.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Page Update="Pages\OrderConsole\LoadDialogContent.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Page Update="Pages\console\OrderManagePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Page Update="Pages\consolePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup Label="MLOrderModel">
+    <None Include="MLOrderModel.consumption.cs">
+      <DependentUpon>MLOrderModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLOrderModel.training.cs">
+      <DependentUpon>MLOrderModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLOrderModel.zip">
+      <DependentUpon>MLOrderModel.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLActivatingModel">
+    <None Include="MLActivatingModel.consumption.cs">
+      <DependentUpon>MLActivatingModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLActivatingModel.training.cs">
+      <DependentUpon>MLActivatingModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLActivatingModel.zip">
+      <DependentUpon>MLActivatingModel.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

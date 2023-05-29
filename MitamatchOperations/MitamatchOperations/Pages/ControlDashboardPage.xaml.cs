@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -29,6 +30,7 @@ namespace mitama.Pages;
 public sealed partial class ControlDashboardPage
 {
     private WindowCapture? _capture;
+    private WindowCapture? _opCapture;
     private readonly ObservableCollection<TimeTableItem> _reminds = new();
     private readonly ObservableHashSet<ResultItem> _results = new();
     private readonly DispatcherTimer _timer = new()
@@ -44,15 +46,22 @@ public sealed partial class ControlDashboardPage
     private readonly string _project = Director.ReadCache().Region;
     private bool _picFlag = true;
     private bool _reFormation;
+    private OpOrderStatus _orderStat = new None();
+    private DateTime _orderPreparePoint = DateTime.Now;
 
     public bool IsCtrlKeyPressed { get; set; }
 
     private void Grid_KeyDown(object sender, KeyRoutedEventArgs e)
     {
         if (e.Key == VirtualKey.Control) IsCtrlKeyPressed = true;
-        else if (IsCtrlKeyPressed && e.Key == VirtualKey.Q)
+        else switch (IsCtrlKeyPressed)
         {
-            ManualTrigger();
+            case true when e.Key == VirtualKey.Q:
+                ManualTrigger();
+                break;
+            case true when e.Key == VirtualKey.S:
+                _opCapture!.IsActivating();
+                break;
         }
     }
 
@@ -75,6 +84,7 @@ public sealed partial class ControlDashboardPage
                 try
                 {
                     _capture = new WindowCapture(Search.WindowHandleFromCaption("Assaultlily"));
+                    _opCapture= new WindowCapture(Search.WindowHandleFromCaption("Assaultlily"));
                     if (InfoBar.AccessKey == "ERROR")
                     {
                         InfoBar.AccessKey = "SUCCESS";
@@ -101,6 +111,7 @@ public sealed partial class ControlDashboardPage
                                 Command = new Defer(delegate
                                 {
                                     _capture = new WindowCapture(handle);
+                                    _opCapture = new WindowCapture(handle);
                                     InfoBar.AccessKey = "SUCCESS";
                                     InfoBar.IsOpen = false;
                                     InfoBar.Content = null;
@@ -139,6 +150,80 @@ public sealed partial class ControlDashboardPage
             }
             #endregion
             _timer.Start();
+
+            #region Capture Opponent's Order
+
+            switch (_orderStat)
+            {
+                case Active(var point, var span):
+                    {
+                        OpponentInfoBar.IsOpen = true;
+                        var spend = (DateTime.Now - point).Seconds + (DateTime.Now - point).Minutes * 60;
+                        OpponentInfoBar.Title = $"Opponent's Order: {span - spend} seconds remaining.";
+                        if (span - spend < 5)
+                        {
+                            _orderStat = new None();
+                            OpponentInfoBar.IsOpen = false;
+                        }
+                        break;
+                    }
+                case None:
+                    {
+                        switch (_opCapture!.CaptureOpponentsOrder())
+                        {
+                            case WaitStat(var image):
+                                {
+                                    image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug.png");
+                                    _orderStat = new Waiting();
+                                    _orderPreparePoint = DateTime.Now;
+                                    break;
+                                }
+                            case ActiveStat:
+                            case Nothing:
+                                break;
+                        }
+                        break;
+                    }
+                case Waiting:
+                    {
+                        OpponentInfoBar.IsOpen = true;
+                        OpponentInfoBar.Title = "Waiting...";
+
+                        for (var i = 1; i < 5; i++)
+                        {
+                            switch (_opCapture!.CaptureOpponentsOrder())
+                            {
+                                case ActiveStat(var image):
+                                {
+                                    image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\active\\debug.png");
+                                    var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
+                                    var modifiedPrepareTime = new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t));
+                                    _orderStat = modifiedPrepareTime switch
+                                    {
+                                        5 => new Active(DateTime.Now, 120 - 3),
+                                        15 => new Active(DateTime.Now, 60 - 3),
+                                        20 => new Active(DateTime.Now, 80 - 3),
+                                        30 => new Active(DateTime.Now, 120 - 3),
+                                        _ => throw new UnreachableException(),
+                                    };
+                                    goto End;
+                                }
+                            }
+                        }
+
+                        if (_orderStat is not Active && _opCapture!.IsActivating())
+                        {
+                            _orderStat = new None();
+                            OpponentInfoBar.IsOpen = false;
+                        }
+                        End:
+                        break;
+                    }
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(_orderStat));
+            }
+
+            #endregion
 
             #region Next Reminder Checking
             if (_reminds.Count > 0 && _nextTimePoint - DateTime.Now <= new TimeSpan(0, 0, 0, 10))
@@ -229,7 +314,7 @@ public sealed partial class ControlDashboardPage
             ReCalcTimeTable();
             var remaining = _reminds.Count;
             _reminds.Clear();
-            foreach (var item in _deck.GetRange(_cursor - remaining - 1, remaining))
+            foreach (var item in _deck.GetRange(_cursor - remaining, remaining))
             {
                 _reminds.Add(item);
             }
@@ -241,12 +326,11 @@ public sealed partial class ControlDashboardPage
                          .GetRange(_cursor - _reminds.Count, _deck.Count - _cursor + _reminds.Count)
                          .Where(item => item.Order != ordered)
                          .Where(item => item.Order.Kind is Elemental)
+                         .Where(item => item.Order.Kind.As<Elemental>().Element == ordered.Kind.As<Elemental>().Element)
                          .ToArray())
             {
-                if (item.Order.Kind.As<Elemental>().Element == ordered.Kind.As<Elemental>().Element)
-                {
-                    _deck.Remove(item);
-                }
+                _deck.Remove(item);
+                _reminds.Remove(item);
             }
             var remaining = _reminds.Count;
             _reminds.Clear();
@@ -407,3 +491,8 @@ internal record ResultItem(string Pic, Order Order, int Deviation, DateTime Acti
     bool IEquatable<ResultItem?>.Equals(ResultItem? other) => Order.Index == other?.Order.Index;
 
 }
+
+internal abstract record OpOrderStatus;
+internal record Waiting : OpOrderStatus;
+internal record Active(DateTime Point, int Span): OpOrderStatus;
+internal record None : OpOrderStatus;

@@ -4,13 +4,22 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Windows.Globalization;
 using Windows.Graphics.Imaging;
 using Windows.Media.Ocr;
+using OpenCvSharp.Extensions;
+using OpenCvSharp;
+using MitamatchOperations;
 
 namespace mitama.Pages.Capture;
 
-internal class WindowCapture {
+internal abstract record OrderStat;
+
+internal record WaitStat(Bitmap Image) : OrderStat;
+internal record ActiveStat(Bitmap Image) : OrderStat;
+internal record Nothing : OrderStat;
+
+
+internal partial class WindowCapture {
     private readonly MemoryStream _bufferStream;
     private readonly IntPtr _handle;
 
@@ -29,19 +38,22 @@ internal class WindowCapture {
         public int bottom;
     }
 
-    [DllImport("user32.dll")]
-    private static extern bool GetWindowRect(IntPtr hwnd, out Rect lpRect);
+    [LibraryImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static partial void GetWindowRect(IntPtr hwnd, out Rect lpRect);
 
-    public Bitmap SnapShot() {
+    public Bitmap SnapShot((int, int) topLeft, (int, int) size) {
         // ウィンドウサイズ取得
         GetWindowRect(_handle, out var rect);
+        var (x, y) = topLeft;
+        var (width, height) = size;
 
-        var bmp = new Bitmap(500, 120);
+        var bmp = new Bitmap(width, height);
 
         //Graphicsの作成
         using var g = Graphics.FromImage(bmp);
         try {
-            g.CopyFromScreen(new Point(rect.left + 260, rect.top + 120), new Point(0, 0), bmp.Size);
+            g.CopyFromScreen(new System.Drawing.Point(rect.left + x, rect.top + y), new System.Drawing.Point(0, 0), bmp.Size);
         }
         catch {
             Console.WriteLine(@"キャプチャに失敗しました");
@@ -64,12 +76,96 @@ internal class WindowCapture {
     }
 
     public async Task<string> RecognizeText(SoftwareBitmap snap) {
-        var ocrEngine = OcrEngine.TryCreateFromLanguage(new Language("ja-JP"));
+        var ocrEngine = OcrEngine.TryCreateFromUserProfileLanguages();
         var ocrResult = await ocrEngine?.RecognizeAsync(snap);
         return ocrResult.Text.Replace(" ", string.Empty);
     }
 
     public async Task<string> TryCaptureOrderInfo() {
-        return await RecognizeText(await GetSoftwareSnapShot(SnapShot()));
+        return await RecognizeText(await GetSoftwareSnapShot(SnapShot((260, 120), (500, 120))));
+    }
+
+    public OrderStat CaptureOpponentsOrder()
+    {
+        var bitmap = SnapShot((1800, 620), (120, 120));
+        bitmap.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\debug.png");
+
+        var srcImage = bitmap.ToMat();
+        Mat grayImage = new();
+
+        Cv2.CvtColor(srcImage, grayImage, ColorConversionCodes.BGR2GRAY);
+
+        // ノイズを軽減するために画像を平滑化
+        Cv2.GaussianBlur(grayImage, grayImage, new OpenCvSharp.Size(9, 9), 2, 2);
+
+        // 円の検出
+        var circles = Cv2.HoughCircles(
+            grayImage,
+            HoughModes.GradientAlt,
+            1,
+            20,
+            100,
+            0.9,
+            10,
+            50
+        );
+
+        var sampleData = new MLOrderModel.ModelInput()
+        {
+            ImageSource = bitmap.ToMat().ToBytes(),
+        };
+
+        // Load model and predict output
+        var result = MLOrderModel.Predict(sampleData);
+
+        return circles.Length == 0
+            ? new Nothing()
+            : result.PredictedLabel == "wait"
+                ? new WaitStat(bitmap)
+                : new ActiveStat(bitmap);
+    }
+
+    public bool IsActivating()
+    {
+        var bitmap = SnapShot((1300, 230), (500, 500));
+        bitmap.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\debug_active.png");
+
+        //Load sample data
+        var sampleData = new MLActivatingModel.ModelInput()
+        {
+            ImageSource = bitmap.ToMat().ToBytes(),
+        };
+
+        //Load model and predict output
+        var result = MLActivatingModel.Predict(sampleData);
+
+        return result.PredictedLabel == "True";
+    }
+        
+    public bool IsStack()
+    {
+        var bitmap = SnapShot((1800, 750), (55, 55));
+
+        var srcImage = bitmap.ToMat();
+        Mat grayImage = new();
+
+        Cv2.CvtColor(srcImage, grayImage, ColorConversionCodes.BGR2GRAY);
+
+        // ノイズを軽減するために画像を平滑化
+        Cv2.GaussianBlur(grayImage, grayImage, new OpenCvSharp.Size(9, 9), 2, 2);
+
+        // 円の検出
+        var circles = Cv2.HoughCircles(
+            grayImage,
+            HoughModes.GradientAlt,
+            1,
+            20,
+            100,
+            0.9,
+            10,
+            50
+        );
+
+        return circles.Length > 0;
     }
 }

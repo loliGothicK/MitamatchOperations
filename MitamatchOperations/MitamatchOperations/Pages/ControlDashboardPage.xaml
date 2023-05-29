@@ -108,6 +108,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
             <InfoBar Grid.Row="0"
@@ -122,6 +123,10 @@
             <InfoBar Grid.Row="3"
                      x:Name="TeachingInfoBar"
                      Title="Automatically start to navigate when first order is prepared."
+                     Severity="Informational"
+                     IsOpen="False"/>
+            <InfoBar Grid.Row="4"
+                     x:Name="OpponentInfoBar"
                      Severity="Informational"
                      IsOpen="False"/>
         </Grid>
