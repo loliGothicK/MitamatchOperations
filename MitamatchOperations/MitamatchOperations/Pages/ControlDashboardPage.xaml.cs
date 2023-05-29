@@ -21,6 +21,7 @@ using Microsoft.UI.Xaml.Input;
 using Windows.System;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using mitama.Domain.OrderKinds;
+using System.ComponentModel;
 
 namespace mitama.Pages;
 
@@ -48,6 +49,7 @@ public sealed partial class ControlDashboardPage
     private bool _reFormation;
     private OpOrderStatus _orderStat = new None();
     private DateTime _orderPreparePoint = DateTime.Now;
+    private Order? _opOrderInfo = null;
 
     public bool IsCtrlKeyPressed { get; set; }
 
@@ -155,22 +157,28 @@ public sealed partial class ControlDashboardPage
 
             switch (_orderStat)
             {
-                case Active(var point, var span):
+                // 相手オーダー発動中
+                case Active(var name,var point, var span):
                     {
                         OpponentInfoBar.IsOpen = true;
                         var spend = (DateTime.Now - point).Seconds + (DateTime.Now - point).Minutes * 60;
-                        OpponentInfoBar.Title = $"Opponent's Order: {span - spend} seconds remaining.";
-                        if (span - spend < 5)
+                        OpponentInfoBar.Title = $"{name ?? "Opponent's Order"}: {span - spend} seconds remaining.";
+                        // オーダーが終わる3秒前には表示をやめる
+                        if (span - spend < 3)
                         {
+                            // 次のオーダー検知にむけて初期化
                             _orderStat = new None();
+                            _opOrderInfo = null;
                             OpponentInfoBar.IsOpen = false;
                         }
                         break;
                     }
+                // 相手オーダー準備中でも発動中でもない
                 case None:
                     {
                         switch (_opCapture!.CaptureOpponentsOrder())
                         {
+                            // オーダー準備中を検知
                             case WaitStat(var image):
                                 {
                                     image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug.png");
@@ -178,34 +186,58 @@ public sealed partial class ControlDashboardPage
                                     _orderPreparePoint = DateTime.Now;
                                     break;
                                 }
-                            case ActiveStat:
-                            case Nothing:
-                                break;
                         }
                         break;
                     }
+                // 相手オーダー準備中
                 case Waiting:
                     {
                         OpponentInfoBar.IsOpen = true;
                         OpponentInfoBar.Title = "Waiting...";
 
+                        // オーダー情報を読取る
+                        var info = await _opCapture!.CaptureOrderInfo();
+
+                        if (info.Length > 0)
+                        {
+                            var result = Order.List
+                                .Select(order => (order, Algo.LevenshteinRate(order.Name, info)))
+                                .ToList();
+                            if (result.Count > 0)
+                            {
+                                // 読取れたため、オーダー情報をストアする
+                                _opOrderInfo = result.MinBy(item => item.Item2).order;
+                            }
+                        }
+
+                        // 念のため5回やる
                         for (var i = 1; i < 5; i++)
                         {
                             switch (_opCapture!.CaptureOpponentsOrder())
                             {
+                                // オーダー発動検知
                                 case ActiveStat(var image):
                                 {
                                     image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\active\\debug.png");
-                                    var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
-                                    var modifiedPrepareTime = new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t));
-                                    _orderStat = modifiedPrepareTime switch
+                                    if (_opOrderInfo != null)
                                     {
-                                        5 => new Active(DateTime.Now, 120 - 1),
-                                        15 => new Active(DateTime.Now, 60 - 1),
-                                        20 => new Active(DateTime.Now, 80 - 1),
-                                        30 => new Active(DateTime.Now, 120 - 1),
-                                        _ => throw new UnreachableException(),
-                                    };
+                                        _orderStat = new Active(_opOrderInfo?.Name, DateTime.Now, _opOrderInfo?.ActiveTime - 1 ?? 0);
+                                    }
+                                    else
+                                    {
+                                        var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
+                                        var modifiedPrepareTime =
+                                            new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t));
+                                        _orderStat = modifiedPrepareTime switch
+                                        {
+                                            5 => new Active(null, DateTime.Now, 120 - 1),
+                                            15 => new Active(null, DateTime.Now, 60 - 1),
+                                            20 => new Active(null, DateTime.Now, 80 - 1),
+                                            30 => new Active(null, DateTime.Now, 120 - 1),
+                                            _ => throw new UnreachableException(),
+                                        };
+                                    }
+
                                     goto End;
                                 }
                             }
@@ -214,6 +246,7 @@ public sealed partial class ControlDashboardPage
                         if (_orderStat is not Active && _opCapture!.IsActivating())
                         {
                             _orderStat = new None();
+                            _opOrderInfo = null;
                             OpponentInfoBar.IsOpen = false;
                         }
                         End:
@@ -494,5 +527,5 @@ internal record ResultItem(string Pic, Order Order, int Deviation, DateTime Acti
 
 internal abstract record OpOrderStatus;
 internal record Waiting : OpOrderStatus;
-internal record Active(DateTime Point, int Span): OpOrderStatus;
+internal record Active(string? Name, DateTime Point, int Span): OpOrderStatus;
 internal record None : OpOrderStatus;
