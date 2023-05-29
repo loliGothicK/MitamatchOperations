@@ -200,10 +200,10 @@ public sealed partial class ControlDashboardPage
                                     var modifiedPrepareTime = new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t));
                                     _orderStat = modifiedPrepareTime switch
                                     {
-                                        5 => new Active(DateTime.Now, 120 - 3),
-                                        15 => new Active(DateTime.Now, 60 - 3),
-                                        20 => new Active(DateTime.Now, 80 - 3),
-                                        30 => new Active(DateTime.Now, 120 - 3),
+                                        5 => new Active(DateTime.Now, 120 - 1),
+                                        15 => new Active(DateTime.Now, 60 - 1),
+                                        20 => new Active(DateTime.Now, 80 - 1),
+                                        30 => new Active(DateTime.Now, 120 - 1),
                                         _ => throw new UnreachableException(),
                                     };
                                     goto End;
