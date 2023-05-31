@@ -19,19 +19,23 @@ internal record ActiveStat(Bitmap Image) : OrderStat;
 internal record Nothing : OrderStat;
 
 
-internal partial class WindowCapture {
+internal partial class WindowCapture
+{
     private readonly MemoryStream _bufferStream;
     private readonly IntPtr _handle;
 
-    public WindowCapture(IntPtr handle) {
+    public WindowCapture(IntPtr handle)
+    {
         _handle = handle;
-        _bufferStream = new MemoryStream(1000) {
+        _bufferStream = new MemoryStream(1000)
+        {
             Position = 0
         };
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct Rect {
+    public struct Rect
+    {
         public int left;
         public int top;
         public int right;
@@ -42,7 +46,8 @@ internal partial class WindowCapture {
     [return: MarshalAs(UnmanagedType.Bool)]
     private static partial void GetWindowRect(IntPtr hwnd, out Rect lpRect);
 
-    public Bitmap SnapShot((int, int) topLeft, (int, int) size) {
+    public Bitmap SnapShot((int, int) topLeft, (int, int) size)
+    {
         // ウィンドウサイズ取得
         GetWindowRect(_handle, out var rect);
         var (x, y) = topLeft;
@@ -52,17 +57,20 @@ internal partial class WindowCapture {
 
         //Graphicsの作成
         using var g = Graphics.FromImage(bmp);
-        try {
+        try
+        {
             g.CopyFromScreen(new System.Drawing.Point(rect.left + x, rect.top + y), new System.Drawing.Point(0, 0), bmp.Size);
         }
-        catch {
+        catch
+        {
             Console.WriteLine(@"キャプチャに失敗しました");
         }
 
         return bmp;
     }
 
-    public async Task<SoftwareBitmap> GetSoftwareSnapShot(Bitmap snap) {
+    public async Task<SoftwareBitmap> GetSoftwareSnapShot(Bitmap snap)
+    {
         // 取得したキャプチャ画像をストリームに保存
         _bufferStream.Seek(0, SeekOrigin.Begin);
         snap.Save(_bufferStream, ImageFormat.Png);
@@ -75,13 +83,15 @@ internal partial class WindowCapture {
         return softwareBitmap;
     }
 
-    public async Task<string> RecognizeText(SoftwareBitmap snap) {
+    public async Task<string> RecognizeText(SoftwareBitmap snap)
+    {
         var ocrEngine = OcrEngine.TryCreateFromUserProfileLanguages();
         var ocrResult = await ocrEngine?.RecognizeAsync(snap);
         return ocrResult.Text.Replace(" ", string.Empty);
     }
 
-    public async Task<string> TryCaptureOrderInfo() {
+    public async Task<string> TryCaptureOrderInfo()
+    {
         return await RecognizeText(await GetSoftwareSnapShot(SnapShot((260, 120), (500, 120))));
     }
 
@@ -125,7 +135,7 @@ internal partial class WindowCapture {
                 : new ActiveStat(bitmap);
     }
 
-    public bool IsActivating()
+    public OrderStat IsActivating()
     {
         var bitmap = SnapShot((1300, 230), (500, 500));
         bitmap.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\debug_active.png");
@@ -139,9 +149,9 @@ internal partial class WindowCapture {
         //Load model and predict output
         var result = MLActivatingModel.Predict(sampleData);
 
-        return result.PredictedLabel == "True";
+        return result.PredictedLabel == "True" ? new ActiveStat(bitmap) : new Nothing();
     }
-        
+
     public bool IsStack()
     {
         var bitmap = SnapShot((1800, 750), (55, 55));
@@ -171,8 +181,7 @@ internal partial class WindowCapture {
 
     public async Task<string> CaptureOrderInfo()
     {
-        var snapShot = SnapShot((1040, 370), (250, 40));
-        snapShot.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\debug_order_info.png");
+        var snapShot = SnapShot((1040, 380), (250, 50));
 
         return await RecognizeText(await GetSoftwareSnapShot(snapShot));
     }

@@ -21,7 +21,7 @@ using Microsoft.UI.Xaml.Input;
 using Windows.System;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using mitama.Domain.OrderKinds;
-using System.ComponentModel;
+using System.Threading;
 
 namespace mitama.Pages;
 
@@ -32,6 +32,7 @@ public sealed partial class ControlDashboardPage
 {
     private WindowCapture? _capture;
     private WindowCapture? _opCapture;
+    private WindowCapture[]? _infoCapture;
     private readonly ObservableCollection<TimeTableItem> _reminds = new();
     private readonly ObservableHashSet<ResultItem> _results = new();
     private readonly DispatcherTimer _timer = new()
@@ -49,7 +50,7 @@ public sealed partial class ControlDashboardPage
     private bool _reFormation;
     private OpOrderStatus _orderStat = new None();
     private DateTime _orderPreparePoint = DateTime.Now;
-    private Order? _opOrderInfo = null;
+    private (Order, int)? _opOrderInfo;
 
     public bool IsCtrlKeyPressed { get; set; }
 
@@ -114,6 +115,14 @@ public sealed partial class ControlDashboardPage
                                 {
                                     _capture = new WindowCapture(handle);
                                     _opCapture = new WindowCapture(handle);
+                                    _infoCapture = new []
+                                    {
+                                        new WindowCapture(handle),
+                                        new WindowCapture(handle),
+                                        new WindowCapture(handle),
+                                        new WindowCapture(handle),
+                                        new WindowCapture(handle)
+                                    };
                                     InfoBar.AccessKey = "SUCCESS";
                                     InfoBar.IsOpen = false;
                                     InfoBar.Content = null;
@@ -155,6 +164,30 @@ public sealed partial class ControlDashboardPage
 
             #region Capture Opponent's Order
 
+            // オーダー情報を読取る
+            var info = (await Task.WhenAll(_infoCapture!
+                .AsParallel()
+                .Select(async capture =>
+                {
+                    var info = await capture.CaptureOrderInfo();
+                    Thread.Sleep(100);
+                    return Order.List
+                        .Select(order => (order, Algo.LevenshteinRate(order.Name, info)))
+                        .MinBy(item => item.Item2);
+                })))
+                .Where(item => item.Item2 < 0.6)
+                .ToArray();
+
+            if (info.Length > 0)
+            {
+                // 読取れたため、オーダー情報をストアする
+                var res = info.MinBy(item => item.Item2);
+                if (_opOrderInfo == null || res.Item2 < _opOrderInfo?.Item2)
+                {
+                    _opOrderInfo = ((Order, int)?)res;
+                }
+            }
+
             switch (_orderStat)
             {
                 // 相手オーダー発動中
@@ -195,21 +228,6 @@ public sealed partial class ControlDashboardPage
                         OpponentInfoBar.IsOpen = true;
                         OpponentInfoBar.Title = "Waiting...";
 
-                        // オーダー情報を読取る
-                        var info = await _opCapture!.CaptureOrderInfo();
-
-                        if (info.Length > 0)
-                        {
-                            var result = Order.List
-                                .Select(order => (order, Algo.LevenshteinRate(order.Name, info)))
-                                .ToList();
-                            if (result.Count > 0)
-                            {
-                                // 読取れたため、オーダー情報をストアする
-                                _opOrderInfo = result.MinBy(item => item.Item2).order;
-                            }
-                        }
-
                         // 念のため5回やる
                         for (var i = 1; i < 5; i++)
                         {
@@ -221,14 +239,12 @@ public sealed partial class ControlDashboardPage
                                     image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\active\\debug.png");
                                     if (_opOrderInfo != null)
                                     {
-                                        _orderStat = new Active(_opOrderInfo?.Name, DateTime.Now, _opOrderInfo?.ActiveTime - 1 ?? 0);
+                                        _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
                                     }
                                     else
                                     {
                                         var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
-                                        var modifiedPrepareTime =
-                                            new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t));
-                                        _orderStat = modifiedPrepareTime switch
+                                        _orderStat = new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t)) switch
                                         {
                                             5 => new Active(null, DateTime.Now, 120 - 1),
                                             15 => new Active(null, DateTime.Now, 60 - 1),
@@ -236,6 +252,7 @@ public sealed partial class ControlDashboardPage
                                             30 => new Active(null, DateTime.Now, 120 - 1),
                                             _ => throw new UnreachableException(),
                                         };
+                                        _opOrderInfo = null;
                                     }
 
                                     goto End;
@@ -243,12 +260,31 @@ public sealed partial class ControlDashboardPage
                             }
                         }
 
-                        if (_orderStat is not Active && _opCapture!.IsActivating())
+                        if (_orderStat is not Active)
                         {
+                            switch (_opCapture!.IsActivating())
+                            {
+                                case ActiveStat(var image):
+                                    image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activaing\\True\\debug.png");
+                                    break;
+                                default:
+                                    goto End;
+                            }
+
+                            if (_opOrderInfo is ({ ActiveTime: > 0 }, _))
+                            {
+                                _orderStat = new Active(
+                                    _opOrderInfo?.Item1.Name,
+                                    DateTime.Now,
+                                    _opOrderInfo?.Item1.ActiveTime ?? 0
+                                );
+                                _opOrderInfo = null;
+                            }
                             _orderStat = new None();
                             _opOrderInfo = null;
                             OpponentInfoBar.IsOpen = false;
                         }
+
                         End:
                         break;
                     }
