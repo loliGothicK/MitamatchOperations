@@ -9,7 +9,6 @@ using Windows.Media.Ocr;
 using OpenCvSharp.Extensions;
 using OpenCvSharp;
 using MitamatchOperations;
-using System.Text.RegularExpressions;
 
 namespace mitama.Pages.Capture;
 
@@ -96,7 +95,6 @@ internal partial class WindowCapture
     public OrderStat CaptureOpponentsOrder()
     {
         var bitmap = GetRect((1800, 620), (120, 120));
-        bitmap.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\debug.png");
 
         var srcImage = bitmap.ToMat();
         Mat grayImage = new();
@@ -136,7 +134,6 @@ internal partial class WindowCapture
     public OrderStat IsActivating()
     {
         var bitmap = GetRect((1300, 230), (500, 500));
-        bitmap.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\debug_active.png");
 
         // Load sample data
         var sampleData = new MLActivatingModel.ModelInput()
