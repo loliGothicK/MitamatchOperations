@@ -202,9 +202,10 @@ public sealed partial class ControlDashboardPage
                                     InitBar.AccessKey = "SUCCESS";
                                     InitBar.IsOpen = false;
                                     InitBar.Content = null;
-                                    _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(50));
-                                    _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(100));
-                                    _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(150));
+                                    _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(40));
+                                    _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(80));
+                                    _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(120));
+                                    _schedulers[4].AdvanceBy(TimeSpan.FromMilliseconds(160));
                                     return Task.CompletedTask;
                                 }),
                             };

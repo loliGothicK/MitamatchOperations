@@ -180,5 +180,4 @@ internal partial class WindowCapture
 
         return await RecognizeText(await GetSoftwareSnapShot(snapShot));
     }
-
 }
