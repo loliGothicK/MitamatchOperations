@@ -24,7 +24,7 @@ using Windows.System;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using mitama.Domain.OrderKinds;
 using SimdLinq;
-using System.Reflection.Metadata;
+using MitamatchOperations;
 
 namespace mitama.Pages;
 
@@ -220,6 +220,16 @@ public sealed partial class ControlDashboardPage
         _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(80));
         _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(120));
         _schedulers[4].AdvanceBy(TimeSpan.FromMilliseconds(160));
+        //Load sample data
+        var imageBytes = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\wait_or_active\active\active01.png");
+        var sampleData = new MLOrderModel.ModelInput()
+        {
+            ImageSource = imageBytes,
+        };
+
+        //Load model and predict output
+        _ = MLOrderModel.Predict(sampleData);
+
     }
 
     private Task OrderScan()
