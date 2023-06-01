@@ -24,6 +24,7 @@ using Windows.System;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using mitama.Domain.OrderKinds;
 using SimdLinq;
+using System.Reflection.Metadata;
 
 namespace mitama.Pages;
 
@@ -169,16 +170,8 @@ public sealed partial class ControlDashboardPage
             {
                 try
                 {
-                    var handle = Search.WindowHandleFromCaption("Assaultlily");
-                    _capture = new WindowCapture(handle);
                     if (InitBar.AccessKey != "ERROR") return;
-                    InitBar.AccessKey = "SUCCESS";
-                    InitBar.IsOpen = false;
-                    InitBar.Content = null;
-                    _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(40));
-                    _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(80));
-                    _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(120));
-                    _schedulers[4].AdvanceBy(TimeSpan.FromMilliseconds(160));
+                    Init(Search.WindowHandleFromCaption("Assaultlily"));
                 }
                 catch
                 {
@@ -198,14 +191,7 @@ public sealed partial class ControlDashboardPage
                                 Text = caption,
                                 Command = new Defer(delegate
                                 {
-                                    _capture = new WindowCapture(handle);
-                                    InitBar.AccessKey = "SUCCESS";
-                                    InitBar.IsOpen = false;
-                                    InitBar.Content = null;
-                                    _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(40));
-                                    _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(80));
-                                    _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(120));
-                                    _schedulers[4].AdvanceBy(TimeSpan.FromMilliseconds(160));
+                                    Init(handle);
                                     return Task.CompletedTask;
                                 }),
                             };
@@ -222,6 +208,18 @@ public sealed partial class ControlDashboardPage
             }
         };
         _timer.Start();
+    }
+
+    private void Init(IntPtr handle)
+    {
+        _capture = new WindowCapture(handle);
+        InitBar.AccessKey = "SUCCESS";
+        InitBar.IsOpen = false;
+        InitBar.Content = null;
+        _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(40));
+        _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(80));
+        _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(120));
+        _schedulers[4].AdvanceBy(TimeSpan.FromMilliseconds(160));
     }
 
     private Task OrderScan()
