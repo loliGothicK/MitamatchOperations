@@ -33,15 +33,13 @@ namespace mitama.Pages;
 public sealed partial class ControlDashboardPage
 {
     private WindowCapture? _capture;
-    private WindowCapture? _opCapture;
-    private WindowCapture? _infoCapture;
 
-    private readonly HistoricalScheduler[] _schedulers = { new(), new(), new(), new() };
+    private readonly HistoricalScheduler[] _schedulers = { new(), new(), new(), new(), new () };
     private readonly ObservableCollection<TimeTableItem> _reminds = new();
     private readonly ObservableHashSet<ResultItem> _results = new();
     private readonly DispatcherTimer _timer = new()
     {
-        Interval = TimeSpan.FromMilliseconds(50)
+        Interval = TimeSpan.FromMilliseconds(40)
     };
 
     private int _cursor = 4;
@@ -65,9 +63,6 @@ public sealed partial class ControlDashboardPage
             case true when e.Key == VirtualKey.Q:
                 ManualTrigger();
                 break;
-            case true when e.Key == VirtualKey.S:
-                _opCapture!.IsActivating();
-                break;
         }
     }
 
@@ -80,13 +75,21 @@ public sealed partial class ControlDashboardPage
     {
         InitializeComponent();
 
-        // 相手のオーダー情報を読取る
+        // 全体のウィンドウキャプチャ
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[0])
             // ReSharper disable once AsyncVoidLambda
             .Subscribe(async delegate
             {
+                await _capture!.SnapShot();
+            });
+
+        // 相手のオーダー情報を読取る
+        Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[1])
+            // ReSharper disable once AsyncVoidLambda
+            .Subscribe(async delegate
+            {
                 // オーダー情報を読取る
-                var cap = await _infoCapture!.CaptureOrderInfo();
+                var cap = await _capture!.CaptureOrderInfo();
                 var info = Order.List
                         .Select(order => (order, Algo.LevenshteinRate(order.Name, cap)))
                         .Where(item => item.Item2 < 0.6)
@@ -102,7 +105,7 @@ public sealed partial class ControlDashboardPage
             });
 
         // 味方のオーダー情報を読取る
-        Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[1])
+        Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[2])
             // ReSharper disable once AsyncVoidLambda
             .Subscribe(async delegate
             {
@@ -124,11 +127,12 @@ public sealed partial class ControlDashboardPage
             });
 
         // 相手のオーダーの 準備/発動/終了 をスキャンする
-        Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[2])
-            .Subscribe(_ => OrderScan());
+        Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[3])
+            // ReSharper disable once AsyncVoidLambda
+            .Subscribe(async delegate { await OrderScan(); });
 
         // 味方オーダーの発動前通知を出す
-        Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[3])
+        Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[4])
             .Subscribe(delegate
             {
                 if (_reminds.Count > 0 && _nextTimePoint - DateTime.Now <= new TimeSpan(0, 0, 0, 10))
@@ -158,23 +162,23 @@ public sealed partial class ControlDashboardPage
             {
                 foreach (var scheduler in _schedulers)
                 {
-                    scheduler.AdvanceBy(TimeSpan.FromMilliseconds(50));
+                    scheduler.AdvanceBy(TimeSpan.FromMilliseconds(40));
                 }
             }
             else
             {
                 try
                 {
-                    _capture = new WindowCapture(Search.WindowHandleFromCaption("Assaultlily"));
-                    _opCapture = new WindowCapture(Search.WindowHandleFromCaption("Assaultlily"));
-                    _infoCapture = new WindowCapture(Search.WindowHandleFromCaption("Assaultlily"));
+                    var handle = Search.WindowHandleFromCaption("Assaultlily");
+                    _capture = new WindowCapture(handle);
                     if (InitBar.AccessKey != "ERROR") return;
                     InitBar.AccessKey = "SUCCESS";
                     InitBar.IsOpen = false;
                     InitBar.Content = null;
-                    _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(50));
-                    _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(100));
-                    _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(150));
+                    _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(40));
+                    _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(80));
+                    _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(120));
+                    _schedulers[4].AdvanceBy(TimeSpan.FromMilliseconds(160));
                 }
                 catch
                 {
@@ -195,8 +199,6 @@ public sealed partial class ControlDashboardPage
                                 Command = new Defer(delegate
                                 {
                                     _capture = new WindowCapture(handle);
-                                    _opCapture = new WindowCapture(handle);
-                                    _infoCapture = new WindowCapture(handle);
                                     InitBar.AccessKey = "SUCCESS";
                                     InitBar.IsOpen = false;
                                     InitBar.Content = null;
@@ -221,7 +223,7 @@ public sealed partial class ControlDashboardPage
         _timer.Start();
     }
 
-    private void OrderScan()
+    private Task OrderScan()
     {
         switch (_orderStat)
         {
@@ -244,7 +246,7 @@ public sealed partial class ControlDashboardPage
             // 相手オーダー準備中でも発動中でもない
             case None:
                 {
-                    switch (_opCapture!.CaptureOpponentsOrder())
+                    switch (_capture!.CaptureOpponentsOrder())
                     {
                         // オーダー準備中を検知
                         case WaitStat(var image):
@@ -263,7 +265,7 @@ public sealed partial class ControlDashboardPage
                     OpponentInfoBar.IsOpen = true;
                     OpponentInfoBar.Title = "Waiting...";
 
-                    switch (_opCapture!.CaptureOpponentsOrder())
+                    switch (_capture!.CaptureOpponentsOrder())
                     {
                         // オーダー発動検知
                         case ActiveStat(var image):
@@ -293,7 +295,7 @@ public sealed partial class ControlDashboardPage
 
                     if (_orderStat is not Active)
                     {
-                        switch (_opCapture!.IsActivating())
+                        switch (_capture!.IsActivating())
                         {
                             case ActiveStat(var image):
                                 image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activaing\\True\\debug.png");
@@ -322,6 +324,7 @@ public sealed partial class ControlDashboardPage
             default:
                 throw new ArgumentOutOfRangeException(nameof(_orderStat));
         }
+        return Task.CompletedTask;
     }
 
     private void ReCalcTimeTable()
@@ -437,7 +440,7 @@ public sealed partial class ControlDashboardPage
 
     private static Task<AnalyzeResult> Analyze(string raw)
     {
-        var orderedRegex = new Regex("(.+)がオーダー(.+)を準備");
+        var orderedRegex = OrderPrepareRegex();
         var match = orderedRegex.Match(raw);
 
         return Task.FromResult<AnalyzeResult>(match.Success
@@ -470,7 +473,7 @@ public sealed partial class ControlDashboardPage
         box.ItemsSource = decks;
     }
 
-    private async void LoadButton_OnClick(object sender, RoutedEventArgs e)
+    private void LoadButton_OnClick(object sender, RoutedEventArgs e)
     {
         var deck = DeckLoadBox.SelectedItem.As<DeckJson>();
 
@@ -494,9 +497,12 @@ public sealed partial class ControlDashboardPage
             popup.IsOpen = false;
         }
 
-        TeachingInfoBar.IsOpen = true;
-        await Task.Delay(2000);
-        TeachingInfoBar.IsOpen = false;
+        using var onClose = new Defer(async delegate
+        {
+            TeachingInfoBar.IsOpen = true;
+            await Task.Delay(2000);
+            TeachingInfoBar.IsOpen = false;
+        });
     }
 
     private void ManualTriggerButton_OnClick(object sender, RoutedEventArgs e)
@@ -510,38 +516,43 @@ public sealed partial class ControlDashboardPage
         Update(_reminds.First().Pic, _reminds.First().Order);
     }
 
-    private static async void PlayAlert(ElementSoundKind soundKind)
+    private static void PlayAlert(ElementSoundKind soundKind)
     {
-        ElementSoundPlayer.State = ElementSoundPlayerState.On;
-
-        ElementSoundPlayer.Play(soundKind);
-        await Task.Delay(400);
-        ElementSoundPlayer.Play(soundKind);
-        await Task.Delay(400);
-        ElementSoundPlayer.Play(soundKind);
-        await Task.Delay(800);
-
-        ElementSoundPlayer.State = ElementSoundPlayerState.Off;
-    }
-
-    private static async void PlayAlert(params ElementSoundKind[] soundKinds)
-    {
-        ElementSoundPlayer.State = ElementSoundPlayerState.On;
-
-        foreach (var soundKind in soundKinds)
+        using var onClose = new Defer(async delegate
         {
+            ElementSoundPlayer.State = ElementSoundPlayerState.On;
             ElementSoundPlayer.Play(soundKind);
             await Task.Delay(400);
-        }
-        await Task.Delay(400);
+            ElementSoundPlayer.Play(soundKind);
+            await Task.Delay(400);
+            ElementSoundPlayer.Play(soundKind);
+            await Task.Delay(800);
+            ElementSoundPlayer.State = ElementSoundPlayerState.Off;
+        });
+    }
 
-        ElementSoundPlayer.State = ElementSoundPlayerState.Off;
+    private static void PlayAlert(params ElementSoundKind[] soundKinds)
+    {
+        using var onClose = new Defer(async delegate
+        {
+            ElementSoundPlayer.State = ElementSoundPlayerState.On;
+            foreach (var soundKind in soundKinds)
+            {
+                ElementSoundPlayer.Play(soundKind);
+                await Task.Delay(400);
+            }
+            await Task.Delay(400);
+            ElementSoundPlayer.State = ElementSoundPlayerState.Off;
+        });
     }
 
     private void DeckLoadBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         LoadButton.IsEnabled = true;
     }
+
+    [GeneratedRegex("(.+)がオーダー(.+)を準備")]
+    private static partial Regex OrderPrepareRegex();
 }
 
 internal record ResultItem(string Pic, Order Order, int Deviation, DateTime ActivatedAt)

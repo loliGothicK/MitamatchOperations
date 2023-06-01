@@ -9,6 +9,7 @@ using Windows.Media.Ocr;
 using OpenCvSharp.Extensions;
 using OpenCvSharp;
 using MitamatchOperations;
+using System.Text.RegularExpressions;
 
 namespace mitama.Pages.Capture;
 
@@ -22,52 +23,49 @@ internal record Nothing : OrderStat;
 internal partial class WindowCapture
 {
     private readonly MemoryStream _bufferStream;
-    private readonly IntPtr _handle;
+    private readonly Bitmap _capture;
+    private readonly Rect _rect;
+
+    [StructLayout(LayoutKind.Sequential)]
+    private readonly struct Rect
+    {
+        public readonly int Left;
+        public readonly int Top;
+        public readonly int Right;
+        public readonly int Bottom;
+    }
+
+    [LibraryImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static partial void GetWindowRect(IntPtr hWnd, out Rect rect);
 
     public WindowCapture(IntPtr handle, int capacity = 1000)
     {
-        _handle = handle;
+        GetWindowRect(handle, out _rect);
+        _capture = new Bitmap(_rect.Right - _rect.Left, _rect.Bottom - _rect.Top);
         _bufferStream = new MemoryStream(capacity)
         {
             Position = 0
         };
     }
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Rect
+    public Task SnapShot()
     {
-        public int left;
-        public int top;
-        public int right;
-        public int bottom;
-    }
-
-    [LibraryImport("user32.dll")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static partial void GetWindowRect(IntPtr hwnd, out Rect lpRect);
-
-    public Bitmap SnapShot((int, int) topLeft, (int, int) size)
-    {
-        // ウィンドウサイズ取得
-        GetWindowRect(_handle, out var rect);
-        var (x, y) = topLeft;
-        var (width, height) = size;
-
-        var bmp = new Bitmap(width, height);
-
         // Graphicsの作成
-        using var g = Graphics.FromImage(bmp);
+        using var g = Graphics.FromImage(_capture);
         try
         {
-            g.CopyFromScreen(new System.Drawing.Point(rect.left + x, rect.top + y), new System.Drawing.Point(0, 0), bmp.Size);
+            g.CopyFromScreen(new System.Drawing.Point(_rect.Left, _rect.Top), new System.Drawing.Point(0, 0), _capture.Size);
         }
         catch
         {
             Console.WriteLine(@"キャプチャに失敗しました");
         }
-
-        return bmp;
+        return Task.CompletedTask;
     }
+
+    private Bitmap GetRect((int, int) topLeft, (int, int) size) =>
+        _capture.Clone(new Rectangle(topLeft.Item1, topLeft.Item2, size.Item1, size.Item2), _capture.PixelFormat);
 
     public async Task<SoftwareBitmap> GetSoftwareSnapShot(Bitmap snap)
     {
@@ -92,12 +90,12 @@ internal partial class WindowCapture
 
     public async Task<string> TryCaptureOrderInfo()
     {
-        return await RecognizeText(await GetSoftwareSnapShot(SnapShot((260, 120), (500, 120))));
+        return await RecognizeText(await GetSoftwareSnapShot(GetRect((260, 120), (500, 120))));
     }
 
     public OrderStat CaptureOpponentsOrder()
     {
-        var bitmap = SnapShot((1800, 620), (120, 120));
+        var bitmap = GetRect((1800, 620), (120, 120));
         bitmap.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\debug.png");
 
         var srcImage = bitmap.ToMat();
@@ -137,7 +135,7 @@ internal partial class WindowCapture
 
     public OrderStat IsActivating()
     {
-        var bitmap = SnapShot((1300, 230), (500, 500));
+        var bitmap = GetRect((1300, 230), (500, 500));
         bitmap.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\debug_active.png");
 
         // Load sample data
@@ -154,7 +152,7 @@ internal partial class WindowCapture
 
     public bool IsStack()
     {
-        var bitmap = SnapShot((1800, 750), (55, 55));
+        var bitmap = GetRect((1800, 750), (55, 55));
 
         var srcImage = bitmap.ToMat();
         Mat grayImage = new();
@@ -181,7 +179,7 @@ internal partial class WindowCapture
 
     public async Task<string> CaptureOrderInfo()
     {
-        var snapShot = SnapShot((1040, 380), (250, 50));
+        var snapShot = GetRect((1040, 380), (250, 50));
 
         return await RecognizeText(await GetSoftwareSnapShot(snapShot));
     }
