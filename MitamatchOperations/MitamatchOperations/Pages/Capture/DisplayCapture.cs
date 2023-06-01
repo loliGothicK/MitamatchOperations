@@ -24,10 +24,10 @@ internal partial class WindowCapture
     private readonly MemoryStream _bufferStream;
     private readonly IntPtr _handle;
 
-    public WindowCapture(IntPtr handle)
+    public WindowCapture(IntPtr handle, int capacity = 1000)
     {
         _handle = handle;
-        _bufferStream = new MemoryStream(1000)
+        _bufferStream = new MemoryStream(capacity)
         {
             Position = 0
         };
@@ -55,7 +55,7 @@ internal partial class WindowCapture
 
         var bmp = new Bitmap(width, height);
 
-        //Graphicsの作成
+        // Graphicsの作成
         using var g = Graphics.FromImage(bmp);
         try
         {
@@ -140,13 +140,13 @@ internal partial class WindowCapture
         var bitmap = SnapShot((1300, 230), (500, 500));
         bitmap.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\debug_active.png");
 
-        //Load sample data
+        // Load sample data
         var sampleData = new MLActivatingModel.ModelInput()
         {
             ImageSource = bitmap.ToMat().ToBytes(),
         };
 
-        //Load model and predict output
+        // Load model and predict output
         var result = MLActivatingModel.Predict(sampleData);
 
         return result.PredictedLabel == "True" ? new ActiveStat(bitmap) : new Nothing();

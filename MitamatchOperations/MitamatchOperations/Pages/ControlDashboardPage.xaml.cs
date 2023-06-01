@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reactive.Concurrency;
+using System.Reactive.Linq;
 using System.Text.Json;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -21,7 +23,7 @@ using Microsoft.UI.Xaml.Input;
 using Windows.System;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using mitama.Domain.OrderKinds;
-using System.Threading;
+using SimdLinq;
 
 namespace mitama.Pages;
 
@@ -32,12 +34,14 @@ public sealed partial class ControlDashboardPage
 {
     private WindowCapture? _capture;
     private WindowCapture? _opCapture;
-    private WindowCapture[]? _infoCapture;
+    private WindowCapture? _infoCapture;
+
+    private readonly HistoricalScheduler[] _schedulers = { new(), new(), new(), new() };
     private readonly ObservableCollection<TimeTableItem> _reminds = new();
     private readonly ObservableHashSet<ResultItem> _results = new();
     private readonly DispatcherTimer _timer = new()
     {
-        Interval = TimeSpan.FromSeconds(1)
+        Interval = TimeSpan.FromMilliseconds(50)
     };
 
     private int _cursor = 4;
@@ -47,7 +51,6 @@ public sealed partial class ControlDashboardPage
     private readonly string? _user = Director.ReadCache().User;
     private readonly string _project = Director.ReadCache().Region;
     private bool _picFlag = true;
-    private bool _reFormation;
     private OpOrderStatus _orderStat = new None();
     private DateTime _orderPreparePoint = DateTime.Now;
     private (Order, int)? _opOrderInfo;
@@ -77,32 +80,110 @@ public sealed partial class ControlDashboardPage
     {
         InitializeComponent();
 
-        _timer.Tick += async (_, _) =>
-        {
-            _timer.Stop();
+        // 相手のオーダー情報を読取る
+        Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[0])
+            // ReSharper disable once AsyncVoidLambda
+            .Subscribe(async delegate
+            {
+                // オーダー情報を読取る
+                var cap = await _infoCapture!.CaptureOrderInfo();
+                var info = Order.List
+                        .Select(order => (order, Algo.LevenshteinRate(order.Name, cap)))
+                        .Where(item => item.Item2 < 0.6)
+                        .ToArray();
 
-            #region Window Capture Initialisation
-            if (_capture == null)
+                if (info.Length <= 0) return;
+                // 読取れたため、オーダー情報をストアする
+                var res = info.MinBy(item => item.Item2);
+                if (_opOrderInfo == null || res.Item2 < _opOrderInfo?.Item2)
+                {
+                    _opOrderInfo = ((Order, int)?)res;
+                }
+            });
+
+        // 味方のオーダー情報を読取る
+        Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[1])
+            // ReSharper disable once AsyncVoidLambda
+            .Subscribe(async delegate
+            {
+                switch (await Analyze(await _capture!.TryCaptureOrderInfo()))
+                {
+                    case SuccessResult(var user, var order):
+                    {
+                        if (_reminds.Count == 0) break;
+                        var ordered = Order.List.MinBy(o => Algo.LevenshteinRate(o.Name, order));
+                        if (_deck.Select(e => e.Order.Index).ToArray().Contains(ordered.Index)
+                            && !_results.Select(r => r.Order.Index).ToArray().Contains(ordered.Index))
+                        {
+                            Update(user, ordered);
+                        }
+                        break;
+                    }
+                    case FailureResult(var raw) when raw != string.Empty: break;
+                }
+            });
+
+        // 相手のオーダーの 準備/発動/終了 をスキャンする
+        Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[2])
+            .Subscribe(_ => OrderScan());
+
+        // 味方オーダーの発動前通知を出す
+        Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[3])
+            .Subscribe(delegate
+            {
+                if (_reminds.Count > 0 && _nextTimePoint - DateTime.Now <= new TimeSpan(0, 0, 0, 10))
+                {
+                    if (_reminds.First().Start == 15u * 60u) return;
+                    InfoBar.IsOpen = true;
+                    var flag = InfoBar.Severity == InfoBarSeverity.Warning;
+                    InfoBar.Severity = _nextTimePoint - DateTime.Now >= new TimeSpan() ? InfoBarSeverity.Warning : InfoBarSeverity.Error;
+                    InfoBar.Title =
+                        $"{_reminds.First().Pic} さんの {_reminds.First().Order.Name} 発動まであと {(_nextTimePoint - DateTime.Now).Seconds} 秒";
+                    if (_picFlag && _user == _reminds.First().Pic)
+                    {
+                        _picFlag = false;
+                        PlayAlert(ElementSoundKind.Hide, ElementSoundKind.Invoke, ElementSoundKind.Show, ElementSoundKind.Invoke);
+                    }
+                    if (flag && InfoBar.Severity == InfoBarSeverity.Error) PlayAlert(ElementSoundKind.Hide);
+                }
+                else
+                {
+                    InfoBar.IsOpen = false;
+                }
+            });
+
+        _timer.Tick += delegate
+        {
+            if (_capture != null)
+            {
+                foreach (var scheduler in _schedulers)
+                {
+                    scheduler.AdvanceBy(TimeSpan.FromMilliseconds(50));
+                }
+            }
+            else
             {
                 try
                 {
                     _capture = new WindowCapture(Search.WindowHandleFromCaption("Assaultlily"));
-                    _opCapture= new WindowCapture(Search.WindowHandleFromCaption("Assaultlily"));
-                    if (InfoBar.AccessKey == "ERROR")
-                    {
-                        InfoBar.AccessKey = "SUCCESS";
-                        InfoBar.IsOpen = false;
-                        InfoBar.Content = null;
-                    }
+                    _opCapture = new WindowCapture(Search.WindowHandleFromCaption("Assaultlily"));
+                    _infoCapture = new WindowCapture(Search.WindowHandleFromCaption("Assaultlily"));
+                    if (InitBar.AccessKey != "ERROR") return;
+                    InitBar.AccessKey = "SUCCESS";
+                    InitBar.IsOpen = false;
+                    InitBar.Content = null;
+                    _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(50));
+                    _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(100));
+                    _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(150));
                 }
                 catch
                 {
-                    if (InfoBar.AccessKey != "ERROR")
+                    if (InitBar.AccessKey != "ERROR")
                     {
-                        InfoBar.IsOpen = true;
-                        InfoBar.AccessKey = "ERROR";
-                        InfoBar.Severity = InfoBarSeverity.Error;
-                        InfoBar.Title = "ラスバレのウィンドウが見つかりませんでした、起動して最前面の状態にしてください";
+                        InitBar.IsOpen = true;
+                        InitBar.AccessKey = "ERROR";
+                        InitBar.Severity = InfoBarSeverity.Error;
+                        InitBar.Title = "ラスバレのウィンドウが見つかりませんでした、起動して最前面の状態にしてください";
 
                         var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
                         foreach (var (caption, handle) in Search.GetWindowList())
@@ -115,229 +196,132 @@ public sealed partial class ControlDashboardPage
                                 {
                                     _capture = new WindowCapture(handle);
                                     _opCapture = new WindowCapture(handle);
-                                    _infoCapture = new []
-                                    {
-                                        new WindowCapture(handle),
-                                        new WindowCapture(handle),
-                                        new WindowCapture(handle),
-                                        new WindowCapture(handle),
-                                        new WindowCapture(handle)
-                                    };
-                                    InfoBar.AccessKey = "SUCCESS";
-                                    InfoBar.IsOpen = false;
-                                    InfoBar.Content = null;
+                                    _infoCapture = new WindowCapture(handle);
+                                    InitBar.AccessKey = "SUCCESS";
+                                    InitBar.IsOpen = false;
+                                    InitBar.Content = null;
+                                    _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(50));
+                                    _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(100));
+                                    _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(150));
                                     return Task.CompletedTask;
                                 }),
                             };
                             menu.Items.Add(item);
                         }
 
-                        InfoBar.Content = new DropDownButton
+                        InitBar.Content = new DropDownButton
                         {
                             Content = "または画面を選択する",
                             Flyout = menu,
                         };
                     }
                 }
-                _timer.Start();
-                return;
             }
-            #endregion
-
-            #region Text Recognition
-            switch (await Analyze(await _capture!.TryCaptureOrderInfo()))
-            {
-                case SuccessResult(var user, var order):
-                    {
-                        if (_reminds.Count == 0) break;
-                        var ordered = Order.List.MinBy(o => Algo.LevenshteinRate(o.Name, order));
-                        if (_deck.Contains(ordered) && !_results.Select(r => r.Order).Contains(ordered))
-                        {
-                            Update(user, ordered);
-                        }
-                        break;
-                    }
-                case FailureResult(var raw) when raw != string.Empty: break;
-            }
-            #endregion
-            _timer.Start();
-
-            #region Capture Opponent's Order
-
-            // オーダー情報を読取る
-            var info = (await Task.WhenAll(_infoCapture!
-                .AsParallel()
-                .Select(async capture =>
-                {
-                    var info = await capture.CaptureOrderInfo();
-                    Thread.Sleep(100);
-                    return Order.List
-                        .Select(order => (order, Algo.LevenshteinRate(order.Name, info)))
-                        .MinBy(item => item.Item2);
-                })))
-                .Where(item => item.Item2 < 0.6)
-                .ToArray();
-
-            if (info.Length > 0)
-            {
-                // 読取れたため、オーダー情報をストアする
-                var res = info.MinBy(item => item.Item2);
-                if (_opOrderInfo == null || res.Item2 < _opOrderInfo?.Item2)
-                {
-                    _opOrderInfo = ((Order, int)?)res;
-                }
-            }
-
-            switch (_orderStat)
-            {
-                // 相手オーダー発動中
-                case Active(var name,var point, var span):
-                    {
-                        OpponentInfoBar.IsOpen = true;
-                        var spend = (DateTime.Now - point).Seconds + (DateTime.Now - point).Minutes * 60;
-                        OpponentInfoBar.Title = $"{name ?? "Opponent's Order"}: {span - spend} seconds remaining.";
-                        // オーダーが終わる3秒前には表示をやめる
-                        if (span - spend < 3)
-                        {
-                            // 次のオーダー検知にむけて初期化
-                            _orderStat = new None();
-                            _opOrderInfo = null;
-                            OpponentInfoBar.IsOpen = false;
-                        }
-                        break;
-                    }
-                // 相手オーダー準備中でも発動中でもない
-                case None:
-                    {
-                        switch (_opCapture!.CaptureOpponentsOrder())
-                        {
-                            // オーダー準備中を検知
-                            case WaitStat(var image):
-                                {
-                                    image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug.png");
-                                    _orderStat = new Waiting();
-                                    _orderPreparePoint = DateTime.Now;
-                                    break;
-                                }
-                        }
-                        break;
-                    }
-                // 相手オーダー準備中
-                case Waiting:
-                    {
-                        OpponentInfoBar.IsOpen = true;
-                        OpponentInfoBar.Title = "Waiting...";
-
-                        // 念のため5回やる
-                        for (var i = 1; i < 5; i++)
-                        {
-                            switch (_opCapture!.CaptureOpponentsOrder())
-                            {
-                                // オーダー発動検知
-                                case ActiveStat(var image):
-                                {
-                                    image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\active\\debug.png");
-                                    if (_opOrderInfo != null)
-                                    {
-                                        _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
-                                    }
-                                    else
-                                    {
-                                        var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
-                                        _orderStat = new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t)) switch
-                                        {
-                                            5 => new Active(null, DateTime.Now, 120 - 1),
-                                            15 => new Active(null, DateTime.Now, 60 - 1),
-                                            20 => new Active(null, DateTime.Now, 80 - 1),
-                                            30 => new Active(null, DateTime.Now, 120 - 1),
-                                            _ => throw new UnreachableException(),
-                                        };
-                                        _opOrderInfo = null;
-                                    }
-
-                                    goto End;
-                                }
-                            }
-                        }
-
-                        if (_orderStat is not Active)
-                        {
-                            switch (_opCapture!.IsActivating())
-                            {
-                                case ActiveStat(var image):
-                                    image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activaing\\True\\debug.png");
-                                    break;
-                                default:
-                                    goto End;
-                            }
-
-                            if (_opOrderInfo is ({ ActiveTime: > 0 }, _))
-                            {
-                                _orderStat = new Active(
-                                    _opOrderInfo?.Item1.Name,
-                                    DateTime.Now,
-                                    _opOrderInfo?.Item1.ActiveTime ?? 0
-                                );
-                                _opOrderInfo = null;
-                            }
-                            _orderStat = new None();
-                            _opOrderInfo = null;
-                            OpponentInfoBar.IsOpen = false;
-                        }
-
-                        End:
-                        break;
-                    }
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(_orderStat));
-            }
-
-            #endregion
-
-            #region Next Reminder Checking
-            if (_reminds.Count > 0 && _nextTimePoint - DateTime.Now <= new TimeSpan(0, 0, 0, 10))
-            {
-                if (_reminds.First().Start == 15u * 60u) return;
-                InfoBar.IsOpen = true;
-                var flag = InfoBar.Severity == InfoBarSeverity.Warning;
-                InfoBar.Severity = _nextTimePoint - DateTime.Now >= new TimeSpan() ? InfoBarSeverity.Warning : InfoBarSeverity.Error;
-                InfoBar.Title =
-                    $"{_reminds.First().Pic} さんの {_reminds.First().Order.Name} 発動まであと {(_nextTimePoint - DateTime.Now).Seconds} 秒";
-                if (_picFlag && _user == _reminds.First().Pic)
-                {
-                    _picFlag = false;
-                    PlayAlert(ElementSoundKind.Hide, ElementSoundKind.Invoke, ElementSoundKind.Show, ElementSoundKind.Invoke);
-                }
-                if (flag && InfoBar.Severity == InfoBarSeverity.Error) PlayAlert(ElementSoundKind.Hide);
-            }
-            else
-            {
-                InfoBar.IsOpen = false;
-            }
-            #endregion
-
-            #region Re-Formation Information
-            if (_reminds.Count > 0 && _reminds.First().Order.Kind == Kinds.Formation)
-            {
-                FormationInfoBar.IsOpen = true;
-                FormationInfoBar.Severity = InfoBarSeverity.Informational;
-                FormationInfoBar.Title = $"次は {_reminds.First().Order.Name} です";
-
-                if (_nextTimePoint - DateTime.Now > new TimeSpan(0, 0, 0, 15)) return;
-                FormationInfoBar.Severity = InfoBarSeverity.Warning;
-                FormationInfoBar.Title = $"{_reminds.First().Order.Name} 発動まであと {(_nextTimePoint - DateTime.Now).Seconds} 秒";
-                if (_reFormation) return;
-                PlayAlert(ElementSoundKind.Show);
-                _reFormation = true;
-            }
-            else
-            {
-                FormationInfoBar.IsOpen = false;
-                _reFormation = false;
-            }
-            #endregion
         };
         _timer.Start();
+    }
+
+    private void OrderScan()
+    {
+        switch (_orderStat)
+        {
+            // 相手オーダー発動中
+            case Active(var name, var point, var span):
+                {
+                    OpponentInfoBar.IsOpen = true;
+                    var spend = (DateTime.Now - point).Seconds + (DateTime.Now - point).Minutes * 60;
+                    OpponentInfoBar.Title = $"{name ?? "Opponent's Order"}: {span - spend} seconds remaining.";
+                    // オーダーが終わる3秒前には表示をやめる
+                    if (span - spend < 3)
+                    {
+                        // 次のオーダー検知にむけて初期化
+                        _orderStat = new None();
+                        _opOrderInfo = null;
+                        OpponentInfoBar.IsOpen = false;
+                    }
+                    break;
+                }
+            // 相手オーダー準備中でも発動中でもない
+            case None:
+                {
+                    switch (_opCapture!.CaptureOpponentsOrder())
+                    {
+                        // オーダー準備中を検知
+                        case WaitStat(var image):
+                            {
+                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug.png");
+                                _orderStat = new Waiting();
+                                _orderPreparePoint = DateTime.Now;
+                                break;
+                            }
+                    }
+                    break;
+                }
+            // 相手オーダー準備中
+            case Waiting:
+                {
+                    OpponentInfoBar.IsOpen = true;
+                    OpponentInfoBar.Title = "Waiting...";
+
+                    switch (_opCapture!.CaptureOpponentsOrder())
+                    {
+                        // オーダー発動検知
+                        case ActiveStat(var image):
+                            {
+                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\active\\debug.png");
+                                if (_opOrderInfo != null)
+                                {
+                                    _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
+                                }
+                                else
+                                {
+                                    var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
+                                    _orderStat = new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t)) switch
+                                    {
+                                        5 => new Active(null, DateTime.Now, 120 - 1),
+                                        15 => new Active(null, DateTime.Now, 60 - 1),
+                                        20 => new Active(null, DateTime.Now, 80 - 1),
+                                        30 => new Active(null, DateTime.Now, 120 - 1),
+                                        _ => throw new UnreachableException(),
+                                    };
+                                    _opOrderInfo = null;
+                                }
+
+                                goto End;
+                            }
+                    }
+
+                    if (_orderStat is not Active)
+                    {
+                        switch (_opCapture!.IsActivating())
+                        {
+                            case ActiveStat(var image):
+                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activaing\\True\\debug.png");
+                                break;
+                            default:
+                                goto End;
+                        }
+
+                        if (_opOrderInfo is ({ ActiveTime: > 0 }, _))
+                        {
+                            _orderStat = new Active(
+                                _opOrderInfo?.Item1.Name,
+                                DateTime.Now,
+                                _opOrderInfo?.Item1.ActiveTime ?? 0
+                            );
+                            _opOrderInfo = null;
+                        }
+                        _orderStat = new None();
+                        _opOrderInfo = null;
+                        OpponentInfoBar.IsOpen = false;
+                    }
+
+                    End:
+                    break;
+                }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(_orderStat));
+        }
     }
 
     private void ReCalcTimeTable()
@@ -391,6 +375,7 @@ public sealed partial class ControlDashboardPage
 
         if (ordered.Kind is Elemental)
         {
+            var originalRemindsCount = _reminds.Count;
             foreach (var item in _deck
                          .GetRange(_cursor - _reminds.Count, _deck.Count - _cursor + _reminds.Count)
                          .Where(item => item.Order != ordered)
@@ -401,13 +386,18 @@ public sealed partial class ControlDashboardPage
                 _deck.Remove(item);
                 _reminds.Remove(item);
             }
-            var remaining = _reminds.Count;
-            _reminds.Clear();
-            foreach (var item in _deck.GetRange(_cursor - remaining, remaining))
+
+            if (_cursor <= _deck.Count)
             {
-                _reminds.Add(item);
+                var remaining = _reminds.Count;
+                _reminds.Clear();
+                foreach (var item in _deck.GetRange(_cursor - originalRemindsCount, remaining))
+                {
+                    _reminds.Add(item);
+                }
+
+                ReCalcTimeTable();
             }
-            ReCalcTimeTable();
         }
 
         // 差分計算

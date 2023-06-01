@@ -109,23 +109,27 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
             <InfoBar Grid.Row="0"
-                     x:Name="InfoBar"
+                     x:Name="DebugBar"
                      IsOpen="False"/>
             <InfoBar Grid.Row="1"
-                     x:Name="FormationInfoBar"
+                     x:Name="InitBar"
                      IsOpen="False"/>
             <InfoBar Grid.Row="2"
-                     x:Name="ConditionalOrderInfo"
+                     x:Name="InfoBar"
                      IsOpen="False"/>
             <InfoBar Grid.Row="3"
+                     x:Name="ConditionalOrderInfo"
+                     IsOpen="False"/>
+            <InfoBar Grid.Row="4"
                      x:Name="TeachingInfoBar"
                      Title="Automatically start to navigate when first order is prepared."
                      Severity="Informational"
                      IsOpen="False"/>
-            <InfoBar Grid.Row="4"
+            <InfoBar Grid.Row="5"
                      x:Name="OpponentInfoBar"
                      Severity="Informational"
                      IsOpen="False"/>
