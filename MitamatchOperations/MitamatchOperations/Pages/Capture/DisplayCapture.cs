@@ -176,8 +176,7 @@ internal partial class WindowCapture
 
     public async Task<string> CaptureOrderInfo()
     {
-        var snapShot = GetRect((1040, 380), (250, 50));
-
+        var snapShot = GetRect((1040, 330), (250, 100));
         return await RecognizeText(await GetSoftwareSnapShot(snapShot));
     }
 }

@@ -9,6 +9,7 @@ using System.Reactive.Linq;
 using System.Text.Json;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -53,6 +54,7 @@ public sealed partial class ControlDashboardPage
     private OpOrderStatus _orderStat = new None();
     private DateTime _orderPreparePoint = DateTime.Now;
     private (Order, int)? _opOrderInfo;
+    private readonly CountdownEvent _captureEvent = new (1);
 
     public bool IsCtrlKeyPressed { get; set; }
 
@@ -82,6 +84,7 @@ public sealed partial class ControlDashboardPage
             .Subscribe(async delegate
             {
                 await _capture!.SnapShot();
+                _captureEvent.Signal();
             });
 
         // 相手のオーダー情報を読取る
@@ -89,6 +92,7 @@ public sealed partial class ControlDashboardPage
             // ReSharper disable once AsyncVoidLambda
             .Subscribe(async delegate
             {
+                _captureEvent.Wait();
                 // オーダー情報を読取る
                 var cap = await _capture!.CaptureOrderInfo();
                 var info = Order.List
@@ -110,6 +114,7 @@ public sealed partial class ControlDashboardPage
             // ReSharper disable once AsyncVoidLambda
             .Subscribe(async delegate
             {
+                _captureEvent.Wait();
                 switch (await Analyze(await _capture!.TryCaptureOrderInfo()))
                 {
                     case SuccessResult(var user, var order):
@@ -136,6 +141,7 @@ public sealed partial class ControlDashboardPage
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[4])
             .Subscribe(delegate
             {
+                _captureEvent.Reset(1);
                 if (_reminds.Count > 0 && _nextTimePoint - DateTime.Now <= new TimeSpan(0, 0, 0, 10))
                 {
                     if (_reminds.First().Start == 15u * 60u) return;
@@ -157,7 +163,7 @@ public sealed partial class ControlDashboardPage
                 }
             });
 
-        _timer.Tick += delegate
+        _timer.Tick += async delegate
         {
             if (_capture != null)
             {
@@ -170,8 +176,7 @@ public sealed partial class ControlDashboardPage
             {
                 try
                 {
-                    if (InitBar.AccessKey != "ERROR") return;
-                    Init(Search.WindowHandleFromCaption("Assaultlily"));
+                    await Init(Search.WindowHandleFromCaption("Assaultlily"));
                 }
                 catch
                 {
@@ -189,10 +194,9 @@ public sealed partial class ControlDashboardPage
                             var item = new MenuFlyoutItem
                             {
                                 Text = caption,
-                                Command = new Defer(delegate
+                                Command = new Defer(async delegate
                                 {
-                                    Init(handle);
-                                    return Task.CompletedTask;
+                                    await Init(handle);
                                 }),
                             };
                             menu.Items.Add(item);
@@ -210,26 +214,37 @@ public sealed partial class ControlDashboardPage
         _timer.Start();
     }
 
-    private void Init(IntPtr handle)
+    private Task Init(IntPtr handle)
     {
         _capture = new WindowCapture(handle);
         InitBar.AccessKey = "SUCCESS";
         InitBar.IsOpen = false;
         InitBar.Content = null;
-        _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(40));
+        _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(40));
         _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(80));
-        _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(120));
-        _schedulers[4].AdvanceBy(TimeSpan.FromMilliseconds(160));
+        _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(120));
+        _schedulers[0].AdvanceBy(TimeSpan.FromMilliseconds(160));
         //Load sample data
         var imageBytes = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\wait_or_active\active\active01.png");
-        var sampleData = new MLOrderModel.ModelInput()
+        var sampleData1 = new MLOrderModel.ModelInput()
         {
             ImageSource = imageBytes,
         };
 
         //Load model and predict output
-        _ = MLOrderModel.Predict(sampleData);
+        _ = MLOrderModel.Predict(sampleData1);
 
+        //Load sample data
+        imageBytes = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\is_activaing\False\False01.png");
+        var sampleData2 = new MLActivatingModel.ModelInput()
+        {
+            ImageSource = imageBytes,
+        };
+
+        //Load model and predict output
+        _ = MLActivatingModel.Predict(sampleData2);
+
+        return Task.CompletedTask;
     }
 
     private Task OrderScan()
@@ -239,9 +254,10 @@ public sealed partial class ControlDashboardPage
             // 相手オーダー発動中
             case Active(var name, var point, var span):
                 {
+                    span = _opOrderInfo?.Item1.ActiveTime - 1 ?? span;
                     OpponentInfoBar.IsOpen = true;
                     var spend = (DateTime.Now - point).Seconds + (DateTime.Now - point).Minutes * 60;
-                    OpponentInfoBar.Title = $"{name ?? "Opponent's Order"}: {span - spend} seconds remaining.";
+                    OpponentInfoBar.Title = $"相手オーダー: {name ?? "なんか"} => 残り {span - spend} 秒";
                     // オーダーが終わる3秒前には表示をやめる
                     if (span - spend < 3)
                     {
@@ -255,6 +271,7 @@ public sealed partial class ControlDashboardPage
             // 相手オーダー準備中でも発動中でもない
             case None:
                 {
+                    _captureEvent.Wait();
                     switch (_capture!.CaptureOpponentsOrder())
                     {
                         // オーダー準備中を検知
@@ -272,7 +289,32 @@ public sealed partial class ControlDashboardPage
             case Waiting:
                 {
                     OpponentInfoBar.IsOpen = true;
-                    OpponentInfoBar.Title = "Waiting...";
+                    var waitingFor = _opOrderInfo != null ? $"for {_opOrderInfo?.Item1.Name}..." : "...";
+                    OpponentInfoBar.Title = $@"Waiting {waitingFor}";
+
+                    if (_opOrderInfo != null)
+                    {
+                        _captureEvent.Wait();
+
+                        switch (_capture!.IsActivating())
+                        {
+                            case ActiveStat:
+                                {
+                                    if (_opOrderInfo?.Item1.ActiveTime == 0)
+                                    {
+                                        _opOrderInfo = null;
+                                        _orderStat = new None();
+                                    }
+                                    else
+                                    {
+                                        _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
+                                    }
+                                    goto End;
+                                }
+                        }
+                    }
+
+                    _captureEvent.Wait();
 
                     switch (_capture!.CaptureOpponentsOrder())
                     {
@@ -307,6 +349,7 @@ public sealed partial class ControlDashboardPage
                         switch (_capture!.IsActivating())
                         {
                             case ActiveStat(var image):
+                                _opOrderInfo = null;
                                 image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activaing\\True\\debug.png");
                                 break;
                             default:
