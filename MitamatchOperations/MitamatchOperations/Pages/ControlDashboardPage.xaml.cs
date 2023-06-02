@@ -36,7 +36,7 @@ public sealed partial class ControlDashboardPage
 {
     private WindowCapture? _capture;
 
-    private readonly HistoricalScheduler[] _schedulers = { new(), new(), new(), new(), new () };
+    private readonly HistoricalScheduler[] _schedulers = { new(), new(), new(), new(), new() };
     private readonly ObservableCollection<TimeTableItem> _reminds = new();
     private readonly ObservableHashSet<ResultItem> _results = new();
     private readonly DispatcherTimer _timer = new()
@@ -54,7 +54,7 @@ public sealed partial class ControlDashboardPage
     private OpOrderStatus _orderStat = new None();
     private DateTime _orderPreparePoint = DateTime.Now;
     private (Order, int)? _opOrderInfo;
-    private readonly CountdownEvent _captureEvent = new (1);
+    private readonly CountdownEvent _captureEvent = new(1);
 
     public bool IsCtrlKeyPressed { get; set; }
 
