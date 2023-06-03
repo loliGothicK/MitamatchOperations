@@ -113,7 +113,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <InfoBar Grid.Row="0"
-                     x:Name="DebugBar"
+                     x:Name="SubCaptureSelectBar"
                      IsOpen="False"/>
             <InfoBar Grid.Row="1"
                      x:Name="InitBar"

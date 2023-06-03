@@ -16,6 +16,8 @@
     <Company>MitamaLab</Company>
     <PackAsTool>True</PackAsTool>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest</AnalysisLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <WarningLevel>7</WarningLevel>

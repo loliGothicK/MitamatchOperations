@@ -35,6 +35,7 @@ namespace mitama.Pages;
 public sealed partial class ControlDashboardPage
 {
     private WindowCapture? _capture;
+    private WindowCapture? _subCapture;
 
     private readonly HistoricalScheduler[] _schedulers = { new(), new(), new(), new(), new() };
     private readonly ObservableCollection<TimeTableItem> _reminds = new();
@@ -83,6 +84,7 @@ public sealed partial class ControlDashboardPage
             // ReSharper disable once AsyncVoidLambda
             .Subscribe(async delegate
             {
+                _captureEvent.Reset(1);
                 await _capture!.SnapShot();
                 _captureEvent.Signal();
             });
@@ -141,7 +143,6 @@ public sealed partial class ControlDashboardPage
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[4])
             .Subscribe(delegate
             {
-                _captureEvent.Reset(1);
                 if (_reminds.Count > 0 && _nextTimePoint - DateTime.Now <= new TimeSpan(0, 0, 0, 10))
                 {
                     if (_reminds.First().Start == 15u * 60u) return;
@@ -176,7 +177,40 @@ public sealed partial class ControlDashboardPage
             {
                 try
                 {
-                    await Init(Search.WindowHandleFromCaption("Assaultlily"));
+                    await Init(Search.WindowHandleFromCaption("Assaultlily"), out _capture);
+
+                    if (SubCaptureSelectBar.AccessKey == "SELECTED") return;
+
+                    SubCaptureSelectBar.IsOpen = true;
+                    SubCaptureSelectBar.AccessKey = "NOT_SELECTED";
+                    SubCaptureSelectBar.Severity = InfoBarSeverity.Warning;
+                    SubCaptureSelectBar.Title = "サブ画面を選択してください";
+
+                    var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
+                    foreach (var (caption, handle) in Search.GetWindowList())
+                    {
+                        if (caption == string.Empty) continue;
+                        var item = new MenuFlyoutItem
+                        {
+                            Text = caption,
+                            Command = new Defer(async delegate
+                            {
+                                await Init(handle, out _subCapture);
+                                SubCaptureSelectBar.AccessKey = "SELECTED";
+                                await _subCapture!.SnapShot();
+                                // たいちょー: (146 80) (1680, 800)
+                                SubCaptureSelectBar.IsOpen = false;
+                            }),
+                        };
+                        menu.Items.Add(item);
+                    }
+
+                    SubCaptureSelectBar.Content = new DropDownButton
+                    {
+                        Content = "画面を選択する",
+                        Flyout = menu,
+                    };
+
                 }
                 catch
                 {
@@ -196,7 +230,7 @@ public sealed partial class ControlDashboardPage
                                 Text = caption,
                                 Command = new Defer(async delegate
                                 {
-                                    await Init(handle);
+                                    await Init(handle, out _capture);
                                 }),
                             };
                             menu.Items.Add(item);
@@ -214,9 +248,9 @@ public sealed partial class ControlDashboardPage
         _timer.Start();
     }
 
-    private Task Init(IntPtr handle)
+    private Task Init(IntPtr handle, out WindowCapture cap)
     {
-        _capture = new WindowCapture(handle);
+        cap = new WindowCapture(handle);
         InitBar.AccessKey = "SUCCESS";
         InitBar.IsOpen = false;
         InitBar.Content = null;
@@ -254,10 +288,11 @@ public sealed partial class ControlDashboardPage
             // 相手オーダー発動中
             case Active(var name, var point, var span):
                 {
+                    name = _opOrderInfo?.Item1.Name ?? name ?? "不明";
                     span = _opOrderInfo?.Item1.ActiveTime - 1 ?? span;
                     OpponentInfoBar.IsOpen = true;
                     var spend = (DateTime.Now - point).Seconds + (DateTime.Now - point).Minutes * 60;
-                    OpponentInfoBar.Title = $"相手オーダー: {name ?? "なんか"} => 残り {span - spend} 秒";
+                    OpponentInfoBar.Title = $"相手オーダー: {name} => 残り {span - spend} 秒";
                     // オーダーが終わる3秒前には表示をやめる
                     if (span - spend < 3)
                     {
