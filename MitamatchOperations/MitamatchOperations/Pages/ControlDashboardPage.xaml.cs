@@ -152,7 +152,8 @@ public sealed partial class ControlDashboardPage
                             {
                                 if (_reminds.Count == 0) break;
                                 var ordered = Order.List.MinBy(o => Algo.LevenshteinRate(o.Name, order));
-                                if (_deck.Select(e => e.Order.Index).ToArray().Contains(ordered.Index))
+                                if (_deck.Select(e => e.Order.Index).ToArray().Contains(ordered.Index)
+                                    && !_results.Select(r => r.Order.Index).ToArray().Contains(ordered.Index))
                                 {
                                     Update(user, ordered);
                                 }
@@ -640,6 +641,7 @@ public sealed partial class ControlDashboardPage
     // ReSharper disable once NotAccessedPositionalProperty.Local
     private record SuccessResult(string User, string Order) : AnalyzeResult;
 
+    // ReSharper disable once NotAccessedPositionalProperty.Local
     private record FailureResult(string Raw) : AnalyzeResult;
 
     private void LoadComboBox_OnLoaded(object sender, RoutedEventArgs e)
