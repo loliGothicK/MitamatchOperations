@@ -9,6 +9,8 @@ using Windows.Media.Ocr;
 using OpenCvSharp.Extensions;
 using OpenCvSharp;
 using MitamatchOperations;
+using AForge.Imaging.Filters;
+using Size = OpenCvSharp.Size;
 
 namespace mitama.Pages.Capture;
 
@@ -87,14 +89,32 @@ internal partial class WindowCapture
         return ocrResult.Text.Replace(" ", string.Empty);
     }
 
-    public async Task<string> TryCaptureOrderInfo()
+    public async Task<string> TryCaptureOrderInfo((int, int)? topLeft = null, (int, int)? size = null)
     {
-        return await RecognizeText(await GetSoftwareSnapShot(GetRect((260, 120), (500, 120))));
+        var image = GetRect(topLeft ?? (260, 120), size ?? (500, 120));
+        var highResolutionImage = Interpolation(image);
+        highResolutionImage.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\debug.png", ImageFormat.Png);
+        return await RecognizeText(await GetSoftwareSnapShot(highResolutionImage));
     }
 
-    public OrderStat CaptureOpponentsOrder()
+    public Bitmap Interpolation(Bitmap src)
     {
-        var bitmap = GetRect((1800, 620), (120, 120));
+        // ノイズリダクションのためにガウシアンフィルタを適用する
+        Mat filtered = new ();
+        Cv2.GaussianBlur(src.ToMat(), filtered, new Size(3, 3), 0);
+
+        // 出力用のMatを作成
+        Mat dst = new ();
+
+        // 画像の補間を行う
+        Cv2.Resize(filtered, dst, new Size(src.Width * 2, src.Height * 2), 0, 0, InterpolationFlags.Cubic);
+
+        return dst.ToBitmap();
+    }
+
+    public OrderStat CaptureOpponentsOrder((int, int)? topLeft = null, (int, int)? size = null)
+    {
+        var bitmap = GetRect(topLeft ?? (1800, 620), size ?? (120, 120));
 
         var srcImage = bitmap.ToMat();
         Mat grayImage = new();
@@ -131,9 +151,9 @@ internal partial class WindowCapture
                 : new ActiveStat(bitmap);
     }
 
-    public OrderStat IsActivating()
+    public OrderStat IsActivating((int, int)? topLeft = null, (int, int)? size = null)
     {
-        var bitmap = GetRect((1300, 230), (500, 500));
+        var bitmap = GetRect(topLeft ?? (1300, 230), size ?? (500, 500));
 
         // Load sample data
         var sampleData = new MLActivatingModel.ModelInput()
@@ -174,9 +194,17 @@ internal partial class WindowCapture
         return circles.Length > 0;
     }
 
-    public async Task<string> CaptureOrderInfo()
+    public async Task<string> CaptureOrderInfo((int, int)? topLeft = null, (int, int)? size = null)
     {
-        var snapShot = GetRect((1040, 330), (250, 100));
+        var snapShot = GetRect(topLeft ?? (1040, 330), size ?? (250, 100));
         return await RecognizeText(await GetSoftwareSnapShot(snapShot));
+    }
+
+    public async Task Dump((int, int)? topLeft = null, (int, int)? size = null)
+    {
+        topLeft ??= (0, 0);
+        size ??= (_capture.Width, _capture.Height);
+        var image = GetRect(topLeft.Value, size.Value);
+        await Task.Run(() => image.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\cap.png", ImageFormat.Png));
     }
 }

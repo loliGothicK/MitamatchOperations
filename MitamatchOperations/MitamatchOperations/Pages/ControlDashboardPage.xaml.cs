@@ -34,17 +34,31 @@ namespace mitama.Pages;
 /// </summary>
 public sealed partial class ControlDashboardPage
 {
+    // ウィンドウキャプチャのためのリソースを司る
     private WindowCapture? _capture;
     private WindowCapture? _subCapture;
 
+    // ウィンドウキャプチャのためのラッチ
+    private readonly CountdownEvent _captureEvent = new(1);
+    // ウィンドウキャプチャのためのスケジューラ
     private readonly HistoricalScheduler[] _schedulers = { new(), new(), new(), new(), new() };
+    
+    // オーダーの表示を行うためのコレクション
     private readonly ObservableCollection<TimeTableItem> _reminds = new();
     private readonly ObservableHashSet<ResultItem> _results = new();
-    private readonly DispatcherTimer _timer = new()
+    
+    // スケジューラを進めるためのタイマー
+    private static readonly Lazy<DispatcherTimer> Timer = new(() => 
     {
-        Interval = TimeSpan.FromMilliseconds(40)
-    };
+        var timer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromMilliseconds(40)
+        };
+        timer.Start();
+        return timer;
+    });
 
+    // なんやかんやで使う変数
     private int _cursor = 4;
     private List<TimeTableItem> _deck = new();
     private DateTime _nextTimePoint;
@@ -55,7 +69,6 @@ public sealed partial class ControlDashboardPage
     private OpOrderStatus _orderStat = new None();
     private DateTime _orderPreparePoint = DateTime.Now;
     private (Order, int)? _opOrderInfo;
-    private readonly CountdownEvent _captureEvent = new(1);
 
     public bool IsCtrlKeyPressed { get; set; }
 
@@ -86,6 +99,7 @@ public sealed partial class ControlDashboardPage
             {
                 _captureEvent.Reset(1);
                 await _capture!.SnapShot();
+                await _subCapture!.SnapShot();
                 _captureEvent.Signal();
             });
 
@@ -130,7 +144,24 @@ public sealed partial class ControlDashboardPage
                         }
                         break;
                     }
-                    case FailureResult(var raw) when raw != string.Empty: break;
+                    case FailureResult:
+                    {
+                        switch (await Analyze(await _subCapture!.TryCaptureOrderInfo((450, 170), (350, 75))))
+                        {
+                            case SuccessResult(var user, var order):
+                            {
+                                if (_reminds.Count == 0) break;
+                                var ordered = Order.List.MinBy(o => Algo.LevenshteinRate(o.Name, order));
+                                if (_deck.Select(e => e.Order.Index).ToArray().Contains(ordered.Index))
+                                {
+                                    Update(user, ordered);
+                                }
+
+                                break;
+                            }
+                        }
+                        break;
+                    }
                 }
             });
 
@@ -164,53 +195,20 @@ public sealed partial class ControlDashboardPage
                 }
             });
 
-        _timer.Tick += async delegate
+        Timer.Value.Tick += async delegate
         {
-            if (_capture != null)
+            if (_capture != null && _subCapture != null)
             {
                 foreach (var scheduler in _schedulers)
                 {
                     scheduler.AdvanceBy(TimeSpan.FromMilliseconds(40));
                 }
             }
-            else
+            else if (InitBar.AccessKey != "SUCCESS")
             {
                 try
                 {
                     await Init(Search.WindowHandleFromCaption("Assaultlily"), out _capture);
-
-                    if (SubCaptureSelectBar.AccessKey == "SELECTED") return;
-
-                    SubCaptureSelectBar.IsOpen = true;
-                    SubCaptureSelectBar.AccessKey = "NOT_SELECTED";
-                    SubCaptureSelectBar.Severity = InfoBarSeverity.Warning;
-                    SubCaptureSelectBar.Title = "サブ画面を選択してください";
-
-                    var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
-                    foreach (var (caption, handle) in Search.GetWindowList())
-                    {
-                        if (caption == string.Empty) continue;
-                        var item = new MenuFlyoutItem
-                        {
-                            Text = caption,
-                            Command = new Defer(async delegate
-                            {
-                                await Init(handle, out _subCapture);
-                                SubCaptureSelectBar.AccessKey = "SELECTED";
-                                await _subCapture!.SnapShot();
-                                // たいちょー: (146 80) (1680, 800)
-                                SubCaptureSelectBar.IsOpen = false;
-                            }),
-                        };
-                        menu.Items.Add(item);
-                    }
-
-                    SubCaptureSelectBar.Content = new DropDownButton
-                    {
-                        Content = "画面を選択する",
-                        Flyout = menu,
-                    };
-
                 }
                 catch
                 {
@@ -228,10 +226,7 @@ public sealed partial class ControlDashboardPage
                             var item = new MenuFlyoutItem
                             {
                                 Text = caption,
-                                Command = new Defer(async delegate
-                                {
-                                    await Init(handle, out _capture);
-                                }),
+                                Command = new Defer(async delegate { await Init(handle, out _capture); }),
                             };
                             menu.Items.Add(item);
                         }
@@ -244,8 +239,40 @@ public sealed partial class ControlDashboardPage
                     }
                 }
             }
+            else if (SubCaptureSelectBar.AccessKey != "SELECTED")
+            {
+                if (SubCaptureSelectBar.IsOpen) return;
+
+                SubCaptureSelectBar.IsOpen = true;
+                SubCaptureSelectBar.AccessKey = "NOT_SELECTED";
+                SubCaptureSelectBar.Severity = InfoBarSeverity.Warning;
+                SubCaptureSelectBar.Title = "サブ画面を選択してください";
+
+                var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
+                foreach (var (caption, handle) in Search.GetWindowList())
+                {
+                    if (caption == string.Empty) continue;
+                    var item = new MenuFlyoutItem
+                    {
+                        Text = caption,
+                        Command = new Defer(async delegate
+                        {
+                            _subCapture = new WindowCapture(handle);
+                            SubCaptureSelectBar.AccessKey = "SELECTED";
+                            await _subCapture!.SnapShot();
+                            SubCaptureSelectBar.IsOpen = false;
+                        }),
+                    };
+                    menu.Items.Add(item);
+                }
+
+                SubCaptureSelectBar.Content = new DropDownButton
+                {
+                    Content = "画面を選択する",
+                    Flyout = menu,
+                };
+            }
         };
-        _timer.Start();
     }
 
     private Task Init(IntPtr handle, out WindowCapture cap)
@@ -258,24 +285,20 @@ public sealed partial class ControlDashboardPage
         _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(80));
         _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(120));
         _schedulers[0].AdvanceBy(TimeSpan.FromMilliseconds(160));
-        //Load sample data
-        var imageBytes = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\wait_or_active\active\active01.png");
-        var sampleData1 = new MLOrderModel.ModelInput()
+
+        // カタログデータをあらかじめメモリリージョンにのせておくために
+
+        var sampleData1 = new MLOrderModel.ModelInput
         {
-            ImageSource = imageBytes,
+            ImageSource = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\wait_or_active\active\active01.png"),
         };
 
-        //Load model and predict output
+        var sampleData2 = new MLActivatingModel.ModelInput
+        {
+            ImageSource = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\is_activaing\False\False01.png"),
+        };
+
         _ = MLOrderModel.Predict(sampleData1);
-
-        //Load sample data
-        imageBytes = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\is_activaing\False\False01.png");
-        var sampleData2 = new MLActivatingModel.ModelInput()
-        {
-            ImageSource = imageBytes,
-        };
-
-        //Load model and predict output
         _ = MLActivatingModel.Predict(sampleData2);
 
         return Task.CompletedTask;
@@ -317,6 +340,21 @@ public sealed partial class ControlDashboardPage
                                 _orderPreparePoint = DateTime.Now;
                                 break;
                             }
+                        default:
+                            {
+                                switch (_subCapture!.CaptureOpponentsOrder((1600, 540), (100, 80)))
+                                {
+                                    // オーダー準備中を検知
+                                    case WaitStat(var image):
+                                    {
+                                        image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug.png");
+                                        _orderStat = new Waiting();
+                                        _orderPreparePoint = DateTime.Now;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
                     }
                     break;
                 }
@@ -345,6 +383,26 @@ public sealed partial class ControlDashboardPage
                                         _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
                                     }
                                     goto End;
+                                }
+                            default:
+                                {
+                                    switch (_subCapture!.IsActivating((1120, 160), (560, 510)))
+                                    {
+                                        case ActiveStat:
+                                        {
+                                            if (_opOrderInfo?.Item1.ActiveTime == 0)
+                                            {
+                                                _opOrderInfo = null;
+                                                _orderStat = new None();
+                                            }
+                                            else
+                                            {
+                                                _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
+                                            }
+                                            goto End;
+                                        }
+                                    }
+                                    break;
                                 }
                         }
                     }
@@ -377,6 +435,37 @@ public sealed partial class ControlDashboardPage
 
                                 goto End;
                             }
+                        default:
+                            {
+                                switch (_subCapture!.CaptureOpponentsOrder((1600, 540), (100, 80)))
+                                {
+                                    // オーダー発動検知
+                                    case ActiveStat(var image):
+                                    {
+                                        image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\active\\debug.png");
+                                        if (_opOrderInfo != null)
+                                        {
+                                            _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
+                                        }
+                                        else
+                                        {
+                                            var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
+                                            _orderStat = new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t)) switch
+                                            {
+                                                5 => new Active(null, DateTime.Now, 120 - 1),
+                                                15 => new Active(null, DateTime.Now, 60 - 1),
+                                                20 => new Active(null, DateTime.Now, 80 - 1),
+                                                30 => new Active(null, DateTime.Now, 120 - 1),
+                                                _ => throw new UnreachableException(),
+                                            };
+                                            _opOrderInfo = null;
+                                        }
+
+                                        goto End;
+                                    }
+                                }
+                                break;
+                            }
                     }
 
                     if (_orderStat is not Active)
@@ -388,7 +477,18 @@ public sealed partial class ControlDashboardPage
                                 image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activaing\\True\\debug.png");
                                 break;
                             default:
-                                goto End;
+                                {
+                                    switch (_subCapture!.IsActivating((1120, 160), (560, 510)))
+                                    {
+                                        case ActiveStat(var image):
+                                            _opOrderInfo = null;
+                                            image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activaing\\True\\debug.png");
+                                            break;
+                                        default:
+                                            goto End;
+                                    }
+                                    goto End;
+                                }
                         }
 
                         if (_opOrderInfo is ({ ActiveTime: > 0 }, _))
