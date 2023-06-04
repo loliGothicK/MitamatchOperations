@@ -40,6 +40,7 @@ public sealed partial class ControlDashboardPage
 
     // ウィンドウキャプチャのためのラッチ
     private readonly CountdownEvent _captureEvent = new(1);
+    private readonly CountdownEvent _subCaptureEvent = new(1);
     // ウィンドウキャプチャのためのスケジューラ
     private readonly HistoricalScheduler[] _schedulers = { new(), new(), new(), new(), new() };
     
@@ -95,12 +96,20 @@ public sealed partial class ControlDashboardPage
         // 全体のウィンドウキャプチャ
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[0])
             // ReSharper disable once AsyncVoidLambda
-            .Subscribe(async delegate
+            .Subscribe(delegate
             {
-                _captureEvent.Reset(1);
-                await _capture!.SnapShot();
-                await _subCapture!.SnapShot();
-                _captureEvent.Signal();
+                Task.Run(async () =>
+                {
+                    _captureEvent.Reset(1);
+                    await _capture!.SnapShot();
+                    _captureEvent.Signal();
+                });
+                Task.Run(async () =>
+                {
+                    _subCaptureEvent.Reset(1);
+                    await _subCapture!.SnapShot();
+                    _subCaptureEvent.Signal();
+                });
             });
 
         // 相手のオーダー情報を読取る
@@ -146,6 +155,7 @@ public sealed partial class ControlDashboardPage
                     }
                     case FailureResult:
                     {
+                        _subCaptureEvent.Wait();
                         switch (await Analyze(await _subCapture!.TryCaptureOrderInfo((450, 170), (350, 75))))
                         {
                             case SuccessResult(var user, var order):
@@ -343,6 +353,7 @@ public sealed partial class ControlDashboardPage
                             }
                         default:
                             {
+                                _subCaptureEvent.Wait();
                                 switch (_subCapture!.CaptureOpponentsOrder((1600, 540), (100, 80)))
                                 {
                                     // オーダー準備中を検知
