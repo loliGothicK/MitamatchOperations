@@ -306,7 +306,7 @@ public sealed partial class ControlDashboardPage
 
         var sampleData2 = new MLActivatingModel.ModelInput
         {
-            ImageSource = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\is_activaing\False\False01.png"),
+            ImageSource = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\is_activating\False\False01.png"),
         };
 
         _ = MLOrderModel.Predict(sampleData1);
@@ -486,7 +486,7 @@ public sealed partial class ControlDashboardPage
                         {
                             case ActiveStat(var image):
                                 _opOrderInfo = null;
-                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activaing\\True\\debug.png");
+                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating\\True\\debug.png");
                                 break;
                             default:
                                 {
@@ -494,7 +494,7 @@ public sealed partial class ControlDashboardPage
                                     {
                                         case ActiveStat(var image):
                                             _opOrderInfo = null;
-                                            image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activaing\\True\\debug.png");
+                                            image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating\\True\\debug.png");
                                             break;
                                         default:
                                             goto End;
