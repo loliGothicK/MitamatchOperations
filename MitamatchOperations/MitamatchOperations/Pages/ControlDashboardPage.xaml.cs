@@ -41,7 +41,7 @@ public sealed partial class ControlDashboardPage
     // ウィンドウキャプチャのためのラッチ
     private readonly CountdownEvent _captureEvent = new(1);
     private readonly CountdownEvent _subCaptureEvent = new(1);
-    // ウィンドウキャプチャのためのスケジューラ
+    // サブスクライバーのスケジューラ
     private readonly HistoricalScheduler[] _schedulers = { new(), new(), new(), new(), new() };
     
     // オーダーの表示を行うためのコレクション
@@ -59,7 +59,7 @@ public sealed partial class ControlDashboardPage
         return timer;
     });
 
-    // なんやかんやで使う変数
+    // なんやかんやで使う状態変数
     private int _cursor = 4;
     private List<TimeTableItem> _deck = new();
     private DateTime _nextTimePoint;
@@ -295,18 +295,18 @@ public sealed partial class ControlDashboardPage
         InitBar.AccessKey = "SUCCESS";
         InitBar.IsOpen = false;
         InitBar.Content = null;
+
+        // IOのタイミングをずらすために 40 ms ずつずらす
         _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(40));
         _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(80));
         _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(120));
         _schedulers[0].AdvanceBy(TimeSpan.FromMilliseconds(160));
 
-        // カタログデータをあらかじめメモリリージョンにのせておくために
-
+        // カタログデータをあらかじめメモリリージョンにのせておくために一度 Predict を呼ぶ
         var sampleData1 = new MLOrderModel.ModelInput
         {
             ImageSource = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\wait_or_active\active\active01.png"),
         };
-
         var sampleData2 = new MLActivatingModel.ModelInput
         {
             ImageSource = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\is_activating\False\False01.png"),
@@ -558,6 +558,11 @@ public sealed partial class ControlDashboardPage
         }
     }
 
+    /// <summary>
+    /// Updates the time table.
+    /// </summary>
+    /// <param name="user">The user who prepared the order.</param>
+    /// <param name="ordered">The order in which it is prepared.</param>
     private void Update(string user, Order ordered)
     {
         var now = DateTime.Now;

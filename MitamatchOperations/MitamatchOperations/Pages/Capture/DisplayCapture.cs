@@ -40,6 +40,11 @@ internal partial class WindowCapture
     [return: MarshalAs(UnmanagedType.Bool)]
     private static partial void GetWindowRect(IntPtr hWnd, out Rect rect);
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="WindowCapture"/> class from window handle and memory capacity.
+    /// </summary>
+    /// <param name="handle">Handle pointer to the window for capturing.</param>
+    /// <param name="capacity">memory stream capacity</param>
     public WindowCapture(IntPtr handle, int capacity = 1000)
     {
         GetWindowRect(handle, out _rect);
@@ -50,6 +55,9 @@ internal partial class WindowCapture
         };
     }
 
+    /// <summary>
+    /// Updates the capture full image.
+    /// </summary>
     public Task SnapShot()
     {
         // Graphicsの作成
@@ -68,7 +76,7 @@ internal partial class WindowCapture
     private Bitmap GetRect((int, int) topLeft, (int, int) size) =>
         _capture.Clone(new Rectangle(topLeft.Item1, topLeft.Item2, size.Item1, size.Item2), _capture.PixelFormat);
 
-    public async Task<SoftwareBitmap> GetSoftwareSnapShot(Bitmap snap)
+    private async Task<SoftwareBitmap> GetSoftwareSnapShot(Image snap)
     {
         // 取得したキャプチャ画像をストリームに保存
         _bufferStream.Seek(0, SeekOrigin.Begin);
@@ -82,34 +90,32 @@ internal partial class WindowCapture
         return softwareBitmap;
     }
 
-    public async Task<string> RecognizeText(SoftwareBitmap snap)
+    private static async Task<string> RecognizeText(SoftwareBitmap snap)
     {
         var ocrEngine = OcrEngine.TryCreateFromUserProfileLanguages();
         var ocrResult = await ocrEngine?.RecognizeAsync(snap);
         return ocrResult.Text.Replace(" ", string.Empty);
     }
 
+    /// <summary>
+    /// Returns a text recognition string of order information.
+    /// </summary>
+    /// <param name="topLeft">top left position [default is (260, 120)].</param>
+    /// <param name="size">capture size [default is (500, 120)].</param>
+    /// <returns>
+    /// The result string of text recognition.
+    /// </returns>
     public async Task<string> TryCaptureOrderInfo((int, int)? topLeft = null, (int, int)? size = null)
     {
         var image = GetRect(topLeft ?? (260, 120), size ?? (500, 120));
         return await RecognizeText(await GetSoftwareSnapShot(image));
     }
 
-    public Bitmap Interpolation(Bitmap src)
-    {
-        // ノイズリダクションのためにガウシアンフィルタを適用する
-        Mat filtered = new ();
-        Cv2.GaussianBlur(src.ToMat(), filtered, new Size(3, 3), 0);
-
-        // 出力用のMatを作成
-        Mat dst = new ();
-
-        // 画像の補間を行う
-        Cv2.Resize(filtered, dst, new Size(src.Width * 2, src.Height * 2), 0, 0, InterpolationFlags.Cubic);
-
-        return dst.ToBitmap();
-    }
-
+    /// <summary>
+    /// Returns a image classification result of opponent's order icon.
+    /// </summary>
+    /// <param name="topLeft">top left position [default is (1800, 620)].</param>
+    /// <param name="size">capture size [default is (120, 120)].</param>
     public OrderStat CaptureOpponentsOrder((int, int)? topLeft = null, (int, int)? size = null)
     {
         var bitmap = GetRect(topLeft ?? (1800, 620), size ?? (120, 120));
@@ -120,7 +126,7 @@ internal partial class WindowCapture
         Cv2.CvtColor(srcImage, grayImage, ColorConversionCodes.BGR2GRAY);
 
         // ノイズを軽減するために画像を平滑化
-        Cv2.GaussianBlur(grayImage, grayImage, new OpenCvSharp.Size(9, 9), 2, 2);
+        Cv2.GaussianBlur(grayImage, grayImage, new Size(9, 9), 2, 2);
 
         // 円の検出
         var circles = Cv2.HoughCircles(
@@ -149,17 +155,20 @@ internal partial class WindowCapture
                 : new ActiveStat(bitmap);
     }
 
+    /// <summary>
+    /// Returns a image classification result of activating order icon.
+    /// </summary>
+    /// <param name="topLeft">top left position [default is (1300, 230)].</param>
+    /// <param name="size">capture size [default is (500, 500)].</param>
     public OrderStat IsActivating((int, int)? topLeft = null, (int, int)? size = null)
     {
         var bitmap = GetRect(topLeft ?? (1300, 230), size ?? (500, 500));
 
-        // Load sample data
         var sampleData = new MLActivatingModel.ModelInput()
         {
             ImageSource = bitmap.ToMat().ToBytes(),
         };
 
-        // Load model and predict output
         var result = MLActivatingModel.Predict(sampleData);
 
         return result.PredictedLabel == "True" ? new ActiveStat(bitmap) : new Nothing();
@@ -175,7 +184,7 @@ internal partial class WindowCapture
         Cv2.CvtColor(srcImage, grayImage, ColorConversionCodes.BGR2GRAY);
 
         // ノイズを軽減するために画像を平滑化
-        Cv2.GaussianBlur(grayImage, grayImage, new OpenCvSharp.Size(9, 9), 2, 2);
+        Cv2.GaussianBlur(grayImage, grayImage, new Size(9, 9), 2, 2);
 
         // 円の検出
         var circles = Cv2.HoughCircles(
@@ -192,6 +201,12 @@ internal partial class WindowCapture
         return circles.Length > 0;
     }
 
+    /// <summary>
+    /// Returns a text recognition string of opponent's order information.
+    /// </summary>
+    /// <param name="topLeft"></param>
+    /// <param name="size"></param>
+    /// <returns></returns>
     public async Task<string> CaptureOrderInfo((int, int)? topLeft = null, (int, int)? size = null)
     {
         var snapShot = GetRect(topLeft ?? (1040, 330), size ?? (250, 100));
