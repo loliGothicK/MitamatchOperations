@@ -92,9 +92,7 @@ internal partial class WindowCapture
     public async Task<string> TryCaptureOrderInfo((int, int)? topLeft = null, (int, int)? size = null)
     {
         var image = GetRect(topLeft ?? (260, 120), size ?? (500, 120));
-        var highResolutionImage = Interpolation(image);
-        highResolutionImage.Save(@"C:\Users\lolig\OneDrive\デスクトップ\MitamatchOperations\debug.png", ImageFormat.Png);
-        return await RecognizeText(await GetSoftwareSnapShot(highResolutionImage));
+        return await RecognizeText(await GetSoftwareSnapShot(image));
     }
 
     public Bitmap Interpolation(Bitmap src)

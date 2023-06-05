@@ -166,18 +166,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup Label="MLActivatingModel">
-    <None Include="MLActivatingModel.consumption.cs">
-      <DependentUpon>MLActivatingModel.mbconfig</DependentUpon>
-    </None>
-    <None Include="MLActivatingModel.training.cs">
-      <DependentUpon>MLActivatingModel.mbconfig</DependentUpon>
-    </None>
-    <None Include="MLActivatingModel.zip">
-      <DependentUpon>MLActivatingModel.mbconfig</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
   <ItemGroup Label="MLOrderModel">
     <None Include="MLOrderModel.consumption.cs">
       <DependentUpon>MLOrderModel.mbconfig</DependentUpon>
@@ -187,6 +175,18 @@
     </None>
     <None Include="MLOrderModel.zip">
       <DependentUpon>MLOrderModel.mbconfig</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLActivatingModel">
+    <None Include="MLActivatingModel.consumption.cs">
+      <DependentUpon>MLActivatingModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLActivatingModel.training.cs">
+      <DependentUpon>MLActivatingModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLActivatingModel.zip">
+      <DependentUpon>MLActivatingModel.mbconfig</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

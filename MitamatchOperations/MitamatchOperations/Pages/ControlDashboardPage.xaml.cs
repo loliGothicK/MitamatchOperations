@@ -81,6 +81,9 @@ public sealed partial class ControlDashboardPage
             case true when e.Key == VirtualKey.Q:
                 ManualTrigger();
                 break;
+            case true when e.Key == VirtualKey.C:
+                _orderStat = new None();
+                break;
         }
     }
 
@@ -156,7 +159,7 @@ public sealed partial class ControlDashboardPage
                     case FailureResult:
                     {
                         _subCaptureEvent.Wait();
-                        switch (await Analyze(await _subCapture!.TryCaptureOrderInfo((450, 170), (350, 75))))
+                        switch (await Analyze(await _subCapture!.TryCaptureOrderInfo((550, 250), (250, 60))))
                         {
                             case SuccessResult(var user, var order):
                             {
@@ -354,7 +357,7 @@ public sealed partial class ControlDashboardPage
                         default:
                             {
                                 _subCaptureEvent.Wait();
-                                switch (_subCapture!.CaptureOpponentsOrder((1600, 540), (100, 80)))
+                                switch (_subCapture!.CaptureOpponentsOrder((1485, 545), (70, 70)))
                                 {
                                     // オーダー準備中を検知
                                     case WaitStat(var image):
@@ -398,7 +401,7 @@ public sealed partial class ControlDashboardPage
                                 }
                             default:
                                 {
-                                    switch (_subCapture!.IsActivating((1120, 160), (560, 510)))
+                                    switch (_subCapture!.IsActivating((1100, 250), (540, 520)))
                                     {
                                         case ActiveStat:
                                         {
@@ -449,7 +452,7 @@ public sealed partial class ControlDashboardPage
                             }
                         default:
                             {
-                                switch (_subCapture!.CaptureOpponentsOrder((1600, 540), (100, 80)))
+                                switch (_subCapture!.CaptureOpponentsOrder((1485, 545), (70, 70)))
                                 {
                                     // オーダー発動検知
                                     case ActiveStat(var image):
@@ -490,7 +493,7 @@ public sealed partial class ControlDashboardPage
                                 break;
                             default:
                                 {
-                                    switch (_subCapture!.IsActivating((1120, 160), (560, 510)))
+                                    switch (_subCapture!.IsActivating((1100, 250), (540, 520)))
                                     {
                                         case ActiveStat(var image):
                                             _opOrderInfo = null;
