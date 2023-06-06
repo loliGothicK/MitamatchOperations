@@ -263,6 +263,7 @@ public static class Meta {
         PassiveKind.AssistUp => "支援UP",
         PassiveKind.HealUp => "回復UP",
         PassiveKind.MpConsumptionDown => "MP消費DOWN",
+        PassiveKind.MatchPointUp => "獲得マッチPtUP",
     };
 }
 
@@ -319,79 +320,123 @@ public record SupportSkills(SupportSkill[] Skills, Level Level) {
     }
 
     public static implicit operator SupportSkills(string text) {
-        static Level LevelFromRaw(string raw) => raw switch {
-            "Ⅰ" => Level.One,
-            "Ⅱ" => Level.Two,
-            "Ⅲ" => Level.Three,
-            "Ⅲ+" => Level.ThreePlus,
-            "Ⅳ" => Level.Four,
-            "Ⅳ+" => Level.FourPlus,
-            "Ⅴ" => Level.Five,
-            "Ⅴ+" => Level.FivePlus,
-            "LG" => Level.LG,
-            "LG+" => Level.LGPlus,
-            _ => throw new ArgumentOutOfRangeException()
-        };
+        try
+        {
+            static Level LevelFromRaw(string raw) => raw switch
+            {
+                "Ⅰ" => Level.One,
+                "Ⅱ" => Level.Two,
+                "Ⅲ" => Level.Three,
+                "Ⅲ+" => Level.ThreePlus,
+                "Ⅳ" => Level.Four,
+                "Ⅳ+" => Level.FourPlus,
+                "Ⅴ" => Level.Five,
+                "Ⅴ+" => Level.FivePlus,
+                "LG" => Level.LG,
+                "LG+" => Level.LGPlus,
+                _ => throw new ArgumentOutOfRangeException()
+            };
 
-        if (text == "回:回復UP/副援:支援UP Ⅱ") return new(new SupportSkill[] { new PassiveSupportSkill(Passive.Heal, PassiveKind.HealUp), new PassiveSupportSkill(Passive.SubAssist, PassiveKind.AssistUp) }, Level.Two);
-        else {
-            var matches = regex.Matches(text);
+            if (text == "回:回復UP/副援:支援UP Ⅱ")
+                return new(
+                    new SupportSkill[]
+                    {
+                        new PassiveSupportSkill(Passive.Heal, PassiveKind.HealUp),
+                        new PassiveSupportSkill(Passive.SubAssist, PassiveKind.AssistUp)
+                    }, Level.Two);
+            else if (text == "回:回復UP/副援:支援UP Ⅲ")
+                return new(
+                    new SupportSkill[]
+                    {
+                        new PassiveSupportSkill(Passive.Heal, PassiveKind.HealUp),
+                        new PassiveSupportSkill(Passive.SubAssist, PassiveKind.AssistUp)
+                    }, Level.Three);
+            else if (text == "攻:獲得マッチPtUP/通常単体 Ⅱ")
+                return new(new SupportSkill[] { new PassiveSupportSkill(Passive.Attack, PassiveKind.MatchPointUp) },
+                    Level.Two);
+            else if (text == "攻:獲得マッチPtUP/特殊単体 Ⅱ")
+                return new(new SupportSkill[] { new PassiveSupportSkill(Passive.Attack, PassiveKind.MatchPointUp) },
+                    Level.Two);
+            else
+            {
+                var matches = regex.Matches(text);
 
-            switch (matches[0].Groups["kind"].Value) {
-                case "攻": {
+                switch (matches[0].Groups["kind"].Value)
+                {
+                    case "攻":
+                    {
                         var effects = matches[0].Groups["body"].Value;
-                        if (effects.Contains('/')) {
+                        if (effects.Contains('/'))
+                        {
                             matches = compound.Matches(effects);
                             var first = SupportSkill.FromStr(Passive.Attack, matches[0].Groups["first"].Value);
                             var second = SupportSkill.FromStr(Passive.Attack, matches[0].Groups["second"].Value);
                             var level = LevelFromRaw(matches[0].Groups["level"].Value);
                             return new(new SupportSkill[] { first, second }, level);
                         }
-                        else {
+                        else
+                        {
                             matches = single.Matches(effects);
                             var effect = SupportSkill.FromStr(Passive.Attack, matches[0].Groups["effect"].Value);
                             var level = LevelFromRaw(matches[0].Groups["level"].Value);
                             return new(new SupportSkill[] { effect }, level);
                         }
                     }
-                case "援": {
+                    case "援":
+                    {
                         var effects = matches[0].Groups["body"].Value;
-                        if (effects.Contains('/')) {
+                        if (effects.Contains('/'))
+                        {
                             matches = compound.Matches(effects);
                             var first = SupportSkill.FromStr(Passive.Assist, matches[0].Groups["first"].Value);
                             var second = SupportSkill.FromStr(Passive.Assist, matches[0].Groups["second"].Value);
                             var level = LevelFromRaw(matches[0].Groups["level"].Value);
                             return new(new SupportSkill[] { first, second }, level);
                         }
-                        else {
+                        else
+                        {
                             matches = single.Matches(effects);
                             var effect = SupportSkill.FromStr(Passive.Assist, matches[0].Groups["effect"].Value);
                             var level = LevelFromRaw(matches[0].Groups["level"].Value);
                             return new(new SupportSkill[] { effect }, level);
                         }
                     }
-                case "回": {
+                    case "回":
+                    {
                         var effects = matches[0].Groups["body"].Value;
-                        if (effects.Contains('/')) {
+                        if (effects.Contains('/'))
+                        {
                             matches = compound.Matches(effects);
                             var first = SupportSkill.FromStr(Passive.Heal, matches[0].Groups["first"].Value);
                             var second = SupportSkill.FromStr(Passive.Heal, matches[0].Groups["second"].Value);
                             var level = LevelFromRaw(matches[0].Groups["level"].Value);
                             return new(new SupportSkill[] { first, second }, level);
                         }
-                        else {
+                        else
+                        {
                             matches = single.Matches(effects);
                             var effect = SupportSkill.FromStr(Passive.Heal, matches[0].Groups["effect"].Value);
                             var level = LevelFromRaw(matches[0].Groups["level"].Value);
                             return new(new SupportSkill[] { effect }, level);
                         }
                     }
-                case "コ": {// 現状、コマンド実行時サポート効果はこれしかない
-                        return new(new SupportSkill[] { new PassiveSupportSkill(Passive.Command, PassiveKind.MpConsumptionDown) }, Level.Two);
+                    case "コ":
+                    {
+                        // 現状、コマンド実行時サポート効果はこれしかない
+                        return new(
+                            new SupportSkill[]
+                                { new PassiveSupportSkill(Passive.Command, PassiveKind.MpConsumptionDown) }, Level.Two);
                     }
-                default: throw new ArgumentException();
-            }
+                    default: throw new ArgumentException();
+                }
 
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            Console.WriteLine(text);
+            throw;
         }
     }
 }
@@ -401,6 +446,7 @@ public enum PassiveKind {
     AssistUp,
     HealUp,
     MpConsumptionDown,
+    MatchPointUp,
 }
 
 public enum Passive {
@@ -422,6 +468,7 @@ public abstract record SupportSkill {
         else if (text.StartsWith("支援UP")) return new PassiveSupportSkill(passive, PassiveKind.AssistUp);
         else if (text.StartsWith("回復UP")) return new PassiveSupportSkill(passive, PassiveKind.HealUp);
         else if (text.StartsWith("MP消費DOWN")) return new PassiveSupportSkill(passive, PassiveKind.MpConsumptionDown);
+        else if (text.StartsWith("獲得マッチPtUP")) return new PassiveSupportSkill(passive, PassiveKind.MatchPointUp);
         else return new StatSupportSkill(passive, MemoriaUtil.StatsFromRaw(text.Replace(text.EndsWith("UP") ? "UP" : "DOWN", string.Empty)), text.EndsWith("UP") ? UpDown.UP : UpDown.DOWN);
     }
 
@@ -463,6 +510,2148 @@ public record struct Memoria(
 
     public static Memoria[] List => new Memoria[]
     {
+        new(
+            "二度寝のいいわけ",
+            "支援",
+            "水",
+            new[]
+            {
+                6235,
+                2222,
+                4889,
+                2238
+            },
+            21,
+            new Skill(
+                "ウォーターパワーアシストB Ⅲ",
+                "味方1～2体のATKと水属性攻撃力を大アップさせる。"
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "二度寝のいいわけ",
+            "通常範囲",
+            "水",
+            new[]
+            {
+                6235,
+                2222,
+                4889,
+                2238
+            },
+            21,
+            new Skill(
+                "ウォーターガードブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "攻:ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "雨、舌戦のあと",
+            "回復",
+            "水",
+            new[]
+            {
+                2239,
+                2211,
+                4886,
+                6226
+            },
+            21,
+            new Skill(
+                "水：Sp.ファイアガードヒールC Ⅲ",
+                "味方1～3体のHPを回復し、Sp.DEFと火属性防御力を小アップする。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※..."
+            ),
+            new Support(
+                "回:回復UP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。"
+            )
+        ),
+        new(
+            "雨、舌戦のあと",
+            "特殊範囲",
+            "水",
+            new[]
+            {
+                2239,
+                2211,
+                4886,
+                6226
+            },
+            21,
+            new Skill(
+                "Sp.ウォーターパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "雨の日は紅茶を",
+            "通常範囲",
+            "水",
+            new[]
+            {
+                6258,
+                2234,
+                4901,
+                2216
+            },
+            21,
+            new Skill(
+                "水：パワーストライクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※..."
+            ),
+            new Support(
+                "攻:ダメージUP/パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "雨の日は紅茶を",
+            "支援",
+            "水",
+            new[]
+            {
+                6258,
+                2234,
+                4901,
+                2216
+            },
+            21,
+            new Skill(
+                "ファイアガードアシストB Ⅲ",
+                "味方1～2体のDEFと火属性防御力を大アップさせる。"
+            ),
+            new Support(
+                "援:ガードUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。"
+            )
+        ),
+        new(
+            "紫陽花の咲く頃",
+            "特殊範囲",
+            "水",
+            new[]
+            {
+                2218,
+                6240,
+                2224,
+                4879
+            },
+            21,
+            new Skill(
+                "水：Sp.パワースマッシュB Ⅲ",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※..."
+            ),
+            new Support(
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "紫陽花の咲く頃",
+            "妨害",
+            "水",
+            new[]
+            {
+                2218,
+                6240,
+                2224,
+                4879
+            },
+            21,
+            new Skill(
+                "Sp.ウォーターガードフォールB Ⅲ",
+                "敵1～2体のSp.DEFと水属性防御力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:Sp.ガードDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "清純な心",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                6224,
+                2240,
+                4909,
+                2217
+            },
+            21,
+            new Skill(
+                "ファイアガードブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。"
+            )
+        ),
+        new(
+            "清純な心",
+            "回復",
+            "火",
+            new[]
+            {
+                6224,
+                2240,
+                4909,
+                2217
+            },
+            21,
+            new Skill(
+                "ウィンドガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:回復UP/副援:支援UP Ⅲ",
+                "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。"
+            )
+        ),
+        new(
+            "そよ風のシュッツエンゲル",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                2227,
+                6259,
+                2225,
+                4898
+            },
+            21,
+            new Skill(
+                "Sp.ファイアガードバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。"
+            )
+        ),
+        new(
+            "そよ風のシュッツエンゲル",
+            "支援",
+            "火",
+            new[]
+            {
+                2227,
+                6259,
+                2225,
+                4898
+            },
+            21,
+            new Skill(
+                "Sp.ファイアパワーアシストB Ⅲ",
+                "味方1～2体のSp.ATKと火属性攻撃力を大アップさせる。"
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "神の子",
+            "回復",
+            "風",
+            new[]
+            {
+                2722,
+                2698,
+                4139,
+                3632
+            },
+            18,
+            new Skill(
+                "ヒールE LG",
+                "味方2～3体のHPを回復する。"
+            ),
+            new Support(
+                "回:回復UP/ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。さらに、HPの回復量を特大アップさせる。"
+            )
+        ),
+        new(
+            "交差する勇み花",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                6255,
+                2248,
+                4901,
+                2222
+            },
+            21,
+            new Skill(
+                "ファイアパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "交差する勇み花",
+            "支援",
+            "火",
+            new[]
+            {
+                6255,
+                2248,
+                4901,
+                2222
+            },
+            21,
+            new Skill(
+                "ファイアパワーアシストB Ⅲ",
+                "味方1～2体のATKと火属性攻撃力を大アップさせる。"
+            ),
+            new Support(
+                "援:パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "情熱",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                2245,
+                6238,
+                2225,
+                4910
+            },
+            21,
+            new Skill(
+                "Sp.ファイアパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "情熱",
+            "妨害",
+            "火",
+            new[]
+            {
+                2245,
+                6238,
+                2225,
+                4910
+            },
+            21,
+            new Skill(
+                "Sp.ウィンドパワーフォールB Ⅲ",
+                "敵1～2体のSp.ATKと風属性攻撃力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:Sp.パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "愛情の絆",
+            "回復",
+            "火",
+            new[]
+            {
+                2227,
+                2232,
+                4909,
+                6256
+            },
+            21,
+            new Skill(
+                "Sp.ウィンドガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のSp.DEFと風属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:Sp.ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
+            )
+        ),
+        new(
+            "愛情の絆",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                2227,
+                2232,
+                4909,
+                6256
+            },
+            21,
+            new Skill(
+                "Sp.ファイアガードバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "攻:Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "貴方に微笑む",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                6224,
+                2243,
+                4905,
+                2213
+            },
+            21,
+            new Skill(
+                "ファイアガードブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "攻:ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "貴方に微笑む",
+            "妨害",
+            "火",
+            new[]
+            {
+                6224,
+                2243,
+                4905,
+                2213
+            },
+            21,
+            new Skill(
+                "ファイアガードフォールB Ⅲ",
+                "敵1～2体のDEFと火属性防御力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:ガードDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "つきしーMAX!!",
+            "回復",
+            "水",
+            new[]
+            {
+                2727,
+                2719,
+                3873,
+                3899
+            },
+            21,
+            new Skill(
+                "WガードヒールE LG",
+                "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。"
+            ),
+            new Support(
+                "回:回復UP/副援:支援UP Ⅱ",
+                "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
+            )
+        ),
+        new(
+            "G戦場の百合亜",
+            "通常単体",
+            "風",
+            new[]
+            {
+                6248,
+                2218,
+                4905,
+                2236
+            },
+            21,
+            new Skill(
+                "ウィンドパワーストライクA Ⅳ+",
+                "敵1体に通常特大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:獲得マッチPtUP/通常単体 Ⅱ",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※..."
+            )
+        ),
+        new(
+            "G戦場の百合亜",
+            "妨害",
+            "風",
+            new[]
+            {
+                6248,
+                2218,
+                4905,
+                2236
+            },
+            21,
+            new Skill(
+                "WパワーフォールA Ⅲ",
+                "敵1体のATKとSp.ATKを大ダウンさせる。"
+            ),
+            new Support(
+                "援:WパワーDOWN Ⅱ",
+                "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを大ダウンさせる。"
+            )
+        ),
+        new(
+            "焼け焦げた土を踏んで",
+            "特殊範囲",
+            "風",
+            new[]
+            {
+                2220,
+                6233,
+                2222,
+                4913
+            },
+            21,
+            new Skill(
+                "Sp.ウィンドガードバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "攻:Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "焼け焦げた土を踏んで",
+            "回復",
+            "風",
+            new[]
+            {
+                2220,
+                6233,
+                2222,
+                4913
+            },
+            21,
+            new Skill(
+                "Sp.ウォーターガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:Sp.ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
+            )
+        ),
+        new(
+            "黒蝕の夢",
+            "支援",
+            "風",
+            new[]
+            {
+                2249,
+                6226,
+                2250,
+                4886
+            },
+            21,
+            new Skill(
+                "Sp.ウィンドパワーアシストB Ⅲ",
+                "味方1～2体のSp.ATKと風属性攻撃力を大アップさせる。"
+            ),
+            new Support(
+                "援:Sp.パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "黒蝕の夢",
+            "特殊範囲",
+            "風",
+            new[]
+            {
+                2249,
+                6226,
+                2250,
+                4886
+            },
+            21,
+            new Skill(
+                "Sp.ウィンドパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "月光奏鳴",
+            "通常範囲",
+            "風",
+            new[]
+            {
+                6225,
+                2244,
+                4904,
+                2231
+            },
+            21,
+            new Skill(
+                "ウィンドガードブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "攻:ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "月光奏鳴",
+            "妨害",
+            "風",
+            new[]
+            {
+                6225,
+                2244,
+                4904,
+                2231
+            },
+            21,
+            new Skill(
+                "ウィンドガードフォールB Ⅲ",
+                "敵1～2体のDEFと風属性防御力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:ガードDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "式場を決めましたわ",
+            "支援",
+            "火",
+            new[]
+            {
+                2212,
+                2237,
+                6241,
+                4910
+            },
+            21,
+            new Skill(
+                "火：WガードアシストC Ⅳ",
+                "味方1～3体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "式場を決めましたわ",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                2212,
+                2237,
+                6241,
+                4910
+            },
+            21,
+            new Skill(
+                "ファイアパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "想像ウェディング",
+            "回復",
+            "火",
+            new[]
+            {
+                2227,
+                2251,
+                4878,
+                6253
+            },
+            21,
+            new Skill(
+                "火：Sp.ウィンドガードヒールC Ⅲ",
+                "味方1～3体のHPを回復し、Sp.DEFと風属性防御力を小アップする。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
+            ),
+            new Support(
+                "回:回復UP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。"
+            )
+        ),
+        new(
+            "想像ウェディング",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                2227,
+                2251,
+                4878,
+                6253
+            },
+            21,
+            new Skill(
+                "Sp.ファイアパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "ウェディングベア",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                2246,
+                6244,
+                2224,
+                4899
+            },
+            21,
+            new Skill(
+                "火：Sp.ガードバーストB Ⅲ",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
+            ),
+            new Support(
+                "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "ウェディングベア",
+            "妨害",
+            "火",
+            new[]
+            {
+                2246,
+                6244,
+                2224,
+                4899
+            },
+            21,
+            new Skill(
+                "Sp.ファイアガードフォールB Ⅲ",
+                "敵1～2体のSp.DEFと火属性防御力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:Sp.ガードDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "門出のブーケ・トス",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                6248,
+                2211,
+                4884,
+                2251
+            },
+            21,
+            new Skill(
+                "火：ガードブレイクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
+            ),
+            new Support(
+                "攻:ダメージUP/ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "門出のブーケ・トス",
+            "回復",
+            "火",
+            new[]
+            {
+                6248,
+                2211,
+                4884,
+                2251
+            },
+            21,
+            new Skill(
+                "ウィンドガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
+            )
+        ),
+        new(
+            "夢見る自分を、怖れずに",
+            "特殊範囲",
+            "水",
+            new[]
+            {
+                2224,
+                6243,
+                2228,
+                4894
+            },
+            21,
+            new Skill(
+                "Sp.ウォーターガードバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "攻:Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "夢見る自分を、怖れずに",
+            "回復",
+            "水",
+            new[]
+            {
+                2224,
+                6243,
+                2228,
+                4894
+            },
+            21,
+            new Skill(
+                "Sp.ファイアガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:Sp.ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
+            )
+        ),
+        new(
+            "ウエディング・マーチ",
+            "妨害",
+            "水",
+            new[]
+            {
+                6262,
+                2233,
+                4903,
+                2231
+            },
+            21,
+            new Skill(
+                "ファイアパワーフォールB Ⅲ",
+                "敵1～2体のATKと火属性攻撃力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "ウエディング・マーチ",
+            "通常範囲",
+            "水",
+            new[]
+            {
+                6262,
+                2233,
+                4903,
+                2231
+            },
+            21,
+            new Skill(
+                "ウォーターパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "エターナル・プロミス",
+            "通常範囲",
+            "水",
+            new[]
+            {
+                6062,
+                2748,
+                5280,
+                2752
+            },
+            23,
+            new Skill(
+                "水拡：ガードブレイクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。オーダースキル「水属性効果増加」を発動中は敵2体に通常大ダメージを与え、敵のDEFをダウンさせる。※..."
+            ),
+            new Support(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。"
+            )
+        ),
+        new(
+            "ピクニック日和",
+            "妨害",
+            "風",
+            new[]
+            {
+                2049,
+                5285,
+                2012,
+                4178
+            },
+            20,
+            new Skill(
+                "Sp.ウォーターパワーフォールB Ⅲ",
+                "敵1～2体のSp.ATKと水属性攻撃力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "ピクニック日和",
+            "特殊範囲",
+            "風",
+            new[]
+            {
+                2049,
+                5285,
+                2012,
+                4178
+            },
+            20,
+            new Skill(
+                "Sp.マイトバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
+            ),
+            new Support(
+                "攻:Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "なでなで連鎖",
+            "回復",
+            "風",
+            new[]
+            {
+                2039,
+                2039,
+                5259,
+                4174
+            },
+            20,
+            new Skill(
+                "風：ウォーターガードヒールC Ⅲ",
+                "味方1～3体のHPを回復し、DEFと水属性防御力を小アップする。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※..."
+            ),
+            new Support(
+                "回:回復UP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。"
+            )
+        ),
+        new(
+            "なでなで連鎖",
+            "通常範囲",
+            "風",
+            new[]
+            {
+                2039,
+                2039,
+                5259,
+                4174
+            },
+            20,
+            new Skill(
+                "マイトブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
+            ),
+            new Support(
+                "攻:ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "尊さの不意打ち",
+            "特殊範囲",
+            "風",
+            new[]
+            {
+                2038,
+                5280,
+                2037,
+                4157
+            },
+            20,
+            new Skill(
+                "風：Sp.パワースマッシュB Ⅲ",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※..."
+            ),
+            new Support(
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "尊さの不意打ち",
+            "支援",
+            "風",
+            new[]
+            {
+                2038,
+                5280,
+                2037,
+                4157
+            },
+            20,
+            new Skill(
+                "Sp.ウィンドパワーアシストB Ⅲ",
+                "味方1～2体のSp.ATKと風属性攻撃力を大アップさせる。"
+            ),
+            new Support(
+                "援:Sp.パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "皐月の頃に",
+            "通常範囲",
+            "風",
+            new[]
+            {
+                5266,
+                2032,
+                4178,
+                2031
+            },
+            20,
+            new Skill(
+                "風：パワーストライクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※..."
+            ),
+            new Support(
+                "攻:ダメージUP/パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "皐月の頃に",
+            "妨害",
+            "風",
+            new[]
+            {
+                5266,
+                2032,
+                4178,
+                2031
+            },
+            20,
+            new Skill(
+                "ウィンドガードフォールB Ⅲ",
+                "敵1～2体のDEFと風属性防御力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:ガードDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "言葉無く吠える",
+            "通常範囲",
+            "水",
+            new[]
+            {
+                5266,
+                2046,
+                4152,
+                2032
+            },
+            20,
+            new Skill(
+                "マイトブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。"
+            )
+        ),
+        new(
+            "言葉無く吠える",
+            "妨害",
+            "水",
+            new[]
+            {
+                5266,
+                2046,
+                4152,
+                2032
+            },
+            20,
+            new Skill(
+                "ファイアパワーフォールB Ⅲ",
+                "敵1～2体のATKと火属性攻撃力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "戦乙女の誇り",
+            "回復",
+            "水",
+            new[]
+            {
+                2040,
+                5253,
+                2025,
+                4182
+            },
+            20,
+            new Skill(
+                "Sp.ファイアガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:回復UP/副援:支援UP Ⅲ",
+                "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。"
+            )
+        ),
+        new(
+            "戦乙女の誇り",
+            "特殊範囲",
+            "水",
+            new[]
+            {
+                2040,
+                5253,
+                2025,
+                4182
+            },
+            20,
+            new Skill(
+                "Sp.マイトバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
+            ),
+            new Support(
+                "攻:Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "竜のシャナと楯の乙女",
+            "回復",
+            "水",
+            new[]
+            {
+                2018,
+                2046,
+                5254,
+                4167
+            },
+            20,
+            new Skill(
+                "ファイアガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のDEFと火属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
+            )
+        ),
+        new(
+            "竜のシャナと楯の乙女",
+            "通常単体",
+            "水",
+            new[]
+            {
+                2018,
+                2046,
+                5254,
+                4167
+            },
+            20,
+            new Skill(
+                "ウォーターパワーストライクA Ⅳ+",
+                "敵1体に通常特大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:獲得マッチPtUP/通常単体 Ⅱ",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※..."
+            )
+        ),
+        new(
+            "パーフェクトエイム",
+            "通常範囲",
+            "水",
+            new[]
+            {
+                5258,
+                2038,
+                4149,
+                2015
+            },
+            20,
+            new Skill(
+                "ウォーターパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "パーフェクトエイム",
+            "支援",
+            "水",
+            new[]
+            {
+                5258,
+                2038,
+                4149,
+                2015
+            },
+            20,
+            new Skill(
+                "ウォーターパワーアシストB Ⅲ",
+                "味方1～2体のATKと水属性攻撃力を大アップさせる。"
+            ),
+            new Support(
+                "援:パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "征くと決めたこの道を",
+            "妨害",
+            "水",
+            new[]
+            {
+                2041,
+                5274,
+                2036,
+                4162
+            },
+            20,
+            new Skill(
+                "Sp.ファイアパワーフォールB Ⅲ",
+                "敵1～2体のSp.ATKと火属性攻撃力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:Sp.パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "征くと決めたこの道を",
+            "特殊範囲",
+            "水",
+            new[]
+            {
+                2041,
+                5274,
+                2036,
+                4162
+            },
+            20,
+            new Skill(
+                "Sp.ウォーターパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "藍だけが使える魔法",
+            "特殊範囲",
+            "水",
+            new[]
+            {
+                2404,
+                5451,
+                2404,
+                4679
+            },
+            22,
+            new Skill(
+                "水拡：Sp.ガードバーストB Ⅲ",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。オーダースキル「水属性効果増加」を発動中は敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。※..."
+            ),
+            new Support(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。"
+            )
+        ),
+        new(
+            "エクセレントアイドル☆紗癒",
+            "支援",
+            "水",
+            new[]
+            {
+                5259,
+                2014,
+                4153,
+                2046
+            },
+            20,
+            new Skill(
+                "ウォーターパワーアシストB Ⅲ",
+                "味方1～2体のATKと水属性攻撃力を大アップさせる。"
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "エクセレントアイドル☆紗癒",
+            "通常範囲",
+            "水",
+            new[]
+            {
+                5259,
+                2014,
+                4153,
+                2046
+            },
+            20,
+            new Skill(
+                "Sp.ディファーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP/パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "ゴージャスアイドル☆楓",
+            "特殊範囲",
+            "水",
+            new[]
+            {
+                2043,
+                5285,
+                2016,
+                4149
+            },
+            20,
+            new Skill(
+                "ディファースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "ゴージャスアイドル☆楓",
+            "妨害",
+            "水",
+            new[]
+            {
+                2043,
+                5285,
+                2016,
+                4149
+            },
+            20,
+            new Skill(
+                "水拡：Sp.ファイアパワーフォールB Ⅲ",
+                "敵1～2体のSp.ATKと火属性攻撃力を大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は敵2体のSp.ATKと火属性攻撃力を大ダウンさせる。※..."
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "荒ぶる魂",
+            "特殊単体",
+            "火",
+            new[]
+            {
+                1934,
+                5149,
+                1950,
+                4044
+            },
+            20,
+            new Skill(
+                "Sp.ファイアパワースマッシュA Ⅳ+",
+                "敵1体に特殊特大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "荒ぶる魂",
+            "回復",
+            "火",
+            new[]
+            {
+                1934,
+                5149,
+                1950,
+                4044
+            },
+            20,
+            new Skill(
+                "Sp.ウィンドガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のSp.DEFと風属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:Sp.ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
+            )
+        ),
+        new(
+            "閑かなること、幻想の如く",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                5254,
+                2019,
+                4186,
+                2035
+            },
+            20,
+            new Skill(
+                "Sp.ディファーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。"
+            ),
+            new Support(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "閑かなること、幻想の如く",
+            "妨害",
+            "火",
+            new[]
+            {
+                5254,
+                2019,
+                4186,
+                2035
+            },
+            20,
+            new Skill(
+                "ウィンドパワーフォールB Ⅲ",
+                "敵1～2体のATKと風属性攻撃力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "猛禽の視点",
+            "支援",
+            "火",
+            new[]
+            {
+                2043,
+                5266,
+                2015,
+                4158
+            },
+            20,
+            new Skill(
+                "[風防]Sp.マイトアシストB Ⅲ",
+                "味方1～2体のSp.ATKと風属性防御力を大アップさせる。"
+            ),
+            new Support(
+                "援:Sp.パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "猛禽の視点",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                2043,
+                5266,
+                2015,
+                4158
+            },
+            20,
+            new Skill(
+                "Sp.ディファーバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のATKとSp.DEFをダウンさせる。"
+            ),
+            new Support(
+                "攻:Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "戦場に差しこむ光",
+            "回復",
+            "火",
+            new[]
+            {
+                2036,
+                2040,
+                5265,
+                4187
+            },
+            20,
+            new Skill(
+                "ウィンドガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。"
+            )
+        ),
+        new(
+            "戦場に差しこむ光",
+            "通常単体",
+            "火",
+            new[]
+            {
+                2036,
+                2040,
+                5265,
+                4187
+            },
+            20,
+            new Skill(
+                "ファイアパワーストライクA Ⅳ+",
+                "敵1体に通常特大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:獲得マッチPtUP/通常単体 Ⅱ",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※..."
+            )
+        ),
+        new(
+            "ウィステリアの誘い",
+            "妨害",
+            "火",
+            new[]
+            {
+                2043,
+                5269,
+                2040,
+                4184
+            },
+            20,
+            new Skill(
+                "Sp.ウィンドパワーフォールB Ⅲ",
+                "敵1～2体のSp.ATKと風属性攻撃力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "ウィステリアの誘い",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                2043,
+                5269,
+                2040,
+                4184
+            },
+            20,
+            new Skill(
+                "Sp.マイトバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。"
+            ),
+            new Support(
+                "攻:Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "花言葉のように",
+            "支援",
+            "火",
+            new[]
+            {
+                5266,
+                2026,
+                4149,
+                2045
+            },
+            20,
+            new Skill(
+                "[風防]マイトアシストB Ⅲ",
+                "味方1～2体のATKと風属性防御力を大アップさせる。"
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "花言葉のように",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                5266,
+                2026,
+                4149,
+                2045
+            },
+            20,
+            new Skill(
+                "マイトブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
+            ),
+            new Support(
+                "攻:ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "藤棚の下で",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                2041,
+                5248,
+                2050,
+                4183
+            },
+            20,
+            new Skill(
+                "Sp.マイトスマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "藤棚の下で",
+            "支援",
+            "火",
+            new[]
+            {
+                2041,
+                5248,
+                2050,
+                4183
+            },
+            20,
+            new Skill(
+                "Sp.ファイアパワーアシストC Ⅲ",
+                "味方1～3体のSp.ATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "援:Sp.パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "紫に酔い、白に想う",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                5275,
+                2038,
+                4170,
+                2017
+            },
+            20,
+            new Skill(
+                "ファイアパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP/パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "紫に酔い、白に想う",
+            "妨害",
+            "火",
+            new[]
+            {
+                5275,
+                2038,
+                4170,
+                2017
+            },
+            20,
+            new Skill(
+                "ウィンドパワーフォールB Ⅲ",
+                "敵1～2体のATKと風属性攻撃力を大ダウンさせる。"
+            ),
+            new Support(
+                "援:パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "舞台「The Gleam of Dawn」開演！",
+            "特殊範囲",
+            "風",
+            new[]
+            {
+                1583,
+                3441,
+                1599,
+                2936
+            },
+            18,
+            new Skill(
+                "Sp.パワースマッシュB Ⅲ",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。"
+            ),
+            new Support(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "舞台「The Gleam of Dawn」開演！",
+            "回復",
+            "風",
+            new[]
+            {
+                1583,
+                3441,
+                1599,
+                2936
+            },
+            18,
+            new Skill(
+                "Sp.パワーヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。"
+            ),
+            new Support(
+                "回:Sp.パワーUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "猪突猛進！",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                4152,
+                2719,
+                3649,
+                2734
+            },
+            18,
+            new Skill(
+                "ストライクD LG",
+                "敵2体に通常大ダメージを与える。"
+            ),
+            new Support(
+                "攻:ダメージUP/パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "さみしがりうさぎ",
+            "妨害",
+            "風",
+            new[]
+            {
+                5260,
+                2021,
+                4172,
+                2038
+            },
+            20,
+            new Skill(
+                "ウィンドパワーフォールC Ⅲ",
+                "敵1～3体のATKと風属性攻撃力をダウンさせる。"
+            ),
+            new Support(
+                "援:パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "さみしがりうさぎ",
+            "通常範囲",
+            "風",
+            new[]
+            {
+                5260,
+                2021,
+                4172,
+                2038
+            },
+            20,
+            new Skill(
+                "ウィンドパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "バニートラップ",
+            "特殊範囲",
+            "風",
+            new[]
+            {
+                2044,
+                5263,
+                2026,
+                4185
+            },
+            20,
+            new Skill(
+                "Sp.ウィンドパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "バニートラップ",
+            "支援",
+            "風",
+            new[]
+            {
+                2044,
+                5263,
+                2026,
+                4185
+            },
+            20,
+            new Skill(
+                "Sp.マイトアシストB Ⅲ",
+                "味方1～2体のSp.ATKとSp.DEFを大アップさせる。"
+            ),
+            new Support(
+                "援:Sp.マイトUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のSp.ATKとSp.DEFを特大アップさせる。"
+            )
+        ),
+        new(
+            "魅惑のセレクション",
+            "回復",
+            "風",
+            new[]
+            {
+                2415,
+                2384,
+                5050,
+                5074
+            },
+            22,
+            new Skill(
+                "WガードヒールD Ⅳ",
+                "味方2体のHPを大回復する。さらに味方のDEFとSp.DEFを小アップする。"
+            ),
+            new Support(
+                "回:回復UP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。"
+            )
+        ),
+        new(
+            "イースターハント",
+            "妨害",
+            "火",
+            new[]
+            {
+                2037,
+                5253,
+                2040,
+                4165
+            },
+            20,
+            new Skill(
+                "火：Sp.ファイアパワーフォールC Ⅲ",
+                "敵1～3体のSp.ATKと火属性攻撃力をダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※..."
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "イースターハント",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                2037,
+                5253,
+                2040,
+                4165
+            },
+            20,
+            new Skill(
+                "Sp.マイトスマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
+            ),
+            new Support(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "花咲くイースター",
+            "支援",
+            "火",
+            new[]
+            {
+                2017,
+                2039,
+                5268,
+                4171
+            },
+            20,
+            new Skill(
+                "火拡：WガードアシストB Ⅳ",
+                "味方1～2体のDEFとSp.DEFを特大アップさせる。オーダースキル「火属性効果増加」を発動中は味方2体のDEFとSp.DEFを特大アップさせる。※..."
+            ),
+            new Support(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
+            )
+        ),
+        new(
+            "花咲くイースター",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                2017,
+                2039,
+                5268,
+                4171
+            },
+            20,
+            new Skill(
+                "マイトブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
+            ),
+            new Support(
+                "攻:ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "イースターエッグ",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                2040,
+                5263,
+                2024,
+                4173
+            },
+            20,
+            new Skill(
+                "Sp.ファイアガードバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "イースターエッグ",
+            "妨害",
+            "火",
+            new[]
+            {
+                2040,
+                5263,
+                2024,
+                4173
+            },
+            20,
+            new Skill(
+                "Sp.ファイアガードフォールC Ⅲ",
+                "敵1～3体のSp.DEFと火属性防御力をダウンさせる。"
+            ),
+            new Support(
+                "援:Sp.ガードDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。"
+            )
+        ),
+        new(
+            "エッグロール開始！",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                5286,
+                2047,
+                4186,
+                2018
+            },
+            20,
+            new Skill(
+                "ファイアパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP/パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
+            )
+        ),
+        new(
+            "エッグロール開始！",
+            "支援",
+            "火",
+            new[]
+            {
+                5286,
+                2047,
+                4186,
+                2018
+            },
+            20,
+            new Skill(
+                "ファイアパワーアシストC Ⅲ",
+                "味方1～3体のATKと火属性攻撃力をアップさせる。"
+            ),
+            new Support(
+                "援:パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。"
+            )
+        ),
+        new(
+            "天のアカリ目！",
+            "回復",
+            "火",
+            new[]
+            {
+                2023,
+                5282,
+                2028,
+                4167
+            },
+            20,
+            new Skill(
+                "Sp.ファイアガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。"
+            ),
+            new Support(
+                "回:回復UP/副援:支援UP Ⅲ",
+                "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。"
+            )
+        ),
+        new(
+            "天のアカリ目！",
+            "特殊範囲",
+            "火",
+            new[]
+            {
+                2023,
+                5282,
+                2028,
+                4167
+            },
+            20,
+            new Skill(
+                "Sp.マイトスマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。"
+            )
+        ),
+        new(
+            "これが、あたしの理！",
+            "通常範囲",
+            "火",
+            new[]
+            {
+                5260,
+                2027,
+                4153,
+                2018
+            },
+            20,
+            new Skill(
+                "マイトブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。"
+            ),
+            new Support(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。"
+            )
+        ),
+        new(
+            "これが、あたしの理！",
+            "妨害",
+            "火",
+            new[]
+            {
+                5260,
+                2027,
+                4153,
+                2018
+            },
+            20,
+            new Skill(
+                "ファイアパワーフォールC Ⅲ",
+                "敵1～3体のATKと火属性攻撃力をダウンさせる。"
+            ),
+            new Support(
+                "援:パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。"
+            )
+        ),
         new(
             "マルチカラード・ティアーズ",
             "回復",
@@ -15959,27 +18148,6 @@ public record struct Memoria(
             new Support(
                 "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。"
-            )
-        ),
-        new(
-            "神の子",
-            "回復",
-            "風",
-            new[]
-            {
-                2153,
-                2147,
-                3453,
-                2985
-            },
-            18,
-            new Skill(
-                "ヒールE LG",
-                "味方2～3体のHPを回復する。"
-            ),
-            new Support(
-                "回:ガードUP Ⅱ",
-                "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。"
             )
         ),
         new(
