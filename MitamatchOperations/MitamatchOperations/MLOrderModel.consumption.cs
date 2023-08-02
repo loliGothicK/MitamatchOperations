@@ -47,7 +47,7 @@ namespace MitamatchOperations
 
         #endregion
 
-        private const string MLNetModelPath = "C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\MLOrderModel.zip";
+        private static string MLNetModelPath = Path.GetFullPath("MLOrderModel.zip");
 
         public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(() => CreatePredictEngine(), true);
 
