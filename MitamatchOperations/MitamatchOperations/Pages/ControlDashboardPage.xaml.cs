@@ -29,6 +29,13 @@ using MitamatchOperations;
 
 namespace mitama.Pages;
 
+internal enum Windows
+{
+    Main,
+    SubPc,
+    SubMobile,
+}
+
 /// <summary>
 /// Control Dashboard Page navigated to within a Main Page.
 /// </summary>
@@ -59,6 +66,34 @@ public sealed partial class ControlDashboardPage
         return timer;
     });
 
+    private readonly Dictionary<Windows, ((int, int), (int, int))> _opOrderIconPos = new()
+    {
+        // メインPC
+        [Windows.Main] = ((1800, 620), (120, 120)),
+        // たいちょースマホ
+        [Windows.SubMobile] = ((1610, 840), (80, 80)),
+        // たいちょーPC
+        [Windows.SubPc] = ((1485, 545), (70, 70)),
+    };
+    private readonly Dictionary<Windows, ((int, int), (int, int))> _opOrderActivatePos = new()
+    {
+        // メインPC
+        [Windows.Main] = ((260, 120), (500, 120)),
+        // たいちょースマホ
+        [Windows.SubMobile] = ((1110, 160), (600, 520)),
+        // たいちょーPC
+        [Windows.SubPc] = ((1100, 250), (540, 520)),
+    };
+    private readonly Dictionary<Windows, ((int, int), (int, int))> _allyOrderInfoPos = new()
+    {
+        // メインPC
+        [Windows.Main] = ((260, 120), (500, 120)),
+        // たいちょースマホ
+        [Windows.SubMobile] = ((450, 170), (350, 70)),
+        // たいちょーPC
+        [Windows.SubPc] = ((450, 170), (350, 70)),
+    };
+
     // なんやかんやで使う状態変数
     private int _cursor = 4;
     private List<TimeTableItem> _deck = new();
@@ -70,6 +105,7 @@ public sealed partial class ControlDashboardPage
     private OpOrderStatus _orderStat = new None();
     private DateTime _orderPreparePoint = DateTime.Now;
     private (Order, int)? _opOrderInfo;
+    private bool _useSub;
 
     public bool IsCtrlKeyPressed { get; set; }
 
@@ -107,12 +143,15 @@ public sealed partial class ControlDashboardPage
                     await _capture!.SnapShot();
                     _captureEvent.Signal();
                 });
-                Task.Run(async () =>
+                if (_useSub)
                 {
-                    _subCaptureEvent.Reset(1);
-                    await _subCapture!.SnapShot();
-                    _subCaptureEvent.Signal();
-                });
+                    Task.Run(async () =>
+                    {
+                        _subCaptureEvent.Reset(1);
+                        await _subCapture!.SnapShot();
+                        _subCaptureEvent.Signal();
+                    });
+                }
             });
 
         // 相手のオーダー情報を読取る
@@ -156,10 +195,10 @@ public sealed partial class ControlDashboardPage
                         }
                         break;
                     }
-                    case FailureResult:
+                    case FailureResult when _useSub:
                     {
                         _subCaptureEvent.Wait();
-                        switch (await Analyze(await _subCapture!.TryCaptureOrderInfo((550, 250), (250, 60))))
+                        switch (await Analyze(await _subCapture!.TryCaptureOrderInfo(_allyOrderInfoPos[Windows.SubMobile].Item1, _allyOrderInfoPos[Windows.SubMobile].Item2)))
                         {
                             case SuccessResult(var user, var order):
                             {
@@ -211,7 +250,7 @@ public sealed partial class ControlDashboardPage
 
         Timer.Value.Tick += async delegate
         {
-            if (_capture != null && _subCapture != null)
+            if (_capture != null && (!_useSub || _subCapture != null))
             {
                 foreach (var scheduler in _schedulers)
                 {
@@ -253,38 +292,48 @@ public sealed partial class ControlDashboardPage
                     }
                 }
             }
-            else if (SubCaptureSelectBar.AccessKey != "SELECTED")
+            else if (SubCaptureSelectBar.AccessKey != "SELECTED" && _useSub)
             {
-                if (SubCaptureSelectBar.IsOpen) return;
-
-                SubCaptureSelectBar.IsOpen = true;
-                SubCaptureSelectBar.AccessKey = "NOT_SELECTED";
-                SubCaptureSelectBar.Severity = InfoBarSeverity.Warning;
-                SubCaptureSelectBar.Title = "サブ画面を選択してください";
-
-                var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
-                foreach (var (caption, handle) in Search.GetWindowList())
+                try
                 {
-                    if (caption == string.Empty) continue;
-                    var item = new MenuFlyoutItem
-                    {
-                        Text = caption,
-                        Command = new Defer(async delegate
-                        {
-                            _subCapture = new WindowCapture(handle);
-                            SubCaptureSelectBar.AccessKey = "SELECTED";
-                            await _subCapture!.SnapShot();
-                            SubCaptureSelectBar.IsOpen = false;
-                        }),
-                    };
-                    menu.Items.Add(item);
+                    _subCapture = new WindowCapture(Search.WindowHandleFromCaption("ちっちゃい娘FC - Discord"));
+                    SubCaptureSelectBar.AccessKey = "SELECTED";
                 }
-
-                SubCaptureSelectBar.Content = new DropDownButton
+                catch
                 {
-                    Content = "画面を選択する",
-                    Flyout = menu,
-                };
+                    if (SubCaptureSelectBar.AccessKey != "SELECTED")
+                    {
+                        if (SubCaptureSelectBar.AccessKey == "NOT_SELECTED") return;
+                        SubCaptureSelectBar.IsOpen = true;
+                        SubCaptureSelectBar.AccessKey = "NOT_SELECTED";
+                        SubCaptureSelectBar.Severity = InfoBarSeverity.Warning;
+                        SubCaptureSelectBar.Title = "たいちょーの画面を選択してください";
+
+                        var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
+                        foreach (var (caption, handle) in Search.GetWindowList())
+                        {
+                            if (caption == string.Empty) continue;
+                            var item = new MenuFlyoutItem
+                            {
+                                Text = caption,
+                                Command = new Defer(async delegate
+                                {
+                                    _subCapture = new WindowCapture(handle);
+                                    SubCaptureSelectBar.AccessKey = "SELECTED";
+                                    await _subCapture!.SnapShot();
+                                    SubCaptureSelectBar.IsOpen = false;
+                                }),
+                            };
+                            menu.Items.Add(item);
+                        }
+
+                        SubCaptureSelectBar.Content = new DropDownButton
+                        {
+                            Content = "画面を選択する",
+                            Flyout = menu,
+                        };
+                    }
+                }
             }
         };
     }
@@ -356,8 +405,9 @@ public sealed partial class ControlDashboardPage
                             }
                         default:
                             {
+                                if (!_useSub) break;
                                 _subCaptureEvent.Wait();
-                                switch (_subCapture!.CaptureOpponentsOrder((1485, 545), (70, 70)))
+                                switch (_subCapture!.CaptureOpponentsOrder(_opOrderIconPos[Windows.SubMobile].Item1, _opOrderIconPos[Windows.SubMobile].Item2))
                                 {
                                     // オーダー準備中を検知
                                     case WaitStat(var image):
@@ -395,13 +445,31 @@ public sealed partial class ControlDashboardPage
                                     }
                                     else
                                     {
-                                        _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
+                                        if (_opOrderInfo != null)
+                                        {
+                                            _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
+                                        }
+                                        else
+                                        {
+                                            var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
+                                            _orderStat = new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t)) switch
+                                            {
+                                                5 => new Active(null, DateTime.Now, 120 - 1),
+                                                15 => new Active(null, DateTime.Now, 60 - 1),
+                                                20 => new Active(null, DateTime.Now, 80 - 1),
+                                                30 => new Active(null, DateTime.Now, 120 - 1),
+                                                _ => throw new UnreachableException(),
+                                            };
+                                            _opOrderInfo = null;
+                                        }
                                     }
                                     goto End;
                                 }
                             default:
                                 {
-                                    switch (_subCapture!.IsActivating((1100, 250), (540, 520)))
+                                    if (!_useSub) break;
+                                    _subCaptureEvent.Wait();
+                                    switch (_subCapture!.IsActivating(_opOrderActivatePos[Windows.SubMobile].Item1, _opOrderActivatePos[Windows.SubMobile].Item2))
                                     {
                                         case ActiveStat:
                                         {
@@ -424,65 +492,6 @@ public sealed partial class ControlDashboardPage
 
                     _captureEvent.Wait();
 
-                    switch (_capture!.CaptureOpponentsOrder())
-                    {
-                        // オーダー発動検知
-                        case ActiveStat(var image):
-                            {
-                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\active\\debug.png");
-                                if (_opOrderInfo != null)
-                                {
-                                    _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
-                                }
-                                else
-                                {
-                                    var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
-                                    _orderStat = new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t)) switch
-                                    {
-                                        5 => new Active(null, DateTime.Now, 120 - 1),
-                                        15 => new Active(null, DateTime.Now, 60 - 1),
-                                        20 => new Active(null, DateTime.Now, 80 - 1),
-                                        30 => new Active(null, DateTime.Now, 120 - 1),
-                                        _ => throw new UnreachableException(),
-                                    };
-                                    _opOrderInfo = null;
-                                }
-
-                                goto End;
-                            }
-                        default:
-                            {
-                                switch (_subCapture!.CaptureOpponentsOrder((1485, 545), (70, 70)))
-                                {
-                                    // オーダー発動検知
-                                    case ActiveStat(var image):
-                                    {
-                                        image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\active\\debug.png");
-                                        if (_opOrderInfo != null)
-                                        {
-                                            _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
-                                        }
-                                        else
-                                        {
-                                            var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
-                                            _orderStat = new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t)) switch
-                                            {
-                                                5 => new Active(null, DateTime.Now, 120 - 1),
-                                                15 => new Active(null, DateTime.Now, 60 - 1),
-                                                20 => new Active(null, DateTime.Now, 80 - 1),
-                                                30 => new Active(null, DateTime.Now, 120 - 1),
-                                                _ => throw new UnreachableException(),
-                                            };
-                                            _opOrderInfo = null;
-                                        }
-
-                                        goto End;
-                                    }
-                                }
-                                break;
-                            }
-                    }
-
                     if (_orderStat is not Active)
                     {
                         switch (_capture!.IsActivating())
@@ -493,7 +502,8 @@ public sealed partial class ControlDashboardPage
                                 break;
                             default:
                                 {
-                                    switch (_subCapture!.IsActivating((1100, 250), (540, 520)))
+                                    if (!_useSub) break;
+                                    switch (_subCapture!.IsActivating(_opOrderActivatePos[Windows.SubMobile].Item1, _opOrderActivatePos[Windows.SubMobile].Item2))
                                     {
                                         case ActiveStat(var image):
                                             _opOrderInfo = null;
@@ -761,6 +771,12 @@ public sealed partial class ControlDashboardPage
 
     [GeneratedRegex("(.+)がオーダー(.+)を準備")]
     private static partial Regex OrderPrepareRegex();
+
+    private void AddScreen_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is not ToggleButton toggle) return;
+        _useSub = toggle.IsChecked == true;
+    }
 }
 
 internal record ResultItem(string Pic, Order Order, int Deviation, DateTime ActivatedAt)

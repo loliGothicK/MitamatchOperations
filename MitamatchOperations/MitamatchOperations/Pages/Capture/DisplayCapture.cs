@@ -9,7 +9,6 @@ using Windows.Media.Ocr;
 using OpenCvSharp.Extensions;
 using OpenCvSharp;
 using MitamatchOperations;
-using AForge.Imaging.Filters;
 using Size = OpenCvSharp.Size;
 
 namespace mitama.Pages.Capture;
@@ -17,7 +16,7 @@ namespace mitama.Pages.Capture;
 internal abstract record OrderStat;
 
 internal record WaitStat(Bitmap Image) : OrderStat;
-internal record ActiveStat(Bitmap Image) : OrderStat;
+internal record  ActiveStat(Bitmap Image) : OrderStat;
 internal record Nothing : OrderStat;
 
 

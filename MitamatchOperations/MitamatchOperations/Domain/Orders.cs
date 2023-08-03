@@ -46,11 +46,13 @@ namespace mitama.Domain {
         Special
     }
 
-    public readonly record struct Status(int Atk, int SpAtk, int Def, int SpDef) {
-        public static implicit operator Status(ValueTuple<int, int, int, int> from) => new() {
+    public readonly record struct Status(int Atk, int Def, int SpAtk, int SpDef)
+    {
+        public static implicit operator Status(ValueTuple<int, int, int, int> from) => new()
+        {
             Atk = from.Item1,
-            SpAtk = from.Item2,
-            Def = from.Item3,
+            Def = from.Item2,
+            SpAtk = from.Item3,
             SpDef = from.Item4,
         };
     }
@@ -621,6 +623,22 @@ namespace mitama.Domain {
                     (2674, 1880, 2704, 1899),
                     (20, 80),
                     Kinds.Other
+                ),
+                (
+                    "覚醒の満月",
+                    "補助スキル発動率上昇Lv.4",
+                    "味方全体のレギオンマッチ補助スキル発動率が超特大上昇（75%）。",
+                    (2275, 2258, 1570, 1560),
+                    (20, 90),
+                    Kinds.TriggerRateFluctuation
+                ),
+                (
+                    "満月の覚醒妨害",
+                    "補助スキル発動率減少Lv.4",
+                    "敵全体のレギオンマッチ補助スキル発動率が超特大減少（65%）。",
+                    (1566, 1567, 2242, 2239),
+                    (20, 90),
+                    Kinds.TriggerRateFluctuation
                 )
             };
 

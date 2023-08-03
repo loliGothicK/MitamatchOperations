@@ -46,11 +46,18 @@ internal class Match {
 
         {
             var templates = await Task.WhenAll(Memoria.List.Where(dummyCostume.CanBeEquipped).Select(async memoria => {
-                var file = await StorageFile.GetFileFromApplicationUriAsync(memoria.Uri);
-                var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
-                var descriptors = new Mat();
-                akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
-                return (memoria, descriptors);
+                try
+                {
+                    var file = await StorageFile.GetFileFromApplicationUriAsync(memoria.Uri);
+                    var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
+                    var descriptors = new Mat();
+                    akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
+                    return (memoria, descriptors);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"{memoria.Name}\n{ex.ToString()}");
+                }
             }));
 
             var detected = rects.AsParallel()

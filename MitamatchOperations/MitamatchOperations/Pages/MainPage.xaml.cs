@@ -53,7 +53,7 @@ public sealed partial class MainPage
     }
 
     public void Navigate(
-        Type pageType,
+        System.Type pageType,
         object? targetPageArguments = null,
         Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo? navigationTransitionInfo = null)
     {
@@ -94,7 +94,7 @@ public sealed partial class MainPage
 
     private void NavView_Navigate(FrameworkElement item)
     {
-        var mapping = new Dictionary<string, Type>()
+        var mapping = new Dictionary<string, System.Type>()
         {
             {"home", typeof(HomePage)},
             {"region console",typeof(RegionConsolePage)},

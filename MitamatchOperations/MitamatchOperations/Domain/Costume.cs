@@ -16,8 +16,8 @@ public record struct Costume(string Lily = "", string Name = "", string Type = "
     };
 
     public bool CanBeEquipped(Memoria memoria) => memoria.Kind switch {
-        "通常単体" or "通常範囲" or "特殊単体" or "特殊範囲" => IsFront,
-        "支援" or "妨害" or "回復" => IsBack,
+        Vanguard => IsFront,
+        Rearguard => IsBack,
         _ => throw new ArgumentOutOfRangeException()
     };
 
