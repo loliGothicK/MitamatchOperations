@@ -205,39 +205,39 @@ public record Memoria(
     public Uri Uri => new($"ms-appx:///Assets/memoria/{Name}.jpg");
     public string Path = $"/Assets/memoria/{Name}.jpg";
 
-    public static Memoria[] List =
+    public static readonly Memoria[] List =
     {
-        new Memoria(
-            "神の子は、水面に踊る",
-            new Vanguard(VanguardKind.SpecialRange),
-            Element.Fire,
-            new Status(2731, 4123, 2714, 3644),
-            21,
-            new Skill(
-                "Sp.ガードバーストD LG",
-                "敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                new SkillEffect[]
-                {
-                },
-                new StatusChange[]
-                {
-                    new StatusDown(new SpDef(), Amount.Medium)
-                },
-                Level.Lg,
-                Range.D
-            )
-            ,
-            new SupportSkill(
-                "攻:ダメージUP Ⅲ",
-                "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
-                Trigger.Attack,
-                new SupportEffect[]
-                {
-                    new DamageUp()
-                },
-                Level.Three
-            )
-        ),
+        //new Memoria(
+        //    "神の子は、水面に踊る",
+        //    new Vanguard(VanguardKind.SpecialRange),
+        //    Element.Fire,
+        //    new Status(2731, 4123, 2714, 3644),
+        //    21,
+        //    new Skill(
+        //        "Sp.ガードバーストD LG",
+        //        "敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
+        //        new SkillEffect[]
+        //        {
+        //        },
+        //        new StatusChange[]
+        //        {
+        //            new StatusDown(new SpDef(), Amount.Medium)
+        //        },
+        //        Level.Lg,
+        //        Range.D
+        //    )
+        //    ,
+        //    new SupportSkill(
+        //        "攻:ダメージUP Ⅲ",
+        //        "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
+        //        Trigger.Attack,
+        //        new SupportEffect[]
+        //        {
+        //            new DamageUp()
+        //        },
+        //        Level.Three
+        //    )
+        //),
 
         new Memoria(
             "双刃無双",
