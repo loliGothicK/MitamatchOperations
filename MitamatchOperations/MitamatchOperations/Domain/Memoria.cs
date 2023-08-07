@@ -207,366 +207,366 @@ public record Memoria(
 
     public static Memoria[] List =
     {
-        //new Memoria(
-        //    "神の子は、水面に踊る",
-        //    new Vanguard(VanguardKind.SpecialRange),
-        //    Element.Fire,
-        //    new Status(2731, 4123, 2714, 3644),
-        //    21,
-        //    new Skill(
-        //        "Sp.ガードバーストD LG",
-        //        "敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-        //        new SkillEffect[]
-        //        {
-        //        },
-        //        new StatusChange[]
-        //        {
-        //            new StatusDown(new SpDef(), Amount.Medium)
-        //        },
-        //        Level.Lg,
-        //        Range.D
-        //    )
-        //    ,
-        //    new SupportSkill(
-        //        "攻:ダメージUP Ⅲ",
-        //        "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
-        //        Trigger.Attack,
-        //        new SupportEffect[]
-        //        {
-        //            new DamageUp()
-        //        },
-        //        Level.Three
-        //    )
-        //),
+        new Memoria(
+            "神の子は、水面に踊る",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            new Status(2731, 4123, 2714, 3644),
+            21,
+            new Skill(
+                "Sp.ガードバーストD LG",
+                "敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
+                new SkillEffect[]
+                {
+                },
+                new StatusChange[]
+                {
+                    new StatusDown(new SpDef(), Amount.Medium)
+                },
+                Level.Lg,
+                Range.D
+            )
+            ,
+            new SupportSkill(
+                "攻:ダメージUP Ⅲ",
+                "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
+                Trigger.Attack,
+                new SupportEffect[]
+                {
+                    new DamageUp()
+                },
+                Level.Three
+            )
+        ),
 
-        //new Memoria(
-        //    "双刃無双",
-        //    new Rearguard(RearguardKind.Recovery),
-        //    Element.Water,
-        //    new Status(4071, 4094, 7066, 7069),
-        //    26,
-        //    new Skill(
-        //        "リカバーヒールD Ⅳ",
-        //        "味方2体のHPを大回復する。さらに自身のMPを60回復する。",
-        //        new SkillEffect[]
-        //        {
-        //            new Recover()
-        //        },
-        //        new StatusChange[]
-        //        {
-        //        },
-        //        Level.Four,
-        //        Range.D
-        //    )
-        //    ,
-        //    new SupportSkill(
-        //        "回:回復UP Ⅳ+",
-        //        "HP回復時、中確率でHPの回復量を超特大アップさせる。",
-        //        Trigger.Recovery,
-        //        new SupportEffect[]
-        //        {
-        //            new RecoveryUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
+        new Memoria(
+            "双刃無双",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Water,
+            new Status(4071, 4094, 7066, 7069),
+            26,
+            new Skill(
+                "リカバーヒールD Ⅳ",
+                "味方2体のHPを大回復する。さらに自身のMPを60回復する。",
+                new SkillEffect[]
+                {
+                    new Recover()
+                },
+                new StatusChange[]
+                {
+                },
+                Level.Four,
+                Range.D
+            )
+            ,
+            new SupportSkill(
+                "回:回復UP Ⅳ+",
+                "HP回復時、中確率でHPの回復量を超特大アップさせる。",
+                Trigger.Recovery,
+                new SupportEffect[]
+                {
+                    new RecoveryUp()
+                },
+                Level.Four
+            )
+        ),
 
-        //new Memoria(
-        //    "双刃無双",
-        //    new Vanguard(VanguardKind.NormalSingle),
-        //    Element.Water,
-        //    new Status(7405, 4094, 6722, 4079),
-        //    26,
-        //    new Skill(
-        //        "ウォーターパワーストライクA Ⅴ+",
-        //        "敵1体に通常超特大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-        //        new SkillEffect[]
-        //        {
-        //        },
-        //        new StatusChange[]
-        //        {
-        //            new StatusUp(new Atk(), Amount.Medium),
-        //            new StatusUp(new ElementAttack(Element.Water), Amount.Medium)
-        //        },
-        //        Level.Five,
-        //        Range.A
-        //    )
-        //    ,
-        //    new SupportSkill(
-        //        "攻:ダメージUP Ⅳ+",
-        //        "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
-        //        Trigger.Attack,
-        //        new SupportEffect[]
-        //        {
-        //            new DamageUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
+        new Memoria(
+            "双刃無双",
+            new Vanguard(VanguardKind.NormalSingle),
+            Element.Water,
+            new Status(7405, 4094, 6722, 4079),
+            26,
+            new Skill(
+                "ウォーターパワーストライクA Ⅴ+",
+                "敵1体に通常超特大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
+                new SkillEffect[]
+                {
+                },
+                new StatusChange[]
+                {
+                    new StatusUp(new Atk(), Amount.Medium),
+                    new StatusUp(new ElementAttack(Element.Water), Amount.Medium)
+                },
+                Level.Five,
+                Range.A
+            )
+            ,
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ+",
+                "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                new SupportEffect[]
+                {
+                    new DamageUp()
+                },
+                Level.Four
+            )
+        ),
 
-        //new Memoria(
-        //    "無二なる二刀",
-        //    new Rearguard(RearguardKind.Interference),
-        //    Element.Fire,
-        //    new Status(7062, 7065, 4065, 4066),
-        //    26,
-        //    new Skill(
-        //        "WパワーフォールD Ⅲ",
-        //        "敵2体のATKとSp.ATKを大ダウンさせる。",
-        //        new SkillEffect[]
-        //        {
-        //        },
-        //        new StatusChange[]
-        //        {
-        //            new StatusDown(new Atk(), Amount.Medium),
-        //            new StatusDown(new SpAtk(), Amount.Medium)
-        //        },
-        //        Level.Three,
-        //        Range.D
-        //    )
-        //    ,
-        //    new SupportSkill(
-        //        "援:支援UP Ⅳ+",
-        //        "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
-        //        Trigger.Support,
-        //        new SupportEffect[]
-        //        {
-        //            new SupportUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
+        new Memoria(
+            "無二なる二刀",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            new Status(7062, 7065, 4065, 4066),
+            26,
+            new Skill(
+                "WパワーフォールD Ⅲ",
+                "敵2体のATKとSp.ATKを大ダウンさせる。",
+                new SkillEffect[]
+                {
+                },
+                new StatusChange[]
+                {
+                    new StatusDown(new Atk(), Amount.Medium),
+                    new StatusDown(new SpAtk(), Amount.Medium)
+                },
+                Level.Three,
+                Range.D
+            )
+            ,
+            new SupportSkill(
+                "援:支援UP Ⅳ+",
+                "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                new SupportEffect[]
+                {
+                    new SupportUp()
+                },
+                Level.Four
+            )
+        ),
 
-        //new Memoria(
-        //    "無二なる二刀",
-        //    new Vanguard(VanguardKind.NormalRange),
-        //    Element.Fire,
-        //    new Status(7406, 4075, 6711, 4066),
-        //    26,
-        //    new Skill(
-        //        "火：ガードブレイクB Ⅲ",
-        //        "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
-        //        new SkillEffect[]
-        //        {
-        //            new ElementStimulation(Element.Fire)
-        //        },
-        //        new StatusChange[]
-        //        {
-        //            new StatusUp(new Def(), Amount.Medium)
-        //        },
-        //        Level.Three,
-        //        Range.B
-        //    )
-        //    ,
-        //    new SupportSkill(
-        //        "攻:ダメージUP Ⅳ+",
-        //        "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
-        //        Trigger.Attack,
-        //        new SupportEffect[]
-        //        {
-        //            new DamageUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
+        new Memoria(
+            "無二なる二刀",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            new Status(7406, 4075, 6711, 4066),
+            26,
+            new Skill(
+                "火：ガードブレイクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                new SkillEffect[]
+                {
+                    new ElementStimulation(Element.Fire)
+                },
+                new StatusChange[]
+                {
+                    new StatusUp(new Def(), Amount.Medium)
+                },
+                Level.Three,
+                Range.B
+            )
+            ,
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ+",
+                "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                new SupportEffect[]
+                {
+                    new DamageUp()
+                },
+                Level.Four
+            )
+        ),
 
-        //new Memoria(
-        //    "幻奏乙女",
-        //    new Rearguard(RearguardKind.Support),
-        //    Element.Fire,
-        //    new Status(7063, 7078, 4088, 4097),
-        //    26,
-        //    new Skill(
-        //        "WパワーアシストD Ⅲ",
-        //        "味方2体のATKとSp.ATKを大アップさせる。",
-        //        new SkillEffect[]
-        //        {
-        //        },
-        //        new StatusChange[]
-        //        {
-        //            new StatusUp(new Atk(), Amount.Medium),
-        //            new StatusUp(new SpAtk(), Amount.Medium)
-        //        },
-        //        Level.Three,
-        //        Range.D
-        //    )
-        //    ,
-        //    new SupportSkill(
-        //        "援:支援UP Ⅳ+",
-        //        "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
-        //        Trigger.Support,
-        //        new SupportEffect[]
-        //        {
-        //            new SupportUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
+        new Memoria(
+            "幻奏乙女",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            new Status(7063, 7078, 4088, 4097),
+            26,
+            new Skill(
+                "WパワーアシストD Ⅲ",
+                "味方2体のATKとSp.ATKを大アップさせる。",
+                new SkillEffect[]
+                {
+                },
+                new StatusChange[]
+                {
+                    new StatusUp(new Atk(), Amount.Medium),
+                    new StatusUp(new SpAtk(), Amount.Medium)
+                },
+                Level.Three,
+                Range.D
+            )
+            ,
+            new SupportSkill(
+                "援:支援UP Ⅳ+",
+                "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                new SupportEffect[]
+                {
+                    new SupportUp()
+                },
+                Level.Four
+            )
+        ),
 
-        //new Memoria(
-        //    "幻奏乙女",
-        //    new Vanguard(VanguardKind.SpecialRange),
-        //    Element.Fire,
-        //    new Status(4073, 7422, 4088, 6743),
-        //    26,
-        //    new Skill(
-        //        "火：Sp.ガードバーストB Ⅲ",
-        //        "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
-        //        new SkillEffect[]
-        //        {
-        //            new ElementStimulation(Element.Fire)
-        //        },
-        //        new StatusChange[]
-        //        {
-        //            new StatusUp(new SpDef(), Amount.Medium)
-        //        },
-        //        Level.Three,
-        //        Range.B
-        //    )
-        //    ,
-        //    new SupportSkill(
-        //        "攻:ダメージUP Ⅳ+",
-        //        "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
-        //        Trigger.Attack,
-        //        new SupportEffect[]
-        //        {
-        //            new DamageUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
+        new Memoria(
+            "幻奏乙女",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            new Status(4073, 7422, 4088, 6743),
+            26,
+            new Skill(
+                "火：Sp.ガードバーストB Ⅲ",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                new SkillEffect[]
+                {
+                    new ElementStimulation(Element.Fire)
+                },
+                new StatusChange[]
+                {
+                    new StatusUp(new SpDef(), Amount.Medium)
+                },
+                Level.Three,
+                Range.B
+            )
+            ,
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ+",
+                "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                new SupportEffect[]
+                {
+                    new DamageUp()
+                },
+                Level.Four
+            )
+        ),
 
-        //new Memoria(
-        //    "終曲のタクト",
-        //    new Vanguard(VanguardKind.SpecialRange),
-        //    Element.Water,
-        //    new Status(4085, 7411, 4065, 6734),
-        //    26,
-        //    new Skill(
-        //        "水：Sp.パワースマッシュB Ⅲ",
-        //        "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
-        //        new SkillEffect[]
-        //        {
-        //            new ElementStimulation(Element.Fire)
-        //        },
-        //        new StatusChange[]
-        //        {
-        //            new StatusUp(new SpAtk(), Amount.Medium)
-        //        },
-        //        Level.Three,
-        //        Range.B
-        //    )
-        //    ,
-        //    new SupportSkill(
-        //        "攻:ダメージUP Ⅳ+",
-        //        "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
-        //        Trigger.Attack,
-        //        new SupportEffect[]
-        //        {
-        //            new DamageUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
+        new Memoria(
+            "終曲のタクト",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Water,
+            new Status(4085, 7411, 4065, 6734),
+            26,
+            new Skill(
+                "水：Sp.パワースマッシュB Ⅲ",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                new SkillEffect[]
+                {
+                    new ElementStimulation(Element.Fire)
+                },
+                new StatusChange[]
+                {
+                    new StatusUp(new SpAtk(), Amount.Medium)
+                },
+                Level.Three,
+                Range.B
+            )
+            ,
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ+",
+                "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                new SupportEffect[]
+                {
+                    new DamageUp()
+                },
+                Level.Four
+            )
+        ),
 
-        //new Memoria(
-        //    "終曲のタクト",
-        //    new Rearguard(RearguardKind.Support),
-        //    Element.Water,
-        //    new Status(4085, 4077, 7055, 7078),
-        //    26,
-        //    new Skill(
-        //        "WガードアシストD Ⅲ",
-        //        "味方2体のDEFとSp.DEFを大アップさせる。",
-        //        new SkillEffect[]
-        //        {
-        //        },
-        //        new StatusChange[]
-        //        {
-        //            new StatusUp(new Def(), Amount.Medium),
-        //            new StatusUp(new SpDef(), Amount.Medium)
-        //        },
-        //        Level.Three,
-        //        Range.D
-        //    )
-        //    ,
-        //    new SupportSkill(
-        //        "援:支援UP Ⅳ+",
-        //        "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
-        //        Trigger.Support,
-        //        new SupportEffect[]
-        //        {
-        //            new SupportUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
+        new Memoria(
+            "終曲のタクト",
+            new Rearguard(RearguardKind.Support),
+            Element.Water,
+            new Status(4085, 4077, 7055, 7078),
+            26,
+            new Skill(
+                "WガードアシストD Ⅲ",
+                "味方2体のDEFとSp.DEFを大アップさせる。",
+                new SkillEffect[]
+                {
+                },
+                new StatusChange[]
+                {
+                    new StatusUp(new Def(), Amount.Medium),
+                    new StatusUp(new SpDef(), Amount.Medium)
+                },
+                Level.Three,
+                Range.D
+            )
+            ,
+            new SupportSkill(
+                "援:支援UP Ⅳ+",
+                "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                new SupportEffect[]
+                {
+                    new SupportUp()
+                },
+                Level.Four
+            )
+        ),
 
-        //new Memoria(
-        //    "ヴィルトシュバイン",
-        //    new Vanguard(VanguardKind.NormalRange),
-        //    Element.Water,
-        //    new Status(7428, 4098, 6721, 4097),
-        //    26,
-        //    new Skill(
-        //        "水：パワーストライクB Ⅲ",
-        //        "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
-        //        new SkillEffect[]
-        //        {
-        //            new ElementStimulation(Element.Fire)
-        //        },
-        //        new StatusChange[]
-        //        {
-        //            new StatusUp(new Atk(), Amount.Medium)
-        //        },
-        //        Level.Three,
-        //        Range.B
-        //    )
-        //    ,
-        //    new SupportSkill(
-        //        "攻:ダメージUP Ⅳ+",
-        //        "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
-        //        Trigger.Attack,
-        //        new SupportEffect[]
-        //        {
-        //            new DamageUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
+        new Memoria(
+            "ヴィルトシュバイン",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            new Status(7428, 4098, 6721, 4097),
+            26,
+            new Skill(
+                "水：パワーストライクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                new SkillEffect[]
+                {
+                    new ElementStimulation(Element.Fire)
+                },
+                new StatusChange[]
+                {
+                    new StatusUp(new Atk(), Amount.Medium)
+                },
+                Level.Three,
+                Range.B
+            )
+            ,
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ+",
+                "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                new SupportEffect[]
+                {
+                    new DamageUp()
+                },
+                Level.Four
+            )
+        ),
 
-        //new Memoria(
-        //    "ヴィルトシュバイン",
-        //    new Rearguard(RearguardKind.Interference),
-        //    Element.Water,
-        //    new Status(4094, 4098, 7065, 7087),
-        //    26,
-        //    new Skill(
-        //        "WガードフォールD Ⅲ",
-        //        "敵2体のDEFとSp.DEFを大ダウンさせる。",
-        //        new SkillEffect[]
-        //        {
-        //        },
-        //        new StatusChange[]
-        //        {
-        //            new StatusDown(new Def(), Amount.Medium),
-        //            new StatusDown(new SpDef(), Amount.Medium)
-        //        },
-        //        Level.Three,
-        //        Range.D
-        //    )
-        //    ,
-        //    new SupportSkill(
-        //        "援:支援UP Ⅳ+",
-        //        "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
-        //        Trigger.Support,
-        //        new SupportEffect[]
-        //        {
-        //            new SupportUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
+        new Memoria(
+            "ヴィルトシュバイン",
+            new Rearguard(RearguardKind.Interference),
+            Element.Water,
+            new Status(4094, 4098, 7065, 7087),
+            26,
+            new Skill(
+                "WガードフォールD Ⅲ",
+                "敵2体のDEFとSp.DEFを大ダウンさせる。",
+                new SkillEffect[]
+                {
+                },
+                new StatusChange[]
+                {
+                    new StatusDown(new Def(), Amount.Medium),
+                    new StatusDown(new SpDef(), Amount.Medium)
+                },
+                Level.Three,
+                Range.D
+            )
+            ,
+            new SupportSkill(
+                "援:支援UP Ⅳ+",
+                "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                new SupportEffect[]
+                {
+                    new SupportUp()
+                },
+                Level.Four
+            )
+        ),
 
         new Memoria(
             "待ち望んだパーティナイト",
