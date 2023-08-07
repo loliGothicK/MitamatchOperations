@@ -56,7 +56,7 @@ internal class Match {
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception($"{memoria.Name}\n{ex.ToString()}");
+                    throw new Exception($"{memoria.Name}が見つかりません:\n{ex}");
                 }
             }));
 
