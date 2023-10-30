@@ -5,7 +5,7 @@
     <TargetPlatformMinVersion>10.0.22621.0</TargetPlatformMinVersion>
     <RootNamespace>mitama</RootNamespace>
     <Platforms>x86;x64;arm64</Platforms>
-    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
     <UseWinUI>true</UseWinUI>
     <Nullable>enable</Nullable>
     <SupportedOSPlatformVersion>10.0.22621.0</SupportedOSPlatformVersion>
@@ -18,6 +18,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <AnalysisLevel>latest</AnalysisLevel>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <WarningLevel>7</WarningLevel>
@@ -49,11 +50,13 @@
     <None Remove="Pages\consolePage.xaml" />
     <None Remove="Pages\console\OrderManagePage.xaml" />
     <None Remove="Pages\ControlDashboardPage.xaml" />
+    <None Remove="Pages\ControlDashboard\CounterView.xaml" />
     <None Remove="Pages\Main\AddNewMemberDialogContent.xaml" />
     <None Remove="Pages\Main\ChangeProjectDialogContent.xaml" />
     <None Remove="Pages\OrderConsole\LoadDialogContent.xaml" />
     <None Remove="Pages\OrderConsole\SaveDialogContent.xaml" />
     <None Remove="Pages\RegionConsolePage.xaml" />
+    <None Remove="Pages\RegionConsole\CounterView.xaml" />
     <None Remove="Pages\RegionConsole\MemberManageConsole.xaml" />
     <None Remove="Pages\RegionConsole\RecogniseDialogContent.xaml" />
     <None Remove="Pages\RegionConsole\TimelineTools.xaml" />
@@ -189,5 +192,20 @@
       <DependentUpon>MLOrderModel.mbconfig</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\ControlDashboardPage\CounterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\ControlDashboard\CounterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\RegionConsole\CounterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
