@@ -7,15 +7,16 @@ using System;
 using System.Diagnostics;
 using System.Text;
 
-public class Interop {
+public partial class Interop {
     /// <summary>
     /// ウィンドウを列挙します。
     /// </summary>
     /// <param name="lpEnumFunc">コールバック関数</param>
     /// <param name="lParam">アプリケーション定義の値</param>
     /// <returns></returns>
-    [System.Runtime.InteropServices.DllImport("user32.dll")]
-    public static extern bool EnumWindows(EnumWinProc lpEnumFunc, IntPtr lParam);
+    [System.Runtime.InteropServices.LibraryImport("user32.dll")]
+    [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+    public static partial bool EnumWindows(EnumWinProc lpEnumFunc, IntPtr lParam);
 
     /// <summary>
     /// EnumWindowsから呼び出されるコールバック関数EnumWinProcのデリゲート
@@ -41,23 +42,25 @@ public class Interop {
     /// <param name="hWnd">ウィンドウのハンドル</param>
     /// <param name="lpdwProcessId">プロセスＩＤ</param>
     /// <returns></returns>
-    [System.Runtime.InteropServices.DllImport("user32.dll")]
-    public static extern int GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
+    [System.Runtime.InteropServices.LibraryImport("user32.dll")]
+    // ReSharper disable once IdentifierTypo
+    public static partial int GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
 
     /// <summary>
     /// ウィンドウが可視かどうかを調べます。
     /// </summary>
     /// <param name="hWnd">ウィンドウのハンドル</param>
     /// <returns></returns>
-    [System.Runtime.InteropServices.DllImport("user32.dll")]
-    public static extern bool IsWindowVisible(IntPtr hWnd);
+    [System.Runtime.InteropServices.LibraryImport("user32.dll")]
+    [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+    public static partial bool IsWindowVisible(IntPtr hWnd);
 }
 
 public class Search {
     public static IntPtr WindowHandleFromCaption(string target) {
         nint result = -1;
         // ウィンドウの列挙を開始
-        EnumWindows((hWnd, lParam) => {
+        EnumWindows((hWnd, _) => {
             var caption = Caption(hWnd);
             if (IsWindowVisible(hWnd) && caption.Contains(target)) {
                 result = hWnd;
@@ -72,7 +75,7 @@ public class Search {
     public static List<(string, IntPtr)> GetWindowList() {
         List<(string, IntPtr)> result = new();
         // ウィンドウの列挙を開始
-        EnumWindows((hWnd, lParam) => {
+        EnumWindows((hWnd, _) => {
             if (IsWindowVisible(hWnd)) {
                 result.Add((Caption(hWnd), hWnd));
             }

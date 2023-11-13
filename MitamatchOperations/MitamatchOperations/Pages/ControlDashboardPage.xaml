@@ -97,6 +97,7 @@
                     </Flyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
+            <AppBarButton Icon="Sync" Label="Counter" Click="CounterButton_OnClick"/>
             <AppBarButton Label="Load">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE836;" />

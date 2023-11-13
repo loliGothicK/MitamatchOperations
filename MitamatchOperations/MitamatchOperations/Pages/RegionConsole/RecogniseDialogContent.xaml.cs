@@ -11,10 +11,9 @@ namespace mitama.Pages.RegionConsole;
 /// </summary>
 public sealed partial class RecogniseDialogContent
 {
-    private List<Memoria> memoriaList;
     public RecogniseDialogContent(IEnumerable<Memoria> memorias)
     {
         InitializeComponent();
-        ResultView.ItemsSource = memoriaList = memorias.ToList();
+        ResultView.ItemsSource = memorias.ToList();
     }
 }

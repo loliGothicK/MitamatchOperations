@@ -24,6 +24,7 @@ using Microsoft.UI.Xaml.Input;
 using Windows.System;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using mitama.Domain.OrderKinds;
+using mitama.Pages.ControlDashboard;
 using SimdLinq;
 using MitamatchOperations;
 
@@ -776,6 +777,17 @@ public sealed partial class ControlDashboardPage
     {
         if (sender is not ToggleButton toggle) return;
         _useSub = toggle.IsChecked == true;
+    }
+
+    private void CounterButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var newWindow = new Window();
+
+        var counterView = new CounterView();
+        newWindow.Content = counterView;
+
+        // ウィンドウを表示
+        newWindow.Activate();
     }
 }
 
