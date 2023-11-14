@@ -210,151 +210,151 @@ public record Memoria(
 
     public static readonly Memoria[] List =
     {
-        //new Memoria(
-        //    "かわいい狩りの秋",
-        //    new Vanguard(VanguardKind.NormalRange),
-        //    Element.Fire,
-        //    new Status(7068, 2616, 5653, 2586),
-        //    22,
-        //    new Skill(
-        //        "火：パワーストライクB Ⅲ",
-        //        "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
-        //        [new ElementStimulation(Element.Fire)],
-        //        [new StatusUp(new Atk(), Amount.Medium)],
-        //        Level.Three,
-        //        Range.B
-        //    ),
-        //    new SupportSkill(
-        //        "攻:ダメージUP Ⅳ",
-        //        "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
-        //        Trigger.Attack,
-        //        new SupportEffect[] {
-        //            new DamageUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
-        //new Memoria(
-        //    "かわいい狩りの秋",
-        //    new Vanguard(VanguardKind.SpecialRange),
-        //    Element.Fire,
-        //    new Status(2616, 7068, 2601, 5638),
-        //    22,
-        //    new Skill(
-        //        "Sp.カウンターファイアパワースマッシュB Ⅲ+",
-        //        "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。さらに劣勢時は効果が1.5倍になる。",
-        //        [new Counter()],
-        //        [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
-        //        Level.Three,
-        //        Range.B
-        //    ),
-        //    new SupportSkill(
-        //        "攻:ダメージUP Ⅳ",
-        //        "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
-        //        Trigger.Attack,
-        //        new SupportEffect[] {
-        //            new DamageUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
-        //new Memoria(
-        //    "かわいい狩りの秋",
-        //    new Rearguard(RearguardKind.Interference),
-        //    Element.Fire,
-        //    new Status(2616, 7068, 2601, 5638),
-        //    22,
-        //    new Skill(
-        //        "Sp.カウンターファイアパワーフォールC Ⅳ",
-        //        "敵1～3体のSp.ATKと火属性攻撃力を大ダウンさせる。さらに劣勢時は効果が1.5倍になる。",
-        //        [new Counter()],
-        //        [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
-        //        Level.Four,
-        //        Range.C
-        //    ),
-        //    new SupportSkill(
-        //        "援:支援UP Ⅳ",
-        //        "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
-        //        Trigger.Support,
-        //        new SupportEffect[] {
-        //            new SupportUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
-        //new Memoria(
-        //    "かわいい狩りの秋",
-        //    new Rearguard(RearguardKind.Recovery),
-        //    Element.Fire,
-        //    new Status(2616, 2616, 7053, 5638),
-        //    22,
-        //    new Skill(
-        //        "カウンターファイアガードヒールD Ⅳ",
-        //        "味方2体のHPを大回復し、DEFと火属性防御力を小アップする。さらに劣勢時は効果が1.5倍になる。",
-        //        [new Counter()],
-        //        [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
-        //        Level.Four,
-        //        Range.D
-        //    ),
-        //    new SupportSkill(
-        //        "回:回復UP Ⅳ",
-        //        "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
-        //        Trigger.Recovery,
-        //        new SupportEffect[] {
-        //            new RecoveryUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
-        //new Memoria(
-        //    "藍の心と秋の空",
-        //    new Rearguard(RearguardKind.Support),
-        //    Element.Fire,
-        //    new Status(6920, 2752, 5519, 2732),
-        //    22,
-        //    new Skill(
-        //        "カウンターファイアパワーアシストC Ⅳ",
-        //        "味方1～3体のATKと火属性攻撃力を大アップさせる。さらに劣勢時は効果が1.5倍になる。",
-        //        [new Counter()],
-        //        [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
-        //        Level.Four,
-        //        Range.C
-        //    ),
-        //    new SupportSkill(
-        //        "援:支援UP Ⅳ",
-        //        "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
-        //        Trigger.Support,
-        //        new SupportEffect[] {
-        //            new SupportUp()
-        //        },
-        //        Level.Four
-        //    )
-        //),
-        //new Memoria(
-        //    "藍の心と秋の空",
-        //    new Vanguard(VanguardKind.NormalRange),
-        //    Element.Fire,
-        //    new Status(6920, 2752, 5519, 2732),
-        //    22,
-        //    new Skill(
-        //        "カウンターファイアガードブレイクB Ⅲ+",
-        //        "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。さらに劣勢時は効果が1.5倍になる。",
-        //        [new Counter()],
-        //        [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
-        //        Level.Three,
-        //        Range.B
-        //    ),
-        //    new SupportSkill(
-        //        "攻:ダメージUP/ガードDOWN Ⅲ",
-        //        "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
-        //        Trigger.Attack,
-        //        new SupportEffect[] {
-        //            new DamageUp(),
-        //new GuardDown(Type.Normal)
-        //        },
-        //        Level.Three
-        //    )
-        //),
+        new Memoria(
+            "かわいい狩りの秋",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            new Status(7068, 2616, 5653, 2586),
+            22,
+            new Skill(
+                "火：パワーストライクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new Atk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                new SupportEffect[] {
+                    new DamageUp()
+                },
+                Level.Four
+            )
+        ),
+        new Memoria(
+            "かわいい狩りの秋",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            new Status(2616, 7068, 2601, 5638),
+            22,
+            new Skill(
+                "Sp.カウンターファイアパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                new SupportEffect[] {
+                    new DamageUp()
+                },
+                Level.Four
+            )
+        ),
+        new Memoria(
+            "かわいい狩りの秋",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            new Status(2616, 7068, 2601, 5638),
+            22,
+            new Skill(
+                "Sp.カウンターファイアパワーフォールC Ⅳ",
+                "敵1～3体のSp.ATKと火属性攻撃力を大ダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                new SupportEffect[] {
+                    new SupportUp()
+                },
+                Level.Four
+            )
+        ),
+        new Memoria(
+            "かわいい狩りの秋",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Fire,
+            new Status(2616, 2616, 7053, 5638),
+            22,
+            new Skill(
+                "カウンターファイアガードヒールD Ⅳ",
+                "味方2体のHPを大回復し、DEFと火属性防御力を小アップする。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
+                Level.Four,
+                Range.D
+            ),
+            new SupportSkill(
+                "回:回復UP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
+                Trigger.Recovery,
+                new SupportEffect[] {
+                    new RecoveryUp()
+                },
+                Level.Four
+            )
+        ),
+        new Memoria(
+            "藍の心と秋の空",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            new Status(6920, 2752, 5519, 2732),
+            22,
+            new Skill(
+                "カウンターファイアパワーアシストC Ⅳ",
+                "味方1～3体のATKと火属性攻撃力を大アップさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                new SupportEffect[] {
+                    new SupportUp()
+                },
+                Level.Four
+            )
+        ),
+        new Memoria(
+            "藍の心と秋の空",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            new Status(6920, 2752, 5519, 2732),
+            22,
+            new Skill(
+                "カウンターファイアガードブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
+                Trigger.Attack,
+                new SupportEffect[] {
+                    new DamageUp(),
+        new GuardDown(Type.Normal)
+                },
+                Level.Three
+            )
+        ),
         new Memoria(
             "神庭の花火師",
             new Vanguard(VanguardKind.NormalRange),
