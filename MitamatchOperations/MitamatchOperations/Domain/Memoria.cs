@@ -2204,7 +2204,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria -ねこさんこちら-",
+            "ねこさんこちら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             new Status(2229, 6255, 2247, 4909),
@@ -2229,7 +2229,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria -ねこさんこちら-",
+            "ねこさんこちら",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             new Status(2229, 6255, 2247, 4909),
@@ -3561,7 +3561,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "真実の刃＆リリコレ2023　開演！",
+            "真実の刃＆リリコレ2023 開演！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
             new Status(1676, 4481, 1658, 3503),
@@ -3585,7 +3585,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "真実の刃＆リリコレ2023　開演！",
+            "真実の刃＆リリコレ2023 開演！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             new Status(1676, 4481, 1658, 3503),
@@ -3633,7 +3633,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -双刃無双-",
+            "双刃無双",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             new Status(4071, 4094, 7066, 7069),
@@ -3657,7 +3657,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -双刃無双-",
+            "双刃無双",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
             new Status(7405, 4094, 6722, 4079),
@@ -3681,7 +3681,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -無二なる二刀-",
+            "無二なる二刀",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             new Status(7062, 7065, 4065, 4066),
@@ -3705,7 +3705,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -無二なる二刀-",
+            "無二なる二刀",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             new Status(7406, 4075, 6711, 4066),
@@ -3729,7 +3729,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -幻奏乙女-",
+            "幻奏乙女",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             new Status(7063, 7078, 4088, 4097),
@@ -3753,7 +3753,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -幻奏乙女-",
+            "幻奏乙女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             new Status(4073, 7422, 4088, 6743),
@@ -3777,7 +3777,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -終曲のタクト-",
+            "終曲のタクト",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             new Status(4085, 7411, 4065, 6734),
@@ -3801,7 +3801,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -終曲のタクト-",
+            "終曲のタクト",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             new Status(4085, 4077, 7055, 7078),
@@ -3825,7 +3825,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -ヴィルトシュバイン-",
+            "ヴィルトシュバイン",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             new Status(7428, 4098, 6721, 4097),
@@ -3849,7 +3849,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -ヴィルトシュバイン-",
+            "ヴィルトシュバイン",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             new Status(4094, 4098, 7065, 7087),
@@ -4236,7 +4236,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria -楽しいを探して-",
+            "楽しいを探して",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             new Status(2218, 2247, 6228, 4876),
@@ -4261,7 +4261,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria -楽しいを探して-",
+            "楽しいを探して",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             new Status(2218, 2247, 6228, 4876),
@@ -5763,7 +5763,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria -伝わる鼓動-",
+            "伝わる鼓動",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             new Status(2237, 6250, 2217, 4876),
@@ -5787,7 +5787,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria -伝わる鼓動-",
+            "伝わる鼓動",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             new Status(2237, 6250, 2217, 4876),
@@ -8448,7 +8448,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria -朝寝坊のススメ-",
+            "朝寝坊のススメ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             new Status(5253, 2013, 4171, 2052),
@@ -8472,7 +8472,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria -朝寝坊のススメ-",
+            "朝寝坊のススメ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             new Status(5253, 2013, 4171, 2052),
@@ -10229,7 +10229,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria -吐息の距離-",
+            "吐息の距離",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             new Status(1921, 5172, 1952, 4042),
@@ -10253,7 +10253,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria -吐息の距離-",
+            "吐息の距離",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             new Status(1921, 5172, 1952, 4042),
@@ -10277,7 +10277,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -縦横無尽、阻む者無し-",
+            "縦横無尽、阻む者無し",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             new Status(3505, 3487, 6312, 6305),
@@ -10301,7 +10301,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -縦横無尽、阻む者無し-",
+            "縦横無尽、阻む者無し",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
             new Status(3505, 6702, 3512, 5890),
@@ -10325,7 +10325,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -シリウス・ロア-",
+            "シリウス・ロア",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             new Status(6289, 6290, 3491, 3520),
@@ -10349,7 +10349,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -シリウス・ロア-",
+            "シリウス・ロア",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             new Status(6704, 3490, 5876, 3520),
@@ -10373,7 +10373,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -蒼き月、満ちる時-",
+            "蒼き月、満ちる時",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             new Status(6318, 6283, 3519, 3493),
@@ -10397,7 +10397,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -蒼き月、満ちる時-",
+            "蒼き月、満ちる時",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             new Status(3518, 6698, 3519, 5878),
@@ -10421,7 +10421,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -フェノメノ-",
+            "フェノメノ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             new Status(3482, 6728, 3511, 5885),
@@ -10445,7 +10445,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -フェノメノ-",
+            "フェノメノ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             new Status(3482, 3513, 6311, 6300),
@@ -10469,7 +10469,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -比類なき異能-",
+            "比類なき異能",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             new Status(6696, 3506, 5883, 3517),
@@ -10493,7 +10493,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Ultimate Memoria -比類なき異能-",
+            "比類なき異能",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             new Status(3481, 3506, 6298, 6317),
@@ -17182,7 +17182,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria-晴れときどきサンオイル-",
+            "晴れときどきサンオイル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
             new Status(4486, 1682, 3506, 1670),
@@ -17206,7 +17206,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria-晴れときどきサンオイル-",
+            "晴れときどきサンオイル",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
             new Status(4486, 1682, 3506, 1670),
@@ -17927,7 +17927,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria-お姉様の水難-",
+            "お姉様の水難",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
             new Status(4498, 1656, 3498, 1651),
@@ -17951,7 +17951,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria-お姉様の水難-",
+            "お姉様の水難",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
             new Status(4498, 1656, 3498, 1651),
@@ -19855,7 +19855,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria -癒しの露天風呂-",
+            "癒しの露天風呂",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
             new Status(1578, 3442, 1580, 2972),
@@ -19879,7 +19879,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Emotional Memoria -癒しの露天風呂-",
+            "癒しの露天風呂",
             new Rearguard(RearguardKind.Support),
             Element.Light,
             new Status(1578, 3442, 1580, 2972),
@@ -20362,7 +20362,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "不動劔の姫",
+            "不動剣の姫",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
             new Status(3895, 1589, 2499, 1590),
@@ -20386,7 +20386,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "不動劔の姫",
+            "不動剣の姫",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
             new Status(3895, 1589, 2499, 1590),
@@ -22997,7 +22997,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            "Anniversary Memoria -大切なあなたを想い-",
+            "大切なあなたを想い",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             new Status(1529, 1517, 2485, 2212),
