@@ -228,9 +228,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -252,9 +250,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -276,9 +272,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -300,9 +294,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -324,9 +316,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -348,10 +338,7 @@ public record Memoria(
                 "攻:ダメージUP/ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Normal)
-                },
+                [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -373,9 +360,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -397,9 +382,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -421,9 +404,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -445,9 +426,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -469,9 +448,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -493,9 +470,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -517,9 +492,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -541,9 +514,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -565,10 +536,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Special)
-                },
+                [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -590,9 +558,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -614,9 +580,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -638,10 +602,7 @@ public record Memoria(
                 "援:パワーDOWN/副援:水パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。さらに、水属性攻撃力を大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal),
-        new ElementPowerDown(Element.Water)
-                },
+                [new PowerDown(Type.Normal), new ElementPowerDown(Element.Water)],
                 Level.Three
             )
         ),
@@ -663,9 +624,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -687,10 +646,7 @@ public record Memoria(
                 "回:回復UP/副援:水ガードUP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の水属性防御力を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new ElementGuardUp(Element.Water)
-                },
+                [new RecoveryUp(), new ElementGuardUp(Element.Water)],
                 Level.Three
             )
         ),
@@ -712,9 +668,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -736,10 +690,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -761,9 +712,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -785,9 +734,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -809,10 +756,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Special)
-                },
+                [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -834,9 +778,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -858,10 +800,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Three
             )
         ),
@@ -883,10 +822,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -908,9 +844,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -932,9 +866,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -956,10 +888,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -981,10 +910,7 @@ public record Memoria(
                 "援:Sp.パワーUP/副援:火パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。さらに、火属性攻撃力を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special),
-        new ElementPowerUp(Element.Fire)
-                },
+                [new PowerUp(Type.Special), new ElementPowerUp(Element.Fire)],
                 Level.Three
             )
         ),
@@ -1006,10 +932,7 @@ public record Memoria(
                 "回:回復UP/副援:火ガードUP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の火属性防御力を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new ElementGuardUp(Element.Fire)
-                },
+                [new RecoveryUp(), new ElementGuardUp(Element.Fire)],
                 Level.Three
             )
         ),
@@ -1031,9 +954,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -1055,10 +976,7 @@ public record Memoria(
                 "攻:ダメージUP/ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Normal)
-                },
+                [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -1080,10 +998,7 @@ public record Memoria(
                 "攻:ダメージUP/ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Normal)
-                },
+                [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -1105,9 +1020,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -1129,9 +1042,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -1153,9 +1064,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -1177,9 +1086,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -1201,9 +1108,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -1225,9 +1130,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -1249,9 +1152,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -1273,9 +1174,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -1297,9 +1196,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -1321,9 +1218,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -1345,10 +1240,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -1370,9 +1262,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -1394,10 +1284,7 @@ public record Memoria(
                 "回:回復UP/副援:水ガードUP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の水属性防御力を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new ElementGuardUp(Element.Water)
-                },
+                [new RecoveryUp(), new ElementGuardUp(Element.Water)],
                 Level.Three
             )
         ),
@@ -1419,9 +1306,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -1443,10 +1328,7 @@ public record Memoria(
                 "援:パワーDOWN/副援:水パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。さらに、水属性攻撃力を大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal),
-        new ElementPowerDown(Element.Water)
-                },
+                [new PowerDown(Type.Normal), new ElementPowerDown(Element.Water)],
                 Level.Three
             )
         ),
@@ -1468,9 +1350,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -1492,9 +1372,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -1516,9 +1394,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -1540,9 +1416,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -1564,9 +1438,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -1588,9 +1460,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -1612,9 +1482,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -1636,9 +1504,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -1660,10 +1526,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN/副援:火ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。さらに、火属性防御力を大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special),
-        new ElementGuardDown(Element.Fire)
-                },
+                [new GuardDown(Type.Special), new ElementGuardDown(Element.Fire)],
                 Level.Three
             )
         ),
@@ -1685,9 +1548,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -1709,9 +1570,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -1733,10 +1592,7 @@ public record Memoria(
                 "攻:パワーUP/副攻:火パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、火属性攻撃力を大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal),
-        new ElementPowerUp(Element.Fire)
-                },
+                [new PowerUp(Type.Normal), new ElementPowerUp(Element.Fire)],
                 Level.Three
             )
         ),
@@ -1758,10 +1614,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -1783,10 +1636,7 @@ public record Memoria(
                 "援:パワーDOWN/副援:風パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。さらに、風属性攻撃力を大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal),
-        new ElementPowerDown(Element.Wind)
-                },
+                [new PowerDown(Type.Normal), new ElementPowerDown(Element.Wind)],
                 Level.Three
             )
         ),
@@ -1808,10 +1658,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Three
             )
         ),
@@ -1833,9 +1680,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -1857,9 +1702,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -1881,10 +1724,7 @@ public record Memoria(
                 "援:パワーUP/副援:水パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。さらに、水属性攻撃力を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal),
-        new ElementPowerUp(Element.Water)
-                },
+                [new PowerUp(Type.Normal), new ElementPowerUp(Element.Water)],
                 Level.Three
             )
         ),
@@ -1906,9 +1746,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -1930,10 +1768,7 @@ public record Memoria(
                 "攻:Sp.パワーUP/副攻:水パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、水属性攻撃力を大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special),
-        new ElementPowerUp(Element.Water)
-                },
+                [new PowerUp(Type.Special), new ElementPowerUp(Element.Water)],
                 Level.Three
             )
         ),
@@ -1955,9 +1790,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -1979,9 +1812,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -2003,9 +1834,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -2027,10 +1856,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -2052,10 +1878,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -2077,9 +1900,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -2101,9 +1922,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -2125,9 +1944,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -2149,9 +1966,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -2173,9 +1988,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -2197,9 +2010,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -2221,10 +2032,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -2246,9 +2054,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -2270,10 +2076,7 @@ public record Memoria(
                 "回:回復UP/副援:火ガードUP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の火属性防御力を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new ElementGuardUp(Element.Fire)
-                },
+                [new RecoveryUp(), new ElementGuardUp(Element.Fire)],
                 Level.Three
             )
         ),
@@ -2295,10 +2098,7 @@ public record Memoria(
                 "攻:Sp.パワーUP/副攻:水パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、水属性攻撃力を大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special),
-        new ElementPowerUp(Element.Water)
-                },
+                [new PowerUp(Type.Special), new ElementPowerUp(Element.Water)],
                 Level.Three
             )
         ),
@@ -2320,9 +2120,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -2344,9 +2142,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -2368,9 +2164,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -2392,9 +2186,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -2416,9 +2208,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -2440,10 +2230,7 @@ public record Memoria(
                 "攻:Sp.パワーUP/副攻:火パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、火属性攻撃力を大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special),
-        new ElementPowerUp(Element.Fire)
-                },
+                [new PowerUp(Type.Special), new ElementPowerUp(Element.Fire)],
                 Level.Three
             )
         ),
@@ -2465,10 +2252,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Special)
-                },
+                [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -2490,9 +2274,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -2514,9 +2296,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -2538,9 +2318,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -2562,9 +2340,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -2586,10 +2362,7 @@ public record Memoria(
                 "援:Sp.パワーUP/副援:風パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。さらに、風属性攻撃力を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special),
-        new ElementPowerUp(Element.Wind)
-                },
+                [new PowerUp(Type.Special), new ElementPowerUp(Element.Wind)],
                 Level.Three
             )
         ),
@@ -2611,9 +2384,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -2635,10 +2406,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -2660,9 +2428,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -2684,9 +2450,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -2708,9 +2472,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -2732,9 +2494,7 @@ public record Memoria(
                 "攻:Sp.パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.ATKを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -2756,9 +2516,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -2780,9 +2538,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -2804,9 +2560,7 @@ public record Memoria(
                 "攻:パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のATKを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -2828,10 +2582,7 @@ public record Memoria(
                 "攻:ダメージUP/ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Normal)
-                },
+                [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -2853,9 +2604,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -2877,10 +2626,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Special)
-                },
+                [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -2902,9 +2648,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -2926,9 +2670,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -2950,9 +2692,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -2974,9 +2714,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -2998,9 +2736,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -3022,9 +2758,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -3046,9 +2780,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -3070,9 +2802,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -3094,9 +2824,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -3118,9 +2846,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -3142,9 +2868,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -3166,9 +2890,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -3190,9 +2912,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -3214,9 +2934,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -3238,9 +2956,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -3262,10 +2978,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Three
             )
         ),
@@ -3287,9 +3000,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -3311,9 +3022,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -3335,9 +3044,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -3359,10 +3066,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Special)
-                },
+                [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -3384,9 +3088,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -3408,10 +3110,7 @@ public record Memoria(
                 "攻:ダメージUP/ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Normal)
-                },
+                [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -3433,9 +3132,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -3457,9 +3154,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -3481,9 +3176,7 @@ public record Memoria(
                 "援:火パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new ElementPowerUp(Element.Fire)
-                },
+                [new ElementPowerUp(Element.Fire)],
                 Level.Three
             )
         ),
@@ -3505,10 +3198,7 @@ public record Memoria(
                 "回:回復UP/副援:風ガードUP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の風属性防御力を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new ElementGuardUp(Element.Wind)
-                },
+                [new RecoveryUp(), new ElementGuardUp(Element.Wind)],
                 Level.Three
             )
         ),
@@ -3530,9 +3220,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -3554,9 +3242,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -3578,9 +3264,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -3602,9 +3286,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -3626,9 +3308,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -3650,9 +3330,7 @@ public record Memoria(
                 "回:回復UP Ⅳ+",
                 "HP回復時、中確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -3674,9 +3352,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ+",
                 "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -3698,9 +3374,7 @@ public record Memoria(
                 "援:支援UP Ⅳ+",
                 "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -3722,9 +3396,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ+",
                 "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -3746,9 +3418,7 @@ public record Memoria(
                 "援:支援UP Ⅳ+",
                 "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -3770,9 +3440,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ+",
                 "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -3794,9 +3462,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ+",
                 "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -3818,9 +3484,7 @@ public record Memoria(
                 "援:支援UP Ⅳ+",
                 "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -3842,9 +3506,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ+",
                 "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -3866,9 +3528,7 @@ public record Memoria(
                 "援:支援UP Ⅳ+",
                 "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -3890,9 +3550,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -3914,9 +3572,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -3938,9 +3594,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -3962,9 +3616,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -3986,9 +3638,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -4010,9 +3660,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -4034,9 +3682,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -4058,10 +3704,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Three
             )
         ),
@@ -4083,9 +3726,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4107,9 +3748,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -4131,9 +3770,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -4155,10 +3792,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -4180,9 +3814,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -4204,10 +3836,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4229,9 +3858,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4253,10 +3880,7 @@ public record Memoria(
                 "回:回復UP/副援:水ガードUP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の水属性防御力を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new ElementGuardUp(Element.Water)
-                },
+                [new RecoveryUp(), new ElementGuardUp(Element.Water)],
                 Level.Three
             )
         ),
@@ -4278,10 +3902,7 @@ public record Memoria(
                 "攻:ダメージUP/ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Normal)
-                },
+                [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4303,9 +3924,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4327,9 +3946,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4351,10 +3968,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Three
             )
         ),
@@ -4376,9 +3990,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -4400,9 +4012,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -4424,9 +4034,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4448,9 +4056,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -4472,9 +4078,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -4496,9 +4100,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4520,9 +4122,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4544,9 +4144,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -4568,9 +4166,7 @@ public record Memoria(
                 "援:火パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new ElementPowerUp(Element.Fire)
-                },
+                [new ElementPowerUp(Element.Fire)],
                 Level.Three
             )
         ),
@@ -4592,9 +4188,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4616,10 +4210,7 @@ public record Memoria(
                 "援:パワーDOWN/副援:風パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。さらに、風属性攻撃力を大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal),
-        new ElementPowerDown(Element.Wind)
-                },
+                [new PowerDown(Type.Normal), new ElementPowerDown(Element.Wind)],
                 Level.Three
             )
         ),
@@ -4641,10 +4232,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Three
             )
         ),
@@ -4666,9 +4254,7 @@ public record Memoria(
                 "攻:Sp.パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.ATKを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -4690,9 +4276,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -4714,9 +4298,7 @@ public record Memoria(
                 "攻:パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のATKを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4738,10 +4320,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Special)
-                },
+                [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -4763,9 +4342,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -4787,10 +4364,7 @@ public record Memoria(
                 "攻:ダメージUP/ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Normal)
-                },
+                [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4812,9 +4386,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -4836,9 +4408,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -4860,10 +4430,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN/副援:火パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。さらに、火属性攻撃力を大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special),
-        new ElementPowerDown(Element.Fire)
-                },
+                [new PowerDown(Type.Special), new ElementPowerDown(Element.Fire)],
                 Level.Three
             )
         ),
@@ -4885,9 +4452,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -4909,10 +4474,7 @@ public record Memoria(
                 "回:回復UP/副援:火ガードUP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の火属性防御力を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new ElementGuardUp(Element.Fire)
-                },
+                [new RecoveryUp(), new ElementGuardUp(Element.Fire)],
                 Level.Three
             )
         ),
@@ -4934,9 +4496,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -4958,9 +4518,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -4982,9 +4540,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -5006,9 +4562,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5030,9 +4584,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5054,10 +4606,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -5079,9 +4628,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -5103,10 +4650,7 @@ public record Memoria(
                 "攻:ダメージUP/ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Normal)
-                },
+                [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5128,9 +4672,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -5152,10 +4694,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Three
             )
         ),
@@ -5177,9 +4716,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5201,9 +4738,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new SpecialMatchPtUp()
-                },
+                [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
@@ -5225,9 +4760,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -5249,9 +4782,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -5273,9 +4804,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -5297,9 +4826,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -5321,9 +4848,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -5345,9 +4870,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5369,9 +4892,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5393,10 +4914,7 @@ public record Memoria(
                 "回:回復UP/副援:水ガードUP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の水属性防御力を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new ElementGuardUp(Element.Water)
-                },
+                [new RecoveryUp(), new ElementGuardUp(Element.Water)],
                 Level.Three
             )
         ),
@@ -5418,9 +4936,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -5442,9 +4958,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -5466,9 +4980,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5490,10 +5002,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5515,9 +5024,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5539,10 +5046,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Special)
-                },
+                [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -5564,9 +5068,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -5588,9 +5090,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -5612,9 +5112,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -5636,9 +5134,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5660,9 +5156,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5684,9 +5178,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5708,9 +5200,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5732,9 +5222,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -5756,9 +5244,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -5780,9 +5266,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -5804,9 +5288,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -5828,9 +5310,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -5852,9 +5332,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5876,9 +5354,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -5900,9 +5376,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -5924,10 +5398,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5949,9 +5420,7 @@ public record Memoria(
                 "援:ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -5973,10 +5442,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -5998,9 +5464,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -6022,9 +5486,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -6046,10 +5508,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Three
             )
         ),
@@ -6071,9 +5530,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -6095,9 +5552,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -6119,10 +5574,7 @@ public record Memoria(
                 "回:回復UP/ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。さらに、HPの回復量を特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new GuardUp(Type.Normal)
-                },
+                [new RecoveryUp(), new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6144,9 +5596,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6168,9 +5618,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6192,9 +5640,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -6216,9 +5662,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -6240,9 +5684,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -6264,9 +5706,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -6288,9 +5728,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6312,9 +5750,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6336,10 +5772,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -6361,9 +5794,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new NormalMatchPtUp()
-                },
+                [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
@@ -6385,10 +5816,7 @@ public record Memoria(
                 "援:WパワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal),
-        new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -6410,9 +5838,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -6434,9 +5860,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -6458,9 +5882,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -6482,9 +5904,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -6506,9 +5926,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6530,9 +5948,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6554,9 +5970,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -6578,9 +5992,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6602,9 +6014,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -6626,9 +6036,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -6650,10 +6058,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Special)
-                },
+                [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -6675,9 +6080,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -6699,10 +6102,7 @@ public record Memoria(
                 "攻:ダメージUP/ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Normal)
-                },
+                [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6724,9 +6124,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6748,9 +6146,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -6772,9 +6168,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -6796,9 +6190,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6820,9 +6212,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6844,9 +6234,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -6868,9 +6256,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -6892,9 +6278,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -6916,9 +6300,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -6940,9 +6322,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -6964,10 +6344,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -6989,9 +6366,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -7013,10 +6388,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7038,9 +6410,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7062,9 +6432,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -7086,9 +6454,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7110,10 +6476,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Three
             )
         ),
@@ -7135,9 +6498,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -7159,9 +6520,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7183,9 +6542,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new NormalMatchPtUp()
-                },
+                [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
@@ -7207,9 +6564,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7231,9 +6586,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7255,9 +6608,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -7279,9 +6630,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -7303,9 +6652,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -7327,9 +6674,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -7351,10 +6696,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7376,10 +6718,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -7401,9 +6740,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -7425,9 +6762,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -7449,9 +6784,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -7473,9 +6806,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7497,9 +6828,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7521,9 +6850,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -7545,9 +6872,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -7569,9 +6894,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7593,9 +6916,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new NormalMatchPtUp()
-                },
+                [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
@@ -7617,9 +6938,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -7641,9 +6960,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -7665,9 +6982,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -7689,9 +7004,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7713,10 +7026,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -7738,9 +7048,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -7762,10 +7070,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7787,9 +7092,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7811,9 +7114,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -7835,9 +7136,7 @@ public record Memoria(
                 "回:Sp.パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -7859,10 +7158,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7884,9 +7180,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7908,9 +7202,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -7932,9 +7224,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -7956,10 +7246,7 @@ public record Memoria(
                 "援:Sp.マイトUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKとSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special),
-        new GuardUp(Type.Special)
-                },
+                [new PowerUp(Type.Special), new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -7981,9 +7268,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -8005,9 +7290,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -8029,9 +7312,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -8053,9 +7334,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -8077,9 +7356,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8101,10 +7378,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Special)
-                },
+                [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -8126,9 +7400,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -8150,10 +7422,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8175,9 +7444,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8199,10 +7466,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Three
             )
         ),
@@ -8224,9 +7488,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -8248,9 +7510,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -8272,9 +7532,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8296,9 +7554,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8320,9 +7576,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8344,9 +7598,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8368,9 +7620,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -8392,9 +7642,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new SpecialMatchPtUp()
-                },
+                [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
@@ -8416,9 +7664,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -8440,10 +7686,7 @@ public record Memoria(
                 "援:WガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFとSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal),
-        new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -8465,9 +7708,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8489,10 +7730,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Three
             )
         ),
@@ -8514,9 +7752,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -8538,9 +7774,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -8562,9 +7796,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -8586,9 +7818,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -8610,9 +7840,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -8634,9 +7862,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new NormalMatchPtUp()
-                },
+                [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
@@ -8658,9 +7884,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8682,9 +7906,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -8706,9 +7928,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -8730,9 +7950,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8754,9 +7972,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8778,9 +7994,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -8802,9 +8016,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -8826,9 +8038,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -8850,9 +8060,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -8874,9 +8082,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -8898,10 +8104,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Special)
-                },
+                [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -8923,10 +8126,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8948,9 +8148,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -8972,9 +8170,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -8996,9 +8192,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -9020,9 +8214,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -9044,9 +8236,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -9068,9 +8258,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -9092,9 +8280,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -9116,9 +8302,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -9140,9 +8324,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -9164,9 +8346,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -9188,9 +8368,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -9212,9 +8390,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -9236,9 +8412,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -9260,9 +8434,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -9284,9 +8456,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -9308,9 +8478,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -9332,9 +8500,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -9356,9 +8522,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -9380,9 +8544,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new SpecialMatchPtUp()
-                },
+                [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
@@ -9404,9 +8566,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -9428,9 +8588,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -9452,9 +8610,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -9476,9 +8632,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -9500,9 +8654,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -9524,9 +8676,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -9548,9 +8698,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -9572,10 +8720,7 @@ public record Memoria(
                 "援:WパワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal),
-        new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -9597,9 +8742,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -9621,9 +8764,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -9645,9 +8786,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -9669,9 +8808,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new NormalMatchPtUp()
-                },
+                [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
@@ -9693,9 +8830,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -9717,9 +8852,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -9741,9 +8874,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -9765,9 +8896,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -9789,9 +8918,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -9813,9 +8940,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -9837,9 +8962,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -9861,9 +8984,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -9885,9 +9006,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -9909,9 +9028,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -9933,9 +9050,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -9957,9 +9072,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -9981,9 +9094,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -10005,9 +9116,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -10029,9 +9138,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -10053,9 +9160,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -10077,9 +9182,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -10101,9 +9204,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -10125,10 +9226,7 @@ public record Memoria(
                 "援:WパワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKとSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal),
-        new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Normal), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -10150,9 +9248,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -10174,9 +9270,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -10198,9 +9292,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -10222,9 +9314,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -10246,9 +9336,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -10270,9 +9358,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -10294,9 +9380,7 @@ public record Memoria(
                 "回:回復UP Ⅳ+",
                 "HP回復時、中確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -10318,9 +9402,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ+",
                 "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -10342,9 +9424,7 @@ public record Memoria(
                 "援:支援UP Ⅳ+",
                 "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -10366,9 +9446,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ+",
                 "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -10390,9 +9468,7 @@ public record Memoria(
                 "援:支援UP Ⅳ+",
                 "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -10414,9 +9490,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ+",
                 "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -10438,9 +9512,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ+",
                 "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -10462,9 +9534,7 @@ public record Memoria(
                 "援:支援UP Ⅳ+",
                 "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -10486,9 +9556,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ+",
                 "攻撃時、中確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -10510,9 +9578,7 @@ public record Memoria(
                 "援:支援UP Ⅳ+",
                 "支援/妨害時、中確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -10534,9 +9600,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -10558,9 +9622,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -10582,9 +9644,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -10606,9 +9666,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -10630,9 +9688,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -10654,9 +9710,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new NormalMatchPtUp()
-                },
+                [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
@@ -10678,9 +9732,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -10702,9 +9754,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new SpecialMatchPtUp()
-                },
+                [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
@@ -10726,9 +9776,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -10750,9 +9798,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -10774,9 +9820,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -10798,9 +9842,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -10822,9 +9864,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -10846,9 +9886,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -10870,9 +9908,7 @@ public record Memoria(
                 "回:回復UP Ⅳ",
                 "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Four
             )
         ),
@@ -10894,9 +9930,7 @@ public record Memoria(
                 "援:支援UP Ⅳ",
                 "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Four
             )
         ),
@@ -10918,9 +9952,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -10942,9 +9974,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅳ",
                 "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Four
             )
         ),
@@ -10966,10 +9996,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -10991,9 +10018,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11015,9 +10040,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11039,9 +10062,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -11063,9 +10084,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -11087,9 +10106,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11111,9 +10128,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11135,9 +10150,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -11159,10 +10172,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -11184,9 +10194,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -11208,9 +10216,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -11232,10 +10238,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -11257,10 +10260,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11282,9 +10282,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11306,9 +10304,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new NormalMatchPtUp()
-                },
+                [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
@@ -11330,9 +10326,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -11354,9 +10348,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new SpecialMatchPtUp()
-                },
+                [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
@@ -11378,9 +10370,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -11402,9 +10392,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -11426,9 +10414,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11450,9 +10436,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11474,9 +10458,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11498,9 +10480,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -11522,9 +10502,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -11546,9 +10524,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -11570,9 +10546,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -11594,9 +10568,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11618,9 +10590,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11642,9 +10612,7 @@ public record Memoria(
                 "攻:Sp.パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.ATKを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -11666,9 +10634,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -11690,9 +10656,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11714,9 +10678,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11738,9 +10700,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11762,9 +10722,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11786,9 +10744,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11810,9 +10766,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new NormalMatchPtUp()
-                },
+                [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
@@ -11834,9 +10788,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -11858,9 +10810,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new SpecialMatchPtUp()
-                },
+                [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
@@ -11882,9 +10832,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -11906,9 +10854,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -11930,9 +10876,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -11954,9 +10898,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -11978,9 +10920,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -12002,9 +10942,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new NormalMatchPtUp()
-                },
+                [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
@@ -12026,9 +10964,7 @@ public record Memoria(
                 "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Three
             )
         ),
@@ -12050,9 +10986,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -12074,9 +11008,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -12098,9 +11030,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -12122,9 +11052,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -12146,10 +11074,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -12171,9 +11096,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -12195,9 +11118,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -12219,10 +11140,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Special)
-                },
+                [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -12244,10 +11162,7 @@ public record Memoria(
                 "攻:ダメージUP/ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new GuardDown(Type.Normal)
-                },
+                [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -12269,9 +11184,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -12293,9 +11206,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -12317,9 +11228,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -12341,9 +11250,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -12365,9 +11272,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -12389,9 +11294,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -12413,10 +11316,7 @@ public record Memoria(
                 "援:WパワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal),
-        new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -12438,9 +11338,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -12462,9 +11360,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -12486,9 +11382,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -12510,9 +11404,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new SpecialMatchPtUp()
-                },
+                [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
@@ -12534,9 +11426,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -12558,9 +11448,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -12582,10 +11470,7 @@ public record Memoria(
                 "援:WパワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKとSp.ATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal),
-        new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Normal), new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -12607,9 +11492,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -12631,10 +11514,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -12656,9 +11536,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -12680,9 +11558,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -12704,9 +11580,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -12728,9 +11602,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -12752,9 +11624,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -12776,10 +11646,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -12801,9 +11668,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -12825,10 +11690,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -12850,9 +11712,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -12874,9 +11734,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -12898,9 +11756,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -12922,9 +11778,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -12946,9 +11800,7 @@ public record Memoria(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
                 "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new NormalMatchPtUp()
-                },
+                [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
@@ -12970,9 +11822,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -12994,9 +11844,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -13018,9 +11866,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -13042,9 +11888,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -13066,9 +11910,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13090,9 +11932,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13114,9 +11954,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13138,9 +11976,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13162,9 +11998,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -13186,9 +12020,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -13210,9 +12042,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13234,9 +12064,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13258,10 +12086,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -13283,9 +12108,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -13307,9 +12130,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -13331,9 +12152,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -13355,9 +12174,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -13379,9 +12196,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13403,10 +12218,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -13428,10 +12240,7 @@ public record Memoria(
                 "援:WガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFとSp.DEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal),
-        new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -13453,10 +12262,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13478,9 +12284,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13502,9 +12306,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -13526,9 +12328,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -13550,9 +12350,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13574,9 +12372,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13598,9 +12394,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -13622,9 +12416,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -13646,10 +12438,7 @@ public record Memoria(
                 "援:支援UP/パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。さらに、支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new SupportUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13671,9 +12460,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13695,9 +12482,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13719,9 +12504,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13743,9 +12526,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13767,10 +12548,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -13792,9 +12570,7 @@ public record Memoria(
                 "攻:Sp.ガードUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -13816,9 +12592,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -13840,9 +12614,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -13864,9 +12636,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -13888,9 +12658,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13912,10 +12680,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -13937,9 +12702,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -13961,10 +12724,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -13986,9 +12746,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14010,9 +12768,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -14034,9 +12790,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14058,9 +12812,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14082,9 +12834,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14106,9 +12856,7 @@ public record Memoria(
                 "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Three
             )
         ),
@@ -14130,9 +12878,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -14154,9 +12900,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -14178,9 +12922,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -14202,9 +12944,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14226,9 +12966,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14250,9 +12988,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -14274,10 +13010,7 @@ public record Memoria(
                 "援:WガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFとSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal),
-        new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -14299,9 +13032,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -14323,9 +13054,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -14347,9 +13076,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14371,9 +13098,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14395,9 +13120,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -14419,10 +13142,7 @@ public record Memoria(
                 "援:WガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFとSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal),
-        new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Normal), new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -14444,9 +13164,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -14468,9 +13186,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -14492,9 +13208,7 @@ public record Memoria(
                 "回:Sp.パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -14516,9 +13230,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14540,9 +13252,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14564,9 +13274,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -14588,9 +13296,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -14612,9 +13318,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -14636,9 +13340,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -14660,10 +13362,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -14685,9 +13384,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14709,10 +13406,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -14734,9 +13428,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -14758,10 +13450,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14783,9 +13472,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14807,9 +13494,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14831,9 +13516,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14855,9 +13538,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14879,9 +13560,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -14903,9 +13582,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -14927,9 +13604,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14951,9 +13626,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -14975,9 +13648,7 @@ public record Memoria(
                 "回:Sp.パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -14999,9 +13670,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15023,9 +13692,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -15047,9 +13714,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15071,9 +13736,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -15095,9 +13758,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15119,10 +13780,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15144,9 +13802,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15168,10 +13824,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15193,9 +13846,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15217,9 +13868,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15241,9 +13890,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15265,9 +13912,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15289,9 +13934,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15313,9 +13956,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15337,9 +13978,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -15361,9 +14000,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15385,9 +14022,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15409,9 +14044,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -15433,9 +14066,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15457,9 +14088,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15481,9 +14110,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15505,9 +14132,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15529,9 +14154,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15553,9 +14176,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15577,9 +14198,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15601,10 +14220,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -15626,9 +14242,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -15650,10 +14264,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15675,10 +14286,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15700,9 +14308,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15724,9 +14330,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15748,9 +14352,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15772,9 +14374,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15796,9 +14396,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15820,10 +14418,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15845,9 +14440,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15869,9 +14462,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -15893,10 +14484,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -15918,9 +14506,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -15942,10 +14528,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -15967,10 +14550,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -15992,9 +14572,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -16016,9 +14594,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -16040,9 +14616,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -16064,9 +14638,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16088,9 +14660,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16112,9 +14682,7 @@ public record Memoria(
                 "回:パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16136,9 +14704,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16160,9 +14726,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -16184,9 +14748,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -16208,9 +14770,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -16232,9 +14792,7 @@ public record Memoria(
                 "回:Sp.パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -16256,9 +14814,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16280,9 +14836,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16304,9 +14858,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -16328,9 +14880,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -16352,9 +14902,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -16376,10 +14924,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16401,10 +14946,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -16426,9 +14968,7 @@ public record Memoria(
                 "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Three
             )
         ),
@@ -16450,9 +14990,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16474,9 +15012,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -16498,9 +15034,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -16522,9 +15056,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16546,10 +15078,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -16571,9 +15100,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -16595,10 +15122,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16620,10 +15144,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -16645,9 +15166,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16669,9 +15188,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16693,9 +15210,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -16717,9 +15232,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -16741,9 +15254,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -16765,9 +15276,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -16789,9 +15298,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16813,9 +15320,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -16837,9 +15342,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -16861,9 +15364,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -16885,9 +15386,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -16909,9 +15408,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16933,9 +15430,7 @@ public record Memoria(
                 "援:ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -16957,9 +15452,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -16981,9 +15474,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -17005,10 +15496,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -17030,10 +15518,7 @@ public record Memoria(
                 "攻:ダメージUP/パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Normal)
-                },
+                [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17055,9 +15540,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -17079,9 +15562,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -17103,9 +15584,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -17127,9 +15606,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -17151,9 +15628,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17175,9 +15650,7 @@ public record Memoria(
                 "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Three
             )
         ),
@@ -17199,9 +15672,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17223,9 +15694,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17247,9 +15716,7 @@ public record Memoria(
                 "攻:パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のATKを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17271,9 +15738,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17295,9 +15760,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -17319,9 +15782,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -17343,9 +15804,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17367,9 +15826,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -17391,9 +15848,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17415,9 +15870,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17439,9 +15892,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17463,9 +15914,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17487,9 +15936,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -17511,9 +15958,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17535,9 +15980,7 @@ public record Memoria(
                 "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Three
             )
         ),
@@ -17559,9 +16002,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -17583,9 +16024,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -17607,9 +16046,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -17631,9 +16068,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -17655,9 +16090,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17679,10 +16112,7 @@ public record Memoria(
                 "援:支援UP/ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。さらに、支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp(),
-        new GuardDown(Type.Normal)
-                },
+                [new SupportUp(), new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17704,9 +16134,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -17728,9 +16156,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -17752,9 +16178,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17776,9 +16200,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17800,9 +16222,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -17824,9 +16244,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -17848,9 +16266,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17872,9 +16288,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17896,9 +16310,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -17920,9 +16332,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -17944,9 +16354,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17968,9 +16376,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -17992,9 +16398,7 @@ public record Memoria(
                 "回:Sp.パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -18016,9 +16420,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -18040,9 +16442,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18064,9 +16464,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -18088,9 +16486,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -18112,9 +16508,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -18136,9 +16530,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -18160,9 +16552,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -18184,9 +16574,7 @@ public record Memoria(
                 "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Three
             )
         ),
@@ -18208,9 +16596,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -18232,9 +16618,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -18256,9 +16640,7 @@ public record Memoria(
                 "回:パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18280,9 +16662,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18304,9 +16684,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -18328,9 +16706,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -18352,9 +16728,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -18376,9 +16750,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18400,9 +16772,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -18424,9 +16794,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -18448,9 +16816,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -18472,9 +16838,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -18496,9 +16860,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -18520,9 +16882,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18544,9 +16904,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -18568,10 +16926,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -18593,9 +16948,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -18617,9 +16970,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18641,9 +16992,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -18665,9 +17014,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -18689,9 +17036,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -18713,9 +17058,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -18737,9 +17080,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18761,9 +17102,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18785,9 +17124,7 @@ public record Memoria(
                 "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Three
             )
         ),
@@ -18809,9 +17146,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -18833,9 +17168,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18857,9 +17190,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18881,9 +17212,7 @@ public record Memoria(
                 "攻:ガードUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のDEFを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18905,9 +17234,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18929,9 +17256,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18953,9 +17278,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -18977,9 +17300,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -19001,9 +17322,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -19025,9 +17344,7 @@ public record Memoria(
                 "攻:Sp.ガードUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -19049,9 +17366,7 @@ public record Memoria(
                 "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Three
             )
         ),
@@ -19073,9 +17388,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -19097,9 +17410,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -19121,9 +17432,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -19145,9 +17454,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -19169,9 +17476,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -19193,9 +17498,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -19217,9 +17520,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -19241,9 +17542,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -19265,9 +17564,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -19289,9 +17586,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -19313,10 +17608,7 @@ public record Memoria(
                 "援:支援UP/Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。さらに、支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp(),
-        new GuardUp(Type.Special)
-                },
+                [new SupportUp(), new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -19338,10 +17630,7 @@ public record Memoria(
                 "攻:マイトDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKとDEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal),
-        new GuardDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal), new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -19363,10 +17652,7 @@ public record Memoria(
                 "援:マイトUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKとDEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal),
-        new GuardUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal), new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -19388,10 +17674,7 @@ public record Memoria(
                 "攻:Sp.ディファーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKとSp.DEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal),
-        new GuardDown(Type.Special)
-                },
+                [new PowerDown(Type.Normal), new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -19413,10 +17696,7 @@ public record Memoria(
                 "援:Sp.マイトDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKとSp.DEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special),
-        new GuardDown(Type.Special)
-                },
+                [new PowerDown(Type.Special), new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -19438,9 +17718,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -19462,9 +17740,7 @@ public record Memoria(
                 "回:パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -19486,10 +17762,7 @@ public record Memoria(
                 "援:WパワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal),
-        new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -19511,9 +17784,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -19535,10 +17806,7 @@ public record Memoria(
                 "攻:WガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFとSp.DEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal),
-        new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -19560,9 +17828,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -19584,9 +17850,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -19608,9 +17872,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -19632,9 +17894,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -19656,9 +17916,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -19680,9 +17938,7 @@ public record Memoria(
                 "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Three
             )
         ),
@@ -19704,9 +17960,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -19728,9 +17982,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -19752,9 +18004,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -19776,9 +18026,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -19800,9 +18048,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -19824,9 +18070,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -19848,9 +18092,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -19872,9 +18114,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -19896,10 +18136,7 @@ public record Memoria(
                 "援:WガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFとSp.DEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal),
-        new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -19921,9 +18158,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -19945,9 +18180,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -19969,9 +18202,7 @@ public record Memoria(
                 "援:ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -19993,9 +18224,7 @@ public record Memoria(
                 "攻:パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のATKを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -20017,9 +18246,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -20041,9 +18268,7 @@ public record Memoria(
                 "回:パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -20065,9 +18290,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -20089,9 +18312,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -20113,10 +18334,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -20138,9 +18356,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -20162,9 +18378,7 @@ public record Memoria(
                 "攻:ガードUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のDEFを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -20186,10 +18400,7 @@ public record Memoria(
                 "回:WガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFとSp.DEFを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal),
-        new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -20211,9 +18422,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -20235,9 +18444,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -20259,9 +18466,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -20283,9 +18488,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -20307,9 +18510,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -20331,9 +18532,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -20355,9 +18554,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -20379,9 +18576,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -20403,9 +18598,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -20427,9 +18620,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -20451,9 +18642,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -20475,9 +18664,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -20499,9 +18686,7 @@ public record Memoria(
                 "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Three
             )
         ),
@@ -20523,9 +18708,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -20547,9 +18730,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -20571,9 +18752,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -20595,9 +18774,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -20619,9 +18796,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -20643,9 +18818,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -20667,9 +18840,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -20691,9 +18862,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -20715,10 +18884,7 @@ public record Memoria(
                 "援:WガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFとSp.DEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal),
-        new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -20740,10 +18906,7 @@ public record Memoria(
                 "攻:Sp.マイトDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKとSp.DEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special),
-        new GuardDown(Type.Special)
-                },
+                [new PowerDown(Type.Special), new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -20765,9 +18928,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -20789,10 +18950,7 @@ public record Memoria(
                 "攻:WパワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKとSp.ATKを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal),
-        new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -20814,9 +18972,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -20838,9 +18994,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -20862,9 +19016,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -20886,9 +19038,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -20910,9 +19060,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -20934,9 +19082,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -20958,9 +19104,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -20982,9 +19126,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -21006,9 +19148,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -21030,9 +19170,7 @@ public record Memoria(
                 "回:Sp.パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -21054,9 +19192,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -21078,9 +19214,7 @@ public record Memoria(
                 "援:ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -21102,9 +19236,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -21126,9 +19258,7 @@ public record Memoria(
                 "回:パワーUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -21150,9 +19280,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -21174,9 +19302,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -21198,9 +19324,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -21222,9 +19346,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -21246,9 +19368,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -21270,9 +19390,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -21294,10 +19412,7 @@ public record Memoria(
                 "攻:Sp.マイトUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKとSp.DEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special),
-        new GuardUp(Type.Special)
-                },
+                [new PowerUp(Type.Special), new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -21319,10 +19434,7 @@ public record Memoria(
                 "援:Sp.マイトUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKとSp.DEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special),
-        new GuardUp(Type.Special)
-                },
+                [new PowerUp(Type.Special), new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -21344,10 +19456,7 @@ public record Memoria(
                 "攻:WガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFとSp.DEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal),
-        new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -21369,10 +19478,7 @@ public record Memoria(
                 "援:ディファーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKとDEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special),
-        new GuardDown(Type.Normal)
-                },
+                [new PowerDown(Type.Special), new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -21394,10 +19500,7 @@ public record Memoria(
                 "攻:マイトUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKとDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal),
-        new GuardUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal), new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -21419,10 +19522,7 @@ public record Memoria(
                 "援:WパワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal),
-        new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -21444,9 +19544,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -21468,9 +19566,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -21492,9 +19588,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -21516,9 +19610,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -21540,9 +19632,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -21564,10 +19654,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅰ",
                 "HP回復時、一定確率でHPの回復量をアップさせる。さらに、支援/妨害時、一定確率で支援/妨害時効果を小アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.One
             )
         ),
@@ -21589,10 +19676,7 @@ public record Memoria(
                 "攻:Sp.マイトUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKとSp.DEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special),
-        new GuardUp(Type.Special)
-                },
+                [new PowerUp(Type.Special), new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -21614,10 +19698,7 @@ public record Memoria(
                 "援:Sp.マイトDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKとSp.DEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special),
-        new GuardDown(Type.Special)
-                },
+                [new PowerDown(Type.Special), new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -21639,9 +19720,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -21663,10 +19742,7 @@ public record Memoria(
                 "援:WガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFとSp.DEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal),
-        new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -21688,9 +19764,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -21712,9 +19786,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -21736,9 +19808,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -21760,9 +19830,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -21784,10 +19852,7 @@ public record Memoria(
                 "攻:ダメージUP/Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp(),
-        new PowerUp(Type.Special)
-                },
+                [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -21809,10 +19874,7 @@ public record Memoria(
                 "回:回復UP/副援:支援UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new RecoveryUp(),
-        new SupportUp()
-                },
+                [new RecoveryUp(), new SupportUp()],
                 Level.Two
             )
         ),
@@ -21834,9 +19896,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -21858,9 +19918,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -21882,10 +19940,7 @@ public record Memoria(
                 "援:WガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFとSp.DEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal),
-        new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -21907,9 +19962,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -21931,9 +19984,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -21955,9 +20006,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -21979,9 +20028,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -22003,9 +20050,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -22027,9 +20072,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -22051,9 +20094,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -22075,9 +20116,7 @@ public record Memoria(
                 "回:ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -22099,9 +20138,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -22123,9 +20160,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -22147,9 +20182,7 @@ public record Memoria(
                 "援:パワーUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -22171,9 +20204,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -22195,9 +20226,7 @@ public record Memoria(
                 "援:ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -22219,10 +20248,7 @@ public record Memoria(
                 "攻:マイトUP Ⅰ",
                 "前衛から攻撃時、一定確率で自身のATKとDEFをアップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal),
-        new GuardUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal), new GuardUp(Type.Normal)],
                 Level.One
             )
         ),
@@ -22244,9 +20270,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -22268,9 +20292,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅲ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -22292,9 +20314,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -22316,9 +20336,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -22340,9 +20358,7 @@ public record Memoria(
                 "回:回復UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Two
             )
         ),
@@ -22364,9 +20380,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -22388,9 +20402,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -22412,9 +20424,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -22436,9 +20446,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -22460,9 +20468,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -22484,9 +20490,7 @@ public record Memoria(
                 "回:回復UP Ⅲ",
                 "HP回復時、一定確率でHPの回復量を特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Three
             )
         ),
@@ -22508,9 +20512,7 @@ public record Memoria(
                 "攻:パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -22532,9 +20534,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Three
             )
         ),
@@ -22556,10 +20556,7 @@ public record Memoria(
                 "回:WガードUP Ⅰ",
                 "HP回復時、一定確率で味方前衛1体のDEFとSp.DEFをアップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal),
-        new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.One
             )
         ),
@@ -22581,9 +20578,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -22605,9 +20600,7 @@ public record Memoria(
                 "攻:パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のATKを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -22629,9 +20622,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅲ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -22653,9 +20644,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -22677,9 +20666,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -22701,9 +20688,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -22725,10 +20710,7 @@ public record Memoria(
                 "攻:Sp.マイトUP Ⅰ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKとSp.DEFをアップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special),
-        new GuardUp(Type.Special)
-                },
+                [new PowerUp(Type.Special), new GuardUp(Type.Special)],
                 Level.One
             )
         ),
@@ -22750,9 +20732,7 @@ public record Memoria(
                 "攻:Sp.ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -22774,9 +20754,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -22798,9 +20776,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -22822,9 +20798,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -22846,9 +20820,7 @@ public record Memoria(
                 "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -22870,9 +20842,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -22894,9 +20864,7 @@ public record Memoria(
                 "援:ガードUP Ⅲ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -22918,9 +20886,7 @@ public record Memoria(
                 "攻:ガードUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のDEFを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Three
             )
         ),
@@ -22942,9 +20908,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅲ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Three
             )
         ),
@@ -22966,9 +20930,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -22990,9 +20952,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅲ",
                 "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -23014,9 +20974,7 @@ public record Memoria(
                 "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -23038,9 +20996,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -23062,9 +21018,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -23086,9 +21040,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -23110,9 +21062,7 @@ public record Memoria(
                 "援:支援UP Ⅲ",
                 "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Three
             )
         ),
@@ -23134,9 +21084,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -23158,9 +21106,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅲ",
                 "攻撃時、一定確率で攻撃ダメージを特大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Three
             )
         ),
@@ -23182,9 +21128,7 @@ public record Memoria(
                 "攻:パワーDOWN Ⅲ",
                 "攻撃時、一定確率で敵のATKを特大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Three
             )
         ),
@@ -23206,9 +21150,7 @@ public record Memoria(
                 "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -23230,9 +21172,7 @@ public record Memoria(
                 "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -23254,9 +21194,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -23278,9 +21216,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -23302,9 +21238,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -23326,9 +21260,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -23350,9 +21282,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -23374,9 +21304,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -23398,9 +21326,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -23422,9 +21348,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -23446,9 +21370,7 @@ public record Memoria(
                 "回:回復UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Two
             )
         ),
@@ -23470,9 +21392,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -23494,9 +21414,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Two
             )
         ),
@@ -23518,9 +21436,7 @@ public record Memoria(
                 "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Two
             )
         ),
@@ -23542,9 +21458,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -23566,9 +21480,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -23590,9 +21502,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -23614,9 +21524,7 @@ public record Memoria(
                 "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -23638,9 +21546,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -23662,9 +21568,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -23686,9 +21590,7 @@ public record Memoria(
                 "回:ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -23710,9 +21612,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -23734,9 +21634,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -23758,9 +21656,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -23782,9 +21678,7 @@ public record Memoria(
                 "回:回復UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Two
             )
         ),
@@ -23806,9 +21700,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -23830,9 +21722,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -23854,9 +21744,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -23878,9 +21766,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -23902,9 +21788,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Two
             )
         ),
@@ -23926,9 +21810,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -23950,9 +21832,7 @@ public record Memoria(
                 "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Two
             )
         ),
@@ -23974,9 +21854,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -23998,9 +21876,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -24022,9 +21898,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24046,9 +21920,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24070,9 +21942,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24094,9 +21964,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24118,9 +21986,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24142,9 +22008,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24166,9 +22030,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24190,9 +22052,7 @@ public record Memoria(
                 "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24214,9 +22074,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24238,9 +22096,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -24262,9 +22118,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24286,9 +22140,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24310,9 +22162,7 @@ public record Memoria(
                 "回:ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24334,9 +22184,7 @@ public record Memoria(
                 "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24358,9 +22206,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24382,9 +22228,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24406,9 +22250,7 @@ public record Memoria(
                 "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24430,9 +22272,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24454,9 +22294,7 @@ public record Memoria(
                 "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24478,9 +22316,7 @@ public record Memoria(
                 "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -24502,9 +22338,7 @@ public record Memoria(
                 "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24526,9 +22360,7 @@ public record Memoria(
                 "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24550,9 +22382,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24574,9 +22404,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24598,9 +22426,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24622,9 +22448,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24646,9 +22470,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24670,9 +22492,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -24694,9 +22514,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24718,9 +22536,7 @@ public record Memoria(
                 "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24742,9 +22558,7 @@ public record Memoria(
                 "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24766,9 +22580,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24790,9 +22602,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24814,9 +22624,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -24838,9 +22646,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -24862,9 +22668,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24886,9 +22690,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24910,9 +22712,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24934,9 +22734,7 @@ public record Memoria(
                 "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -24958,9 +22756,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -24982,9 +22778,7 @@ public record Memoria(
                 "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25006,9 +22800,7 @@ public record Memoria(
                 "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25030,9 +22822,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25054,9 +22844,7 @@ public record Memoria(
                 "回:ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25078,9 +22866,7 @@ public record Memoria(
                 "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25102,9 +22888,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -25126,9 +22910,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -25150,9 +22932,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -25174,10 +22954,7 @@ public record Memoria(
                 "攻:Sp.マイトUP Ⅰ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKとSp.DEFをアップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special),
-        new GuardUp(Type.Special)
-                },
+                [new PowerUp(Type.Special), new GuardUp(Type.Special)],
                 Level.One
             )
         ),
@@ -25199,9 +22976,7 @@ public record Memoria(
                 "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Two
             )
         ),
@@ -25223,9 +22998,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Two
             )
         ),
@@ -25247,9 +23020,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -25271,9 +23042,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25295,9 +23064,7 @@ public record Memoria(
                 "援:ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のDEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25319,9 +23086,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -25343,9 +23108,7 @@ public record Memoria(
                 "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25367,9 +23130,7 @@ public record Memoria(
                 "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25391,10 +23152,7 @@ public record Memoria(
                 "攻:マイトUP Ⅰ",
                 "前衛から攻撃時、一定確率で自身のATKとDEFをアップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal),
-        new GuardUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal), new GuardUp(Type.Normal)],
                 Level.One
             )
         ),
@@ -25416,9 +23174,7 @@ public record Memoria(
                 "回:回復UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Two
             )
         ),
@@ -25440,9 +23196,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -25464,9 +23218,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -25488,9 +23240,7 @@ public record Memoria(
                 "回:パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25512,9 +23262,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25536,9 +23284,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Two
             )
         ),
@@ -25560,9 +23306,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -25584,9 +23328,7 @@ public record Memoria(
                 "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -25608,9 +23350,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -25632,9 +23372,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -25656,9 +23394,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25680,9 +23416,7 @@ public record Memoria(
                 "援:Sp.ガードUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -25704,9 +23438,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -25728,9 +23460,7 @@ public record Memoria(
                 "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Two
             )
         ),
@@ -25752,9 +23482,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25776,9 +23504,7 @@ public record Memoria(
                 "援:Sp.ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.DEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -25800,9 +23526,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25824,9 +23548,7 @@ public record Memoria(
                 "回:回復UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Two
             )
         ),
@@ -25848,9 +23570,7 @@ public record Memoria(
                 "攻:Sp.ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -25872,9 +23592,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -25896,9 +23614,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25920,9 +23636,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25944,9 +23658,7 @@ public record Memoria(
                 "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Two
             )
         ),
@@ -25968,9 +23680,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -25992,9 +23702,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26016,9 +23724,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26040,9 +23746,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -26064,9 +23768,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -26088,9 +23790,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -26112,9 +23812,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -26136,9 +23834,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26160,9 +23856,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -26184,9 +23878,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26208,9 +23900,7 @@ public record Memoria(
                 "攻:Sp.パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.ATKを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -26232,9 +23922,7 @@ public record Memoria(
                 "援:Sp.パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のSp.ATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Special)
-                },
+                [new PowerDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -26256,9 +23944,7 @@ public record Memoria(
                 "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -26280,9 +23966,7 @@ public record Memoria(
                 "攻:Sp.ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -26304,9 +23988,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -26328,9 +24010,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26352,9 +24032,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26376,9 +24054,7 @@ public record Memoria(
                 "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Two
             )
         ),
@@ -26400,9 +24076,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26424,9 +24098,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Two
             )
         ),
@@ -26448,9 +24120,7 @@ public record Memoria(
                 "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26472,9 +24142,7 @@ public record Memoria(
                 "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Two
             )
         ),
@@ -26496,9 +24164,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -26520,9 +24186,7 @@ public record Memoria(
                 "コ:MP消費DOWN Ⅱ",
                 "コマンド実行時、一定確率でMP消費を抑える。",
                 Trigger.Command,
-                new SupportEffect[] {
-                    new MpCostDown()
-                },
+                [new MpCostDown()],
                 Level.Two
             )
         ),
@@ -26544,9 +24208,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -26568,9 +24230,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26592,9 +24252,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26616,9 +24274,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26640,9 +24296,7 @@ public record Memoria(
                 "攻:パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26664,9 +24318,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26688,9 +24340,7 @@ public record Memoria(
                 "攻:ダメージUP Ⅱ",
                 "攻撃時、一定確率で攻撃ダメージを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new DamageUp()
-                },
+                [new DamageUp()],
                 Level.Two
             )
         ),
@@ -26712,9 +24362,7 @@ public record Memoria(
                 "援:支援UP Ⅱ",
                 "支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.Two
             )
         ),
@@ -26736,9 +24384,7 @@ public record Memoria(
                 "回:回復UP Ⅱ",
                 "HP回復時、一定確率でHPの回復量を大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new RecoveryUp()
-                },
+                [new RecoveryUp()],
                 Level.Two
             )
         ),
@@ -26760,9 +24406,7 @@ public record Memoria(
                 "援:パワーDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のATKを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26784,9 +24428,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26808,9 +24450,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26832,9 +24472,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26856,9 +24494,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -26880,9 +24516,7 @@ public record Memoria(
                 "攻:パワーDOWN Ⅱ",
                 "攻撃時、一定確率で敵のATKを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerDown(Type.Normal)
-                },
+                [new PowerDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26904,9 +24538,7 @@ public record Memoria(
                 "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -26928,9 +24560,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26952,9 +24582,7 @@ public record Memoria(
                 "援:パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Normal)
-                },
+                [new PowerUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -26976,9 +24604,7 @@ public record Memoria(
                 "攻:Sp.ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のSp.DEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Special)
-                },
+                [new GuardDown(Type.Special)],
                 Level.Two
             )
         ),
@@ -27000,9 +24626,7 @@ public record Memoria(
                 "攻:Sp.ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.DEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -27024,9 +24648,7 @@ public record Memoria(
                 "援:ガードDOWN Ⅱ",
                 "支援/妨害時、一定確率で敵前衛1体のDEFを大ダウンさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -27048,9 +24670,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -27072,9 +24692,7 @@ public record Memoria(
                 "回:Sp.パワーUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -27096,9 +24714,7 @@ public record Memoria(
                 "攻:ガードUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のDEFを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardUp(Type.Normal)
-                },
+                [new GuardUp(Type.Normal)],
                 Level.Two
             )
         ),
@@ -27120,9 +24736,7 @@ public record Memoria(
                 "回:Sp.ガードUP Ⅱ",
                 "HP回復時、一定確率で味方前衛1体のSp.DEFを大アップさせる。",
                 Trigger.Recovery,
-                new SupportEffect[] {
-                    new GuardUp(Type.Special)
-                },
+                [new GuardUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -27144,9 +24758,7 @@ public record Memoria(
                 "援:支援UP Ⅰ",
                 "支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new SupportUp()
-                },
+                [new SupportUp()],
                 Level.One
             )
         ),
@@ -27168,9 +24780,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
@@ -27192,9 +24802,7 @@ public record Memoria(
                 "援:Sp.パワーUP Ⅱ",
                 "支援/妨害時、一定確率で味方前衛1体のSp.ATKを大アップさせる。",
                 Trigger.Support,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -27216,9 +24824,7 @@ public record Memoria(
                 "攻:Sp.パワーUP Ⅱ",
                 "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new PowerUp(Type.Special)
-                },
+                [new PowerUp(Type.Special)],
                 Level.Two
             )
         ),
@@ -27240,9 +24846,7 @@ public record Memoria(
                 "攻:ガードDOWN Ⅱ",
                 "攻撃時、一定確率で敵のDEFを大ダウンさせる。",
                 Trigger.Attack,
-                new SupportEffect[] {
-                    new GuardDown(Type.Normal)
-                },
+                [new GuardDown(Type.Normal)],
                 Level.Two
             )
         ),
