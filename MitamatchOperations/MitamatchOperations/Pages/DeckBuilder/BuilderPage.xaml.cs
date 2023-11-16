@@ -97,10 +97,24 @@ namespace mitama.Pages.DeckBuilder
                     Deck.ItemsSource = _deckView;
                     MemoriaSources.ItemsSource = Sources;
                     FilterContent.Children.Clear();
-                    FilterContent.Children.Add(new CheckBox { Name = "NSingle", Content = "’Êí’P‘Ì" });
-                    FilterContent.Children.Add(new CheckBox { Name = "NRange", Content = "’Êí”ÍˆÍ" });
-                    FilterContent.Children.Add(new CheckBox { Name = "SpRange", Content = "“ÁŽê’P‘Ì" });
-                    FilterContent.Children.Add(new CheckBox { Name = "SpRange", Content = "“ÁŽê”ÍˆÍ" });
+                    
+                    var c1 = new CheckBox { Content = "’Êí’P‘Ì", IsChecked = true };
+                    c1.Checked += Option_Checked;
+                    c1.Unchecked += Option_Unchecked;
+                    FilterContent.Children.Add(c1);
+                    var c2 = new CheckBox { Content = "’Êí”ÍˆÍ", IsChecked = true };
+                    c2.Checked += Option_Checked;
+                    c2.Unchecked += Option_Unchecked;
+                    FilterContent.Children.Add(c2);
+                    var c3 = new CheckBox { Content = "“ÁŽê’P‘Ì", IsChecked = true };
+                    c3.Checked += Option_Checked;
+                    c3.Unchecked += Option_Unchecked;
+                    FilterContent.Children.Add(c3);
+                    var c4 = new CheckBox { Content = "“ÁŽê”ÍˆÍ", IsChecked = true };
+                    c4.Checked += Option_Checked;
+                    c4.Unchecked += Option_Unchecked;
+                    FilterContent.Children.Add(c4);
+
                     _currentFilters = [
                         FilterType.NormalSingle,
                         FilterType.NormalRange,
@@ -114,9 +128,20 @@ namespace mitama.Pages.DeckBuilder
                     _deckView = new ListCollectionView(_deck);
                     Sources = new(Memoria.List.Where(memoria => Costume.List[1].CanBeEquipped(memoria)));
                     FilterContent.Children.Clear();
-                    FilterContent.Children.Add(new CheckBox { Name = "Buff", Content = "Žx‰‡" });
-                    FilterContent.Children.Add(new CheckBox { Name = "Debuff", Content = "–WŠQ" });
-                    FilterContent.Children.Add(new CheckBox { Name = "Heal", Content = "‰ñ•œ" });
+
+                    var c1 = new CheckBox { Content = "Žx‰‡", IsChecked = true };
+                    c1.Checked += Option_Checked;
+                    c1.Unchecked += Option_Unchecked;
+                    FilterContent.Children.Add(c1);
+                    var c2 = new CheckBox { Content = "–WŠQ", IsChecked = true };
+                    c2.Checked += Option_Checked;
+                    c2.Unchecked += Option_Unchecked;
+                    FilterContent.Children.Add(c2);
+                    var c3 = new CheckBox { Content = "‰ñ•œ", IsChecked = true };
+                    c3.Checked += Option_Checked;
+                    c3.Unchecked += Option_Unchecked;
+                    FilterContent.Children.Add(c3);
+
                     _currentFilters = [
                         FilterType.Support,
                         FilterType.Interference,
@@ -229,7 +254,7 @@ namespace mitama.Pages.DeckBuilder
                         throw new UnreachableException("Unreachable");
                     }
             }
-            Sources.Remove(Memoria.List.Where(memoria => _currentFilters.All(filter => Filters[filter](memoria))));
+            Sources.Remove(Sources.ToList().Where(memoria => !_currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria))));
         }
 
         private void InitAdvancedOptions()
@@ -676,6 +701,7 @@ namespace mitama.Pages.DeckBuilder
                         throw new UnreachableException("Unreachable");
                     }
             }
+            if (prevCoount == _currentFilters.Count) return;
             Sources.Add(
                 Memoria
                     .List
@@ -688,6 +714,7 @@ namespace mitama.Pages.DeckBuilder
         private void AdvancedOption_Unchecked(object sender, RoutedEventArgs e)
         {
             if (sender is not CheckBox box) return;
+            var prevCoount = _currentFilters.Count;
 
             switch (box.Content)
             {
@@ -695,6 +722,7 @@ namespace mitama.Pages.DeckBuilder
                     {
                         foreach (var node in TreeNodes[0].Children)
                         {
+                            if (!node.IsChecked) return;
                             node.IsChecked = false;
                         }
                         Sources.Clear();
@@ -703,37 +731,33 @@ namespace mitama.Pages.DeckBuilder
                 case "‰Î":
                     {
                         _currentFilters.Remove(FilterType.Fire);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Fire]));
                         break;
                     }
                 case "…":
                     {
                         _currentFilters.Remove(FilterType.Water);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Water]));
                         break;
                     }
                 case "•—":
                     {
                         _currentFilters.Remove(FilterType.Wind);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Wind]));
                         break;
                     }
                 case "Œõ":
                     {
                         _currentFilters.Remove(FilterType.Light);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Light]));
                         break;
                     }
                 case "ˆÅ":
                     {
                         _currentFilters.Remove(FilterType.Dark);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Dark]));
                         break;
                     }
                 case "”ÍˆÍ":
                     {
                         foreach (var node in TreeNodes[1].Children)
                         {
+                            if (!node.IsChecked) return;
                             node.IsChecked = false;
                         }
                         Sources.Clear();
@@ -742,37 +766,33 @@ namespace mitama.Pages.DeckBuilder
                 case "A":
                     {
                         _currentFilters.Remove(FilterType.A);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.A]));
                         break;
                     }
                 case "B":
                     {
                         _currentFilters.Remove(FilterType.B);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.B]));
                         break;
                     }
                 case "C":
                     {
                         _currentFilters.Remove(FilterType.C);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.C]));
                         break;
                     }
                 case "D":
                     {
                         _currentFilters.Remove(FilterType.D);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.D]));
                         break;
                     }
                 case "E":
                     {
                         _currentFilters.Remove(FilterType.E);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.E]));
                         break;
                     }
                 case "Œø‰Ê—Ê":
                     {
                         foreach (var node in TreeNodes[2].Children)
                         {
+                            if (!node.IsChecked) return;
                             node.IsChecked = false;
                         }
                         Sources.Clear();
@@ -781,67 +801,58 @@ namespace mitama.Pages.DeckBuilder
                 case "‡T":
                     {
                         _currentFilters.Remove(FilterType.One);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.One]));
                         break;
                     }
                 case "‡U":
                     {
                         _currentFilters.Remove(FilterType.Two);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Two]));
                         break;
                     }
                 case "‡V":
                     {
                         _currentFilters.Remove(FilterType.Three);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Three]));
                         break;
                     }
                 case "‡V+":
                     {
                         _currentFilters.Remove(FilterType.ThreePlus);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.ThreePlus]));
                         break;
                     }
                 case "‡W":
                     {
                         _currentFilters.Remove(FilterType.Four);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Four]));
                         break;
                     }
                 case "‡W+":
                     {
                         _currentFilters.Remove(FilterType.FourPlus);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.FourPlus]));
                         break;
                     }
                 case "‡X":
                     {
                         _currentFilters.Remove(FilterType.Five);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Five]));
                         break;
                     }
                 case "‡X+":
                     {
                         _currentFilters.Remove(FilterType.FivePlus);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.FivePlus]));
                         break;
                     }
                 case "LG":
                     {
                         _currentFilters.Remove(FilterType.Lg);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Lg]));
                         break;
                     }
                 case "LG+":
                     {
                         _currentFilters.Remove(FilterType.LgPlus);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.LgPlus]));
                         break;
                     }
                 case "ƒXƒLƒ‹Œø‰Ê":
                     {
                         foreach (var node in TreeNodes[3].Children)
                         {
+                            if (!node.IsChecked) return;
                             node.IsChecked = false;
                         }
                         Sources.Clear();
@@ -850,175 +861,146 @@ namespace mitama.Pages.DeckBuilder
                 case "A up":
                     {
                         _currentFilters.Remove(FilterType.Au);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Au]));
                         break;
                     }
                 case "A down":
                     {
                         _currentFilters.Remove(FilterType.Ad);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Ad]));
                         break;
                     }
                 case "SA up":
                     {
                         _currentFilters.Remove(FilterType.SAu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.SAu]));
                         break;
                     }
                 case "SA down":
                     {
                         _currentFilters.Remove(FilterType.SAd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.SAd]));
                         break;
                     }
                 case "D up":
                     {
                         _currentFilters.Remove(FilterType.Du);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Du]));
                         break;
                     }
                 case "D down":
                     {
                         _currentFilters.Remove(FilterType.Dd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.Dd]));
                         break;
                     }
                 case "SD up":
                     {
                         _currentFilters.Remove(FilterType.SDu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.SDu]));
                         break;
                     }
                 case "SD down":
                     {
                         _currentFilters.Remove(FilterType.SDd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.SDd]));
                         break;
                     }
                 case "Fire Power up":
                     {
                         _currentFilters.Remove(FilterType.FPu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.FPu]));
                         break;
                     }
                 case "Fire Power down":
                     {
                         _currentFilters.Remove(FilterType.FPd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.FPd]));
                         break;
                     }
                 case "Water Power up":
                     {
                         _currentFilters.Remove(FilterType.WaPu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.WaPu]));
                         break;
                     }
                 case "Water Power down":
                     {
                         _currentFilters.Remove(FilterType.WaPd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.WaPd]));
                         break;
                     }
                 case "Wind Power up":
                     {
                         _currentFilters.Remove(FilterType.WiPu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.WiPu]));
                         break;
                     }
                 case "Wind Power down":
                     {
                         _currentFilters.Remove(FilterType.WiPd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.WiPd]));
                         break;
                     }
                 case "Light Power up":
                     {
                         _currentFilters.Remove(FilterType.LPu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.LPu]));
                         break;
                     }
                 case "Light Power down":
                     {
                         _currentFilters.Remove(FilterType.LPd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.LPd]));
                         break;
                     }
                 case "Dark Power up":
                     {
                         _currentFilters.Remove(FilterType.DPu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.DPu]));
                         break;
                     }
                 case "Dark Power down":
                     {
                         _currentFilters.Remove(FilterType.DPd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.DPd]));
                         break;
                     }
                 case "Fire Guard up":
                     {
                         _currentFilters.Remove(FilterType.FGu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.FGu]));
                         break;
                     }
                 case "Fire Guard down":
                     {
                         _currentFilters.Remove(FilterType.FGd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.FGd]));
                         break;
                     }
                 case "Water Guard up":
                     {
                         _currentFilters.Remove(FilterType.WaGu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.WaGu]));
                         break;
                     }
                 case "Water Guard down":
                     {
                         _currentFilters.Remove(FilterType.WaGd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.WaGd]));
                         break;
                     }
                 case "Wind Guard up":
                     {
                         _currentFilters.Remove(FilterType.WiGu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.WiGu]));
                         break;
                     }
                 case "Wind Guard down":
                     {
                         _currentFilters.Remove(FilterType.WiGd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.WiGd]));
                         break;
                     }
                 case "Light Guard up":
                     {
                         _currentFilters.Remove(FilterType.LGu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.LGu]));
                         break;
                     }
                 case "Light Guard down":
                     {
                         _currentFilters.Remove(FilterType.LGd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.LGd]));
                         break;
                     }
                 case "Dark Guard up":
                     {
                         _currentFilters.Remove(FilterType.DGu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.DGu]));
                         break;
                     }
                 case "Dark Guard down":
                     {
                         _currentFilters.Remove(FilterType.DGd);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.DGd]));
                         break;
                     }
                 case "HP up":
                     {
                         _currentFilters.Remove(FilterType.HPu);
-                        Sources.Remove(Memoria.List.Where(Filters[FilterType.HPu]));
                         break;
                     }
                 default:
@@ -1026,6 +1008,8 @@ namespace mitama.Pages.DeckBuilder
                         throw new UnreachableException("Unreachable");
                     }
             }
+            if (prevCoount == _currentFilters.Count) return;
+            Sources.Remove(Sources.ToList().Where(memoria => !ApplyFilter(memoria, Filters, _currentFilters, false)));
         }
         private void InitFilters()
         {
@@ -1276,18 +1260,22 @@ namespace mitama.Pages.DeckBuilder
             );
         }
 
-        bool ApplyFilter(Memoria memoria, Dictionary<FilterType, Func<Memoria, bool>> filters, HashSet<FilterType> predicates)
+        bool ApplyFilter(Memoria memoria, Dictionary<FilterType, Func<Memoria, bool>> filters, HashSet<FilterType> predicates, bool flip=true)
         {
             var p1 = predicates.Where(IsElementFilter).ToList();
-            var c1 = p1.Count == 0 || p1.Any(key => filters[key](memoria));
+            var c1 = p1.Any(key => filters[key](memoria));
             var p2 = predicates.Where(IsRangeFilter).ToList();
-            var c2 = p2.Count == 0 || p2.Any(key => filters[key](memoria));
+            var c2 = p2.Any(key => filters[key](memoria));
             var p3 = predicates.Where(IsLevelFilter).ToList();
-            var c3 = p3.Count == 0 || p3.Any(key => filters[key](memoria));
+            var c3 = p3.Any(key => filters[key](memoria));
             var p4 = predicates.Where(IsEffectFilter).ToList();
-            var c4 = p4.Count == 0 || p4.Any(key => filters[key](memoria));
-
-            return c1 && c2 && c3 && c4;
+            var c4 = p4.Any(key => filters[key](memoria));
+            if (flip) { 
+                return (p1.Count == 0 || c1) && (p2.Count == 0 || c2) && (p3.Count == 0 || c3) && (p4.Count == 0 || c4);
+            } else
+            {
+                return (p1.Count != 0 && !c1) || (p2.Count != 0 && !c2) || (p3.Count != 0 && !c3) || (p4.Count != 0 && !c4);
+            }
         }
 
         bool IsKindFilter(FilterType filter)
