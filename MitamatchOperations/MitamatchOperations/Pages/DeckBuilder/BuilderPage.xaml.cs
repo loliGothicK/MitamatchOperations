@@ -10,7 +10,6 @@ using DynamicData;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using mitama.Domain;
-using NumSharp.Utilities;
 using Windows.ApplicationModel.DataTransfer;
 using WinRT;
 
@@ -32,7 +31,7 @@ namespace mitama.Pages.DeckBuilder
         private ListCollectionView _sourceView { get; set; }
         private ObservableCollection<Memoria> Sources { get; set; } = new(Memoria.List.Where(m => Costume.List[1].CanBeEquipped(m)));
         private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = new();
-        private Hashset<FilterType> _currentFilters = [];
+        private HashSet<FilterType> _currentFilters = [];
 
         // Filter
         private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = new();
@@ -175,7 +174,13 @@ namespace mitama.Pages.DeckBuilder
                         throw new UnreachableException("Unreachable");
                     }
             }
-            Sources.Add(Memoria.List.Where(memoria => !Sources.Contains(memoria) && _currentFilters.All(filter => Filters[filter](memoria))));
+            Sources.Add(
+                Memoria
+                    .List
+                    .Where(memoria => _currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria)))
+                    .Where(memoria => !Sources.Contains(memoria))
+                    .Where(memoria => ApplyFilter(memoria, Filters, _currentFilters))
+            );
         }
 
         private void Option_Unchecked(object sender, RoutedEventArgs e)
@@ -325,7 +330,7 @@ namespace mitama.Pages.DeckBuilder
         private void AdvancedOption_Checked(object sender, RoutedEventArgs e)
         {
             if (sender is not CheckBox box) return;
-
+            var prevCoount = _currentFilters.Count;
             switch (box.Content)
             {
                 case "‘®«":
@@ -416,7 +421,7 @@ namespace mitama.Pages.DeckBuilder
                         {
                             node.IsChecked = true;
                         }
-                        FilterType[] remove =[
+                        FilterType[] remove = [
                             FilterType.One,
                             FilterType.Two,
                             FilterType.Three,
@@ -671,7 +676,13 @@ namespace mitama.Pages.DeckBuilder
                         throw new UnreachableException("Unreachable");
                     }
             }
-            Sources.Add(Memoria.List.Where(memoria => !Sources.Contains(memoria) && _currentFilters.All(filter => Filters[filter](memoria))));
+            Sources.Add(
+                Memoria
+                    .List
+                    .Where(memoria => _currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria)))
+                    .Where(memoria => !Sources.Contains(memoria))
+                    .Where(memoria => ApplyFilter(memoria, Filters, _currentFilters))
+            );
         }
 
         private void AdvancedOption_Unchecked(object sender, RoutedEventArgs e)
@@ -1018,8 +1029,6 @@ namespace mitama.Pages.DeckBuilder
         }
         private void InitFilters()
         {
-            Filters.Add(FilterType.Sentinel, _ => false);
-
             Filters.Add(FilterType.NormalSingle, memoria => memoria.Kind is Vanguard(VanguardKind.NormalSingle));
             Filters.Add(FilterType.NormalRange, memoria => memoria.Kind is Vanguard(VanguardKind.NormalRange));
             Filters.Add(FilterType.SpecialSingle, memoria => memoria.Kind is Vanguard(VanguardKind.SpecialSingle));
@@ -1093,9 +1102,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusUp
-                        && stat.As<StatusUp>().Stat is ElementAttack
-                        && stat.As<StatusUp>().Stat.As<ElementAttack>().Element is Element.Fire
+                        stat is StatusUp(ElementAttack(Element.Fire), _)
                     )
             );
             Filters.Add(
@@ -1104,9 +1111,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusDown
-                        && stat.As<StatusDown>().Stat is ElementAttack
-                        && stat.As<StatusDown>().Stat.As<ElementAttack>().Element is Element.Fire
+                        stat is StatusDown(ElementAttack(Element.Fire), _)
                     )
             );
             Filters.Add(
@@ -1115,9 +1120,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusUp
-                        && stat.As<StatusUp>().Stat is ElementAttack
-                        && stat.As<StatusUp>().Stat.As<ElementAttack>().Element is Element.Water
+                        stat is StatusUp(ElementAttack(Element.Water), _)
                     )
             );
             Filters.Add(
@@ -1126,9 +1129,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusDown
-                        && stat.As<StatusDown>().Stat is ElementAttack
-                        && stat.As<StatusDown>().Stat.As<ElementAttack>().Element is Element.Water
+                        stat is StatusDown(ElementAttack(Element.Water), _)
                     )
             );
             Filters.Add(
@@ -1137,9 +1138,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusUp
-                        && stat.As<StatusUp>().Stat is ElementAttack
-                        && stat.As<StatusUp>().Stat.As<ElementAttack>().Element is Element.Wind
+                        stat is StatusUp(ElementAttack(Element.Wind), _)
                     )
             );
             Filters.Add(
@@ -1148,9 +1147,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusDown
-                        && stat.As<StatusDown>().Stat is ElementAttack
-                        && stat.As<StatusDown>().Stat.As<ElementAttack>().Element is Element.Wind
+                        stat is StatusDown(ElementAttack(Element.Wind), _)
                     )
             );
             Filters.Add(
@@ -1159,9 +1156,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusUp
-                        && stat.As<StatusUp>().Stat is ElementAttack
-                        && stat.As<StatusUp>().Stat.As<ElementAttack>().Element is Element.Light
+                        stat is StatusUp(ElementAttack(Element.Light), _)
                     )
             );
             Filters.Add(
@@ -1170,9 +1165,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusDown
-                        && stat.As<StatusDown>().Stat is ElementAttack
-                        && stat.As<StatusDown>().Stat.As<ElementAttack>().Element is Element.Light
+                        stat is StatusDown(ElementAttack(Element.Light), _)
                     )
             );
             Filters.Add(
@@ -1181,9 +1174,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusUp
-                        && stat.As<StatusUp>().Stat is ElementAttack
-                        && stat.As<StatusUp>().Stat.As<ElementAttack>().Element is Element.Dark
+                        stat is StatusUp(ElementAttack(Element.Dark), _)
                     )
             );
             Filters.Add(
@@ -1192,9 +1183,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusDown
-                        && stat.As<StatusDown>().Stat is ElementAttack
-                        && stat.As<StatusDown>().Stat.As<ElementAttack>().Element is Element.Dark
+                        stat is StatusDown(ElementAttack(Element.Dark), _)
                     )
             );
             Filters.Add(
@@ -1203,9 +1192,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusUp
-                        && stat.As<StatusUp>().Stat is ElementGuard
-                        && stat.As<StatusUp>().Stat.As<ElementGuard>().Element is Element.Fire
+                        stat is StatusUp(ElementGuard(Element.Fire), _)
                     )
             );
             Filters.Add(
@@ -1214,9 +1201,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusDown
-                        && stat.As<StatusDown>().Stat is ElementGuard
-                        && stat.As<StatusDown>().Stat.As<ElementGuard>().Element is Element.Fire
+                        stat is StatusDown(ElementGuard(Element.Fire), _)
                     )
             );
             Filters.Add(
@@ -1224,10 +1209,7 @@ namespace mitama.Pages.DeckBuilder
                 memoria => memoria
                     .Skill
                     .StatusChanges
-                    .Any(stat =>
-                        stat is StatusUp
-                        && stat.As<StatusUp>().Stat is ElementGuard(Element.Water)
-                    )
+                    .Any(stat => stat is StatusUp(ElementGuard(Element.Water), _))
             );
             Filters.Add(
                 FilterType.WaGd,
@@ -1235,8 +1217,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusDown
-                        && stat.As<StatusDown>().Stat is ElementGuard(Element.Water)
+                        stat is StatusDown(ElementGuard(Element.Water), _)
                     )
             );
             Filters.Add(
@@ -1245,9 +1226,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusUp
-                        && stat.As<StatusUp>().Stat is ElementGuard
-                        && stat.As<StatusUp>().Stat.As<ElementGuard>().Element is Element.Wind
+                        stat is StatusUp(ElementGuard(Element.Wind), _)
                     )
             );
             Filters.Add(
@@ -1256,9 +1235,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusDown
-                        && stat.As<StatusDown>().Stat is ElementGuard
-                        && stat.As<StatusDown>().Stat.As<ElementGuard>().Element is Element.Wind
+                        stat is StatusDown(ElementGuard(Element.Wind), _)
                     )
             );
             Filters.Add(
@@ -1267,9 +1244,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusUp
-                        && stat.As<StatusUp>().Stat is ElementGuard
-                        && stat.As<StatusUp>().Stat.As<ElementGuard>().Element is Element.Light
+                        stat is StatusUp(ElementGuard(Element.Light), _)
                     )
             );
             Filters.Add(
@@ -1278,9 +1253,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusDown
-                        && stat.As<StatusDown>().Stat is ElementGuard
-                        && stat.As<StatusDown>().Stat.As<ElementGuard>().Element is Element.Light
+                        stat is StatusDown(ElementGuard(Element.Light), _)
                     )
             );
             Filters.Add(
@@ -1289,9 +1262,7 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusUp
-                        && stat.As<StatusUp>().Stat is ElementGuard
-                        && stat.As<StatusUp>().Stat.As<ElementGuard>().Element is Element.Dark
+                        stat is StatusUp(ElementGuard(Element.Dark), _)
                     )
             );
             Filters.Add(
@@ -1300,17 +1271,120 @@ namespace mitama.Pages.DeckBuilder
                     .Skill
                     .StatusChanges
                     .Any(stat =>
-                        stat is StatusDown
-                        && stat.As<StatusDown>().Stat is ElementGuard
-                        && stat.As<StatusDown>().Stat.As<ElementGuard>().Element is Element.Dark
+                        stat is StatusDown(ElementGuard(Element.Dark), _)
                     )
             );
+        }
+
+        bool ApplyFilter(Memoria memoria, Dictionary<FilterType, Func<Memoria, bool>> filters, HashSet<FilterType> predicates)
+        {
+            var p1 = predicates.Where(IsElementFilter).ToList();
+            var c1 = p1.Count == 0 || p1.Any(key => filters[key](memoria));
+            var p2 = predicates.Where(IsRangeFilter).ToList();
+            var c2 = p2.Count == 0 || p2.Any(key => filters[key](memoria));
+            var p3 = predicates.Where(IsLevelFilter).ToList();
+            var c3 = p3.Count == 0 || p3.Any(key => filters[key](memoria));
+            var p4 = predicates.Where(IsEffectFilter).ToList();
+            var c4 = p4.Count == 0 || p4.Any(key => filters[key](memoria));
+
+            return c1 && c2 && c3 && c4;
+        }
+
+        bool IsKindFilter(FilterType filter)
+        {
+            FilterType[] kindFilters = [
+                FilterType.NormalSingle,
+                FilterType.NormalRange,
+                FilterType.SpecialSingle,
+                FilterType.SpecialRange,
+                FilterType.Support,
+                FilterType.Interference,
+                FilterType.Recovery,
+            ];
+
+            return kindFilters.Contains(filter);
+        }
+        bool IsElementFilter(FilterType filter)
+        {
+            FilterType[] elementFilters = [
+                FilterType.Fire,
+                FilterType.Water,
+                FilterType.Wind,
+                FilterType.Light,
+                FilterType.Dark,
+            ];
+
+            return elementFilters.Contains(filter);
+        }
+        bool IsRangeFilter(FilterType filter)
+        {
+            FilterType[] rangeFilters = [
+                FilterType.A,
+                FilterType.B,
+                FilterType.C,
+                FilterType.D,
+                FilterType.E,
+            ];
+
+            return rangeFilters.Contains(filter);
+        }
+        bool IsLevelFilter(FilterType filter)
+        {
+            FilterType[] LevelFilters = [
+                FilterType.One,
+                FilterType.Two,
+                FilterType.Three,
+                FilterType.ThreePlus,
+                FilterType.Four,
+                FilterType.FourPlus,
+                FilterType.Five,
+                FilterType.FivePlus,
+                FilterType.Lg,
+                FilterType.LgPlus,
+            ];
+
+            return LevelFilters.Contains(filter);
+        }
+        bool IsEffectFilter(FilterType filter)
+        {
+            FilterType[] effectFilters = [
+                FilterType.Au,
+                FilterType.Ad,
+                FilterType.SAu,
+                FilterType.SAd,
+                FilterType.Du,
+                FilterType.Dd,
+                FilterType.SDu,
+                FilterType.SDd,
+                FilterType.HPu,
+                FilterType.FPu,
+                FilterType.FPd,
+                FilterType.WaPu,
+                FilterType.WaPd,
+                FilterType.WiPu,
+                FilterType.WiPd,
+                FilterType.LPu,
+                FilterType.LPd,
+                FilterType.DPu,
+                FilterType.DPd,
+                FilterType.FGu,
+                FilterType.FGd,
+                FilterType.WaGu,
+                FilterType.WaGd,
+                FilterType.WiGu,
+                FilterType.WiGd,
+                FilterType.LGu,
+                FilterType.LGd,
+                FilterType.DGu,
+                FilterType.DGd,
+            ];
+
+            return effectFilters.Contains(filter);
         }
     }
 
     public enum FilterType
     {
-        Sentinel,
         // Kinds
         NormalSingle,
         NormalRange,
