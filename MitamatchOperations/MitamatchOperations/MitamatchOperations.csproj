@@ -51,6 +51,8 @@
     <None Remove="Pages\console\OrderManagePage.xaml" />
     <None Remove="Pages\ControlDashboardPage.xaml" />
     <None Remove="Pages\ControlDashboard\CounterView.xaml" />
+    <None Remove="Pages\DeckBuilderPage.xaml" />
+    <None Remove="Pages\DeckBuilder\BuilderPage.xaml" />
     <None Remove="Pages\Main\AddNewMemberDialogContent.xaml" />
     <None Remove="Pages\Main\ChangeProjectDialogContent.xaml" />
     <None Remove="Pages\OrderConsole\LoadDialogContent.xaml" />
@@ -194,6 +196,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Pages\DeckBuilderPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Pages\ControlDashboardPage\CounterView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -205,6 +212,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\RegionConsole\CounterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\DeckBuilder\BuilderPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

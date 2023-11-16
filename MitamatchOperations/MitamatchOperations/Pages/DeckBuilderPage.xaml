@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="mitama.Pages.DeckBuilderPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:mitama.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TabView SelectedIndex="0" Margin="10" IsAddTabButtonVisible="False" MinHeight="475">
+            <TabView.TabItems>
+                <TabViewItem Header="Deck Builder" IsClosable="False" Background="DarkGray">
+                    <TabViewItem.IconSource>
+                        <SymbolIconSource Symbol="Edit" />
+                    </TabViewItem.IconSource>
+                    <Frame x:Name="EditFrame" />
+                </TabViewItem>
+                <TabViewItem Header="Deck Builder" IsClosable="False">
+                    <TabViewItem.IconSource>
+                        <SymbolIconSource Symbol="Manage" />
+                    </TabViewItem.IconSource>
+                    <Frame x:Name="ManageFrame" />
+                </TabViewItem>
+            </TabView.TabItems>
+        </TabView>
+    </Grid>
+</Page>

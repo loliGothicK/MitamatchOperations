@@ -81,6 +81,7 @@
                         <NavigationViewItem x:Name="RegionView" Icon="People" Content ="レギオン コンソール" Tag="region console"/>
                         <NavigationViewItem Icon="XboxOneConsole" Content ="オーダー コンソール" Tag="order console"/>
                         <NavigationViewItem Icon="Remote" Content ="コントロール ダッシュボード" Tag="control dashboard"/>
+                        <NavigationViewItem Icon="Upload" Content ="デッキ ビルダー" Tag="deck builder"/>
                     </NavigationView.MenuItems>
                     <Frame x:Name="RootFrame" Navigated="OnRootFrameNavigated" Navigating="OnRootFrameNavigating"/>
                 </NavigationView>

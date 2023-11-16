@@ -100,6 +100,7 @@ public sealed partial class MainPage
             {"region console",typeof(RegionConsolePage)},
             {"order console", typeof(OrderConsolePage)},
             {"control dashboard", typeof(ControlDashboardPage)},
+            {"deck builder", typeof(DeckBuilderPage)},
         };
 
         var pageType = mapping[(string)item.Tag];
