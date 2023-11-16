@@ -25,13 +25,12 @@ namespace mitama.Pages.DeckBuilder
     public sealed partial class BuilderPage : Page
     {
         // Temporarily store the selected Memoria
-        private Memoria[] selectedMemorias = [];
+        private List<Memoria> selectedMemorias = [];
 
-        private ObservableCollection<Memoria> _deck { get; set; } = new();
-        private ListCollectionView _deckView { get; set; }
-        private ListCollectionView _sourceView { get; set; }
+        private ObservableCollection<Memoria> Deck { get; set; } = [];
+        private ObservableCollection<Memoria> LegendaryDeck { get; set; } = [];
         private ObservableCollection<Memoria> Sources { get; set; } = new(Memoria.List.Where(m => Costume.List[1].CanBeEquipped(m)));
-        private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = new();
+        private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = [];
         private HashSet<FilterType> _currentFilters = [];
 
         // Filter
@@ -41,14 +40,12 @@ namespace mitama.Pages.DeckBuilder
         {
             InitFilters();
             InitializeComponent();
-            _deckView = new ListCollectionView(_deck);
-            _sourceView = new ListCollectionView(Sources);
             InitAdvancedOptions();
         }
 
-        private void MemeriaSources_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
+        private void Memeria_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
         {
-            selectedMemorias = e.Items.Select(v => (Memoria)v).ToArray();
+            selectedMemorias = e.Items.Select(v => (Memoria)v).ToList();
             e.Data.RequestedOperation = DataPackageOperation.Move;
         }
 
@@ -61,28 +58,24 @@ namespace mitama.Pages.DeckBuilder
             e.AcceptedOperation = DataPackageOperation.Move;
         }
 
-        private void Deck_DropCompleted(UIElement sender, DropCompletedEventArgs args)
+        private void MyDropCompleted(UIElement sender, DropCompletedEventArgs args)
         {
-
+            selectedMemorias.Clear();
         }
 
         private void Deck_Drop(object sender, DragEventArgs e)
         {
-            _deck.Add(selectedMemorias);
+            Deck.Add(selectedMemorias.Where(m => !m.IsLegendary));
+            LegendaryDeck.Add(selectedMemorias.Where(m => m.IsLegendary));
             Sources.Remove(selectedMemorias);
-            _deckView = new ListCollectionView(Sources);
-            MemoriaSources.ItemsSource = _deckView;
-        }
 
+        }
 
         private void MemeriaSources_Drop(object sender, DragEventArgs e)
         {
             Sources.Add(selectedMemorias);
-            _deck.Remove(selectedMemorias);
-            _deckView = new ListCollectionView(Sources);
-            _deckView.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Descending));
-
-            MemoriaSources.ItemsSource = _deckView;
+            Deck.Remove(selectedMemorias);
+            LegendaryDeck.Remove(selectedMemorias);
         }
 
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
@@ -91,11 +84,9 @@ namespace mitama.Pages.DeckBuilder
             {
                 if (toggleSwitch.IsOn == true)
                 {
-                    _deck.Clear();
-                    _deckView = new ListCollectionView(_deck);
+                    Deck.Clear();
                     Sources = new(Memoria.List.Where(memoria => Costume.List[0].CanBeEquipped(memoria)));
 
-                    Deck.ItemsSource = _deckView;
                     MemoriaSources.ItemsSource = Sources;
                     FilterContent.Children.Clear();
                     
@@ -125,8 +116,7 @@ namespace mitama.Pages.DeckBuilder
                 }
                 else
                 {
-                    _deck.Clear();
-                    _deckView = new ListCollectionView(_deck);
+                    Deck.Clear();
                     Sources = new(Memoria.List.Where(memoria => Costume.List[1].CanBeEquipped(memoria)));
                     FilterContent.Children.Clear();
 
@@ -148,7 +138,6 @@ namespace mitama.Pages.DeckBuilder
                         FilterType.Interference,
                         FilterType.Recovery
                     ];
-                    Deck.ItemsSource = _deckView;
                     MemoriaSources.ItemsSource = Sources;
                 }
             }

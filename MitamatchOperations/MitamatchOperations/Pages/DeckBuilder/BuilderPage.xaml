@@ -89,26 +89,47 @@
                   VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid x:Name="DeckGrid" Grid.Row="1" CornerRadius="10" VerticalAlignment="Stretch">
+                <!--[TODO: menu]-->
+                <Grid x:Name="LegendaryDeckGrid" Grid.Row="1" CornerRadius="10" VerticalAlignment="Stretch" Margin="2">
                     <GridView
-                        x:Name="Deck"
+                        x:Name="LegendaryDeckGridView"
+                        MinHeight="100"
+                        MinWidth="520"
+                        MaxWidth="520"
+                        Background="Gray"
+                        BorderBrush="{StaticResource SystemControlForegroundBaseMediumLowBrush}"
+                        ItemTemplate="{StaticResource MemoriaTemplate}"
+                        ItemsSource="{x:Bind LegendaryDeck}"
+                        CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="Single"
+                        DragItemsStarting="Memeria_DragItemsStarting"
+                        DragOver="Deck_DragOver"
+                        Drop="Deck_Drop"
+                        DropCompleted="MyDropCompleted"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Left"/>
+                </Grid>
+                <Grid x:Name="DeckGrid" Grid.Row="2" CornerRadius="10" VerticalAlignment="Stretch">
+                    <GridView
+                        x:Name="DeckGridView"
                         MinHeight="520"
                         MinWidth="520"
                         MaxWidth="520"
                         Background="Gray"
                         BorderBrush="{StaticResource SystemControlForegroundBaseMediumLowBrush}"
                         ItemTemplate="{StaticResource MemoriaTemplate}"
-                        ItemsSource="{x:Bind _deck}"
+                        ItemsSource="{x:Bind Deck}"
                         CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="Single"
+                        DragItemsStarting="Memeria_DragItemsStarting"
                         DragOver="Deck_DragOver"
                         Drop="Deck_Drop"
-                        DropCompleted="Deck_DropCompleted"
+                        DropCompleted="MyDropCompleted"
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Left"/>
                 </Grid>
@@ -192,9 +213,10 @@
                     CanReorderItems="True"
                     AllowDrop="True"
                     SelectionMode="Multiple"
-                    DragItemsStarting="MemeriaSources_DragItemsStarting"
+                    DragItemsStarting="Memeria_DragItemsStarting"
                     DragOver="MemeriaSources_DragOver"
                     Drop="MemeriaSources_Drop"
+                    DropCompleted="MyDropCompleted"
                     BorderThickness="1"
                     BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"/>
             </Grid>
