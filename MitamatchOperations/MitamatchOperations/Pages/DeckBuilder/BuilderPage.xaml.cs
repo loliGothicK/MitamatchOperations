@@ -5,18 +5,14 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Runtime.Intrinsics.Arm;
 using System.Windows.Data;
 using DynamicData;
-using MathNet.Numerics.LinearAlgebra.Factorization;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using mitama.Domain;
 using NumSharp.Utilities;
-using Tensorflow.Keras.Optimizers;
 using Windows.ApplicationModel.DataTransfer;
 using WinRT;
-using static Google.Protobuf.WellKnownTypes.Field.Types;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -36,7 +32,7 @@ namespace mitama.Pages.DeckBuilder
         private ListCollectionView _sourceView { get; set; }
         private ObservableCollection<Memoria> Sources { get; set; } = new(Memoria.List.Where(m => Costume.List[1].CanBeEquipped(m)));
         private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = new();
-        private List<FilterType> _currentFilters = [];
+        private Hashset<FilterType> _currentFilters = [];
 
         // Filter
         private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = new();
@@ -190,37 +186,37 @@ namespace mitama.Pages.DeckBuilder
             {
                 case "’Êí’P‘Ì":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.NormalSingle).ToList();
+                        _currentFilters.Remove(FilterType.NormalSingle);
                         break;
                     }
                 case "’Êí”ÍˆÍ":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.NormalRange).ToList();
+                        _currentFilters.Remove(FilterType.NormalRange);
                         break;
                     }
                 case "“ÁŽê’P‘Ì":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.SpecialSingle).ToList();
+                        _currentFilters.Remove(FilterType.SpecialSingle);
                         break;
                     }
                 case "“ÁŽê”ÍˆÍ":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.SpecialRange).ToList();
+                        _currentFilters.Remove(FilterType.SpecialRange);
                         break;
                     }
                 case "Žx‰‡":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Support).ToList();
+                        _currentFilters.Remove(FilterType.Support);
                         break;
                     }
                 case "–WŠQ":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Interference).ToList();
+                        _currentFilters.Remove(FilterType.Interference);
                         break;
                     }
                 case "‰ñ•œ":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Recovery).ToList();
+                        _currentFilters.Remove(FilterType.Recovery);
                         break;
                     }
                 default:
@@ -345,7 +341,7 @@ namespace mitama.Pages.DeckBuilder
                             FilterType.Light,
                             FilterType.Dark,
                         ];
-                        _currentFilters = _currentFilters.Where(filter => !remove.Contains(filter)).ToList();
+                        _currentFilters.RemoveWhere(filter => remove.Contains(filter));
                         break;
                     }
                 case "‰Î":
@@ -386,7 +382,7 @@ namespace mitama.Pages.DeckBuilder
                             FilterType.D,
                             FilterType.E,
                         ];
-                        _currentFilters = _currentFilters.Where(filter => !remove.Contains(filter)).ToList();
+                        _currentFilters.RemoveWhere(filter => remove.Contains(filter));
                         break;
                     }
                 case "A":
@@ -432,7 +428,7 @@ namespace mitama.Pages.DeckBuilder
                             FilterType.Lg,
                             FilterType.LgPlus,
                         ];
-                        _currentFilters = _currentFilters.Where(filter => !remove.Contains(filter)).ToList();
+                        _currentFilters.RemoveWhere(filter => remove.Contains(filter));
                         break;
                     }
                 case "‡T":
@@ -522,7 +518,7 @@ namespace mitama.Pages.DeckBuilder
                             FilterType.DGu,
                             FilterType.DGd,
                         ];
-                        _currentFilters = _currentFilters.Where(filter => !remove.Contains(filter)).ToList();
+                        _currentFilters.RemoveWhere(filter => remove.Contains(filter));
                         break;
                     }
                 case "A up":
@@ -695,31 +691,31 @@ namespace mitama.Pages.DeckBuilder
                     }
                 case "‰Î":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Fire).ToList();
+                        _currentFilters.Remove(FilterType.Fire);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Fire]));
                         break;
                     }
                 case "…":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Water).ToList();
+                        _currentFilters.Remove(FilterType.Water);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Water]));
                         break;
                     }
                 case "•—":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Wind).ToList();
+                        _currentFilters.Remove(FilterType.Wind);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Wind]));
                         break;
                     }
                 case "Œõ":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Light).ToList();
+                        _currentFilters.Remove(FilterType.Light);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Light]));
                         break;
                     }
                 case "ˆÅ":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Dark).ToList();
+                        _currentFilters.Remove(FilterType.Dark);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Dark]));
                         break;
                     }
@@ -734,31 +730,31 @@ namespace mitama.Pages.DeckBuilder
                     }
                 case "A":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.A).ToList();
+                        _currentFilters.Remove(FilterType.A);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.A]));
                         break;
                     }
                 case "B":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.B).ToList();
+                        _currentFilters.Remove(FilterType.B);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.B]));
                         break;
                     }
                 case "C":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.C).ToList();
+                        _currentFilters.Remove(FilterType.C);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.C]));
                         break;
                     }
                 case "D":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.D).ToList();
+                        _currentFilters.Remove(FilterType.D);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.D]));
                         break;
                     }
                 case "E":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.E).ToList();
+                        _currentFilters.Remove(FilterType.E);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.E]));
                         break;
                     }
@@ -773,61 +769,61 @@ namespace mitama.Pages.DeckBuilder
                     }
                 case "‡T":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.One).ToList();
+                        _currentFilters.Remove(FilterType.One);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.One]));
                         break;
                     }
                 case "‡U":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Two).ToList();
+                        _currentFilters.Remove(FilterType.Two);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Two]));
                         break;
                     }
                 case "‡V":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Three).ToList();
+                        _currentFilters.Remove(FilterType.Three);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Three]));
                         break;
                     }
                 case "‡V+":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.ThreePlus).ToList();
+                        _currentFilters.Remove(FilterType.ThreePlus);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.ThreePlus]));
                         break;
                     }
                 case "‡W":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Four).ToList();
+                        _currentFilters.Remove(FilterType.Four);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Four]));
                         break;
                     }
                 case "‡W+":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.FourPlus).ToList();
+                        _currentFilters.Remove(FilterType.FourPlus);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.FourPlus]));
                         break;
                     }
                 case "‡X":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Five).ToList();
+                        _currentFilters.Remove(FilterType.Five);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Five]));
                         break;
                     }
                 case "‡X+":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.FivePlus).ToList();
+                        _currentFilters.Remove(FilterType.FivePlus);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.FivePlus]));
                         break;
                     }
                 case "LG":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Lg).ToList();
+                        _currentFilters.Remove(FilterType.Lg);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Lg]));
                         break;
                     }
                 case "LG+":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.LgPlus).ToList();
+                        _currentFilters.Remove(FilterType.LgPlus);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.LgPlus]));
                         break;
                     }
@@ -842,175 +838,175 @@ namespace mitama.Pages.DeckBuilder
                     }
                 case "A up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Au).ToList();
+                        _currentFilters.Remove(FilterType.Au);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Au]));
                         break;
                     }
                 case "A down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Ad).ToList();
+                        _currentFilters.Remove(FilterType.Ad);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Ad]));
                         break;
                     }
                 case "SA up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.SAu).ToList();
+                        _currentFilters.Remove(FilterType.SAu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.SAu]));
                         break;
                     }
                 case "SA down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.SAd).ToList();
+                        _currentFilters.Remove(FilterType.SAd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.SAd]));
                         break;
                     }
                 case "D up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Du).ToList();
+                        _currentFilters.Remove(FilterType.Du);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Du]));
                         break;
                     }
                 case "D down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.Dd).ToList();
+                        _currentFilters.Remove(FilterType.Dd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.Dd]));
                         break;
                     }
                 case "SD up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.SDu).ToList();
+                        _currentFilters.Remove(FilterType.SDu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.SDu]));
                         break;
                     }
                 case "SD down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.SDd).ToList();
+                        _currentFilters.Remove(FilterType.SDd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.SDd]));
                         break;
                     }
                 case "Fire Power up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.FPu).ToList();
+                        _currentFilters.Remove(FilterType.FPu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.FPu]));
                         break;
                     }
                 case "Fire Power down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.FPd).ToList();
+                        _currentFilters.Remove(FilterType.FPd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.FPd]));
                         break;
                     }
                 case "Water Power up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.WaPu).ToList();
+                        _currentFilters.Remove(FilterType.WaPu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.WaPu]));
                         break;
                     }
                 case "Water Power down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.WaPd).ToList();
+                        _currentFilters.Remove(FilterType.WaPd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.WaPd]));
                         break;
                     }
                 case "Wind Power up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.WiPu).ToList();
+                        _currentFilters.Remove(FilterType.WiPu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.WiPu]));
                         break;
                     }
                 case "Wind Power down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.WiPd).ToList();
+                        _currentFilters.Remove(FilterType.WiPd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.WiPd]));
                         break;
                     }
                 case "Light Power up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.LPu).ToList();
+                        _currentFilters.Remove(FilterType.LPu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.LPu]));
                         break;
                     }
                 case "Light Power down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.LPd).ToList();
+                        _currentFilters.Remove(FilterType.LPd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.LPd]));
                         break;
                     }
                 case "Dark Power up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.DPu).ToList();
+                        _currentFilters.Remove(FilterType.DPu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.DPu]));
                         break;
                     }
                 case "Dark Power down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.DPd).ToList();
+                        _currentFilters.Remove(FilterType.DPd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.DPd]));
                         break;
                     }
                 case "Fire Guard up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.FGu).ToList();
+                        _currentFilters.Remove(FilterType.FGu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.FGu]));
                         break;
                     }
                 case "Fire Guard down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.FGd).ToList();
+                        _currentFilters.Remove(FilterType.FGd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.FGd]));
                         break;
                     }
                 case "Water Guard up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.WaGu).ToList();
+                        _currentFilters.Remove(FilterType.WaGu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.WaGu]));
                         break;
                     }
                 case "Water Guard down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.WaGd).ToList();
+                        _currentFilters.Remove(FilterType.WaGd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.WaGd]));
                         break;
                     }
                 case "Wind Guard up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.WiGu).ToList();
+                        _currentFilters.Remove(FilterType.WiGu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.WiGu]));
                         break;
                     }
                 case "Wind Guard down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.WiGd).ToList();
+                        _currentFilters.Remove(FilterType.WiGd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.WiGd]));
                         break;
                     }
                 case "Light Guard up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.LGu).ToList();
+                        _currentFilters.Remove(FilterType.LGu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.LGu]));
                         break;
                     }
                 case "Light Guard down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.LGd).ToList();
+                        _currentFilters.Remove(FilterType.LGd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.LGd]));
                         break;
                     }
                 case "Dark Guard up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.DGu).ToList();
+                        _currentFilters.Remove(FilterType.DGu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.DGu]));
                         break;
                     }
                 case "Dark Guard down":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.DGd).ToList();
+                        _currentFilters.Remove(FilterType.DGd);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.DGd]));
                         break;
                     }
                 case "HP up":
                     {
-                        _currentFilters = _currentFilters.Where(filter => filter is not FilterType.HPu).ToList();
+                        _currentFilters.Remove(FilterType.HPu);
                         Sources.Remove(Memoria.List.Where(Filters[FilterType.HPu]));
                         break;
                     }
