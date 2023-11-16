@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Data;
+using ColorCode.Common;
 using DynamicData;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -1368,6 +1369,37 @@ namespace mitama.Pages.DeckBuilder
             ];
 
             return effectFilters.Contains(filter);
+        }
+
+        private void Sort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is RadioButtons rb)
+            {
+                switch (rb.SelectedItem as string)
+                {
+                    case "Id":
+                        Sources.SortStable((a, b) => b.Id.CompareTo(a.Id));
+                        break;
+                    case "Atk":
+                        Sources.SortStable((a, b) => b.Status.Atk.CompareTo(a.Status.Atk));
+                        break;
+                    case "Def":
+                        Sources.SortStable((a, b) => b.Status.Def.CompareTo(a.Status.Def));
+                        break;
+                    case "Sp.Atk":
+                        Sources.SortStable((a, b) => b.Status.SpAtk.CompareTo(a.Status.SpAtk));
+                        break;
+                    case "Sp.Def":
+                        Sources.SortStable((a, b) => b.Status.SpDef.CompareTo(a.Status.SpDef));
+                        break;
+                    case "Atk+Sp.Atk":
+                        Sources.SortStable((a, b) => (b.Status.Atk + b.Status.SpAtk).CompareTo(a.Status.Atk + a.Status.SpAtk));
+                        break;
+                    case "Def+Sp.Def":
+                        Sources.SortStable((a, b) => (b.Status.Def + b.Status.SpDef).CompareTo(a.Status.Def + a.Status.SpDef));
+                        break;
+                }
+            }
         }
     }
 

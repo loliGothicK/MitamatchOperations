@@ -233,8 +233,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1118,
@@ -257,8 +256,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1117,
@@ -281,8 +279,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1116,
@@ -305,8 +302,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1115,
@@ -329,8 +325,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1114,
@@ -353,8 +348,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1113,
@@ -377,8 +371,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1112,
@@ -401,8 +394,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1111,
@@ -425,8 +417,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1110,
@@ -449,8 +440,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1109,
@@ -473,8 +463,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1108,
@@ -497,8 +486,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1107,
@@ -545,8 +533,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1105,
@@ -569,8 +556,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1104,
@@ -593,8 +579,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1103,
@@ -617,8 +602,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1102,
@@ -641,8 +625,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal), new ElementPowerDown(Element.Water)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1101,
@@ -665,8 +648,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1100,
@@ -689,8 +671,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new ElementGuardUp(Element.Water)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1099,
@@ -713,8 +694,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1098,
@@ -737,8 +717,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1097,
@@ -761,8 +740,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1096,
@@ -785,8 +763,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1095,
@@ -809,8 +786,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1094,
@@ -833,8 +809,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1093,
@@ -857,8 +832,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1092,
@@ -881,8 +855,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1091,
@@ -905,8 +878,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1090,
@@ -929,8 +901,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1089,
@@ -953,8 +924,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1088,
@@ -977,8 +947,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special), new ElementPowerUp(Element.Fire)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1087,
@@ -1001,8 +970,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new ElementGuardUp(Element.Fire)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1086,
@@ -1025,8 +993,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1085,
@@ -1049,8 +1016,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1084,
@@ -1073,8 +1039,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1083,
@@ -1097,8 +1062,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1082,
@@ -1121,8 +1085,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1081,
@@ -1145,8 +1108,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1080,
@@ -1169,8 +1131,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1079,
@@ -1193,8 +1154,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1078,
@@ -1217,8 +1177,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1077,
@@ -1241,8 +1200,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1076,
@@ -1265,8 +1223,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1075,
@@ -1289,8 +1246,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1074,
@@ -1313,8 +1269,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1073,
@@ -1337,8 +1292,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1072,
@@ -1361,8 +1315,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1071,
@@ -1385,8 +1338,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new ElementGuardUp(Element.Water)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1070,
@@ -1409,8 +1361,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1069,
@@ -1433,8 +1384,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal), new ElementPowerDown(Element.Water)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1068,
@@ -1481,8 +1431,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1066,
@@ -1505,8 +1454,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1065,
@@ -1529,8 +1477,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1064,
@@ -1553,8 +1500,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1063,
@@ -1577,8 +1523,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1062,
@@ -1601,8 +1546,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1061,
@@ -1625,8 +1569,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1060,
@@ -1649,8 +1592,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special), new ElementGuardDown(Element.Fire)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1059,
@@ -1673,8 +1615,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1058,
@@ -1697,8 +1638,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1057,
@@ -1721,8 +1661,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal), new ElementPowerUp(Element.Fire)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1056,
@@ -1745,8 +1684,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1055,
@@ -1769,8 +1707,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal), new ElementPowerDown(Element.Wind)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1054,
@@ -1793,8 +1730,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1053,
@@ -1817,8 +1753,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1052,
@@ -1841,8 +1776,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1051,
@@ -1865,8 +1799,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal), new ElementPowerUp(Element.Water)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1050,
@@ -1889,8 +1822,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1049,
@@ -1913,8 +1845,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special), new ElementPowerUp(Element.Water)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1048,
@@ -1937,8 +1868,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1047,
@@ -1985,8 +1915,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1045,
@@ -2009,8 +1938,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1044,
@@ -2033,8 +1961,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1043,
@@ -2057,8 +1984,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1042,
@@ -2081,8 +2007,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1041,
@@ -2105,8 +2030,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1040,
@@ -2129,8 +2053,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1039,
@@ -2153,8 +2076,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1038,
@@ -2201,8 +2123,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1036,
@@ -2225,8 +2146,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1035,
@@ -2249,8 +2169,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new ElementGuardUp(Element.Fire)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1034,
@@ -2273,8 +2192,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special), new ElementPowerUp(Element.Water)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1033,
@@ -2297,8 +2215,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1032,
@@ -2321,8 +2238,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1031,
@@ -2345,8 +2261,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1030,
@@ -2369,8 +2284,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1029,
@@ -2393,8 +2307,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1028,
@@ -2417,8 +2330,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special), new ElementPowerUp(Element.Fire)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1027,
@@ -2441,8 +2353,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1026,
@@ -2465,8 +2376,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1025,
@@ -2489,8 +2399,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1024,
@@ -2513,8 +2422,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1023,
@@ -2537,8 +2445,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1022,
@@ -2561,8 +2468,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special), new ElementPowerUp(Element.Wind)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1021,
@@ -2585,8 +2491,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1020,
@@ -2609,8 +2514,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1019,
@@ -2633,8 +2537,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1018,
@@ -2657,8 +2560,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1017,
@@ -2681,8 +2583,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1016,
@@ -2705,8 +2606,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1015,
@@ -2753,8 +2653,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1013,
@@ -2777,8 +2676,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1012,
@@ -2801,8 +2699,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1011,
@@ -2825,8 +2722,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1010,
@@ -2849,8 +2745,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1009,
@@ -2873,8 +2768,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1008,
@@ -2897,8 +2791,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1007,
@@ -2921,8 +2814,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1006,
@@ -2945,8 +2837,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1005,
@@ -2969,8 +2860,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             1004,
@@ -2993,8 +2883,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1003,
@@ -3017,8 +2906,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1002,
@@ -3041,8 +2929,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1001,
@@ -3065,8 +2952,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             1000,
@@ -3089,8 +2975,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             999,
@@ -3113,8 +2998,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             998,
@@ -3137,8 +3021,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             997,
@@ -3161,8 +3044,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             996,
@@ -3185,8 +3067,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             995,
@@ -3209,8 +3090,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             994,
@@ -3233,8 +3113,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             993,
@@ -3257,8 +3136,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             992,
@@ -3281,8 +3159,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             991,
@@ -3305,8 +3182,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             990,
@@ -3329,8 +3205,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             989,
@@ -3353,8 +3228,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             988,
@@ -3377,8 +3251,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             987,
@@ -3401,8 +3274,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             986,
@@ -3425,8 +3297,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             985,
@@ -3449,8 +3320,7 @@ public record Memoria(
                 Trigger.Support,
                 [new ElementPowerUp(Element.Fire)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             984,
@@ -3473,8 +3343,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new ElementGuardUp(Element.Wind)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             983,
@@ -3497,8 +3366,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             982,
@@ -3545,8 +3413,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             980,
@@ -3569,8 +3436,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             979,
@@ -3617,8 +3483,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             977,
@@ -3641,8 +3506,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             976,
@@ -3665,8 +3529,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             975,
@@ -3689,8 +3552,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             974,
@@ -3713,8 +3575,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             973,
@@ -3737,8 +3598,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             972,
@@ -3761,8 +3621,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             971,
@@ -3785,8 +3644,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             970,
@@ -3809,8 +3667,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             969,
@@ -3833,8 +3690,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             968,
@@ -3857,8 +3713,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             967,
@@ -3881,8 +3736,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             966,
@@ -3905,8 +3759,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             965,
@@ -3929,8 +3782,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             964,
@@ -3953,8 +3805,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             963,
@@ -3977,8 +3828,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             962,
@@ -4025,8 +3875,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             960,
@@ -4049,8 +3898,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             959,
@@ -4073,8 +3921,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             958,
@@ -4097,8 +3944,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             957,
@@ -4121,8 +3967,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             956,
@@ -4145,8 +3990,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             955,
@@ -4169,8 +4013,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             954,
@@ -4193,8 +4036,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             953,
@@ -4217,8 +4059,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new ElementGuardUp(Element.Water)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             952,
@@ -4241,8 +4082,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             951,
@@ -4265,8 +4105,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             950,
@@ -4289,8 +4128,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             949,
@@ -4313,8 +4151,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             948,
@@ -4337,8 +4174,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             947,
@@ -4361,8 +4197,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             946,
@@ -4385,8 +4220,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             945,
@@ -4457,8 +4291,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             942,
@@ -4481,8 +4314,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             941,
@@ -4505,8 +4337,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             940,
@@ -4529,8 +4360,7 @@ public record Memoria(
                 Trigger.Support,
                 [new ElementPowerUp(Element.Fire)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             939,
@@ -4553,8 +4383,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             938,
@@ -4577,8 +4406,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal), new ElementPowerDown(Element.Wind)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             937,
@@ -4601,8 +4429,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             936,
@@ -4625,8 +4452,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             935,
@@ -4649,8 +4475,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             934,
@@ -4673,8 +4498,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             933,
@@ -4697,8 +4521,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             932,
@@ -4721,8 +4544,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             931,
@@ -4745,8 +4567,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             930,
@@ -4769,8 +4590,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             929,
@@ -4793,8 +4613,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             928,
@@ -4817,8 +4636,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special), new ElementPowerDown(Element.Fire)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             927,
@@ -4841,8 +4659,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             926,
@@ -4865,8 +4682,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new ElementGuardUp(Element.Fire)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             925,
@@ -4913,8 +4729,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             923,
@@ -4937,8 +4752,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             922,
@@ -4961,8 +4775,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             921,
@@ -4985,8 +4798,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             920,
@@ -5009,8 +4821,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             919,
@@ -5033,8 +4844,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             918,
@@ -5057,8 +4867,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             917,
@@ -5081,8 +4890,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             916,
@@ -5105,8 +4913,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             915,
@@ -5129,8 +4936,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             914,
@@ -5153,8 +4959,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             913,
@@ -5177,8 +4982,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             912,
@@ -5201,8 +5005,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             911,
@@ -5225,8 +5028,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             910,
@@ -5249,8 +5051,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             909,
@@ -5273,8 +5074,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             908,
@@ -5297,8 +5097,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             907,
@@ -5321,8 +5120,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             906,
@@ -5345,8 +5143,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new ElementGuardUp(Element.Water)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             905,
@@ -5369,8 +5166,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             904,
@@ -5393,8 +5189,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             903,
@@ -5417,8 +5212,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             902,
@@ -5441,8 +5235,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             901,
@@ -5465,8 +5258,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             900,
@@ -5489,8 +5281,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             899,
@@ -5513,8 +5304,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             898,
@@ -5537,8 +5327,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             897,
@@ -5561,8 +5350,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             896,
@@ -5585,8 +5373,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             895,
@@ -5609,8 +5396,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             894,
@@ -5633,8 +5419,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             893,
@@ -5657,8 +5442,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             892,
@@ -5681,8 +5465,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             891,
@@ -5705,8 +5488,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             890,
@@ -5729,8 +5511,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             889,
@@ -5753,8 +5534,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             888,
@@ -5777,8 +5557,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             887,
@@ -5801,8 +5580,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             886,
@@ -5825,8 +5603,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             885,
@@ -5849,8 +5626,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             884,
@@ -5873,8 +5649,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             883,
@@ -5897,8 +5672,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             882,
@@ -5921,8 +5695,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             881,
@@ -5945,8 +5718,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             880,
@@ -5969,8 +5741,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             879,
@@ -5993,8 +5764,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             878,
@@ -6017,8 +5787,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             877,
@@ -6041,8 +5810,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             876,
@@ -6089,8 +5857,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             874,
@@ -6113,8 +5880,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             873,
@@ -6137,8 +5903,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             872,
@@ -6161,8 +5926,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             871,
@@ -6185,8 +5949,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             870,
@@ -6209,8 +5972,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             869,
@@ -6233,8 +5995,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             868,
@@ -6257,8 +6018,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             867,
@@ -6305,8 +6065,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             865,
@@ -6329,8 +6088,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             864,
@@ -6353,8 +6111,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             863,
@@ -6377,8 +6134,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             862,
@@ -6401,8 +6157,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             861,
@@ -6425,8 +6180,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             860,
@@ -6449,8 +6203,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             859,
@@ -6473,8 +6226,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             858,
@@ -6497,8 +6249,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             857,
@@ -6521,8 +6272,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             856,
@@ -6545,8 +6295,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             855,
@@ -6569,8 +6318,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             854,
@@ -6593,8 +6341,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             853,
@@ -6617,8 +6364,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             852,
@@ -6641,8 +6387,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             851,
@@ -6665,8 +6410,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             850,
@@ -6689,8 +6433,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             849,
@@ -6713,8 +6456,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             848,
@@ -6737,8 +6479,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             847,
@@ -6761,8 +6502,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             846,
@@ -6809,8 +6549,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             844,
@@ -6833,8 +6572,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             843,
@@ -6857,8 +6595,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             842,
@@ -6881,8 +6618,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             841,
@@ -6905,8 +6641,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             840,
@@ -6929,8 +6664,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             839,
@@ -6953,8 +6687,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             838,
@@ -6977,8 +6710,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             837,
@@ -7001,8 +6733,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             836,
@@ -7025,8 +6756,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             835,
@@ -7049,8 +6779,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             834,
@@ -7073,8 +6802,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             833,
@@ -7097,8 +6825,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             832,
@@ -7121,8 +6848,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             831,
@@ -7145,8 +6871,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             830,
@@ -7169,8 +6894,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             829,
@@ -7193,8 +6917,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             828,
@@ -7217,8 +6940,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             827,
@@ -7265,8 +6987,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             825,
@@ -7289,8 +7010,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             824,
@@ -7313,8 +7033,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             823,
@@ -7337,8 +7056,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             822,
@@ -7361,8 +7079,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             821,
@@ -7385,8 +7102,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             820,
@@ -7409,8 +7125,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             819,
@@ -7433,8 +7148,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             818,
@@ -7457,8 +7171,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             817,
@@ -7481,8 +7194,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             816,
@@ -7505,8 +7217,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             815,
@@ -7529,8 +7240,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             814,
@@ -7553,8 +7263,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             813,
@@ -7577,8 +7286,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             812,
@@ -7601,8 +7309,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             811,
@@ -7625,8 +7332,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             810,
@@ -7649,8 +7355,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             809,
@@ -7673,8 +7378,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             808,
@@ -7697,8 +7401,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             807,
@@ -7721,8 +7424,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             806,
@@ -7745,8 +7447,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             805,
@@ -7769,8 +7470,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             804,
@@ -7817,8 +7517,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             802,
@@ -7841,8 +7540,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             801,
@@ -7865,8 +7563,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             800,
@@ -7889,8 +7586,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special), new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             799,
@@ -7937,8 +7633,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             797,
@@ -7961,8 +7656,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             796,
@@ -7985,8 +7679,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             795,
@@ -8009,8 +7702,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             794,
@@ -8033,8 +7725,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             793,
@@ -8057,8 +7748,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             792,
@@ -8081,8 +7771,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             791,
@@ -8105,8 +7794,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             790,
@@ -8129,8 +7817,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             789,
@@ -8153,8 +7840,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             788,
@@ -8177,8 +7863,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             787,
@@ -8201,8 +7886,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             786,
@@ -8225,8 +7909,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             785,
@@ -8249,8 +7932,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             784,
@@ -8273,8 +7955,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             783,
@@ -8297,8 +7978,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             782,
@@ -8321,8 +8001,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             781,
@@ -8345,8 +8024,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             780,
@@ -8369,8 +8047,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             779,
@@ -8393,8 +8070,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             778,
@@ -8417,8 +8093,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             777,
@@ -8441,8 +8116,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             776,
@@ -8465,8 +8139,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             775,
@@ -8489,8 +8162,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             774,
@@ -8513,8 +8185,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             773,
@@ -8537,8 +8208,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             772,
@@ -8561,8 +8231,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             771,
@@ -8585,8 +8254,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             770,
@@ -8609,8 +8277,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             769,
@@ -8633,8 +8300,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             768,
@@ -8657,8 +8323,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             767,
@@ -8681,8 +8346,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             766,
@@ -8705,8 +8369,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             765,
@@ -8729,8 +8392,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             764,
@@ -8753,8 +8415,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             763,
@@ -8777,8 +8438,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             762,
@@ -8801,8 +8461,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             761,
@@ -8825,8 +8484,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             760,
@@ -8849,8 +8507,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             759,
@@ -8897,8 +8554,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             757,
@@ -8921,8 +8577,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             756,
@@ -8945,8 +8600,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             755,
@@ -8969,8 +8623,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             754,
@@ -9017,8 +8670,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             752,
@@ -9041,8 +8693,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             751,
@@ -9065,8 +8716,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             750,
@@ -9089,8 +8739,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             749,
@@ -9113,8 +8762,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             748,
@@ -9137,8 +8785,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             747,
@@ -9161,8 +8808,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             746,
@@ -9185,8 +8831,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             745,
@@ -9209,8 +8854,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             744,
@@ -9233,8 +8877,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             743,
@@ -9257,8 +8900,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             742,
@@ -9281,8 +8923,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             741,
@@ -9305,8 +8946,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             740,
@@ -9329,8 +8969,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             739,
@@ -9353,8 +8992,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             738,
@@ -9377,8 +9015,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             737,
@@ -9401,8 +9038,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             736,
@@ -9425,8 +9061,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             735,
@@ -9449,8 +9084,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             734,
@@ -9473,8 +9107,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             733,
@@ -9497,8 +9130,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             732,
@@ -9521,8 +9153,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             731,
@@ -9545,8 +9176,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             730,
@@ -9569,8 +9199,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             729,
@@ -9593,8 +9222,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             728,
@@ -9617,8 +9245,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             727,
@@ -9641,8 +9268,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             726,
@@ -9665,8 +9291,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             725,
@@ -9689,8 +9314,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             724,
@@ -9713,8 +9337,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             723,
@@ -9737,8 +9360,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             722,
@@ -9761,8 +9383,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             721,
@@ -9785,8 +9406,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             720,
@@ -9809,8 +9429,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             719,
@@ -9833,8 +9452,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             718,
@@ -9857,8 +9475,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             717,
@@ -9881,8 +9498,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             716,
@@ -9905,8 +9521,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             715,
@@ -9929,8 +9544,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             714,
@@ -9953,8 +9567,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             713,
@@ -9977,8 +9590,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             712,
@@ -10001,8 +9613,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             711,
@@ -10025,8 +9636,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             710,
@@ -10049,8 +9659,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             709,
@@ -10073,8 +9682,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             708,
@@ -10097,8 +9705,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             707,
@@ -10121,8 +9728,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             706,
@@ -10145,8 +9751,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             705,
@@ -10169,8 +9774,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             704,
@@ -10193,15 +9797,14 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             703,
             "縦横無尽、阻む者無し",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(3505, 3487, 6312, 6305),
+            new Status(4085, 4067, 7082, 7075),
             24,
             new Skill(
                 "リカバーヒールD Ⅳ",
@@ -10217,15 +9820,14 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             702,
             "縦横無尽、阻む者無し",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(3505, 6702, 3512, 5890),
+            new Status(4085, 7401, 4092, 6731),
             24,
             new Skill(
                 "Sp.マイトスマッシュA Ⅴ+",
@@ -10241,15 +9843,14 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             701,
             "シリウス・ロア",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(6289, 6290, 3491, 3520),
+            new Status(7059, 7060, 4071, 4100),
             24,
             new Skill(
                 "WパワーアシストD Ⅲ",
@@ -10265,15 +9866,14 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             700,
             "シリウス・ロア",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(6704, 3490, 5876, 3520),
+            new Status(7403, 4070, 6717, 4100),
             24,
             new Skill(
                 "風：ガードブレイクB Ⅲ",
@@ -10289,15 +9889,14 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             699,
             "蒼き月、満ちる時",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(6318, 6283, 3519, 3493),
+            new Status(7088, 7053, 4099, 4073),
             24,
             new Skill(
                 "WパワーフォールD Ⅲ",
@@ -10313,15 +9912,14 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             698,
             "蒼き月、満ちる時",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(3518, 6698, 3519, 5878),
+            new Status(4098, 7397, 4099, 6719),
             24,
             new Skill(
                 "風：Sp.ガードバーストB Ⅲ",
@@ -10337,15 +9935,14 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             697,
             "フェノメノ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(3482, 6728, 3511, 5885),
+            new Status(4062, 7427, 4091, 6726),
             24,
             new Skill(
                 "火：Sp.パワースマッシュB Ⅲ",
@@ -10361,15 +9958,14 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             696,
             "フェノメノ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(3482, 3513, 6311, 6300),
+            new Status(4062, 4093, 7081, 7070),
             24,
             new Skill(
                 "WガードフォールD Ⅲ",
@@ -10385,15 +9981,14 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             695,
             "比類なき異能",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6696, 3506, 5883, 3517),
+            new Status(7395, 4086, 6724, 4097),
             24,
             new Skill(
                 "火：パワーストライクB Ⅲ",
@@ -10409,15 +10004,14 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             694,
             "比類なき異能",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(3481, 3506, 6298, 6317),
+            new Status(4061, 4086, 7068, 7087),
             24,
             new Skill(
                 "WガードアシストD Ⅲ",
@@ -10433,8 +10027,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             693,
@@ -10457,8 +10050,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             692,
@@ -10481,8 +10073,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             691,
@@ -10505,8 +10096,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             690,
@@ -10529,8 +10119,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             689,
@@ -10553,8 +10142,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             688,
@@ -10577,8 +10165,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             687,
@@ -10601,8 +10188,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             686,
@@ -10625,8 +10211,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             685,
@@ -10649,8 +10234,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             684,
@@ -10673,8 +10257,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             683,
@@ -10697,8 +10280,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             682,
@@ -10721,8 +10303,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             681,
@@ -10745,8 +10326,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             680,
@@ -10769,8 +10349,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             679,
@@ -10793,8 +10372,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             678,
@@ -10817,8 +10395,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            false
+            )
         ),
         new Memoria(
             677,
@@ -10913,8 +10490,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             673,
@@ -10937,8 +10513,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             672,
@@ -10961,8 +10536,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             671,
@@ -10985,8 +10559,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             670,
@@ -11009,8 +10582,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             669,
@@ -11033,8 +10605,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             668,
@@ -11057,8 +10628,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             667,
@@ -11081,8 +10651,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             666,
@@ -11105,8 +10674,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             665,
@@ -11129,8 +10697,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             664,
@@ -11153,8 +10720,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             663,
@@ -11177,8 +10743,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             662,
@@ -11201,8 +10766,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             661,
@@ -11225,8 +10789,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             660,
@@ -11249,8 +10812,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             659,
@@ -11273,8 +10835,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             658,
@@ -11297,8 +10858,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             657,
@@ -11321,8 +10881,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             656,
@@ -11345,8 +10904,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             655,
@@ -11369,8 +10927,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             654,
@@ -11393,8 +10950,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             653,
@@ -11417,8 +10973,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             652,
@@ -11441,8 +10996,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             651,
@@ -11465,8 +11019,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             650,
@@ -11489,8 +11042,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             649,
@@ -11513,8 +11065,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             648,
@@ -11537,8 +11088,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             647,
@@ -11561,8 +11111,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             646,
@@ -11585,8 +11134,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             645,
@@ -11609,8 +11157,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             644,
@@ -11633,8 +11180,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             643,
@@ -11657,8 +11203,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             642,
@@ -11681,8 +11226,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             641,
@@ -11705,8 +11249,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             640,
@@ -11729,8 +11272,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             639,
@@ -11753,8 +11295,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             638,
@@ -11777,8 +11318,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             637,
@@ -11801,8 +11341,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             636,
@@ -11825,8 +11364,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             635,
@@ -11849,8 +11387,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             634,
@@ -11873,8 +11410,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             633,
@@ -11897,8 +11433,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             632,
@@ -11921,8 +11456,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             631,
@@ -11945,8 +11479,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             630,
@@ -11969,8 +11502,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             629,
@@ -11993,8 +11525,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             628,
@@ -12017,8 +11548,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             627,
@@ -12041,8 +11571,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             626,
@@ -12065,8 +11594,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             625,
@@ -12089,8 +11617,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             624,
@@ -12113,8 +11640,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             623,
@@ -12137,8 +11663,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             622,
@@ -12161,8 +11686,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             621,
@@ -12185,8 +11709,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             620,
@@ -12209,8 +11732,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             619,
@@ -12257,8 +11779,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             617,
@@ -12281,8 +11802,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             616,
@@ -12305,8 +11825,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             615,
@@ -12329,8 +11848,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             614,
@@ -12353,8 +11871,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             613,
@@ -12377,8 +11894,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             612,
@@ -12401,8 +11917,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             611,
@@ -12425,8 +11940,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             610,
@@ -12449,8 +11963,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             609,
@@ -12473,8 +11986,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             608,
@@ -12497,8 +12009,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal), new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             607,
@@ -12521,8 +12032,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             606,
@@ -12545,8 +12055,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             605,
@@ -12569,8 +12078,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             604,
@@ -12593,8 +12101,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             603,
@@ -12617,8 +12124,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             602,
@@ -12641,8 +12147,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             601,
@@ -12665,8 +12170,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             600,
@@ -12689,8 +12193,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             599,
@@ -12713,8 +12216,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             598,
@@ -12737,8 +12239,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             597,
@@ -12761,8 +12262,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             596,
@@ -12785,8 +12285,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             595,
@@ -12809,8 +12308,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             594,
@@ -12833,8 +12331,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             593,
@@ -12857,8 +12354,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             592,
@@ -12881,8 +12377,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             591,
@@ -12905,8 +12400,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             590,
@@ -12929,8 +12423,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             589,
@@ -12953,8 +12446,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             588,
@@ -12977,8 +12469,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             587,
@@ -13001,8 +12492,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             586,
@@ -13025,8 +12515,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             585,
@@ -13049,8 +12538,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             584,
@@ -13073,8 +12561,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             583,
@@ -13097,8 +12584,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             582,
@@ -13121,8 +12607,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             581,
@@ -13145,8 +12630,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             580,
@@ -13169,8 +12653,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             579,
@@ -13193,8 +12676,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             578,
@@ -13217,8 +12699,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             577,
@@ -13241,8 +12722,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             576,
@@ -13265,8 +12745,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             575,
@@ -13289,8 +12768,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             574,
@@ -13313,8 +12791,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             573,
@@ -13337,8 +12814,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             572,
@@ -13361,8 +12837,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             571,
@@ -13385,8 +12860,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             570,
@@ -13409,8 +12883,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             569,
@@ -13433,8 +12906,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             568,
@@ -13457,8 +12929,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             567,
@@ -13481,8 +12952,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             566,
@@ -13505,8 +12975,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             565,
@@ -13529,8 +12998,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             564,
@@ -13577,8 +13045,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             562,
@@ -13601,8 +13068,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             561,
@@ -13625,8 +13091,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             560,
@@ -13649,8 +13114,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             559,
@@ -13673,8 +13137,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             558,
@@ -13697,8 +13160,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             557,
@@ -13721,8 +13183,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             556,
@@ -13745,8 +13206,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             555,
@@ -13769,8 +13229,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             554,
@@ -13793,8 +13252,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             553,
@@ -13817,8 +13275,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             552,
@@ -13841,8 +13298,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             551,
@@ -13865,8 +13321,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             550,
@@ -13889,8 +13344,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             549,
@@ -13913,8 +13367,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             548,
@@ -13937,8 +13390,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             547,
@@ -13961,8 +13413,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             546,
@@ -13985,8 +13436,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             545,
@@ -14009,8 +13459,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             544,
@@ -14033,8 +13482,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             543,
@@ -14057,8 +13505,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             542,
@@ -14081,8 +13528,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             541,
@@ -14105,8 +13551,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             540,
@@ -14129,8 +13574,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             539,
@@ -14153,8 +13597,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             538,
@@ -14177,8 +13620,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             537,
@@ -14201,8 +13643,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             536,
@@ -14225,8 +13666,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             535,
@@ -14249,8 +13689,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             534,
@@ -14273,8 +13712,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             533,
@@ -14297,8 +13735,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             532,
@@ -14321,8 +13758,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal), new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             531,
@@ -14369,8 +13805,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             529,
@@ -14393,8 +13828,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             528,
@@ -14417,8 +13851,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             527,
@@ -14441,8 +13874,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             526,
@@ -14465,8 +13897,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             525,
@@ -14489,8 +13920,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             524,
@@ -14513,8 +13943,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             523,
@@ -14537,8 +13966,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             522,
@@ -14561,8 +13989,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             521,
@@ -14585,8 +14012,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             520,
@@ -14609,8 +14035,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             519,
@@ -14633,8 +14058,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             518,
@@ -14657,8 +14081,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             517,
@@ -14681,8 +14104,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             516,
@@ -14705,8 +14127,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             515,
@@ -14729,8 +14150,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             514,
@@ -14753,8 +14173,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             513,
@@ -14777,8 +14196,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             512,
@@ -14801,8 +14219,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             511,
@@ -14825,8 +14242,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             510,
@@ -14849,8 +14265,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             509,
@@ -14873,8 +14288,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             508,
@@ -14897,8 +14311,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             507,
@@ -14921,8 +14334,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             506,
@@ -14945,8 +14357,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             505,
@@ -14969,8 +14380,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             504,
@@ -14993,8 +14403,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             503,
@@ -15017,8 +14426,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             502,
@@ -15041,8 +14449,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             501,
@@ -15065,8 +14472,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             500,
@@ -15089,8 +14495,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             499,
@@ -15113,8 +14518,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             498,
@@ -15137,8 +14541,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             497,
@@ -15161,8 +14564,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             496,
@@ -15185,8 +14587,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             495,
@@ -15209,8 +14610,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             494,
@@ -15233,8 +14633,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             493,
@@ -15257,8 +14656,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             492,
@@ -15281,8 +14679,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             491,
@@ -15305,8 +14702,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             490,
@@ -15329,8 +14725,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             489,
@@ -15353,8 +14748,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             488,
@@ -15377,8 +14771,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             487,
@@ -15401,8 +14794,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             486,
@@ -15425,8 +14817,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             485,
@@ -15449,8 +14840,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             484,
@@ -15473,8 +14863,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             483,
@@ -15497,8 +14886,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             482,
@@ -15521,8 +14909,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             481,
@@ -15545,8 +14932,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             480,
@@ -15569,8 +14955,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             479,
@@ -15593,8 +14978,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             478,
@@ -15617,8 +15001,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             477,
@@ -15641,8 +15024,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             476,
@@ -15665,8 +15047,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             475,
@@ -15689,8 +15070,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             474,
@@ -15737,8 +15117,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             472,
@@ -15761,8 +15140,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             471,
@@ -15785,8 +15163,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             470,
@@ -15809,8 +15186,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             469,
@@ -15833,8 +15209,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             468,
@@ -15857,8 +15232,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             467,
@@ -15881,8 +15255,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             466,
@@ -15905,8 +15278,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             465,
@@ -15929,8 +15301,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             464,
@@ -15953,8 +15324,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             463,
@@ -15977,8 +15347,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             462,
@@ -16001,8 +15370,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             461,
@@ -16025,8 +15393,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             460,
@@ -16049,8 +15416,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             459,
@@ -16073,8 +15439,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             458,
@@ -16097,8 +15462,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             457,
@@ -16121,8 +15485,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             456,
@@ -16145,8 +15508,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             455,
@@ -16169,8 +15531,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             454,
@@ -16217,8 +15578,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             452,
@@ -16241,8 +15601,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             451,
@@ -16265,8 +15624,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             450,
@@ -16289,8 +15647,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             449,
@@ -16313,8 +15670,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             448,
@@ -16337,8 +15693,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             447,
@@ -16361,8 +15716,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             446,
@@ -16385,8 +15739,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             445,
@@ -16409,8 +15762,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             444,
@@ -16433,8 +15785,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             443,
@@ -16457,8 +15808,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             442,
@@ -16481,8 +15831,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             441,
@@ -16505,8 +15854,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             440,
@@ -16529,8 +15877,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             439,
@@ -16553,8 +15900,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             438,
@@ -16577,8 +15923,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             437,
@@ -16601,8 +15946,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             436,
@@ -16625,8 +15969,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             435,
@@ -16649,8 +15992,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             434,
@@ -16673,8 +16015,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             433,
@@ -16697,8 +16038,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             432,
@@ -16721,8 +16061,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             431,
@@ -16745,8 +16084,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             430,
@@ -16769,8 +16107,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             429,
@@ -16793,8 +16130,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             428,
@@ -16817,8 +16153,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             427,
@@ -16841,8 +16176,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             426,
@@ -16865,8 +16199,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             425,
@@ -16889,8 +16222,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             424,
@@ -16913,8 +16245,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             423,
@@ -16937,8 +16268,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             422,
@@ -16961,8 +16291,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             421,
@@ -16985,8 +16314,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             420,
@@ -17009,8 +16337,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             419,
@@ -17033,8 +16360,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             418,
@@ -17057,8 +16383,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             417,
@@ -17081,8 +16406,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             416,
@@ -17105,8 +16429,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             415,
@@ -17129,8 +16452,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             414,
@@ -17153,8 +16475,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             413,
@@ -17177,8 +16498,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             412,
@@ -17201,8 +16521,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             411,
@@ -17225,8 +16544,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             410,
@@ -17249,8 +16567,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             409,
@@ -17273,8 +16590,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             408,
@@ -17297,8 +16613,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             407,
@@ -17321,8 +16636,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             406,
@@ -17345,8 +16659,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             405,
@@ -17369,8 +16682,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             404,
@@ -17393,8 +16705,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             403,
@@ -17417,8 +16728,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             402,
@@ -17441,8 +16751,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             401,
@@ -17465,8 +16774,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             400,
@@ -17489,8 +16797,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             399,
@@ -17513,8 +16820,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             398,
@@ -17537,8 +16843,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             397,
@@ -17585,8 +16890,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             395,
@@ -17609,8 +16913,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             394,
@@ -17633,8 +16936,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             393,
@@ -17657,8 +16959,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             392,
@@ -17681,8 +16982,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             391,
@@ -17705,8 +17005,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             390,
@@ -17729,8 +17028,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             389,
@@ -17753,8 +17051,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             388,
@@ -17777,8 +17074,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             387,
@@ -17801,8 +17097,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             386,
@@ -17825,8 +17120,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             385,
@@ -17849,8 +17143,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             384,
@@ -17873,8 +17166,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             383,
@@ -17897,8 +17189,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             382,
@@ -17921,8 +17212,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             381,
@@ -17945,8 +17235,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             380,
@@ -17969,8 +17258,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             379,
@@ -17993,8 +17281,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             378,
@@ -18041,8 +17328,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             376,
@@ -18065,8 +17351,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             375,
@@ -18089,8 +17374,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             374,
@@ -18113,8 +17397,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             373,
@@ -18137,8 +17420,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             372,
@@ -18161,8 +17443,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             371,
@@ -18185,8 +17466,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             370,
@@ -18209,8 +17489,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             369,
@@ -18233,8 +17512,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             368,
@@ -18257,8 +17535,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             367,
@@ -18281,8 +17558,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             366,
@@ -18305,8 +17581,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             365,
@@ -18329,8 +17604,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             364,
@@ -18353,8 +17627,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             363,
@@ -18377,8 +17650,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             362,
@@ -18401,8 +17673,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             361,
@@ -18425,8 +17696,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             360,
@@ -18449,8 +17719,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             359,
@@ -18473,8 +17742,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             358,
@@ -18497,8 +17765,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             357,
@@ -18521,8 +17788,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             356,
@@ -18545,8 +17811,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             355,
@@ -18569,8 +17834,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             354,
@@ -18593,8 +17857,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             353,
@@ -18617,8 +17880,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             352,
@@ -18641,8 +17903,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             351,
@@ -18665,8 +17926,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             350,
@@ -18689,8 +17949,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             349,
@@ -18713,8 +17972,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             348,
@@ -18737,8 +17995,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             347,
@@ -18761,8 +18018,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             346,
@@ -18785,8 +18041,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             345,
@@ -18809,8 +18064,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             344,
@@ -18833,8 +18087,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             343,
@@ -18857,8 +18110,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             342,
@@ -18881,8 +18133,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             341,
@@ -18905,8 +18156,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             340,
@@ -18929,8 +18179,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             339,
@@ -18953,8 +18202,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             338,
@@ -18977,8 +18225,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             337,
@@ -19001,8 +18248,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             336,
@@ -19025,8 +18271,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             335,
@@ -19049,8 +18294,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             334,
@@ -19073,8 +18317,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             333,
@@ -19097,8 +18340,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             332,
@@ -19121,8 +18363,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             331,
@@ -19145,8 +18386,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             330,
@@ -19169,8 +18409,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             329,
@@ -19217,8 +18456,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal), new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             327,
@@ -19241,8 +18479,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal), new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             326,
@@ -19265,8 +18502,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal), new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             325,
@@ -19289,8 +18525,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special), new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             324,
@@ -19313,8 +18548,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             323,
@@ -19337,8 +18571,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             322,
@@ -19361,8 +18594,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             321,
@@ -19385,8 +18617,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             320,
@@ -19409,8 +18640,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             319,
@@ -19433,8 +18663,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             318,
@@ -19457,8 +18686,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             317,
@@ -19481,8 +18709,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             316,
@@ -19505,8 +18732,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             315,
@@ -19529,8 +18755,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             314,
@@ -19553,8 +18778,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             313,
@@ -19577,8 +18801,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             312,
@@ -19601,8 +18824,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             311,
@@ -19625,8 +18847,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             310,
@@ -19649,8 +18870,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             309,
@@ -19673,8 +18893,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             308,
@@ -19697,8 +18916,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             307,
@@ -19721,8 +18939,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             306,
@@ -19745,8 +18962,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             305,
@@ -19769,8 +18985,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             304,
@@ -19793,8 +19008,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             303,
@@ -19817,8 +19031,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             302,
@@ -19841,8 +19054,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             301,
@@ -19865,8 +19077,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             300,
@@ -19889,8 +19100,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             299,
@@ -19913,8 +19123,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             298,
@@ -19937,8 +19146,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             297,
@@ -19961,8 +19169,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             296,
@@ -20009,8 +19216,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             294,
@@ -20033,8 +19239,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             293,
@@ -20057,8 +19262,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             292,
@@ -20081,8 +19285,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             291,
@@ -20105,8 +19308,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             290,
@@ -20129,8 +19331,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             289,
@@ -20153,8 +19354,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             288,
@@ -20177,8 +19377,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             287,
@@ -20201,8 +19400,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             286,
@@ -20225,8 +19423,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             285,
@@ -20249,8 +19446,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             284,
@@ -20273,8 +19469,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             283,
@@ -20297,8 +19492,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             282,
@@ -20321,8 +19515,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             281,
@@ -20345,8 +19538,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             280,
@@ -20369,8 +19561,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             279,
@@ -20393,8 +19584,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             278,
@@ -20417,8 +19607,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             277,
@@ -20441,8 +19630,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             276,
@@ -20465,8 +19653,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             275,
@@ -20489,8 +19676,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             274,
@@ -20513,8 +19699,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             273,
@@ -20537,8 +19722,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             272,
@@ -20561,8 +19745,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             271,
@@ -20585,8 +19768,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             270,
@@ -20609,8 +19791,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Special), new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             269,
@@ -20633,8 +19814,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             268,
@@ -20657,8 +19837,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             267,
@@ -20681,8 +19860,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             266,
@@ -20705,8 +19883,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             265,
@@ -20729,8 +19906,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             264,
@@ -20753,8 +19929,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             263,
@@ -20777,8 +19952,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             262,
@@ -20801,8 +19975,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             261,
@@ -20825,8 +19998,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             260,
@@ -20849,8 +20021,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             259,
@@ -20873,8 +20044,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             258,
@@ -20897,8 +20067,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             257,
@@ -20921,8 +20090,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             256,
@@ -20945,8 +20113,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             255,
@@ -20969,8 +20136,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             254,
@@ -20993,8 +20159,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             253,
@@ -21017,8 +20182,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             252,
@@ -21041,8 +20205,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             251,
@@ -21065,8 +20228,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             250,
@@ -21089,8 +20251,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             249,
@@ -21113,8 +20274,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             248,
@@ -21137,8 +20297,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             247,
@@ -21161,8 +20320,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special), new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             246,
@@ -21185,8 +20343,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special), new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             245,
@@ -21209,8 +20366,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             244,
@@ -21233,8 +20389,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special), new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             243,
@@ -21257,8 +20412,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal), new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             242,
@@ -21281,8 +20435,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             241,
@@ -21305,8 +20458,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             240,
@@ -21329,8 +20481,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             239,
@@ -21353,8 +20504,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             238,
@@ -21377,8 +20527,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             237,
@@ -21401,8 +20550,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             236,
@@ -21425,8 +20573,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.One
-            ),
-            false
+            )
         ),
         new Memoria(
             235,
@@ -21449,8 +20596,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special), new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             234,
@@ -21473,8 +20619,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special), new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             233,
@@ -21497,8 +20642,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             232,
@@ -21521,8 +20665,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             231,
@@ -21545,8 +20688,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             230,
@@ -21569,8 +20711,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             229,
@@ -21593,8 +20734,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             228,
@@ -21617,8 +20757,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             227,
@@ -21665,8 +20804,7 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             225,
@@ -21689,8 +20827,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             224,
@@ -21713,8 +20850,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             223,
@@ -21737,8 +20873,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             222,
@@ -21761,8 +20896,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             221,
@@ -21785,8 +20919,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             220,
@@ -21809,8 +20942,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             219,
@@ -21833,8 +20965,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             218,
@@ -21857,8 +20988,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             217,
@@ -21881,8 +21011,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             216,
@@ -21905,8 +21034,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             215,
@@ -21929,8 +21057,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             214,
@@ -21953,8 +21080,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             213,
@@ -21977,8 +21103,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             212,
@@ -22001,8 +21126,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             211,
@@ -22025,8 +21149,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             210,
@@ -22049,8 +21172,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             209,
@@ -22073,8 +21195,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal), new GuardUp(Type.Normal)],
                 Level.One
-            ),
-            false
+            )
         ),
         new Memoria(
             208,
@@ -22097,8 +21218,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             207,
@@ -22121,8 +21241,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             206,
@@ -22145,8 +21264,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             205,
@@ -22169,8 +21287,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             204,
@@ -22193,8 +21310,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             203,
@@ -22217,8 +21333,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             202,
@@ -22241,8 +21356,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             201,
@@ -22265,8 +21379,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             200,
@@ -22289,8 +21402,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             199,
@@ -22313,8 +21425,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             198,
@@ -22337,8 +21448,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             197,
@@ -22361,8 +21471,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             196,
@@ -22385,8 +21494,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             195,
@@ -22409,8 +21517,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal), new GuardUp(Type.Special)],
                 Level.One
-            ),
-            false
+            )
         ),
         new Memoria(
             194,
@@ -22433,8 +21540,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             193,
@@ -22457,8 +21563,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             192,
@@ -22481,8 +21586,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             191,
@@ -22505,8 +21609,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             190,
@@ -22529,8 +21632,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             189,
@@ -22553,8 +21655,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             188,
@@ -22577,8 +21678,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special), new GuardUp(Type.Special)],
                 Level.One
-            ),
-            false
+            )
         ),
         new Memoria(
             187,
@@ -22601,8 +21701,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             186,
@@ -22625,8 +21724,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             185,
@@ -22649,8 +21747,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             184,
@@ -22673,8 +21770,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             183,
@@ -22697,8 +21793,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             182,
@@ -22721,8 +21816,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             181,
@@ -22745,8 +21839,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             180,
@@ -22769,8 +21862,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             179,
@@ -22793,8 +21885,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             178,
@@ -22817,8 +21908,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             177,
@@ -22841,8 +21931,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             176,
@@ -22865,8 +21954,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             175,
@@ -22889,8 +21977,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             174,
@@ -22913,8 +22000,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             173,
@@ -22937,8 +22023,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             172,
@@ -22961,8 +22046,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             171,
@@ -22985,8 +22069,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             170,
@@ -23009,8 +22092,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             169,
@@ -23033,8 +22115,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal)],
                 Level.Three
-            ),
-            false
+            )
         ),
         new Memoria(
             168,
@@ -23057,8 +22138,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             167,
@@ -23081,8 +22161,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             166,
@@ -23105,8 +22184,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             165,
@@ -23129,8 +22207,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             164,
@@ -23153,8 +22230,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             163,
@@ -23177,8 +22253,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             162,
@@ -23201,8 +22276,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             161,
@@ -23225,8 +22299,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             160,
@@ -23249,8 +22322,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             159,
@@ -23273,8 +22345,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             158,
@@ -23297,8 +22368,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             157,
@@ -23321,8 +22391,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             156,
@@ -23345,8 +22414,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             155,
@@ -23369,8 +22437,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             154,
@@ -23393,8 +22460,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             153,
@@ -23417,8 +22483,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             152,
@@ -23441,8 +22506,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             151,
@@ -23465,8 +22529,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             150,
@@ -23489,8 +22552,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             149,
@@ -23513,8 +22575,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             148,
@@ -23537,8 +22598,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             147,
@@ -23561,8 +22621,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             146,
@@ -23585,8 +22644,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             145,
@@ -23609,8 +22667,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             144,
@@ -23633,8 +22690,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             143,
@@ -23657,8 +22713,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             142,
@@ -23681,8 +22736,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             141,
@@ -23705,8 +22759,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             140,
@@ -23729,8 +22782,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             139,
@@ -23753,8 +22805,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             138,
@@ -23777,8 +22828,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             137,
@@ -23801,8 +22851,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             136,
@@ -23825,8 +22874,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             135,
@@ -23849,8 +22897,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             134,
@@ -23873,8 +22920,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             133,
@@ -23897,8 +22943,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             132,
@@ -23921,8 +22966,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             131,
@@ -23945,8 +22989,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             130,
@@ -23969,8 +23012,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             129,
@@ -23993,8 +23035,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             128,
@@ -24017,8 +23058,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             127,
@@ -24041,8 +23081,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             126,
@@ -24065,8 +23104,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             125,
@@ -24089,8 +23127,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             124,
@@ -24113,8 +23150,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             123,
@@ -24137,8 +23173,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             122,
@@ -24161,8 +23196,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             121,
@@ -24185,8 +23219,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             120,
@@ -24209,8 +23242,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             119,
@@ -24233,8 +23265,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             118,
@@ -24257,8 +23288,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             117,
@@ -24281,8 +23311,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             116,
@@ -24305,8 +23334,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             115,
@@ -24329,8 +23357,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             114,
@@ -24353,8 +23380,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             113,
@@ -24377,8 +23403,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             112,
@@ -24401,8 +23426,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             111,
@@ -24425,8 +23449,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             110,
@@ -24449,8 +23472,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             109,
@@ -24473,8 +23495,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             108,
@@ -24497,8 +23518,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             107,
@@ -24521,8 +23541,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             106,
@@ -24545,8 +23564,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             105,
@@ -24569,8 +23587,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             104,
@@ -24593,8 +23610,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             103,
@@ -24617,8 +23633,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             102,
@@ -24641,8 +23656,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             101,
@@ -24665,8 +23679,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             100,
@@ -24689,8 +23702,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             99,
@@ -24713,8 +23725,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             98,
@@ -24737,8 +23748,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             97,
@@ -24809,8 +23819,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             94,
@@ -24833,8 +23842,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             93,
@@ -24857,8 +23865,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             92,
@@ -24881,8 +23888,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             91,
@@ -24905,8 +23911,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             90,
@@ -24929,8 +23934,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             89,
@@ -24953,8 +23957,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             88,
@@ -24977,8 +23980,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             87,
@@ -25001,8 +24003,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             86,
@@ -25025,8 +24026,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special), new GuardUp(Type.Special)],
                 Level.One
-            ),
-            false
+            )
         ),
         new Memoria(
             85,
@@ -25049,8 +24049,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             84,
@@ -25073,8 +24072,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             83,
@@ -25097,8 +24095,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             82,
@@ -25121,8 +24118,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             81,
@@ -25145,8 +24141,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             80,
@@ -25169,8 +24164,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             79,
@@ -25193,8 +24187,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             78,
@@ -25217,8 +24210,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             77,
@@ -25241,8 +24233,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal), new GuardUp(Type.Normal)],
                 Level.One
-            ),
-            false
+            )
         ),
         new Memoria(
             76,
@@ -25265,8 +24256,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             75,
@@ -25289,8 +24279,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             74,
@@ -25313,8 +24302,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             73,
@@ -25337,8 +24325,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             72,
@@ -25361,8 +24348,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             71,
@@ -25385,8 +24371,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             70,
@@ -25409,8 +24394,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             69,
@@ -25433,8 +24417,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             68,
@@ -25457,8 +24440,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             67,
@@ -25481,8 +24463,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             66,
@@ -25505,8 +24486,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             65,
@@ -25529,8 +24509,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             64,
@@ -25553,8 +24532,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             63,
@@ -25577,8 +24555,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             62,
@@ -25601,8 +24578,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             61,
@@ -25625,8 +24601,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             60,
@@ -25649,8 +24624,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             59,
@@ -25673,8 +24647,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             58,
@@ -25697,8 +24670,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             57,
@@ -25721,8 +24693,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             56,
@@ -25745,8 +24716,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             55,
@@ -25793,8 +24763,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             53,
@@ -25817,8 +24786,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             52,
@@ -25841,8 +24809,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             51,
@@ -25865,8 +24832,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             50,
@@ -25889,8 +24855,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             49,
@@ -25913,8 +24878,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             48,
@@ -25937,8 +24901,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             47,
@@ -25961,8 +24924,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             46,
@@ -25985,8 +24947,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             45,
@@ -26009,8 +24970,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             44,
@@ -26033,8 +24993,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             43,
@@ -26057,8 +25016,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             42,
@@ -26081,8 +25039,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             41,
@@ -26105,8 +25062,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             40,
@@ -26129,8 +25085,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             39,
@@ -26153,8 +25108,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             38,
@@ -26177,8 +25131,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             37,
@@ -26201,8 +25154,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             36,
@@ -26225,8 +25177,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             35,
@@ -26249,8 +25200,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             34,
@@ -26273,8 +25223,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             33,
@@ -26297,8 +25246,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             32,
@@ -26321,8 +25269,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             31,
@@ -26345,8 +25292,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             30,
@@ -26369,8 +25315,7 @@ public record Memoria(
                 Trigger.Command,
                 [new MpCostDown()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             29,
@@ -26393,8 +25338,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             28,
@@ -26417,8 +25361,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             27,
@@ -26441,8 +25384,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             26,
@@ -26465,8 +25407,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             25,
@@ -26489,8 +25430,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             24,
@@ -26513,8 +25453,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             23,
@@ -26537,8 +25476,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             22,
@@ -26561,8 +25499,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             21,
@@ -26585,8 +25522,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new RecoveryUp()],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             20,
@@ -26609,8 +25545,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             19,
@@ -26633,8 +25568,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             18,
@@ -26657,8 +25591,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             17,
@@ -26681,8 +25614,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             16,
@@ -26705,8 +25637,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             15,
@@ -26729,8 +25660,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             14,
@@ -26753,8 +25683,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             13,
@@ -26777,8 +25706,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             12,
@@ -26801,8 +25729,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             11,
@@ -26825,8 +25752,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             10,
@@ -26849,8 +25775,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             9,
@@ -26873,8 +25798,7 @@ public record Memoria(
                 Trigger.Support,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             8,
@@ -26897,8 +25821,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             7,
@@ -26921,8 +25844,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             6,
@@ -26945,8 +25867,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardUp(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             5,
@@ -26969,8 +25890,7 @@ public record Memoria(
                 Trigger.Recovery,
                 [new GuardUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             4,
@@ -26993,8 +25913,7 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.One
-            ),
-            false
+            )
         ),
         new Memoria(
             3,
@@ -27017,8 +25936,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             2,
@@ -27041,8 +25959,7 @@ public record Memoria(
                 Trigger.Support,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             1,
@@ -27065,8 +25982,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Special)],
                 Level.Two
-            ),
-            false
+            )
         ),
         new Memoria(
             0,
@@ -27089,8 +26005,7 @@ public record Memoria(
                 Trigger.Attack,
                 [new GuardDown(Type.Normal)],
                 Level.Two
-            ),
-            false
+            )
         ),
     };
 }

@@ -46,7 +46,7 @@ namespace mitama.Domain {
         Special
     }
 
-    public readonly record struct Status(int Atk, int Def, int SpAtk, int SpDef)
+    public readonly record struct Status(int Atk, int SpAtk, int Def, int SpDef)
     {
         public static implicit operator Status(ValueTuple<int, int, int, int> from) => new()
         {
