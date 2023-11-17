@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MitamatichOperations (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MitamatichOperations (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
