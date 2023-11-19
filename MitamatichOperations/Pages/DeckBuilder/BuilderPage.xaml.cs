@@ -14,6 +14,7 @@ using mitama.Pages.Common;
 using Windows.ApplicationModel.DataTransfer;
 using WinRT;
 using ColorCode.Common;
+using SimdLinq;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -119,7 +120,7 @@ namespace mitama.Pages.DeckBuilder
             {
                 SupportSummary.Items.Add(new Button() {
                     Content = $"{BuilderPageHelpers.SupportTypeToString(type)}: {num}",
-                    Width = 100,
+                    Width = 120,
                 });
             }
 
@@ -143,7 +144,7 @@ namespace mitama.Pages.DeckBuilder
             {
                 SkillSummary.Items.Add(new Button() {
                     Content = $"{BuilderPageHelpers.SkillTypeToString(type)}: {num}",
-                    Width = 100,
+                    Width = 120,
                 });
             }
         }
@@ -299,6 +300,7 @@ namespace mitama.Pages.DeckBuilder
                 .List
                 .Where(memoria => _currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria)))
                 .Where(memoria => !Pool.Contains(memoria))
+                .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Name).Contains(memoria.Name))
                 .Where(memoria => ApplyFilter(memoria, Filters, _currentFilters)))
             {
                 Pool.Add(memoria);
