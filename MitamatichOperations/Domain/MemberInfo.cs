@@ -8,8 +8,8 @@ public abstract record Position : IComparable<Position> {
     public abstract string Display { get; }
 
     public static Position FromStr(string pos) => pos switch {
-        "Sp.Attacker" => new Front(FrontCategory.Normal),
-        "N.Attacker" => new Front(FrontCategory.Special),
+        "N.Attacker" => new Front(FrontCategory.Normal),
+        "Sp.Attacker" => new Front(FrontCategory.Special),
         "Buffer" => new Back(BackCategory.Buffer),
         "DeBuffer" => new Back(BackCategory.DeBuffer),
         "Healer" => new Back(BackCategory.Healer),

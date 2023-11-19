@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
@@ -12,6 +13,7 @@ using mitama.Domain;
 using mitama.Pages.Common;
 using Windows.ApplicationModel.DataTransfer;
 using WinRT;
+using ColorCode.Common;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -28,7 +30,7 @@ namespace mitama.Pages.DeckBuilder
 
         private ObservableCollection<Memoria> Deck { get; set; } = [];
         private ObservableCollection<Memoria> LegendaryDeck { get; set; } = [];
-        private ObservableCollection<Memoria> Sources { get; set; } = new(Memoria.List.Where(m => Costume.List[1].CanBeEquipped(m)));
+        private ObservableCollection<Memoria> Pool { get; set; } = new(Memoria.List.Where(m => Costume.List[1].CanBeEquipped(m)));
         private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = [];
         private HashSet<FilterType> _currentFilters = [];
         private readonly Domain.Status StatSum = new();
@@ -97,6 +99,47 @@ namespace mitama.Pages.DeckBuilder
             {
                 GeneralInfoBar.IsOpen = false;
             }
+
+            Dictionary<SupportType, int> supportPairs = [];
+            foreach (var effect in Deck.Concat(LegendaryDeck).SelectMany(m => m.SupportSkill.Effects))
+            {
+                var type = BuilderPageHelpers.ToSupportType(effect);
+                if (supportPairs.TryGetValue(type, out int count))
+                {
+                    supportPairs[type] = count + 1;
+                }
+                else
+                {
+                    supportPairs.Add(type, 1);
+                }
+            }
+
+            SupportSummary.Items.Clear();
+            foreach (var (type, num) in supportPairs)
+            {
+                SupportSummary.Items.Add(new Button() { Content = $"{BuilderPageHelpers.SupportTypeToString(type)}: {num}" });
+            }
+
+
+            Dictionary<SkillType, int> skillPairs = [];
+            foreach (var effect in Deck.Concat(LegendaryDeck).SelectMany(m => m.Skill.StatusChanges))
+            {
+                var type = BuilderPageHelpers.ToSkillType(effect);
+                if (skillPairs.TryGetValue(type, out int count))
+                {
+                    skillPairs[type] = count + 1;
+                }
+                else
+                {
+                    skillPairs.Add(type, 1);
+                }
+            }
+
+            SkillSummary.Items.Clear();
+            foreach (var (type, num) in skillPairs)
+            {
+                SkillSummary.Items.Add(new Button() { Content = $"{BuilderPageHelpers.SkillTypeToString(type)}: {num}" });
+            }
         }
 
         private void Deck_Drop(object sender, DragEventArgs e)
@@ -109,9 +152,9 @@ namespace mitama.Pages.DeckBuilder
             {
                 LegendaryDeck.Add(memoria);
             }
-            foreach (var toRemove in Sources.Where(m => selectedMemorias.Select(s => s.Name).Contains(m.Name)).ToList())
+            foreach (var toRemove in Pool.Where(m => selectedMemorias.Select(s => s.Name).Contains(m.Name)).ToList())
             {
-                Sources.Remove(toRemove);
+                Pool.Remove(toRemove);
             }
             Cleanup();
         }
@@ -124,7 +167,7 @@ namespace mitama.Pages.DeckBuilder
                 .Where(dummyCostume.CanBeEquipped)
                 .Where(m => selectedMemorias.Select(s => s.Name).Contains(m.Name)))
             {
-                Sources.Add(toAdd);
+                Pool.Add(toAdd);
             }
             foreach (var toRemove in selectedMemorias)
             {
@@ -142,9 +185,9 @@ namespace mitama.Pages.DeckBuilder
                 {
                     Deck.Clear();
                     Cleanup();
-                    Sources = new(Memoria.List.Where(memoria => Costume.List[0].CanBeEquipped(memoria)));
+                    Pool = new(Memoria.List.Where(memoria => Costume.List[0].CanBeEquipped(memoria)));
 
-                    MemoriaSources.ItemsSource = Sources;
+                    MemoriaSources.ItemsSource = Pool;
                     FilterContent.Children.Clear();
                     
                     var c1 = new CheckBox { Content = "’Êí’P‘Ì", IsChecked = true };
@@ -174,7 +217,7 @@ namespace mitama.Pages.DeckBuilder
                 else
                 {
                     Deck.Clear();
-                    Sources = new(Memoria.List.Where(memoria => Costume.List[1].CanBeEquipped(memoria)));
+                    Pool = new(Memoria.List.Where(memoria => Costume.List[1].CanBeEquipped(memoria)));
                     FilterContent.Children.Clear();
 
                     var c1 = new CheckBox { Content = "Žx‰‡", IsChecked = true };
@@ -195,7 +238,7 @@ namespace mitama.Pages.DeckBuilder
                         FilterType.Interference,
                         FilterType.Recovery
                     ];
-                    MemoriaSources.ItemsSource = Sources;
+                    MemoriaSources.ItemsSource = Pool;
                 }
             }
         }
@@ -249,10 +292,10 @@ namespace mitama.Pages.DeckBuilder
             foreach (var memoria in Memoria
                 .List
                 .Where(memoria => _currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria)))
-                .Where(memoria => !Sources.Contains(memoria))
+                .Where(memoria => !Pool.Contains(memoria))
                 .Where(memoria => ApplyFilter(memoria, Filters, _currentFilters)))
             {
-                Sources.Add(memoria);
+                Pool.Add(memoria);
             }
         }
 
@@ -302,9 +345,9 @@ namespace mitama.Pages.DeckBuilder
                         throw new UnreachableException("Unreachable");
                     }
             }
-            foreach (var memoria in Sources.ToList().Where(memoria => !_currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria))))
+            foreach (var memoria in Pool.ToList().Where(memoria => !_currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria))))
             {
-                Sources.Remove(memoria);
+                Pool.Remove(memoria);
             }
         }
 
@@ -846,10 +889,10 @@ namespace mitama.Pages.DeckBuilder
             foreach (var memoria in Memoria
                     .List
                     .Where(memoria => _currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria)))
-                    .Where(memoria => !Sources.Contains(memoria))
+                    .Where(memoria => !Pool.Contains(memoria))
                     .Where(memoria => ApplyFilter(memoria, Filters, _currentFilters)))
             {
-                Sources.Add(memoria);
+                Pool.Add(memoria);
             }
         }
 
@@ -867,7 +910,7 @@ namespace mitama.Pages.DeckBuilder
                             if (!node.IsChecked) return;
                             node.IsChecked = false;
                         }
-                        Sources.Clear();
+                        Pool.Clear();
                         break;
                     }
                 case "‰Î":
@@ -902,7 +945,7 @@ namespace mitama.Pages.DeckBuilder
                             if (!node.IsChecked) return;
                             node.IsChecked = false;
                         }
-                        Sources.Clear();
+                        Pool.Clear();
                         break;
                     }
                 case "A":
@@ -937,7 +980,7 @@ namespace mitama.Pages.DeckBuilder
                             if (!node.IsChecked) return;
                             node.IsChecked = false;
                         }
-                        Sources.Clear();
+                        Pool.Clear();
                         break;
                     }
                 case "‡T":
@@ -997,7 +1040,7 @@ namespace mitama.Pages.DeckBuilder
                             if (!node.IsChecked) return;
                             node.IsChecked = false;
                         }
-                        Sources.Clear();
+                        Pool.Clear();
                         break;
                     }
                 case "A up":
@@ -1241,9 +1284,9 @@ namespace mitama.Pages.DeckBuilder
                     }
             }
             if (prevCoount == _currentFilters.Count) return;
-            foreach (var memoria in Sources.ToList().Where(memoria => !ApplyFilter(memoria, Filters, _currentFilters, false)))
+            foreach (var memoria in Pool.ToList().Where(memoria => !ApplyFilter(memoria, Filters, _currentFilters, false)))
             {
-                Sources.Remove(memoria);
+                Pool.Remove(memoria);
             }
         }
         private void InitFilters()
@@ -1767,25 +1810,25 @@ namespace mitama.Pages.DeckBuilder
             switch (option)
             {
                 case 0:
-                    Sources = new(Sources.OrderBy(memoria => memoria.Id));
+                    Pool.SortStable((a, b) => b.Id.CompareTo(a.Id));
                     break;
                 case 1:
-                    Sources = new(Sources.OrderBy(memoria => memoria.Status.Atk));
+                    Pool.SortStable((a, b) => b.Status.Atk.CompareTo(a.Status.Atk));
                     break;
                 case 2:
-                    Sources = new(Sources.OrderBy(memoria => memoria.Status.SpAtk));
+                    Pool.SortStable((a, b) => b.Status.SpAtk.CompareTo(a.Status.SpAtk));
                     break;
                 case 3:
-                    Sources = new(Sources.OrderBy(memoria => memoria.Status.Def));
+                    Pool.SortStable((a, b) => b.Status.Def.CompareTo(a.Status.Def));
                     break;
                 case 4:
-                    Sources = new(Sources.OrderBy(memoria => memoria.Status.SpDef));
+                    Pool.SortStable((a, b) => b.Status.SpDef.CompareTo(a.Status.SpDef));
                     break;
                 case 5:
-                    Sources = new(Sources.OrderBy(memoria => memoria.Status.Atk + memoria.Status.SpAtk));
+                    Pool.SortStable((a, b) => b.Status.ASA.CompareTo(a.Status.ASA));
                     break;
                 case 6:
-                    Sources = new(Sources.OrderBy(memoria => memoria.Status.Def + memoria.Status.SpDef));
+                    Pool.SortStable((a, b) => b.Status.DSD.CompareTo(a.Status.DSD));
                     break;
             }
         }
@@ -1909,6 +1952,71 @@ namespace mitama.Pages.DeckBuilder
         Recover,
         Counter,
     }
+
+    public enum SkillType
+    {
+        Au,
+        Ad,
+        SAu,
+        SAd,
+        Du,
+        Dd,
+        SDu,
+        SDd,
+        HPu,
+        FPu,
+        FPd,
+        WaPu,
+        WaPd,
+        WiPu,
+        WiPd,
+        LPu,
+        LPd,
+        DPu,
+        DPd,
+        FGu,
+        FGd,
+        WaGu,
+        WaGd,
+        WiGu,
+        WiGd,
+        LGu,
+        LGd,
+        DGu,
+        DGd,
+        Other,
+    }
+
+    public enum SupportType
+    {
+        NormalMatchPtUp,
+        SpecialMatchPtUp,
+        DamageUp,
+        PowerUp,
+        PowerDown,
+        GuardUp,
+        GuardDown,
+        SpPowerUp,
+        SpPowerDown,
+        SpGuardUp,
+        SpGuardDown,
+        FirePowerUp,
+        WaterPowerUp,
+        WindPowerUp,
+        FirePowerDown,
+        WaterPowerDown,
+        WindPowerDown,
+        FireGuardUp,
+        WaterGuardUp,
+        WindGuardUp,
+        FireGuardDown,
+        WaterGuardDown,
+        WindGuardDown,
+        SupportUp,
+        RecoveryUp, 
+        MpCostDown,
+    }
+
     public class MyTreeNode
     {
         public string Text { get; set; } = string.Empty;

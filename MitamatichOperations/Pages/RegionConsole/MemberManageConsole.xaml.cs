@@ -14,6 +14,7 @@ using mitama.Algorithm.IR;
 using WinRT;
 using System.IO;
 using System.Text;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace mitama.Pages.RegionConsole;
 
@@ -23,11 +24,17 @@ namespace mitama.Pages.RegionConsole;
 public sealed partial class MemberManageConsole
 {
     private string _regionName = Director.ReadCache().Region;
-    private MemberInfo? _selectedMember;
+    private MemberInfo _selectedMember;
 
     public MemberManageConsole()
     {
         InitializeComponent();
+        Init();
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
         Init();
     }
 

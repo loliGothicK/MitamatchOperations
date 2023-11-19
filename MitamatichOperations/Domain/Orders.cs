@@ -55,6 +55,10 @@ namespace mitama.Domain {
             Def = from.Item3,
             SpDef = from.Item4,
         };
+
+        public int ASA => Atk + SpAtk;
+        public int DSD => Def + SpDef;
+
         public static Status operator+(Status a, Status b) => new()
         {
             Atk = a.Atk + b.Atk,

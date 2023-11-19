@@ -19176,13 +19176,13 @@ public record Memoria(
             "フラガラッハの光",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(2711, 2718, 3888, 3892),
+            new Status(3620, 2718, 3595, 4964),
             21,
             new Skill(
                 "WガードヒールE LG",
                 "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
                 Array.Empty<SkillEffect>(),
-                [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
+                [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Lg,
                 Range.E
             ),

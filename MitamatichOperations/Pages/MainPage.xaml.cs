@@ -54,8 +54,8 @@ public sealed partial class MainPage
 
     public void Navigate(
         System.Type pageType,
-        object? targetPageArguments = null,
-        Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo? navigationTransitionInfo = null)
+        object targetPageArguments = null,
+        Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo navigationTransitionInfo = null)
     {
         var args = new NavigationRootPageProps
         {
@@ -164,8 +164,8 @@ public sealed partial class MainPage
             .Build();
         dialog.IsPrimaryButtonEnabled = false;
 
-        string? name = null;
-        Position? position = null;
+        string name = null;
+        Position position = null;
 
         var body = new AddNewMemberDialogContent(fragment =>
         {
@@ -190,11 +190,13 @@ public sealed partial class MainPage
             }
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Members\{name}");
             await using var fs = Director.CreateFile($@"{Director.ProjectDir()}\{Project}\Members\{name}\info.json");
-            var memberJson = new MemberInfo(DateTime.Now, DateTime.Now, name!, position!, new ushort[] { }).ToJson();
+            var memberJson = new MemberInfo(DateTime.Now, DateTime.Now, name!, position!, []).ToJson();
             var save = new UTF8Encoding(true).GetBytes(memberJson);
             fs.Write(save, 0, save.Length);
             await SuccessInfo("Successfully saved!");
         });
+
+        Navigate(typeof(RegionConsolePage), Project);
 
         await dialog.ShowAsync();
     }
@@ -331,6 +333,6 @@ public sealed partial class MainPage
 
 public class NavigationRootPageProps
 {
-    public MainPage? NavigationRootPage;
-    public object? Parameter;
+    public MainPage NavigationRootPage;
+    public object Parameter;
 }

@@ -7,6 +7,7 @@ using System.Text.Json;
 using mitama.Domain;
 using static System.IO.Directory;
 using static System.Environment;
+using static Tensorflow.TensorShapeProto.Types;
 
 namespace mitama.Pages.Common;
 
@@ -36,9 +37,18 @@ internal class Util {
     }
     internal static MemberInfo[] LoadMembersInfo(string project) {
         var membersDir = @$"{Director.ProjectDir()}\{project}\Members";
+
+        static void WaitForFile(string filePath)
+        {
+            while (IsFileInUse(filePath))
+            {
+                System.Threading.Thread.Sleep(1000); // 1秒待機して再試行
+            }
+        }
         if (Exists(membersDir)) {
             return GetDirectories(membersDir)
                 .Select(dir => {
+                    WaitForFile($@"{dir}\info.json");
                     using var sr = new StreamReader($@"{dir}\info.json", Encoding.GetEncoding("UTF-8"));
                     var json = sr.ReadToEnd();
                     return MemberInfo.FromJson(json);
@@ -50,6 +60,22 @@ internal class Util {
         return [];
     }
 
+    private static bool IsFileInUse(string filePath)
+    {
+        try
+        {
+            using (FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
+            {
+                // ファイルを開ける場合は利用中でないとみなす
+                return false;
+            }
+        }
+        catch (IOException)
+        {
+            // IOExceptionが発生した場合はファイルが他のプロセスによって利用中
+            return true;
+        }
+    }
 }
 
 internal class Director {
