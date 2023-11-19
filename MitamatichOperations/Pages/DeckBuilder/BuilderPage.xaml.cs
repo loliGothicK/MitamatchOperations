@@ -117,7 +117,10 @@ namespace mitama.Pages.DeckBuilder
             SupportSummary.Items.Clear();
             foreach (var (type, num) in supportPairs)
             {
-                SupportSummary.Items.Add(new Button() { Content = $"{BuilderPageHelpers.SupportTypeToString(type)}: {num}" });
+                SupportSummary.Items.Add(new Button() {
+                    Content = $"{BuilderPageHelpers.SupportTypeToString(type)}: {num}",
+                    Width = 100,
+                });
             }
 
 
@@ -138,7 +141,10 @@ namespace mitama.Pages.DeckBuilder
             SkillSummary.Items.Clear();
             foreach (var (type, num) in skillPairs)
             {
-                SkillSummary.Items.Add(new Button() { Content = $"{BuilderPageHelpers.SkillTypeToString(type)}: {num}" });
+                SkillSummary.Items.Add(new Button() {
+                    Content = $"{BuilderPageHelpers.SkillTypeToString(type)}: {num}",
+                    Width = 100,
+                });
             }
         }
 
