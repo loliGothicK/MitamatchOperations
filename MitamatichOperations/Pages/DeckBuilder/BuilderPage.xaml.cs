@@ -1873,6 +1873,21 @@ namespace mitama.Pages.DeckBuilder
                 GeneralInfoBar.IsOpen = false;
             }
         }
+
+        private async void GenerateLink_Click(object _sender, RoutedEventArgs _e)
+        {
+            var legendary = string.Join(",", LegendaryDeck.Select(m => m.ToJson()));
+            var deck = string.Join(",", Deck.Select(m => m.ToJson()));
+            var json = $"{{ \"legendary\":[{legendary}],\"deck\": [{deck}] }}";
+            var jsonBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(json));
+            // copy to clipboard
+            System.Windows.Clipboard.SetText($"http://mitama.tech/deck/?json={jsonBase64}");
+            GeneralInfoBar.Title = "クリップボードにリンクをコピーしました";
+            GeneralInfoBar.Severity = InfoBarSeverity.Success;
+            GeneralInfoBar.IsOpen = true;
+            await Task.Delay(3000);
+            GeneralInfoBar.IsOpen = false;
+        }
     }
 
     public enum FilterType

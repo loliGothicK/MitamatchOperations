@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Web;
 
 namespace mitama.Domain;
 
@@ -194,6 +195,7 @@ public record Rearguard(RearguardKind Kind) : MemoriaKind;
 
 public record Memoria(
     int Id,
+    string Link,
     string Name,
     MemoriaKind Kind,
     Element Element,
@@ -206,6 +208,10 @@ public record Memoria(
 {
     public Uri Uri => new($"ms-appx:///Assets/memoria/{Name}.jpg");
     public string Path = $"/Assets/memoria/{Name}.jpg";
+    public string ToJson()
+    {
+        return $@"{{ ""link"": ""{HttpUtility.UrlEncode(Link)}"", ""name"": ""{HttpUtility.UrlEncode(Name)}"" }}";
+    }
 
     public virtual bool Equals(Memoria? other) => Id == other?.Id;
     public override int GetHashCode() => Name.GetHashCode();
@@ -213,7 +219,33 @@ public record Memoria(
     public static readonly Memoria[] List =
     {
         new Memoria(
-            1119,
+            1127,
+            "フラガラッハの光",
+            "フラガラッハの光",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Light,
+            new Status(3620, 3595, 4935, 4964),
+            21,
+            new Skill(
+                "WガードヒールE LG",
+                "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
+                Array.Empty<SkillEffect>(),
+                [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
+                Level.Lg,
+                Range.E
+            ),
+            new SupportSkill(
+                "回:回復UP/副援:支援UP Ⅲ",
+                "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
+                Trigger.Support,
+                [new RecoveryUp(), new SupportUp()],
+                Level.Three
+            ),
+            true
+        ),
+        new Memoria(
+            1126,
+            "クリエイターズコラボかわいい狩りの秋",
             "かわいい狩りの秋",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -221,7 +253,7 @@ public record Memoria(
             22,
             new Skill(
                 "火：パワーストライクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -236,7 +268,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1118,
+            1125,
+            "クリエイターズコラボかわいい狩りの秋",
             "かわいい狩りの秋",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -259,7 +292,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1117,
+            1124,
+            "クリエイターズコラボかわいい狩りの秋",
             "かわいい狩りの秋",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -282,7 +316,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1116,
+            1123,
+            "クリエイターズコラボかわいい狩りの秋",
             "かわいい狩りの秋",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -305,7 +340,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1115,
+            1122,
+            "クリエイターズコラボ藍の心と秋の空",
             "藍の心と秋の空",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -328,7 +364,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1114,
+            1121,
+            "クリエイターズコラボ藍の心と秋の空",
             "藍の心と秋の空",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -351,7 +388,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1113,
+            1120,
+            "神庭の花火師",
             "神庭の花火師",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -374,7 +412,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1112,
+            1119,
+            "神庭の花火師",
             "神庭の花火師",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -397,7 +436,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1111,
+            1118,
+            "神庭の花火師",
             "神庭の花火師",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -420,7 +460,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1110,
+            1117,
+            "神庭の花火師",
             "神庭の花火師",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -443,7 +484,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1109,
+            1116,
+            "シネマティックに煌めいて",
             "シネマティックに煌めいて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -466,7 +508,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1108,
+            1115,
+            "シネマティックに煌めいて",
             "シネマティックに煌めいて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -489,7 +532,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1107,
+            1114,
+            "秘め事☆プールサイド",
             "秘め事☆プールサイド",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -497,7 +541,7 @@ public record Memoria(
             24,
             new Skill(
                 "水拡：Sp.パワースマッシュB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。オーダースキル「水属性効果増加」を発動中は敵2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。※...",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。オーダースキル「水属性効果増加」を発動中は敵2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
                 [new ElementSpread(Element.Water)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -513,7 +557,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            1106,
+            1113,
+            "クリエイターズコラボはつらつハイタッチ",
             "はつらつハイタッチ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -536,7 +581,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1105,
+            1112,
+            "クリエイターズコラボはつらつハイタッチ",
             "はつらつハイタッチ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -559,7 +605,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1104,
+            1111,
+            "クリエイターズコラボはつらつハイタッチ",
             "はつらつハイタッチ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -582,7 +629,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1103,
+            1110,
+            "クリエイターズコラボはつらつハイタッチ",
             "はつらつハイタッチ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -605,7 +653,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1102,
+            1109,
+            "クリエイターズコラボ夢の中で隠れんぼ",
             "夢の中で隠れんぼ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -628,7 +677,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1101,
+            1108,
+            "クリエイターズコラボ夢の中で隠れんぼ",
             "夢の中で隠れんぼ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -651,7 +701,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1100,
+            1107,
+            "クリエイターズコラボフレフレリリィ",
             "フレフレリリィ！",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -674,7 +725,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1099,
+            1106,
+            "クリエイターズコラボフレフレリリィ",
             "フレフレリリィ！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -697,7 +749,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1098,
+            1105,
+            "クリエイターズコラボひそひそナイト",
             "ひそひそナイト",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -720,7 +773,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1097,
+            1104,
+            "クリエイターズコラボひそひそナイト",
             "ひそひそナイト",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -743,7 +797,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1096,
+            1103,
+            "クリエイターズコラボ新涼灯火",
             "新涼灯火",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -766,7 +821,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1095,
+            1102,
+            "クリエイターズコラボ新涼灯火",
             "新涼灯火",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -789,7 +845,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1094,
+            1101,
+            "クリエイターズコラボ新涼灯火",
             "新涼灯火",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -812,7 +869,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1093,
+            1100,
+            "クリエイターズコラボ新涼灯火",
             "新涼灯火",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -835,7 +893,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1092,
+            1099,
+            "クリエイターズコラボ秋のそうさく",
             "秋のそうさく",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -858,7 +917,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1091,
+            1098,
+            "クリエイターズコラボ秋のそうさく",
             "秋のそうさく",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -881,7 +941,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1090,
+            1097,
+            "かけがえのない時間",
             "かけがえのない時間",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -904,7 +965,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1089,
+            1096,
+            "かけがえのない時間",
             "かけがえのない時間",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -927,7 +989,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1088,
+            1095,
+            "かけがえのない時間",
             "かけがえのない時間",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -950,7 +1013,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1087,
+            1094,
+            "かけがえのない時間",
             "かけがえのない時間",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -973,7 +1037,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1086,
+            1093,
+            "双子メイド風スタイル",
             "双子メイド風スタイル",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -996,7 +1061,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1085,
+            1092,
+            "双子メイド風スタイル",
             "双子メイド風スタイル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -1019,7 +1085,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1084,
+            1091,
+            "素敵なお茶会",
             "素敵なお茶会",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -1042,7 +1109,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1083,
+            1090,
+            "素敵なお茶会",
             "素敵なお茶会",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -1065,7 +1133,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1082,
+            1089,
+            "素敵なお茶会",
             "素敵なお茶会",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -1088,7 +1157,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1081,
+            1088,
+            "素敵なお茶会",
             "素敵なお茶会",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -1111,7 +1181,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1080,
+            1087,
+            "メイドのうたたね",
             "メイドのうたたね",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -1134,7 +1205,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1079,
+            1086,
+            "メイドのうたたね",
             "メイドのうたたね",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -1157,7 +1229,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1078,
+            1085,
+            "メイドのご奉仕",
             "メイドのご奉仕",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -1180,7 +1253,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1077,
+            1084,
+            "メイドのご奉仕",
             "メイドのご奉仕",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -1203,7 +1277,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1076,
+            1083,
+            "海風に吹かれて",
             "海風に吹かれて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -1226,7 +1301,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1075,
+            1082,
+            "海風に吹かれて",
             "海風に吹かれて",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -1249,7 +1325,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1074,
+            1081,
+            "クリエイターズコラボ落ち葉のリース",
             "落ち葉のリース",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -1272,7 +1349,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1073,
+            1080,
+            "クリエイターズコラボ落ち葉のリース",
             "落ち葉のリース",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -1295,7 +1373,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1072,
+            1079,
+            "クリエイターズコラボ落ち葉のリース",
             "落ち葉のリース",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -1318,7 +1397,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1071,
+            1078,
+            "クリエイターズコラボ落ち葉のリース",
             "落ち葉のリース",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -1341,7 +1421,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1070,
+            1077,
+            "クリエイターズコラボ深まる秋の一幕",
             "深まる秋の一幕",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -1364,7 +1445,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1069,
+            1076,
+            "クリエイターズコラボ深まる秋の一幕",
             "深まる秋の一幕",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -1387,7 +1469,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1068,
+            1075,
+            "雹嵐の如く",
             "雹嵐の如く",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -1411,7 +1494,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            1067,
+            1074,
+            "瓦礫の街に咲いてこそ",
             "瓦礫の街に咲いてこそ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -1434,7 +1518,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1066,
+            1073,
+            "瓦礫の街に咲いてこそ",
             "瓦礫の街に咲いてこそ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -1457,7 +1542,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1065,
+            1072,
+            "瓦礫の街に咲いてこそ",
             "瓦礫の街に咲いてこそ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -1480,7 +1566,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1064,
+            1071,
+            "瓦礫の街に咲いてこそ",
             "瓦礫の街に咲いてこそ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -1503,7 +1590,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1063,
+            1070,
+            "掲げし長針と短針",
             "掲げし長針と短針",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -1526,7 +1614,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1062,
+            1069,
+            "掲げし長針と短針",
             "掲げし長針と短針",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -1549,7 +1638,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1061,
+            1068,
+            "廃墟のアンティークドール",
             "廃墟のアンティークドール",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -1572,7 +1662,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1060,
+            1067,
+            "廃墟のアンティークドール",
             "廃墟のアンティークドール",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -1595,7 +1686,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1059,
+            1066,
+            "クリエイターズコラボ転ばぬ先の一葉",
             "転ばぬ先の一葉",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -1618,7 +1710,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1058,
+            1065,
+            "クリエイターズコラボ転ばぬ先の一葉",
             "転ばぬ先の一葉",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -1641,7 +1734,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1057,
+            1064,
+            "クリエイターズコラボ秋空を見上げながら",
             "秋空を見上げながら",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -1649,7 +1743,7 @@ public record Memoria(
             22,
             new Skill(
                 "火：ファイアパワーストライクA Ⅳ+",
-                "敵1体に通常特大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1体に通常特大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
@@ -1664,7 +1758,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1056,
+            1063,
+            "クリエイターズコラボ秋空を見上げながら",
             "秋空を見上げながら",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -1687,7 +1782,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1055,
+            1062,
+            "クリエイターズコラボ秋空を見上げながら",
             "秋空を見上げながら",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -1710,7 +1806,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1054,
+            1061,
+            "クリエイターズコラボ秋空を見上げながら",
             "秋空を見上げながら",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -1733,7 +1830,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1053,
+            1060,
+            "優美な魔女に魅せられて",
             "優美な魔女に魅せられて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -1756,7 +1854,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1052,
+            1059,
+            "優美な魔女に魅せられて",
             "優美な魔女に魅せられて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -1779,7 +1878,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1051,
+            1058,
+            "優美な魔女に魅せられて",
             "優美な魔女に魅せられて",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -1802,7 +1902,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1050,
+            1057,
+            "優美な魔女に魅せられて",
             "優美な魔女に魅せられて",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -1825,7 +1926,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1049,
+            1056,
+            "這い寄る妖艶",
             "這い寄る妖艶",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -1833,7 +1935,7 @@ public record Memoria(
             22,
             new Skill(
                 "水：Sp.ウォーターパワースマッシュA Ⅳ+",
-                "敵1体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
@@ -1848,7 +1950,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1048,
+            1055,
+            "這い寄る妖艶",
             "這い寄る妖艶",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -1871,7 +1974,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1047,
+            1054,
+            "健気×恥じらい＝",
             "健気×恥じらい＝",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -1879,7 +1983,7 @@ public record Memoria(
             24,
             new Skill(
                 "水：WガードヒールD Ⅳ",
-                "味方2体のHPを大回復し、味方のDEFとSp.DEFを小アップする。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "味方2体のHPを大回復し、味方のDEFとSp.DEFを小アップする。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Four,
@@ -1895,7 +1999,56 @@ public record Memoria(
             true
         ),
         new Memoria(
-            1046,
+            1053,
+            "百合ヶ丘ティーパーティ2023開催",
+            "百合ヶ丘ティーパーティ2023開催！",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            new Status(1570, 2264, 1601, 2234),
+            18,
+            new Skill(
+                "WパワーアシストA Ⅲ",
+                "味方1体のATKとSp.ATKを大アップさせる。",
+                Array.Empty<SkillEffect>(),
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
+                Level.Three,
+                Range.A
+            ),
+            new SupportSkill(
+                "援:Sp.パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
+                Trigger.Support,
+                [new PowerUp(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1052,
+            "百合ヶ丘ティーパーティ2023開催",
+            "百合ヶ丘ティーパーティ2023開催！",
+            new Vanguard(VanguardKind.SpecialSingle),
+            Element.Fire,
+            new Status(1570, 2264, 1601, 2234),
+            18,
+            new Skill(
+                "Sp.パワースマッシュA Ⅳ+",
+                "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。",
+                Array.Empty<SkillEffect>(),
+                [new StatusUp(new SpAtk(), Amount.Medium)],
+                Level.Four,
+                Range.A
+            ),
+            new SupportSkill(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1051,
+            "クリエイターズコラボもみじまんじゅう",
             "もみじまんじゅう",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -1918,7 +2071,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1045,
+            1050,
+            "クリエイターズコラボもみじまんじゅう",
             "もみじまんじゅう",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -1941,7 +2095,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1044,
+            1049,
+            "クリエイターズコラボ楓の頃",
             "楓の頃",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -1964,7 +2119,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1043,
+            1048,
+            "クリエイターズコラボ楓の頃",
             "楓の頃",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -1987,7 +2143,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1042,
+            1047,
+            "光射す守護者",
             "光射す守護者",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -2010,7 +2167,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1041,
+            1046,
+            "光射す守護者",
             "光射す守護者",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -2033,7 +2191,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1040,
+            1045,
+            "緋染めの天使",
             "緋染めの天使",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -2056,7 +2215,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1039,
+            1044,
+            "緋染めの天使",
             "緋染めの天使",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -2079,7 +2239,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1038,
+            1043,
+            "誓いの剣閃",
             "誓いの剣閃",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -2087,7 +2248,7 @@ public record Memoria(
             24,
             new Skill(
                 "火：WパワーフォールB Ⅲ",
-                "敵1～2体のATKとSp.ATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のATKとSp.ATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -2099,11 +2260,11 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            ),
-            true
+            )
         ),
         new Memoria(
-            1037,
+            1042,
+            "emotionalmemoriaねこさんこちら",
             "ねこさんこちら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -2126,7 +2287,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1036,
+            1041,
+            "emotionalmemoriaねこさんこちら",
             "ねこさんこちら",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -2149,7 +2311,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1035,
+            1040,
+            "たつき100％",
             "たつき100％",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -2172,7 +2335,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1034,
+            1039,
+            "たつき100％",
             "たつき100％",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -2195,7 +2359,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1033,
+            1038,
+            "彼方の宵空",
             "彼方の宵空",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -2218,7 +2383,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1032,
+            1037,
+            "彼方の宵空",
             "彼方の宵空",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -2241,7 +2407,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1031,
+            1036,
+            "荒ぶる銘花",
             "荒ぶる銘花",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -2264,7 +2431,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1030,
+            1035,
+            "荒ぶる銘花",
             "荒ぶる銘花",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -2287,7 +2455,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1029,
+            1034,
+            "クリエイターズコラボムーンリットワルツ",
             "ムーンリットワルツ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -2310,7 +2479,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1028,
+            1033,
+            "クリエイターズコラボムーンリットワルツ",
             "ムーンリットワルツ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
@@ -2333,7 +2503,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1027,
+            1032,
+            "クリエイターズコラボ月を見上げて",
             "月を見上げて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -2356,7 +2527,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1026,
+            1031,
+            "クリエイターズコラボ月を見上げて",
             "月を見上げて",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -2379,7 +2551,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1025,
+            1030,
+            "クリエイターズコラボお月さまの秘密",
             "お月さまの秘密",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -2402,7 +2575,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1024,
+            1029,
+            "クリエイターズコラボお月さまの秘密",
             "お月さまの秘密",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -2425,7 +2599,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1023,
+            1028,
+            "2人でニューゲーム",
             "2人でニューゲーム",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -2448,7 +2623,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1022,
+            1027,
+            "2人でニューゲーム",
             "2人でニューゲーム",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -2471,7 +2647,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1021,
+            1026,
+            "クエレブレの正義",
             "クエレブレの正義",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -2494,7 +2671,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1020,
+            1025,
+            "クエレブレの正義",
             "クエレブレの正義",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -2517,7 +2695,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1019,
+            1024,
+            "ワイルドバンチ",
             "ワイルドバンチ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -2540,7 +2719,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1018,
+            1023,
+            "ワイルドバンチ",
             "ワイルドバンチ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -2563,7 +2743,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1017,
+            1022,
+            "追憶の星空",
             "追憶の星空",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -2586,7 +2767,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1016,
+            1021,
+            "追憶の星空",
             "追憶の星空",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -2609,7 +2791,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1015,
+            1020,
+            "シャナの剣",
             "シャナの剣",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -2617,7 +2800,7 @@ public record Memoria(
             23,
             new Skill(
                 "風拡：ガードブレイクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。オーダースキル「風属性効果増加」を発動中は敵2体に通常大ダメージを与え、敵のDEFをダウンさせる。※...",
+                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。オーダースキル「風属性効果増加」を発動中は敵2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
                 [new ElementSpread(Element.Wind)],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
@@ -2633,7 +2816,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            1014,
+            1019,
+            "クリエイターズコラボ黄色い絨毯で",
             "黄色い絨毯で",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -2656,7 +2840,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1013,
+            1018,
+            "クリエイターズコラボ黄色い絨毯で",
             "黄色い絨毯で",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -2679,7 +2864,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1012,
+            1017,
+            "クリエイターズコラボ朋友信之",
             "朋友信之",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -2702,7 +2888,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1011,
+            1016,
+            "クリエイターズコラボ朋友信之",
             "朋友信之",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -2725,7 +2912,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1010,
+            1015,
+            "クリエイターズコラボコスモスコスメ",
             "コスモスコスメ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -2748,7 +2936,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1009,
+            1014,
+            "クリエイターズコラボコスモスコスメ",
             "コスモスコスメ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -2771,7 +2960,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1008,
+            1013,
+            "キラキラ★アイドル",
             "キラキラ★アイドル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -2794,7 +2984,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1007,
+            1012,
+            "キラキラ★アイドル",
             "キラキラ★アイドル",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -2817,7 +3008,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1006,
+            1011,
+            "デュエットですの♥",
             "デュエットですの♥",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -2840,7 +3032,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1005,
+            1010,
+            "デュエットですの♥",
             "デュエットですの♥",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -2863,7 +3056,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1004,
+            1009,
+            "超電磁アイドル",
             "超電磁アイドル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -2886,7 +3080,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1003,
+            1008,
+            "超電磁アイドル",
             "超電磁アイドル",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -2909,7 +3104,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1002,
+            1007,
+            "楯の乙女と超電磁砲",
             "楯の乙女と超電磁砲",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -2932,7 +3128,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1001,
+            1006,
+            "楯の乙女と超電磁砲",
             "楯の乙女と超電磁砲",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -2955,7 +3152,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1000,
+            1005,
+            "さすが私ってところかしらぁ",
             "さすが私ってところかしらぁ？",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -2978,7 +3176,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            999,
+            1004,
+            "さすが私ってところかしらぁ",
             "さすが私ってところかしらぁ？",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -3001,7 +3200,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            998,
+            1003,
+            "お姉様の露払い",
             "お姉様の露払い",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -3024,7 +3224,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            997,
+            1002,
+            "お姉様の露払い",
             "お姉様の露払い",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -3047,7 +3248,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            996,
+            1001,
+            "これが私の、全力だぁ――",
             "これが私の、全力だぁ――！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -3070,7 +3272,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            995,
+            1000,
+            "これが私の、全力だぁ――",
             "これが私の、全力だぁ――！！",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -3093,7 +3296,33 @@ public record Memoria(
             )
         ),
         new Memoria(
-            994,
+            999,
+            "プランセス",
+            "プランセス",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Wind,
+            new Status(4152, 2719, 3649, 2734),
+            18,
+            new Skill(
+                "ストライクD LG",
+                "敵2体に通常大ダメージを与える。",
+                Array.Empty<SkillEffect>(),
+                [],
+                Level.Lg,
+                Range.D
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Normal)],
+                Level.Three
+            ),
+            true
+        ),
+        new Memoria(
+            998,
+            "クリエイターズコラボお祭りを味わって",
             "お祭りを味わって",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -3116,7 +3345,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            993,
+            997,
+            "クリエイターズコラボお祭りを味わって",
             "お祭りを味わって",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -3139,7 +3369,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            992,
+            996,
+            "クリエイターズコラボ瞳の中に映る花火",
             "瞳の中に映る花火",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -3162,7 +3393,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            991,
+            995,
+            "クリエイターズコラボ瞳の中に映る花火",
             "瞳の中に映る花火",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -3185,7 +3417,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            990,
+            994,
+            "クリエイターズコラボ射的の景品です",
             "射的の景品です！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -3208,7 +3441,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            989,
+            993,
+            "クリエイターズコラボ射的の景品です",
             "射的の景品です！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -3231,7 +3465,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            988,
+            992,
+            "クリエイターズコラボ切れた鼻緒と繋ぐ心",
             "切れた鼻緒と繋ぐ心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -3254,7 +3489,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            987,
+            991,
+            "クリエイターズコラボ切れた鼻緒と繋ぐ心",
             "切れた鼻緒と繋ぐ心",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -3277,7 +3513,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            986,
+            990,
+            "明朗たる戦乙女",
             "明朗たる戦乙女",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -3300,7 +3537,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            985,
+            989,
+            "明朗たる戦乙女",
             "明朗たる戦乙女",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -3323,7 +3561,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            984,
+            988,
+            "陽だまりの女神",
             "陽だまりの女神",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -3346,7 +3585,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            983,
+            987,
+            "陽だまりの女神",
             "陽だまりの女神",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -3369,7 +3609,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            982,
+            986,
+            "燦然たる騎士",
             "燦然たる騎士",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -3377,7 +3618,7 @@ public record Memoria(
             23,
             new Skill(
                 "火：Sp.パワースマッシュB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -3393,7 +3634,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            981,
+            985,
+            "真実の刃＆リリコレ2023開演",
             "真実の刃＆リリコレ2023 開演！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -3416,7 +3658,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            980,
+            984,
+            "真実の刃＆リリコレ2023開演",
             "真実の刃＆リリコレ2023 開演！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -3439,7 +3682,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            979,
+            983,
+            "神の子は、水面に踊る",
             "神の子は、水面に踊る",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -3463,7 +3707,152 @@ public record Memoria(
             true
         ),
         new Memoria(
+            982,
+            "夏尽くしの海",
+            "夏尽くしの海",
+            new Rearguard(RearguardKind.Support),
+            Element.Wind,
+            new Status(2233, 6254, 2221, 4889),
+            21,
+            new Skill(
+                "[風攻水防]マイトアシストC Ⅳ",
+                "味方1～3体の風属性攻撃力と水属性防御力を大アップさせる。",
+                Array.Empty<SkillEffect>(),
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium), new StatusUp(new ElementGuard(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:風パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体の風属性攻撃力を特大アップさせる。",
+                Trigger.Support,
+                [new ElementPowerUp(Element.Wind)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            981,
+            "夏尽くしの海",
+            "夏尽くしの海",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Wind,
+            new Status(2233, 6254, 2221, 4889),
+            21,
+            new Skill(
+                "風弱：Sp.パワースマッシュB Ⅲ",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに敵の風属性防御力が低いほど与えるダメージが上昇する。",
+                [new ElementWeaken(Element.Wind)],
+                [new StatusUp(new SpAtk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            980,
+            "壱撃必殺",
+            "壱撃必殺！！",
+            new Vanguard(VanguardKind.SpecialSingle),
+            Element.Wind,
+            new Status(2221, 6251, 2211, 4906),
+            21,
+            new Skill(
+                "風弱：Sp.パワースマッシュA Ⅳ",
+                "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。さらに敵の風属性防御力が低いほど与えるダメージが上昇する。",
+                [new ElementWeaken(Element.Wind)],
+                [new StatusUp(new SpAtk(), Amount.Medium)],
+                Level.Four,
+                Range.A
+            ),
+            new SupportSkill(
+                "攻:Sp.パワーUP/副攻:風パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、風属性攻撃力を大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Special), new ElementPowerUp(Element.Wind)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            979,
+            "壱撃必殺",
+            "壱撃必殺！！",
+            new Rearguard(RearguardKind.Interference),
+            Element.Wind,
+            new Status(2221, 6251, 2211, 4906),
+            21,
+            new Skill(
+                "風弱：Sp.ガードフォールC Ⅳ",
+                "敵1～3体のSp.DEFを大ダウンさせる。さらに敵の風属性防御力が低いほどスキル効果が上昇する。",
+                [new ElementWeaken(Element.Wind)],
+                [new StatusDown(new SpDef(), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:Sp.ガードDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
+                Trigger.Support,
+                [new GuardDown(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
             978,
+            "くすみんサマー",
+            "くすみんサマー",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Wind,
+            new Status(6231, 2225, 4908, 2232),
+            21,
+            new Skill(
+                "風弱：パワーストライクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに敵の風属性防御力が低いほど与えるダメージが上昇する。",
+                [new ElementWeaken(Element.Wind)],
+                [new StatusUp(new Atk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            977,
+            "くすみんサマー",
+            "くすみんサマー",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Wind,
+            new Status(6231, 2225, 4908, 2232),
+            21,
+            new Skill(
+                "水強：ヒールC Ⅳ",
+                "味方1～3体のHPを大回復する。さらに味方の水属性防御力が高いほどスキル効果が上昇する。",
+                [new ElementStrengthen(Element.Water)],
+                [],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "回:ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
+                Trigger.Recovery,
+                [new GuardUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            976,
+            "ultimatememoria双刃無双",
             "双刃無双",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -3486,7 +3875,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            977,
+            975,
+            "ultimatememoria双刃無双",
             "双刃無双",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -3509,7 +3899,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            976,
+            974,
+            "ultimatememoria無二なる二刀",
             "無二なる二刀",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -3532,7 +3923,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            975,
+            973,
+            "ultimatememoria無二なる二刀",
             "無二なる二刀",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -3540,7 +3932,7 @@ public record Memoria(
             26,
             new Skill(
                 "火：ガードブレイクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
@@ -3555,7 +3947,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            974,
+            972,
+            "ultimatememoria幻奏乙女",
             "幻奏乙女",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -3578,7 +3971,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            973,
+            971,
+            "ultimatememoria幻奏乙女",
             "幻奏乙女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -3586,7 +3980,7 @@ public record Memoria(
             26,
             new Skill(
                 "火：Sp.ガードバーストB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -3601,7 +3995,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            972,
+            970,
+            "ultimatememoria終曲のタクト",
             "終曲のタクト",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -3609,7 +4004,7 @@ public record Memoria(
             26,
             new Skill(
                 "水：Sp.パワースマッシュB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -3624,7 +4019,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            971,
+            969,
+            "ultimatememoria終曲のタクト",
             "終曲のタクト",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -3647,7 +4043,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            970,
+            968,
+            "ultimatememoriaヴィルトシュバイン",
             "ヴィルトシュバイン",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -3655,7 +4052,7 @@ public record Memoria(
             26,
             new Skill(
                 "水：パワーストライクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -3670,7 +4067,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            969,
+            967,
+            "ultimatememoriaヴィルトシュバイン",
             "ヴィルトシュバイン",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -3693,7 +4091,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            968,
+            966,
+            "待ち望んだパーティナイト",
             "待ち望んだパーティナイト",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -3716,7 +4115,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            967,
+            965,
+            "待ち望んだパーティナイト",
             "待ち望んだパーティナイト",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -3739,7 +4139,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            966,
+            964,
+            "焦がれる夜",
             "焦がれる夜",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -3762,7 +4163,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            965,
+            963,
+            "焦がれる夜",
             "焦がれる夜",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -3785,7 +4187,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            964,
+            962,
+            "いたずらトゥインクル",
             "いたずらトゥインクル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -3808,7 +4211,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            963,
+            961,
+            "いたずらトゥインクル",
             "いたずらトゥインクル",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -3831,7 +4235,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            962,
+            960,
+            "はにかみプールサイド",
             "はにかみプールサイド",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -3839,7 +4244,7 @@ public record Memoria(
             23,
             new Skill(
                 "水：WパワーアシストB Ⅲ",
-                "味方1～2体のATKとSp.ATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のATKとSp.ATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -3855,7 +4260,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            961,
+            959,
+            "クリエイターズコラボ真夏のステージ",
             "真夏のステージ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -3878,7 +4284,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            960,
+            958,
+            "クリエイターズコラボ真夏のステージ",
             "真夏のステージ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -3901,7 +4308,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            959,
+            957,
+            "クリエイターズコラボ浮き輪でぷかぷか",
             "浮き輪でぷかぷか",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -3924,7 +4332,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            958,
+            956,
+            "クリエイターズコラボ浮き輪でぷかぷか",
             "浮き輪でぷかぷか",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -3947,7 +4356,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            957,
+            955,
+            "クリエイターズコラボ向日葵の咲く園",
             "向日葵の咲く園",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -3970,7 +4380,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            956,
+            954,
+            "クリエイターズコラボ向日葵の咲く園",
             "向日葵の咲く園",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -3993,7 +4404,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            955,
+            953,
+            "クリエイターズコラボ水着をお披露目",
             "水着をお披露目",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -4016,7 +4428,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            954,
+            952,
+            "クリエイターズコラボ水着をお披露目",
             "水着をお披露目",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -4039,7 +4452,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            953,
+            951,
+            "emotionalmemoria楽しいを探して",
             "楽しいを探して",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -4062,7 +4476,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            952,
+            950,
+            "emotionalmemoria楽しいを探して",
             "楽しいを探して",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -4085,7 +4500,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            951,
+            949,
+            "祝2.5周年リリサマ",
             "祝2.5周年 リリサマ!!",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -4108,7 +4524,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            950,
+            948,
+            "祝2.5周年リリサマ",
             "祝2.5周年 リリサマ!!",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -4131,7 +4548,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            949,
+            947,
+            "惹かれる手のひら",
             "惹かれる手のひら",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -4154,7 +4572,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            948,
+            946,
+            "惹かれる手のひら",
             "惹かれる手のひら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -4177,7 +4596,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            947,
+            945,
+            "王家の夏休み",
             "王家の夏休み",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -4200,7 +4620,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            946,
+            944,
+            "王家の夏休み",
             "王家の夏休み",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -4223,7 +4644,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            945,
+            943,
+            "アグレッシヴ・ヒロイン",
             "アグレッシヴ・ヒロイン",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -4247,7 +4669,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            944,
+            942,
+            "夏色スライダー",
             "夏色スライダー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -4271,7 +4694,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            943,
+            941,
+            "星月夜の指揮者",
             "星月夜の指揮者",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -4294,7 +4718,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            942,
+            940,
+            "星月夜の指揮者",
             "星月夜の指揮者",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -4317,7 +4742,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            941,
+            939,
+            "月下に舞うプランセス",
             "月下に舞うプランセス",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -4340,7 +4766,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            940,
+            938,
+            "月下に舞うプランセス",
             "月下に舞うプランセス",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -4363,7 +4790,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            939,
+            937,
+            "蒼き月の夜",
             "蒼き月の夜",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -4386,7 +4814,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            938,
+            936,
+            "蒼き月の夜",
             "蒼き月の夜",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -4409,7 +4838,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            937,
+            935,
+            "クリエイターズコラボ非常事態のその後",
             "非常事態のその後",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -4432,7 +4862,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            936,
+            934,
+            "クリエイターズコラボ非常事態のその後",
             "非常事態のその後",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -4455,7 +4886,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            935,
+            933,
+            "クリエイターズコラボ冷たい舌触り",
             "冷たい舌触り",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -4478,7 +4910,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            934,
+            932,
+            "クリエイターズコラボ冷たい舌触り",
             "冷たい舌触り",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -4501,7 +4934,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            933,
+            931,
+            "クリエイターズコラボ灯莉の貝殻アート☆",
             "灯莉の貝殻アート☆",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -4509,7 +4943,7 @@ public record Memoria(
             21,
             new Skill(
                 "水：Sp.ガードバーストB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -4524,7 +4958,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            932,
+            930,
+            "クリエイターズコラボ灯莉の貝殻アート☆",
             "灯莉の貝殻アート☆",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -4547,7 +4982,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            931,
+            929,
+            "クリエイターズコラボ碧い海のふたり",
             "碧い海のふたり",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -4555,7 +4991,7 @@ public record Memoria(
             21,
             new Skill(
                 "水：ガードブレイクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
@@ -4570,7 +5006,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            930,
+            928,
+            "クリエイターズコラボ碧い海のふたり",
             "碧い海のふたり",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -4593,7 +5030,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            929,
+            927,
+            "夢の果て、その先へ",
             "夢の果て、その先へ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -4616,7 +5054,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            928,
+            926,
+            "夢の果て、その先へ",
             "夢の果て、その先へ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -4639,7 +5078,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            927,
+            925,
+            "正義の咆哮",
             "正義の咆哮",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -4662,7 +5102,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            926,
+            924,
+            "正義の咆哮",
             "正義の咆哮",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -4685,7 +5126,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            925,
+            923,
+            "深炎のスキャルドメール",
             "深炎のスキャルドメール",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -4693,7 +5135,7 @@ public record Memoria(
             23,
             new Skill(
                 "水：WパワーフォールB Ⅲ",
-                "敵1～2体のATKとSp.ATKを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のATKとSp.ATKを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -4709,7 +5151,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            924,
+            922,
+            "七頭龍幻想の担い手",
             "七頭龍幻想の担い手",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -4732,7 +5175,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            923,
+            921,
+            "七頭龍幻想の担い手",
             "七頭龍幻想の担い手",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -4755,7 +5199,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            922,
+            920,
+            "竜のシャナ",
             "竜のシャナ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -4778,7 +5223,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            921,
+            919,
+            "竜のシャナ",
             "竜のシャナ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -4801,7 +5247,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            920,
+            918,
+            "ゴージャス☆おしゃ恋花",
             "ゴージャス☆おしゃ恋花",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -4824,7 +5271,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            919,
+            917,
+            "ゴージャス☆おしゃ恋花",
             "ゴージャス☆おしゃ恋花",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -4847,7 +5295,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            918,
+            916,
+            "枕投げチャンピオン",
             "枕投げチャンピオン",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -4870,7 +5319,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            917,
+            915,
+            "枕投げチャンピオン",
             "枕投げチャンピオン",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -4893,7 +5343,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            916,
+            914,
+            "幸せな夢を見る前に",
             "幸せな夢を見る前に",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -4916,7 +5367,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            915,
+            913,
+            "幸せな夢を見る前に",
             "幸せな夢を見る前に",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -4939,7 +5391,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            914,
+            912,
+            "心を鋼鉄に変えて",
             "心を鋼鉄に変えて",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -4955,14 +5408,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            913,
+            911,
+            "心を鋼鉄に変えて",
             "心を鋼鉄に変えて",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -4985,7 +5439,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            912,
+            910,
+            "受け継がれし攻守の型",
             "受け継がれし攻守の型",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -4993,7 +5448,7 @@ public record Memoria(
             21,
             new Skill(
                 "水：Sp.ウォーターパワースマッシュA Ⅳ+",
-                "敵1体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
@@ -5008,7 +5463,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            911,
+            909,
+            "受け継がれし攻守の型",
             "受け継がれし攻守の型",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -5031,7 +5487,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            910,
+            908,
+            "煉獄の守護天使",
             "煉獄の守護天使",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -5054,7 +5511,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            909,
+            907,
+            "煉獄の守護天使",
             "煉獄の守護天使",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -5077,7 +5535,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            908,
+            906,
+            "祈りの声が届く時",
             "祈りの声が届く時",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -5100,7 +5559,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            907,
+            905,
+            "祈りの声が届く時",
             "祈りの声が届く時",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -5123,7 +5583,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            906,
+            904,
+            "クリエイターズコラボこれなんかどう",
             "これなんかどう？",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -5146,7 +5607,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            905,
+            903,
+            "クリエイターズコラボこれなんかどう",
             "これなんかどう？",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -5169,7 +5631,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            904,
+            902,
+            "クリエイターズコラボ日差しを見上げて",
             "日差しを見上げて",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -5192,7 +5655,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            903,
+            901,
+            "クリエイターズコラボ日差しを見上げて",
             "日差しを見上げて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -5215,7 +5679,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            902,
+            900,
+            "クリエイターズコラボ初夏の装い",
             "初夏の装い",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -5223,7 +5688,7 @@ public record Memoria(
             21,
             new Skill(
                 "風：パワーストライクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -5238,7 +5703,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            901,
+            899,
+            "クリエイターズコラボ初夏の装い",
             "初夏の装い",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -5261,7 +5727,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            900,
+            898,
+            "クリエイターズコラボ水族館を探検",
             "水族館を探検",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -5269,7 +5736,7 @@ public record Memoria(
             21,
             new Skill(
                 "風：Sp.ガードバーストB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -5284,7 +5751,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            899,
+            897,
+            "クリエイターズコラボ水族館を探検",
             "水族館を探検",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -5307,7 +5775,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            898,
+            896,
+            "桜花爛漫",
             "桜花爛漫",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -5330,7 +5799,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            897,
+            895,
+            "桜花爛漫",
             "桜花爛漫",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -5353,7 +5823,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            896,
+            894,
+            "心の痛みを判る人",
             "心の痛みを判る人",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -5376,7 +5847,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            895,
+            893,
+            "心の痛みを判る人",
             "心の痛みを判る人",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -5399,7 +5871,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            894,
+            892,
+            "輝く心",
             "輝く心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -5422,7 +5895,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            893,
+            891,
+            "輝く心",
             "輝く心",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -5445,7 +5919,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            892,
+            890,
+            "勇気の拳",
             "勇気の拳",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -5468,7 +5943,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            891,
+            889,
+            "勇気の拳",
             "勇気の拳",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -5491,7 +5967,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            890,
+            888,
+            "emotionalmemoria伝わる鼓動",
             "伝わる鼓動",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -5514,7 +5991,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            889,
+            887,
+            "emotionalmemoria伝わる鼓動",
             "伝わる鼓動",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -5522,7 +6000,7 @@ public record Memoria(
             21,
             new Skill(
                 "水：Sp.ガードフォールB Ⅲ",
-                "敵1～2体のSp.DEFを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のSp.DEFを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -5537,7 +6015,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            888,
+            886,
+            "クリエイターズコラボ二度寝のいいわけ",
             "二度寝のいいわけ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -5560,7 +6039,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            887,
+            885,
+            "クリエイターズコラボ二度寝のいいわけ",
             "二度寝のいいわけ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -5583,7 +6063,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            886,
+            884,
+            "クリエイターズコラボ雨、舌戦のあと",
             "雨、舌戦のあと",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -5591,7 +6072,7 @@ public record Memoria(
             21,
             new Skill(
                 "水：Sp.ファイアガードヒールC Ⅲ",
-                "味方1～3体のHPを回復し、Sp.DEFと火属性防御力を小アップする。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～3体のHPを回復し、Sp.DEFと火属性防御力を小アップする。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
@@ -5606,7 +6087,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            885,
+            883,
+            "クリエイターズコラボ雨、舌戦のあと",
             "雨、舌戦のあと",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -5629,7 +6111,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            884,
+            882,
+            "クリエイターズコラボ雨の日は紅茶を",
             "雨の日は紅茶を",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -5637,7 +6120,7 @@ public record Memoria(
             21,
             new Skill(
                 "水：パワーストライクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -5652,7 +6135,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            883,
+            881,
+            "クリエイターズコラボ雨の日は紅茶を",
             "雨の日は紅茶を",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -5675,7 +6159,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            882,
+            880,
+            "クリエイターズコラボ紫陽花の咲く頃",
             "紫陽花の咲く頃",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -5683,7 +6168,7 @@ public record Memoria(
             21,
             new Skill(
                 "水：Sp.パワースマッシュB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -5698,7 +6183,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            881,
+            879,
+            "クリエイターズコラボ紫陽花の咲く頃",
             "紫陽花の咲く頃",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -5721,7 +6207,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            880,
+            878,
+            "清純な心",
             "清純な心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -5744,7 +6231,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            879,
+            877,
+            "清純な心",
             "清純な心",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -5767,7 +6255,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            878,
+            876,
+            "そよ風のシュッツエンゲル",
             "そよ風のシュッツエンゲル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -5790,7 +6279,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            877,
+            875,
+            "そよ風のシュッツエンゲル",
             "そよ風のシュッツエンゲル",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -5813,7 +6303,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            876,
+            874,
+            "神の子",
             "神の子",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -5837,7 +6328,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            875,
+            873,
+            "交差する勇み花",
             "交差する勇み花",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -5860,7 +6352,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            874,
+            872,
+            "交差する勇み花",
             "交差する勇み花",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -5883,7 +6376,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            873,
+            871,
+            "情熱",
             "情熱",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -5906,7 +6400,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            872,
+            870,
+            "情熱",
             "情熱",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -5929,7 +6424,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            871,
+            869,
+            "愛情の絆",
             "愛情の絆",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -5952,7 +6448,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            870,
+            868,
+            "愛情の絆",
             "愛情の絆",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -5975,7 +6472,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            869,
+            867,
+            "貴方に微笑む",
             "貴方に微笑む",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -5998,7 +6496,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            868,
+            866,
+            "貴方に微笑む",
             "貴方に微笑む",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -6021,7 +6520,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            867,
+            865,
+            "つきしーmax",
             "つきしーMAX!!",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -6045,7 +6545,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            866,
+            864,
+            "g戦場の百合亜",
             "G戦場の百合亜",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -6061,14 +6562,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            865,
+            863,
+            "g戦場の百合亜",
             "G戦場の百合亜",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -6091,7 +6593,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            864,
+            862,
+            "焼け焦げた土を踏んで",
             "焼け焦げた土を踏んで",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -6114,7 +6617,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            863,
+            861,
+            "焼け焦げた土を踏んで",
             "焼け焦げた土を踏んで",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -6137,7 +6641,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            862,
+            860,
+            "黒蝕の夢",
             "黒蝕の夢",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -6160,7 +6665,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            861,
+            859,
+            "黒蝕の夢",
             "黒蝕の夢",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -6183,7 +6689,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            860,
+            858,
+            "月光奏鳴",
             "月光奏鳴",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -6206,7 +6713,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            859,
+            857,
+            "月光奏鳴",
             "月光奏鳴",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -6229,7 +6737,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            858,
+            856,
+            "クリエイターズコラボ式場を決めましたわ",
             "式場を決めましたわ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -6237,7 +6746,7 @@ public record Memoria(
             21,
             new Skill(
                 "火：WガードアシストC Ⅳ",
-                "味方1～3体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～3体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
@@ -6252,7 +6761,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            857,
+            855,
+            "クリエイターズコラボ式場を決めましたわ",
             "式場を決めましたわ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -6275,7 +6785,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            856,
+            854,
+            "クリエイターズコラボ想像ウェディング",
             "想像ウェディング",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -6283,7 +6794,7 @@ public record Memoria(
             21,
             new Skill(
                 "火：Sp.ウィンドガードヒールC Ⅲ",
-                "味方1～3体のHPを回復し、Sp.DEFと風属性防御力を小アップする。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～3体のHPを回復し、Sp.DEFと風属性防御力を小アップする。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
@@ -6298,7 +6809,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            855,
+            853,
+            "クリエイターズコラボ想像ウェディング",
             "想像ウェディング",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -6321,7 +6833,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            854,
+            852,
+            "クリエイターズコラボウェディングベア",
             "ウェディングベア",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -6329,7 +6842,7 @@ public record Memoria(
             21,
             new Skill(
                 "火：Sp.ガードバーストB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -6344,7 +6857,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            853,
+            851,
+            "クリエイターズコラボウェディングベア",
             "ウェディングベア",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -6367,7 +6881,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            852,
+            850,
+            "クリエイターズコラボ門出のブーケ・トス",
             "門出のブーケ・トス",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -6375,7 +6890,7 @@ public record Memoria(
             21,
             new Skill(
                 "火：ガードブレイクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
@@ -6390,7 +6905,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            851,
+            849,
+            "クリエイターズコラボ門出のブーケ・トス",
             "門出のブーケ・トス",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -6413,7 +6929,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            850,
+            848,
+            "夢見る自分を、怖れずに",
             "夢見る自分を、怖れずに",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -6436,7 +6953,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            849,
+            847,
+            "夢見る自分を、怖れずに",
             "夢見る自分を、怖れずに",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -6459,7 +6977,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            848,
+            846,
+            "ウエディング・マーチ",
             "ウエディング・マーチ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -6482,7 +7001,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            847,
+            845,
+            "ウエディング・マーチ",
             "ウエディング・マーチ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -6505,7 +7025,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            846,
+            844,
+            "エターナル・プロミス",
             "エターナル・プロミス",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -6513,7 +7034,7 @@ public record Memoria(
             23,
             new Skill(
                 "水拡：ガードブレイクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。オーダースキル「水属性効果増加」を発動中は敵2体に通常大ダメージを与え、敵のDEFをダウンさせる。※...",
+                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。オーダースキル「水属性効果増加」を発動中は敵2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
                 [new ElementSpread(Element.Water)],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
@@ -6529,7 +7050,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            845,
+            843,
+            "クリエイターズコラボピクニック日和",
             "ピクニック日和",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -6552,7 +7074,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            844,
+            842,
+            "クリエイターズコラボピクニック日和",
             "ピクニック日和",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -6575,7 +7098,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            843,
+            841,
+            "クリエイターズコラボなでなで連鎖",
             "なでなで連鎖",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -6583,7 +7107,7 @@ public record Memoria(
             20,
             new Skill(
                 "風：ウォーターガードヒールC Ⅲ",
-                "味方1～3体のHPを回復し、DEFと水属性防御力を小アップする。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～3体のHPを回復し、DEFと水属性防御力を小アップする。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
@@ -6598,7 +7122,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            842,
+            840,
+            "クリエイターズコラボなでなで連鎖",
             "なでなで連鎖",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -6621,7 +7146,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            841,
+            839,
+            "クリエイターズコラボ尊さの不意打ち",
             "尊さの不意打ち",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -6629,7 +7155,7 @@ public record Memoria(
             20,
             new Skill(
                 "風：Sp.パワースマッシュB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -6644,7 +7170,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            840,
+            838,
+            "クリエイターズコラボ尊さの不意打ち",
             "尊さの不意打ち",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -6667,7 +7194,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            839,
+            837,
+            "クリエイターズコラボ皐月の頃に",
             "皐月の頃に",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -6675,7 +7203,7 @@ public record Memoria(
             20,
             new Skill(
                 "風：パワーストライクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -6690,7 +7218,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            838,
+            836,
+            "クリエイターズコラボ皐月の頃に",
             "皐月の頃に",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -6713,7 +7242,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            837,
+            835,
+            "言葉無く吠える",
             "言葉無く吠える",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -6736,7 +7266,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            836,
+            834,
+            "言葉無く吠える",
             "言葉無く吠える",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -6759,7 +7290,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            835,
+            833,
+            "戦乙女の誇り",
             "戦乙女の誇り",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -6782,7 +7314,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            834,
+            832,
+            "戦乙女の誇り",
             "戦乙女の誇り",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -6805,7 +7338,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            833,
+            831,
+            "竜のシャナと楯の乙女",
             "竜のシャナと楯の乙女",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -6828,7 +7362,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            832,
+            830,
+            "竜のシャナと楯の乙女",
             "竜のシャナと楯の乙女",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -6844,14 +7379,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            831,
+            829,
+            "パーフェクトエイム",
             "パーフェクトエイム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -6874,7 +7410,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            830,
+            828,
+            "パーフェクトエイム",
             "パーフェクトエイム",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -6897,7 +7434,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            829,
+            827,
+            "征くと決めたこの道を",
             "征くと決めたこの道を",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -6920,7 +7458,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            828,
+            826,
+            "征くと決めたこの道を",
             "征くと決めたこの道を",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -6943,7 +7482,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            827,
+            825,
+            "藍だけが使える魔法",
             "藍だけが使える魔法",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -6951,7 +7491,7 @@ public record Memoria(
             22,
             new Skill(
                 "水拡：Sp.ガードバーストB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。オーダースキル「水属性効果増加」を発動中は敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。※...",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。オーダースキル「水属性効果増加」を発動中は敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
                 [new ElementSpread(Element.Water)],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -6967,7 +7507,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            826,
+            824,
+            "エクセレントアイドル☆紗癒",
             "エクセレントアイドル☆紗癒",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -6990,7 +7531,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            825,
+            823,
+            "エクセレントアイドル☆紗癒",
             "エクセレントアイドル☆紗癒",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -7013,7 +7555,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            824,
+            822,
+            "ゴージャスアイドル☆楓",
             "ゴージャスアイドル☆楓",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -7036,7 +7579,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            823,
+            821,
+            "ゴージャスアイドル☆楓",
             "ゴージャスアイドル☆楓",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -7044,7 +7588,7 @@ public record Memoria(
             20,
             new Skill(
                 "水拡：Sp.ファイアパワーフォールB Ⅲ",
-                "敵1～2体のSp.ATKと火属性攻撃力を大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は敵2体のSp.ATKと火属性攻撃力を大ダウンさせる。※...",
+                "敵1～2体のSp.ATKと火属性攻撃力を大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は敵2体のSp.ATKと火属性攻撃力を大ダウンさせる。",
                 [new ElementSpread(Element.Water)],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
@@ -7059,7 +7603,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            822,
+            820,
+            "荒ぶる魂",
             "荒ぶる魂",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
@@ -7082,7 +7627,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            821,
+            819,
+            "荒ぶる魂",
             "荒ぶる魂",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -7105,7 +7651,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            820,
+            818,
+            "閑かなること、幻想の如く",
             "閑かなること、幻想の如く",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -7128,7 +7675,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            819,
+            817,
+            "閑かなること、幻想の如く",
             "閑かなること、幻想の如く",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -7151,7 +7699,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            818,
+            816,
+            "猛禽の視点",
             "猛禽の視点",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -7174,7 +7723,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            817,
+            815,
+            "猛禽の視点",
             "猛禽の視点",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -7197,7 +7747,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            816,
+            814,
+            "戦場に差しこむ光",
             "戦場に差しこむ光",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -7220,7 +7771,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            815,
+            813,
+            "戦場に差しこむ光",
             "戦場に差しこむ光",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -7236,14 +7788,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            814,
+            812,
+            "クリエイターズコラボウィステリアの誘い",
             "ウィステリアの誘い",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -7266,7 +7819,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            813,
+            811,
+            "クリエイターズコラボウィステリアの誘い",
             "ウィステリアの誘い",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -7289,7 +7843,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            812,
+            810,
+            "クリエイターズコラボ花言葉のように",
             "花言葉のように",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -7312,7 +7867,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            811,
+            809,
+            "クリエイターズコラボ花言葉のように",
             "花言葉のように",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -7335,7 +7891,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            810,
+            808,
+            "クリエイターズコラボ藤棚の下で",
             "藤棚の下で",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -7358,7 +7915,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            809,
+            807,
+            "クリエイターズコラボ藤棚の下で",
             "藤棚の下で",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -7381,7 +7939,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            808,
+            806,
+            "クリエイターズコラボ紫に酔い、白に想う",
             "紫に酔い、白に想う",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -7404,7 +7963,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            807,
+            805,
+            "クリエイターズコラボ紫に酔い、白に想う",
             "紫に酔い、白に想う",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -7427,7 +7987,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            806,
+            804,
+            "舞台「thegleamofdawn」開演",
             "舞台「The Gleam of Dawn」開演！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -7450,7 +8011,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            805,
+            803,
+            "舞台「thegleamofdawn」開演",
             "舞台「The Gleam of Dawn」開演！",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -7473,7 +8035,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            804,
+            802,
+            "猪突猛進",
             "猪突猛進！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -7497,7 +8060,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            803,
+            801,
+            "さみしがりうさぎ",
             "さみしがりうさぎ",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -7520,7 +8084,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            802,
+            800,
+            "さみしがりうさぎ",
             "さみしがりうさぎ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -7543,7 +8108,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            801,
+            799,
+            "バニートラップ",
             "バニートラップ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -7566,7 +8132,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            800,
+            798,
+            "バニートラップ",
             "バニートラップ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -7589,7 +8156,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            799,
+            797,
+            "魅惑のセレクション",
             "魅惑のセレクション",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -7613,7 +8181,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            798,
+            796,
+            "クリエイターズコラボイースターハント",
             "イースターハント",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -7621,7 +8190,7 @@ public record Memoria(
             20,
             new Skill(
                 "火：Sp.ファイアパワーフォールC Ⅲ",
-                "敵1～3体のSp.ATKと火属性攻撃力をダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～3体のSp.ATKと火属性攻撃力をダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
@@ -7636,7 +8205,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            797,
+            795,
+            "クリエイターズコラボイースターハント",
             "イースターハント",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -7659,7 +8229,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            796,
+            794,
+            "クリエイターズコラボ花咲くイースター",
             "花咲くイースター",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -7667,7 +8238,7 @@ public record Memoria(
             20,
             new Skill(
                 "火拡：WガードアシストB Ⅳ",
-                "味方1～2体のDEFとSp.DEFを特大アップさせる。オーダースキル「火属性効果増加」を発動中は味方2体のDEFとSp.DEFを特大アップさせる。※...",
+                "味方1～2体のDEFとSp.DEFを特大アップさせる。オーダースキル「火属性効果増加」を発動中は味方2体のDEFとSp.DEFを特大アップさせる。",
                 [new ElementSpread(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
@@ -7682,7 +8253,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            795,
+            793,
+            "クリエイターズコラボ花咲くイースター",
             "花咲くイースター",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -7705,7 +8277,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            794,
+            792,
+            "クリエイターズコラボイースターエッグ",
             "イースターエッグ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -7728,7 +8301,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            793,
+            791,
+            "クリエイターズコラボイースターエッグ",
             "イースターエッグ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -7751,7 +8325,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            792,
+            790,
+            "クリエイターズコラボエッグロール開始",
             "エッグロール開始！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -7774,7 +8349,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            791,
+            789,
+            "クリエイターズコラボエッグロール開始",
             "エッグロール開始！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -7797,7 +8373,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            790,
+            788,
+            "天のアカリ目",
             "天のアカリ目！",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -7820,7 +8397,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            789,
+            787,
+            "天のアカリ目",
             "天のアカリ目！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -7843,7 +8421,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            788,
+            786,
+            "これが、あたしの理",
             "これが、あたしの理！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -7866,7 +8445,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            787,
+            785,
+            "これが、あたしの理",
             "これが、あたしの理！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -7889,7 +8469,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            786,
+            784,
+            "マルチカラード・ティアーズ",
             "マルチカラード・ティアーズ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -7912,7 +8493,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            785,
+            783,
+            "尊き花を守るために",
             "尊き花を守るために",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -7935,7 +8517,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            784,
+            782,
+            "尊き花を守るために",
             "尊き花を守るために",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -7958,7 +8541,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            783,
+            781,
+            "笑顔の夜明け",
             "笑顔の夜明け",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -7981,7 +8565,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            782,
+            780,
+            "笑顔の夜明け",
             "笑顔の夜明け",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
@@ -7997,14 +8582,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            781,
+            779,
+            "天使の左手、堕天使の右手",
             "天使の左手、堕天使の右手",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -8027,7 +8613,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            780,
+            778,
+            "天使の左手、堕天使の右手",
             "天使の左手、堕天使の右手",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -8050,7 +8637,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            779,
+            777,
+            "emotionalmemoria朝寝坊のススメ",
             "朝寝坊のススメ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -8073,7 +8661,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            778,
+            776,
+            "emotionalmemoria朝寝坊のススメ",
             "朝寝坊のススメ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -8096,7 +8685,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            777,
+            775,
+            "千香瑠のエクササイズ",
             "千香瑠のエクササイズ",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -8104,7 +8694,7 @@ public record Memoria(
             22,
             new Skill(
                 "風：Sp.ウィンドガードヒールC Ⅲ",
-                "味方1～3体のHPを回復し、Sp.DEFと風属性防御力を小アップする。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～3体のHPを回復し、Sp.DEFと風属性防御力を小アップする。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
@@ -8119,7 +8709,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            776,
+            774,
+            "玲瓏玉の如し",
             "玲瓏玉の如し",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -8127,7 +8718,7 @@ public record Memoria(
             22,
             new Skill(
                 "風：ウィンドパワーフォールC Ⅲ",
-                "敵1～3体のATKと風属性攻撃力をダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～3体のATKと風属性攻撃力をダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
@@ -8142,7 +8733,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            775,
+            773,
+            "ぱーふぇくとアカリズム",
             "ぱーふぇくとアカリズム",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -8150,7 +8742,7 @@ public record Memoria(
             22,
             new Skill(
                 "風：WガードアシストC Ⅳ",
-                "味方1～3体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～3体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
@@ -8165,7 +8757,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            774,
+            772,
+            "グラスにラムネを注いだら",
             "グラスにラムネを注いだら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -8173,7 +8766,7 @@ public record Memoria(
             22,
             new Skill(
                 "風拡：Sp.パワースマッシュB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。オーダースキル「風属性効果増加」を発動中は敵2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。※...",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。オーダースキル「風属性効果増加」を発動中は敵2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
                 [new ElementSpread(Element.Wind)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -8188,7 +8781,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            773,
+            771,
+            "ツインテじゃらし",
             "ツインテじゃらし",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -8196,7 +8790,7 @@ public record Memoria(
             22,
             new Skill(
                 "風拡：パワーストライクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。オーダースキル「風属性効果増加」を発動中は敵2体に通常大ダメージを与え、自身のATKをアップさせる。※...",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。オーダースキル「風属性効果増加」を発動中は敵2体に通常大ダメージを与え、自身のATKをアップさせる。",
                 [new ElementSpread(Element.Wind)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -8211,7 +8805,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            772,
+            770,
+            "反りし刃、誘うは棺",
             "反りし刃、誘うは棺",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -8227,14 +8822,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            771,
+            769,
+            "反りし刃、誘うは棺",
             "反りし刃、誘うは棺",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -8257,7 +8853,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            770,
+            768,
+            "蒼き輝き、楯たる矜持",
             "蒼き輝き、楯たる矜持",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -8280,7 +8877,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            769,
+            767,
+            "蒼き輝き、楯たる矜持",
             "蒼き輝き、楯たる矜持",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -8303,7 +8901,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            768,
+            766,
+            "その心、炎よりも熱く",
             "その心、炎よりも熱く",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -8326,7 +8925,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            767,
+            765,
+            "その心、炎よりも熱く",
             "その心、炎よりも熱く",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -8349,7 +8949,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            766,
+            764,
+            "贖いの祈り",
             "贖いの祈り",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -8372,7 +8973,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            765,
+            763,
+            "贖いの祈り",
             "贖いの祈り",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -8395,7 +8997,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            764,
+            762,
+            "クリエイターズコラボ桜と貴女を",
             "桜と貴女を",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -8418,7 +9021,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            763,
+            761,
+            "クリエイターズコラボgOgo新学期",
             "GOGO新学期！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -8426,7 +9030,7 @@ public record Memoria(
             22,
             new Skill(
                 "火：Sp.ファイアパワーフォールC Ⅲ",
-                "敵1～3体のSp.ATKと火属性攻撃力をダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～3体のSp.ATKと火属性攻撃力をダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
@@ -8441,7 +9045,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            762,
+            760,
+            "クリエイターズコラボ天に舞う花びら",
             "天に舞う花びら",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -8449,7 +9054,7 @@ public record Memoria(
             22,
             new Skill(
                 "火：WガードアシストC Ⅳ",
-                "味方1～3体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～3体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
@@ -8464,7 +9069,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            761,
+            759,
+            "クリエイターズコラボお花見ティータイム",
             "お花見ティータイム",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -8487,7 +9093,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            760,
+            758,
+            "クリエイターズコラボ春風に吹かれて",
             "春風に吹かれて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -8510,7 +9117,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            759,
+            757,
+            "堅固なる守り",
             "堅固なる守り",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -8534,7 +9142,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            758,
+            756,
+            "光咲く日々を抱いて",
             "光咲く日々を抱いて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -8557,7 +9166,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            757,
+            755,
+            "光咲く日々を抱いて",
             "光咲く日々を抱いて",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -8580,7 +9190,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            756,
+            754,
+            "泡立てチャレンジの結果",
             "泡立てチャレンジの結果",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -8603,7 +9214,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            755,
+            753,
+            "泡立てチャレンジの結果",
             "泡立てチャレンジの結果",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -8626,7 +9238,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            754,
+            752,
+            "ぎゅーっとしてあげる",
             "ぎゅーっとしてあげる",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -8634,7 +9247,7 @@ public record Memoria(
             22,
             new Skill(
                 "風：WパワーアシストB Ⅲ",
-                "味方1～2体のATKとSp.ATKを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のATKとSp.ATKを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -8650,7 +9263,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            753,
+            751,
+            "クリエイターズコラボシルト餌付け実験",
             "シルト餌付け実験",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -8673,7 +9287,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            752,
+            750,
+            "クリエイターズコラボ苺飴の味わい",
             "苺飴の味わい",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -8696,7 +9311,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            751,
+            749,
+            "クリエイターズコラボ甘々苺クレープ",
             "甘々苺クレープ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -8719,7 +9335,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            750,
+            748,
+            "クリエイターズコラボ籠いっぱいの幸せ",
             "籠いっぱいの幸せ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -8742,7 +9359,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            749,
+            747,
+            "クリエイターズコラボ苺色に染めて",
             "苺色に染めて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -8765,7 +9383,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            748,
+            746,
+            "差し出されたお菓子",
             "差し出されたお菓子",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -8788,7 +9407,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            747,
+            745,
+            "差し出されたお菓子",
             "差し出されたお菓子",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -8811,7 +9431,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            746,
+            744,
+            "共同戦線",
             "共同戦線！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -8834,7 +9455,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            745,
+            743,
+            "共同戦線",
             "共同戦線！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -8857,7 +9479,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            744,
+            742,
+            "僕と契約して、魔法少女になってよ",
             "僕と契約して、魔法少女になってよ！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -8880,7 +9503,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            743,
+            741,
+            "僕と契約して、魔法少女になってよ",
             "僕と契約して、魔法少女になってよ！",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -8903,7 +9527,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            742,
+            740,
+            "奇跡の出会い",
             "奇跡の出会い！",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -8926,7 +9551,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            741,
+            739,
+            "奇跡の出会い",
             "奇跡の出会い！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
@@ -8942,14 +9568,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            740,
+            738,
+            "頼れる先輩",
             "頼れる先輩",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -8972,7 +9599,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            739,
+            737,
+            "頼れる先輩",
             "頼れる先輩",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -8995,7 +9623,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            738,
+            736,
+            "謎めいた魔法少女",
             "謎めいた魔法少女",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -9018,7 +9647,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            737,
+            735,
+            "謎めいた魔法少女",
             "謎めいた魔法少女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -9041,7 +9671,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            736,
+            734,
+            "連携プレーの勝利",
             "連携プレーの勝利！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -9064,7 +9695,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            735,
+            733,
+            "連携プレーの勝利",
             "連携プレーの勝利！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -9087,7 +9719,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            734,
+            732,
+            "氷嵐を断つ劔",
             "氷嵐を断つ劔",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
@@ -9110,7 +9743,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            733,
+            731,
+            "氷嵐を断つ劔",
             "氷嵐を断つ劔",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -9133,7 +9767,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            732,
+            730,
+            "一意専心",
             "一意専心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -9156,7 +9791,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            731,
+            729,
+            "一意専心",
             "一意専心",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -9179,7 +9815,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            730,
+            728,
+            "六花、胡蝶の如く舞う",
             "六花、胡蝶の如く舞う",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -9202,7 +9839,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            729,
+            727,
+            "六花、胡蝶の如く舞う",
             "六花、胡蝶の如く舞う",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -9218,14 +9856,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            728,
+            726,
+            "輝ける流星",
             "輝ける流星",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -9248,7 +9887,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            727,
+            725,
+            "輝ける流星",
             "輝ける流星",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -9271,7 +9911,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            726,
+            724,
+            "クリエイターズコラボとろけるハート",
             "とろけるハート",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -9294,7 +9935,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            725,
+            723,
+            "クリエイターズコラボ甘いきらめき",
             "甘いきらめき",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -9317,7 +9959,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            724,
+            722,
+            "クリエイターズコラボショコラのゆうわく",
             "ショコラのゆうわく",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -9340,7 +9983,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            723,
+            721,
+            "クリエイターズコラボいただきだゾ♪",
             "いただきだゾ♪",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -9363,7 +10007,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            722,
+            720,
+            "あなたにお茶を",
             "あなたにお茶を",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -9386,7 +10031,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            721,
+            719,
+            "あなたにお茶を",
             "あなたにお茶を",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -9409,7 +10055,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            720,
+            718,
+            "安らぎをあなたに",
             "安らぎをあなたに",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -9432,7 +10079,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            719,
+            717,
+            "安らぎをあなたに",
             "安らぎをあなたに",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -9455,7 +10103,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            718,
+            716,
+            "触れ合う吐息",
             "触れ合う吐息",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -9478,7 +10127,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            717,
+            715,
+            "触れ合う吐息",
             "触れ合う吐息",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -9501,7 +10151,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            716,
+            714,
+            "チョコを知らない君へ",
             "チョコを知らない君へ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -9524,7 +10175,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            715,
+            713,
+            "チョコを知らない君へ",
             "チョコを知らない君へ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -9547,7 +10199,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            714,
+            712,
+            "運命のトリニティ",
             "運命のトリニティ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -9570,7 +10223,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            713,
+            711,
+            "運命のトリニティ",
             "運命のトリニティ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -9593,7 +10247,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            712,
+            710,
+            "貴女と共にあるために",
             "貴女と共にあるために",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -9616,7 +10271,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            711,
+            709,
+            "貴女と共にあるために",
             "貴女と共にあるために",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -9639,7 +10295,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            710,
+            708,
+            "貴女の笑顔を守るために",
             "貴女の笑顔を守るために",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -9662,7 +10319,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            709,
+            707,
+            "光の盾",
             "光の盾",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -9685,7 +10343,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            708,
+            706,
+            "光の盾",
             "光の盾",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -9708,7 +10367,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            707,
+            705,
+            "ハルナストライク",
             "ハルナストライク！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -9731,7 +10391,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            706,
+            704,
+            "ハルナストライク",
             "ハルナストライク！！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -9754,7 +10415,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            705,
+            703,
+            "emotionalmemoria吐息の距離",
             "吐息の距離",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -9777,7 +10439,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            704,
+            702,
+            "emotionalmemoria吐息の距離",
             "吐息の距離",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -9800,12 +10463,13 @@ public record Memoria(
             )
         ),
         new Memoria(
-            703,
+            701,
+            "ultimatememoria縦横無尽、阻む者無し",
             "縦横無尽、阻む者無し",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             new Status(4085, 4067, 7082, 7075),
-            24,
+            26,
             new Skill(
                 "リカバーヒールD Ⅳ",
                 "味方2体のHPを大回復する。さらに自身のMPを60回復する。",
@@ -9823,12 +10487,13 @@ public record Memoria(
             )
         ),
         new Memoria(
-            702,
+            700,
+            "ultimatememoria縦横無尽、阻む者無し",
             "縦横無尽、阻む者無し",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
             new Status(4085, 7401, 4092, 6731),
-            24,
+            26,
             new Skill(
                 "Sp.マイトスマッシュA Ⅴ+",
                 "敵1体に特殊超特大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
@@ -9846,12 +10511,13 @@ public record Memoria(
             )
         ),
         new Memoria(
-            701,
+            699,
+            "ultimatememoriaシリウス・ロア",
             "シリウス・ロア",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             new Status(7059, 7060, 4071, 4100),
-            24,
+            26,
             new Skill(
                 "WパワーアシストD Ⅲ",
                 "味方2体のATKとSp.ATKを大アップさせる。",
@@ -9869,15 +10535,16 @@ public record Memoria(
             )
         ),
         new Memoria(
-            700,
+            698,
+            "ultimatememoriaシリウス・ロア",
             "シリウス・ロア",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             new Status(7403, 4070, 6717, 4100),
-            24,
+            26,
             new Skill(
                 "風：ガードブレイクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
@@ -9892,12 +10559,13 @@ public record Memoria(
             )
         ),
         new Memoria(
-            699,
+            697,
+            "ultimatememoria蒼き月、満ちる時",
             "蒼き月、満ちる時",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             new Status(7088, 7053, 4099, 4073),
-            24,
+            26,
             new Skill(
                 "WパワーフォールD Ⅲ",
                 "敵2体のATKとSp.ATKを大ダウンさせる。",
@@ -9915,15 +10583,16 @@ public record Memoria(
             )
         ),
         new Memoria(
-            698,
+            696,
+            "ultimatememoria蒼き月、満ちる時",
             "蒼き月、満ちる時",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             new Status(4098, 7397, 4099, 6719),
-            24,
+            26,
             new Skill(
                 "風：Sp.ガードバーストB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -9938,15 +10607,16 @@ public record Memoria(
             )
         ),
         new Memoria(
-            697,
+            695,
+            "ultimatememoriaフェノメノ",
             "フェノメノ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             new Status(4062, 7427, 4091, 6726),
-            24,
+            26,
             new Skill(
                 "火：Sp.パワースマッシュB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -9961,12 +10631,13 @@ public record Memoria(
             )
         ),
         new Memoria(
-            696,
+            694,
+            "ultimatememoriaフェノメノ",
             "フェノメノ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             new Status(4062, 4093, 7081, 7070),
-            24,
+            26,
             new Skill(
                 "WガードフォールD Ⅲ",
                 "敵2体のDEFとSp.DEFを大ダウンさせる。",
@@ -9984,15 +10655,16 @@ public record Memoria(
             )
         ),
         new Memoria(
-            695,
+            693,
+            "ultimatememoria比類なき異能",
             "比類なき異能",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             new Status(7395, 4086, 6724, 4097),
-            24,
+            26,
             new Skill(
                 "火：パワーストライクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -10007,12 +10679,13 @@ public record Memoria(
             )
         ),
         new Memoria(
-            694,
+            692,
+            "ultimatememoria比類なき異能",
             "比類なき異能",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             new Status(4061, 4086, 7068, 7087),
-            24,
+            26,
             new Skill(
                 "WガードアシストD Ⅲ",
                 "味方2体のDEFとSp.DEFを大アップさせる。",
@@ -10030,7 +10703,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            693,
+            691,
+            "ありのままのわたしで",
             "ありのままのわたしで",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -10053,7 +10727,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            692,
+            690,
+            "ありのままのわたしで",
             "ありのままのわたしで",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -10076,7 +10751,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            691,
+            689,
+            "いつも隣に",
             "いつも隣に",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -10099,7 +10775,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            690,
+            688,
+            "いつも隣に",
             "いつも隣に",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -10122,7 +10799,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            689,
+            687,
+            "蝶の夢",
             "蝶の夢",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -10145,7 +10823,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            688,
+            686,
+            "蝶の夢",
             "蝶の夢",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -10161,14 +10840,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            687,
+            685,
+            "湯けむりの向こう側",
             "湯けむりの向こう側",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -10191,7 +10871,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            686,
+            684,
+            "湯けむりの向こう側",
             "湯けむりの向こう側",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
@@ -10207,14 +10888,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            685,
+            683,
+            "宵に舞う華",
             "宵に舞う華",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -10237,7 +10919,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            684,
+            682,
+            "宵に舞う華",
             "宵に舞う華",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -10260,7 +10943,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            683,
+            681,
+            "好いも甘いも受け止めて",
             "好いも甘いも受け止めて",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -10283,7 +10967,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            682,
+            680,
+            "好いも甘いも受け止めて",
             "好いも甘いも受け止めて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -10306,7 +10991,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            681,
+            679,
+            "2周年祭り絆の彩り",
             "2周年祭り 絆の彩り",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -10329,7 +11015,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            680,
+            678,
+            "2周年祭り絆の彩り",
             "2周年祭り 絆の彩り",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -10352,7 +11039,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            679,
+            677,
+            "ふたりのヒメゴト",
             "ふたりのヒメゴト",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -10375,7 +11063,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            678,
+            676,
+            "変わらない絆",
             "変わらない絆",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -10398,7 +11087,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            677,
+            675,
+            "cherishing",
             "Cherishing",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -10422,7 +11112,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            676,
+            674,
+            "止めどない熱",
             "止めどない熱",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -10446,7 +11137,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            675,
+            673,
+            "戦場のコンダクター",
             "戦場のコンダクター",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
@@ -10470,7 +11162,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            674,
+            672,
+            "引導を渡して差し上げますわ",
             "引導を渡して差し上げますわ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -10493,7 +11186,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            673,
+            671,
+            "引導を渡して差し上げますわ",
             "引導を渡して差し上げますわ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -10516,7 +11210,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            672,
+            670,
+            "飢えし群れ、挑む狩人",
             "飢えし群れ、挑む狩人",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -10539,7 +11234,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            671,
+            669,
+            "飢えし群れ、挑む狩人",
             "飢えし群れ、挑む狩人",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -10562,7 +11258,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            670,
+            668,
+            "うりゃうりゃうりゃうりゃ",
             "うりゃうりゃうりゃうりゃ！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -10585,7 +11282,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            669,
+            667,
+            "うりゃうりゃうりゃうりゃ",
             "うりゃうりゃうりゃうりゃ！！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -10608,7 +11306,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            668,
+            666,
+            "この手に劔がある限り",
             "この手に劔がある限り",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -10631,7 +11330,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            667,
+            665,
+            "クリエイターズコラボ今年もよろしくね",
             "今年もよろしくね",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -10654,7 +11354,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            666,
+            664,
+            "クリエイターズコラボ謹賀新年です",
             "謹賀新年です！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -10677,7 +11378,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            665,
+            663,
+            "クリエイターズコラボあけおめですっ♪",
             "あけおめですっ♪",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -10700,7 +11402,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            664,
+            662,
+            "クリエイターズコラボ新年を祝すわ",
             "新年を祝すわ！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -10723,7 +11426,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            663,
+            661,
+            "クリエイターズコラボことよろなのじゃ",
             "ことよろなのじゃ！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -10746,7 +11450,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            662,
+            660,
+            "賀正",
             "賀正！！",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -10769,7 +11474,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            661,
+            659,
+            "賀正",
             "賀正！！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -10785,14 +11491,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            660,
+            658,
+            "思い出を抱きしめて",
             "思い出を抱きしめて",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -10815,7 +11522,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            659,
+            657,
+            "思い出を抱きしめて",
             "思い出を抱きしめて",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -10831,14 +11539,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            658,
+            656,
+            "突きて返すは兎姉妹",
             "突きて返すは兎姉妹",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -10861,7 +11570,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            657,
+            655,
+            "突きて返すは兎姉妹",
             "突きて返すは兎姉妹",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -10884,7 +11594,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            656,
+            654,
+            "雪兎に会えた日",
             "雪兎に会えた日",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -10907,7 +11618,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            655,
+            653,
+            "大丈夫、みんながいるから",
             "大丈夫、みんながいるから",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -10915,7 +11627,7 @@ public record Memoria(
             19,
             new Skill(
                 "水：パワーフォールB Ⅲ",
-                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -10930,7 +11642,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            654,
+            652,
+            "大丈夫、みんながいるから",
             "大丈夫、みんながいるから",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -10953,7 +11666,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            653,
+            651,
+            "高らかと響き渡る歌声の中で",
             "高らかと響き渡る歌声の中で",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -10976,7 +11690,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            652,
+            650,
+            "高らかと響き渡る歌声の中で",
             "高らかと響き渡る歌声の中で",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -10999,7 +11714,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            651,
+            649,
+            "スノーフレイク",
             "スノーフレイク",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -11022,7 +11738,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            650,
+            648,
+            "スノーフレイク",
             "スノーフレイク",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -11045,7 +11762,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            649,
+            647,
+            "胸躍る聖夜",
             "胸躍る聖夜",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -11068,7 +11786,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            648,
+            646,
+            "胸躍る聖夜",
             "胸躍る聖夜",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -11091,7 +11810,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            647,
+            645,
+            "ここから先へ",
             "ここから先へ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -11114,7 +11834,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            646,
+            644,
+            "ここから先へ",
             "ここから先へ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -11137,7 +11858,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            645,
+            643,
+            "無邪気な親近感",
             "無邪気な親近感",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -11160,7 +11882,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            644,
+            642,
+            "無邪気な親近感",
             "無邪気な親近感",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -11183,7 +11906,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            643,
+            641,
+            "かがみもち、できました",
             "かがみもち、できました！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -11206,7 +11930,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            642,
+            640,
+            "かがみもち、できました",
             "かがみもち、できました！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -11229,7 +11954,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            641,
+            639,
+            "兎であけおめですわ",
             "兎であけおめですわ！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -11252,7 +11978,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            640,
+            638,
+            "兎であけおめですわ",
             "兎であけおめですわ！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -11268,14 +11995,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            639,
+            637,
+            "新年、はっじまっるよ～♪",
             "新年、はっじまっるよ～♪",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -11298,7 +12026,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            638,
+            636,
+            "新年、はっじまっるよ～♪",
             "新年、はっじまっるよ～♪",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -11314,14 +12043,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            637,
+            635,
+            "初春の宴に貴女を想う",
             "初春の宴に貴女を想う",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -11344,7 +12074,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            636,
+            634,
+            "約束された勝利の剣",
             "約束された勝利の剣",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -11367,7 +12098,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            635,
+            633,
+            "約束された勝利の剣",
             "約束された勝利の剣",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -11390,7 +12122,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            634,
+            632,
+            "射殺す百頭",
             "射殺す百頭",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -11413,7 +12146,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            633,
+            631,
+            "射殺す百頭",
             "射殺す百頭",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -11436,7 +12170,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            632,
+            630,
+            "投影魔術",
             "投影魔術",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -11452,14 +12187,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            631,
+            629,
+            "投影魔術",
             "投影魔術",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -11482,7 +12218,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            630,
+            628,
+            "願いの魔法少女",
             "願いの魔法少女",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -11505,7 +12242,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            629,
+            627,
+            "願いの魔法少女",
             "願いの魔法少女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -11528,7 +12266,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            628,
+            626,
+            "空想魔法少女",
             "空想魔法少女",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -11551,7 +12290,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            627,
+            625,
+            "空想魔法少女",
             "空想魔法少女",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -11574,7 +12314,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            626,
+            624,
+            "クリエイターズコラボ膝の子猫と窓の雪",
             "膝の子猫と窓の雪",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -11597,7 +12338,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            625,
+            623,
+            "クリエイターズコラボかずはをよしよし",
             "かずはをよしよし",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -11620,7 +12362,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            624,
+            622,
+            "クリエイターズコラボゆー姉と一緒",
             "ゆー姉と一緒！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -11628,7 +12371,7 @@ public record Memoria(
             22,
             new Skill(
                 "風拡：Sp.パワーアシストB Ⅳ",
-                "味方1～2体のSp.ATKを特大アップさせる。オーダースキル「風属性効果増加」を発動中は味方2体のSp.ATKを特大アップさせる。※...",
+                "味方1～2体のSp.ATKを特大アップさせる。オーダースキル「風属性効果増加」を発動中は味方2体のSp.ATKを特大アップさせる。",
                 [new ElementSpread(Element.Wind)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
@@ -11643,7 +12386,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            623,
+            621,
+            "クリエイターズコラボあつあつの肉まん",
             "あつあつの肉まん",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -11666,7 +12410,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            622,
+            620,
+            "クリエイターズコラボどんがらがっしゃん",
             "どんがらがっしゃん",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -11689,7 +12434,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            621,
+            619,
+            "懐かしくて、優しい味",
             "懐かしくて、優しい味",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -11712,7 +12458,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            620,
+            618,
+            "懐かしくて、優しい味",
             "懐かしくて、優しい味",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -11735,7 +12482,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            619,
+            617,
+            "聞こえし者",
             "聞こえし者",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -11759,7 +12507,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            618,
+            616,
+            "ふーみんにインタビュー",
             "ふーみんにインタビュー",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -11782,7 +12531,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            617,
+            615,
+            "ふーみんにインタビュー",
             "ふーみんにインタビュー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -11805,7 +12555,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            616,
+            614,
+            "歴戦の余裕",
             "歴戦の余裕",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -11828,7 +12579,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            615,
+            613,
+            "歴戦の余裕",
             "歴戦の余裕",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -11851,7 +12603,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            614,
+            612,
+            "雪原に火花散る",
             "雪原に火花散る",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -11874,7 +12627,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            613,
+            611,
+            "雪原に火花散る",
             "雪原に火花散る",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -11897,7 +12651,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            612,
+            610,
+            "縮地、友の元へ",
             "縮地、友の元へ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -11920,7 +12675,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            611,
+            609,
+            "縮地、友の元へ",
             "縮地、友の元へ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -11936,14 +12692,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/特殊単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new SpecialMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            610,
+            608,
+            "旋律に身を委ねて",
             "旋律に身を委ねて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -11966,7 +12723,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            609,
+            607,
+            "旋律に身を委ねて",
             "旋律に身を委ねて",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -11989,7 +12747,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            608,
+            606,
+            "神琳これは違うの",
             "神琳！？　これは違うの！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -12012,7 +12771,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            607,
+            605,
+            "神琳これは違うの",
             "神琳！？　これは違うの！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -12035,7 +12795,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            606,
+            604,
+            "クリエイターズコラボサンタをつかまえて",
             "サンタをつかまえて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -12058,7 +12819,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            605,
+            603,
+            "クリエイターズコラボサンタをつかまえて",
             "サンタをつかまえて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -12081,7 +12843,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            604,
+            602,
+            "クリエイターズコラボ聖夜のテラリウム",
             "聖夜のテラリウム",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -12104,7 +12867,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            603,
+            601,
+            "クリエイターズコラボ聖夜のテラリウム",
             "聖夜のテラリウム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -12127,7 +12891,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            602,
+            600,
+            "クリエイターズコラボ聖夜に乾杯",
             "聖夜に乾杯",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -12150,7 +12915,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            601,
+            599,
+            "クリエイターズコラボ聖夜に乾杯",
             "聖夜に乾杯",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -12173,7 +12939,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            600,
+            598,
+            "クリエイターズコラボ手作りクリスマス",
             "手作りクリスマス",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -12196,7 +12963,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            599,
+            597,
+            "クリエイターズコラボ手作りクリスマス",
             "手作りクリスマス",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -12219,7 +12987,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            598,
+            596,
+            "クリエイターズコラボひめひめ仕立て",
             "ひめひめ仕立て",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -12242,7 +13011,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            597,
+            595,
+            "クリエイターズコラボひめひめ仕立て",
             "ひめひめ仕立て",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -12250,7 +13020,7 @@ public record Memoria(
             20,
             new Skill(
                 "風：パワーフォールB Ⅲ",
-                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -12265,7 +13035,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            596,
+            594,
+            "はっぴーらっきーとっきー",
             "はっぴーらっきーとっきー",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -12288,7 +13059,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            595,
+            593,
+            "はっぴーらっきーとっきー",
             "はっぴーらっきーとっきー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -12311,7 +13083,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            594,
+            592,
+            "サプライズゲーム",
             "サプライズゲーム",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -12334,7 +13107,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            593,
+            591,
+            "サプライズゲーム",
             "サプライズゲーム",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -12350,14 +13124,15 @@ public record Memoria(
             ),
             new SupportSkill(
                 "攻:獲得マッチPtUP/通常単体 Ⅱ",
-                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ※...",
+                "前衛から攻撃時、一定確率で自身のマッチPtの獲得量がアップする。 ",
                 Trigger.Attack,
                 [new NormalMatchPtUp()],
                 Level.Two
             )
         ),
         new Memoria(
-            592,
+            590,
+            "帯びる熱と急接近",
             "帯びる熱と急接近",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -12380,7 +13155,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            591,
+            589,
+            "帯びる熱と急接近",
             "帯びる熱と急接近",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -12403,7 +13179,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            590,
+            588,
+            "レンズ越しの視点",
             "レンズ越しの視点",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -12426,7 +13203,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            589,
+            587,
+            "レンズ越しの視点",
             "レンズ越しの視点",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -12449,7 +13227,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            588,
+            586,
+            "白に染まる世界",
             "白に染まる世界",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -12472,7 +13251,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            587,
+            585,
+            "白に染まる世界",
             "白に染まる世界",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -12480,7 +13260,7 @@ public record Memoria(
             19,
             new Skill(
                 "風：パワーアシストB Ⅲ",
-                "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -12495,7 +13275,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            586,
+            584,
+            "雪風と踊る少女",
             "雪風と踊る少女",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -12518,7 +13299,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            585,
+            583,
+            "雪風と踊る少女",
             "雪風と踊る少女",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -12541,7 +13323,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            584,
+            582,
+            "雪原の白き魔女",
             "雪原の白き魔女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -12564,7 +13347,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            583,
+            581,
+            "雪原の白き魔女",
             "雪原の白き魔女",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -12587,7 +13371,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            582,
+            580,
+            "鳴り響く狂乱の連弾",
             "鳴り響く狂乱の連弾",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -12610,7 +13395,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            581,
+            579,
+            "鳴り響く狂乱の連弾",
             "鳴り響く狂乱の連弾",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -12633,7 +13419,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            580,
+            578,
+            "クリエイターズコラボご一緒にいかが",
             "ご一緒にいかが？",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -12656,7 +13443,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            579,
+            577,
+            "クリエイターズコラボご一緒にいかが",
             "ご一緒にいかが？",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -12679,7 +13467,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            578,
+            576,
+            "クリエイターズコラボいつものおやつ",
             "いつものおやつ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -12702,7 +13491,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            577,
+            575,
+            "クリエイターズコラボいつものおやつ",
             "いつものおやつ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -12725,7 +13515,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            576,
+            574,
+            "クリエイターズコラボどたばたデイズ",
             "どたばたデイズ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -12748,7 +13539,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            575,
+            573,
+            "クリエイターズコラボどたばたデイズ",
             "どたばたデイズ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -12771,7 +13563,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            574,
+            572,
+            "クリエイターズコラボ思い出がもう一つ",
             "思い出がもう一つ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -12794,7 +13587,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            573,
+            571,
+            "クリエイターズコラボ思い出がもう一つ",
             "思い出がもう一つ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -12817,7 +13611,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            572,
+            570,
+            "クリエイターズコラボもふもふな時間",
             "もふもふな時間",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -12840,7 +13635,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            571,
+            569,
+            "クリエイターズコラボもふもふな時間",
             "もふもふな時間",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -12863,7 +13659,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            570,
+            568,
+            "覚醒の兆し",
             "覚醒の兆し",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -12886,7 +13683,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            569,
+            567,
+            "覚醒の兆し",
             "覚醒の兆し",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -12909,7 +13707,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            568,
+            566,
+            "騒がし乙女の凱旋",
             "騒がし乙女の凱旋",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -12932,7 +13731,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            567,
+            565,
+            "騒がし乙女の凱旋",
             "騒がし乙女の凱旋",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -12955,7 +13755,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            566,
+            564,
+            "あなたとおそろい",
             "あなたとおそろい",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -12978,7 +13779,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            565,
+            563,
+            "あなたとおそろい",
             "あなたとおそろい",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -13001,7 +13803,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            564,
+            562,
+            "ワンマンアーミー",
             "ワンマンアーミー",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -13025,7 +13828,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            563,
+            561,
+            "縄跳びトレーニング",
             "縄跳びトレーニング",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -13048,7 +13852,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            562,
+            560,
+            "縄跳びトレーニング",
             "縄跳びトレーニング",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -13071,7 +13876,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            561,
+            559,
+            "暮れなずむ空",
             "暮れなずむ空",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -13094,7 +13900,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            560,
+            558,
+            "暮れなずむ空",
             "暮れなずむ空",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -13117,7 +13924,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            559,
+            557,
+            "かめ、のち、えがお",
             "かめ、のち、えがお",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -13140,7 +13948,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            558,
+            556,
+            "かめ、のち、えがお",
             "かめ、のち、えがお",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -13163,7 +13972,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            557,
+            555,
+            "ひめひめコールお願いっ",
             "ひめひめコールお願いっ！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -13186,7 +13996,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            556,
+            554,
+            "ひめひめコールお願いっ",
             "ひめひめコールお願いっ！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -13209,7 +14020,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            555,
+            553,
+            "カワウソづくし",
             "カワウソづくし",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -13217,7 +14029,7 @@ public record Memoria(
             19,
             new Skill(
                 "水：WパワーアシストB Ⅲ",
-                "味方1～2体のATKとSp.ATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のATKとSp.ATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -13232,7 +14044,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            554,
+            552,
+            "カワウソづくし",
             "カワウソづくし",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -13255,7 +14068,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            553,
+            551,
+            "クリエイターズコラボ不動劔と至宝",
             "不動劔と至宝",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -13278,7 +14092,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            552,
+            550,
+            "クリエイターズコラボ不動劔と至宝",
             "不動劔と至宝",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -13301,7 +14116,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            551,
+            549,
+            "クリエイターズコラボねんねこぐろっぴ",
             "ねんねこぐろっぴ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -13324,7 +14140,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            550,
+            548,
+            "クリエイターズコラボねんねこぐろっぴ",
             "ねんねこぐろっぴ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -13347,7 +14164,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            549,
+            547,
+            "charmという兵器",
             "CHARMという兵器",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -13370,7 +14188,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            548,
+            546,
+            "charmという兵器",
             "CHARMという兵器",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -13393,7 +14212,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            547,
+            545,
+            "ワーオエキサイティン",
             "ワーオ！　エキサイティン！！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -13416,7 +14236,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            546,
+            544,
+            "ワーオエキサイティン",
             "ワーオ！　エキサイティン！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -13439,7 +14260,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            545,
+            543,
+            "束の間の休息",
             "束の間の休息",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -13462,7 +14284,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            544,
+            542,
+            "束の間の休息",
             "束の間の休息",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -13485,7 +14308,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            543,
+            541,
+            "作戦会議です",
             "作戦会議です！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -13508,7 +14332,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            542,
+            540,
+            "作戦会議です",
             "作戦会議です！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -13531,7 +14356,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            541,
+            539,
+            "予想外の事態",
             "予想外の事態",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -13554,7 +14380,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            540,
+            538,
+            "予想外の事態",
             "予想外の事態",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -13577,7 +14404,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            539,
+            537,
+            "優雅なティータイム",
             "優雅なティータイム",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -13600,7 +14428,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            538,
+            536,
+            "優雅なティータイム",
             "優雅なティータイム",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -13623,7 +14452,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            537,
+            535,
+            "西住流の誇り",
             "西住流の誇り",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -13646,7 +14476,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            536,
+            534,
+            "西住流の誇り",
             "西住流の誇り",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -13669,7 +14500,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            535,
+            533,
+            "形勢逆転",
             "形勢逆転！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -13692,7 +14524,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            534,
+            532,
+            "形勢逆転",
             "形勢逆転！！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -13715,7 +14548,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            533,
+            531,
+            "ワイン色の思い出",
             "ワイン色の思い出",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -13738,7 +14572,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            532,
+            530,
+            "ワイン色の思い出",
             "ワイン色の思い出",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -13746,7 +14581,7 @@ public record Memoria(
             19,
             new Skill(
                 "風：WガードフォールB Ⅲ",
-                "敵1～2体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -13761,7 +14596,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            531,
+            529,
+            "月夜に吠える天狼",
             "月夜に吠える天狼",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -13785,7 +14621,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            530,
+            528,
+            "雲間から差し込む光",
             "雲間から差し込む光",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -13808,7 +14645,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            529,
+            527,
+            "雲間から差し込む光",
             "雲間から差し込む光",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -13831,7 +14669,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            528,
+            526,
+            "好機を待つのじゃ",
             "好機を待つのじゃ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -13839,7 +14678,7 @@ public record Memoria(
             19,
             new Skill(
                 "水：パワーアシストC Ⅳ",
-                "味方1～3体のATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～3体のATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
@@ -13854,7 +14693,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            527,
+            525,
+            "好機を待つのじゃ",
             "好機を待つのじゃ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -13877,7 +14717,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            526,
+            524,
+            "ひめひめ華麗に参上",
             "ひめひめ華麗に参上！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -13900,7 +14741,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            525,
+            523,
+            "ひめひめ華麗に参上",
             "ひめひめ華麗に参上！",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -13908,7 +14750,7 @@ public record Memoria(
             19,
             new Skill(
                 "水拡：Sp.パワーフォールB Ⅳ",
-                "敵1～2体のSp.ATKを特大ダウンさせる。オーダースキル「水属性効果増加」を発動中は敵2体のSp.ATKを特大ダウンさせる。※...",
+                "敵1～2体のSp.ATKを特大ダウンさせる。オーダースキル「水属性効果増加」を発動中は敵2体のSp.ATKを特大ダウンさせる。",
                 [new ElementSpread(Element.Water)],
                 [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Four,
@@ -13923,7 +14765,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            524,
+            522,
+            "クリエイターズコラボ紅葉の帳",
             "紅葉の帳",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -13946,7 +14789,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            523,
+            521,
+            "クリエイターズコラボ紅葉の帳",
             "紅葉の帳",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -13969,7 +14813,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            522,
+            520,
+            "クリエイターズコラボ紅葉も頬も色づいて",
             "紅葉も頬も色づいて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -13992,7 +14837,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            521,
+            519,
+            "クリエイターズコラボ紅葉も頬も色づいて",
             "紅葉も頬も色づいて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14015,7 +14861,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            520,
+            518,
+            "クリエイターズコラボ秋月夜の彩り",
             "秋月夜の彩り",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -14038,7 +14885,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            519,
+            517,
+            "クリエイターズコラボ秋月夜の彩り",
             "秋月夜の彩り",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -14061,7 +14909,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            518,
+            516,
+            "クリエイターズコラボ秋の木漏れ日",
             "秋の木漏れ日",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14084,7 +14933,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            517,
+            515,
+            "クリエイターズコラボ秋の木漏れ日",
             "秋の木漏れ日",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -14107,7 +14957,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            516,
+            514,
+            "はじらいマミー",
             "はじらいマミー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14130,7 +14981,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            515,
+            513,
+            "どきどきデビル",
             "どきどきデビル",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -14153,7 +15005,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            514,
+            512,
+            "どきどきデビル",
             "どきどきデビル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14176,7 +15029,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            513,
+            511,
+            "いたずらゴースト",
             "いたずらゴースト",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -14199,7 +15053,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            512,
+            510,
+            "いたずらゴースト",
             "いたずらゴースト",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -14222,7 +15077,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            511,
+            509,
+            "夜空に響く勝利の歌",
             "夜空に響く勝利の歌",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14245,7 +15101,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            510,
+            508,
+            "夜空に響く勝利の歌",
             "夜空に響く勝利の歌",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -14268,7 +15125,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            509,
+            507,
+            "陽だまりシュッツエンゲル",
             "陽だまりシュッツエンゲル",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -14291,7 +15149,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            508,
+            506,
+            "陽だまりシュッツエンゲル",
             "陽だまりシュッツエンゲル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -14314,7 +15173,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            507,
+            505,
+            "クリエイターズコラボくるくおーらんたん",
             "くるくおーらんたん",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -14337,7 +15197,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            506,
+            504,
+            "クリエイターズコラボくるくおーらんたん",
             "くるくおーらんたん",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14360,7 +15221,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            505,
+            503,
+            "クリエイターズコラボこころにいたずら",
             "こころにいたずら",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -14368,7 +15230,7 @@ public record Memoria(
             19,
             new Skill(
                 "水：Sp.パワーアシストC Ⅳ",
-                "味方1～3体のSp.ATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～3体のSp.ATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
@@ -14383,7 +15245,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            504,
+            502,
+            "クリエイターズコラボこころにいたずら",
             "こころにいたずら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -14406,7 +15269,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            503,
+            501,
+            "クリエイターズコラボearlytrick",
             "Early Trick",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -14429,7 +15293,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            502,
+            500,
+            "クリエイターズコラボearlytrick",
             "Early Trick",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -14452,7 +15317,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            501,
+            499,
+            "クリエイターズコラボジャックコーデ",
             "ジャックコーデ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14475,7 +15341,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            500,
+            498,
+            "クリエイターズコラボジャックコーデ",
             "ジャックコーデ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -14498,7 +15365,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            499,
+            497,
+            "秋空ピクニック",
             "秋空ピクニック",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -14521,7 +15389,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            498,
+            496,
+            "秋空ピクニック",
             "秋空ピクニック",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -14544,7 +15413,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            497,
+            495,
+            "ソーイングマスター姫歌",
             "ソーイングマスター姫歌",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -14567,7 +15437,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            496,
+            494,
+            "ソーイングマスター姫歌",
             "ソーイングマスター姫歌",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -14590,7 +15461,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            495,
+            493,
+            "庭園の護り人",
             "庭園の護り人",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -14613,7 +15485,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            494,
+            492,
+            "庭園の護り人",
             "庭園の護り人",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -14636,7 +15509,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            493,
+            491,
+            "ふたりの距離",
             "ふたりの距離",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14659,7 +15533,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            492,
+            490,
+            "ふたりの距離",
             "ふたりの距離",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -14682,7 +15557,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            491,
+            489,
+            "ダイスキをキャンバスに",
             "ダイスキをキャンバスに",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -14705,7 +15581,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            490,
+            488,
+            "ダイスキをキャンバスに",
             "ダイスキをキャンバスに",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14728,7 +15605,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            489,
+            487,
+            "らんとたづさのかくれんぼ",
             "らんとたづさのかくれんぼ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -14751,7 +15629,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            488,
+            486,
+            "らんとたづさのかくれんぼ",
             "らんとたづさのかくれんぼ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -14774,7 +15653,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            487,
+            485,
+            "藍は舞い降りた",
             "藍は舞い降りた",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -14797,7 +15677,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            486,
+            484,
+            "藍は舞い降りた",
             "藍は舞い降りた",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -14820,7 +15701,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            485,
+            483,
+            "静寂に佇む狩人",
             "静寂に佇む狩人",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -14843,7 +15725,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            484,
+            482,
+            "静寂に佇む狩人",
             "静寂に佇む狩人",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14866,7 +15749,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            483,
+            481,
+            "クリエイターズコラボ好きなものを一緒に",
             "好きなものを一緒に",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -14889,7 +15773,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            482,
+            480,
+            "クリエイターズコラボ星空のどうぶつ探し",
             "星空のどうぶつ探し",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -14897,7 +15782,7 @@ public record Memoria(
             21,
             new Skill(
                 "水：WガードアシストC Ⅳ",
-                "味方1～3体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～3体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
@@ -14912,7 +15797,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            481,
+            479,
+            "クリエイターズコラボ二人の奏でる夜の歌",
             "二人の奏でる夜の歌",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -14935,7 +15821,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            480,
+            478,
+            "クリエイターズコラボすすきの道しるべ",
             "すすきの道しるべ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14958,7 +15845,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            479,
+            477,
+            "息を潜めて",
             "息を潜めて",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -14981,7 +15869,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            478,
+            476,
+            "息を潜めて",
             "息を潜めて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -15004,7 +15893,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            477,
+            475,
+            "ミッドナイトスティール",
             "ミッドナイトスティール",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -15027,7 +15917,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            476,
+            474,
+            "ミッドナイトスティール",
             "ミッドナイトスティール",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -15050,7 +15941,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            475,
+            473,
+            "真夜中の極秘作戦",
             "真夜中の極秘作戦",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -15073,7 +15965,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            474,
+            472,
+            "誠実なる守護者",
             "誠実なる守護者",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -15097,7 +15990,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            473,
+            471,
+            "一葉ののんびりタイム",
             "一葉ののんびりタイム",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -15120,7 +16014,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            472,
+            470,
+            "一葉ののんびりタイム",
             "一葉ののんびりタイム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -15143,7 +16038,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            471,
+            469,
+            "クリエイターズコラボペアトレ",
             "ペアトレ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -15166,7 +16062,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            470,
+            468,
+            "クリエイターズコラボ先輩ふぁいと☆",
             "先輩ふぁいと☆",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -15189,7 +16086,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            469,
+            467,
+            "クリエイターズコラボもっと優しく",
             "もっと優しく",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -15212,7 +16110,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            468,
+            466,
+            "クリエイターズコラボりざるとちぇっく",
             "りざるとちぇっく",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -15235,7 +16134,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            467,
+            465,
+            "親愛なるルームメイト",
             "親愛なるルームメイト",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -15258,7 +16158,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            466,
+            464,
+            "戦場のお色直し",
             "戦場のお色直し",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -15281,7 +16182,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            465,
+            463,
+            "戦場のお色直し",
             "戦場のお色直し",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -15304,7 +16206,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            464,
+            462,
+            "白鳥の姫騎士",
             "白鳥の姫騎士",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -15327,7 +16230,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            463,
+            461,
+            "白鳥の姫騎士",
             "白鳥の姫騎士",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -15335,7 +16239,7 @@ public record Memoria(
             19,
             new Skill(
                 "水拡：パワーアシストB Ⅳ",
-                "味方1～2体のATKを特大アップさせる。オーダースキル「水属性効果増加」を発動中は味方2体のATKを特大アップさせる。※...",
+                "味方1～2体のATKを特大アップさせる。オーダースキル「水属性効果増加」を発動中は味方2体のATKを特大アップさせる。",
                 [new ElementSpread(Element.Water)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
@@ -15350,7 +16254,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            462,
+            460,
+            "氷帝",
             "氷帝",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -15373,7 +16278,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            461,
+            459,
+            "氷帝",
             "氷帝",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -15396,7 +16302,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            460,
+            458,
+            "その瞳に映るモノ",
             "その瞳に映るモノ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -15419,7 +16326,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            459,
+            457,
+            "その瞳に映るモノ",
             "その瞳に映るモノ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -15442,7 +16350,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            458,
+            456,
+            "アクロバット・シューター",
             "アクロバット・シューター",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -15465,7 +16374,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            457,
+            455,
+            "アクロバット・シューター",
             "アクロバット・シューター",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -15488,7 +16398,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            456,
+            454,
+            "天からの強襲",
             "天からの強襲",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -15511,7 +16422,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            455,
+            453,
+            "天からの強襲",
             "天からの強襲",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -15534,7 +16446,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            454,
+            452,
+            "ナイトガンスリンガー",
             "ナイトガンスリンガー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -15558,7 +16471,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            453,
+            451,
+            "クリエイターズコラボ夏色日和",
             "夏色日和",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -15581,7 +16495,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            452,
+            450,
+            "クリエイターズコラボ打ち上げ花火",
             "打ち上げ花火",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -15604,7 +16519,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            451,
+            449,
+            "クリエイターズコラボ涼やかな響き",
             "涼やかな響き",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -15627,7 +16543,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            450,
+            448,
+            "クリエイターズコラボ納涼かき氷",
             "納涼かき氷",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -15650,7 +16567,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            449,
+            447,
+            "飛び出せミリアム",
             "飛び出せミリアム！",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -15673,7 +16591,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            448,
+            446,
+            "飛び出せミリアム",
             "飛び出せミリアム！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
@@ -15696,7 +16615,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            447,
+            445,
+            "ポイ越しの笑顔",
             "ポイ越しの笑顔",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -15719,7 +16639,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            446,
+            444,
+            "ポイ越しの笑顔",
             "ポイ越しの笑顔",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -15742,7 +16663,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            445,
+            443,
+            "祭囃子と恋の音",
             "祭囃子と恋の音",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -15765,7 +16687,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            444,
+            442,
+            "クリエイターズコラボ想いを込めた歌声",
             "想いを込めた歌声",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -15788,7 +16711,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            443,
+            441,
+            "クリエイターズコラボ花咲くハーモニー",
             "花咲くハーモニー",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -15811,7 +16735,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            442,
+            440,
+            "クリエイターズコラボ躍動の旋律",
             "躍動の旋律",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -15834,7 +16759,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            441,
+            439,
+            "クリエイターズコラボきらめきステージ",
             "きらめきステージ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -15857,7 +16783,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            440,
+            438,
+            "夏の海とかき氷",
             "夏の海とかき氷",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -15880,7 +16807,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            439,
+            437,
+            "夏の海とかき氷",
             "夏の海とかき氷",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -15903,7 +16831,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            438,
+            436,
+            "見返り美人",
             "見返り美人",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -15926,7 +16855,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            437,
+            435,
+            "見返り美人",
             "見返り美人",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -15949,7 +16879,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            436,
+            434,
+            "diverse",
             "Diverse",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -15972,7 +16903,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            435,
+            433,
+            "diverse",
             "Diverse",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -15995,7 +16927,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            434,
+            432,
+            "cherish",
             "Cherish",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -16018,7 +16951,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            433,
+            431,
+            "cherish",
             "Cherish",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -16041,7 +16975,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            432,
+            430,
+            "激戦の終わりに",
             "激戦の終わりに",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -16064,7 +16999,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            431,
+            429,
+            "極限コンビネーション",
             "極限コンビネーション",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -16087,7 +17023,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            430,
+            428,
+            "極限コンビネーション",
             "極限コンビネーション",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
@@ -16110,7 +17047,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            429,
+            427,
+            "不屈の一太刀",
             "不屈の一太刀",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -16133,7 +17071,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            428,
+            426,
+            "不屈の一太刀",
             "不屈の一太刀",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -16156,7 +17095,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            427,
+            425,
+            "クリエイターズコラボらぶらぶぴーす",
             "らぶらぶぴーす",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -16179,7 +17119,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            426,
+            424,
+            "クリエイターズコラボひまわりとんだよ",
             "ひまわりとんだよ",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -16202,7 +17143,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            425,
+            423,
+            "クリエイターズコラボレディーティータイム",
             "レディーティータイム",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -16225,7 +17167,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            424,
+            422,
+            "クリエイターズコラボ月に顔をそむけて",
             "月に顔をそむけて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -16248,7 +17191,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            423,
+            421,
+            "バトル・デプロイメント",
             "バトル・デプロイメント",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
@@ -16271,7 +17215,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            422,
+            420,
+            "バトル・デプロイメント",
             "バトル・デプロイメント",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -16294,7 +17239,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            421,
+            419,
+            "淀みを蹴って",
             "淀みを蹴って",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -16317,7 +17263,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            420,
+            418,
+            "淀みを蹴って",
             "淀みを蹴って",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -16340,7 +17287,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            419,
+            417,
+            "アンブッシュ",
             "アンブッシュ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -16363,7 +17311,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            418,
+            416,
+            "アンブッシュ",
             "アンブッシュ",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -16386,7 +17335,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            417,
+            415,
+            "emotionalmemoria晴れときどきサンオイル",
             "晴れときどきサンオイル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -16409,7 +17359,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            416,
+            414,
+            "emotionalmemoria晴れときどきサンオイル",
             "晴れときどきサンオイル",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -16432,7 +17383,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            415,
+            413,
+            "楽しいを探しに行こう",
             "楽しいを探しに行こう！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -16455,7 +17407,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            414,
+            412,
+            "楽しいを探しに行こう",
             "楽しいを探しに行こう！",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -16478,7 +17431,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            413,
+            411,
+            "ダイビング・アタッカー",
             "ダイビング・アタッカー",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -16501,7 +17455,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            412,
+            410,
+            "ダイビング・アタッカー",
             "ダイビング・アタッカー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -16524,7 +17479,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            411,
+            409,
+            "ウッドクラフトに挑戦",
             "ウッドクラフトに挑戦",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -16547,7 +17503,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            410,
+            408,
+            "炊事は任せた",
             "炊事は任せた！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -16570,7 +17527,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            409,
+            407,
+            "面目躍如のサバイバル",
             "面目躍如のサバイバル",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -16593,7 +17551,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            408,
+            406,
+            "面目躍如のサバイバル",
             "面目躍如のサバイバル",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
@@ -16616,7 +17575,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            407,
+            405,
+            "殲滅のシルバーバレット",
             "殲滅のシルバーバレット",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -16639,7 +17599,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            406,
+            404,
+            "殲滅のシルバーバレット",
             "殲滅のシルバーバレット",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -16662,7 +17623,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            405,
+            403,
+            "やめられない刺激",
             "やめられない刺激",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -16685,7 +17647,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            404,
+            402,
+            "やめられない刺激",
             "やめられない刺激",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -16708,7 +17671,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            403,
+            401,
+            "光の注ぐ夜",
             "光の注ぐ夜",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -16731,7 +17695,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            402,
+            400,
+            "光の注ぐ夜",
             "光の注ぐ夜",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -16754,7 +17719,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            401,
+            399,
+            "ゼロ距離のしあわせ",
             "ゼロ距離のしあわせ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -16777,7 +17743,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            400,
+            398,
+            "ゼロ距離のしあわせ",
             "ゼロ距離のしあわせ",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -16800,7 +17767,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            399,
+            397,
+            "水も滴るいい乙女",
             "水も滴るいい乙女",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -16823,7 +17791,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            398,
+            396,
+            "水も滴るいい乙女",
             "水も滴るいい乙女",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -16846,7 +17815,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            397,
+            395,
+            "リトル・アークメイジ",
             "リトル・アークメイジ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -16870,7 +17840,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            396,
+            394,
+            "信じる想いを力に変えて",
             "信じる想いを力に変えて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -16893,7 +17864,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            395,
+            393,
+            "信じる想いを力に変えて",
             "信じる想いを力に変えて",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -16916,7 +17888,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            394,
+            392,
+            "絆のアルケミートレース",
             "絆のアルケミートレース",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -16939,7 +17912,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            393,
+            391,
+            "絆のアルケミートレース",
             "絆のアルケミートレース",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -16962,7 +17936,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            392,
+            390,
+            "ピュリファイ・ラプラス",
             "ピュリファイ・ラプラス",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -16985,7 +17960,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            391,
+            389,
+            "ピュリファイ・ラプラス",
             "ピュリファイ・ラプラス",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -17008,7 +17984,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            390,
+            388,
+            "ヘイムスクリングラ・シスターズ",
             "ヘイムスクリングラ・シスターズ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -17031,7 +18008,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            389,
+            387,
+            "ヘイムスクリングラ・シスターズ",
             "ヘイムスクリングラ・シスターズ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -17054,7 +18032,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            388,
+            386,
+            "黄昏の英雄たち",
             "黄昏の英雄たち",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -17077,7 +18056,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            387,
+            385,
+            "黄昏の英雄たち",
             "黄昏の英雄たち",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -17085,7 +18065,7 @@ public record Memoria(
             19,
             new Skill(
                 "風：スマッシュB Ⅲ",
-                "敵1～2体に特殊大ダメージを与える。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与える。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [],
                 Level.Three,
@@ -17100,7 +18080,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            386,
+            384,
+            "emotionalmemoriaお姉様の水難",
             "お姉様の水難",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -17123,7 +18104,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            385,
+            383,
+            "emotionalmemoriaお姉様の水難",
             "お姉様の水難",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -17146,7 +18128,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            384,
+            382,
+            "この勝利が小さな一歩でも",
             "この勝利が小さな一歩でも",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -17169,7 +18152,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            383,
+            381,
+            "この勝利が小さな一歩でも",
             "この勝利が小さな一歩でも",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Light,
@@ -17192,7 +18176,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            382,
+            380,
+            "巨影を討つ閃光",
             "巨影を討つ閃光",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -17200,7 +18185,7 @@ public record Memoria(
             19,
             new Skill(
                 "光：パワーフォールB Ⅲ",
-                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -17215,7 +18200,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            381,
+            379,
+            "巨影を討つ閃光",
             "巨影を討つ閃光",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -17238,7 +18224,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            380,
+            378,
+            "ここから先は通さない",
             "ここから先は通さない",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -17261,7 +18248,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            379,
+            377,
+            "ここから先は通さない",
             "ここから先は通さない",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -17284,7 +18272,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            378,
+            376,
+            "猛る獅子の剣",
             "猛る獅子の剣",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -17308,7 +18297,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            377,
+            375,
+            "クローバー・クラウン",
             "クローバー・クラウン",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -17331,7 +18321,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            376,
+            374,
+            "クローバー・クラウン",
             "クローバー・クラウン",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -17354,7 +18345,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            375,
+            373,
+            "華の休息",
             "華の休息",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -17377,7 +18369,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            374,
+            372,
+            "華の休息",
             "華の休息",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
@@ -17400,7 +18393,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            373,
+            371,
+            "ビーチでバカンス",
             "ビーチでバカンス",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -17423,7 +18417,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            372,
+            370,
+            "ビーチでバカンス",
             "ビーチでバカンス",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Dark,
@@ -17446,7 +18441,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            371,
+            369,
+            "乙女の非常事態",
             "乙女の非常事態",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -17469,7 +18465,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            370,
+            368,
+            "乙女の非常事態",
             "乙女の非常事態",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -17477,7 +18474,7 @@ public record Memoria(
             19,
             new Skill(
                 "闇：Sp.パワーアシストB Ⅲ",
-                "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -17492,7 +18489,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            369,
+            367,
+            "m.v.p.オンステージ",
             "M.V.P.オンステージ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -17515,7 +18513,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            368,
+            366,
+            "m.v.p.オンステージ",
             "M.V.P.オンステージ",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -17538,7 +18537,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            367,
+            365,
+            "勝利のファンファーレ",
             "勝利のファンファーレ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -17561,7 +18561,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            366,
+            364,
+            "勝利のファンファーレ",
             "勝利のファンファーレ",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -17584,7 +18585,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            365,
+            363,
+            "お手当マイスター",
             "お手当マイスター",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -17607,7 +18609,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            364,
+            362,
+            "お手当マイスター",
             "お手当マイスター",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -17630,7 +18633,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            363,
+            361,
+            "謳歌のミュージックアワー",
             "謳歌のミュージックアワー",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -17653,7 +18657,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            362,
+            360,
+            "謳歌のミュージックアワー",
             "謳歌のミュージックアワー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -17676,7 +18681,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            361,
+            359,
+            "メイクアップ",
             "メイクアップ！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -17699,7 +18705,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            360,
+            358,
+            "メイクアップ",
             "メイクアップ！",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -17722,7 +18729,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            359,
+            357,
+            "回遊のススメ",
             "回遊のススメ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -17745,7 +18753,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            358,
+            356,
+            "回遊のススメ",
             "回遊のススメ",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -17768,7 +18777,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            357,
+            355,
+            "尊みの探求者",
             "尊みの探求者",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -17776,7 +18786,7 @@ public record Memoria(
             19,
             new Skill(
                 "闇：Sp.パワーフォールB Ⅲ",
-                "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -17791,7 +18801,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            356,
+            354,
+            "尊みの探求者",
             "尊みの探求者",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -17814,7 +18825,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            355,
+            353,
+            "生徒会のお仕事",
             "生徒会のお仕事",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -17837,7 +18849,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            354,
+            352,
+            "生徒会のお仕事",
             "生徒会のお仕事",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -17845,7 +18858,7 @@ public record Memoria(
             19,
             new Skill(
                 "光：Sp.パワーフォールB Ⅲ",
-                "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -17860,7 +18873,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            353,
+            351,
+            "美しき師弟関係",
             "美しき師弟関係",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -17883,7 +18897,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            352,
+            350,
+            "美しき師弟関係",
             "美しき師弟関係",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
@@ -17906,7 +18921,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            351,
+            349,
+            "最高のルームメイト",
             "最高のルームメイト",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -17929,7 +18945,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            350,
+            348,
+            "最高のルームメイト",
             "最高のルームメイト",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Light,
@@ -17952,7 +18969,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            349,
+            347,
+            "bzのプロフェッショナル",
             "BZのプロフェッショナル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -17975,7 +18993,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            348,
+            346,
+            "bzのプロフェッショナル",
             "BZのプロフェッショナル",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -17998,7 +19017,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            347,
+            345,
+            "もう一度、何度でも",
             "もう一度、何度でも",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Dark,
@@ -18021,7 +19041,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            346,
+            344,
+            "もう一度、何度でも",
             "もう一度、何度でも",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -18029,7 +19050,7 @@ public record Memoria(
             18,
             new Skill(
                 "闇：ガードフォールB Ⅲ",
-                "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
@@ -18044,7 +19065,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            345,
+            343,
+            "相生の水先案内人",
             "相生の水先案内人",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -18067,7 +19089,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            344,
+            342,
+            "相生の水先案内人",
             "相生の水先案内人",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -18090,7 +19113,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            343,
+            341,
+            "心の炎は豪雨で消えず",
             "心の炎は豪雨で消えず",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -18113,7 +19137,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            342,
+            340,
+            "心の炎は豪雨で消えず",
             "心の炎は豪雨で消えず",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -18136,7 +19161,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            341,
+            339,
+            "昼下がりのラプソディー",
             "昼下がりのラプソディー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -18159,7 +19185,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            340,
+            338,
+            "昼下がりのラプソディー",
             "昼下がりのラプソディー",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -18182,7 +19209,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            339,
+            337,
+            "私ヲ蝕ム悪イ夢",
             "私ヲ蝕ム悪イ夢",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -18205,7 +19233,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            338,
+            336,
+            "私ヲ蝕ム悪イ夢",
             "私ヲ蝕ム悪イ夢",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -18228,7 +19257,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            337,
+            335,
+            "だいすきをあげる",
             "だいすきをあげる",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -18251,7 +19281,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            336,
+            334,
+            "だいすきをあげる",
             "だいすきをあげる",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -18274,7 +19305,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            335,
+            333,
+            "希望の光",
             "希望の光",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
@@ -18297,7 +19329,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            334,
+            332,
+            "希望の光",
             "希望の光",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -18320,7 +19353,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            333,
+            331,
+            "思い出はカメラの中に",
             "思い出はカメラの中に",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -18343,7 +19377,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            332,
+            330,
+            "ブレイク・タイム",
             "ブレイク・タイム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -18366,7 +19401,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            331,
+            329,
+            "ラブリーアンドピース",
             "ラブリーアンドピース",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -18389,7 +19425,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            330,
+            328,
+            "すってんあかりん",
             "すってんあかりん",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -18412,7 +19449,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            329,
+            327,
+            "獅子奮迅",
             "獅子奮迅",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -18436,7 +19474,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            328,
+            326,
+            "せめて、この子だけは",
             "せめて、この子だけは",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -18459,7 +19498,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            327,
+            325,
+            "せめて、この子だけは",
             "せめて、この子だけは",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -18467,7 +19507,7 @@ public record Memoria(
             18,
             new Skill(
                 "水：パワーアシストB Ⅲ",
-                "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -18482,7 +19522,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            326,
+            324,
+            "紅巴式夏祭りの楽しみ方",
             "紅巴式夏祭りの楽しみ方",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -18505,7 +19546,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            325,
+            323,
+            "紅巴式夏祭りの楽しみ方",
             "紅巴式夏祭りの楽しみ方",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -18528,7 +19570,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            324,
+            322,
+            "世界を越えて",
             "世界を越えて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -18551,7 +19594,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            323,
+            321,
+            "世界を越えて",
             "世界を越えて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -18574,7 +19618,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            322,
+            320,
+            "小さなシュッツエンゲル",
             "小さなシュッツエンゲル",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -18597,7 +19642,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            321,
+            319,
+            "小さなシュッツエンゲル",
             "小さなシュッツエンゲル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -18620,7 +19666,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            320,
+            318,
+            "束ねる絆の一夜",
             "束ねる絆の一夜",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -18643,7 +19690,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            319,
+            317,
+            "束ねる絆の一夜",
             "束ねる絆の一夜",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -18651,7 +19699,7 @@ public record Memoria(
             18,
             new Skill(
                 "水：パワーアシストB Ⅲ",
-                "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -18666,7 +19714,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            318,
+            316,
+            "救う願いの一閃",
             "救う願いの一閃",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -18689,7 +19738,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            317,
+            315,
+            "救う願いの一閃",
             "救う願いの一閃",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -18697,7 +19747,7 @@ public record Memoria(
             18,
             new Skill(
                 "水：Sp.パワーフォールB Ⅲ",
-                "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -18712,7 +19762,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            316,
+            314,
+            "足踏み健康ロードの悲劇",
             "足踏み健康ロードの悲劇",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -18735,7 +19786,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            315,
+            313,
+            "足踏み健康ロードの悲劇",
             "足踏み健康ロードの悲劇",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -18743,7 +19795,7 @@ public record Memoria(
             18,
             new Skill(
                 "闇：パワーフォールB Ⅲ",
-                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -18758,7 +19810,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            314,
+            312,
+            "みんなを守るために",
             "みんなを守るために",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -18781,7 +19834,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            313,
+            311,
+            "みんなを守るために",
             "みんなを守るために",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
@@ -18804,7 +19858,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            312,
+            310,
+            "狂化フルスロットル",
             "狂化フルスロットル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -18827,7 +19882,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            311,
+            309,
+            "狂化フルスロットル",
             "狂化フルスロットル",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -18850,7 +19906,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            310,
+            308,
+            "友を守護する剣",
             "友を守護する剣",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -18873,7 +19930,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            309,
+            307,
+            "友を守護する剣",
             "友を守護する剣",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -18896,7 +19954,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            308,
+            306,
+            "不死身の刃",
             "不死身の刃",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -18919,7 +19978,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            307,
+            305,
+            "不死身の刃",
             "不死身の刃",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Light,
@@ -18942,7 +20002,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            306,
+            304,
+            "emotionalmemoria癒しの露天風呂",
             "癒しの露天風呂",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -18965,7 +20026,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            305,
+            303,
+            "emotionalmemoria癒しの露天風呂",
             "癒しの露天風呂",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -18973,7 +20035,7 @@ public record Memoria(
             18,
             new Skill(
                 "光：WガードアシストB Ⅲ",
-                "味方1～2体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -18988,7 +20050,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            304,
+            302,
+            "アサルトリリィふるーつ",
             "アサルトリリィ ふるーつ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -19011,7 +20074,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            303,
+            301,
+            "アサルトリリィふるーつ",
             "アサルトリリィ ふるーつ",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -19019,7 +20083,7 @@ public record Memoria(
             18,
             new Skill(
                 "光：WガードフォールA Ⅲ",
-                "敵1体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※...",
+                "敵1体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -19034,7 +20098,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            302,
+            300,
+            "ストームデュオ",
             "ストームデュオ",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -19042,7 +20107,7 @@ public record Memoria(
             18,
             new Skill(
                 "光：ガードアシストB Ⅲ",
-                "味方1～2体のDEFを大アップさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のDEFを大アップさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
@@ -19057,7 +20122,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            301,
+            299,
+            "ストームデュオ",
             "ストームデュオ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
@@ -19080,7 +20146,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            300,
+            298,
+            "アクアストライク",
             "アクアストライク",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -19103,7 +20170,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            299,
+            297,
+            "アクアストライク",
             "アクアストライク",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -19126,7 +20194,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            298,
+            296,
+            "雷光一閃",
             "雷光一閃",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -19149,7 +20218,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            297,
+            295,
+            "雷光一閃",
             "雷光一閃",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -19157,7 +20227,7 @@ public record Memoria(
             18,
             new Skill(
                 "光：Sp.ガードフォールB Ⅲ",
-                "敵1～2体のSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -19172,31 +20242,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            296,
-            "フラガラッハの光",
-            new Rearguard(RearguardKind.Recovery),
-            Element.Light,
-            new Status(3620, 2718, 3595, 4964),
-            21,
-            new Skill(
-                "WガードヒールE LG",
-                "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
-                [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
-                Level.Lg,
-                Range.E
-            ),
-            new SupportSkill(
-                "回:回復UP/副援:支援UP Ⅱ",
-                "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。",
-                Trigger.Support,
-                [new RecoveryUp(), new SupportUp()],
-                Level.Two
-            ),
-            true
-        ),
-        new Memoria(
-            295,
+            294,
+            "ハッピーを見つけたら☆",
             "ハッピーを見つけたら☆",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -19219,7 +20266,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            294,
+            293,
+            "ハッピーを見つけたら☆",
             "ハッピーを見つけたら☆",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -19242,7 +20290,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            293,
+            292,
+            "戦いを終えて",
             "戦いを終えて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -19265,7 +20314,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            292,
+            291,
+            "戦いを終えて",
             "戦いを終えて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -19288,7 +20338,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            291,
+            290,
+            "通じ合うふたり",
             "通じ合うふたり",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -19311,7 +20362,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            290,
+            289,
+            "通じ合うふたり",
             "通じ合うふたり",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -19319,7 +20371,7 @@ public record Memoria(
             18,
             new Skill(
                 "火：Sp.パワーフォールB Ⅲ",
-                "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -19334,7 +20386,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            289,
+            288,
+            "麗しき出立",
             "麗しき出立",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -19342,7 +20395,7 @@ public record Memoria(
             18,
             new Skill(
                 "光：パワーアシストB Ⅲ",
-                "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -19357,7 +20410,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            288,
+            287,
+            "麗しき出立",
             "麗しき出立",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -19380,7 +20434,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            287,
+            286,
+            "飛翔迎撃",
             "飛翔迎撃",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -19403,7 +20458,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            286,
+            285,
+            "飛翔迎撃",
             "飛翔迎撃",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -19426,7 +20482,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            285,
+            284,
+            "不動劔の姫",
             "不動剣の姫",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
@@ -19449,7 +20506,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            284,
+            283,
+            "不動劔の姫",
             "不動剣の姫",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -19472,7 +20530,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            283,
+            282,
+            "そうさく倶楽部の活動",
             "そうさく倶楽部の活動",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -19495,7 +20554,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            282,
+            281,
+            "そうさく倶楽部の活動",
             "そうさく倶楽部の活動",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -19503,7 +20563,7 @@ public record Memoria(
             18,
             new Skill(
                 "光：WガードフォールA Ⅲ",
-                "敵1体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※...",
+                "敵1体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -19518,7 +20578,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            281,
+            280,
+            "愛しき人との待ち合わせ",
             "愛しき人との待ち合わせ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -19541,7 +20602,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            280,
+            279,
+            "愛しき人との待ち合わせ",
             "愛しき人との待ち合わせ",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -19564,7 +20626,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            279,
+            278,
+            "月下の傍観者",
             "月下の傍観者",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -19587,7 +20650,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            278,
+            277,
+            "月下の傍観者",
             "月下の傍観者",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -19610,7 +20674,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            277,
+            276,
+            "なかよしとわいらいと",
             "なかよしとわいらいと",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -19633,7 +20698,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            276,
+            275,
+            "なかよしとわいらいと",
             "なかよしとわいらいと",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -19641,7 +20707,7 @@ public record Memoria(
             18,
             new Skill(
                 "光：WガードフォールB Ⅲ",
-                "敵1～2体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -19656,7 +20722,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            275,
+            274,
+            "水流乱撃",
             "水流乱撃",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -19679,7 +20746,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            274,
+            273,
+            "水流乱撃",
             "水流乱撃",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -19702,7 +20770,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            273,
+            272,
+            "踏み込む勇気",
             "踏み込む勇気",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -19710,7 +20779,7 @@ public record Memoria(
             17,
             new Skill(
                 "火：ガードフォールB Ⅲ",
-                "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
@@ -19725,7 +20794,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            272,
+            271,
+            "踏み込む勇気",
             "踏み込む勇気",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -19748,7 +20818,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            271,
+            270,
+            "吸血鬼のたしなみ",
             "吸血鬼のたしなみ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -19771,7 +20842,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            270,
+            269,
+            "吸血鬼のたしなみ",
             "吸血鬼のたしなみ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -19794,7 +20866,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            269,
+            268,
+            "校舎屋上のストラグル",
             "校舎屋上のストラグル",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -19802,7 +20875,7 @@ public record Memoria(
             18,
             new Skill(
                 "風：Sp.パワーアシストB Ⅲ",
-                "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -19817,7 +20890,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            268,
+            267,
+            "校舎屋上のストラグル",
             "校舎屋上のストラグル",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -19840,7 +20914,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            267,
+            266,
+            "清淑なる黒き槍",
             "清淑なる黒き槍",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -19863,7 +20938,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            266,
+            265,
+            "清淑なる黒き槍",
             "清淑なる黒き槍",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -19871,7 +20947,7 @@ public record Memoria(
             18,
             new Skill(
                 "火：パワーアシストB Ⅲ",
-                "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -19886,7 +20962,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            265,
+            264,
+            "世界を守る剣たち",
             "世界を守る剣たち",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -19894,7 +20971,7 @@ public record Memoria(
             18,
             new Skill(
                 "光：パワーフォールB Ⅲ",
-                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -19909,7 +20986,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            264,
+            263,
+            "世界を守る剣たち",
             "世界を守る剣たち",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -19932,7 +21010,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            263,
+            262,
+            "悪夢との共闘",
             "悪夢との共闘",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -19955,7 +21034,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            262,
+            261,
+            "悪夢との共闘",
             "悪夢との共闘",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -19978,7 +21058,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            261,
+            260,
+            "扶翼の剣",
             "扶翼の剣",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -20001,7 +21082,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            260,
+            259,
+            "扶翼の剣",
             "扶翼の剣",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -20024,7 +21106,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            259,
+            258,
+            "灼爛の一撃",
             "灼爛の一撃",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Light,
@@ -20047,7 +21130,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            258,
+            257,
+            "灼爛の一撃",
             "灼爛の一撃",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -20070,7 +21154,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            257,
+            256,
+            "静寂の中で",
             "静寂の中で",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -20093,7 +21178,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            256,
+            255,
+            "静寂の中で",
             "静寂の中で",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -20116,7 +21202,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            255,
+            254,
+            "キラキラアイスクリーム",
             "キラキラアイスクリーム！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -20139,7 +21226,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            254,
+            253,
+            "キラキラアイスクリーム",
             "キラキラアイスクリーム！",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -20162,7 +21250,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            253,
+            252,
+            "迎え撃つ勇士たち",
             "迎え撃つ勇士たち",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -20185,7 +21274,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            252,
+            251,
+            "迎え撃つ勇士たち",
             "迎え撃つ勇士たち",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -20208,7 +21298,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            251,
+            250,
+            "不撓不屈の心を胸に",
             "不撓不屈の心を胸に",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -20231,7 +21322,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            250,
+            249,
+            "不撓不屈の心を胸に",
             "不撓不屈の心を胸に",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -20239,7 +21331,7 @@ public record Memoria(
             18,
             new Skill(
                 "闇：ガードフォールB Ⅲ",
-                "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
@@ -20254,7 +21346,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            249,
+            248,
+            "ブレイブ・ショット",
             "ブレイブ・ショット",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -20277,7 +21370,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            248,
+            247,
+            "ブレイブ・ショット",
             "ブレイブ・ショット",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
@@ -20300,7 +21394,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            247,
+            246,
+            "発進☆ユニコーン",
             "発進☆ユニコーン！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -20323,7 +21418,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            246,
+            245,
+            "発進☆ユニコーン",
             "発進☆ユニコーン！",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -20346,7 +21442,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            245,
+            244,
+            "仮想訓練場の応酬",
             "仮想訓練場の応酬",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -20369,7 +21466,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            244,
+            243,
+            "仮想訓練場の応酬",
             "仮想訓練場の応酬",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -20377,7 +21475,7 @@ public record Memoria(
             18,
             new Skill(
                 "火：Sp.パワーフォールB Ⅲ",
-                "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -20392,7 +21490,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            243,
+            242,
+            "優しい夕暮れ",
             "優しい夕暮れ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -20415,7 +21514,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            242,
+            241,
+            "優しい夕暮れ",
             "優しい夕暮れ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -20438,7 +21538,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            241,
+            240,
+            "静かに肩を寄せて",
             "静かに肩を寄せて",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -20461,7 +21562,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            240,
+            239,
+            "静かに肩を寄せて",
             "静かに肩を寄せて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -20484,7 +21586,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            239,
+            238,
+            "レスキューキャット",
             "レスキューキャット",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -20507,7 +21610,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            238,
+            237,
+            "レスキューキャット",
             "レスキューキャット",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -20515,7 +21619,7 @@ public record Memoria(
             18,
             new Skill(
                 "闇：WガードアシストB Ⅲ",
-                "味方1～2体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -20530,7 +21634,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            237,
+            236,
+            "平穏を守るための哮り",
             "平穏を守るための哮り",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -20553,7 +21658,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            236,
+            235,
+            "平穏を守るための哮り",
             "平穏を守るための哮り",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -20576,7 +21682,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            235,
+            234,
+            "ハッピー＆トリート",
             "ハッピー＆トリート",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -20599,7 +21706,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            234,
+            233,
+            "ハッピー＆トリート",
             "ハッピー＆トリート",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -20622,7 +21730,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            233,
+            232,
+            "あなただけの守護天使",
             "あなただけの守護天使",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -20645,7 +21754,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            232,
+            231,
+            "あなただけの守護天使",
             "あなただけの守護天使",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -20653,7 +21763,7 @@ public record Memoria(
             18,
             new Skill(
                 "闇：WガードアシストB Ⅲ",
-                "味方1～2体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のDEFとSp.DEFを大アップさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -20668,7 +21778,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            231,
+            230,
+            "いつでも近くに",
             "いつでも近くに",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Dark,
@@ -20691,7 +21802,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            230,
+            229,
+            "いつでも近くに",
             "いつでも近くに",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -20714,7 +21826,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            229,
+            228,
+            "純白の想い",
             "純白の想い",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -20722,7 +21835,7 @@ public record Memoria(
             18,
             new Skill(
                 "闇：パワーフォールB Ⅲ",
-                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -20737,7 +21850,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            228,
+            227,
+            "純白の想い",
             "純白の想い",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -20760,7 +21874,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            227,
+            226,
+            "蒼き月の御使い",
             "蒼き月の御使い",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -20784,7 +21899,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            226,
+            225,
+            "放課後のミューズ",
             "放課後のミューズ",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -20807,7 +21923,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            225,
+            224,
+            "放課後のミューズ",
             "放課後のミューズ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -20830,7 +21947,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            224,
+            223,
+            "小春日和",
             "小春日和",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -20853,7 +21971,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            223,
+            222,
+            "小春日和",
             "小春日和",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -20876,7 +21995,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            222,
+            221,
+            "真夜中のクリエイター",
             "真夜中のクリエイター",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -20899,7 +22019,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            221,
+            220,
+            "真夜中のクリエイター",
             "真夜中のクリエイター",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -20907,7 +22028,7 @@ public record Memoria(
             18,
             new Skill(
                 "闇：Sp.パワーアシストB Ⅲ",
-                "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -20922,7 +22043,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            220,
+            219,
+            "遠い日の足跡",
             "遠い日の足跡",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -20945,7 +22067,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            219,
+            218,
+            "遠い日の足跡",
             "遠い日の足跡",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
@@ -20968,7 +22091,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            218,
+            217,
+            "先駆けプリンセス",
             "先駆けプリンセス",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
@@ -20991,7 +22115,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            217,
+            216,
+            "先駆けプリンセス",
             "先駆けプリンセス",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Dark,
@@ -21014,7 +22139,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            216,
+            215,
+            "寂寥の美",
             "寂寥の美",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -21037,7 +22163,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            215,
+            214,
+            "寂寥の美",
             "寂寥の美",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -21060,7 +22187,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            214,
+            213,
+            "劔の妖精",
             "劔の妖精",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -21083,7 +22211,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            213,
+            212,
+            "セインツの宝石",
             "セインツの宝石",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -21106,7 +22235,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            212,
+            211,
+            "セインツの宝石",
             "セインツの宝石",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -21129,7 +22259,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            211,
+            210,
+            "暴君の花嫁",
             "暴君の花嫁",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -21152,7 +22283,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            210,
+            209,
+            "約束の蕾",
             "約束の蕾",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -21160,7 +22292,7 @@ public record Memoria(
             18,
             new Skill(
                 "水：ガードアシストC Ⅳ",
-                "味方1～3体のDEFを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～3体のDEFを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
@@ -21175,7 +22307,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            209,
+            208,
+            "約束の蕾",
             "約束の蕾",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -21198,7 +22331,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            208,
+            207,
+            "大切な存在",
             "大切な存在",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -21221,7 +22355,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            207,
+            206,
+            "大切な存在",
             "大切な存在",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -21244,7 +22379,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            206,
+            205,
+            "黄昏の研究者たち",
             "黄昏の研究者たち",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -21267,7 +22403,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            205,
+            204,
+            "黄昏の研究者たち",
             "黄昏の研究者たち",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -21290,7 +22427,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            204,
+            203,
+            "出逢いの約束",
             "出逢いの約束",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -21313,7 +22451,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            203,
+            202,
+            "出逢いの約束",
             "出逢いの約束",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -21336,7 +22475,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            202,
+            201,
+            "暁に笑う少女",
             "暁に笑う少女",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -21359,7 +22499,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            201,
+            200,
+            "暁に笑う少女",
             "暁に笑う少女",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -21382,7 +22523,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            200,
+            199,
+            "ハンドメイド・リリィ",
             "ハンドメイド・リリィ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -21405,7 +22547,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            199,
+            198,
+            "ハンドメイド・リリィ",
             "ハンドメイド・リリィ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -21428,7 +22571,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            198,
+            197,
+            "ハッピーバレンタインだにゃん♪",
             "ハッピーバレンタインだにゃん♪",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -21451,7 +22595,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            197,
+            196,
+            "まごころをこめて",
             "まごころをこめて！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -21474,7 +22619,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            196,
+            195,
+            "ドキドキ・ショコラーデ",
             "ドキドキ・ショコラーデ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -21497,7 +22643,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            195,
+            194,
+            "煌めく花々",
             "煌めく花々",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -21520,7 +22667,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            194,
+            193,
+            "煌めく花々",
             "煌めく花々",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -21543,7 +22691,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            193,
+            192,
+            "一筆の心",
             "一筆の心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -21566,7 +22715,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            192,
+            191,
+            "一筆の心",
             "一筆の心",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -21589,7 +22739,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            191,
+            190,
+            "飾らぬ想いに咲き誇る",
             "飾らぬ想いに咲き誇る",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -21612,7 +22763,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            190,
+            189,
+            "飾らぬ想いに咲き誇る",
             "飾らぬ想いに咲き誇る",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -21635,7 +22787,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            189,
+            188,
+            "ヘルヴォルのお嫁さん",
             "ヘルヴォルのお嫁さん",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -21658,7 +22811,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            188,
+            187,
+            "ヘルヴォルのお嫁さん",
             "ヘルヴォルのお嫁さん",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -21681,7 +22835,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            187,
+            186,
+            "楽しい遊園地",
             "楽しい遊園地",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
@@ -21704,7 +22859,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            186,
+            185,
+            "楽しい遊園地",
             "楽しい遊園地",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -21727,7 +22883,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            185,
+            184,
+            "リフレッシュエンジン",
             "リフレッシュ！エンジン",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -21750,7 +22907,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            184,
+            183,
+            "リフレッシュエンジン",
             "リフレッシュ！エンジン",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -21773,7 +22931,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            183,
+            182,
+            "夜の闇を切り拓く者たち",
             "夜の闇を切り拓く者たち",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -21796,7 +22955,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            182,
+            181,
+            "夜の闇を切り拓く者たち",
             "夜の闇を切り拓く者たち",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -21819,7 +22979,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            181,
+            180,
+            "エクストリームブースト",
             "エクストリームブースト",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -21842,7 +23003,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            180,
+            179,
+            "エクストリームブースト",
             "エクストリームブースト",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -21865,7 +23027,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            179,
+            178,
+            "ガーディアン・パワー",
             "ガーディアン・パワー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -21888,7 +23051,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            178,
+            177,
+            "コール・ユア・ネーム",
             "コール・ユア・ネーム",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -21911,7 +23075,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            177,
+            176,
+            "ジャスト・ザ・ブレイブ",
             "ジャスト・ザ・ブレイブ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -21934,7 +23099,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            176,
+            175,
+            "anniversarymemoria大切なあなたを想い",
             "大切なあなたを想い",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -21957,7 +23123,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            175,
+            174,
+            "戦火の結束",
             "戦火の結束",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -21980,7 +23147,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            174,
+            173,
+            "戦火の結束",
             "戦火の結束",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -22003,7 +23171,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            173,
+            172,
+            "ラ・ピュセル",
             "ラ・ピュセル",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -22026,7 +23195,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            172,
+            171,
+            "鬼神の意志を継ぐ者",
             "鬼神の意志を継ぐ者",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -22049,7 +23219,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            171,
+            170,
+            "台場の白き魔女",
             "台場の白き魔女",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -22072,7 +23243,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            170,
+            169,
+            "狂乱の姫巫女",
             "狂乱の姫巫女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -22095,7 +23267,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            169,
+            168,
+            "親愛なる仲間",
             "親愛なる仲間",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -22118,7 +23291,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            168,
+            167,
+            "親愛なる仲間",
             "親愛なる仲間",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -22141,7 +23315,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            167,
+            166,
+            "そこにある笑顔",
             "そこにある笑顔",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -22164,7 +23339,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            166,
+            165,
+            "そこにある笑顔",
             "そこにある笑顔",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -22187,7 +23363,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            165,
+            164,
+            "ふたりのアーセナル",
             "ふたりのアーセナル",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -22195,7 +23372,7 @@ public record Memoria(
             17,
             new Skill(
                 "火：Sp.ガードアシストB Ⅲ",
-                "味方1～2体のSp.DEFを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のSp.DEFを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
@@ -22210,7 +23387,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            164,
+            163,
+            "ふたりのアーセナル",
             "ふたりのアーセナル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -22233,7 +23411,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            163,
+            162,
+            "パジャマパーティー",
             "パジャマパーティー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -22256,7 +23435,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            162,
+            161,
+            "ファイア・ダッシュ",
             "ファイア・ダッシュ",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -22264,7 +23444,7 @@ public record Memoria(
             18,
             new Skill(
                 "風：ガードフォールB Ⅲ",
-                "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
@@ -22279,7 +23459,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            161,
+            160,
+            "ファイア・ダッシュ",
             "ファイア・ダッシュ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -22302,7 +23483,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            160,
+            159,
+            "ミューチュアルプロテクション",
             "ミューチュアルプロテクション",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -22325,7 +23507,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            159,
+            158,
+            "ミューチュアルプロテクション",
             "ミューチュアルプロテクション",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -22348,7 +23531,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            158,
+            157,
+            "海の世界に想いを馳せて",
             "海の世界に想いを馳せて",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -22371,7 +23555,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            157,
+            156,
+            "海の世界に想いを馳せて",
             "海の世界に想いを馳せて",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -22394,7 +23579,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            156,
+            155,
+            "charmを絵筆に替えて",
             "CHARMを絵筆に替えて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -22417,7 +23603,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            155,
+            154,
+            "charmを絵筆に替えて",
             "CHARMを絵筆に替えて",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -22440,7 +23627,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            154,
+            153,
+            "ボナペティ",
             "ボナペティ！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -22463,7 +23651,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            153,
+            152,
+            "ボナペティ",
             "ボナペティ！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -22471,7 +23660,7 @@ public record Memoria(
             18,
             new Skill(
                 "火：パワーアシストB Ⅲ",
-                "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のATKを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -22486,7 +23675,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            152,
+            151,
+            "恋花様ダイエット大作戦",
             "恋花様ダイエット大作戦",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -22494,7 +23684,7 @@ public record Memoria(
             17,
             new Skill(
                 "風：パワーフォールB Ⅲ",
-                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -22509,7 +23699,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            151,
+            150,
+            "恋花様ダイエット大作戦",
             "恋花様ダイエット大作戦",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -22532,7 +23723,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            150,
+            149,
+            "復讐の炎",
             "復讐の炎",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -22555,7 +23747,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            149,
+            148,
+            "復讐の炎",
             "復讐の炎",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -22578,7 +23771,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            148,
+            147,
+            "強くなるために",
             "強くなるために",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -22601,7 +23795,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            147,
+            146,
+            "強くなるために",
             "強くなるために",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -22624,7 +23819,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            146,
+            145,
+            "大切な貴女への贈り物",
             "大切な貴女への贈り物",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -22632,7 +23828,7 @@ public record Memoria(
             18,
             new Skill(
                 "火：パワーフォールB Ⅲ",
-                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -22647,7 +23843,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            145,
+            144,
+            "大切な貴女への贈り物",
             "大切な貴女への贈り物",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -22670,7 +23867,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            144,
+            143,
+            "罰執行のお時間です",
             "罰執行のお時間です",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -22693,7 +23891,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            143,
+            142,
+            "罰執行のお時間です",
             "罰執行のお時間です",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -22716,7 +23915,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            142,
+            141,
+            "故郷へ想い馳せながら",
             "故郷へ想い馳せながら",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -22739,7 +23939,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            141,
+            140,
+            "心弛ぶひととき",
             "心弛ぶひととき",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -22747,7 +23948,7 @@ public record Memoria(
             20,
             new Skill(
                 "水：スマッシュB Ⅲ",
-                "敵1～2体に特殊大ダメージを与える。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与える。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [],
                 Level.Three,
@@ -22762,7 +23963,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            140,
+            139,
+            "元日の決斗",
             "元日の決斗！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -22785,7 +23987,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            139,
+            138,
+            "気高き錬金術師",
             "気高き錬金術師",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -22808,7 +24011,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            138,
+            137,
+            "ガンズ・パーティー",
             "ガンズ・パーティー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -22831,7 +24035,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            137,
+            136,
+            "神獣鏡の輝き",
             "神獣鏡の輝き",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -22854,7 +24059,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            136,
+            135,
+            "絆の歌",
             "絆の歌",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
@@ -22877,7 +24083,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            135,
+            134,
+            "絆の歌",
             "絆の歌",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -22900,7 +24107,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            134,
+            133,
+            "戦いの合間に",
             "戦いの合間に",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -22923,7 +24131,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            133,
+            132,
+            "輝きの海岸線",
             "輝きの海岸線",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -22946,7 +24155,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            132,
+            131,
+            "輝きの海岸線",
             "輝きの海岸線",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -22969,7 +24179,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            131,
+            130,
+            "ざっぱ～～ん",
             "ざっぱ～～ん！",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -22977,7 +24188,7 @@ public record Memoria(
             17,
             new Skill(
                 "水：Sp.パワーアシストB Ⅲ",
-                "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のSp.ATKを大アップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -22992,7 +24203,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            130,
+            129,
+            "ざっぱ～～ん",
             "ざっぱ～～ん！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -23015,7 +24227,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            129,
+            128,
+            "白花咲く港",
             "白花咲く港",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -23038,7 +24251,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            128,
+            127,
+            "白花咲く港",
             "白花咲く港",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -23061,7 +24275,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            127,
+            126,
+            "一柳隊、大特集",
             "一柳隊、大特集！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -23069,7 +24284,7 @@ public record Memoria(
             17,
             new Skill(
                 "火：ガードアシストC Ⅳ",
-                "味方1～3体のDEFを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～3体のDEFを大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
@@ -23084,7 +24299,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            126,
+            125,
+            "一柳隊、大特集",
             "一柳隊、大特集！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -23107,7 +24323,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            125,
+            124,
+            "あなたに傘を",
             "あなたに傘を",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -23130,7 +24347,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            124,
+            123,
+            "あなたに傘を",
             "あなたに傘を",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -23153,7 +24371,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            123,
+            122,
+            "情熱の取材前夜",
             "情熱の取材前夜！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -23176,7 +24395,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            122,
+            121,
+            "情熱の取材前夜",
             "情熱の取材前夜！",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -23199,7 +24419,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            121,
+            120,
+            "姫歌を脅かす2つの新星",
             "姫歌を脅かす2つの新星",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -23222,7 +24443,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            120,
+            119,
+            "姫歌を脅かす2つの新星",
             "姫歌を脅かす2つの新星",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -23245,7 +24467,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            119,
+            118,
+            "ハッピー☆シューティングスター",
             "ハッピー☆シューティングスター",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -23268,7 +24491,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            118,
+            117,
+            "ハッピー☆シューティングスター",
             "ハッピー☆シューティングスター",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -23291,7 +24515,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            117,
+            116,
+            "プレゼントはお任せ♪",
             "プレゼントはお任せ♪",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -23314,7 +24539,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            116,
+            115,
+            "プレゼントはお任せ♪",
             "プレゼントはお任せ♪",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -23322,7 +24548,7 @@ public record Memoria(
             17,
             new Skill(
                 "風：ガードアシストB Ⅲ",
-                "味方1～2体のDEFを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                "味方1～2体のDEFを大アップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
@@ -23337,7 +24563,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            115,
+            114,
+            "リリィのすべてを伝えるために",
             "リリィのすべてを伝えるために",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -23360,7 +24587,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            114,
+            113,
+            "リリィのすべてを伝えるために",
             "リリィのすべてを伝えるために",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -23383,7 +24611,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            113,
+            112,
+            "キャッチ＆リリース＆イート",
             "キャッチ＆リリース＆イート",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -23406,7 +24635,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            112,
+            111,
+            "キャッチ＆リリース＆イート",
             "キャッチ＆リリース＆イート",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -23429,7 +24659,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            111,
+            110,
+            "これまでも、これからも隣で",
             "これまでも、これからも隣で",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -23452,7 +24683,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            110,
+            109,
+            "これまでも、これからも隣で",
             "これまでも、これからも隣で",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -23475,7 +24707,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            109,
+            108,
+            "リリィになるために",
             "リリィになるために！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -23498,7 +24731,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            108,
+            107,
+            "結梨の大好きな場所",
             "結梨の大好きな場所",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -23521,7 +24755,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            107,
+            106,
+            "結梨の大好きな場所",
             "結梨の大好きな場所",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -23544,7 +24779,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            106,
+            105,
+            "みんな、ガンバレー",
             "みんな、ガンバレー！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -23567,7 +24803,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            105,
+            104,
+            "冷たいラムネをどうぞ",
             "冷たいラムネをどうぞ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -23590,7 +24827,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            104,
+            103,
+            "リワード・マイセルフ",
             "リワード・マイセルフ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -23613,7 +24851,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            103,
+            102,
+            "リワード・マイセルフ",
             "リワード・マイセルフ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -23636,7 +24875,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            102,
+            101,
+            "トライング・オン",
             "トライング・オン",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -23659,7 +24899,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            101,
+            100,
+            "トライング・オン",
             "トライング・オン",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -23682,7 +24923,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            100,
+            99,
+            "気まぐれのツーショット",
             "気まぐれのツーショット",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -23705,7 +24947,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            99,
+            98,
+            "藍の宝物",
             "藍の宝物",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -23728,7 +24971,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            98,
+            97,
+            "藍の宝物",
             "藍の宝物",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -23751,7 +24995,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            97,
+            96,
+            "指先と白いペン",
             "指先と白いペン",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -23775,7 +25020,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            96,
+            95,
+            "指先と白いペン",
             "指先と白いペン",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -23799,7 +25045,8 @@ public record Memoria(
             true
         ),
         new Memoria(
-            95,
+            94,
+            "エレクトロンバウト",
             "エレクトロンバウト！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -23822,7 +25069,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            94,
+            93,
+            "悲壮の華",
             "悲壮の華",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -23845,7 +25093,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            93,
+            92,
+            "悲壮の華",
             "悲壮の華",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -23868,7 +25117,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            92,
+            91,
+            "鬼さんズ、こちら",
             "鬼さんズ、こちら",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -23891,7 +25141,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            91,
+            90,
+            "鬼さんズ、こちら",
             "鬼さんズ、こちら",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -23914,7 +25165,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            90,
+            89,
+            "優美なる舞",
             "優美なる舞",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -23937,7 +25189,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            89,
+            88,
+            "優美なる舞",
             "優美なる舞",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -23960,7 +25213,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            88,
+            87,
+            "美しき鉄糸の舞",
             "美しき鉄糸の舞",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -23983,7 +25237,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            87,
+            86,
+            "美しき鉄糸の舞",
             "美しき鉄糸の舞",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -24006,7 +25261,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            86,
+            85,
+            "駆けろエージェント",
             "駆けろ！エージェント",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -24029,7 +25285,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            85,
+            84,
+            "スピード☆スター",
             "スピード☆スター",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -24052,7 +25309,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            84,
+            83,
+            "電光石火でご到着",
             "電光石火でご到着！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -24060,7 +25318,7 @@ public record Memoria(
             18,
             new Skill(
                 "風：ストライクC Ⅲ",
-                "敵1～3体に通常ダメージを与える。さらに味方がオーダースキル「風属性効果増加」を発動中は威力がアップする。※...",
+                "敵1～3体に通常ダメージを与える。さらに味方がオーダースキル「風属性効果増加」を発動中は威力がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [],
                 Level.Three,
@@ -24075,7 +25333,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            83,
+            82,
+            "街角の寡黙な花",
             "街角の寡黙な花",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -24098,7 +25357,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            82,
+            81,
+            "アクアプラクティス",
             "アクアプラクティス",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -24121,7 +25381,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            81,
+            80,
+            "アクアプラクティス",
             "アクアプラクティス",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -24144,7 +25405,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            80,
+            79,
+            "二水のヘイムスクリングラ体験",
             "二水のヘイムスクリングラ体験",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -24167,7 +25429,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            79,
+            78,
+            "勝利の女神が微笑む時",
             "勝利の女神が微笑む時",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -24190,7 +25453,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            78,
+            77,
+            "プレシャス・モーニング",
             "プレシャス・モーニング",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -24213,7 +25477,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            77,
+            76,
+            "プレシャス・モーニング",
             "プレシャス・モーニング",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -24236,7 +25501,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            76,
+            75,
+            "フォール・ダウン・アタック",
             "フォール・ダウン・アタック",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -24259,7 +25525,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            75,
+            74,
+            "ホワイト・ラビット・マジック",
             "ホワイト・ラビット・マジック！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -24282,7 +25549,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            74,
+            73,
+            "プレ・ハロウィンパーティー",
             "プレ・ハロウィンパーティー！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -24305,7 +25573,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            73,
+            72,
+            "ようこそふしぎの国へ",
             "ようこそ！ふしぎの国へ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -24328,7 +25597,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            72,
+            71,
+            "おいでよ☆ハロウィン",
             "おいでよ☆ハロウィン",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -24351,7 +25621,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            71,
+            70,
+            "一直線上のストラテジー",
             "一直線上のストラテジー",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -24374,7 +25645,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            70,
+            69,
+            "この空の下で",
             "この空の下で",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -24397,7 +25669,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            69,
+            68,
+            "追跡者",
             "追跡者",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -24420,7 +25693,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            68,
+            67,
+            "花を束ねる者",
             "花を束ねる者",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -24443,7 +25717,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            67,
+            66,
+            "姉妹の休息",
             "姉妹の休息",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -24466,7 +25741,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            66,
+            65,
+            "凛々しい花々",
             "凛々しい花々",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -24489,7 +25765,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            65,
+            64,
+            "わたしたちの魔法",
             "わたしたちの魔法",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -24512,7 +25789,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            64,
+            63,
+            "貫く想いの一撃",
             "貫く想いの一撃",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -24535,7 +25813,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            63,
+            62,
+            "プリンセスひめひめ",
             "プリンセスひめひめ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -24558,7 +25837,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            62,
+            61,
+            "いつかみんなと見る景色",
             "いつかみんなと見る景色",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -24581,7 +25861,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            61,
+            60,
+            "繋げたい言葉",
             "繋げたい言葉",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -24604,7 +25885,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            60,
+            59,
+            "夏祭りのスナイパー",
             "夏祭りのスナイパー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -24627,7 +25909,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            59,
+            58,
+            "もう何も奪わせない",
             "もう何も奪わせない",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -24650,7 +25933,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            58,
+            57,
+            "夜空に咲く約束の花",
             "夜空に咲く約束の花",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -24673,7 +25957,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            57,
+            56,
+            "のびのびトレーニング",
             "のびのびトレーニング！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -24696,7 +25981,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            56,
+            55,
+            "神宿りの暴走",
             "神宿りの暴走",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -24719,31 +26005,8 @@ public record Memoria(
             )
         ),
         new Memoria(
-            55,
-            "プランセス",
-            new Vanguard(VanguardKind.NormalRange),
-            Element.Wind,
-            new Status(3390, 2074, 2873, 2093),
-            18,
-            new Skill(
-                "ストライクD LG",
-                "敵2体に通常大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
-                [],
-                Level.Lg,
-                Range.D
-            ),
-            new SupportSkill(
-                "攻:パワーUP Ⅱ",
-                "前衛から攻撃時、一定確率で自身のATKを大アップさせる。",
-                Trigger.Attack,
-                [new PowerUp(Type.Normal)],
-                Level.Two
-            ),
-            true
-        ),
-        new Memoria(
             54,
+            "信頼の背中",
             "信頼の背中",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -24768,6 +26031,7 @@ public record Memoria(
         new Memoria(
             53,
             "単騎無双",
+            "単騎無双",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             new Status(2485, 1494, 2220, 1497),
@@ -24790,6 +26054,7 @@ public record Memoria(
         ),
         new Memoria(
             52,
+            "ラプラスの発動",
             "ラプラスの発動",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -24814,6 +26079,7 @@ public record Memoria(
         new Memoria(
             51,
             "顕現する脅威",
+            "顕現する脅威",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             new Status(2108, 1480, 2093, 1457),
@@ -24836,6 +26102,7 @@ public record Memoria(
         ),
         new Memoria(
             50,
+            "スーパーかわいいジャンプ",
             "スーパーかわいいジャンプ！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -24860,6 +26127,7 @@ public record Memoria(
         new Memoria(
             49,
             "きみとぼくの創作世界",
+            "きみとぼくの創作世界",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
             new Status(1382, 2057, 1413, 1977),
@@ -24882,6 +26150,7 @@ public record Memoria(
         ),
         new Memoria(
             48,
+            "グリーンライフ",
             "グリーンライフ",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -24906,6 +26175,7 @@ public record Memoria(
         new Memoria(
             47,
             "馳せたる海辺",
+            "馳せたる海辺",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             new Status(1568, 2994, 1570, 2524),
@@ -24928,6 +26198,7 @@ public record Memoria(
         ),
         new Memoria(
             46,
+            "エスコートナイト",
             "エスコートナイト",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -24952,6 +26223,7 @@ public record Memoria(
         new Memoria(
             45,
             "おもちゃのプール",
+            "おもちゃのプール",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             new Status(1469, 2141, 1455, 2077),
@@ -24974,6 +26246,7 @@ public record Memoria(
         ),
         new Memoria(
             44,
+            "ランペイジクラフト",
             "ランペイジクラフト",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -24998,6 +26271,7 @@ public record Memoria(
         new Memoria(
             43,
             "あなたと甘いひとときを",
+            "あなたと甘いひとときを",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
             new Status(2133, 1483, 1476, 2066),
@@ -25020,6 +26294,7 @@ public record Memoria(
         ),
         new Memoria(
             42,
+            "水の車窓",
             "水の車窓",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -25044,6 +26319,7 @@ public record Memoria(
         new Memoria(
             41,
             "ラ・ヴァカンス・パルフェ",
+            "ラ・ヴァカンス・パルフェ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             new Status(1410, 1407, 1999, 2039),
@@ -25066,6 +26342,7 @@ public record Memoria(
         ),
         new Memoria(
             40,
+            "ウォーター・レイルウェイ",
             "ウォーター・レイルウェイ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -25090,6 +26367,7 @@ public record Memoria(
         new Memoria(
             39,
             "アナザーワールド",
+            "アナザーワールド",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             new Status(1392, 1977, 1386, 2059),
@@ -25112,6 +26390,7 @@ public record Memoria(
         ),
         new Memoria(
             38,
+            "勝負の鍵は",
             "勝負の鍵は",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -25136,6 +26415,7 @@ public record Memoria(
         new Memoria(
             37,
             "アンブレイカブル",
+            "アンブレイカブル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             new Status(2406, 1399, 1628, 1391),
@@ -25158,6 +26438,7 @@ public record Memoria(
         ),
         new Memoria(
             36,
+            "ひとりはみんなのために",
             "ひとりはみんなのために",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -25182,6 +26463,7 @@ public record Memoria(
         new Memoria(
             35,
             "文武両道の乙女",
+            "文武両道の乙女",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
             new Status(2121, 1460, 2087, 1455),
@@ -25204,6 +26486,7 @@ public record Memoria(
         ),
         new Memoria(
             34,
+            "アーセナルの絆",
             "アーセナルの絆",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -25228,6 +26511,7 @@ public record Memoria(
         new Memoria(
             33,
             "未来を切り開く武器",
+            "未来を切り開く武器",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             new Status(2993, 1570, 2488, 1549),
@@ -25250,6 +26534,7 @@ public record Memoria(
         ),
         new Memoria(
             32,
+            "この地にて芽吹く",
             "この地にて芽吹く",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -25274,6 +26559,7 @@ public record Memoria(
         new Memoria(
             31,
             "おこづかいのゆくえ",
+            "おこづかいのゆくえ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             new Status(1386, 2052, 1401, 1998),
@@ -25296,6 +26582,7 @@ public record Memoria(
         ),
         new Memoria(
             30,
+            "カワイイのシャッターチャンス",
             "カワイイのシャッターチャンス",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -25320,6 +26607,7 @@ public record Memoria(
         new Memoria(
             29,
             "不滅のホワイトナイト",
+            "不滅のホワイトナイト",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             new Status(1473, 2488, 1461, 1723),
@@ -25342,6 +26630,7 @@ public record Memoria(
         ),
         new Memoria(
             28,
+            "果断なる漆黒の騎士",
             "果断なる漆黒の騎士",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -25366,6 +26655,7 @@ public record Memoria(
         new Memoria(
             27,
             "不完全ゆえに愛おしく",
+            "不完全ゆえに愛おしく",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             new Status(2008, 1383, 2041, 1404),
@@ -25388,6 +26678,7 @@ public record Memoria(
         ),
         new Memoria(
             26,
+            "甘いスイーツでおもてなし♪",
             "甘いスイーツでおもてなし♪",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -25412,6 +26703,7 @@ public record Memoria(
         new Memoria(
             25,
             "見切れ希望女子",
+            "見切れ希望女子",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             new Status(2381, 1401, 1648, 1415),
@@ -25434,6 +26726,7 @@ public record Memoria(
         ),
         new Memoria(
             24,
+            "ハッピーハッピー☆タピオカ",
             "ハッピーハッピー☆タピオカ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -25458,6 +26751,7 @@ public record Memoria(
         new Memoria(
             23,
             "レンズに咲く百合の花",
+            "レンズに咲く百合の花",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             new Status(2063, 1413, 1996, 1384),
@@ -25480,6 +26774,7 @@ public record Memoria(
         ),
         new Memoria(
             22,
+            "不器用なお姉様",
             "不器用なお姉様",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -25504,6 +26799,7 @@ public record Memoria(
         new Memoria(
             21,
             "ワンショット",
+            "ワンショット",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             new Status(1415, 1389, 1979, 2037),
@@ -25526,6 +26822,7 @@ public record Memoria(
         ),
         new Memoria(
             20,
+            "ふたつのふれあい",
             "ふたつのふれあい",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -25550,6 +26847,7 @@ public record Memoria(
         new Memoria(
             19,
             "アイドルリリィをつかまえて",
+            "アイドルリリィをつかまえて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             new Status(2321, 1345, 1554, 1324),
@@ -25572,6 +26870,7 @@ public record Memoria(
         ),
         new Memoria(
             18,
+            "うさぎになったカメ",
             "うさぎになったカメ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -25596,6 +26895,7 @@ public record Memoria(
         new Memoria(
             17,
             "迷子のクマ",
+            "迷子のクマ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             new Status(2321, 1311, 1556, 1314),
@@ -25618,6 +26918,7 @@ public record Memoria(
         ),
         new Memoria(
             16,
+            "晴れのちラムネ",
             "晴れのちラムネ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -25642,6 +26943,7 @@ public record Memoria(
         new Memoria(
             15,
             "湯けむりの園",
+            "湯けむりの園",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
             new Status(1317, 1978, 1925, 1327),
@@ -25664,6 +26966,7 @@ public record Memoria(
         ),
         new Memoria(
             14,
+            "姫歌イメチェン大作戦",
             "姫歌イメチェン大作戦!!",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -25688,6 +26991,7 @@ public record Memoria(
         new Memoria(
             13,
             "ガラスの中の大切な世界",
+            "ガラスの中の大切な世界",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             new Status(1346, 1334, 2321, 1548),
@@ -25711,6 +27015,7 @@ public record Memoria(
         new Memoria(
             12,
             "あたしがこの手で守るもの",
+            "あたしがこの手で守るもの",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             new Status(2300, 1560, 1324, 1317),
@@ -25733,6 +27038,7 @@ public record Memoria(
         ),
         new Memoria(
             11,
+            "charmにお疲れ様",
             "CHARMにお疲れ様",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -25757,6 +27063,7 @@ public record Memoria(
         new Memoria(
             10,
             "一柳隊の知恵袋",
+            "一柳隊の知恵袋",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
             new Status(1930, 1348, 1965, 1318),
@@ -25779,6 +27086,7 @@ public record Memoria(
         ),
         new Memoria(
             9,
+            "ロイヤル・ホスピタリティ",
             "ロイヤル・ホスピタリティ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -25803,6 +27111,7 @@ public record Memoria(
         new Memoria(
             8,
             "わたしにできること",
+            "わたしにできること",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
             new Status(1345, 1558, 1907, 1748),
@@ -25825,6 +27134,7 @@ public record Memoria(
         ),
         new Memoria(
             7,
+            "安らぎの帰り道",
             "安らぎの帰り道",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -25849,6 +27159,7 @@ public record Memoria(
         new Memoria(
             6,
             "猫の誘惑",
+            "猫の誘惑",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             new Status(1320, 2303, 1322, 1583),
@@ -25871,6 +27182,7 @@ public record Memoria(
         ),
         new Memoria(
             5,
+            "星降る夜の約束",
             "星降る夜の約束",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -25895,6 +27207,7 @@ public record Memoria(
         new Memoria(
             4,
             "私たちの正義",
+            "私たちの正義",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             new Status(1346, 1914, 1324, 1969),
@@ -25917,6 +27230,7 @@ public record Memoria(
         ),
         new Memoria(
             3,
+            "放課後ファンタズム",
             "放課後ファンタズム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -25941,6 +27255,7 @@ public record Memoria(
         new Memoria(
             2,
             "雨上がりの朝稽古",
+            "雨上がりの朝稽古",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             new Status(1337, 1925, 1336, 1952),
@@ -25964,6 +27279,7 @@ public record Memoria(
         new Memoria(
             1,
             "アフタヌーンティー",
+            "アフタヌーンティー",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
             new Status(1335, 2297, 1335, 1575),
@@ -25986,6 +27302,7 @@ public record Memoria(
         ),
         new Memoria(
             0,
+            "dearschutzengel",
             "Dear Schutzengel",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
