@@ -900,6 +900,7 @@ namespace mitama.Pages.DeckBuilder
             {
                 Pool.Add(memoria);
             }
+            Sort(SortOption.SelectedIndex);
         }
 
         private void AdvancedOption_Unchecked(object sender, RoutedEventArgs e)
