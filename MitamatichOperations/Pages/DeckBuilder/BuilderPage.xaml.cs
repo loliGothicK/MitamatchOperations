@@ -31,18 +31,16 @@ namespace mitama.Pages.DeckBuilder
 
         private ObservableCollection<Memoria> Deck { get; set; } = [];
         private ObservableCollection<Memoria> LegendaryDeck { get; set; } = [];
-        private ObservableCollection<Memoria> Pool { get; set; } = new(Memoria.List.Where(m => Costume.List[1].CanBeEquipped(m)));
+        private ObservableCollection<Memoria> Pool { get; set; } = new(Memoria.List.Where(Costume.List[1].CanBeEquipped));
         private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = [];
         private HashSet<FilterType> _currentFilters = [];
-        private readonly Domain.Status StatSum = new();
+        private readonly Status StatSum = new();
         private string region = "";
         private MemberInfo[] members = [];
         readonly Dictionary<KindType, int> kindPairs = [];
         readonly Dictionary<SkillType, int> skillPairs = [];
         readonly Dictionary<SupportType, int> supportPairs = [];
-
-        // Filter
-        private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = new();
+        private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = [];
 
         public BuilderPage()
         {

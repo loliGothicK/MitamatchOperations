@@ -68,6 +68,7 @@ internal static class BuilderPageHelpers
             _ => SkillType.Other,
         };
     }
+
     public static string SkillTypeToString(SkillType type)
     {
         return type switch
@@ -169,5 +170,4 @@ internal static class BuilderPageHelpers
             _ => "その他",
         };
     }
-
 }
