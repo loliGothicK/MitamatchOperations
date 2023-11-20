@@ -37,6 +37,9 @@ namespace mitama.Pages.DeckBuilder
         private readonly Domain.Status StatSum = new();
         private string region = "";
         private MemberInfo[] members = [];
+        readonly Dictionary<KindType, int> kindPairs = [];
+        readonly Dictionary<SkillType, int> skillPairs = [];
+        readonly Dictionary<SupportType, int> supportPairs = [];
 
         // Filter
         private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = new();
@@ -101,7 +104,6 @@ namespace mitama.Pages.DeckBuilder
                 GeneralInfoBar.IsOpen = false;
             }
 
-            Dictionary<SupportType, int> supportPairs = [];
             foreach (var effect in Deck.Concat(LegendaryDeck).SelectMany(m => m.SupportSkill.Effects))
             {
                 var type = BuilderPageHelpers.ToSupportType(effect);
@@ -125,7 +127,6 @@ namespace mitama.Pages.DeckBuilder
             }
 
 
-            Dictionary<SkillType, int> skillPairs = [];
             foreach (var effect in Deck.Concat(LegendaryDeck).SelectMany(m => m.Skill.StatusChanges))
             {
                 var type = BuilderPageHelpers.ToSkillType(effect);
@@ -148,7 +149,6 @@ namespace mitama.Pages.DeckBuilder
                 });
             }
 
-            Dictionary<KindType, int> kindPairs = [];
             foreach (var kind in Deck.Concat(LegendaryDeck).Select(m => m.Kind))
             {
                 var type = BuilderPageHelpers.ToKindType(kind);
@@ -437,39 +437,85 @@ namespace mitama.Pages.DeckBuilder
                     Text = "ƒXƒLƒ‹Œø‰Ê",
                     Children =
                     [
-                        // UŒ‚Œn
-                        new() { Text = "A up" },
-                        new() { Text = "A down" },
-                        new() { Text = "SA up" },
-                        new() { Text = "SA down" },
-                        // –hŒäŒn
-                        new() { Text = "D up" },
-                        new() { Text = "D down" },
-                        new() { Text = "SD up" },
-                        new() { Text = "SD down" },
-                        // ‘®«Œn
-                        new() { Text = "Fire Power up" },
-                        new() { Text = "Fire Power down" },
-                        new() { Text = "Water Power up" },
-                        new() { Text = "Water Power down" },
-                        new() { Text = "Wind Power up" },
-                        new() { Text = "Wind Power down" },
-                        new() { Text = "Light Power up" },
-                        new() { Text = "Light Power down" },
-                        new() { Text = "Dark Power up" },
-                        new() { Text = "Dark Power down" },
-                        new() { Text = "Fire Guard up" },
-                        new() { Text = "Fire Guard down" },
-                        new() { Text = "Water Guard up" },
-                        new() { Text = "Water Guard down" },
-                        new() { Text = "Wind Guard up" },
-                        new() { Text = "Wind Guard down" },
-                        new() { Text = "Light Guard up" },
-                        new() { Text = "Light Guard down" },
-                        new() { Text = "Dark Guard up" },
-                        new() { Text = "Dark Guard down" },
+                        // ’Êí
+                        new() {
+                            Text = "’Êí",
+                            Children =
+                            [
+                                new() { Text = "A up" },
+                                new() { Text = "A down" },
+                                new() { Text = "D up" },
+                                new() { Text = "D down" },
+                            ]
+                        },
+                        // “ÁŽê
+                        new() {
+                            Text = "“ÁŽê",
+                            Children =
+                            [
+                                new() { Text = "SA up" },
+                                new() { Text = "SA down" },
+                                new() { Text = "SD up" },
+                                new() { Text = "SD down" },
+                            ]
+                        },
+                        // ‘®«
+                        new() {
+                            Text = "‘®«UŒ‚",
+                            Children =
+                            [
+                                new() { Text = "Fire Power up" },
+                                new() { Text = "Fire Power down" },
+                                new() { Text = "Water Power up" },
+                                new() { Text = "Water Power down" },
+                                new() { Text = "Wind Power up" },
+                                new() { Text = "Wind Power down" },
+                                new() { Text = "Light Power up" },
+                                new() { Text = "Light Power down" },
+                                new() { Text = "Dark Power up" },
+                                new() { Text = "Dark Power down" },
+                            ]
+                        },
+                        new() {
+                            Text = "‘®«–hŒä",
+                            Children = [
+                                new() { Text = "Fire Guard up" },
+                                new() { Text = "Fire Guard down" },
+                                new() { Text = "Water Guard up" },
+                                new() { Text = "Water Guard down" },
+                                new() { Text = "Wind Guard up" },
+                                new() { Text = "Wind Guard down" },
+                                new() { Text = "Light Guard up" },
+                                new() { Text = "Light Guard down" },
+                                new() { Text = "Dark Guard up" },
+                                new() { Text = "Dark Guard down" },
+                            ]
+                        },
                         // ‚»‚Ì‘¼
-                        new() { Text = "HP up" },
+                        new() {
+                            Text = "‚»‚Ì‘¼",
+                            Children = [
+                                new() { Text = "HP up" },
+                                new() { Text = "‰ÎŒø‰ÊƒAƒbƒv" },
+                                new() { Text = "…Œø‰ÊƒAƒbƒv" },
+                                new() { Text = "•—Œø‰ÊƒAƒbƒv" },
+                                new() { Text = "ŒõŒø‰ÊƒAƒbƒv" },
+                                new() { Text = "ˆÅŒø‰ÊƒAƒbƒv" },
+                                new() { Text = "‰Î‹­" },
+                                new() { Text = "…‹­" },
+                                new() { Text = "•—‹­" },
+                                new() { Text = "‰ÎŽã" },
+                                new() { Text = "…Žã" },
+                                new() { Text = "•—Žã" },
+                                new() { Text = "‰ÎŠg" },
+                                new() { Text = "…Šg" },
+                                new() { Text = "•—Šg" },
+                                new() { Text = "ƒq[ƒ‹" },
+                                new() { Text = "ƒ`ƒƒ[ƒW" },
+                                new() { Text = "ƒŠƒJƒo[" },
+                                new() { Text = "ƒJƒEƒ“ƒ^[" },
+                            ]
+                        }
                     ]
                 }
             ];
@@ -679,6 +725,46 @@ namespace mitama.Pages.DeckBuilder
                             FilterType.DGd,
                         ];
                         _currentFilters.RemoveWhere(filter => remove.Contains(filter));
+                        break;
+                    }
+                case "’Êí":
+                    {
+                        foreach (var node in TreeNodes[3].Children[0].Children)
+                        {
+                            node.IsChecked = true;
+                        }
+                        break;
+                    }
+                case "“ÁŽê":
+                    {
+                        foreach (var node in TreeNodes[3].Children[1].Children)
+                        {
+                            node.IsChecked = true;
+                        }
+                        break;
+                    }
+                case "‘®«UŒ‚":
+                    {
+                        foreach (var node in TreeNodes[3].Children[2].Children)
+                        {
+                            node.IsChecked = true;
+                        }
+                        break;
+                    }
+                case "‘®«–hŒä":
+                    {
+                        foreach (var node in TreeNodes[3].Children[3].Children)
+                        {
+                            node.IsChecked = true;
+                        }
+                        break;
+                    }
+                case "‚»‚Ì‘¼":
+                    {
+                        foreach (var node in TreeNodes[3].Children[4].Children)
+                        {
+                            node.IsChecked = true;
+                        }
                         break;
                     }
                 case "A up":
@@ -1074,10 +1160,120 @@ namespace mitama.Pages.DeckBuilder
                     {
                         foreach (var node in TreeNodes[3].Children)
                         {
-                            if (!node.IsChecked) return;
+                            node.IsChecked = false;
+                        }
+                        foreach (var node in TreeNodes[3].Children.SelectMany(node => node.Children))
+                        {
                             node.IsChecked = false;
                         }
                         Pool.Clear();
+                        break;
+                    }
+                case "’Êí":
+                    {
+                        foreach (var node in TreeNodes[3].Children[0].Children)
+                        {
+                            if (!node.IsChecked) return;
+                            node.IsChecked = false;
+                        }
+                        FilterType[] toRemove = [
+                            FilterType.Au,
+                            FilterType.Ad,
+                            FilterType.Du,
+                            FilterType.Dd,
+                        ];
+                        _currentFilters.RemoveWhere(filter => toRemove.Contains(filter));
+                        break;
+                    }
+                case "“ÁŽê":
+                    {
+                        foreach (var node in TreeNodes[3].Children[1].Children)
+                        {
+                            if (!node.IsChecked) return;
+                            node.IsChecked = false;
+                        }
+                        FilterType[] toRemove = [
+                            FilterType.SAu,
+                            FilterType.SAd,
+                            FilterType.SDu,
+                            FilterType.SDd,
+                        ];
+                        _currentFilters.RemoveWhere(filter => toRemove.Contains(filter));
+                        break;
+                    }
+                case "‘®«UŒ‚":
+                    {
+                        foreach (var node in TreeNodes[3].Children[2].Children)
+                        {
+                            if (!node.IsChecked) return;
+                            node.IsChecked = false;
+                        }
+                        FilterType[] toRemove = [
+                            FilterType.FPu,
+                            FilterType.FPd,
+                            FilterType.WaPu,
+                            FilterType.WaPd,
+                            FilterType.WiPu,
+                            FilterType.WiPd,
+                            FilterType.LPu,
+                            FilterType.LPd,
+                            FilterType.DPu,
+                            FilterType.DPd,
+                        ];
+                        _currentFilters.RemoveWhere(filter => toRemove.Contains(filter));
+                        break;
+                    }
+                case "‘®«–hŒä":
+                    {
+                        foreach (var node in TreeNodes[3].Children[3].Children)
+                        {
+                            if (!node.IsChecked) return;
+                            node.IsChecked = false;
+                        }
+                        FilterType[] toRemove = [
+                            FilterType.FGu,
+                            FilterType.FGd,
+                            FilterType.WaGu,
+                            FilterType.WaGd,
+                            FilterType.WiGu,
+                            FilterType.WiGd,
+                            FilterType.LGu,
+                            FilterType.LGd,
+                            FilterType.DGu,
+                            FilterType.DGd,
+                        ];
+                        _currentFilters.RemoveWhere(filter => toRemove.Contains(filter));
+                        break;
+                    }
+                case "‚»‚Ì‘¼":
+                    {
+                        foreach (var node in TreeNodes[3].Children[4].Children)
+                        {
+                            if (!node.IsChecked) return;
+                            node.IsChecked = false;
+                        }
+                        FilterType[] toRemove = [
+                            FilterType.HPu,
+                            FilterType.FireStimulation,
+                            FilterType.WaterStimulation,
+                            FilterType.WindStimulation,
+                            FilterType.LightStimulation,
+                            FilterType.DarkStimulation,
+                            FilterType.FireStrong,
+                            FilterType.WaterStrong,
+                            FilterType.WindStrong,
+                            FilterType.FireWeak,
+                            FilterType.WaterWeak,
+                            FilterType.WindWeak,
+                            FilterType.FireSpread,
+                            FilterType.WaterSpread,
+                            FilterType.WindSpread,
+                            FilterType.Heal,
+                            FilterType.Charge,
+                            FilterType.Recover,
+                            FilterType.Counter,
+                        ];
+                        _currentFilters.RemoveWhere(filter => toRemove.Contains(filter));
                         break;
                     }
                 case "A up":
@@ -1723,7 +1919,8 @@ namespace mitama.Pages.DeckBuilder
             var c3 = p3.Any(key => filters[key](memoria));
             var p4 = predicates.Where(IsEffectFilter).ToList();
             var c4 = p4.Any(key => filters[key](memoria));
-            if (flip) { 
+            if (flip)
+            { 
                 return (p1.Count == 0 || c1) && (p2.Count == 0 || c2) && (p3.Count == 0 || c3) && (p4.Count == 0 || c4);
             } else
             {
