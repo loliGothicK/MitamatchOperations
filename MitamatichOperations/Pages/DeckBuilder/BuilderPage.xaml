@@ -135,9 +135,11 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="内訳"/>
-                            <Grid Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <GridView Grid.Row="1" x:Name="Breakdown" />
+                            <Grid Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>

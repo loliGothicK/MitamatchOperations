@@ -147,6 +147,30 @@ namespace mitama.Pages.DeckBuilder
                     Width = 120,
                 });
             }
+
+            Dictionary<KindType, int> kindPairs = [];
+            foreach (var kind in Deck.Concat(LegendaryDeck).Select(m => m.Kind))
+            {
+                var type = BuilderPageHelpers.ToKindType(kind);
+                if (kindPairs.TryGetValue(type, out int count))
+                {
+                    kindPairs[type] = count + 1;
+                }
+                else
+                {
+                    kindPairs.Add(type, 1);
+                }
+            }
+
+            Breakdown.Items.Clear();
+            foreach (var (type, num) in kindPairs)
+            {
+                Breakdown.Items.Add(new Button()
+                {
+                    Content = $"{BuilderPageHelpers.KindTypeToString(type)}: {num}",
+                    Width = 100,
+                });
+            }
         }
 
         private void Deck_Drop(object sender, DragEventArgs e)
@@ -179,7 +203,7 @@ namespace mitama.Pages.DeckBuilder
             foreach (var toRemove in selectedMemorias)
             {
                 Deck.Remove(toRemove);
-               LegendaryDeck.Remove(toRemove);
+                LegendaryDeck.Remove(toRemove);
             }
             Sort(SortOption.SelectedIndex);
         }
@@ -190,7 +214,11 @@ namespace mitama.Pages.DeckBuilder
             {
                 if (toggleSwitch.IsOn == true)
                 {
+                    LegendaryDeck.Clear();
                     Deck.Clear();
+                    Breakdown.Items.Clear();
+                    SkillSummary.Items.Clear();
+                    SupportSummary.Items.Clear();
                     Cleanup();
                     Pool = new(Memoria.List.Where(memoria => Costume.List[0].CanBeEquipped(memoria)));
 
@@ -2039,6 +2067,17 @@ namespace mitama.Pages.DeckBuilder
         SupportUp,
         RecoveryUp, 
         MpCostDown,
+    }
+
+    public enum KindType
+    {
+        NormalSingle,
+        NormalRange,
+        SpecialSingle,
+        SpecialRange,
+        Support,
+        Interference,
+        Recovery,
     }
 
     public class MyTreeNode

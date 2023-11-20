@@ -3,6 +3,36 @@ using mitama.Pages.DeckBuilder;
 
 internal static class BuilderPageHelpers
 {
+    public static KindType ToKindType(MemoriaKind kind)
+    {
+        return kind switch
+        {
+            Vanguard(VanguardKind.NormalSingle) => KindType.NormalSingle,
+            Vanguard(VanguardKind.NormalRange) => KindType.NormalRange,
+            Vanguard(VanguardKind.SpecialSingle) => KindType.SpecialSingle,
+            Vanguard(VanguardKind.SpecialRange) => KindType.SpecialRange,
+            Rearguard(RearguardKind.Support) => KindType.Support,
+            Rearguard(RearguardKind.Interference) => KindType.Interference,
+            Rearguard(RearguardKind.Recovery) => KindType.Recovery,
+            _ => throw new System.NotImplementedException(),
+        };
+    }
+
+    public static string KindTypeToString(KindType type)
+    {
+        return type switch
+        {
+            KindType.NormalSingle => "通常単体",
+            KindType.NormalRange => "通常範囲",
+            KindType.SpecialSingle => "特殊単体",
+            KindType.SpecialRange => "特殊範囲",
+            KindType.Support => "支援",
+            KindType.Interference => "妨害",
+            KindType.Recovery => "回復",
+            _ => "その他",
+        };
+    }
+
     public static SkillType ToSkillType(StatusChange eff)
     {
         return eff switch
