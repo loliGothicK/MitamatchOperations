@@ -102,6 +102,7 @@ namespace mitama.Pages.DeckBuilder
                 GeneralInfoBar.IsOpen = false;
             }
 
+            supportPairs.Clear();
             foreach (var effect in Deck.Concat(LegendaryDeck).SelectMany(m => m.SupportSkill.Effects))
             {
                 var type = BuilderPageHelpers.ToSupportType(effect);
@@ -125,6 +126,7 @@ namespace mitama.Pages.DeckBuilder
             }
 
 
+            skillPairs.Clear();
             foreach (var effect in Deck.Concat(LegendaryDeck).SelectMany(m => m.Skill.StatusChanges))
             {
                 var type = BuilderPageHelpers.ToSkillType(effect);
@@ -147,6 +149,7 @@ namespace mitama.Pages.DeckBuilder
                 });
             }
 
+            kindPairs.Clear();
             foreach (var kind in Deck.Concat(LegendaryDeck).Select(m => m.Kind))
             {
                 var type = BuilderPageHelpers.ToKindType(kind);
@@ -327,7 +330,7 @@ namespace mitama.Pages.DeckBuilder
                 .Where(memoria => _currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria)))
                 .Where(memoria => !Pool.Contains(memoria))
                 .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Name).Contains(memoria.Name))
-                .Where(memoria => ApplyFilter(memoria, Filters, _currentFilters)))
+                .Where(ApplyFilter))
             {
                 Pool.Add(memoria);
             }
@@ -433,85 +436,232 @@ namespace mitama.Pages.DeckBuilder
                 new()
                 {
                     Text = "スキル効果",
+                    IsChecked = false,
                     Children =
                     [
                         // 通常
                         new() {
                             Text = "通常",
+                            IsChecked = false,
                             Children =
                             [
-                                new() { Text = "A up" },
-                                new() { Text = "A down" },
-                                new() { Text = "D up" },
-                                new() { Text = "D down" },
+                                new() {
+                                    Text = "A up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "A down",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "D up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "D down",
+                                    IsChecked = false,
+                                },
                             ]
                         },
                         // 特殊
                         new() {
                             Text = "特殊",
+                            IsChecked = false,
                             Children =
                             [
-                                new() { Text = "SA up" },
-                                new() { Text = "SA down" },
-                                new() { Text = "SD up" },
-                                new() { Text = "SD down" },
+                                new() {
+                                    Text = "SA up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "SA down",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "SD up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "SD down",
+                                    IsChecked = false,
+                                },
                             ]
                         },
                         // 属性
                         new() {
                             Text = "属性攻撃",
+                            IsChecked = false,
                             Children =
                             [
-                                new() { Text = "Fire Power up" },
-                                new() { Text = "Fire Power down" },
-                                new() { Text = "Water Power up" },
-                                new() { Text = "Water Power down" },
-                                new() { Text = "Wind Power up" },
-                                new() { Text = "Wind Power down" },
-                                new() { Text = "Light Power up" },
-                                new() { Text = "Light Power down" },
-                                new() { Text = "Dark Power up" },
-                                new() { Text = "Dark Power down" },
+                                new() {
+                                    Text = "Fire Power up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Fire Power down",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Water Power up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Water Power down",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Wind Power up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Wind Power down",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Light Power up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Light Power down",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Dark Power up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Dark Power down",
+                                    IsChecked = false,
+                                },
                             ]
                         },
                         new() {
                             Text = "属性防御",
+                            IsChecked = false,
                             Children = [
-                                new() { Text = "Fire Guard up" },
-                                new() { Text = "Fire Guard down" },
-                                new() { Text = "Water Guard up" },
-                                new() { Text = "Water Guard down" },
-                                new() { Text = "Wind Guard up" },
-                                new() { Text = "Wind Guard down" },
-                                new() { Text = "Light Guard up" },
-                                new() { Text = "Light Guard down" },
-                                new() { Text = "Dark Guard up" },
-                                new() { Text = "Dark Guard down" },
+                                new() {
+                                    Text = "Fire Guard up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Fire Guard down",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Water Guard up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Water Guard down",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Wind Guard up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Wind Guard down",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Light Guard up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Light Guard down",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Dark Guard up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "Dark Guard down",
+                                    IsChecked = false,
+                                },
                             ]
                         },
                         // その他
                         new() {
                             Text = "その他",
+                            IsChecked = false,
                             Children = [
-                                new() { Text = "HP up" },
-                                new() { Text = "火効果アップ" },
-                                new() { Text = "水効果アップ" },
-                                new() { Text = "風効果アップ" },
-                                new() { Text = "光効果アップ" },
-                                new() { Text = "闇効果アップ" },
-                                new() { Text = "火強" },
-                                new() { Text = "水強" },
-                                new() { Text = "風強" },
-                                new() { Text = "火弱" },
-                                new() { Text = "水弱" },
-                                new() { Text = "風弱" },
-                                new() { Text = "火拡" },
-                                new() { Text = "水拡" },
-                                new() { Text = "風拡" },
-                                new() { Text = "ヒール" },
-                                new() { Text = "チャージ" },
-                                new() { Text = "リカバー" },
-                                new() { Text = "カウンター" },
+                                new() {
+                                    Text = "HP up",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "火効果アップ",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "水効果アップ",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "風効果アップ",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "光効果アップ",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "闇効果アップ",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "火強",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "水強",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "風強",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "火弱",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "水弱",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "風弱",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "火拡",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "水拡",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "風拡",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "ヒール",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "チャージ",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "リカバー",
+                                    IsChecked = false,
+                                },
+                                new() {
+                                    Text = "カウンター",
+                                    IsChecked = false,
+                                },
                             ]
                         }
                     ]
@@ -538,14 +688,17 @@ namespace mitama.Pages.DeckBuilder
                         {
                             node.IsChecked = true;
                         }
-                        FilterType[] remove = [
+                        FilterType[] toAdd = [
                             FilterType.Fire,
                             FilterType.Water,
                             FilterType.Wind,
                             FilterType.Light,
                             FilterType.Dark,
                         ];
-                        _currentFilters.RemoveWhere(filter => remove.Contains(filter));
+                        foreach (var filter in toAdd)
+                        {
+                            _currentFilters.Add(filter);
+                        }
                         break;
                     }
                 case "火":
@@ -579,14 +732,17 @@ namespace mitama.Pages.DeckBuilder
                         {
                             node.IsChecked = true;
                         }
-                        FilterType[] remove = [
+                        FilterType[] toAdd = [
                             FilterType.A,
                             FilterType.B,
                             FilterType.C,
                             FilterType.D,
                             FilterType.E,
                         ];
-                        _currentFilters.RemoveWhere(filter => remove.Contains(filter));
+                        foreach (var filter in toAdd)
+                        {
+                            _currentFilters.Add(filter);
+                        }
                         break;
                     }
                 case "A":
@@ -620,7 +776,7 @@ namespace mitama.Pages.DeckBuilder
                         {
                             node.IsChecked = true;
                         }
-                        FilterType[] remove = [
+                        FilterType[] toAdd = [
                             FilterType.One,
                             FilterType.Two,
                             FilterType.Three,
@@ -632,7 +788,10 @@ namespace mitama.Pages.DeckBuilder
                             FilterType.Lg,
                             FilterType.LgPlus,
                         ];
-                        _currentFilters.RemoveWhere(filter => remove.Contains(filter));
+                        foreach (var filter in toAdd)
+                        {
+                            _currentFilters.Add(filter);
+                        }
                         break;
                     }
                 case "Ⅰ":
@@ -691,16 +850,55 @@ namespace mitama.Pages.DeckBuilder
                         {
                             node.IsChecked = true;
                         }
-                        FilterType[] remove = [
+                        foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsEffectFilter))
+                        {
+                            _currentFilters.Add(type);
+                        }
+                        break;
+                    }
+                case "通常":
+                    {
+                        foreach (var node in TreeNodes[3].Children[0].Children)
+                        {
+                            node.IsChecked = true;
+                        }
+                        FilterType[] toAdd = [
                             FilterType.Au,
                             FilterType.Ad,
-                            FilterType.SAu,
-                            FilterType.SAd,
                             FilterType.Du,
                             FilterType.Dd,
+                        ];
+                        foreach (var filter in toAdd)
+                        {
+                            _currentFilters.Add(filter);
+                        }
+                        break;
+                    }
+                case "特殊":
+                    {
+                        foreach (var node in TreeNodes[3].Children[1].Children)
+                        {
+                            node.IsChecked = true;
+                        }
+                        FilterType[] toAdd = [
+                            FilterType.SAu,
+                            FilterType.SAd,
                             FilterType.SDu,
                             FilterType.SDd,
-                            FilterType.HPu,
+                        ];
+                        foreach (var filter in toAdd)
+                        {
+                            _currentFilters.Add(filter);
+                        }
+                        break;
+                    }
+                case "属性攻撃":
+                    {
+                        foreach (var node in TreeNodes[3].Children[2].Children)
+                        {
+                            node.IsChecked = true;
+                        }
+                        FilterType[] toAdd = [
                             FilterType.FPu,
                             FilterType.FPd,
                             FilterType.WaPu,
@@ -711,6 +909,20 @@ namespace mitama.Pages.DeckBuilder
                             FilterType.LPd,
                             FilterType.DPu,
                             FilterType.DPd,
+                        ];
+                        foreach (var filter in toAdd)
+                        {
+                            _currentFilters.Add(filter);
+                        }
+                        break;
+                    }
+                case "属性防御":
+                    {
+                        foreach (var node in TreeNodes[3].Children[3].Children)
+                        {
+                            node.IsChecked = true;
+                        }
+                        FilterType[] toAdd = [
                             FilterType.FGu,
                             FilterType.FGd,
                             FilterType.WaGu,
@@ -722,38 +934,9 @@ namespace mitama.Pages.DeckBuilder
                             FilterType.DGu,
                             FilterType.DGd,
                         ];
-                        _currentFilters.RemoveWhere(filter => remove.Contains(filter));
-                        break;
-                    }
-                case "通常":
-                    {
-                        foreach (var node in TreeNodes[3].Children[0].Children)
+                        foreach (var filter in toAdd)
                         {
-                            node.IsChecked = true;
-                        }
-                        break;
-                    }
-                case "特殊":
-                    {
-                        foreach (var node in TreeNodes[3].Children[1].Children)
-                        {
-                            node.IsChecked = true;
-                        }
-                        break;
-                    }
-                case "属性攻撃":
-                    {
-                        foreach (var node in TreeNodes[3].Children[2].Children)
-                        {
-                            node.IsChecked = true;
-                        }
-                        break;
-                    }
-                case "属性防御":
-                    {
-                        foreach (var node in TreeNodes[3].Children[3].Children)
-                        {
-                            node.IsChecked = true;
+                            _currentFilters.Add(filter);
                         }
                         break;
                     }
@@ -762,6 +945,31 @@ namespace mitama.Pages.DeckBuilder
                         foreach (var node in TreeNodes[3].Children[4].Children)
                         {
                             node.IsChecked = true;
+                        }
+                        FilterType[] toAdd = [
+                            FilterType.HPu,
+                            FilterType.FireStimulation,
+                            FilterType.WaterStimulation,
+                            FilterType.WindStimulation,
+                            FilterType.LightStimulation,
+                            FilterType.DarkStimulation,
+                            FilterType.FireStrong,
+                            FilterType.WaterStrong,
+                            FilterType.WindStrong,
+                            FilterType.FireWeak,
+                            FilterType.WaterWeak,
+                            FilterType.WindWeak,
+                            FilterType.FireSpread,
+                            FilterType.WaterSpread,
+                            FilterType.WindSpread,
+                            FilterType.Heal,
+                            FilterType.Charge,
+                            FilterType.Recover,
+                            FilterType.Counter,
+                        ];
+                        foreach (var filter in toAdd)
+                        {
+                            _currentFilters.Add(filter);
                         }
                         break;
                     }
@@ -1010,7 +1218,7 @@ namespace mitama.Pages.DeckBuilder
                     .List
                     .Where(memoria => _currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria)))
                     .Where(memoria => !Pool.Contains(memoria))
-                    .Where(memoria => ApplyFilter(memoria, Filters, _currentFilters)))
+                    .Where(ApplyFilter))
             {
                 Pool.Add(memoria);
             }
@@ -1031,6 +1239,7 @@ namespace mitama.Pages.DeckBuilder
                             if (!node.IsChecked) return;
                             node.IsChecked = false;
                         }
+                        _currentFilters.RemoveWhere(IsElementFilter);
                         Pool.Clear();
                         break;
                     }
@@ -1066,6 +1275,7 @@ namespace mitama.Pages.DeckBuilder
                             if (!node.IsChecked) return;
                             node.IsChecked = false;
                         }
+                        _currentFilters.RemoveWhere(IsRangeFilter);
                         Pool.Clear();
                         break;
                     }
@@ -1101,6 +1311,7 @@ namespace mitama.Pages.DeckBuilder
                             if (!node.IsChecked) return;
                             node.IsChecked = false;
                         }
+                        _currentFilters.RemoveWhere(IsLevelFilter);
                         Pool.Clear();
                         break;
                     }
@@ -1164,6 +1375,7 @@ namespace mitama.Pages.DeckBuilder
                         {
                             node.IsChecked = false;
                         }
+                        _currentFilters.RemoveWhere(IsEffectFilter);
                         Pool.Clear();
                         break;
                     }
@@ -1515,7 +1727,7 @@ namespace mitama.Pages.DeckBuilder
                     }
             }
             if (prevCoount == _currentFilters.Count) return;
-            foreach (var memoria in Pool.ToList().Where(memoria => !ApplyFilter(memoria, Filters, _currentFilters, false)))
+            foreach (var memoria in Pool.ToList().Where(memoria => !ApplyFilter(memoria)))
             {
                 Pool.Remove(memoria);
             }
@@ -1905,26 +2117,21 @@ namespace mitama.Pages.DeckBuilder
             Filters.Add(FilterType.Recover, memoria => memoria.Skill.Effects.Any(eff => eff is Recover));
             // カウンター
             Filters.Add(FilterType.Counter, memoria => memoria.Skill.Effects.Any(eff => eff is Counter));
+
+            // push all FilterTypes to _currentFilters
+            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsElementFilter(f)))
+            {
+                _currentFilters.Add(type);
+            }
         }
 
-        bool ApplyFilter(Memoria memoria, Dictionary<FilterType, Func<Memoria, bool>> filters, HashSet<FilterType> predicates, bool flip=true)
+        bool ApplyFilter(Memoria memoria)
         {
-            var p1 = predicates.Where(IsElementFilter).ToList();
-            var c1 = p1.Any(key => filters[key](memoria));
-            var p2 = predicates.Where(IsRangeFilter).ToList();
-            var c2 = p2.Any(key => filters[key](memoria));
-            var p3 = predicates.Where(IsLevelFilter).ToList();
-            var c3 = p3.Any(key => filters[key](memoria));
-            var p4 = predicates.Where(IsEffectFilter).ToList();
-            var c4 = p4.Any(key => filters[key](memoria));
-            if (flip)
-            {
-                return (p1.Count == 0 || c1) && (p2.Count == 0 || c2) && (p3.Count == 0 || c3) && (p4.Count == 0 || c4);
-            }
-            else
-            {
-                return (p1.Count != 0 && !c1) || (p2.Count != 0 && !c2) || (p3.Count != 0 && !c3) || (p4.Count != 0 && !c4);
-            }
+            var p1 = _currentFilters.Where(IsElementFilter).Any(key => Filters[key](memoria));
+            var p2 = _currentFilters.Where(IsRangeFilter).Any(key => Filters[key](memoria));
+            var p3 = _currentFilters.Where(IsLevelFilter).Any(key => Filters[key](memoria));
+            var p4 = _currentFilters.Where(IsEffectFilter).All(key => Filters[key](memoria));
+            return p1 && p2 && p3 && p4;
         }
 
         bool IsKindFilter(FilterType filter)
@@ -2032,7 +2239,6 @@ namespace mitama.Pages.DeckBuilder
                 FilterType.Charge,
                 FilterType.Recover,
                 FilterType.Counter,
-
             ];
 
             return effectFilters.Contains(filter);
