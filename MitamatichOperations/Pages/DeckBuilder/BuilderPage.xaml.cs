@@ -1920,9 +1920,10 @@ namespace mitama.Pages.DeckBuilder
             var p4 = predicates.Where(IsEffectFilter).ToList();
             var c4 = p4.Any(key => filters[key](memoria));
             if (flip)
-            { 
+            {
                 return (p1.Count == 0 || c1) && (p2.Count == 0 || c2) && (p3.Count == 0 || c3) && (p4.Count == 0 || c4);
-            } else
+            }
+            else
             {
                 return (p1.Count != 0 && !c1) || (p2.Count != 0 && !c2) || (p3.Count != 0 && !c3) || (p4.Count != 0 && !c4);
             }
@@ -2086,7 +2087,8 @@ namespace mitama.Pages.DeckBuilder
                 await Task.Delay(3000);
                 GeneralInfoBar.IsOpen = false;
                 return;
-            } else
+            }
+            else
             {
                 var name = DeckName.Text;
                 new DirectoryInfo($@"{Director.ProjectDir()}\{region}\Members\{member.Name}\Units").Create();
