@@ -213,7 +213,7 @@ public record Memoria(
         return $@"{{ ""link"": ""{HttpUtility.UrlEncode(Link)}"", ""name"": ""{HttpUtility.UrlEncode(Name)}"" }}";
     }
 
-    public virtual bool Equals(Memoria? other) => Id == other?.Id;
+    public virtual bool Equals(Memoria other) => Id == other?.Id;
     public override int GetHashCode() => Name.GetHashCode();
 
     public static readonly Memoria[] List =
@@ -229,7 +229,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールE LG",
                 "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Lg,
                 Range.E
@@ -398,7 +398,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -422,7 +422,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -470,7 +470,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーフォールB Ⅲ",
                 "敵1～2体のATKと水属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -494,7 +494,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -591,7 +591,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -615,7 +615,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーフォールC Ⅳ",
                 "敵1～3体のSp.ATKと水属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -639,7 +639,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -663,7 +663,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーフォールC Ⅳ",
                 "敵1～3体のATKと水属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -687,7 +687,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -711,7 +711,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅳ",
                 "味方1～3体のHPを大回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Four,
                 Range.C
@@ -759,7 +759,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -783,7 +783,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーアシストC Ⅳ",
                 "味方1～3体のATKと水属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -807,7 +807,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -879,7 +879,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールC Ⅳ",
                 "味方1～3体のHPを大回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Four,
                 Range.C
@@ -975,7 +975,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -999,7 +999,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーアシストC Ⅳ",
                 "味方1～3体のSp.ATKと火属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -1023,7 +1023,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードヒールC Ⅳ",
                 "味方1～3体のHPを大回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Four,
                 Range.C
@@ -1047,7 +1047,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -1071,7 +1071,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -1095,7 +1095,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -1119,7 +1119,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -1143,7 +1143,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーアシストB Ⅲ",
                 "味方1～2体のATKと火属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -1191,7 +1191,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーフォールC Ⅳ",
                 "敵1～3体のSp.ATKと火属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -1239,7 +1239,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -1263,7 +1263,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーフォールB Ⅲ",
                 "敵1～2体のATKと火属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -1287,7 +1287,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -1311,7 +1311,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -1455,7 +1455,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーフォールC Ⅳ",
                 "敵1～3体のATKと水属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -1479,7 +1479,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールE LG",
                 "敵2～3体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Lg,
                 Range.E
@@ -1528,7 +1528,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -1576,7 +1576,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードヒールC Ⅳ",
                 "味方1～3体のHPを大回復する。さらに味方のDEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Four,
                 Range.C
@@ -1600,7 +1600,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -1624,7 +1624,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーアシストC Ⅳ",
                 "味方1～3体のATKと火属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -1648,7 +1648,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -1672,7 +1672,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードフォールC Ⅳ",
                 "敵1～3体のSp.DEFと火属性防御力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -1792,7 +1792,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーフォールC Ⅳ",
                 "敵1～3体のATKと風属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -1840,7 +1840,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -1888,7 +1888,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーアシストB Ⅲ",
                 "味方1～2体のATKと水属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -1960,7 +1960,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKと火属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -2009,7 +2009,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストA Ⅲ",
                 "味方1体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -2033,7 +2033,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -2129,7 +2129,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーアシストC Ⅳ",
                 "味方1～3体のATKと水属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -2177,7 +2177,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -2321,7 +2321,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードヒールD Ⅳ",
                 "味方2体のHPを大回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Four,
                 Range.D
@@ -2345,7 +2345,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -2393,7 +2393,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードフォールC Ⅳ",
                 "敵1～3体のDEFと水属性防御力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -2417,7 +2417,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -2441,7 +2441,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーアシストC Ⅳ",
                 "味方1～3体のSp.ATKと水属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -2489,7 +2489,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -2537,7 +2537,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -2585,7 +2585,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーアシストB Ⅲ",
                 "味方1～2体のATKと火属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -2609,7 +2609,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -2633,7 +2633,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーアシストB Ⅲ",
                 "味方1～2体のSp.ATKと風属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -2657,7 +2657,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードヒールD Ⅳ",
                 "味方2体のHPを大回復する。さらに味方のDEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Four,
                 Range.D
@@ -2777,7 +2777,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKと水属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -2850,7 +2850,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKと火属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -2898,7 +2898,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -2946,7 +2946,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーアシストB Ⅲ",
                 "味方1～2体のSp.ATKと水属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -2970,7 +2970,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -2994,7 +2994,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -3066,7 +3066,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -3162,7 +3162,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -3186,7 +3186,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -3258,7 +3258,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -3306,7 +3306,7 @@ public record Memoria(
             new Skill(
                 "ストライクD LG",
                 "敵2体に通常大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Lg,
                 Range.D
@@ -3331,7 +3331,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅳ+",
                 "味方1～3体のHPを大回復する。さらに味方のSp.DEFと水属性防御力をアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium), new StatusUp(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -3355,7 +3355,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -3403,7 +3403,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -3451,7 +3451,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーアシストC Ⅳ",
                 "味方1～3体のSp.ATKと風属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -3547,7 +3547,7 @@ public record Memoria(
             new Skill(
                 "[火攻風防]マイトアシストC Ⅳ",
                 "味方1～3体の火属性攻撃力と風属性防御力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium), new StatusUp(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -3644,7 +3644,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -3668,7 +3668,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストA Ⅲ",
                 "味方1体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -3692,7 +3692,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストD LG",
                 "敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Lg,
                 Range.D
@@ -3717,7 +3717,7 @@ public record Memoria(
             new Skill(
                 "[風攻水防]マイトアシストC Ⅳ",
                 "味方1～3体の風属性攻撃力と水属性防御力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium), new StatusUp(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -3885,7 +3885,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクA Ⅴ+",
                 "敵1体に通常超特大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Five,
                 Range.A
@@ -3909,7 +3909,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールD Ⅲ",
                 "敵2体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.D
@@ -3957,7 +3957,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストD Ⅲ",
                 "味方2体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.D
@@ -4029,7 +4029,7 @@ public record Memoria(
             new Skill(
                 "WガードアシストD Ⅲ",
                 "味方2体のDEFとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.D
@@ -4077,7 +4077,7 @@ public record Memoria(
             new Skill(
                 "WガードフォールD Ⅲ",
                 "敵2体のDEFとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.D
@@ -4294,7 +4294,7 @@ public record Memoria(
             new Skill(
                 "[風攻火防]マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵の風属性攻撃力と火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -4342,7 +4342,7 @@ public record Memoria(
             new Skill(
                 "[風攻火防]マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵の風属性攻撃力と火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -4390,7 +4390,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -4438,7 +4438,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーアシストB Ⅲ",
                 "味方1～2体のATKと火属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -4462,7 +4462,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールD Ⅳ",
                 "味方2体のHPを大回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Four,
                 Range.D
@@ -4486,7 +4486,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -4510,7 +4510,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -4534,7 +4534,7 @@ public record Memoria(
             new Skill(
                 "WガードフォールA Ⅲ",
                 "敵1体のDEFとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -4582,7 +4582,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKと水属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -4630,7 +4630,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKと水属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -4704,7 +4704,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードヒールD Ⅳ",
                 "味方2体のHPを大回復する。さらに味方のDEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Four,
                 Range.D
@@ -4728,7 +4728,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -4752,7 +4752,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -4776,7 +4776,7 @@ public record Memoria(
             new Skill(
                 "[火攻風防]マイトアシストB Ⅲ",
                 "味方1～2体の火属性攻撃力と風属性防御力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium), new StatusUp(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -4800,7 +4800,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -4824,7 +4824,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーフォールC Ⅳ",
                 "敵1～3体のATKと風属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -4848,7 +4848,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -4872,7 +4872,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKと火属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -4896,7 +4896,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーフォールC Ⅳ",
                 "敵1～3体のATKと火属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -4920,7 +4920,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKと火属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -4968,7 +4968,7 @@ public record Memoria(
             new Skill(
                 "[水攻火防]マイトアシストB Ⅲ",
                 "味方1～2体の水属性攻撃力と火属性防御力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium), new StatusUp(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5016,7 +5016,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードフォールB Ⅲ",
                 "敵1～2体のDEFと水属性防御力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5040,7 +5040,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5064,7 +5064,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーフォールB Ⅳ",
                 "敵1～2体のSp.ATKと火属性攻撃力を特大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.B
@@ -5088,7 +5088,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5112,7 +5112,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードヒールD Ⅳ",
                 "味方2体のHPを大回復する。さらに味方のDEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Four,
                 Range.D
@@ -5161,7 +5161,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードヒールD Ⅳ",
                 "味方2体のHPを大回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Four,
                 Range.D
@@ -5185,7 +5185,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5209,7 +5209,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5233,7 +5233,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーアシストB Ⅲ",
                 "味方1～2体のATKと水属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5257,7 +5257,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5281,7 +5281,7 @@ public record Memoria(
             new Skill(
                 "[火攻風防]マイトアシストB Ⅲ",
                 "味方1～2体の火属性攻撃力と風属性防御力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium), new StatusUp(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5305,7 +5305,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5329,7 +5329,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーフォールB Ⅲ",
                 "敵1～2体のATKと風属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5353,7 +5353,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -5377,7 +5377,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5401,7 +5401,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -5425,7 +5425,7 @@ public record Memoria(
             new Skill(
                 "[火防]Sp.マイトアシストB Ⅲ",
                 "味方1～2体のSp.ATKと火属性防御力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium), new StatusUp(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5473,7 +5473,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKと火属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5497,7 +5497,7 @@ public record Memoria(
             new Skill(
                 "[水攻火防]マイトアシストB Ⅲ",
                 "味方1～2体の水属性攻撃力と火属性防御力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium), new StatusUp(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5521,7 +5521,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5545,7 +5545,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5569,7 +5569,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -5593,7 +5593,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -5617,7 +5617,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5641,7 +5641,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードフォールB Ⅲ",
                 "敵1～2体のDEFと風属性防御力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5665,7 +5665,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5713,7 +5713,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーアシストB Ⅲ",
                 "味方1～2体のATKと風属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5761,7 +5761,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードフォールB Ⅲ",
                 "敵1～2体のSp.DEFと風属性防御力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5785,7 +5785,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKと風属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5809,7 +5809,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5833,7 +5833,7 @@ public record Memoria(
             new Skill(
                 "[風防]マイトアシストB Ⅲ",
                 "味方1～2体のATKと風属性防御力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5857,7 +5857,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5881,7 +5881,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5905,7 +5905,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードフォールB Ⅲ",
                 "敵1～2体のDEFと火属性防御力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5929,7 +5929,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -5953,7 +5953,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -5977,7 +5977,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6025,7 +6025,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーアシストB Ⅲ",
                 "味方1～2体のATKと水属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6049,7 +6049,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6097,7 +6097,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6145,7 +6145,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードアシストB Ⅲ",
                 "味方1～2体のDEFと火属性防御力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6193,7 +6193,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードフォールB Ⅲ",
                 "敵1～2体のSp.DEFと水属性防御力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6217,7 +6217,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6241,7 +6241,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -6265,7 +6265,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6289,7 +6289,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーアシストB Ⅲ",
                 "味方1～2体のSp.ATKと火属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6313,7 +6313,7 @@ public record Memoria(
             new Skill(
                 "ヒールE LG",
                 "味方2～3体のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Lg,
                 Range.E
@@ -6338,7 +6338,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6362,7 +6362,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーアシストB Ⅲ",
                 "味方1～2体のATKと火属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6386,7 +6386,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6410,7 +6410,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKと風属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6434,7 +6434,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -6458,7 +6458,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6482,7 +6482,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6506,7 +6506,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードフォールB Ⅲ",
                 "敵1～2体のDEFと火属性防御力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6530,7 +6530,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールE LG",
                 "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Lg,
                 Range.E
@@ -6555,7 +6555,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -6579,7 +6579,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールA Ⅲ",
                 "敵1体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -6603,7 +6603,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6627,7 +6627,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -6651,7 +6651,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーアシストB Ⅲ",
                 "味方1～2体のSp.ATKと風属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6675,7 +6675,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6699,7 +6699,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6723,7 +6723,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードフォールB Ⅲ",
                 "敵1～2体のDEFと風属性防御力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6771,7 +6771,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6819,7 +6819,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6867,7 +6867,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードフォールB Ⅲ",
                 "敵1～2体のSp.DEFと火属性防御力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6915,7 +6915,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -6939,7 +6939,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -6963,7 +6963,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -6987,7 +6987,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーフォールB Ⅲ",
                 "敵1～2体のATKと火属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7011,7 +7011,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7060,7 +7060,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKと水属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7084,7 +7084,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7132,7 +7132,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7180,7 +7180,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーアシストB Ⅲ",
                 "味方1～2体のSp.ATKと風属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7228,7 +7228,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードフォールB Ⅲ",
                 "敵1～2体のDEFと風属性防御力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7252,7 +7252,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7276,7 +7276,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーフォールB Ⅲ",
                 "敵1～2体のATKと火属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7300,7 +7300,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -7324,7 +7324,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7348,7 +7348,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -7372,7 +7372,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -7396,7 +7396,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7420,7 +7420,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーアシストB Ⅲ",
                 "味方1～2体のATKと水属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7444,7 +7444,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKと火属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7468,7 +7468,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7517,7 +7517,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーアシストB Ⅲ",
                 "味方1～2体のATKと水属性攻撃力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7541,7 +7541,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7565,7 +7565,7 @@ public record Memoria(
             new Skill(
                 "ディファースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7613,7 +7613,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -7637,7 +7637,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -7661,7 +7661,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7685,7 +7685,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーフォールB Ⅲ",
                 "敵1～2体のATKと風属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7709,7 +7709,7 @@ public record Memoria(
             new Skill(
                 "[風防]Sp.マイトアシストB Ⅲ",
                 "味方1～2体のSp.ATKと風属性防御力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium), new StatusUp(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7733,7 +7733,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7757,7 +7757,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -7781,7 +7781,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -7805,7 +7805,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKと風属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7829,7 +7829,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7853,7 +7853,7 @@ public record Memoria(
             new Skill(
                 "[風防]マイトアシストB Ⅲ",
                 "味方1～2体のATKと風属性防御力を大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7877,7 +7877,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7901,7 +7901,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7925,7 +7925,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーアシストC Ⅲ",
                 "味方1～3体のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -7949,7 +7949,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7973,7 +7973,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーフォールB Ⅲ",
                 "敵1～2体のATKと風属性攻撃力を大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -7997,7 +7997,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8021,7 +8021,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -8045,7 +8045,7 @@ public record Memoria(
             new Skill(
                 "ストライクD LG",
                 "敵2体に通常大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Lg,
                 Range.D
@@ -8070,7 +8070,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーフォールC Ⅲ",
                 "敵1～3体のATKと風属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -8094,7 +8094,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8118,7 +8118,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8142,7 +8142,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8166,7 +8166,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールD Ⅳ",
                 "味方2体のHPを大回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Four,
                 Range.D
@@ -8215,7 +8215,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8263,7 +8263,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8287,7 +8287,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8311,7 +8311,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードフォールC Ⅲ",
                 "敵1～3体のSp.DEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -8335,7 +8335,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8359,7 +8359,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーアシストC Ⅲ",
                 "味方1～3体のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -8383,7 +8383,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -8407,7 +8407,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8431,7 +8431,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8455,7 +8455,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーフォールC Ⅲ",
                 "敵1～3体のATKと火属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -8479,7 +8479,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のDEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -8503,7 +8503,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーアシストC Ⅲ",
                 "味方1～3体のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -8527,7 +8527,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8551,7 +8551,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーフォールC Ⅲ",
                 "敵1～3体のSp.ATKと火属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -8575,7 +8575,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -8599,7 +8599,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8623,7 +8623,7 @@ public record Memoria(
             new Skill(
                 "ライフアシストB Ⅱ",
                 "味方1～2体の最大HPをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Life(), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -8647,7 +8647,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8671,7 +8671,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -8815,7 +8815,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -8839,7 +8839,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -8863,7 +8863,7 @@ public record Memoria(
             new Skill(
                 "ディファースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8887,7 +8887,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーアシストC Ⅲ",
                 "味方1～3体のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -8911,7 +8911,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーフォールC Ⅲ",
                 "敵1～3体のATKと風属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -8935,7 +8935,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -8959,7 +8959,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールD Ⅳ",
                 "味方2体のHPを大回復する。さらに味方のSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small)],
                 Level.Four,
                 Range.D
@@ -8983,7 +8983,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -9007,7 +9007,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールD Ⅳ",
                 "味方2体のHPを大回復する。さらに味方のDEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small)],
                 Level.Four,
                 Range.D
@@ -9079,7 +9079,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -9103,7 +9103,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -9127,7 +9127,7 @@ public record Memoria(
             new Skill(
                 "WガードアシストE LG",
                 "味方2～3体のDEFとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Lg,
                 Range.E
@@ -9152,7 +9152,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -9176,7 +9176,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -9200,7 +9200,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーフォールB Ⅱ",
                 "敵1～2体のSp.ATKと風属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -9224,7 +9224,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -9273,7 +9273,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -9297,7 +9297,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードフォールC Ⅲ",
                 "敵1～3体のSp.DEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -9321,7 +9321,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーアシストC Ⅲ",
                 "味方1～3体のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -9345,7 +9345,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -9369,7 +9369,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -9393,7 +9393,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -9417,7 +9417,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -9441,7 +9441,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -9465,7 +9465,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーフォールB Ⅱ",
                 "敵1～2体のATKと火属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -9489,7 +9489,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -9513,7 +9513,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -9537,7 +9537,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -9561,7 +9561,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -9585,7 +9585,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -9609,7 +9609,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーアシストC Ⅲ",
                 "味方1～3体のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -9633,7 +9633,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーアシストC Ⅲ",
                 "味方1～3体のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -9657,7 +9657,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -9681,7 +9681,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -9705,7 +9705,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーフォールB Ⅱ",
                 "敵1～2体のSp.ATKと火属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -9729,7 +9729,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -9753,7 +9753,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールA Ⅲ",
                 "敵1体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -9777,7 +9777,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -9801,7 +9801,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードフォールB Ⅱ",
                 "敵1～2体のDEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -9825,7 +9825,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -9849,7 +9849,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -9873,7 +9873,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -9897,7 +9897,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードライフアシストD Ⅱ",
                 "味方2体のSp.DEFと最大HPをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Two,
                 Range.D
@@ -9921,7 +9921,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -9945,7 +9945,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーアシストC Ⅲ",
                 "味方1～3体のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -9969,7 +9969,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -9993,7 +9993,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -10017,7 +10017,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -10041,7 +10041,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -10065,7 +10065,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -10089,7 +10089,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードフォールC Ⅲ",
                 "敵1～3体のSp.DEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -10113,7 +10113,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -10137,7 +10137,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -10161,7 +10161,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーアシストC Ⅲ",
                 "味方1～3体のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -10185,7 +10185,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -10209,7 +10209,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーアシストB Ⅱ",
                 "味方1～2体のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -10233,7 +10233,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -10257,7 +10257,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のDEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -10281,7 +10281,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -10305,7 +10305,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストB Ⅲ",
                 "味方1～2体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -10329,7 +10329,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -10353,7 +10353,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -10377,7 +10377,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -10401,7 +10401,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードフォールB Ⅱ",
                 "敵1～2体のDEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -10425,7 +10425,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -10449,7 +10449,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワーアシストB Ⅱ",
                 "味方1～2体のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -10497,7 +10497,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュA Ⅴ+",
                 "敵1体に特殊超特大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Five,
                 Range.A
@@ -10521,7 +10521,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストD Ⅲ",
                 "味方2体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.D
@@ -10569,7 +10569,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールD Ⅲ",
                 "敵2体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.D
@@ -10641,7 +10641,7 @@ public record Memoria(
             new Skill(
                 "WガードフォールD Ⅲ",
                 "敵2体のDEFとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.D
@@ -10689,7 +10689,7 @@ public record Memoria(
             new Skill(
                 "WガードアシストD Ⅲ",
                 "味方2体のDEFとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.D
@@ -10713,7 +10713,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -10737,7 +10737,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードフォールB Ⅱ",
                 "敵1～2体のSp.DEFと火属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -10761,7 +10761,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -10785,7 +10785,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーアシストB Ⅱ",
                 "味方1～2体のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -10809,7 +10809,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -10833,7 +10833,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -10857,7 +10857,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -10881,7 +10881,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -10905,7 +10905,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -10929,7 +10929,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードフォールB Ⅱ",
                 "敵1～2体のDEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -10953,7 +10953,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーアシストC Ⅲ",
                 "味方1～3体のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -10977,7 +10977,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -11001,7 +11001,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11025,7 +11025,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーアシストB Ⅲ",
                 "味方1～2体のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11049,7 +11049,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールD Ⅳ",
                 "味方2体のHPを大回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Four,
                 Range.D
@@ -11073,7 +11073,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールB Ⅲ",
                 "敵1～2体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11097,7 +11097,7 @@ public record Memoria(
             new Skill(
                 "ファイアガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -11122,7 +11122,7 @@ public record Memoria(
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Fire), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -11147,7 +11147,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA LG",
                 "敵1体に特殊超特大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Lg,
                 Range.A
@@ -11172,7 +11172,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -11196,7 +11196,7 @@ public record Memoria(
             new Skill(
                 "マイトアシストB Ⅲ",
                 "味方1～2体のATKとDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11220,7 +11220,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -11244,7 +11244,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11268,7 +11268,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11292,7 +11292,7 @@ public record Memoria(
             new Skill(
                 "ファイアパワーアシストB Ⅱ",
                 "味方1～2体のATKと火属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -11316,7 +11316,7 @@ public record Memoria(
             new Skill(
                 "WガードフォールB Ⅲ",
                 "敵1～2体のDEFとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11340,7 +11340,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -11364,7 +11364,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーフォールB Ⅱ",
                 "敵1～2体のSp.ATKと風属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -11388,7 +11388,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストC Ⅳ",
                 "味方1～3体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -11412,7 +11412,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11436,7 +11436,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11460,7 +11460,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -11484,7 +11484,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、敵のDEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -11508,7 +11508,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーアシストC Ⅲ",
                 "味方1～3体のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -11532,7 +11532,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードバーストA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、敵のSp.DEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -11556,7 +11556,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11580,7 +11580,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードフォールC Ⅲ",
                 "敵1～3体のSp.DEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -11604,7 +11604,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11652,7 +11652,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11676,7 +11676,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11700,7 +11700,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -11724,7 +11724,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -11748,7 +11748,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーアシストB Ⅱ",
                 "味方1～2体のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -11772,7 +11772,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールB Ⅲ",
                 "敵1～2体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11796,7 +11796,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11820,7 +11820,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11844,7 +11844,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーアシストC Ⅳ",
                 "味方1～3体のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -11868,7 +11868,7 @@ public record Memoria(
             new Skill(
                 "パワーアシストC Ⅳ",
                 "味方1～3体のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -11892,7 +11892,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11916,7 +11916,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -11940,7 +11940,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーアシストC Ⅲ",
                 "味方1～3体のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -11964,7 +11964,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーフォールB Ⅱ",
                 "敵1～2体のATKと風属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -11988,7 +11988,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -12012,7 +12012,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -12036,7 +12036,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -12060,7 +12060,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12084,7 +12084,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12108,7 +12108,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーアシストC Ⅲ",
                 "味方1～3体のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -12132,7 +12132,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12156,7 +12156,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーフォールB Ⅱ",
                 "敵1～2体のATKと風属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -12180,7 +12180,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -12204,7 +12204,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -12228,7 +12228,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーフォールB Ⅱ",
                 "敵1～2体のSp.ATKと風属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -12252,7 +12252,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12276,7 +12276,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12300,7 +12300,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストC Ⅳ",
                 "味方1～3体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -12324,7 +12324,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -12348,7 +12348,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーフォールC Ⅲ",
                 "敵1～3体のATKと水属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -12396,7 +12396,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12420,7 +12420,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12444,7 +12444,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワーアシストC Ⅲ",
                 "味方1～3体のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -12468,7 +12468,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12492,7 +12492,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA LG+",
                 "敵1体に通常超特大ダメージを与え、自身のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Lg,
                 Range.A
@@ -12517,7 +12517,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと風属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -12541,7 +12541,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12565,7 +12565,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -12589,7 +12589,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールA Ⅲ",
                 "敵1体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -12613,7 +12613,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードフォールB Ⅱ",
                 "敵1～2体のDEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -12637,7 +12637,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12661,7 +12661,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -12685,7 +12685,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -12709,7 +12709,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12733,7 +12733,7 @@ public record Memoria(
             new Skill(
                 "ライフアシストB Ⅱ",
                 "味方1～2体の最大HPをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Life(), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -12757,7 +12757,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストB Ⅲ",
                 "味方1～2体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12781,7 +12781,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12805,7 +12805,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -12829,7 +12829,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12853,7 +12853,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードフォールC Ⅲ",
                 "敵1～3体のDEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -12877,7 +12877,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -12901,7 +12901,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーアシストC Ⅲ",
                 "味方1～3体のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -12925,7 +12925,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -12949,7 +12949,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -12973,7 +12973,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーフォールB Ⅱ",
                 "敵1～2体のSp.ATKと水属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -12997,7 +12997,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13045,7 +13045,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーフォールB Ⅱ",
                 "敵1～2体のATKと水属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -13069,7 +13069,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13093,7 +13093,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -13117,7 +13117,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -13141,7 +13141,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13165,7 +13165,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーアシストB Ⅱ",
                 "味方1～2体のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -13189,7 +13189,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13213,7 +13213,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードライフアシストD Ⅱ",
                 "味方2体のSp.DEFと最大HPをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Two,
                 Range.D
@@ -13237,7 +13237,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -13285,7 +13285,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のDEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -13309,7 +13309,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13333,7 +13333,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -13357,7 +13357,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードフォールC Ⅲ",
                 "敵1～3体のSp.DEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -13381,7 +13381,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13405,7 +13405,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーアシストC Ⅲ",
                 "味方1～3体のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -13429,7 +13429,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -13453,7 +13453,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13477,7 +13477,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールB Ⅲ",
                 "敵1～2体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13501,7 +13501,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13525,7 +13525,7 @@ public record Memoria(
             new Skill(
                 "ライフアシストB Ⅱ",
                 "味方1～2体の最大HPをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Life(), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -13549,7 +13549,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -13573,7 +13573,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13597,7 +13597,7 @@ public record Memoria(
             new Skill(
                 "WガードアシストB Ⅲ",
                 "味方1～2体のDEFとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13621,7 +13621,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13645,7 +13645,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -13669,7 +13669,7 @@ public record Memoria(
             new Skill(
                 "ライフアシストB Ⅱ",
                 "味方1～2体の最大HPをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Life(), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -13693,7 +13693,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -13717,7 +13717,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -13741,7 +13741,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードフォールB Ⅱ",
                 "敵1～2体のDEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -13765,7 +13765,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13789,7 +13789,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -13813,7 +13813,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストD LG",
                 "味方2体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Lg,
                 Range.D
@@ -13838,7 +13838,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーアシストC Ⅲ",
                 "味方1～3体のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -13862,7 +13862,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13886,7 +13886,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13934,7 +13934,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -13958,7 +13958,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -13982,7 +13982,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトフォールB Ⅲ",
                 "敵1～2体のSp.ATKとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14006,7 +14006,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14054,7 +14054,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14078,7 +14078,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14102,7 +14102,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードフォールC Ⅲ",
                 "敵1～3体のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -14126,7 +14126,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14150,7 +14150,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーアシストB Ⅲ",
                 "味方1～2体のATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14174,7 +14174,7 @@ public record Memoria(
             new Skill(
                 "ライフアシストB Ⅱ",
                 "味方1～2体の最大HPをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Life(), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -14198,7 +14198,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと風属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -14222,7 +14222,7 @@ public record Memoria(
             new Skill(
                 "ウィンドガードフォールC Ⅲ",
                 "敵1～3体のDEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -14246,7 +14246,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKと風属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -14270,7 +14270,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -14294,7 +14294,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Wind), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -14318,7 +14318,7 @@ public record Memoria(
             new Skill(
                 "ライフアシストB Ⅱ",
                 "味方1～2体の最大HPをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Life(), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -14342,7 +14342,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと風属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Wind), Amount.Small)],
                 Level.Four,
                 Range.A
@@ -14366,7 +14366,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14390,7 +14390,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のDEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -14414,7 +14414,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと風属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14438,7 +14438,7 @@ public record Memoria(
             new Skill(
                 "ライフアシストB Ⅱ",
                 "味方1～2体の最大HPをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Life(), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -14462,7 +14462,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14486,7 +14486,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールB Ⅲ",
                 "敵1～2体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14510,7 +14510,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14534,7 +14534,7 @@ public record Memoria(
             new Skill(
                 "ウィンドパワーアシストC Ⅲ",
                 "味方1～3体のATKと風属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -14558,7 +14558,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14606,7 +14606,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールE LG",
                 "敵2～3体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Lg,
                 Range.E
@@ -14631,7 +14631,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、敵のSp.DEFと水属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Four,
                 Range.A
@@ -14655,7 +14655,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -14703,7 +14703,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14727,7 +14727,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14775,7 +14775,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14799,7 +14799,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14823,7 +14823,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -14847,7 +14847,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14871,7 +14871,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14895,7 +14895,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーアシストB Ⅱ",
                 "味方1～2体のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -14919,7 +14919,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14943,7 +14943,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のDEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -14967,7 +14967,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -14991,7 +14991,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーアシストC Ⅳ",
                 "味方1～3体のATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -15015,7 +15015,7 @@ public record Memoria(
             new Skill(
                 "ディファーブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のSp.ATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15039,7 +15039,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトフォールB Ⅲ",
                 "敵1～2体のSp.ATKとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15063,7 +15063,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -15087,7 +15087,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15111,7 +15111,7 @@ public record Memoria(
             new Skill(
                 "マイトアシストB Ⅲ",
                 "味方1～2体のATKとDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15135,7 +15135,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKと水属性攻撃力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -15159,7 +15159,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15183,7 +15183,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーフォールC Ⅲ",
                 "敵1～3体のATKと水属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -15207,7 +15207,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -15255,7 +15255,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -15279,7 +15279,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15303,7 +15303,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15327,7 +15327,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15351,7 +15351,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -15375,7 +15375,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -15399,7 +15399,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -15423,7 +15423,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクA Ⅳ",
                 "敵1体に通常特大ダメージを与え、自身のATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Four,
                 Range.A
@@ -15447,7 +15447,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーアシストC Ⅲ",
                 "味方1～3体のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -15471,7 +15471,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -15519,7 +15519,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15543,7 +15543,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -15567,7 +15567,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーアシストC Ⅲ",
                 "味方1～3体のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -15591,7 +15591,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15615,7 +15615,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクA Ⅳ",
                 "敵1体に通常特大ダメージを与え、自身のATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Four,
                 Range.A
@@ -15639,7 +15639,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -15663,7 +15663,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -15687,7 +15687,7 @@ public record Memoria(
             new Skill(
                 "ディファーアシストC Ⅳ",
                 "味方1～3体のSp.ATKとDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -15711,7 +15711,7 @@ public record Memoria(
             new Skill(
                 "ガードフォールC Ⅳ",
                 "敵1～3体のDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -15735,7 +15735,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -15759,7 +15759,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -15807,7 +15807,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15831,7 +15831,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15855,7 +15855,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーアシストC Ⅲ",
                 "味方1～3体のSp.ATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -15879,7 +15879,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -15903,7 +15903,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -15927,7 +15927,7 @@ public record Memoria(
             new Skill(
                 "ガードフォールC Ⅳ",
                 "敵1～3体のDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -15951,7 +15951,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -15975,7 +15975,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA LG",
                 "敵1体に通常超特大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Lg,
                 Range.A
@@ -16000,7 +16000,7 @@ public record Memoria(
             new Skill(
                 "ガードフォールC Ⅳ",
                 "敵1～3体のDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -16024,7 +16024,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -16048,7 +16048,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと水属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -16072,7 +16072,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストC Ⅳ",
                 "味方1～3体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -16096,7 +16096,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16120,7 +16120,7 @@ public record Memoria(
             new Skill(
                 "ウォーターガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16144,7 +16144,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16168,7 +16168,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードフォールB Ⅱ",
                 "敵1～2体のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -16192,7 +16192,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Four,
                 Range.A
@@ -16216,7 +16216,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -16264,7 +16264,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のATKと水属性攻撃力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -16288,7 +16288,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクA Ⅳ",
                 "敵1体に通常特大ダメージを与え、自身のATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Four,
                 Range.A
@@ -16312,7 +16312,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Four,
                 Range.A
@@ -16336,7 +16336,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターガードフォールB Ⅱ",
                 "敵1～2体のSp.DEFと水属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -16360,7 +16360,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16384,7 +16384,7 @@ public record Memoria(
             new Skill(
                 "Sp.ウォーターパワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKと水属性攻撃力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -16408,7 +16408,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーアシストB Ⅱ",
                 "味方1～2体のATKと水属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -16432,7 +16432,7 @@ public record Memoria(
             new Skill(
                 "ウォーターパワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Water), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16456,7 +16456,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストD LG",
                 "敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Lg,
                 Range.D
@@ -16481,7 +16481,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと光属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -16505,7 +16505,7 @@ public record Memoria(
             new Skill(
                 "ダークパワーフォールB Ⅱ",
                 "敵1～2体のATKと闇属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Dark), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -16529,7 +16529,7 @@ public record Memoria(
             new Skill(
                 "ライトガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと光属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16553,7 +16553,7 @@ public record Memoria(
             new Skill(
                 "Sp.ダークガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと闇属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16577,7 +16577,7 @@ public record Memoria(
             new Skill(
                 "ダークガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと闇属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -16601,7 +16601,7 @@ public record Memoria(
             new Skill(
                 "ライトパワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKと光属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Light), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -16625,7 +16625,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトパワーバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKと光属性攻撃力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Small), new StatusDown(new ElementAttack(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16649,7 +16649,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトガードアシストB Ⅱ",
                 "味方1～2体のSp.DEFと光属性防御力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium), new StatusUp(new ElementGuard(Element.Light), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -16673,7 +16673,7 @@ public record Memoria(
             new Skill(
                 "ライトパワーブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のATKと光属性攻撃力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Small), new StatusDown(new ElementAttack(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16697,7 +16697,7 @@ public record Memoria(
             new Skill(
                 "ライトガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと光属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -16721,7 +16721,7 @@ public record Memoria(
             new Skill(
                 "ダークガードアシストB Ⅱ",
                 "味方1～2体のDEFと闇属性防御力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementGuard(Element.Dark), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -16745,7 +16745,7 @@ public record Memoria(
             new Skill(
                 "ダークパワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKと闇属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16769,7 +16769,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと光属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16793,7 +16793,7 @@ public record Memoria(
             new Skill(
                 "ダークガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと闇属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16817,7 +16817,7 @@ public record Memoria(
             new Skill(
                 "ダークガードフォールB Ⅱ",
                 "敵1～2体のDEFと闇属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Dark), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -16841,7 +16841,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと光属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -16865,7 +16865,7 @@ public record Memoria(
             new Skill(
                 "Sp.ダークパワーフォールB Ⅱ",
                 "敵1～2体のSp.ATKと闇属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Dark), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -16889,7 +16889,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -16913,7 +16913,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -16937,7 +16937,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -16961,7 +16961,7 @@ public record Memoria(
             new Skill(
                 "パワーフォールC Ⅳ",
                 "敵1～3体のATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -16985,7 +16985,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと光属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17009,7 +17009,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと光属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -17033,7 +17033,7 @@ public record Memoria(
             new Skill(
                 "Sp.ダークパワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと闇属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Dark), Amount.Small)],
                 Level.Four,
                 Range.A
@@ -17057,7 +17057,7 @@ public record Memoria(
             new Skill(
                 "ライトパワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKと光属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17081,7 +17081,7 @@ public record Memoria(
             new Skill(
                 "ダークガードアシストB Ⅱ",
                 "味方1～2体のDEFと闇属性防御力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementGuard(Element.Dark), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17105,7 +17105,7 @@ public record Memoria(
             new Skill(
                 "ダークガードアシストB Ⅱ",
                 "味方1～2体のDEFと闇属性防御力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new ElementGuard(Element.Dark), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17129,7 +17129,7 @@ public record Memoria(
             new Skill(
                 "ライトパワーフォールB Ⅱ",
                 "敵1～2体のATKと光属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Light), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17153,7 +17153,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと光属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17177,7 +17177,7 @@ public record Memoria(
             new Skill(
                 "ダークガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと闇属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17201,7 +17201,7 @@ public record Memoria(
             new Skill(
                 "Sp.ダークパワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKと闇属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Dark), Amount.Small)],
                 Level.Four,
                 Range.A
@@ -17225,7 +17225,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトガードアシストB Ⅱ",
                 "味方1～2体のSp.DEFと光属性防御力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium), new StatusUp(new ElementGuard(Element.Light), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17249,7 +17249,7 @@ public record Memoria(
             new Skill(
                 "Sp.ダークパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと闇属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17273,7 +17273,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトパワーフォールB Ⅱ",
                 "敵1～2体のSp.ATKと光属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Light), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17297,7 +17297,7 @@ public record Memoria(
             new Skill(
                 "ダークパワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKと闇属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17321,7 +17321,7 @@ public record Memoria(
             new Skill(
                 "ライトガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと光属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -17345,7 +17345,7 @@ public record Memoria(
             new Skill(
                 "ライトパワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKと光属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17369,7 +17369,7 @@ public record Memoria(
             new Skill(
                 "ダークガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のDEFと闇属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -17393,7 +17393,7 @@ public record Memoria(
             new Skill(
                 "ダークパワーブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のATKと闇属性攻撃力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Small), new StatusDown(new ElementAttack(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17417,7 +17417,7 @@ public record Memoria(
             new Skill(
                 "ダークパワーフォールB Ⅱ",
                 "敵1～2体のATKと闇属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Dark), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17441,7 +17441,7 @@ public record Memoria(
             new Skill(
                 "Sp.ダークガードアシストB Ⅱ",
                 "味方1～2体のSp.DEFと闇属性防御力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium), new StatusUp(new ElementGuard(Element.Dark), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17465,7 +17465,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと光属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17489,7 +17489,7 @@ public record Memoria(
             new Skill(
                 "ダークガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと闇属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17513,7 +17513,7 @@ public record Memoria(
             new Skill(
                 "Sp.ダークパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと闇属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17537,7 +17537,7 @@ public record Memoria(
             new Skill(
                 "ダークガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFと闇属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -17561,7 +17561,7 @@ public record Memoria(
             new Skill(
                 "ライトパワーストライクA Ⅳ",
                 "敵1体に通常特大ダメージを与え、自身のATKと光属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Light), Amount.Small)],
                 Level.Four,
                 Range.A
@@ -17585,7 +17585,7 @@ public record Memoria(
             new Skill(
                 "ダークパワーフォールB Ⅱ",
                 "敵1～2体のATKと闇属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Dark), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17609,7 +17609,7 @@ public record Memoria(
             new Skill(
                 "ライトガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと光属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17633,7 +17633,7 @@ public record Memoria(
             new Skill(
                 "ライトパワーフォールB Ⅱ",
                 "敵1～2体のATKと光属性攻撃力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Light), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17657,7 +17657,7 @@ public record Memoria(
             new Skill(
                 "ダークガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFと闇属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Small), new StatusDown(new ElementGuard(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17681,7 +17681,7 @@ public record Memoria(
             new Skill(
                 "Sp.ダークガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと闇属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -17705,7 +17705,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと光属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17729,7 +17729,7 @@ public record Memoria(
             new Skill(
                 "Sp.ダークパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと闇属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17753,7 +17753,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトガードアシストB Ⅱ",
                 "味方1～2体のSp.DEFと光属性防御力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium), new StatusUp(new ElementGuard(Element.Light), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17777,7 +17777,7 @@ public record Memoria(
             new Skill(
                 "ライトパワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKと光属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17801,7 +17801,7 @@ public record Memoria(
             new Skill(
                 "ライトパワーアシストB Ⅱ",
                 "味方1～2体のATKと光属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Light), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17825,7 +17825,7 @@ public record Memoria(
             new Skill(
                 "WガードフォールD LG",
                 "敵2体のDEFとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Lg,
                 Range.D
@@ -17850,7 +17850,7 @@ public record Memoria(
             new Skill(
                 "Sp.ライトパワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと光属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new ElementAttack(Element.Light), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17874,7 +17874,7 @@ public record Memoria(
             new Skill(
                 "Sp.ダークガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFと闇属性防御力を小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -17898,7 +17898,7 @@ public record Memoria(
             new Skill(
                 "ダークパワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKと闇属性攻撃力を小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new ElementAttack(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17922,7 +17922,7 @@ public record Memoria(
             new Skill(
                 "ダークガードフォールB Ⅱ",
                 "敵1～2体のDEFと闇属性防御力をダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Dark), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17946,7 +17946,7 @@ public record Memoria(
             new Skill(
                 "Sp.ダークパワーアシストB Ⅱ",
                 "味方1～2体のSp.ATKと闇属性攻撃力をアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Dark), Amount.Medium)],
                 Level.Two,
                 Range.B
@@ -17970,7 +17970,7 @@ public record Memoria(
             new Skill(
                 "Sp.ダークガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと闇属性防御力を小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Small), new StatusDown(new ElementGuard(Element.Dark), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -17994,7 +17994,7 @@ public record Memoria(
             new Skill(
                 "WパワーブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとSp.ATKをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18018,7 +18018,7 @@ public record Memoria(
             new Skill(
                 "パワーアシストC Ⅳ",
                 "味方1～3体のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -18042,7 +18042,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードフォールA Ⅳ",
                 "敵1体のSp.DEFを超特大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -18090,7 +18090,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18114,7 +18114,7 @@ public record Memoria(
             new Skill(
                 "マイトフォールB Ⅲ",
                 "敵1～2体のATKとDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18138,7 +18138,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -18162,7 +18162,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -18210,7 +18210,7 @@ public record Memoria(
             new Skill(
                 "ディファーブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のSp.ATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18234,7 +18234,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18258,7 +18258,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーアシストC Ⅳ",
                 "味方1～3体のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -18282,7 +18282,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクD LG",
                 "敵2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Lg,
                 Range.D
@@ -18307,7 +18307,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18331,7 +18331,7 @@ public record Memoria(
             new Skill(
                 "WパワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のATKとSp.ATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new SpAtk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -18355,7 +18355,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードフォールC Ⅳ",
                 "敵1～3体のSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -18379,7 +18379,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -18403,7 +18403,7 @@ public record Memoria(
             new Skill(
                 "パワーヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -18427,7 +18427,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -18451,7 +18451,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18499,7 +18499,7 @@ public record Memoria(
             new Skill(
                 "ディファーブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のSp.ATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18523,7 +18523,7 @@ public record Memoria(
             new Skill(
                 "ディファーフォールB Ⅲ",
                 "敵1～2体のSp.ATKとDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18571,7 +18571,7 @@ public record Memoria(
             new Skill(
                 "パワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -18619,7 +18619,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18643,7 +18643,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーアシストB Ⅲ",
                 "味方1～2体のATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18667,7 +18667,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18691,7 +18691,7 @@ public record Memoria(
             new Skill(
                 "ディファースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18715,7 +18715,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -18739,7 +18739,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18763,7 +18763,7 @@ public record Memoria(
             new Skill(
                 "ガードフォールC Ⅳ",
                 "敵1～3体のDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -18811,7 +18811,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18835,7 +18835,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -18883,7 +18883,7 @@ public record Memoria(
             new Skill(
                 "パワーアシストC Ⅳ",
                 "味方1～3体のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -18907,7 +18907,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -18931,7 +18931,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -18955,7 +18955,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -18979,7 +18979,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19003,7 +19003,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーアシストB Ⅲ",
                 "味方1～2体のATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19027,7 +19027,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -19075,7 +19075,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19099,7 +19099,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のDEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -19123,7 +19123,7 @@ public record Memoria(
             new Skill(
                 "ディファースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19147,7 +19147,7 @@ public record Memoria(
             new Skill(
                 "ディファーアシストB Ⅲ",
                 "味方1～2体のSp.ATKとDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19171,7 +19171,7 @@ public record Memoria(
             new Skill(
                 "ディファースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19195,7 +19195,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -19267,7 +19267,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19291,7 +19291,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーアシストB Ⅲ",
                 "味方1～2体のATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19315,7 +19315,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -19339,7 +19339,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -19363,7 +19363,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストB Ⅲ",
                 "味方1～2体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19387,7 +19387,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19411,7 +19411,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールB Ⅲ",
                 "敵1～2体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19435,7 +19435,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19459,7 +19459,7 @@ public record Memoria(
             new Skill(
                 "WガードアシストD LG",
                 "味方2体のDEFとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Lg,
                 Range.D
@@ -19484,7 +19484,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19532,7 +19532,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19556,7 +19556,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトフォールB Ⅲ",
                 "敵1～2体のSp.ATKとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19580,7 +19580,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19604,7 +19604,7 @@ public record Memoria(
             new Skill(
                 "パワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -19628,7 +19628,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールB Ⅲ",
                 "敵1～2体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19652,7 +19652,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19676,7 +19676,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -19724,7 +19724,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -19820,7 +19820,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のDEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -19844,7 +19844,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -19868,7 +19868,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19892,7 +19892,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -19916,7 +19916,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19964,7 +19964,7 @@ public record Memoria(
             new Skill(
                 "ディファーアシストB Ⅲ",
                 "味方1～2体のSp.ATKとDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -19988,7 +19988,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -20060,7 +20060,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20132,7 +20132,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -20156,7 +20156,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20204,7 +20204,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20252,7 +20252,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -20276,7 +20276,7 @@ public record Memoria(
             new Skill(
                 "パワーブレイクA Ⅳ",
                 "敵1体に通常特大ダメージを与え、敵のATKをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -20300,7 +20300,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールB Ⅲ+",
                 "味方1～2体のHPを大回復する。さらに味方のDEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20324,7 +20324,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20348,7 +20348,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20420,7 +20420,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20444,7 +20444,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20468,7 +20468,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -20492,7 +20492,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -20540,7 +20540,7 @@ public record Memoria(
             new Skill(
                 "スマッシュC Ⅲ",
                 "敵1～3体に特殊ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.C
@@ -20612,7 +20612,7 @@ public record Memoria(
             new Skill(
                 "パワーヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -20636,7 +20636,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20660,7 +20660,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20684,7 +20684,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20756,7 +20756,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードアシストC Ⅳ",
                 "味方1～3体のSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -20804,7 +20804,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20828,7 +20828,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20852,7 +20852,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -20900,7 +20900,7 @@ public record Memoria(
             new Skill(
                 "WパワーバーストA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、敵のATKとSp.ATKをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -20924,7 +20924,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、敵のDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -20996,7 +20996,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21068,7 +21068,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21092,7 +21092,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトフォールB Ⅲ",
                 "敵1～2体のSp.ATKとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21116,7 +21116,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -21140,7 +21140,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のSp.ATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -21212,7 +21212,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21260,7 +21260,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21284,7 +21284,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -21308,7 +21308,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21380,7 +21380,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -21404,7 +21404,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -21428,7 +21428,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21452,7 +21452,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21500,7 +21500,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクA Ⅴ",
                 "敵1体に通常超特大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Five,
                 Range.A
@@ -21524,7 +21524,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールA Ⅲ",
                 "敵1体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -21548,7 +21548,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトフォールB Ⅲ",
                 "敵1～2体のSp.ATKとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21572,7 +21572,7 @@ public record Memoria(
             new Skill(
                 "ディファースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21596,7 +21596,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21644,7 +21644,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21668,7 +21668,7 @@ public record Memoria(
             new Skill(
                 "パワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -21692,7 +21692,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストA Ⅴ",
                 "敵1体に特殊超特大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Five,
                 Range.A
@@ -21716,7 +21716,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーフォールC Ⅳ",
                 "敵1～3体のSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -21788,7 +21788,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -21812,7 +21812,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のDEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -21860,7 +21860,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21884,7 +21884,7 @@ public record Memoria(
             new Skill(
                 "スマッシュD LG",
                 "敵2体に特殊大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Lg,
                 Range.D
@@ -21909,7 +21909,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -21933,7 +21933,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21957,7 +21957,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -21981,7 +21981,7 @@ public record Memoria(
             new Skill(
                 "WガードアシストC Ⅳ",
                 "味方1～3体のDEFとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -22005,7 +22005,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22197,7 +22197,7 @@ public record Memoria(
             new Skill(
                 "WパワーバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のATKとSp.ATKを小ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Small), new StatusDown(new SpAtk(), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -22221,7 +22221,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22245,7 +22245,7 @@ public record Memoria(
             new Skill(
                 "パワーアシストC Ⅳ",
                 "味方1～3体のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -22269,7 +22269,7 @@ public record Memoria(
             new Skill(
                 "WガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -22317,7 +22317,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22341,7 +22341,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22365,7 +22365,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーフォールC Ⅳ",
                 "敵1～3体のSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -22389,7 +22389,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
                 "味方1～3体のHPを回復する。さらに味方のSp.DEFをアップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.C
@@ -22413,7 +22413,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22437,7 +22437,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -22461,7 +22461,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトバーストA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -22485,7 +22485,7 @@ public record Memoria(
             new Skill(
                 "ガードフォールC Ⅳ",
                 "敵1～3体のDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -22509,7 +22509,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、敵のDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -22533,7 +22533,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードアシストD Ⅲ",
                 "味方2体のSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.D
@@ -22557,7 +22557,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -22581,7 +22581,7 @@ public record Memoria(
             new Skill(
                 "WパワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のATKとSp.ATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small), new StatusUp(new SpAtk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -22605,7 +22605,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22629,7 +22629,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22653,7 +22653,7 @@ public record Memoria(
             new Skill(
                 "ヒールD Ⅳ",
                 "味方2体のHPを大回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Four,
                 Range.D
@@ -22677,7 +22677,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22701,7 +22701,7 @@ public record Memoria(
             new Skill(
                 "WパワーブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとSp.ATKをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22725,7 +22725,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -22749,7 +22749,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22773,7 +22773,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -22797,7 +22797,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトフォールB Ⅲ",
                 "敵1～2体のSp.ATKとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22821,7 +22821,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、敵のSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -22845,7 +22845,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -22869,7 +22869,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードアシストC Ⅳ",
                 "味方1～3体のSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -22893,7 +22893,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -22917,7 +22917,7 @@ public record Memoria(
             new Skill(
                 "ガードフォールC Ⅳ",
                 "敵1～3体のDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -22941,7 +22941,7 @@ public record Memoria(
             new Skill(
                 "WガードアシストB Ⅲ",
                 "味方1～2体のDEFとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22965,7 +22965,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -22989,7 +22989,7 @@ public record Memoria(
             new Skill(
                 "ガードアシストC Ⅳ",
                 "味方1～3体のDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -23013,7 +23013,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA Ⅲ+",
                 "敵1体に通常大ダメージを与え、自身のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -23037,7 +23037,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23061,7 +23061,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -23085,7 +23085,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23109,7 +23109,7 @@ public record Memoria(
             new Skill(
                 "パワーヒールB Ⅲ",
                 "味方1～2体のHPを大回復する。さらに味方のATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -23133,7 +23133,7 @@ public record Memoria(
             new Skill(
                 "マイトアシストB Ⅲ",
                 "味方1～2体のATKとDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23157,7 +23157,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -23181,7 +23181,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -23205,7 +23205,7 @@ public record Memoria(
             new Skill(
                 "パワーフォールC Ⅳ",
                 "敵1～3体のATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -23229,7 +23229,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23253,7 +23253,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23277,7 +23277,7 @@ public record Memoria(
             new Skill(
                 "ディファースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23301,7 +23301,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -23325,7 +23325,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23349,7 +23349,7 @@ public record Memoria(
             new Skill(
                 "マイトフォールA Ⅲ",
                 "敵1体のATKとDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -23397,7 +23397,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23421,7 +23421,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23469,7 +23469,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23493,7 +23493,7 @@ public record Memoria(
             new Skill(
                 "ヒールスマッシュC Ⅲ",
                 "敵1～3体に特殊ダメージを与える。さらに自身のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.C
@@ -23517,7 +23517,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーアシストC Ⅳ",
                 "味方1～3体のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -23541,7 +23541,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のDEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -23565,7 +23565,7 @@ public record Memoria(
             new Skill(
                 "ディファースマッシュA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -23589,7 +23589,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23613,7 +23613,7 @@ public record Memoria(
             new Skill(
                 "Sp.ディファーフォールB Ⅲ",
                 "敵1～2体のATKとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23637,7 +23637,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23709,7 +23709,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23733,7 +23733,7 @@ public record Memoria(
             new Skill(
                 "ディファースマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23757,7 +23757,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーアシストC Ⅳ",
                 "味方1～3体のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -23781,7 +23781,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -23805,7 +23805,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、敵のDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -23853,7 +23853,7 @@ public record Memoria(
             new Skill(
                 "パワーブレイクA Ⅳ",
                 "敵1体に通常特大ダメージを与え、敵のATKをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -23877,7 +23877,7 @@ public record Memoria(
             new Skill(
                 "パワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -23901,7 +23901,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23925,7 +23925,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
                 "味方1～2体のSp.ATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -23973,7 +23973,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -23997,7 +23997,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA Ⅳ",
                 "敵1体に通常特大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -24021,7 +24021,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24045,7 +24045,7 @@ public record Memoria(
             new Skill(
                 "WガードアシストB Ⅲ",
                 "味方1～2体のDEFとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24069,7 +24069,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -24093,7 +24093,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24117,7 +24117,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24141,7 +24141,7 @@ public record Memoria(
             new Skill(
                 "WガードフォールB Ⅲ",
                 "敵1～2体のDEFとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24165,7 +24165,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24213,7 +24213,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24237,7 +24237,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -24261,7 +24261,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーアシストA Ⅳ",
                 "味方1体のSp.ATKを超特大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -24309,7 +24309,7 @@ public record Memoria(
             new Skill(
                 "ストライクC Ⅲ",
                 "敵1～3体に通常ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.C
@@ -24333,7 +24333,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードフォールC Ⅳ",
                 "敵1～3体のSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -24357,7 +24357,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅲ+",
                 "敵1体に特殊大ダメージを与え、自身のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -24381,7 +24381,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -24405,7 +24405,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -24429,7 +24429,7 @@ public record Memoria(
             new Skill(
                 "パワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -24453,7 +24453,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、敵のSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -24477,7 +24477,7 @@ public record Memoria(
             new Skill(
                 "ヒールストライクA Ⅳ",
                 "敵1体に通常特大ダメージを与える。さらに自身のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Four,
                 Range.A
@@ -24501,7 +24501,7 @@ public record Memoria(
             new Skill(
                 "マイトアシストB Ⅲ",
                 "味方1～2体のATKとDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24525,7 +24525,7 @@ public record Memoria(
             new Skill(
                 "マイトブレイクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、敵のATKとDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24573,7 +24573,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24597,7 +24597,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -24621,7 +24621,7 @@ public record Memoria(
             new Skill(
                 "マイトアシストB Ⅲ",
                 "味方1～2体のATKとDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24645,7 +24645,7 @@ public record Memoria(
             new Skill(
                 "ガードストライクA Ⅳ",
                 "敵1体に通常特大ダメージを与え、自身のDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -24669,7 +24669,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24693,7 +24693,7 @@ public record Memoria(
             new Skill(
                 "パワーフォールB Ⅲ",
                 "敵1～2体のATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24717,7 +24717,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24741,7 +24741,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストA Ⅳ+",
                 "敵1体に特殊特大ダメージを与え、敵のSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -24765,7 +24765,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24789,7 +24789,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24813,7 +24813,7 @@ public record Memoria(
             new Skill(
                 "ヒールD Ⅲ",
                 "味方2体のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.D
@@ -24837,7 +24837,7 @@ public record Memoria(
             new Skill(
                 "パワーアシストC Ⅳ",
                 "味方1～3体のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -24861,7 +24861,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -24885,7 +24885,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA Ⅳ",
                 "敵1体に通常特大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -24909,7 +24909,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトフォールA Ⅲ",
                 "敵1体のSp.ATKとSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -24933,7 +24933,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードフォールC Ⅳ",
                 "敵1～3体のSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -24957,7 +24957,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーアシストC Ⅳ",
                 "味方1～3体のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -24981,7 +24981,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25005,7 +25005,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25030,7 +25030,7 @@ public record Memoria(
             new Skill(
                 "ヒールD Ⅲ",
                 "味方2体のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.D
@@ -25055,7 +25055,7 @@ public record Memoria(
             new Skill(
                 "ヒールスマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与える。さらに自身のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.B
@@ -25079,7 +25079,7 @@ public record Memoria(
             new Skill(
                 "ガードアシストD Ⅲ",
                 "味方2体のDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.D
@@ -25103,7 +25103,7 @@ public record Memoria(
             new Skill(
                 "パワーブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のATKをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25127,7 +25127,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクA Ⅳ+",
                 "敵1体に通常特大ダメージを与え、敵のDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -25151,7 +25151,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のDEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -25175,7 +25175,7 @@ public record Memoria(
             new Skill(
                 "WガードスマッシュB Ⅲ+",
                 "敵1～2体に特殊大ダメージを与え、自身のDEFとSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25199,7 +25199,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードフォールB Ⅲ",
                 "敵1～2体のSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25223,7 +25223,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーアシストC Ⅳ",
                 "味方1～3体のSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -25247,7 +25247,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25271,7 +25271,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅲ",
                 "敵1体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -25295,7 +25295,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストB Ⅲ",
                 "味方1～2体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25343,7 +25343,7 @@ public record Memoria(
             new Skill(
                 "ディファースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKとDEFを小アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small), new StatusUp(new Def(), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -25367,7 +25367,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA Ⅲ+",
                 "敵1体に通常大ダメージを与え、自身のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -25391,7 +25391,7 @@ public record Memoria(
             new Skill(
                 "WガードアシストB Ⅲ",
                 "味方1～2体のDEFとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25415,7 +25415,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25439,7 +25439,7 @@ public record Memoria(
             new Skill(
                 "パワーヒールB Ⅲ",
                 "味方1～2体のHPを大回復する。さらに味方のATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -25463,7 +25463,7 @@ public record Memoria(
             new Skill(
                 "マイトアシストB Ⅲ",
                 "味方1～2体のATKとDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25487,7 +25487,7 @@ public record Memoria(
             new Skill(
                 "マイトストライクB Ⅲ+",
                 "敵1～2体に通常大ダメージを与え、自身のATKとDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25511,7 +25511,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のDEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -25535,7 +25535,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25559,7 +25559,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25583,7 +25583,7 @@ public record Memoria(
             new Skill(
                 "パワーヒールC Ⅲ",
                 "味方1～3体のHPを回復する。さらに味方のATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Small)],
                 Level.Three,
                 Range.C
@@ -25607,7 +25607,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25631,7 +25631,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -25655,7 +25655,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードフォールB Ⅲ",
                 "敵1～2体のSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25679,7 +25679,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のSp.ATKをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25703,7 +25703,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25727,7 +25727,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールD Ⅲ",
                 "味方2体のHPを回復する。さらに味方のSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.D
@@ -25751,7 +25751,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25775,7 +25775,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードアシストC Ⅳ",
                 "味方1～3体のSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -25799,7 +25799,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25823,7 +25823,7 @@ public record Memoria(
             new Skill(
                 "パワーフォールC Ⅳ",
                 "敵1～3体のATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -25847,7 +25847,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25871,7 +25871,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードフォールB Ⅲ",
                 "敵1～2体のSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25895,7 +25895,7 @@ public record Memoria(
             new Skill(
                 "ガードストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -25919,7 +25919,7 @@ public record Memoria(
             new Skill(
                 "ガードヒールB Ⅲ",
                 "味方1～2体のHPを大回復する。さらに味方のDEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -25943,7 +25943,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードスマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -25967,7 +25967,7 @@ public record Memoria(
             new Skill(
                 "Sp.マイトアシストA Ⅲ",
                 "味方1体のSp.ATKとSp.DEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -25991,7 +25991,7 @@ public record Memoria(
             new Skill(
                 "ガードストライクA Ⅳ",
                 "敵1体に通常特大ダメージを与え、自身のDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -26015,7 +26015,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26039,7 +26039,7 @@ public record Memoria(
             new Skill(
                 "ヒールストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与える。さらに自身のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.B
@@ -26063,7 +26063,7 @@ public record Memoria(
             new Skill(
                 "ストライクC Ⅲ",
                 "敵1～3体に通常ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.C
@@ -26087,7 +26087,7 @@ public record Memoria(
             new Skill(
                 "ガードストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のDEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26111,7 +26111,7 @@ public record Memoria(
             new Skill(
                 "WパワーアシストA Ⅲ",
                 "味方1体のATKとSp.ATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -26135,7 +26135,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -26159,7 +26159,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードヒールB Ⅲ",
                 "味方1～2体のHPを大回復する。さらに味方のSp.DEFを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -26183,7 +26183,7 @@ public record Memoria(
             new Skill(
                 "スマッシュC Ⅲ",
                 "敵1～3体に特殊ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.C
@@ -26207,7 +26207,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA Ⅳ",
                 "敵1体に通常特大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -26231,7 +26231,7 @@ public record Memoria(
             new Skill(
                 "ヒールスマッシュA Ⅲ",
                 "敵1体に特殊大ダメージを与える。さらに自身のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.A
@@ -26255,7 +26255,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26279,7 +26279,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーブレイクA Ⅲ+",
                 "敵1体に通常大ダメージを与え、敵のSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -26303,7 +26303,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26327,7 +26327,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワーヒールB Ⅲ",
                 "味方1～2体のHPを大回復する。さらに味方のSp.ATKを小アップする。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Small)],
                 Level.Three,
                 Range.B
@@ -26351,7 +26351,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードストライクA Ⅲ",
                 "敵1体に通常大ダメージを与え、自身のSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -26375,7 +26375,7 @@ public record Memoria(
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26399,7 +26399,7 @@ public record Memoria(
             new Skill(
                 "ストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.B
@@ -26423,7 +26423,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26447,7 +26447,7 @@ public record Memoria(
             new Skill(
                 "ガードフォールC Ⅳ",
                 "敵1～3体のDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -26471,7 +26471,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクA Ⅳ",
                 "敵1体に通常特大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -26495,7 +26495,7 @@ public record Memoria(
             new Skill(
                 "スマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.B
@@ -26519,7 +26519,7 @@ public record Memoria(
             new Skill(
                 "パワーブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のATKをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26543,7 +26543,7 @@ public record Memoria(
             new Skill(
                 "ガードアシストC Ⅳ",
                 "味方1～3体のDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Def(), Amount.Medium)],
                 Level.Four,
                 Range.C
@@ -26567,7 +26567,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストA Ⅳ",
                 "敵1体に特殊特大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Four,
                 Range.A
@@ -26591,7 +26591,7 @@ public record Memoria(
             new Skill(
                 "ストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.B
@@ -26615,7 +26615,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26639,7 +26639,7 @@ public record Memoria(
             new Skill(
                 "パワーフォールB Ⅲ",
                 "敵1～2体のATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26663,7 +26663,7 @@ public record Memoria(
             new Skill(
                 "マイトアシストA Ⅲ",
                 "味方1体のATKとDEFを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -26687,7 +26687,7 @@ public record Memoria(
             new Skill(
                 "ヒールストライクA Ⅲ",
                 "敵1体に通常大ダメージを与える。さらに自身のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.A
@@ -26711,7 +26711,7 @@ public record Memoria(
             new Skill(
                 "ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26735,7 +26735,7 @@ public record Memoria(
             new Skill(
                 "スマッシュA Ⅲ",
                 "敵1体に特殊特大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.A
@@ -26759,7 +26759,7 @@ public record Memoria(
             new Skill(
                 "パワーストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26783,7 +26783,7 @@ public record Memoria(
             new Skill(
                 "パワーアシストB Ⅲ",
                 "味方1～2体のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26807,7 +26807,7 @@ public record Memoria(
             new Skill(
                 "ヒールC Ⅲ",
                 "味方1～3体のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.C
@@ -26831,7 +26831,7 @@ public record Memoria(
             new Skill(
                 "WパワーフォールA Ⅲ",
                 "敵1体のATKとSp.ATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -26855,7 +26855,7 @@ public record Memoria(
             new Skill(
                 "ストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.B
@@ -26879,7 +26879,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードスマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与え、自身のSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -26903,7 +26903,7 @@ public record Memoria(
             new Skill(
                 "ストライクA Ⅲ",
                 "敵1体に通常特大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.A
@@ -26927,7 +26927,7 @@ public record Memoria(
             new Skill(
                 "スマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.B
@@ -26951,7 +26951,7 @@ public record Memoria(
             new Skill(
                 "ヒールスマッシュA Ⅲ",
                 "敵1体に特殊大ダメージを与える。さらに自身のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.A
@@ -26975,7 +26975,7 @@ public record Memoria(
             new Skill(
                 "ヒールD Ⅲ",
                 "味方2体のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.D
@@ -26999,7 +26999,7 @@ public record Memoria(
             new Skill(
                 "ガードフォールB Ⅲ",
                 "敵1～2体のDEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -27023,7 +27023,7 @@ public record Memoria(
             new Skill(
                 "パワーアシストB Ⅲ",
                 "味方1～2体のATKを大アップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -27047,7 +27047,7 @@ public record Memoria(
             new Skill(
                 "スマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.B
@@ -27071,7 +27071,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードストライクA Ⅲ",
                 "敵1体に通常大ダメージを与え、自身のSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -27095,7 +27095,7 @@ public record Memoria(
             new Skill(
                 "パワーフォールB Ⅲ",
                 "敵1～2体のATKを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -27119,7 +27119,7 @@ public record Memoria(
             new Skill(
                 "スマッシュA Ⅲ",
                 "敵1体に特殊特大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.A
@@ -27143,7 +27143,7 @@ public record Memoria(
             new Skill(
                 "ヒールA Ⅲ",
                 "味方1体のHPを特大回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.A
@@ -27167,7 +27167,7 @@ public record Memoria(
             new Skill(
                 "スマッシュB Ⅲ",
                 "敵1～2体に特殊大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.B
@@ -27191,7 +27191,7 @@ public record Memoria(
             new Skill(
                 "ヒールC Ⅲ",
                 "味方1～3体のHPを回復する。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.C
@@ -27215,7 +27215,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードフォールB Ⅲ",
                 "敵1～2体のSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -27239,7 +27239,7 @@ public record Memoria(
             new Skill(
                 "ストライクB Ⅲ",
                 "敵1～2体に通常大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.B
@@ -27263,7 +27263,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードフォールB Ⅲ",
                 "敵1～2体のSp.DEFを大ダウンさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
@@ -27287,7 +27287,7 @@ public record Memoria(
             new Skill(
                 "Sp.ガードスマッシュA Ⅲ",
                 "敵1体に特殊大ダメージを与え、自身のSp.DEFをアップさせる。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.A
@@ -27311,7 +27311,7 @@ public record Memoria(
             new Skill(
                 "ストライクA Ⅲ",
                 "敵1体に通常特大ダメージを与える。",
-                Array.Empty<SkillEffect>(),
+                [],
                 [],
                 Level.Three,
                 Range.A
