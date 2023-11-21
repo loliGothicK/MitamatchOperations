@@ -289,6 +289,7 @@ namespace mitama.Pages.DeckBuilder
 
                 if (toggleSwitch.IsOn)
                 {
+                    VoR.Label = "‘O‰q";
                     Pool = new(Memoria.List.Where(memoria => Costume.List[0].CanBeEquipped(memoria)));
                     MemoriaSources.ItemsSource = Pool;
                     TreeNodes[0].Children = [
@@ -310,6 +311,7 @@ namespace mitama.Pages.DeckBuilder
                 }
                 else
                 {
+                    VoR.Label = "Œã‰q";
                     Pool = new(Memoria.List.Where(memoria => Costume.List[1].CanBeEquipped(memoria)));
                     TreeNodes[0].Children = [
                         new() { Text = "Žx‰‡" },

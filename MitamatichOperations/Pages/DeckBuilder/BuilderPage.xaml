@@ -246,11 +246,11 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <CommandBar x:Name="SourceCommandBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                        <AppBarButton Icon="Switch" Label="Switch">
+                        <AppBarButton x:Name="VoR" Icon="Switch" Label="後衛">
                             <AppBarButton.Flyout>
                                 <Flyout>
                                     <ToggleSwitch x:Name="Switch"
-                                                  Header="VanguradOrReagurad"
+                                                  Header="前衛 &lt;=&gt; 後衛"
                                                   OffContent="後衛" OnContent="前衛" 
                                                   Toggled="ToggleSwitch_Toggled"/>
                                 </Flyout>
