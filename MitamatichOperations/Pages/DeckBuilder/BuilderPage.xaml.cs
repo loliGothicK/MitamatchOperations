@@ -51,6 +51,8 @@ namespace mitama.Pages.DeckBuilder
         private void InitSearchOptions()
         {
             string[] searchOptions = [
+                "???",
+                "レジェンダリー",
                 "ATKアップ",
                 "ATKダウン",
                 "Sp.ATKアップ",
@@ -304,7 +306,7 @@ namespace mitama.Pages.DeckBuilder
                         FilterType.SpecialSingle,
                         FilterType.SpecialRange,
                     ];
-                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsEffectFilter(f)))
+                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSearchOption(f)))
                     {
                         _currentFilters.Add(type);
                     }
@@ -323,7 +325,7 @@ namespace mitama.Pages.DeckBuilder
                         FilterType.Interference,
                         FilterType.Recovery
                     ];
-                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsEffectFilter(f)))
+                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSearchOption(f)))
                     {
                         _currentFilters.Add(type);
                     }
@@ -745,6 +747,7 @@ namespace mitama.Pages.DeckBuilder
             {
                 Pool.Remove(memoria);
             }
+            Sort(SortOption.SelectedIndex);
         }
 
         private void InitFilterOptions()
@@ -810,7 +813,7 @@ namespace mitama.Pages.DeckBuilder
                 FilterType.Interference,
                 FilterType.Recovery
             ];
-            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsEffectFilter(f)))
+            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSearchOption(f)))
             {
                 _currentFilters.Add(type);
             }
@@ -822,6 +825,11 @@ namespace mitama.Pages.DeckBuilder
             var prevCoount = _currentFilters.Count;
             switch (box.Content)
             {
+                case "レジェンダリー":
+                    {
+                        _currentFilters.Add(FilterType.Legendary);
+                        break;
+                    }
                 case "ATKアップ":
                     {
                         _currentFilters.Add(FilterType.Au);
@@ -1085,6 +1093,11 @@ namespace mitama.Pages.DeckBuilder
 
             switch (box.Content)
             {
+                case "レジェンダリー":
+                    {
+                        _currentFilters.Remove(FilterType.Legendary);
+                        break;
+                    }
                 case "ATKアップ":
                     {
                         _currentFilters.Remove(FilterType.Au);
@@ -1329,17 +1342,16 @@ namespace mitama.Pages.DeckBuilder
             foreach (var memoria in Memoria
                     .List
                     .Where(memoria => !Pool.Contains(memoria))
+                    .Where(memoria => !Deck.Concat(LegendaryDeck).Contains(memoria))
                     .Where(ApplyFilter))
             {
                 Pool.Add(memoria);
             }
-            foreach (var memoria in Pool.ToList().Where(memoria => !ApplyFilter(memoria)))
-            {
-                Pool.Remove(memoria);
-            }
+            Sort(SortOption.SelectedIndex);
         }
         private void InitFilters()
         {
+            Filters.Add(FilterType.Legendary, memoria => memoria.IsLegendary);
             Filters.Add(FilterType.NormalSingle, memoria => memoria.Kind is Vanguard(VanguardKind.NormalSingle));
             Filters.Add(FilterType.NormalRange, memoria => memoria.Kind is Vanguard(VanguardKind.NormalRange));
             Filters.Add(FilterType.SpecialSingle, memoria => memoria.Kind is Vanguard(VanguardKind.SpecialSingle));
@@ -1725,7 +1737,7 @@ namespace mitama.Pages.DeckBuilder
             Filters.Add(FilterType.Counter, memoria => memoria.Skill.Effects.Any(eff => eff is Counter));
 
             // push all FilterTypes to _currentFilters
-            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsEffectFilter(f)))
+            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsSearchOption(f)))
             {
                 _currentFilters.Add(type);
             }
@@ -1737,7 +1749,7 @@ namespace mitama.Pages.DeckBuilder
             var p1 = _currentFilters.Where(IsElementFilter).Any(key => Filters[key](memoria));
             var p2 = _currentFilters.Where(IsRangeFilter).Any(key => Filters[key](memoria));
             var p3 = _currentFilters.Where(IsLevelFilter).Any(key => Filters[key](memoria));
-            var p4 = _currentFilters.Where(IsEffectFilter).All(key => Filters[key](memoria));
+            var p4 = _currentFilters.Where(IsSearchOption).All(key => Filters[key](memoria));
             return p0 && p1 && p2 && p3 && p4;
         }
 
@@ -1796,9 +1808,10 @@ namespace mitama.Pages.DeckBuilder
 
             return LevelFilters.Contains(filter);
         }
-        bool IsEffectFilter(FilterType filter)
+        bool IsSearchOption(FilterType filter)
         {
             FilterType[] effectFilters = [
+                FilterType.Legendary,
                 FilterType.Au,
                 FilterType.Ad,
                 FilterType.SAu,
@@ -1934,6 +1947,7 @@ namespace mitama.Pages.DeckBuilder
     public enum FilterType
     {
         // Kinds
+        Legendary,
         NormalSingle,
         NormalRange,
         SpecialSingle,
