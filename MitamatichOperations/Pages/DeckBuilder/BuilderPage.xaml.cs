@@ -15,10 +15,6 @@ using Windows.ApplicationModel.DataTransfer;
 using WinRT;
 using ColorCode.Common;
 using SimdLinq;
-using Microsoft.EntityFrameworkCore;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace mitama.Pages.DeckBuilder
 {
