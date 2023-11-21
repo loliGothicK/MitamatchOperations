@@ -259,18 +259,7 @@
                         <AppBarButton Icon="Filter" Label="Filter">
                             <AppBarButton.Flyout>
                                 <Flyout>
-                                    <StackPanel Name="FilterContent">
-                                        <CheckBox x:Name="Buff" Content="支援" IsChecked="True" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" />
-                                        <CheckBox x:Name="Debuff" Content="妨害" IsChecked="True" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" />
-                                        <CheckBox x:Name="Heal" Content="回復" IsChecked="True" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" />
-                                    </StackPanel>
-                                </Flyout>
-                            </AppBarButton.Flyout>
-                        </AppBarButton>
-                        <AppBarButton Icon="Zoom" Label="Search">
-                            <AppBarButton.Flyout>
-                                <Flyout>
-                                    <TreeView Name="AdvancedOptions">
+                                    <TreeView Name="FilterOptions">
                                         <TreeView.ItemTemplate>
                                             <DataTemplate x:DataType="local:MyTreeNode">
                                                 <TreeViewItem ItemsSource="{x:Bind Children}">
@@ -278,13 +267,20 @@
                                                         <!-- Checkbox -->
                                                         <CheckBox Content="{x:Bind Text}"
                                                                   IsChecked="{x:Bind IsChecked, Mode=TwoWay}"
-                                                                  Checked="AdvancedOption_Checked"
-                                                                  Unchecked="AdvancedOption_Unchecked"/>
+                                                                  Checked="FilterOption_Checked"
+                                                                  Unchecked="FilterOption_Unchecked"/>
                                                     </StackPanel>
                                                 </TreeViewItem>
                                             </DataTemplate>
                                         </TreeView.ItemTemplate>
                                     </TreeView>
+                                </Flyout>
+                            </AppBarButton.Flyout>
+                        </AppBarButton>
+                        <AppBarButton Icon="Zoom" Label="Search">
+                            <AppBarButton.Flyout>
+                                <Flyout>
+                                    <StackPanel x:Name="SearchOptions" />
                                 </Flyout>
                             </AppBarButton.Flyout>
                         </AppBarButton>
