@@ -249,6 +249,10 @@ namespace mitama.Pages.DeckBuilder
                         FilterType.SpecialSingle,
                         FilterType.SpecialRange,
                     ];
+                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsEffectFilter(f)))
+                    {
+                        _currentFilters.Add(type);
+                    }
                 }
                 else
                 {
@@ -274,6 +278,10 @@ namespace mitama.Pages.DeckBuilder
                         FilterType.Interference,
                         FilterType.Recovery
                     ];
+                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsEffectFilter(f)))
+                    {
+                        _currentFilters.Add(type);
+                    }
                     MemoriaSources.ItemsSource = Pool;
                 }
             }
@@ -327,12 +335,19 @@ namespace mitama.Pages.DeckBuilder
             }
             foreach (var memoria in Memoria
                 .List
-                .Where(memoria => _currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria)))
                 .Where(memoria => !Pool.Contains(memoria))
                 .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Name).Contains(memoria.Name))
                 .Where(ApplyFilter))
             {
                 Pool.Add(memoria);
+            }
+            if (SortOption == null)
+            {
+                Sort(0);
+            }
+            else
+            {
+                Sort(SortOption.SelectedIndex);
             }
         }
 
@@ -382,7 +397,7 @@ namespace mitama.Pages.DeckBuilder
                         throw new UnreachableException("Unreachable");
                     }
             }
-            foreach (var memoria in Pool.ToList().Where(memoria => !_currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria))))
+            foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
             {
                 Pool.Remove(memoria);
             }
@@ -674,6 +689,10 @@ namespace mitama.Pages.DeckBuilder
                 FilterType.Interference,
                 FilterType.Recovery
             ];
+            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsEffectFilter(f)))
+            {
+                _currentFilters.Add(type);
+            }
         }
 
         private void AdvancedOption_Checked(object sender, RoutedEventArgs e)
@@ -1216,12 +1235,16 @@ namespace mitama.Pages.DeckBuilder
             if (prevCoount == _currentFilters.Count) return;
             foreach (var memoria in Memoria
                     .List
-                    .Where(memoria => _currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria)))
                     .Where(memoria => !Pool.Contains(memoria))
                     .Where(ApplyFilter))
             {
                 Pool.Add(memoria);
             }
+            foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
+            {
+                Pool.Remove(memoria);
+            }
+
             Sort(SortOption.SelectedIndex);
         }
 
@@ -1727,6 +1750,13 @@ namespace mitama.Pages.DeckBuilder
                     }
             }
             if (prevCoount == _currentFilters.Count) return;
+            foreach (var memoria in Memoria
+                    .List
+                    .Where(memoria => !Pool.Contains(memoria))
+                    .Where(ApplyFilter))
+            {
+                Pool.Add(memoria);
+            }
             foreach (var memoria in Pool.ToList().Where(memoria => !ApplyFilter(memoria)))
             {
                 Pool.Remove(memoria);
@@ -2119,7 +2149,7 @@ namespace mitama.Pages.DeckBuilder
             Filters.Add(FilterType.Counter, memoria => memoria.Skill.Effects.Any(eff => eff is Counter));
 
             // push all FilterTypes to _currentFilters
-            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsElementFilter(f)))
+            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsEffectFilter(f)))
             {
                 _currentFilters.Add(type);
             }
@@ -2127,11 +2157,12 @@ namespace mitama.Pages.DeckBuilder
 
         bool ApplyFilter(Memoria memoria)
         {
+            var p0 = _currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria));
             var p1 = _currentFilters.Where(IsElementFilter).Any(key => Filters[key](memoria));
             var p2 = _currentFilters.Where(IsRangeFilter).Any(key => Filters[key](memoria));
             var p3 = _currentFilters.Where(IsLevelFilter).Any(key => Filters[key](memoria));
             var p4 = _currentFilters.Where(IsEffectFilter).All(key => Filters[key](memoria));
-            return p1 && p2 && p3 && p4;
+            return p0 && p1 && p2 && p3 && p4;
         }
 
         bool IsKindFilter(FilterType filter)
