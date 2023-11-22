@@ -260,8 +260,8 @@ public sealed partial class DeckEditorPage
                     foreach (var item in _selectedOrder.Reverse())
                     {
                         Sources.Remove(item);
-
-                        _deck.Insert(index, (TimeTableItem)item with { Delay = Margin });
+                        var margin = _deck.Count == 0 ? 0 : Margin;
+                        _deck.Insert(index, (TimeTableItem)item with { Delay = margin });
                     }
 
                     break;
