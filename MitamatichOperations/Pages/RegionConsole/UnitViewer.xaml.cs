@@ -28,6 +28,10 @@ public sealed partial class UnitViewer
 
     private void UnitTreeView_OnItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
     {
+        if (Util.LoadMemberNames(_regionName).Contains(args.InvokedItem.As<ExplorerItem>().Name!))
+        {
+            return;
+        }
         using var sr =
             new StreamReader(@$"{Director.UnitDir(_regionName, args.InvokedItem.As<ExplorerItem>().Parent!)}\{args.InvokedItem.As<ExplorerItem>().Name!}.json");
         var json = sr.ReadToEnd();
@@ -79,9 +83,9 @@ public class ExplorerItem : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
     public enum ExplorerItemType { Folder, File };
-    public string? Parent { get; set; }
-    public string? Name { get; set; }
-    public string? Path { get; set; }
+    public string Parent { get; set; }
+    public string Name { get; set; }
+    public string Path { get; set; }
 
     public ExplorerItemType Type { get; set; }
     private ObservableCollection<ExplorerItem>? _children;
@@ -111,10 +115,10 @@ public class ExplorerItem : INotifyPropertyChanged
 
 internal class ExplorerItemTemplateSelector : DataTemplateSelector
 {
-    public DataTemplate? FolderTemplate { get; set; }
-    public DataTemplate? FileTemplate { get; set; }
+    public DataTemplate FolderTemplate { get; set; }
+    public DataTemplate FileTemplate { get; set; }
 
-    protected override DataTemplate? SelectTemplateCore(object item)
+    protected override DataTemplate SelectTemplateCore(object item)
     {
         var explorerItem = (ExplorerItem)item;
         return explorerItem.Type == ExplorerItem.ExplorerItemType.Folder ? FolderTemplate : FileTemplate;
