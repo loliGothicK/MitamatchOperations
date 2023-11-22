@@ -2260,7 +2260,8 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1042,

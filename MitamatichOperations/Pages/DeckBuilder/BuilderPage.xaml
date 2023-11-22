@@ -290,8 +290,8 @@
                                     <RadioButtons x:Name="SortOption" Header="Sort by" SelectedIndex="0" SelectionChanged="Sort_SelectionChanged">
                                         <x:String>Id</x:String>
                                         <x:String>Atk</x:String>
-                                        <x:String>Def</x:String>
                                         <x:String>Sp.Atk</x:String>
+                                        <x:String>Def</x:String>
                                         <x:String>Sp.Def</x:String>
                                         <x:String>Atk+Sp.Atk</x:String>
                                         <x:String>Def+Sp.Def</x:String>

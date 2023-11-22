@@ -1071,18 +1071,10 @@ namespace mitama.Pages.DeckBuilder
                     }
             }
             if (prevCoount == _currentFilters.Count) return;
-            foreach (var memoria in Memoria
-                    .List
-                    .Where(memoria => !Pool.Contains(memoria))
-                    .Where(ApplyFilter))
-            {
-                Pool.Add(memoria);
-            }
             foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
             {
                 Pool.Remove(memoria);
             }
-
             Sort(SortOption.SelectedIndex);
         }
 
@@ -1342,7 +1334,7 @@ namespace mitama.Pages.DeckBuilder
             foreach (var memoria in Memoria
                     .List
                     .Where(memoria => !Pool.Contains(memoria))
-                    .Where(memoria => !Deck.Concat(LegendaryDeck).Contains(memoria))
+                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Name).Contains(memoria.Name))
                     .Where(ApplyFilter))
             {
                 Pool.Add(memoria);
