@@ -636,6 +636,11 @@ public sealed partial class DeckEditorPage
         internal abstract (bool, string) IntoTuple();
     }
 
+    private void ResetButton_Click(object sender, RoutedEventArgs e)
+    {
+        _deck.Clear();
+    }
+
     private record Enable(string Msg) : Validated
     {
         internal override (bool, string) IntoTuple() => (true, Msg);
