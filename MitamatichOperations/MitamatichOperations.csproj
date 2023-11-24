@@ -13,7 +13,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>FDA82BB71B7ACDE3BC30923488A1978A7D9FD41B</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>37CDF010F4B4878EEE88EB7402C90A9D63B507A0</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA512</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
