@@ -178,6 +178,31 @@
                                 </Flyout>
                             </AppBarButton.Flyout>
                         </AppBarButton>
+                        <AppBarButton Icon="Import" Label="Load" AllowFocusOnInteraction="True">
+                            <AppBarButton.Flyout>
+                                <Flyout>
+                                    <StackPanel MinWidth="400" Orientation="Vertical">
+                                        <ComboBox x:Name="LoadMemberSelect" 
+                                                  Header="メンバー"
+                                                  PlaceholderText="メンバーを選択してくだい"
+                                                  ItemsSource="{x:Bind members}"
+                                                  ItemTemplate="{StaticResource MemberTemplate}"
+                                                  SelectionChanged="LoadMemberSelect_SelectionChanged"
+                                                  Width="200">
+                                        </ComboBox>
+                                        <ComboBox x:Name="DeckSelect" 
+                                                  Header="デッキ"
+                                                  PlaceholderText="デッキを選択してくだい"
+                                                  Width="200" />
+                                        <!-- Confirm Button -->
+                                        <Button Content="Load"
+                                                Style="{StaticResource AccentButtonStyle}"
+                                                Click="LoadButton_Click"
+                                                Margin="10"/>
+                                    </StackPanel>
+                                </Flyout>
+                            </AppBarButton.Flyout>
+                        </AppBarButton>
                         <AppBarButton Icon="Save" Label="Save" AllowFocusOnInteraction="True">
                             <AppBarButton.Flyout>
                                 <Flyout>

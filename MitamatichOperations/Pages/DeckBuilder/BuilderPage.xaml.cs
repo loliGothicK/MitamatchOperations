@@ -15,6 +15,8 @@ using Windows.ApplicationModel.DataTransfer;
 using WinRT;
 using ColorCode.Common;
 using SimdLinq;
+using mitama.Pages.RegionConsole;
+using static Tensorflow.ApiDef.Types;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -38,6 +40,7 @@ namespace mitama.Pages.DeckBuilder
         readonly Dictionary<SkillType, int> skillPairs = [];
         readonly Dictionary<SupportType, int> supportPairs = [];
         private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = [];
+        private readonly string _regionName;
 
         public BuilderPage()
         {
@@ -46,6 +49,7 @@ namespace mitama.Pages.DeckBuilder
             InitializeComponent();
             InitFilterOptions();
             InitSearchOptions();
+            _regionName = Director.ReadCache().Region;
         }
 
         private void InitSearchOptions()
@@ -1933,6 +1937,32 @@ namespace mitama.Pages.DeckBuilder
             GeneralInfoBar.IsOpen = true;
             await Task.Delay(3000);
             GeneralInfoBar.IsOpen = false;
+        }
+
+        private void LoadMemberSelect_SelectionChanged(object sender, SelectionChangedEventArgs _)
+        {
+            var units = Util.LoadUnitNames(_regionName, sender.As<ComboBox>().SelectedItem.As<MemberInfo>().Name);
+            DeckSelect.ItemsSource = units;
+        }
+
+        private void LoadButton_Click(object _, RoutedEventArgs _e)
+        {
+            var name = LoadMemberSelect.SelectedItem.As<MemberInfo>().Name;
+            var deck = DeckSelect.SelectedItem.As<string>();
+            var path = $@"{Director.ProjectDir()}\{region}\Members\{name}\Units\{deck}.json"; using var sr =
+            new StreamReader(path);
+            var json = sr.ReadToEnd();
+            var unit = Unit.FromJson(json);
+            LegendaryDeck.Clear();
+            Deck.Clear();
+            foreach (var memoria in unit.Memorias.Where(m => m.IsLegendary))
+            {
+                LegendaryDeck.Add(memoria);
+            }
+            foreach (var memoria in unit.Memorias.Where(m => !m.IsLegendary))
+            {
+                Deck.Add(memoria);
+            }
         }
     }
 

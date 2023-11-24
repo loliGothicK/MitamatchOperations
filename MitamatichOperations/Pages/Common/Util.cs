@@ -35,6 +35,21 @@ internal class Util {
         Director.CreateDirectory(membersDir);
         return [];
     }
+
+    internal static string[] LoadUnitNames(string project, string name)
+    {
+        var unitDir = @$"{Director.ProjectDir()}\{project}\Members\{name}\Units";
+        if (Exists(unitDir))
+        {
+            return GetFiles(unitDir)
+                .Select(path => path.Split('\\').Last().Replace(".json", string.Empty))
+                .ToArray();
+        }
+
+        Director.CreateDirectory(unitDir);
+        return [];
+    }
+
     internal static MemberInfo[] LoadMembersInfo(string project) {
         var membersDir = @$"{Director.ProjectDir()}\{project}\Members";
 
