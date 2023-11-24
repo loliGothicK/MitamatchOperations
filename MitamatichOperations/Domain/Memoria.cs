@@ -9,18 +9,18 @@ namespace mitama.Domain;
 public record struct Unit(string UnitName, bool IsFront, List<Memoria> Memorias)
 {
     public string ToJson() =>
-        JsonSerializer.Serialize(new UnitDto(UnitName, IsFront, Memorias.Select(m => m.Name).ToArray()));
+        JsonSerializer.Serialize(new UnitDto(UnitName, IsFront, Memorias.Select(m => m.Id).ToArray()));
 
     public static Unit FromJson(string json)
     {
         var dto = JsonSerializer.Deserialize<UnitDto>(json);
         var dummyCostume = dto.IsFront ? Costume.List[0] : Costume.List[1];
-        var selector = Memoria.List.Where(dummyCostume.CanBeEquipped).DistinctBy(m => m.Name).ToDictionary(m => m.Name);
-        return new Unit(dto.UnitName, dto.IsFront, dto.Names.Select(name => selector[name]).ToList());
+        var selector = Memoria.List.Where(dummyCostume.CanBeEquipped).ToDictionary(m => m.Id);
+        return new Unit(dto.UnitName, dto.IsFront, dto.Ids.Select(id => selector[id]).ToList());
     }
 }
 
-public record struct UnitDto(string UnitName, bool IsFront, string[] Names);
+public record struct UnitDto(string UnitName, bool IsFront, int[] Ids);
 
 public enum Type
 {
