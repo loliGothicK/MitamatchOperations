@@ -3935,8 +3935,7 @@ public record Memoria(
                 "火：ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Def(), Amount.Medium)],
-                Level.Three,
+                [new StatusDown(new Def(), Amount.Medium)],                Level.Three,
                 Range.B
             ),
             new SupportSkill(
@@ -4994,8 +4993,7 @@ public record Memoria(
                 "水：ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Def(), Amount.Medium)],
-                Level.Three,
+                [new StatusDown(new Def(), Amount.Medium)],                Level.Three,
                 Range.B
             ),
             new SupportSkill(
@@ -6893,8 +6891,7 @@ public record Memoria(
                 "火：ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Def(), Amount.Medium)],
-                Level.Three,
+                [new StatusDown(new Def(), Amount.Medium)],                Level.Three,
                 Range.B
             ),
             new SupportSkill(
@@ -10547,8 +10544,7 @@ public record Memoria(
                 "風：ガードブレイクB Ⅲ",
                 "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Def(), Amount.Medium)],
-                Level.Three,
+                [new StatusDown(new Def(), Amount.Medium)],                Level.Three,
                 Range.B
             ),
             new SupportSkill(
