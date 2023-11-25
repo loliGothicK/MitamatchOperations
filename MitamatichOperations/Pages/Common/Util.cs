@@ -94,6 +94,22 @@ internal class Util {
 }
 
 internal class Director {
+    public static bool IsFileInUse(string filePath)
+    {
+        try
+        {
+            using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+            {
+                // ファイルを開けた場合は使用中ではない
+                return false;
+            }
+        }
+        catch (IOException)
+        {
+            // IOExceptionが発生した場合はファイルが使用中
+            return true;
+        }
+    }
     public static void CreateDirectory(string path) {
         using var isoStore = IsolatedStorageFile.GetStore(
             IsolatedStorageScope.User | IsolatedStorageScope.Domain | IsolatedStorageScope.Assembly, null, null);

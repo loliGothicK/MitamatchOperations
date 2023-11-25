@@ -17,6 +17,7 @@ using ColorCode.Common;
 using SimdLinq;
 using mitama.Pages.RegionConsole;
 using static Tensorflow.ApiDef.Types;
+using System.Threading;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -341,7 +342,7 @@ namespace mitama.Pages.DeckBuilder
         private void FilterOption_Checked(object sender, RoutedEventArgs e)
         {
             if (sender is not CheckBox box) return;
-            var prevCoount = _currentFilters.Count;
+            var prevCount = _currentFilters.Count;
 
             switch (box.Content)
             {
@@ -542,7 +543,7 @@ namespace mitama.Pages.DeckBuilder
                         throw new UnreachableException("Unreachable");
                     }
             }
-            if (prevCoount == _currentFilters.Count) return;
+            if (prevCount == _currentFilters.Count) return;
             foreach (var memoria in Memoria
                 .List
                 .Where(memoria => !Pool.Contains(memoria))
@@ -564,7 +565,7 @@ namespace mitama.Pages.DeckBuilder
         private void FilterOption_Unchecked(object sender, RoutedEventArgs e)
         {
             if (sender is not CheckBox box) return;
-            var prevCoount = _currentFilters.Count;
+            var prevCount = _currentFilters.Count;
 
             switch (box.Content)
             {
@@ -746,7 +747,7 @@ namespace mitama.Pages.DeckBuilder
                         throw new UnreachableException("Unreachable");
                     }
             }
-            if (prevCoount == _currentFilters.Count) return;
+            if (prevCount == _currentFilters.Count) return;
             foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
             {
                 Pool.Remove(memoria);
@@ -826,7 +827,7 @@ namespace mitama.Pages.DeckBuilder
         private void SearchOption_Checked(object sender, RoutedEventArgs e)
         {
             if (sender is not CheckBox box) return;
-            var prevCoount = _currentFilters.Count;
+            var prevCount = _currentFilters.Count;
             switch (box.Content)
             {
                 case "レジェンダリー":
@@ -1074,7 +1075,7 @@ namespace mitama.Pages.DeckBuilder
                         throw new UnreachableException("Unreachable");
                     }
             }
-            if (prevCoount == _currentFilters.Count) return;
+            if (prevCount == _currentFilters.Count) return;
             foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
             {
                 Pool.Remove(memoria);
@@ -1085,7 +1086,7 @@ namespace mitama.Pages.DeckBuilder
         private void SearchOption_Unchecked(object sender, RoutedEventArgs e)
         {
             if (sender is not CheckBox box) return;
-            var prevCoount = _currentFilters.Count;
+            var prevCount = _currentFilters.Count;
 
             switch (box.Content)
             {
@@ -1334,7 +1335,7 @@ namespace mitama.Pages.DeckBuilder
                         throw new UnreachableException("Unreachable");
                     }
             }
-            if (prevCoount == _currentFilters.Count) return;
+            if (prevCount == _currentFilters.Count) return;
             foreach (var memoria in Memoria
                     .List
                     .Where(memoria => !Pool.Contains(memoria))
@@ -1899,6 +1900,15 @@ namespace mitama.Pages.DeckBuilder
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             var member = MemberSelect.SelectedItem.As<MemberInfo>();
+            if (Deck.Count == 0)
+            {
+                GeneralInfoBar.Title = "必須枠がありません。最低1枚のメモリアを編成してください。";
+                GeneralInfoBar.IsOpen = true;
+                GeneralInfoBar.Severity = InfoBarSeverity.Error;
+                await Task.Delay(3000);
+                GeneralInfoBar.IsOpen = false;
+                return;
+            }
             if (LegendaryDeck.Count > 4 || Deck.Count > 20)
             {
                 GeneralInfoBar.Title = "デッキは20枚までです（レジェンダリーは4枚までです）。";
