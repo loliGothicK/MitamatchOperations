@@ -14,8 +14,7 @@ public record struct Unit(string UnitName, bool IsFront, List<Memoria> Memorias)
     public static Unit FromJson(string json)
     {
         var dto = JsonSerializer.Deserialize<UnitDto>(json);
-        var dummyCostume = dto.IsFront ? Costume.List[0] : Costume.List[1];
-        var selector = Memoria.List.Where(dummyCostume.CanBeEquipped).ToDictionary(m => m.Id);
+        var selector = Memoria.List.ToDictionary(m => m.Id);
         return new Unit(dto.UnitName, dto.IsFront, dto.Ids.Select(id => selector[id]).ToList());
     }
 }
