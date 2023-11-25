@@ -1917,6 +1917,15 @@ namespace mitama.Pages.DeckBuilder
                 GeneralInfoBar.IsOpen = false;
                 return;
             }
+            if (Deck.Count == 0)
+            {
+                GeneralInfoBar.Title = "必須装備枠がありません。最低1枚は編成してください。";
+                GeneralInfoBar.IsOpen = true;
+                GeneralInfoBar.Severity = InfoBarSeverity.Error;
+                await Task.Delay(3000);
+                GeneralInfoBar.IsOpen = false;
+                return;
+            }
             else
             {
                 var name = DeckName.Text;
@@ -1962,9 +1971,9 @@ namespace mitama.Pages.DeckBuilder
             using var sr = new StreamReader(path);
             var json = sr.ReadToEnd();
             var unit = Unit.FromJson(json);
-            if (Deck.Count == 0)
+            if (unit.IsFront != Switch.IsOn)
             {
-                GeneralInfoBar.Title = "必須装備枠がありません。最低1枚は編成してください。";
+                GeneralInfoBar.Title = "前衛モードで後衛編成をロードすること（またはその逆）はできません！";
                 GeneralInfoBar.IsOpen = true;
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
                 await Task.Delay(3000);
