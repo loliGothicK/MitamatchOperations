@@ -18,6 +18,7 @@ using SimdLinq;
 using mitama.Pages.RegionConsole;
 using static Tensorflow.ApiDef.Types;
 using System.Threading;
+using Google.Protobuf.Reflection;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -299,12 +300,11 @@ namespace mitama.Pages.DeckBuilder
                     VoR.Label = "‘O‰q";
                     Pool = new(Memoria.List.Where(memoria => Costume.List[0].CanBeEquipped(memoria)));
                     MemoriaSources.ItemsSource = Pool;
-                    TreeNodes[0].Children = [
-                        new() { Text = "’Êí’P‘Ì" },
-                        new() { Text = "’Êí”ÍˆÍ" },
-                        new() { Text = "“ÁŽê’P‘Ì" },
-                        new() { Text = "“ÁŽê”ÍˆÍ" },
-                    ];
+                    TreeNodes[0].Children.Clear();
+                    TreeNodes[0].Children.Add(new() { Text = "’Êí’P‘Ì" });
+                    TreeNodes[0].Children.Add(new() { Text = "’Êí”ÍˆÍ" });
+                    TreeNodes[0].Children.Add(new() { Text = "“ÁŽê’P‘Ì" });
+                    TreeNodes[0].Children.Add(new() { Text = "“ÁŽê”ÍˆÍ" });
                     _currentFilters = [
                         FilterType.NormalSingle,
                         FilterType.NormalRange,
@@ -320,11 +320,10 @@ namespace mitama.Pages.DeckBuilder
                 {
                     VoR.Label = "Œã‰q";
                     Pool = new(Memoria.List.Where(memoria => Costume.List[1].CanBeEquipped(memoria)));
-                    TreeNodes[0].Children = [
-                        new() { Text = "Žx‰‡" },
-                        new() { Text = "–WŠQ" },
-                        new() { Text = "‰ñ•œ" },
-                    ];
+                    TreeNodes[0].Children.Clear();
+                    TreeNodes[0].Children.Add(new() { Text = "Žx‰‡" });
+                    TreeNodes[0].Children.Add(new() { Text = "–WŠQ" });
+                    TreeNodes[0].Children.Add(new() { Text = "‰ñ•œ" });
                     _currentFilters = [
                         FilterType.Support,
                         FilterType.Interference,
