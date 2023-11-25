@@ -1923,7 +1923,7 @@ namespace mitama.Pages.DeckBuilder
                 var name = DeckName.Text;
                 new DirectoryInfo($@"{Director.ProjectDir()}\{region}\Members\{member.Name}\Units").Create();
                 var path = $@"{Director.ProjectDir()}\{region}\Members\{member.Name}\Units\{name}.json";
-                await using var unit = File.Create(path);
+                using var unit = File.Create(path);
                 await unit.WriteAsync(new UTF8Encoding(true).GetBytes(
                     new Unit(name, member.Position is Front, [.. Deck, .. LegendaryDeck]).ToJson()));
                 GeneralInfoBar.Title = "•Û‘¶‚µ‚Ü‚µ‚½";
@@ -1955,14 +1955,23 @@ namespace mitama.Pages.DeckBuilder
             DeckSelect.ItemsSource = units;
         }
 
-        private void LoadButton_Click(object _, RoutedEventArgs _e)
+        private async void LoadButton_Click(object _, RoutedEventArgs _e)
         {
             var name = LoadMemberSelect.SelectedItem.As<MemberInfo>().Name;
             var deck = DeckSelect.SelectedItem.As<string>();
-            var path = $@"{Director.ProjectDir()}\{region}\Members\{name}\Units\{deck}.json"; using var sr =
-            new StreamReader(path);
+            var path = $@"{Director.ProjectDir()}\{region}\Members\{name}\Units\{deck}.json";
+            using var sr = new StreamReader(path);
             var json = sr.ReadToEnd();
             var unit = Unit.FromJson(json);
+            if (Deck.Count == 0)
+            {
+                GeneralInfoBar.Title = "•K{‘•”õ˜g‚ª‚ ‚è‚Ü‚¹‚ñBÅ’á1–‡‚Í•Ò¬‚µ‚Ä‚­‚¾‚³‚¢B";
+                GeneralInfoBar.IsOpen = true;
+                GeneralInfoBar.Severity = InfoBarSeverity.Error;
+                await Task.Delay(3000);
+                GeneralInfoBar.IsOpen = false;
+                return;
+            }
             LegendaryDeck.Clear();
             Deck.Clear();
             foreach (var memoria in unit.Memorias.Where(m => m.IsLegendary))
