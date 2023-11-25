@@ -2250,7 +2250,7 @@ public record Memoria(
                 "火：WパワーフォールB Ⅲ",
                 "敵1～2体のATKとSp.ATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -5136,7 +5136,7 @@ public record Memoria(
                 "水：WパワーフォールB Ⅲ",
                 "敵1～2体のATKとSp.ATKを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -6001,7 +6001,7 @@ public record Memoria(
                 "水：Sp.ガードフォールB Ⅲ",
                 "敵1～2体のSp.DEFを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new SpDef(), Amount.Medium)],
+                [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -8190,7 +8190,7 @@ public record Memoria(
                 "火：Sp.ファイアパワーフォールC Ⅲ",
                 "敵1～3体のSp.ATKと火属性攻撃力をダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.C
             ),
@@ -8718,7 +8718,7 @@ public record Memoria(
                 "風：ウィンドパワーフォールC Ⅲ",
                 "敵1～3体のATKと風属性攻撃力をダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
                 Level.Three,
                 Range.C
             ),
@@ -9030,7 +9030,7 @@ public record Memoria(
                 "火：Sp.ファイアパワーフォールC Ⅲ",
                 "敵1～3体のSp.ATKと火属性攻撃力をダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
                 Level.Three,
                 Range.C
             ),
@@ -11626,7 +11626,7 @@ public record Memoria(
                 "水：パワーフォールB Ⅲ",
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Atk(), Amount.Medium)],
+                [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -13019,7 +13019,7 @@ public record Memoria(
                 "風：パワーフォールB Ⅲ",
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Atk(), Amount.Medium)],
+                [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -14580,7 +14580,7 @@ public record Memoria(
                 "風：WガードフォールB Ⅲ",
                 "敵1～2体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
+                [new StatusDown(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -18184,7 +18184,7 @@ public record Memoria(
                 "光：パワーフォールB Ⅲ",
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Atk(), Amount.Medium)],
+                [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -18785,7 +18785,7 @@ public record Memoria(
                 "闇：Sp.パワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new SpAtk(), Amount.Medium)],
+                [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -18857,7 +18857,7 @@ public record Memoria(
                 "光：Sp.パワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new SpAtk(), Amount.Medium)],
+                [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -19049,7 +19049,7 @@ public record Memoria(
                 "闇：ガードフォールB Ⅲ",
                 "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Def(), Amount.Medium)],
+                [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -19746,7 +19746,7 @@ public record Memoria(
                 "水：Sp.パワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new SpAtk(), Amount.Medium)],
+                [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -19794,7 +19794,7 @@ public record Memoria(
                 "闇：パワーフォールB Ⅲ",
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Atk(), Amount.Medium)],
+                [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -20082,7 +20082,7 @@ public record Memoria(
                 "光：WガードフォールA Ⅲ",
                 "敵1体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
+                [new StatusDown(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.A
             ),
@@ -20226,7 +20226,7 @@ public record Memoria(
                 "光：Sp.ガードフォールB Ⅲ",
                 "敵1～2体のSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new SpDef(), Amount.Medium)],
+                [new StatusDown(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -20370,7 +20370,7 @@ public record Memoria(
                 "火：Sp.パワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new SpAtk(), Amount.Medium)],
+                [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -20562,7 +20562,7 @@ public record Memoria(
                 "光：WガードフォールA Ⅲ",
                 "敵1体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
+                [new StatusDown(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.A
             ),
@@ -20706,7 +20706,7 @@ public record Memoria(
                 "光：WガードフォールB Ⅲ",
                 "敵1～2体のDEFとSp.DEFを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
+                [new StatusDown(new Def(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -20778,7 +20778,7 @@ public record Memoria(
                 "火：ガードフォールB Ⅲ",
                 "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Def(), Amount.Medium)],
+                [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -20970,7 +20970,7 @@ public record Memoria(
                 "光：パワーフォールB Ⅲ",
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「光属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Atk(), Amount.Medium)],
+                [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -21330,7 +21330,7 @@ public record Memoria(
                 "闇：ガードフォールB Ⅲ",
                 "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Def(), Amount.Medium)],
+                [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -21474,7 +21474,7 @@ public record Memoria(
                 "火：Sp.パワーフォールB Ⅲ",
                 "敵1～2体のSp.ATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new SpAtk(), Amount.Medium)],
+                [new StatusDown(new SpAtk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -21834,7 +21834,7 @@ public record Memoria(
                 "闇：パワーフォールB Ⅲ",
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「闇属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Atk(), Amount.Medium)],
+                [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -23443,7 +23443,7 @@ public record Memoria(
                 "風：ガードフォールB Ⅲ",
                 "敵1～2体のDEFを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Def(), Amount.Medium)],
+                [new StatusDown(new Def(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -23683,7 +23683,7 @@ public record Memoria(
                 "風：パワーフォールB Ⅲ",
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Atk(), Amount.Medium)],
+                [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
@@ -23827,7 +23827,7 @@ public record Memoria(
                 "火：パワーフォールB Ⅲ",
                 "敵1～2体のATKを大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
-                [new StatusUp(new Atk(), Amount.Medium)],
+                [new StatusDown(new Atk(), Amount.Medium)],
                 Level.Three,
                 Range.B
             ),
