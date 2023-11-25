@@ -4501,7 +4501,7 @@ public record Memoria(
         ),
         new Memoria(
             949,
-            "祝2.5周年リリサマ",
+            "祝25周年リリサマ",
             "祝2.5周年 リリサマ!!",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
@@ -4525,7 +4525,7 @@ public record Memoria(
         ),
         new Memoria(
             948,
-            "祝2.5周年リリサマ",
+            "祝25周年リリサマ",
             "祝2.5周年 リリサマ!!",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -9020,7 +9020,7 @@ public record Memoria(
         ),
         new Memoria(
             761,
-            "クリエイターズコラボgOgo新学期",
+            "クリエイターズコラボgogo新学期",
             "GOGO新学期！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
