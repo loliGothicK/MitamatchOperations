@@ -1,28 +1,33 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace mitama.Domain;
 
 public record struct Costume(string Lily = "", string Name = "", string Type = "") {
-    public Uri Uri => new($"ms-appx:///Assets/costume/{Lily}/{Name}.jpg");
+    public readonly Uri Uri => new($"ms-appx:///Assets/costume/{Lily}/{Name}.jpg");
     public string Path = $"/Assets/costume/{Lily}/{Name}.jpg";
 
-    public bool IsFront => Type switch {
+    public readonly bool IsFront => Type switch {
         "通常単体" or "通常範囲" or "特殊単体" or "特殊範囲" => true,
         _ => false,
     };
-    public bool IsBack => Type switch {
+    public readonly bool IsBack => Type switch {
         "支援" or "妨害" or "回復" => true,
         _ => false,
     };
 
-    public bool CanBeEquipped(Memoria memoria) => memoria.Kind switch {
-        Vanguard => IsFront,
-        Rearguard => IsBack,
-        _ => throw new ArgumentOutOfRangeException()
-    };
-
-    public static Costume[] List => new[]
+    public readonly bool CanBeEquipped(Memoria memoria)
     {
+        return memoria.Kind switch
+        {
+            Vanguard => IsFront,
+            Rearguard => IsBack,
+            _ => throw new UnreachableException("")
+        };
+    }
+
+    public static Costume[] List =>
+    [
         new Costume
         {
             Lily = "一柳梨璃",
@@ -1469,5 +1474,5 @@ public record struct Costume(string Lily = "", string Name = "", string Type = "
             Name = "私立ルドビコ女学院制服",
             Type = "特殊範囲"
         }
-    };
+    ];
 }
