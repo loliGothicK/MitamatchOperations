@@ -2,7 +2,9 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel;
+using Windows.System;
 
 namespace mitama.Pages;
 
@@ -43,7 +45,7 @@ public sealed partial class SettingsPage
                 if (version == $"v{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}")
                 {
                     InfoBar.Title = "このバージョンは最新です";
-                    InfoBar.Severity = Microsoft.UI.Xaml.Controls.InfoBarSeverity.Informational;
+                    InfoBar.Severity = InfoBarSeverity.Informational;
                     InfoBar.IsOpen = true;
                     await Task.Delay(3000);
                     InfoBar.IsOpen = false;
@@ -51,7 +53,12 @@ public sealed partial class SettingsPage
                 else
                 {
                     InfoBar.Title = $"{version}が利用可能です";
-                    InfoBar.Severity = Microsoft.UI.Xaml.Controls.InfoBarSeverity.Informational;
+                    InfoBar.Severity = InfoBarSeverity.Informational;
+                    var link = new Button
+                    {
+                        Content = $"https://github.com/LoliGothick/MitamatchOperations/releases/tag/{version}",
+                    };
+                    link.Click += (s, e) => { _ = Launcher.LaunchUriAsync(new Uri(link.Content.ToString())); };
                     InfoBar.IsOpen = true;
                 }
             }
