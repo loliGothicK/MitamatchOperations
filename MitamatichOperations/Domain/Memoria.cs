@@ -8,7 +8,7 @@ namespace mitama.Domain;
 
 public record struct Unit(string UnitName, bool IsFront, List<Memoria> Memorias)
 {
-    public string ToJson() =>
+    public readonly string ToJson() =>
         JsonSerializer.Serialize(new UnitDto(UnitName, IsFront, Memorias.Select(m => m.Id).ToArray()));
 
     public static Unit FromJson(string json)
