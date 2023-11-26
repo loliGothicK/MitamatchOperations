@@ -216,9 +216,9 @@ public record Memoria(
     public override int GetHashCode() => Name.GetHashCode();
 
     public static readonly Memoria[] List =
-    {
+    [
         new Memoria(
-            1140,
+            1141,
             "クリエイターズコラボ秋の日に描く面影",
             "秋の日に描く面影",
             new Vanguard(VanguardKind.NormalSingle),
@@ -242,7 +242,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1139,
+            1140,
             "クリエイターズコラボ秋の日に描く面影",
             "秋の日に描く面影",
             new Vanguard(VanguardKind.SpecialRange),
@@ -266,7 +266,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1138,
+            1139,
             "クリエイターズコラボ秋の日に描く面影",
             "秋の日に描く面影",
             new Rearguard(RearguardKind.Support),
@@ -290,7 +290,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1137,
+            1138,
             "クリエイターズコラボ秋の日に描く面影",
             "秋の日に描く面影",
             new Rearguard(RearguardKind.Interference),
@@ -314,7 +314,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1136,
+            1137,
             "クリエイターズコラボ小さな音楽会",
             "小さな音楽会",
             new Rearguard(RearguardKind.Recovery),
@@ -338,7 +338,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1135,
+            1136,
             "クリエイターズコラボ小さな音楽会",
             "小さな音楽会",
             new Vanguard(VanguardKind.NormalRange),
@@ -362,7 +362,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1134,
+            1135,
             "理が導く勝機",
             "理が導く勝機",
             new Vanguard(VanguardKind.NormalRange),
@@ -386,7 +386,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1133,
+            1134,
             "理が導く勝機",
             "理が導く勝機",
             new Vanguard(VanguardKind.SpecialRange),
@@ -410,7 +410,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1132,
+            1133,
             "理が導く勝機",
             "理が導く勝機",
             new Rearguard(RearguardKind.Interference),
@@ -27656,5 +27656,5 @@ public record Memoria(
                 Level.Two
             )
         ),
-    };
+    ];
 }
