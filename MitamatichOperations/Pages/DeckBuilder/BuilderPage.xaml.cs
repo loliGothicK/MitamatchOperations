@@ -15,10 +15,6 @@ using Windows.ApplicationModel.DataTransfer;
 using WinRT;
 using ColorCode.Common;
 using SimdLinq;
-using mitama.Pages.RegionConsole;
-using static Tensorflow.ApiDef.Types;
-using System.Threading;
-using Google.Protobuf.Reflection;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -40,9 +36,10 @@ namespace mitama.Pages.DeckBuilder
         private MemberInfo[] members = [];
         readonly Dictionary<KindType, int> kindPairs = [];
         readonly Dictionary<SkillType, int> skillPairs = [];
-        readonly Dictionary<SupportType, int> supportPairs = [];
+        readonly Dictionary<SupportType, SupportBreakdown> supportPairs = [];
         private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = [];
         private readonly string _regionName;
+        private readonly ObservableCollection<SupportBreakdown> SupporBreakdowns = [];
 
         public BuilderPage()
         {
@@ -170,28 +167,35 @@ namespace mitama.Pages.DeckBuilder
             }
 
             supportPairs.Clear();
-            foreach (var effect in Deck.Concat(LegendaryDeck).SelectMany(m => m.SupportSkill.Effects))
+            foreach (var (effect, level) in Deck.Concat(LegendaryDeck).SelectMany(m => m.SupportSkill.Effects.Select(e => (e, m.SupportSkill.Level))))
             {
                 var type = BuilderPageHelpers.ToSupportType(effect);
-                if (supportPairs.TryGetValue(type, out int count))
+                if (supportPairs.TryGetValue(type, out SupportBreakdown breakdown))
                 {
-                    supportPairs[type] = count + 1;
+                    if (breakdown.Breakdown.TryGetValue(level, out int count))
+                    {
+                        supportPairs[type].Breakdown[level] = count + 1;
+                    }
+                    else
+                    {
+                        supportPairs[type].Breakdown.Add(level, 1);
+                    }
                 }
                 else
                 {
-                    supportPairs.Add(type, 1);
+                    supportPairs.Add(type, new SupportBreakdown()
+                    {
+                        Type = type,
+                        Breakdown = new() { { level, 1 } }
+                    });
                 }
             }
 
-            SupportSummary.Items.Clear();
-            foreach (var (type, num) in supportPairs)
+            SupporBreakdowns.Clear();
+            foreach (var (_, breakdown) in supportPairs)
             {
-                SupportSummary.Items.Add(new Button() {
-                    Content = $"{BuilderPageHelpers.SupportTypeToString(type)}: {num}",
-                    Width = 120,
-                });
+                SupporBreakdowns.Add(breakdown);
             }
-
 
             skillPairs.Clear();
             foreach (var effect in Deck.Concat(LegendaryDeck).SelectMany(m => m.Skill.StatusChanges))
@@ -273,6 +277,7 @@ namespace mitama.Pages.DeckBuilder
                 Deck.Remove(toRemove);
                 LegendaryDeck.Remove(toRemove);
             }
+            Cleanup();
             Sort(SortOption.SelectedIndex);
         }
 
@@ -2159,5 +2164,22 @@ namespace mitama.Pages.DeckBuilder
         public bool IsChecked { get; set; } = true;
 
         public ObservableCollection<MyTreeNode> Children { get; set; } = [];
+    }
+
+    public class SupportBreakdown
+    {
+        public SupportType Type { get; set; }
+        public Dictionary<Level, int> Breakdown { get; set; } = [];
+        public ObservableCollection<BreakdownItem> Data => new(Breakdown.Select(p => new BreakdownItem(p)));
+        public int Total => Breakdown.Values.Sum();
+        public string Content => $"{BuilderPageHelpers.SupportTypeToString(Type)}: {Total}";
+    }
+
+    public class BreakdownItem(KeyValuePair<Level, int> pair)
+    {
+        public Level Level { get; set; } = pair.Key;
+        public int Value { get; set; } = pair.Value;
+
+        public string Content => $"{BuilderPageHelpers.LevelToString(Level)}: {Value}";
     }
 }

@@ -170,4 +170,22 @@ internal static class BuilderPageHelpers
             _ => "その他",
         };
     }
+
+    public static string LevelToString(Level level)
+    {
+        return level switch
+        {
+            Level.One => "Ⅰ",
+            Level.Two => "Ⅱ",
+            Level.Three => "Ⅲ",
+            Level.ThreePlus => "Ⅲ+",
+            Level.Four => "Ⅳ",
+            Level.FourPlus => "Ⅳ+",
+            Level.Five => "Ⅴ",
+            Level.FivePlus => "Ⅴ+",
+            Level.Lg => "LG",
+            Level.LgPlus => "LG+",
+            _ => "その他",
+        };
+    }
 }

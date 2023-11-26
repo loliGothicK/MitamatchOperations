@@ -55,6 +55,19 @@
             <DataTemplate x:Name="MemberTemplate" x:DataType="domain:MemberInfo">
                 <TextBlock Text="{x:Bind Name}"/>
             </DataTemplate>
+            <DataTemplate x:Name="BreakdownItemTemplate" x:DataType="local:BreakdownItem">
+                <Button Content="{x:Bind Content}" />
+            </DataTemplate>
+            <DataTemplate x:Name="BreakdownTemplate" x:DataType="local:SupportBreakdown">
+                <Grid>
+                    <Button Content="{x:Bind Content}" />
+                    <Grid.ContextFlyout>
+                        <Flyout>
+                            <GridView ItemsSource="{x:Bind Data}" ItemTemplate="{StaticResource BreakdownItemTemplate}" />
+                        </Flyout>
+                    </Grid.ContextFlyout>
+                </Grid>
+            </DataTemplate>
         </Grid.Resources>
 
         <!--Main Contents-->
@@ -129,7 +142,10 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="補助"/>
-                            <GridView Grid.Row="1" x:Name="SupportSummary" />
+                            <GridView Grid.Row="1"
+                                      x:Name="SupportSummary"
+                                      ItemsSource="{x:Bind SupporBreakdowns}"
+                                      ItemTemplate="{StaticResource BreakdownTemplate}" />
                         </Grid>
                         <Grid Grid.Row="3" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <Grid.RowDefinitions>
