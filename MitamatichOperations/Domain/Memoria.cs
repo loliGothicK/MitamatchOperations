@@ -251,7 +251,7 @@ public record Memoria(
             22,
             new Skill(
                 "火：Sp.パワースマッシュB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -347,7 +347,7 @@ public record Memoria(
             22,
             new Skill(
                 "火：パワーストライクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
