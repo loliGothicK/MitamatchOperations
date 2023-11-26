@@ -28,13 +28,13 @@ namespace mitama.Pages.OrderConsole;
 public sealed partial class DeckEditorPage
 {
     public static readonly int[] TimeSource = Enumerable.Range(0, 12).Select(t => t * 5).ToArray();
-    private ObservableCollection<TimeTableItem> _deck = new();
-    private ObservableCollection<Order> Sources { get; set; } = new();
+    private ObservableCollection<TimeTableItem> _deck = [];
+    private ObservableCollection<Order> Sources { get; set; } = [];
     private new int Margin { get; set; } = 5;
-    private MemberInfo[] _members = { };
-    private readonly List<HoldOn> _holdOns = new();
+    private MemberInfo[] _members = [];
+    private readonly List<HoldOn> _holdOns = [];
     private readonly string _project = Director.ReadCache().Region;
-    private Order[] _selectedOrder = { };
+    private Order[] _selectedOrder = [];
 
 
     private abstract record HoldOn;
@@ -663,7 +663,7 @@ public sealed partial class DeckEditorPage
         confirmButton.IsEnabled = isEnabled;
     }
 
-    private void DeckItemFlyout_OnClosed(object? sender, object e)
+    private void DeckItemFlyout_OnClosed(object sender, object e)
     {
         _holdOns.Clear();
     }
@@ -811,7 +811,7 @@ internal record TimeTableItem(Order Order, int Delay, int Start, int End, string
     internal string Pic { get; set; } = Pic;
     internal bool Conditional { get; set; } = Conditional;
 
-    bool IEquatable<TimeTableItem?>.Equals(TimeTableItem? other) => Order.Index == other?.Order.Index;
+    bool IEquatable<TimeTableItem>.Equals(TimeTableItem other) => Order.Index == other?.Order.Index;
 
     public static implicit operator TimeTableItem(Order order) => new(order, 0, 0, 0);
 
