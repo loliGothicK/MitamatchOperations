@@ -636,10 +636,7 @@ public sealed partial class DeckEditorPage
         internal abstract (bool, string) IntoTuple();
     }
 
-    private void ResetButton_Click(object sender, RoutedEventArgs e)
-    {
-        _deck.Clear();
-    }
+    private void ResetButton_Click(object _sender, RoutedEventArgs _e) => _deck.Clear();
 
     private record Enable(string Msg) : Validated
     {

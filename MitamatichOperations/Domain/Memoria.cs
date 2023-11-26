@@ -205,8 +205,8 @@ public record Memoria(
     bool IsLegendary = false
 )
 {
-    public Uri Uri => new($"ms-appx:///Assets/memoria/{Name}.jpg");
-    public string Path = $"/Assets/memoria/{Name}.jpg";
+    public Uri Uri => new($"ms-appx:///Assets/memoria/{Name}.png");
+    public string Path = $"/Assets/memoria/{Name}.png";
     public string ToJson()
     {
         return $@"{{ ""link"": ""{HttpUtility.UrlEncode(Link)}"", ""name"": ""{HttpUtility.UrlEncode(Name)}"" }}";
@@ -217,6 +217,342 @@ public record Memoria(
 
     public static readonly Memoria[] List =
     {
+        new Memoria(
+            13,
+            "クリエイターズコラボ秋の日に描く面影",
+            "秋の日に描く面影",
+            new Vanguard(VanguardKind.NormalSingle),
+            Element.Fire,
+            new Status(7037, 2592, 5667, 2602),
+            22,
+            new Skill(
+                "ファイアパワーストライクA Ⅳ+",
+                "敵1体に通常特大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.A
+            ),
+            new SupportSkill(
+                "攻:パワーUP/副攻:火パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、火属性攻撃力を大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Normal), new ElementPowerUp(Element.Fire)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            12,
+            "クリエイターズコラボ秋の日に描く面影",
+            "秋の日に描く面影",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            new Status(2585, 7044, 2615, 5654),
+            22,
+            new Skill(
+                "火：Sp.パワースマッシュB Ⅲ",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new SpAtk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            11,
+            "クリエイターズコラボ秋の日に描く面影",
+            "秋の日に描く面影",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            new Status(2585, 7044, 2615, 5654),
+            22,
+            new Skill(
+                "Sp.ファイアパワーアシストC Ⅳ",
+                "味方1～3体のSp.ATKと火属性攻撃力を大アップさせる。",
+                [],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:Sp.パワーUP/副援:火パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。さらに、火属性攻撃力を大アップさせる。",
+                Trigger.Support,
+                [new PowerUp(Type.Special), new ElementPowerUp(Element.Fire)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            10,
+            "クリエイターズコラボ秋の日に描く面影",
+            "秋の日に描く面影",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            new Status(7037, 2592, 5667, 2602),
+            22,
+            new Skill(
+                "ファイアパワーフォールC Ⅳ",
+                "敵1～3体のATKと火属性攻撃力を大ダウンさせる。",
+                [],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:パワーDOWN/副援:火パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。さらに、火属性攻撃力を大ダウンさせる。",
+                Trigger.Support,
+                [new PowerDown(Type.Normal), new ElementPowerDown(Element.Fire)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            9,
+            "クリエイターズコラボ小さな音楽会",
+            "小さな音楽会",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Fire,
+            new Status(6902, 2768, 5505, 2756),
+            22,
+            new Skill(
+                "ファイアガードヒールC Ⅳ",
+                "味方1～3体のHPを大回復する。さらに味方のDEFと火属性防御力を小アップする。",
+                [],
+                [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "回:ガードUP/副援:火ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の火属性防御力を大アップさせる。",
+                Trigger.Support,
+                [new GuardUp(Type.Normal), new ElementGuardUp(Element.Fire)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            8,
+            "クリエイターズコラボ小さな音楽会",
+            "小さな音楽会",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            new Status(6902, 2768, 5505, 2756),
+            22,
+            new Skill(
+                "火：パワーストライクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new Atk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            7,
+            "理が導く勝機",
+            "理が導く勝機",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            new Status(7037, 2597, 5668, 2586),
+            22,
+            new Skill(
+                "水弱：パワーストライクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに敵の水属性防御力が低いほど与えるダメージが上昇する。",
+                [new ElementWeaken(Element.Water)],
+                [new StatusUp(new Atk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            6,
+            "理が導く勝機",
+            "理が導く勝機",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Water,
+            new Status(2585, 7049, 2616, 5638),
+            22,
+            new Skill(
+                "Sp.ウォーターパワーバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.ATKと水属性攻撃力をダウンさせる。",
+                [],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:Sp.パワーDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.ATKを特大ダウンさせる。",
+                Trigger.Attack,
+                [new PowerDown(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            5,
+            "理が導く勝機",
+            "理が導く勝機",
+            new Rearguard(RearguardKind.Interference),
+            Element.Water,
+            new Status(7037, 2597, 5668, 2586),
+            22,
+            new Skill(
+                "水弱：パワーフォールB Ⅲ",
+                "敵1～2体のATKを大ダウンさせる。さらに敵の水属性攻撃力が低いほどスキル効果が上昇する。",
+                [new ElementWeaken(Element.Water)],
+                [new StatusDown(new Atk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "援:パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
+                Trigger.Support,
+                [new PowerDown(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            4,
+            "理が導く勝機",
+            "理が導く勝機",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Water,
+            new Status(2585, 2597, 5668, 7038),
+            22,
+            new Skill(
+                "Sp.ウォーターガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
+                [],
+                [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
+                Level.Three,
+                Range.C
+            ),
+            new SupportSkill(
+                "回:Sp.ガードUP/副援:水ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の水属性防御力を大アップさせる。",
+                Trigger.Support,
+                [new GuardUp(Type.Special), new ElementGuardUp(Element.Water)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            3,
+            "暮れなずむ廃址の佳人",
+            "暮れなずむ廃址の佳人",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            new Status(6912, 2756, 5496, 2746),
+            22,
+            new Skill(
+                "ウォーターパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            2,
+            "暮れなずむ廃址の佳人",
+            "暮れなずむ廃址の佳人",
+            new Rearguard(RearguardKind.Support),
+            Element.Water,
+            new Status(6912, 2756, 5496, 2746),
+            22,
+            new Skill(
+                "ウォーターパワーアシストB Ⅲ",
+                "味方1～2体のATKと水属性攻撃力を大アップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "援:パワーUP/副援:水パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。さらに、水属性攻撃力を大アップさせる。",
+                Trigger.Support,
+                [new PowerUp(Type.Normal), new ElementPowerUp(Element.Water)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1,
+            "夕映えに冴える一手",
+            "夕映えに冴える一手",
+            new Rearguard(RearguardKind.Interference),
+            Element.Water,
+            new Status(2766, 6891, 2746, 5490),
+            22,
+            new Skill(
+                "Sp.ウォーターパワーフォールB Ⅲ",
+                "敵1～2体のSp.ATKと水属性攻撃力を大ダウンさせる。",
+                [],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "援:支援UP/副援:水パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体の水属性攻撃力を大ダウンさせる。さらに、支援/妨害効果を特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new ElementPowerDown(Element.Water)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            0,
+            "夕映えに冴える一手",
+            "夕映えに冴える一手",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Water,
+            new Status(2766, 6891, 2746, 5490),
+            22,
+            new Skill(
+                "Sp.ウォーターガードバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
+                [],
+                [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
+                Trigger.Attack,
+                [new GuardDown(Type.Special)],
+                Level.Three
+            )
+        ),
         new Memoria(
             1127,
             "フラガラッハの光",
