@@ -16,7 +16,6 @@ public sealed partial class RegionConsolePage
 
         ManageConsoleFrame.Navigate(typeof(MemberManageConsole));
         UnitViewerFrame.Navigate(typeof(UnitViewer));
-        TimelineToolsFrame.Navigate(typeof(TimelineTools));
 
         ManageConsoleFrame.Navigated += (_, _) => { ManageConsoleFrame.Navigate(typeof(MemberManageConsole)); };
     }

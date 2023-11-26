@@ -13,7 +13,6 @@ using mitama.Domain;
 using mitama.Pages.Common;
 using Windows.ApplicationModel.DataTransfer;
 using WinRT;
-using ColorCode.Common;
 using SimdLinq;
 
 namespace mitama.Pages.DeckBuilder
@@ -1870,25 +1869,25 @@ namespace mitama.Pages.DeckBuilder
             switch (option)
             {
                 case 0:
-                    Pool.SortStable((a, b) => b.Id.CompareTo(a.Id));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Id.CompareTo(a.Id));
                     break;
                 case 1:
-                    Pool.SortStable((a, b) => b.Status.Atk.CompareTo(a.Status.Atk));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.Atk.CompareTo(a.Status.Atk));
                     break;
                 case 2:
-                    Pool.SortStable((a, b) => b.Status.SpAtk.CompareTo(a.Status.SpAtk));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.SpAtk.CompareTo(a.Status.SpAtk));
                     break;
                 case 3:
-                    Pool.SortStable((a, b) => b.Status.Def.CompareTo(a.Status.Def));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.Def.CompareTo(a.Status.Def));
                     break;
                 case 4:
-                    Pool.SortStable((a, b) => b.Status.SpDef.CompareTo(a.Status.SpDef));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.SpDef.CompareTo(a.Status.SpDef));
                     break;
                 case 5:
-                    Pool.SortStable((a, b) => b.Status.ASA.CompareTo(a.Status.ASA));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.ASA.CompareTo(a.Status.ASA));
                     break;
                 case 6:
-                    Pool.SortStable((a, b) => b.Status.DSD.CompareTo(a.Status.DSD));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.DSD.CompareTo(a.Status.DSD));
                     break;
             }
         }

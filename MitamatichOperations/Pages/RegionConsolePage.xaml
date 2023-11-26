@@ -25,12 +25,6 @@
                     </TabViewItem.IconSource>
                     <Frame x:Name="UnitViewerFrame" />
                 </TabViewItem>
-                <TabViewItem Header="Timeline Tools" IsClosable="False">
-                    <TabViewItem.IconSource>
-                        <SymbolIconSource Symbol="Manage" />
-                    </TabViewItem.IconSource>
-                    <Frame x:Name="TimelineToolsFrame" />
-                </TabViewItem>
             </TabView.TabItems>
         </TabView>
     </Grid>
