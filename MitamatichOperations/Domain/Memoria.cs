@@ -218,7 +218,7 @@ public record Memoria(
     public static readonly Memoria[] List =
     {
         new Memoria(
-            13,
+            1140,
             "クリエイターズコラボ秋の日に描く面影",
             "秋の日に描く面影",
             new Vanguard(VanguardKind.NormalSingle),
@@ -242,7 +242,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            12,
+            1139,
             "クリエイターズコラボ秋の日に描く面影",
             "秋の日に描く面影",
             new Vanguard(VanguardKind.SpecialRange),
@@ -266,7 +266,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            11,
+            1138,
             "クリエイターズコラボ秋の日に描く面影",
             "秋の日に描く面影",
             new Rearguard(RearguardKind.Support),
@@ -290,7 +290,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            10,
+            1137,
             "クリエイターズコラボ秋の日に描く面影",
             "秋の日に描く面影",
             new Rearguard(RearguardKind.Interference),
@@ -314,7 +314,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            9,
+            1136,
             "クリエイターズコラボ小さな音楽会",
             "小さな音楽会",
             new Rearguard(RearguardKind.Recovery),
@@ -338,7 +338,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            8,
+            1135,
             "クリエイターズコラボ小さな音楽会",
             "小さな音楽会",
             new Vanguard(VanguardKind.NormalRange),
@@ -362,7 +362,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            7,
+            1134,
             "理が導く勝機",
             "理が導く勝機",
             new Vanguard(VanguardKind.NormalRange),
@@ -386,7 +386,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            6,
+            1133,
             "理が導く勝機",
             "理が導く勝機",
             new Vanguard(VanguardKind.SpecialRange),
@@ -410,7 +410,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            5,
+            1132,
             "理が導く勝機",
             "理が導く勝機",
             new Rearguard(RearguardKind.Interference),
@@ -434,7 +434,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            4,
+            1132,
             "理が導く勝機",
             "理が導く勝機",
             new Rearguard(RearguardKind.Recovery),
@@ -458,7 +458,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            3,
+            1131,
             "暮れなずむ廃址の佳人",
             "暮れなずむ廃址の佳人",
             new Vanguard(VanguardKind.NormalRange),
@@ -482,7 +482,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            2,
+            1130,
             "暮れなずむ廃址の佳人",
             "暮れなずむ廃址の佳人",
             new Rearguard(RearguardKind.Support),
@@ -506,7 +506,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            1,
+            1129,
             "夕映えに冴える一手",
             "夕映えに冴える一手",
             new Rearguard(RearguardKind.Interference),
@@ -530,7 +530,7 @@ public record Memoria(
             )
         ),
         new Memoria(
-            0,
+            1128,
             "夕映えに冴える一手",
             "夕映えに冴える一手",
             new Vanguard(VanguardKind.SpecialRange),
