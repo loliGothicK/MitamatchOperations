@@ -15,6 +15,7 @@ using WinRT;
 using System.IO;
 using System.Text;
 using Microsoft.UI.Xaml.Navigation;
+using mitama.Pages.DeckBuilder;
 
 namespace mitama.Pages.RegionConsole;
 
@@ -94,7 +95,7 @@ public sealed partial class MemberManageConsole
                             $@"{Director.ProjectDir()}\{_regionName}\Members\{_selectedMember?.Name}\Units\{body.Text}.json";
                         await using var unit = File.Create(path);
                         await unit.WriteAsync(new UTF8Encoding(true).GetBytes(
-                            new Unit(body.Text, _selectedMember!.Position is Front, detected.ToList()).ToJson()));
+                            new Unit(body.Text, _selectedMember!.Position is Front, detected.Select(m => new MemoriaWithConcentration(m, 4)).ToList()).ToJson()));
                     });
 
                     await naming.ShowAsync();

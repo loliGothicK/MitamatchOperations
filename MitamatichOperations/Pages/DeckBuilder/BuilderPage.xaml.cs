@@ -25,8 +25,8 @@ namespace mitama.Pages.DeckBuilder
         // Temporarily store the selected Memoria
         private List<Memoria> selectedMemorias = [];
 
-        private ObservableCollection<Memoria> Deck { get; set; } = [];
-        private ObservableCollection<Memoria> LegendaryDeck { get; set; } = [];
+        private ObservableCollection<MemoriaWithConcentration> Deck { get; set; } = [];
+        private ObservableCollection<MemoriaWithConcentration> LegendaryDeck { get; set; } = [];
         private ObservableCollection<Memoria> Pool { get; set; } = new(Memoria.List.Where(Costume.List[1].CanBeEquipped));
         private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = [];
         private HashSet<FilterType> _currentFilters = [];
@@ -143,19 +143,19 @@ namespace mitama.Pages.DeckBuilder
         {
             selectedMemorias.Clear();
 
-            var (atk, spatk, def, spdef) = Deck.Concat(LegendaryDeck).Select(m => m.Status[4]).Aggregate((a, b) => a + b);
+            var (atk, spatk, def, spdef) = Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Status[m.Concentration]).Aggregate((a, b) => a + b);
             Atk.Content = $"Atk: {atk}";
             SpAtk.Content = $"SpAtk: {spatk}";
             Def.Content = $"Def: {def}";
             SpDef.Content = $"SpDef: {spdef}";
 
-            Fire.Content = $"‰Î: {Deck.Concat(LegendaryDeck).Count(m => m.Element is Element.Fire)}";
-            Water.Content = $"…: {Deck.Concat(LegendaryDeck).Count(m => m.Element is Element.Water)}";
-            Wind.Content = $"•—: {Deck.Concat(LegendaryDeck).Count(m => m.Element is Element.Wind)}";
-            Light.Content = $"Œõ: {Deck.Concat(LegendaryDeck).Count(m => m.Element is Element.Light)}";
-            Dark.Content = $"ˆÅ: {Deck.Concat(LegendaryDeck).Count(m => m.Element is Element.Dark)}";
+            Fire.Content = $"‰Î: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Fire)}";
+            Water.Content = $"…: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Water)}";
+            Wind.Content = $"•—: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Wind)}";
+            Light.Content = $"Œõ: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Light)}";
+            Dark.Content = $"ˆÅ: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Dark)}";
 
-            if (Deck.DistinctBy(m => m.Name).Count() != Deck.Count)
+            if (Deck.DistinctBy(m => m.Memoria.Name).Count() != Deck.Count)
             {
                 GeneralInfoBar.Title = "’´ŠoÁ‚Ìƒƒ‚ƒŠƒA‚ªd•¡‚µ‚Ä‚¢‚Ü‚·";
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
@@ -166,7 +166,7 @@ namespace mitama.Pages.DeckBuilder
             }
 
             supportPairs.Clear();
-            foreach (var (effect, level) in Deck.Concat(LegendaryDeck).SelectMany(m => m.SupportSkill.Effects.Select(e => (e, m.SupportSkill.Level))))
+            foreach (var (effect, level) in Deck.Concat(LegendaryDeck).SelectMany(m => m.Memoria.SupportSkill.Effects.Select(e => (e, m.Memoria.SupportSkill.Level))))
             {
                 var type = BuilderPageHelpers.ToSupportType(effect);
                 if (supportPairs.TryGetValue(type, out SupportBreakdown breakdown))
@@ -197,7 +197,7 @@ namespace mitama.Pages.DeckBuilder
             }
 
             skillPairs.Clear();
-            foreach (var effect in Deck.Concat(LegendaryDeck).SelectMany(m => m.Skill.StatusChanges))
+            foreach (var effect in Deck.Concat(LegendaryDeck).SelectMany(m => m.Memoria.Skill.StatusChanges))
             {
                 var type = BuilderPageHelpers.ToSkillType(effect);
                 if (skillPairs.TryGetValue(type, out int count))
@@ -220,7 +220,7 @@ namespace mitama.Pages.DeckBuilder
             }
 
             kindPairs.Clear();
-            foreach (var kind in Deck.Concat(LegendaryDeck).Select(m => m.Kind))
+            foreach (var kind in Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Kind))
             {
                 var type = BuilderPageHelpers.ToKindType(kind);
                 if (kindPairs.TryGetValue(type, out int count))
@@ -248,11 +248,11 @@ namespace mitama.Pages.DeckBuilder
         {
             foreach (var memoria in selectedMemorias.Where(m => !m.IsLegendary))
             {
-                Deck.Add(memoria);
+                Deck.Add(new MemoriaWithConcentration(memoria, 4));
             }
             foreach (var memoria in selectedMemorias.Where(m => m.IsLegendary))
             {
-                LegendaryDeck.Add(memoria);
+                LegendaryDeck.Add(new MemoriaWithConcentration(memoria, 4));
             }
             foreach (var toRemove in Pool.Where(m => selectedMemorias.Select(s => s.Name).Contains(m.Name)).ToList())
             {
@@ -271,10 +271,13 @@ namespace mitama.Pages.DeckBuilder
             {
                 Pool.Add(toAdd);
             }
-            foreach (var toRemove in selectedMemorias)
+            foreach (var toRemove in LegendaryDeck.ToList().Where(m => selectedMemorias.Contains(m.Memoria)))
+            {
+                LegendaryDeck.Remove(toRemove);
+            }
+            foreach (var toRemove in Deck.ToList().Where(m => selectedMemorias.Contains(m.Memoria)))
             {
                 Deck.Remove(toRemove);
-                LegendaryDeck.Remove(toRemove);
             }
             Cleanup();
             Sort(SortOption.SelectedIndex);
@@ -550,7 +553,7 @@ namespace mitama.Pages.DeckBuilder
             foreach (var memoria in Memoria
                 .List
                 .Where(memoria => !Pool.Contains(memoria))
-                .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Name).Contains(memoria.Name))
+                .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Name))
                 .Where(ApplyFilter))
             {
                 Pool.Add(memoria);
@@ -1342,7 +1345,7 @@ namespace mitama.Pages.DeckBuilder
             foreach (var memoria in Memoria
                     .List
                     .Where(memoria => !Pool.Contains(memoria))
-                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Name).Contains(memoria.Name))
+                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Name))
                     .Where(ApplyFilter))
             {
                 Pool.Add(memoria);
@@ -1948,8 +1951,8 @@ namespace mitama.Pages.DeckBuilder
 
         private async void GenerateLink_Click(object _sender, RoutedEventArgs _e)
         {
-            var legendary = string.Join(",", LegendaryDeck.Select(m => m.ToJson()));
-            var deck = string.Join(",", Deck.Select(m => m.ToJson()));
+            var legendary = string.Join(",", LegendaryDeck.Select(m => m.Memoria.ToJson()));
+            var deck = string.Join(",", Deck.Select(m => m.Memoria.ToJson()));
             var json = $"{{ \"legendary\":[{legendary}],\"deck\": [{deck}] }}";
             var jsonBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(json));
             // copy to clipboard
@@ -1986,13 +1989,29 @@ namespace mitama.Pages.DeckBuilder
             }
             LegendaryDeck.Clear();
             Deck.Clear();
-            foreach (var memoria in unit.Memorias.Where(m => m.IsLegendary))
+            foreach (var memoria in unit.Memorias.Where(m => m.Memoria.IsLegendary))
             {
                 LegendaryDeck.Add(memoria);
             }
-            foreach (var memoria in unit.Memorias.Where(m => !m.IsLegendary))
+            foreach (var memoria in unit.Memorias.Where(m => !m.Memoria.IsLegendary))
             {
                 Deck.Add(memoria);
+            }
+        }
+
+        private void Concentration_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBox = sender.As<ComboBox>();
+            if (comboBox.AccessKey == string.Empty) return;
+            var id = int.Parse(comboBox.AccessKey);
+            foreach (var item in Deck.ToList())
+            {
+                if (item.Memoria.Id == id)
+                {
+                    var newItem = item with { Concentration = comboBox.SelectedIndex };
+                    var idx = Deck.IndexOf(item);
+                    Deck[idx] = newItem;
+                }
             }
         }
     }
@@ -2180,5 +2199,39 @@ namespace mitama.Pages.DeckBuilder
         public int Value { get; set; } = pair.Value;
 
         public string Content => $"{BuilderPageHelpers.LevelToString(Level)}: {Value}";
+    }
+
+    public record MemoriaWithConcentration(Memoria Memoria, int Concentration)
+    {
+        public Memoria Memoria { get; set; } = Memoria;
+        public int Concentration { get; set; } = Concentration;
+
+        public int FontSize => Concentration switch
+        {
+            4 => 12,
+            _ => 18,
+        };
+
+        public Thickness Margin => Concentration switch
+        { 
+            4 => new(0, 30, 2, 0),
+            _ => new(0, 26, -4, 0) 
+        };
+
+        public string LimitBreak => Concentration switch
+        {
+            0 => "0",
+            1 => "1",
+            2 => "2",
+            3 => "3",
+            4 => "MAX",
+            _ => throw new UnreachableException("Unreachable"),
+        };
+
+        public static implicit operator Memoria(MemoriaWithConcentration m) => m.Memoria;
+
+        public Status Status => Memoria.Status[Concentration];
+
+        public override int GetHashCode() => Memoria.GetHashCode();
     }
 }

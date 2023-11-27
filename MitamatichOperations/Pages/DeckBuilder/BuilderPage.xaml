@@ -52,6 +52,76 @@
                     </Grid.ContextFlyout>
                 </Grid>
             </DataTemplate>
+            <DataTemplate x:Name="MemoriaWithConcentrationTemplate" x:DataType="local:MemoriaWithConcentration">
+                <Grid Width="100">
+                    <Image Source="{x:Bind Memoria.Path}" Stretch="UniformToFill"/>
+                    <Image Source="/Assets/Images/Concentration.png"
+                           Height="30"
+                           Width="30"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top"
+                           Margin="0,25,6,0" />
+                    <TextBlock Text="{x:Bind LimitBreak}"
+                               FontSize="{x:Bind FontSize}"
+                               Height="30"
+                               Width="30"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Top"
+                               Margin="{x:Bind Margin}" />
+                    <Grid.ContextFlyout>
+                        <Flyout>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="0" Content="{x:Bind Memoria.Name}" Margin="5" FontSize="20"/>
+                                    <ComboBox Grid.Column="1"
+                                              SelectedIndex="4"
+                                              SelectionChanged="Concentration_SelectionChanged"
+                                              AccessKey="{x:Bind Memoria.Id}"
+                                              Margin="5"
+                                              FontSize="20"
+                                              HorizontalAlignment="Right">
+                                        <ComboBoxItem Content="0" />
+                                        <ComboBoxItem Content="1" />
+                                        <ComboBoxItem Content="2" />
+                                        <ComboBoxItem Content="3" />
+                                        <ComboBoxItem Content="MAX" />
+                                    </ComboBox>
+                                </Grid>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                                    <StackPanel Orientation="Vertical" Margin="0 0 5 0">
+                                        <TextBlock Text="ATK"/>
+                                        <Button Content="{x:Bind Status.Atk}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="5 0">
+                                        <TextBlock Text="DEF"/>
+                                        <Button Content="{x:Bind Status.Def}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="5 0">
+                                        <TextBlock Text="Sp.ATK"/>
+                                        <Button Content="{x:Bind Status.SpAtk}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="5 0">
+                                        <TextBlock Text="Sp.DEF"/>
+                                        <Button Content="{x:Bind Status.SpDef}" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <Button Grid.Row="2" Content="{x:Bind Memoria.Skill.Name}" Margin="5"/>
+                                <Button Grid.Row="3" Content="{x:Bind Memoria.SupportSkill.Name}" Margin="5"/>
+                            </Grid>
+                        </Flyout>
+                    </Grid.ContextFlyout>
+                </Grid>
+            </DataTemplate>
             <DataTemplate x:Name="MemberTemplate" x:DataType="domain:MemberInfo">
                 <TextBlock Text="{x:Bind Name}"/>
             </DataTemplate>
@@ -248,7 +318,7 @@
                             MaxWidth="520"
                             Background="Gray"
                             BorderBrush="{StaticResource SystemControlForegroundBaseMediumLowBrush}"
-                            ItemTemplate="{StaticResource MemoriaTemplate}"
+                            ItemTemplate="{StaticResource MemoriaWithConcentrationTemplate}"
                             ItemsSource="{x:Bind LegendaryDeck}"
                             CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="Multiple"
                             DragItemsStarting="Memeria_DragItemsStarting"
@@ -266,7 +336,7 @@
                             MaxWidth="520"
                             Background="Gray"
                             BorderBrush="{StaticResource SystemControlForegroundBaseMediumLowBrush}"
-                            ItemTemplate="{StaticResource MemoriaTemplate}"
+                            ItemTemplate="{StaticResource MemoriaWithConcentrationTemplate}"
                             ItemsSource="{x:Bind Deck}"
                             CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="Multiple"
                             DragItemsStarting="Memeria_DragItemsStarting"

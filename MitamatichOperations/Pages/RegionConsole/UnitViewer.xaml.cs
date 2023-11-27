@@ -88,10 +88,10 @@ public class ExplorerItem : INotifyPropertyChanged
     public string Path { get; set; }
 
     public ExplorerItemType Type { get; set; }
-    private ObservableCollection<ExplorerItem>? _children;
+    private ObservableCollection<ExplorerItem> _children;
     public ObservableCollection<ExplorerItem> Children
     {
-        get => _children ??= new ObservableCollection<ExplorerItem>();
+        get => _children ??= [];
         set => _children = value;
     }
 
@@ -103,7 +103,7 @@ public class ExplorerItem : INotifyPropertyChanged
         {
             if (_isExpanded == value) return;
             _isExpanded = value;
-            NotifyPropertyChanged("IsExpanded");
+            NotifyPropertyChanged(nameof(IsExpanded));
         }
     }
 

@@ -3,23 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Web;
+using mitama.Pages.DeckBuilder;
 
 namespace mitama.Domain;
 
-public record struct Unit(string UnitName, bool IsFront, List<Memoria> Memorias)
+public record struct IdAndConcentration(int Id, int Concentration);
+
+public record struct Unit(string UnitName, bool IsFront, List<MemoriaWithConcentration> Memorias)
 {
     public readonly string ToJson() =>
-        JsonSerializer.Serialize(new UnitDto(UnitName, IsFront, Memorias.Select(m => m.Id).ToArray()));
+        JsonSerializer.Serialize(new UnitDto(UnitName, IsFront, Memorias.Select(m => new IdAndConcentration(m.Memoria.Id, m.Concentration)).ToArray()));
 
     public static Unit FromJson(string json)
     {
         var dto = JsonSerializer.Deserialize<UnitDto>(json);
         var selector = Memoria.List.ToDictionary(m => m.Id);
-        return new Unit(dto.UnitName, dto.IsFront, dto.Ids.Select(id => selector[id]).ToList());
+        return new Unit(
+            dto.UnitName,
+            dto.IsFront,
+            dto.Items.Select(item => new MemoriaWithConcentration(selector[item.Id], item.Concentration)).ToList()
+        );
     }
 }
 
-public record struct UnitDto(string UnitName, bool IsFront, int[] Ids);
+public record struct UnitDto(string UnitName, bool IsFront, IdAndConcentration[] Items);
 
 public enum Type
 {
