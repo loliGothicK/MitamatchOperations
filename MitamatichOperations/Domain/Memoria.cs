@@ -198,7 +198,7 @@ public record Memoria(
     string Name,
     MemoriaKind Kind,
     Element Element,
-    Status Status,
+    Status[] Status,
     int Cost,
     Skill Skill,
     SupportSkill SupportSkill,
@@ -223,7 +223,13 @@ public record Memoria(
             "秋の日に描く面影",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(7037, 2592, 5667, 2602),
+            [
+                new Status(2283, 1950, 2313, 1960),
+                new Status(2472, 2110, 3352, 2120),
+                new Status(3810, 2271, 3540, 2281),
+                new Status(3998, 2431, 5478, 2441),
+                new Status(7037, 2592, 5667, 2602),
+            ],
             22,
             new Skill(
                 "ファイアパワーストライクA Ⅳ+",
@@ -247,11 +253,17 @@ public record Memoria(
             "秋の日に描く面影",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2585, 7044, 2615, 5654),
+            [
+                new Status(1943, 2290, 1973, 2300),
+                new Status(2103, 2479, 2133, 3339),
+                new Status(2264, 3817, 2294, 3527),
+                new Status(2424, 4005, 2454, 5465),
+                new Status(2585, 7044, 2615, 5654),
+            ],
             22,
             new Skill(
                 "火：Sp.パワースマッシュB Ⅲ",
-                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new SpAtk(), Amount.Medium)],
                 Level.Three,
@@ -271,7 +283,13 @@ public record Memoria(
             "秋の日に描く面影",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2585, 7044, 2615, 5654),
+            [
+                new Status(1943, 2290, 1973, 2300),
+                new Status(2103, 2479, 2133, 3339),
+                new Status(2264, 3817, 2294, 3527),
+                new Status(2424, 4005, 2454, 5465),
+                new Status(2585, 7044, 2615, 5654),
+            ],
             22,
             new Skill(
                 "Sp.ファイアパワーアシストC Ⅳ",
@@ -295,7 +313,13 @@ public record Memoria(
             "秋の日に描く面影",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(7037, 2592, 5667, 2602),
+            [
+                new Status(2283, 1950, 2313, 1960),
+                new Status(2472, 2110, 3352, 2120),
+                new Status(3810, 2271, 3540, 2281),
+                new Status(3998, 2431, 5478, 2441),
+                new Status(7037, 2592, 5667, 2602),
+            ],
             22,
             new Skill(
                 "ファイアパワーフォールC Ⅳ",
@@ -319,7 +343,13 @@ public record Memoria(
             "小さな音楽会",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(6902, 2768, 5505, 2756),
+            [
+                new Status(2448, 2126, 2451, 2114),
+                new Status(2637, 2286, 3340, 2274),
+                new Status(3825, 2447, 3528, 2435),
+                new Status(4013, 2607, 5316, 2595),
+                new Status(6902, 2768, 5505, 2756),
+            ],
             22,
             new Skill(
                 "ファイアガードヒールC Ⅳ",
@@ -343,11 +373,17 @@ public record Memoria(
             "小さな音楽会",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6902, 2768, 5505, 2756),
+            [
+                new Status(2448, 2126, 2451, 2114),
+                new Status(2637, 2286, 3340, 2274),
+                new Status(3825, 2447, 3528, 2435),
+                new Status(4013, 2607, 5316, 2595),
+                new Status(6902, 2768, 5505, 2756),
+            ],
             22,
             new Skill(
                 "火：パワーストライクB Ⅲ",
-                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
                 [new ElementStimulation(Element.Fire)],
                 [new StatusUp(new Atk(), Amount.Medium)],
                 Level.Three,
@@ -367,7 +403,13 @@ public record Memoria(
             "理が導く勝機",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(7037, 2597, 5668, 2586),
+            [
+                new Status(2283, 1955, 2314, 1944),
+                new Status(2472, 2115, 3353, 2104),
+                new Status(3810, 2276, 3541, 2265),
+                new Status(3998, 2436, 5479, 2425),
+                new Status(7037, 2597, 5668, 2586),
+            ],
             22,
             new Skill(
                 "水弱：パワーストライクB Ⅲ",
@@ -391,7 +433,13 @@ public record Memoria(
             "理が導く勝機",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2585, 7049, 2616, 5638),
+            [
+                new Status(1943, 2295, 1974, 2284),
+                new Status(2103, 2484, 2134, 3323),
+                new Status(2264, 3822, 2295, 3511),
+                new Status(2424, 4010, 2455, 5449),
+                new Status(2585, 7049, 2616, 5638),
+            ],
             22,
             new Skill(
                 "Sp.ウォーターパワーバーストB Ⅲ+",
@@ -415,7 +463,13 @@ public record Memoria(
             "理が導く勝機",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(7037, 2597, 5668, 2586),
+            [
+                new Status(2283, 1955, 2314, 1944),
+                new Status(2472, 2115, 3353, 2104),
+                new Status(3810, 2276, 3541, 2265),
+                new Status(3998, 2436, 5479, 2425),
+                new Status(7037, 2597, 5668, 2586),
+            ],
             22,
             new Skill(
                 "水弱：パワーフォールB Ⅲ",
@@ -439,7 +493,13 @@ public record Memoria(
             "理が導く勝機",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2585, 2597, 5668, 7038),
+            [
+                new Status(1943, 1955, 2314, 2284),
+                new Status(2103, 2115, 3353, 2473),
+                new Status(2264, 2276, 3541, 3811),
+                new Status(2424, 2436, 5479, 3999),
+                new Status(2585, 2597, 5668, 7038),
+            ],
             22,
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
@@ -463,7 +523,13 @@ public record Memoria(
             "暮れなずむ廃址の佳人",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6912, 2756, 5496, 2746),
+            [
+                new Status(2458, 2114, 2442, 2104),
+                new Status(2647, 2274, 3331, 2264),
+                new Status(3835, 2435, 3519, 2425),
+                new Status(4023, 2595, 5307, 2585),
+                new Status(6912, 2756, 5496, 2746),
+            ],
             22,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -487,7 +553,13 @@ public record Memoria(
             "暮れなずむ廃址の佳人",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(6912, 2756, 5496, 2746),
+            [
+                new Status(2458, 2114, 2442, 2104),
+                new Status(2647, 2274, 3331, 2264),
+                new Status(3835, 2435, 3519, 2425),
+                new Status(4023, 2595, 5307, 2585),
+                new Status(6912, 2756, 5496, 2746),
+            ],
             22,
             new Skill(
                 "ウォーターパワーアシストB Ⅲ",
@@ -511,7 +583,13 @@ public record Memoria(
             "夕映えに冴える一手",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2766, 6891, 2746, 5490),
+            [
+                new Status(2124, 2437, 2104, 2436),
+                new Status(2284, 2626, 2264, 3325),
+                new Status(2445, 3814, 2425, 3513),
+                new Status(2605, 4002, 2585, 5301),
+                new Status(2766, 6891, 2746, 5490),
+            ],
             22,
             new Skill(
                 "Sp.ウォーターパワーフォールB Ⅲ",
@@ -535,7 +613,13 @@ public record Memoria(
             "夕映えに冴える一手",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2766, 6891, 2746, 5490),
+            [
+                new Status(2124, 2437, 2104, 2436),
+                new Status(2284, 2626, 2264, 3325),
+                new Status(2445, 3814, 2425, 3513),
+                new Status(2605, 4002, 2585, 5301),
+                new Status(2766, 6891, 2746, 5490),
+            ],
             22,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
@@ -559,7 +643,13 @@ public record Memoria(
             "フラガラッハの光",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(3620, 3595, 4935, 4964),
+            [
+                new Status(1605, 1588, 1872, 1862),
+                new Status(1728, 1711, 2167, 2007),
+                new Status(1852, 1835, 2312, 2302),
+                new Status(1976, 1959, 2607, 2597),
+                new Status(2100, 2083, 3153, 3143),
+            ],
             21,
             new Skill(
                 "WガードヒールE LG",
@@ -584,7 +674,13 @@ public record Memoria(
             "かわいい狩りの秋",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(7068, 2616, 5653, 2586),
+            [
+                new Status(2314, 1974, 2299, 1944),
+                new Status(2503, 2134, 3338, 2104),
+                new Status(3841, 2295, 3526, 2265),
+                new Status(4029, 2455, 5464, 2425),
+                new Status(7068, 2616, 5653, 2586),
+            ],
             22,
             new Skill(
                 "火：パワーストライクB Ⅲ",
@@ -608,7 +704,13 @@ public record Memoria(
             "かわいい狩りの秋",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2616, 7068, 2601, 5638),
+            [
+                new Status(1974, 2314, 1959, 2284),
+                new Status(2134, 2503, 2119, 3323),
+                new Status(2295, 3841, 2280, 3511),
+                new Status(2455, 4029, 2440, 5449),
+                new Status(2616, 7068, 2601, 5638),
+            ],
             22,
             new Skill(
                 "Sp.カウンターファイアパワースマッシュB Ⅲ+",
@@ -632,7 +734,13 @@ public record Memoria(
             "かわいい狩りの秋",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2616, 7068, 2601, 5638),
+            [
+                new Status(1974, 2314, 1959, 2284),
+                new Status(2134, 2503, 2119, 3323),
+                new Status(2295, 3841, 2280, 3511),
+                new Status(2455, 4029, 2440, 5449),
+                new Status(2616, 7068, 2601, 5638),
+            ],
             22,
             new Skill(
                 "Sp.カウンターファイアパワーフォールC Ⅳ",
@@ -656,7 +764,13 @@ public record Memoria(
             "かわいい狩りの秋",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2616, 2616, 7053, 5638),
+            [
+                new Status(1974, 1974, 2299, 2284),
+                new Status(2134, 2134, 2488, 3323),
+                new Status(2295, 2295, 3826, 3511),
+                new Status(2455, 2455, 4014, 5449),
+                new Status(2616, 2616, 7053, 5638),
+            ],
             22,
             new Skill(
                 "カウンターファイアガードヒールD Ⅳ",
@@ -680,7 +794,13 @@ public record Memoria(
             "藍の心と秋の空",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(6920, 2752, 5519, 2732),
+            [
+                new Status(2466, 2110, 2465, 2090),
+                new Status(2655, 2270, 3354, 2250),
+                new Status(3843, 2431, 3542, 2411),
+                new Status(4031, 2591, 5330, 2571),
+                new Status(6920, 2752, 5519, 2732),
+            ],
             22,
             new Skill(
                 "カウンターファイアパワーアシストC Ⅳ",
@@ -704,7 +824,13 @@ public record Memoria(
             "藍の心と秋の空",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6920, 2752, 5519, 2732),
+            [
+                new Status(2466, 2110, 2465, 2090),
+                new Status(2655, 2270, 3354, 2250),
+                new Status(3843, 2431, 3542, 2411),
+                new Status(4031, 2591, 5330, 2571),
+                new Status(6920, 2752, 5519, 2732),
+            ],
             22,
             new Skill(
                 "カウンターファイアガードブレイクB Ⅲ+",
@@ -728,7 +854,13 @@ public record Memoria(
             "神庭の花火師",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(7056, 2613, 5652, 2579),
+            [
+                new Status(2302, 1971, 2298, 1937),
+                new Status(2491, 2131, 3337, 2097),
+                new Status(3829, 2292, 3525, 2258),
+                new Status(4017, 2452, 5463, 2418),
+                new Status(7056, 2613, 5652, 2579),
+            ],
             22,
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
@@ -752,7 +884,13 @@ public record Memoria(
             "神庭の花火師",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(2604, 7065, 2600, 5631),
+            [
+                new Status(1962, 2311, 1958, 2277),
+                new Status(2122, 2500, 2118, 3316),
+                new Status(2283, 3838, 2279, 3504),
+                new Status(2443, 4026, 2439, 5442),
+                new Status(2604, 7065, 2600, 5631),
+            ],
             22,
             new Skill(
                 "Sp.ウォーターパワースマッシュA Ⅳ+",
@@ -776,7 +914,13 @@ public record Memoria(
             "神庭の花火師",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2604, 7065, 2600, 5631),
+            [
+                new Status(1962, 2311, 1958, 2277),
+                new Status(2122, 2500, 2118, 3316),
+                new Status(2283, 3838, 2279, 3504),
+                new Status(2443, 4026, 2439, 5442),
+                new Status(2604, 7065, 2600, 5631),
+            ],
             22,
             new Skill(
                 "水強：Sp.パワーアシストB Ⅲ",
@@ -800,7 +944,13 @@ public record Memoria(
             "神庭の花火師",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(7056, 2613, 5652, 2579),
+            [
+                new Status(2302, 1971, 2298, 1937),
+                new Status(2491, 2131, 3337, 2097),
+                new Status(3829, 2292, 3525, 2258),
+                new Status(4017, 2452, 5463, 2418),
+                new Status(7056, 2613, 5652, 2579),
+            ],
             22,
             new Skill(
                 "ウォーターパワーフォールB Ⅲ",
@@ -824,7 +974,13 @@ public record Memoria(
             "シネマティックに煌めいて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2753, 2744, 5515, 6912),
+            [
+                new Status(2111, 2102, 2461, 2458),
+                new Status(2271, 2262, 3350, 2647),
+                new Status(2432, 2423, 3538, 3835),
+                new Status(2592, 2583, 5326, 4023),
+                new Status(2753, 2744, 5515, 6912),
+            ],
             22,
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
@@ -848,7 +1004,13 @@ public record Memoria(
             "シネマティックに煌めいて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2753, 2744, 5515, 6912),
+            [
+                new Status(2111, 2102, 2461, 2458),
+                new Status(2271, 2262, 3350, 2647),
+                new Status(2432, 2423, 3538, 3835),
+                new Status(2592, 2583, 5326, 4023),
+                new Status(2753, 2744, 5515, 6912),
+            ],
             22,
             new Skill(
                 "水弱：Sp.パワースマッシュB Ⅲ",
@@ -872,7 +1034,13 @@ public record Memoria(
             "秘め事☆プールサイド",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(3184, 6901, 3210, 6082),
+            [
+                new Status(2381, 4273, 2407, 4254),
+                new Status(2581, 5630, 2607, 4611),
+                new Status(2782, 5987, 2808, 5168),
+                new Status(2983, 6544, 3009, 5525),
+                new Status(3184, 6901, 3210, 6082),
+            ],
             24,
             new Skill(
                 "水拡：Sp.パワースマッシュB Ⅲ",
@@ -897,7 +1065,13 @@ public record Memoria(
             "はつらつハイタッチ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(7045, 2580, 5657, 2605),
+            [
+                new Status(2291, 1938, 2303, 1963),
+                new Status(2480, 2098, 3342, 2123),
+                new Status(3818, 2259, 3530, 2284),
+                new Status(4006, 2419, 5468, 2444),
+                new Status(7045, 2580, 5657, 2605),
+            ],
             22,
             new Skill(
                 "水弱：パワーストライクB Ⅲ",
@@ -921,7 +1095,13 @@ public record Memoria(
             "はつらつハイタッチ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2593, 7032, 2605, 5657),
+            [
+                new Status(1951, 2278, 1963, 2303),
+                new Status(2111, 2467, 2123, 3342),
+                new Status(2272, 3805, 2284, 3530),
+                new Status(2432, 3993, 2444, 5468),
+                new Status(2593, 7032, 2605, 5657),
+            ],
             22,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
@@ -945,7 +1125,13 @@ public record Memoria(
             "はつらつハイタッチ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2593, 7032, 2605, 5657),
+            [
+                new Status(1951, 2278, 1963, 2303),
+                new Status(2111, 2467, 2123, 3342),
+                new Status(2272, 3805, 2284, 3530),
+                new Status(2432, 3993, 2444, 5468),
+                new Status(2593, 7032, 2605, 5657),
+            ],
             22,
             new Skill(
                 "Sp.ウォーターパワーフォールC Ⅳ",
@@ -969,7 +1155,13 @@ public record Memoria(
             "はつらつハイタッチ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2593, 2580, 7057, 5657),
+            [
+                new Status(1951, 1938, 2303, 2303),
+                new Status(2111, 2098, 2492, 3342),
+                new Status(2272, 2259, 3830, 3530),
+                new Status(2432, 2419, 4018, 5468),
+                new Status(2593, 2580, 7057, 5657),
+            ],
             22,
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
@@ -993,7 +1185,13 @@ public record Memoria(
             "夢の中で隠れんぼ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(6916, 2766, 5490, 2752),
+            [
+                new Status(2462, 2124, 2436, 2110),
+                new Status(2651, 2284, 3325, 2270),
+                new Status(3839, 2445, 3513, 2431),
+                new Status(4027, 2605, 5301, 2591),
+                new Status(6916, 2766, 5490, 2752),
+            ],
             22,
             new Skill(
                 "ウォーターパワーフォールC Ⅳ",
@@ -1017,7 +1215,13 @@ public record Memoria(
             "夢の中で隠れんぼ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6916, 2766, 5490, 2752),
+            [
+                new Status(2462, 2124, 2436, 2110),
+                new Status(2651, 2284, 3325, 2270),
+                new Status(3839, 2445, 3513, 2431),
+                new Status(4027, 2605, 5301, 2591),
+                new Status(6916, 2766, 5490, 2752),
+            ],
             22,
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
@@ -1041,7 +1245,13 @@ public record Memoria(
             "フレフレリリィ！",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2757, 2763, 5492, 6894),
+            [
+                new Status(2115, 2121, 2438, 2440),
+                new Status(2275, 2281, 3327, 2629),
+                new Status(2436, 2442, 3515, 3817),
+                new Status(2596, 2602, 5303, 4005),
+                new Status(2757, 2763, 5492, 6894),
+            ],
             22,
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅳ",
@@ -1065,7 +1275,13 @@ public record Memoria(
             "フレフレリリィ！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2757, 2763, 5492, 6894),
+            [
+                new Status(2115, 2121, 2438, 2440),
+                new Status(2275, 2281, 3327, 2629),
+                new Status(2436, 2442, 3515, 3817),
+                new Status(2596, 2602, 5303, 4005),
+                new Status(2757, 2763, 5492, 6894),
+            ],
             22,
             new Skill(
                 "水弱：Sp.パワースマッシュB Ⅲ",
@@ -1089,7 +1305,13 @@ public record Memoria(
             "ひそひそナイト",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6889, 2757, 5507, 2729),
+            [
+                new Status(2435, 2115, 2453, 2087),
+                new Status(2624, 2275, 3342, 2247),
+                new Status(3812, 2436, 3530, 2408),
+                new Status(4000, 2596, 5318, 2568),
+                new Status(6889, 2757, 5507, 2729),
+            ],
             22,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -1113,7 +1335,13 @@ public record Memoria(
             "ひそひそナイト",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(6889, 2757, 5507, 2729),
+            [
+                new Status(2435, 2115, 2453, 2087),
+                new Status(2624, 2275, 3342, 2247),
+                new Status(3812, 2436, 3530, 2408),
+                new Status(4000, 2596, 5318, 2568),
+                new Status(6889, 2757, 5507, 2729),
+            ],
             22,
             new Skill(
                 "ウォーターパワーアシストC Ⅳ",
@@ -1137,7 +1365,13 @@ public record Memoria(
             "新涼灯火",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(7055, 2593, 5641, 2590),
+            [
+                new Status(2301, 1951, 2287, 1948),
+                new Status(2490, 2111, 3326, 2108),
+                new Status(3828, 2272, 3514, 2269),
+                new Status(4016, 2432, 5452, 2429),
+                new Status(7055, 2593, 5641, 2590),
+            ],
             22,
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
@@ -1161,7 +1395,13 @@ public record Memoria(
             "新涼灯火",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2603, 7045, 2589, 5642),
+            [
+                new Status(1961, 2291, 1947, 2288),
+                new Status(2121, 2480, 2107, 3327),
+                new Status(2282, 3818, 2268, 3515),
+                new Status(2442, 4006, 2428, 5453),
+                new Status(2603, 7045, 2589, 5642),
+            ],
             22,
             new Skill(
                 "Sp.カウンターファイアガードバーストB Ⅲ+",
@@ -1185,7 +1425,13 @@ public record Memoria(
             "新涼灯火",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2603, 7045, 2589, 5642),
+            [
+                new Status(1961, 2291, 1947, 2288),
+                new Status(2121, 2480, 2107, 3327),
+                new Status(2282, 3818, 2268, 3515),
+                new Status(2442, 4006, 2428, 5453),
+                new Status(2603, 7045, 2589, 5642),
+            ],
             22,
             new Skill(
                 "Sp.カウンターファイアパワーフォールC Ⅳ",
@@ -1209,7 +1455,13 @@ public record Memoria(
             "新涼灯火",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2603, 2593, 6341, 6342),
+            [
+                new Status(1961, 1951, 2287, 2288),
+                new Status(2121, 2111, 2901, 2902),
+                new Status(2282, 2272, 3664, 3665),
+                new Status(2442, 2432, 4727, 4728),
+                new Status(2603, 2593, 6341, 6342),
+            ],
             22,
             new Skill(
                 "WガードヒールC Ⅳ",
@@ -1233,7 +1485,13 @@ public record Memoria(
             "秋のそうさく",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6915, 2761, 5494, 2747),
+            [
+                new Status(2461, 2119, 2440, 2105),
+                new Status(2650, 2279, 3329, 2265),
+                new Status(3838, 2440, 3517, 2426),
+                new Status(4026, 2600, 5305, 2586),
+                new Status(6915, 2761, 5494, 2747),
+            ],
             22,
             new Skill(
                 "カウンターファイアパワーストライクB Ⅲ+",
@@ -1257,7 +1515,13 @@ public record Memoria(
             "秋のそうさく",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(6915, 2761, 5494, 2747),
+            [
+                new Status(2461, 2119, 2440, 2105),
+                new Status(2650, 2279, 3329, 2265),
+                new Status(3838, 2440, 3517, 2426),
+                new Status(4026, 2600, 5305, 2586),
+                new Status(6915, 2761, 5494, 2747),
+            ],
             22,
             new Skill(
                 "カウンターパワーアシストC Ⅳ",
@@ -1281,7 +1545,13 @@ public record Memoria(
             "かけがえのない時間",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(7036, 2614, 5645, 2612),
+            [
+                new Status(2282, 1972, 2291, 1970),
+                new Status(2471, 2132, 3330, 2130),
+                new Status(3809, 2293, 3518, 2291),
+                new Status(3997, 2453, 5456, 2451),
+                new Status(7036, 2614, 5645, 2612),
+            ],
             22,
             new Skill(
                 "火弱：パワーストライクB Ⅲ",
@@ -1305,7 +1575,13 @@ public record Memoria(
             "かけがえのない時間",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2584, 7066, 2593, 5664),
+            [
+                new Status(1942, 2312, 1951, 2310),
+                new Status(2102, 2501, 2111, 3349),
+                new Status(2263, 3839, 2272, 3537),
+                new Status(2423, 4027, 2432, 5475),
+                new Status(2584, 7066, 2593, 5664),
+            ],
             22,
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
@@ -1329,7 +1605,13 @@ public record Memoria(
             "かけがえのない時間",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2584, 7066, 2593, 5664),
+            [
+                new Status(1942, 2312, 1951, 2310),
+                new Status(2102, 2501, 2111, 3349),
+                new Status(2263, 3839, 2272, 3537),
+                new Status(2423, 4027, 2432, 5475),
+                new Status(2584, 7066, 2593, 5664),
+            ],
             22,
             new Skill(
                 "Sp.ファイアパワーアシストC Ⅳ",
@@ -1353,7 +1635,13 @@ public record Memoria(
             "かけがえのない時間",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2584, 2614, 5645, 7064),
+            [
+                new Status(1942, 1972, 2291, 2310),
+                new Status(2102, 2132, 3330, 2499),
+                new Status(2263, 2293, 3518, 3837),
+                new Status(2423, 2453, 5456, 4025),
+                new Status(2584, 2614, 5645, 7064),
+            ],
             22,
             new Skill(
                 "Sp.ファイアガードヒールC Ⅳ",
@@ -1377,7 +1665,13 @@ public record Memoria(
             "双子メイド風スタイル",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2755, 2756, 6887, 5484),
+            [
+                new Status(2113, 2114, 2433, 2430),
+                new Status(2273, 2274, 2622, 3319),
+                new Status(2434, 2435, 3810, 3507),
+                new Status(2594, 2595, 3998, 5295),
+                new Status(2755, 2756, 6887, 5484),
+            ],
             22,
             new Skill(
                 "ファイアガードヒールC Ⅲ",
@@ -1401,7 +1695,13 @@ public record Memoria(
             "双子メイド風スタイル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2755, 2756, 6887, 5484),
+            [
+                new Status(2113, 2114, 2433, 2430),
+                new Status(2273, 2274, 2622, 3319),
+                new Status(2434, 2435, 3810, 3507),
+                new Status(2594, 2595, 3998, 5295),
+                new Status(2755, 2756, 6887, 5484),
+            ],
             22,
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
@@ -1425,7 +1725,13 @@ public record Memoria(
             "素敵なお茶会",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(7043, 2590, 5647, 2606),
+            [
+                new Status(2289, 1948, 2293, 1964),
+                new Status(2478, 2108, 3332, 2124),
+                new Status(3816, 2269, 3520, 2285),
+                new Status(4004, 2429, 5458, 2445),
+                new Status(7043, 2590, 5647, 2606),
+            ],
             22,
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
@@ -1449,7 +1755,13 @@ public record Memoria(
             "素敵なお茶会",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2591, 7042, 2595, 5658),
+            [
+                new Status(1949, 2288, 1953, 2304),
+                new Status(2109, 2477, 2113, 3343),
+                new Status(2270, 3815, 2274, 3531),
+                new Status(2430, 4003, 2434, 5469),
+                new Status(2591, 7042, 2595, 5658),
+            ],
             22,
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
@@ -1473,7 +1785,13 @@ public record Memoria(
             "素敵なお茶会",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(7043, 2590, 5647, 2606),
+            [
+                new Status(2289, 1948, 2293, 1964),
+                new Status(2478, 2108, 3332, 2124),
+                new Status(3816, 2269, 3520, 2285),
+                new Status(4004, 2429, 5458, 2445),
+                new Status(7043, 2590, 5647, 2606),
+            ],
             22,
             new Skill(
                 "ファイアパワーアシストB Ⅲ",
@@ -1497,7 +1815,13 @@ public record Memoria(
             "素敵なお茶会",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(6343, 6342, 2595, 2606),
+            [
+                new Status(2289, 2288, 1953, 1964),
+                new Status(2903, 2902, 2113, 2124),
+                new Status(3666, 3665, 2274, 2285),
+                new Status(4729, 4728, 2434, 2445),
+                new Status(6343, 6342, 2595, 2606),
+            ],
             22,
             new Skill(
                 "火弱：WパワーフォールD Ⅲ",
@@ -1521,7 +1845,13 @@ public record Memoria(
             "メイドのうたたね",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2757, 6881, 2742, 5484),
+            [
+                new Status(2115, 2427, 2100, 2430),
+                new Status(2275, 2616, 2260, 3319),
+                new Status(2436, 3804, 2421, 3507),
+                new Status(2596, 3992, 2581, 5295),
+                new Status(2757, 6881, 2742, 5484),
+            ],
             22,
             new Skill(
                 "Sp.ファイアパワーフォールC Ⅳ",
@@ -1545,7 +1875,13 @@ public record Memoria(
             "メイドのうたたね",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2757, 6881, 2742, 5484),
+            [
+                new Status(2115, 2427, 2100, 2430),
+                new Status(2275, 2616, 2260, 3319),
+                new Status(2436, 3804, 2421, 3507),
+                new Status(2596, 3992, 2581, 5295),
+                new Status(2757, 6881, 2742, 5484),
+            ],
             22,
             new Skill(
                 "火弱：Sp.パワースマッシュB Ⅲ",
@@ -1569,7 +1905,13 @@ public record Memoria(
             "メイドのご奉仕",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6916, 2752, 5509, 2734),
+            [
+                new Status(2462, 2110, 2455, 2092),
+                new Status(2651, 2270, 3344, 2252),
+                new Status(3839, 2431, 3532, 2413),
+                new Status(4027, 2591, 5320, 2573),
+                new Status(6916, 2752, 5509, 2734),
+            ],
             22,
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
@@ -1593,7 +1935,13 @@ public record Memoria(
             "メイドのご奉仕",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(6916, 2752, 5509, 2734),
+            [
+                new Status(2462, 2110, 2455, 2092),
+                new Status(2651, 2270, 3344, 2252),
+                new Status(3839, 2431, 3532, 2413),
+                new Status(4027, 2591, 5320, 2573),
+                new Status(6916, 2752, 5509, 2734),
+            ],
             22,
             new Skill(
                 "ファイアパワーフォールB Ⅲ",
@@ -1617,7 +1965,13 @@ public record Memoria(
             "海風に吹かれて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2736, 6898, 2742, 5487),
+            [
+                new Status(2094, 2444, 2100, 2433),
+                new Status(2254, 2633, 2260, 3322),
+                new Status(2415, 3821, 2421, 3510),
+                new Status(2575, 4009, 2581, 5298),
+                new Status(2736, 6898, 2742, 5487),
+            ],
             22,
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
@@ -1641,7 +1995,13 @@ public record Memoria(
             "海風に吹かれて",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2736, 6898, 2742, 5487),
+            [
+                new Status(2094, 2444, 2100, 2433),
+                new Status(2254, 2633, 2260, 3322),
+                new Status(2415, 3821, 2421, 3510),
+                new Status(2575, 4009, 2581, 5298),
+                new Status(2736, 6898, 2742, 5487),
+            ],
             22,
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
@@ -1665,7 +2025,13 @@ public record Memoria(
             "落ち葉のリース",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(2580, 7060, 2615, 5637),
+            [
+                new Status(1938, 2306, 1973, 2283),
+                new Status(2098, 2495, 2133, 3322),
+                new Status(2259, 3833, 2294, 3510),
+                new Status(2419, 4021, 2454, 5448),
+                new Status(2580, 7060, 2615, 5637),
+            ],
             22,
             new Skill(
                 "水弱：Sp.マイトスマッシュA Ⅳ+",
@@ -1689,7 +2055,13 @@ public record Memoria(
             "落ち葉のリース",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2580, 7060, 2615, 5637),
+            [
+                new Status(1938, 2306, 1973, 2283),
+                new Status(2098, 2495, 2133, 3322),
+                new Status(2259, 3833, 2294, 3510),
+                new Status(2419, 4021, 2454, 5448),
+                new Status(2580, 7060, 2615, 5637),
+            ],
             22,
             new Skill(
                 "Sp.カウンターウォーターパワースマッシュB Ⅲ+",
@@ -1713,7 +2085,13 @@ public record Memoria(
             "落ち葉のリース",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2580, 7060, 2615, 5637),
+            [
+                new Status(1938, 2306, 1973, 2283),
+                new Status(2098, 2495, 2133, 3322),
+                new Status(2259, 3833, 2294, 3510),
+                new Status(2419, 4021, 2454, 5448),
+                new Status(2580, 7060, 2615, 5637),
+            ],
             22,
             new Skill(
                 "Sp.カウンターパワーアシストC Ⅳ",
@@ -1737,7 +2115,13 @@ public record Memoria(
             "落ち葉のリース",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2580, 2608, 5667, 7037),
+            [
+                new Status(1938, 1966, 2313, 2283),
+                new Status(2098, 2126, 3352, 2472),
+                new Status(2259, 2287, 3540, 3810),
+                new Status(2419, 2447, 5478, 3998),
+                new Status(2580, 2608, 5667, 7037),
+            ],
             22,
             new Skill(
                 "Sp.カウンターウォーターガードヒールD Ⅳ",
@@ -1761,7 +2145,13 @@ public record Memoria(
             "深まる秋の一幕",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6897, 2765, 5495, 2754),
+            [
+                new Status(2443, 2123, 2441, 2112),
+                new Status(2632, 2283, 3330, 2272),
+                new Status(3820, 2444, 3518, 2433),
+                new Status(4008, 2604, 5306, 2593),
+                new Status(6897, 2765, 5495, 2754),
+            ],
             22,
             new Skill(
                 "カウンターウォーターガードブレイクB Ⅲ+",
@@ -1785,7 +2175,13 @@ public record Memoria(
             "深まる秋の一幕",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(6897, 2765, 5495, 2754),
+            [
+                new Status(2443, 2123, 2441, 2112),
+                new Status(2632, 2283, 3330, 2272),
+                new Status(3820, 2444, 3518, 2433),
+                new Status(4008, 2604, 5306, 2593),
+                new Status(6897, 2765, 5495, 2754),
+            ],
             22,
             new Skill(
                 "ウォーターパワーフォールC Ⅳ",
@@ -1809,7 +2205,13 @@ public record Memoria(
             "雹嵐の如く",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(3639, 4135, 2699, 2731),
+            [
+                new Status(1871, 1842, 1604, 1601),
+                new Status(2166, 1987, 1727, 1724),
+                new Status(2311, 2282, 1851, 1848),
+                new Status(2756, 2427, 1975, 1972),
+                new Status(2902, 3373, 2099, 2096),
+            ],
             21,
             new Skill(
                 "WパワーフォールE LG",
@@ -1834,7 +2236,13 @@ public record Memoria(
             "瓦礫の街に咲いてこそ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(7063, 2616, 5659, 2590),
+            [
+                new Status(2309, 1974, 2305, 1948),
+                new Status(2498, 2134, 3344, 2108),
+                new Status(3836, 2295, 3532, 2269),
+                new Status(4024, 2455, 5470, 2429),
+                new Status(7063, 2616, 5659, 2590),
+            ],
             22,
             new Skill(
                 "火弱：パワーストライクB Ⅲ",
@@ -1858,7 +2266,13 @@ public record Memoria(
             "瓦礫の街に咲いてこそ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2611, 7068, 2607, 5642),
+            [
+                new Status(1969, 2314, 1965, 2288),
+                new Status(2129, 2503, 2125, 3327),
+                new Status(2290, 3841, 2286, 3515),
+                new Status(2450, 4029, 2446, 5453),
+                new Status(2611, 7068, 2607, 5642),
+            ],
             22,
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
@@ -1882,7 +2296,13 @@ public record Memoria(
             "瓦礫の街に咲いてこそ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2611, 7068, 2607, 5642),
+            [
+                new Status(1969, 2314, 1965, 2288),
+                new Status(2129, 2503, 2125, 3327),
+                new Status(2290, 3841, 2286, 3515),
+                new Status(2450, 4029, 2446, 5453),
+                new Status(2611, 7068, 2607, 5642),
+            ],
             22,
             new Skill(
                 "火強：Sp.パワーアシストB Ⅲ",
@@ -1906,7 +2326,13 @@ public record Memoria(
             "瓦礫の街に咲いてこそ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2611, 2616, 7059, 5642),
+            [
+                new Status(1969, 1974, 2305, 2288),
+                new Status(2129, 2134, 2494, 3327),
+                new Status(2290, 2295, 3832, 3515),
+                new Status(2450, 2455, 4020, 5453),
+                new Status(2611, 2616, 7059, 5642),
+            ],
             22,
             new Skill(
                 "ファイアガードヒールC Ⅳ",
@@ -1930,7 +2356,13 @@ public record Memoria(
             "掲げし長針と短針",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6915, 2744, 5495, 2766),
+            [
+                new Status(2461, 2102, 2441, 2124),
+                new Status(2650, 2262, 3330, 2284),
+                new Status(3838, 2423, 3518, 2445),
+                new Status(4026, 2583, 5306, 2605),
+                new Status(6915, 2744, 5495, 2766),
+            ],
             22,
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
@@ -1954,7 +2386,13 @@ public record Memoria(
             "掲げし長針と短針",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(6915, 2744, 5495, 2766),
+            [
+                new Status(2461, 2102, 2441, 2124),
+                new Status(2650, 2262, 3330, 2284),
+                new Status(3838, 2423, 3518, 2445),
+                new Status(4026, 2583, 5306, 2605),
+                new Status(6915, 2744, 5495, 2766),
+            ],
             22,
             new Skill(
                 "ファイアパワーアシストC Ⅳ",
@@ -1978,7 +2416,13 @@ public record Memoria(
             "廃墟のアンティークドール",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2745, 6902, 2765, 5514),
+            [
+                new Status(2103, 2448, 2123, 2460),
+                new Status(2263, 2637, 2283, 3349),
+                new Status(2424, 3825, 2444, 3537),
+                new Status(2584, 4013, 2604, 5325),
+                new Status(2745, 6902, 2765, 5514),
+            ],
             22,
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
@@ -2002,7 +2446,13 @@ public record Memoria(
             "廃墟のアンティークドール",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2745, 6902, 2765, 5514),
+            [
+                new Status(2103, 2448, 2123, 2460),
+                new Status(2263, 2637, 2283, 3349),
+                new Status(2424, 3825, 2444, 3537),
+                new Status(2584, 4013, 2604, 5325),
+                new Status(2745, 6902, 2765, 5514),
+            ],
             22,
             new Skill(
                 "Sp.ファイアガードフォールC Ⅳ",
@@ -2026,7 +2476,13 @@ public record Memoria(
             "転ばぬ先の一葉",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2754, 6888, 2761, 5506),
+            [
+                new Status(2112, 2434, 2119, 2452),
+                new Status(2272, 2623, 2279, 3341),
+                new Status(2433, 3811, 2440, 3529),
+                new Status(2593, 3999, 2600, 5317),
+                new Status(2754, 6888, 2761, 5506),
+            ],
             22,
             new Skill(
                 "Sp.カウンターファイアパワーアシストC Ⅳ",
@@ -2050,7 +2506,13 @@ public record Memoria(
             "転ばぬ先の一葉",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2754, 6888, 2761, 5506),
+            [
+                new Status(2112, 2434, 2119, 2452),
+                new Status(2272, 2623, 2279, 3341),
+                new Status(2433, 3811, 2440, 3529),
+                new Status(2593, 3999, 2600, 5317),
+                new Status(2754, 6888, 2761, 5506),
+            ],
             22,
             new Skill(
                 "Sp.カウンターパワースマッシュB Ⅲ",
@@ -2074,7 +2536,13 @@ public record Memoria(
             "秋空を見上げながら",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(7040, 2589, 5642, 2619),
+            [
+                new Status(2286, 1947, 2288, 1977),
+                new Status(2475, 2107, 3327, 2137),
+                new Status(3813, 2268, 3515, 2298),
+                new Status(4001, 2428, 5453, 2458),
+                new Status(7040, 2589, 5642, 2619),
+            ],
             22,
             new Skill(
                 "火：ファイアパワーストライクA Ⅳ+",
@@ -2098,7 +2566,13 @@ public record Memoria(
             "秋空を見上げながら",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(7040, 2589, 5642, 2619),
+            [
+                new Status(2286, 1947, 2288, 1977),
+                new Status(2475, 2107, 3327, 2137),
+                new Status(3813, 2268, 3515, 2298),
+                new Status(4001, 2428, 5453, 2458),
+                new Status(7040, 2589, 5642, 2619),
+            ],
             22,
             new Skill(
                 "カウンターパワーストライクB Ⅲ",
@@ -2122,7 +2596,13 @@ public record Memoria(
             "秋空を見上げながら",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(7040, 2589, 5642, 2619),
+            [
+                new Status(2286, 1947, 2288, 1977),
+                new Status(2475, 2107, 3327, 2137),
+                new Status(3813, 2268, 3515, 2298),
+                new Status(4001, 2428, 5453, 2458),
+                new Status(7040, 2589, 5642, 2619),
+            ],
             22,
             new Skill(
                 "ウィンドパワーフォールC Ⅳ",
@@ -2146,7 +2626,13 @@ public record Memoria(
             "秋空を見上げながら",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2588, 2589, 5642, 7071),
+            [
+                new Status(1946, 1947, 2288, 2317),
+                new Status(2106, 2107, 3327, 2506),
+                new Status(2267, 2268, 3515, 3844),
+                new Status(2427, 2428, 5453, 4032),
+                new Status(2588, 2589, 5642, 7071),
+            ],
             22,
             new Skill(
                 "Sp.カウンターガードヒールC Ⅲ",
@@ -2170,7 +2656,13 @@ public record Memoria(
             "優美な魔女に魅せられて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(7069, 2582, 5670, 2592),
+            [
+                new Status(2315, 1940, 2316, 1950),
+                new Status(2504, 2100, 3355, 2110),
+                new Status(3842, 2261, 3543, 2271),
+                new Status(4030, 2421, 5481, 2431),
+                new Status(7069, 2582, 5670, 2592),
+            ],
             22,
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
@@ -2194,7 +2686,13 @@ public record Memoria(
             "優美な魔女に魅せられて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2617, 7034, 2618, 5644),
+            [
+                new Status(1975, 2280, 1976, 2290),
+                new Status(2135, 2469, 2136, 3329),
+                new Status(2296, 3807, 2297, 3517),
+                new Status(2456, 3995, 2457, 5455),
+                new Status(2617, 7034, 2618, 5644),
+            ],
             22,
             new Skill(
                 "水弱：Sp.パワースマッシュB Ⅲ",
@@ -2218,7 +2716,13 @@ public record Memoria(
             "優美な魔女に魅せられて",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(7069, 2582, 5670, 2592),
+            [
+                new Status(2315, 1940, 2316, 1950),
+                new Status(2504, 2100, 3355, 2110),
+                new Status(3842, 2261, 3543, 2271),
+                new Status(4030, 2421, 5481, 2431),
+                new Status(7069, 2582, 5670, 2592),
+            ],
             22,
             new Skill(
                 "ウォーターパワーアシストB Ⅲ",
@@ -2242,7 +2746,13 @@ public record Memoria(
             "優美な魔女に魅せられて",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2617, 7034, 2618, 5644),
+            [
+                new Status(1975, 2280, 1976, 2290),
+                new Status(2135, 2469, 2136, 3329),
+                new Status(2296, 3807, 2297, 3517),
+                new Status(2456, 3995, 2457, 5455),
+                new Status(2617, 7034, 2618, 5644),
+            ],
             22,
             new Skill(
                 "水弱：Sp.ガードフォールB Ⅲ",
@@ -2266,7 +2776,13 @@ public record Memoria(
             "這い寄る妖艶",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(2731, 6914, 2760, 5501),
+            [
+                new Status(2089, 2460, 2118, 2447),
+                new Status(2249, 2649, 2278, 3336),
+                new Status(2410, 3837, 2439, 3524),
+                new Status(2570, 4025, 2599, 5312),
+                new Status(2731, 6914, 2760, 5501),
+            ],
             22,
             new Skill(
                 "水：Sp.ウォーターパワースマッシュA Ⅳ+",
@@ -2290,7 +2806,13 @@ public record Memoria(
             "這い寄る妖艶",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2731, 6914, 2760, 5501),
+            [
+                new Status(2089, 2460, 2118, 2447),
+                new Status(2249, 2649, 2278, 3336),
+                new Status(2410, 3837, 2439, 3524),
+                new Status(2570, 4025, 2599, 5312),
+                new Status(2731, 6914, 2760, 5501),
+            ],
             22,
             new Skill(
                 "Sp.ファイアパワーフォールB Ⅲ",
@@ -2314,7 +2836,13 @@ public record Memoria(
             "健気×恥じらい＝",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(3179, 3204, 6484, 6503),
+            [
+                new Status(2376, 2401, 4256, 4275),
+                new Status(2576, 2601, 5113, 5132),
+                new Status(2777, 2802, 5570, 5589),
+                new Status(2978, 3003, 6027, 6046),
+                new Status(3179, 3204, 6484, 6503),
+            ],
             24,
             new Skill(
                 "水：WガードヒールD Ⅳ",
@@ -2339,7 +2867,13 @@ public record Memoria(
             "百合ヶ丘ティーパーティ2023開催！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(1570, 2264, 1601, 2234),
+            [
+                new Status(1234, 1470, 1265, 1440),
+                new Status(1318, 1569, 1349, 1739),
+                new Status(1402, 1867, 1433, 1837),
+                new Status(1486, 1965, 1517, 2135),
+                new Status(1570, 2264, 1601, 2234),
+            ],
             18,
             new Skill(
                 "WパワーアシストA Ⅲ",
@@ -2363,7 +2897,13 @@ public record Memoria(
             "百合ヶ丘ティーパーティ2023開催！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(1570, 2264, 1601, 2234),
+            [
+                new Status(1234, 1470, 1265, 1440),
+                new Status(1318, 1569, 1349, 1739),
+                new Status(1402, 1867, 1433, 1837),
+                new Status(1486, 1965, 1517, 2135),
+                new Status(1570, 2264, 1601, 2234),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
@@ -2387,7 +2927,13 @@ public record Memoria(
             "もみじまんじゅう",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2745, 6921, 2734, 5511),
+            [
+                new Status(2103, 2467, 2092, 2457),
+                new Status(2263, 2656, 2252, 3346),
+                new Status(2424, 3844, 2413, 3534),
+                new Status(2584, 4032, 2573, 5322),
+                new Status(2745, 6921, 2734, 5511),
+            ],
             22,
             new Skill(
                 "Sp.カウンターファイアパワーフォールC Ⅳ",
@@ -2411,7 +2957,13 @@ public record Memoria(
             "もみじまんじゅう",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2745, 6921, 2734, 5511),
+            [
+                new Status(2103, 2467, 2092, 2457),
+                new Status(2263, 2656, 2252, 3346),
+                new Status(2424, 3844, 2413, 3534),
+                new Status(2584, 4032, 2573, 5322),
+                new Status(2745, 6921, 2734, 5511),
+            ],
             22,
             new Skill(
                 "Sp.カウンターパワースマッシュB Ⅲ",
@@ -2435,7 +2987,13 @@ public record Memoria(
             "楓の頃",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6916, 2750, 5494, 2755),
+            [
+                new Status(2462, 2108, 2440, 2113),
+                new Status(2651, 2268, 3329, 2273),
+                new Status(3839, 2429, 3517, 2434),
+                new Status(4027, 2589, 5305, 2594),
+                new Status(6916, 2750, 5494, 2755),
+            ],
             22,
             new Skill(
                 "カウンターパワーストライクB Ⅲ",
@@ -2459,7 +3017,13 @@ public record Memoria(
             "楓の頃",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(6916, 2750, 5494, 2755),
+            [
+                new Status(2462, 2108, 2440, 2113),
+                new Status(2651, 2268, 3329, 2273),
+                new Status(3839, 2429, 3517, 2434),
+                new Status(4027, 2589, 5305, 2594),
+                new Status(6916, 2750, 5494, 2755),
+            ],
             22,
             new Skill(
                 "ウォーターパワーアシストC Ⅳ",
@@ -2483,7 +3047,13 @@ public record Memoria(
             "光射す守護者",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6906, 2729, 5492, 2769),
+            [
+                new Status(2452, 2087, 2438, 2127),
+                new Status(2641, 2247, 3327, 2287),
+                new Status(3829, 2408, 3515, 2448),
+                new Status(4017, 2568, 5303, 2608),
+                new Status(6906, 2729, 5492, 2769),
+            ],
             22,
             new Skill(
                 "火弱：パワーストライクB Ⅲ",
@@ -2507,7 +3077,13 @@ public record Memoria(
             "光射す守護者",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(6906, 2729, 5492, 2769),
+            [
+                new Status(2452, 2087, 2438, 2127),
+                new Status(2641, 2247, 3327, 2287),
+                new Status(3829, 2408, 3515, 2448),
+                new Status(4017, 2568, 5303, 2608),
+                new Status(6906, 2729, 5492, 2769),
+            ],
             22,
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
@@ -2531,7 +3107,13 @@ public record Memoria(
             "緋染めの天使",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2742, 6901, 2746, 5502),
+            [
+                new Status(2100, 2447, 2104, 2448),
+                new Status(2260, 2636, 2264, 3337),
+                new Status(2421, 3824, 2425, 3525),
+                new Status(2581, 4012, 2585, 5313),
+                new Status(2742, 6901, 2746, 5502),
+            ],
             22,
             new Skill(
                 "火弱：Sp.パワースマッシュB Ⅲ",
@@ -2555,7 +3137,13 @@ public record Memoria(
             "緋染めの天使",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2742, 6901, 2746, 5502),
+            [
+                new Status(2100, 2447, 2104, 2448),
+                new Status(2260, 2636, 2264, 3337),
+                new Status(2421, 3824, 2425, 3525),
+                new Status(2581, 4012, 2585, 5313),
+                new Status(2742, 6901, 2746, 5502),
+            ],
             22,
             new Skill(
                 "火強：Sp.パワーアシストB Ⅲ",
@@ -2579,7 +3167,13 @@ public record Memoria(
             "誓いの剣閃",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(6505, 6488, 3208, 3198),
+            [
+                new Status(4277, 4260, 2405, 2395),
+                new Status(5134, 5117, 2605, 2595),
+                new Status(5591, 5574, 2806, 2796),
+                new Status(6048, 6031, 3007, 2997),
+                new Status(6505, 6488, 3208, 3198),
+            ],
             24,
             new Skill(
                 "火：WパワーフォールB Ⅲ",
@@ -2595,7 +3189,8 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp()],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1042,
@@ -2603,7 +3198,13 @@ public record Memoria(
             "ねこさんこちら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2229, 6255, 2247, 4909),
+            [
+                new Status(1734, 2024, 1752, 2028),
+                new Status(1857, 2169, 1875, 2873),
+                new Status(1981, 3264, 1999, 3018),
+                new Status(2105, 3409, 2123, 4763),
+                new Status(2229, 6255, 2247, 4909),
+            ],
             21,
             new Skill(
                 "Sp.カウンターファイアパワースマッシュB Ⅲ+",
@@ -2627,7 +3228,13 @@ public record Memoria(
             "ねこさんこちら",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2229, 6255, 2247, 4909),
+            [
+                new Status(1734, 2024, 1752, 2028),
+                new Status(1857, 2169, 1875, 2873),
+                new Status(1981, 3264, 1999, 3018),
+                new Status(2105, 3409, 2123, 4763),
+                new Status(2229, 6255, 2247, 4909),
+            ],
             21,
             new Skill(
                 "火強：WパワーアシストB Ⅲ",
@@ -2651,7 +3258,13 @@ public record Memoria(
             "たつき100％",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2248, 2248, 4873, 6253),
+            [
+                new Status(1753, 1753, 1992, 2022),
+                new Status(1876, 1876, 2837, 2167),
+                new Status(2000, 2000, 2982, 3262),
+                new Status(2124, 2124, 4727, 3407),
+                new Status(2248, 2248, 4873, 6253),
+            ],
             21,
             new Skill(
                 "Sp.ファイアガードヒールD Ⅳ",
@@ -2675,7 +3288,13 @@ public record Memoria(
             "たつき100％",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(2248, 2248, 4873, 6253),
+            [
+                new Status(1753, 1753, 1992, 2022),
+                new Status(1876, 1876, 2837, 2167),
+                new Status(2000, 2000, 2982, 3262),
+                new Status(2124, 2124, 4727, 3407),
+                new Status(2248, 2248, 4873, 6253),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターパワースマッシュA Ⅳ+",
@@ -2699,7 +3318,13 @@ public record Memoria(
             "彼方の宵空",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6250, 2238, 4884, 2237),
+            [
+                new Status(2019, 1743, 2003, 1742),
+                new Status(2164, 1866, 2848, 1865),
+                new Status(3259, 1990, 2993, 1989),
+                new Status(3404, 2114, 4738, 2113),
+                new Status(6250, 2238, 4884, 2237),
+            ],
             21,
             new Skill(
                 "水弱：パワーストライクB Ⅲ",
@@ -2723,7 +3348,13 @@ public record Memoria(
             "彼方の宵空",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(6250, 2238, 4884, 2237),
+            [
+                new Status(2019, 1743, 2003, 1742),
+                new Status(2164, 1866, 2848, 1865),
+                new Status(3259, 1990, 2993, 1989),
+                new Status(3404, 2114, 4738, 2113),
+                new Status(6250, 2238, 4884, 2237),
+            ],
             21,
             new Skill(
                 "ウォーターガードフォールC Ⅳ",
@@ -2747,7 +3378,13 @@ public record Memoria(
             "荒ぶる銘花",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2237, 6255, 2236, 4882),
+            [
+                new Status(1742, 2024, 1741, 2001),
+                new Status(1865, 2169, 1864, 2846),
+                new Status(1989, 3264, 1988, 2991),
+                new Status(2113, 3409, 2112, 4736),
+                new Status(2237, 6255, 2236, 4882),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
@@ -2771,7 +3408,13 @@ public record Memoria(
             "荒ぶる銘花",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2237, 6255, 2236, 4882),
+            [
+                new Status(1742, 2024, 1741, 2001),
+                new Status(1865, 2169, 1864, 2846),
+                new Status(1989, 3264, 1988, 2991),
+                new Status(2113, 3409, 2112, 4736),
+                new Status(2237, 6255, 2236, 4882),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターパワーアシストC Ⅳ",
@@ -2795,7 +3438,13 @@ public record Memoria(
             "ムーンリットワルツ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2229, 6243, 2241, 4892),
+            [
+                new Status(1734, 2012, 1746, 2011),
+                new Status(1857, 2157, 1869, 2856),
+                new Status(1981, 3252, 1993, 3001),
+                new Status(2105, 3397, 2117, 4746),
+                new Status(2229, 6243, 2241, 4892),
+            ],
             21,
             new Skill(
                 "Sp.カウンターファイアガードフォールC Ⅳ",
@@ -2819,7 +3468,13 @@ public record Memoria(
             "ムーンリットワルツ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(2229, 6243, 2241, 4892),
+            [
+                new Status(1734, 2012, 1746, 2011),
+                new Status(1857, 2157, 1869, 2856),
+                new Status(1981, 3252, 1993, 3001),
+                new Status(2105, 3397, 2117, 4746),
+                new Status(2229, 6243, 2241, 4892),
+            ],
             21,
             new Skill(
                 "Sp.ファイアパワースマッシュA Ⅳ+",
@@ -2843,7 +3498,13 @@ public record Memoria(
             "月を見上げて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2229, 6257, 2215, 4893),
+            [
+                new Status(1734, 2026, 1720, 2012),
+                new Status(1857, 2171, 1843, 2857),
+                new Status(1981, 3266, 1967, 3002),
+                new Status(2105, 3411, 2091, 4747),
+                new Status(2229, 6257, 2215, 4893),
+            ],
             21,
             new Skill(
                 "Sp.カウンターガードバーストB Ⅲ",
@@ -2867,7 +3528,13 @@ public record Memoria(
             "月を見上げて",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2229, 6257, 2215, 4893),
+            [
+                new Status(1734, 2026, 1720, 2012),
+                new Status(1857, 2171, 1843, 2857),
+                new Status(1981, 3266, 1967, 3002),
+                new Status(2105, 3411, 2091, 4747),
+                new Status(2229, 6257, 2215, 4893),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
@@ -2891,7 +3558,13 @@ public record Memoria(
             "お月さまの秘密",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6251, 2216, 4886, 2245),
+            [
+                new Status(2020, 1721, 2005, 1750),
+                new Status(2165, 1844, 2850, 1873),
+                new Status(3260, 1968, 2995, 1997),
+                new Status(3405, 2092, 4740, 2121),
+                new Status(6251, 2216, 4886, 2245),
+            ],
             21,
             new Skill(
                 "カウンターガードブレイクB Ⅲ",
@@ -2915,7 +3588,13 @@ public record Memoria(
             "お月さまの秘密",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(6251, 2216, 4886, 2245),
+            [
+                new Status(2020, 1721, 2005, 1750),
+                new Status(2165, 1844, 2850, 1873),
+                new Status(3260, 1968, 2995, 1997),
+                new Status(3405, 2092, 4740, 2121),
+                new Status(6251, 2216, 4886, 2245),
+            ],
             21,
             new Skill(
                 "ファイアパワーアシストB Ⅲ",
@@ -2939,7 +3618,13 @@ public record Memoria(
             "2人でニューゲーム",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2217, 6257, 2217, 4892),
+            [
+                new Status(1722, 2026, 1722, 2011),
+                new Status(1845, 2171, 1845, 2856),
+                new Status(1969, 3266, 1969, 3001),
+                new Status(2093, 3411, 2093, 4746),
+                new Status(2217, 6257, 2217, 4892),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
@@ -2963,7 +3648,13 @@ public record Memoria(
             "2人でニューゲーム",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2217, 6257, 2217, 4892),
+            [
+                new Status(1722, 2026, 1722, 2011),
+                new Status(1845, 2171, 1845, 2856),
+                new Status(1969, 3266, 1969, 3001),
+                new Status(2093, 3411, 2093, 4746),
+                new Status(2217, 6257, 2217, 4892),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドパワーアシストB Ⅲ",
@@ -2987,7 +3678,13 @@ public record Memoria(
             "クエレブレの正義",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(6233, 2237, 4874, 2214),
+            [
+                new Status(2002, 1742, 1993, 1719),
+                new Status(2147, 1865, 2838, 1842),
+                new Status(3242, 1989, 2983, 1966),
+                new Status(3387, 2113, 4728, 2090),
+                new Status(6233, 2237, 4874, 2214),
+            ],
             21,
             new Skill(
                 "ウォーターガードヒールD Ⅳ",
@@ -3011,7 +3708,13 @@ public record Memoria(
             "クエレブレの正義",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(6233, 2237, 4874, 2214),
+            [
+                new Status(2002, 1742, 1993, 1719),
+                new Status(2147, 1865, 2838, 1842),
+                new Status(3242, 1989, 2983, 1966),
+                new Status(3387, 2113, 4728, 2090),
+                new Status(6233, 2237, 4874, 2214),
+            ],
             21,
             new Skill(
                 "風弱：パワーストライクB Ⅲ",
@@ -3035,7 +3738,13 @@ public record Memoria(
             "ワイルドバンチ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2240, 6249, 2235, 4887),
+            [
+                new Status(1745, 2018, 1740, 2006),
+                new Status(1868, 2163, 1863, 2851),
+                new Status(1992, 3258, 1987, 2996),
+                new Status(2116, 3403, 2111, 4741),
+                new Status(2240, 6249, 2235, 4887),
+            ],
             21,
             new Skill(
                 "風弱：Sp.パワースマッシュB Ⅲ",
@@ -3059,7 +3768,13 @@ public record Memoria(
             "ワイルドバンチ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2240, 6249, 2235, 4887),
+            [
+                new Status(1745, 2018, 1740, 2006),
+                new Status(1868, 2163, 1863, 2851),
+                new Status(1992, 3258, 1987, 2996),
+                new Status(2116, 3403, 2111, 4741),
+                new Status(2240, 6249, 2235, 4887),
+            ],
             21,
             new Skill(
                 "風強：Sp.パワーアシストB Ⅲ",
@@ -3083,7 +3798,13 @@ public record Memoria(
             "追憶の星空",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(2235, 6227, 2235, 4905),
+            [
+                new Status(1740, 1996, 1740, 2024),
+                new Status(1863, 2141, 1863, 2869),
+                new Status(1987, 3236, 1987, 3014),
+                new Status(2111, 3381, 2111, 4759),
+                new Status(2235, 6227, 2235, 4905),
+            ],
             21,
             new Skill(
                 "風弱：Sp.ガードフォールB Ⅲ",
@@ -3107,7 +3828,13 @@ public record Memoria(
             "追憶の星空",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2235, 6227, 2235, 4905),
+            [
+                new Status(1740, 1996, 1740, 2024),
+                new Status(1863, 2141, 1863, 2869),
+                new Status(1987, 3236, 1987, 3014),
+                new Status(2111, 3381, 2111, 4759),
+                new Status(2235, 6227, 2235, 4905),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターパワーバーストB Ⅲ+",
@@ -3131,7 +3858,13 @@ public record Memoria(
             "シャナの剣",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(6055, 2718, 5249, 2750),
+            [
+                new Status(3650, 2040, 3644, 2072),
+                new Status(4951, 2209, 3945, 2241),
+                new Status(5252, 2379, 4446, 2411),
+                new Status(5753, 2548, 4747, 2580),
+                new Status(6055, 2718, 5249, 2750),
+            ],
             23,
             new Skill(
                 "風拡：ガードブレイクB Ⅲ",
@@ -3156,7 +3889,13 @@ public record Memoria(
             "黄色い絨毯で",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(6254, 2248, 4877, 2212),
+            [
+                new Status(2023, 1753, 1996, 1717),
+                new Status(2168, 1876, 2841, 1840),
+                new Status(3263, 2000, 2986, 1964),
+                new Status(3408, 2124, 4731, 2088),
+                new Status(6254, 2248, 4877, 2212),
+            ],
             21,
             new Skill(
                 "カウンターファイアパワーフォールC Ⅳ",
@@ -3180,7 +3919,13 @@ public record Memoria(
             "黄色い絨毯で",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6254, 2248, 4877, 2212),
+            [
+                new Status(2023, 1753, 1996, 1717),
+                new Status(2168, 1876, 2841, 1840),
+                new Status(3263, 2000, 2986, 1964),
+                new Status(3408, 2124, 4731, 2088),
+                new Status(6254, 2248, 4877, 2212),
+            ],
             21,
             new Skill(
                 "ファイアパワーブレイクB Ⅲ+",
@@ -3204,7 +3949,13 @@ public record Memoria(
             "朋友信之",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6237, 2220, 4903, 2215),
+            [
+                new Status(2006, 1725, 2022, 1720),
+                new Status(2151, 1848, 2867, 1843),
+                new Status(3246, 1972, 3012, 1967),
+                new Status(3391, 2096, 4757, 2091),
+                new Status(6237, 2220, 4903, 2215),
+            ],
             21,
             new Skill(
                 "カウンターガードブレイクB Ⅲ",
@@ -3228,7 +3979,13 @@ public record Memoria(
             "朋友信之",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(6237, 2220, 4903, 2215),
+            [
+                new Status(2006, 1725, 2022, 1720),
+                new Status(2151, 1848, 2867, 1843),
+                new Status(3246, 1972, 3012, 1967),
+                new Status(3391, 2096, 4757, 2091),
+                new Status(6237, 2220, 4903, 2215),
+            ],
             21,
             new Skill(
                 "ファイアガードヒールC Ⅲ",
@@ -3252,7 +4009,13 @@ public record Memoria(
             "コスモスコスメ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2217, 6230, 2249, 4896),
+            [
+                new Status(1722, 1999, 1754, 2015),
+                new Status(1845, 2144, 1877, 2860),
+                new Status(1969, 3239, 2001, 3005),
+                new Status(2093, 3384, 2125, 4750),
+                new Status(2217, 6230, 2249, 4896),
+            ],
             21,
             new Skill(
                 "Sp.カウンターガードバーストB Ⅲ",
@@ -3276,7 +4039,13 @@ public record Memoria(
             "コスモスコスメ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2217, 6230, 2249, 4896),
+            [
+                new Status(1722, 1999, 1754, 2015),
+                new Status(1845, 2144, 1877, 2860),
+                new Status(1969, 3239, 2001, 3005),
+                new Status(2093, 3384, 2125, 4750),
+                new Status(2217, 6230, 2249, 4896),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターパワーアシストB Ⅲ",
@@ -3300,7 +4069,13 @@ public record Memoria(
             "キラキラ★アイドル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6254, 2229, 4876, 2221),
+            [
+                new Status(2023, 1734, 1995, 1726),
+                new Status(2168, 1857, 2840, 1849),
+                new Status(3263, 1981, 2985, 1973),
+                new Status(3408, 2105, 4730, 2097),
+                new Status(6254, 2229, 4876, 2221),
+            ],
             21,
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
@@ -3324,7 +4099,13 @@ public record Memoria(
             "キラキラ★アイドル",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(6254, 2229, 4876, 2221),
+            [
+                new Status(2023, 1734, 1995, 1726),
+                new Status(2168, 1857, 2840, 1849),
+                new Status(3263, 1981, 2985, 1973),
+                new Status(3408, 2105, 4730, 2097),
+                new Status(6254, 2229, 4876, 2221),
+            ],
             21,
             new Skill(
                 "ファイアガードヒールC Ⅲ",
@@ -3348,7 +4129,13 @@ public record Memoria(
             "デュエットですの♥",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(6247, 2239, 4890, 2250),
+            [
+                new Status(2016, 1744, 2009, 1755),
+                new Status(2161, 1867, 2854, 1878),
+                new Status(3256, 1991, 2999, 2002),
+                new Status(3401, 2115, 4744, 2126),
+                new Status(6247, 2239, 4890, 2250),
+            ],
             21,
             new Skill(
                 "水強：パワーアシストB Ⅲ",
@@ -3372,7 +4159,13 @@ public record Memoria(
             "デュエットですの♥",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6247, 2239, 4890, 2250),
+            [
+                new Status(2016, 1744, 2009, 1755),
+                new Status(2161, 1867, 2854, 1878),
+                new Status(3256, 1991, 2999, 2002),
+                new Status(3401, 2115, 4744, 2126),
+                new Status(6247, 2239, 4890, 2250),
+            ],
             21,
             new Skill(
                 "水弱：パワーストライクB Ⅲ",
@@ -3396,7 +4189,13 @@ public record Memoria(
             "超電磁アイドル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2242, 6244, 2239, 4909),
+            [
+                new Status(1747, 2013, 1744, 2028),
+                new Status(1870, 2158, 1867, 2873),
+                new Status(1994, 3253, 1991, 3018),
+                new Status(2118, 3398, 2115, 4763),
+                new Status(2242, 6244, 2239, 4909),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
@@ -3420,7 +4219,13 @@ public record Memoria(
             "超電磁アイドル",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2242, 6244, 2239, 4909),
+            [
+                new Status(1747, 2013, 1744, 2028),
+                new Status(1870, 2158, 1867, 2873),
+                new Status(1994, 3253, 1991, 3018),
+                new Status(2118, 3398, 2115, 4763),
+                new Status(2242, 6244, 2239, 4909),
+            ],
             21,
             new Skill(
                 "火弱：Sp.パワーフォールB Ⅲ",
@@ -3444,7 +4249,13 @@ public record Memoria(
             "楯の乙女と超電磁砲",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(6241, 2225, 4874, 2244),
+            [
+                new Status(2010, 1730, 1993, 1749),
+                new Status(2155, 1853, 2838, 1872),
+                new Status(3250, 1977, 2983, 1996),
+                new Status(3395, 2101, 4728, 2120),
+                new Status(6241, 2225, 4874, 2244),
+            ],
             21,
             new Skill(
                 "火弱：パワーフォールB Ⅲ",
@@ -3468,7 +4279,13 @@ public record Memoria(
             "楯の乙女と超電磁砲",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6241, 2225, 4874, 2244),
+            [
+                new Status(2010, 1730, 1993, 1749),
+                new Status(2155, 1853, 2838, 1872),
+                new Status(3250, 1977, 2983, 1996),
+                new Status(3395, 2101, 4728, 2120),
+                new Status(6241, 2225, 4874, 2244),
+            ],
             21,
             new Skill(
                 "水弱：パワーストライクB Ⅲ",
@@ -3492,7 +4309,13 @@ public record Memoria(
             "さすが私ってところかしらぁ？",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2240, 2211, 4911, 6258),
+            [
+                new Status(1745, 1716, 2030, 2027),
+                new Status(1868, 1839, 2875, 2172),
+                new Status(1992, 1963, 3020, 3267),
+                new Status(2116, 2087, 4765, 3412),
+                new Status(2240, 2211, 4911, 6258),
+            ],
             21,
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
@@ -3516,7 +4339,13 @@ public record Memoria(
             "さすが私ってところかしらぁ？",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2240, 2211, 4911, 6258),
+            [
+                new Status(1745, 1716, 2030, 2027),
+                new Status(1868, 1839, 2875, 2172),
+                new Status(1992, 1963, 3020, 3267),
+                new Status(2116, 2087, 4765, 3412),
+                new Status(2240, 2211, 4911, 6258),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
@@ -3540,7 +4369,13 @@ public record Memoria(
             "お姉様の露払い",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2238, 6249, 2233, 4878),
+            [
+                new Status(1743, 2018, 1738, 1997),
+                new Status(1866, 2163, 1861, 2842),
+                new Status(1990, 3258, 1985, 2987),
+                new Status(2114, 3403, 2109, 4732),
+                new Status(2238, 6249, 2233, 4878),
+            ],
             21,
             new Skill(
                 "水弱：Sp.パワースマッシュB Ⅲ",
@@ -3564,7 +4399,13 @@ public record Memoria(
             "お姉様の露払い",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2238, 6249, 2233, 4878),
+            [
+                new Status(1743, 2018, 1738, 1997),
+                new Status(1866, 2163, 1861, 2842),
+                new Status(1990, 3258, 1985, 2987),
+                new Status(2114, 3403, 2109, 4732),
+                new Status(2238, 6249, 2233, 4878),
+            ],
             21,
             new Skill(
                 "水強：Sp.パワーアシストB Ⅲ",
@@ -3588,7 +4429,13 @@ public record Memoria(
             "これが私の、全力だぁ――！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6235, 2220, 4897, 2237),
+            [
+                new Status(2004, 1725, 2016, 1742),
+                new Status(2149, 1848, 2861, 1865),
+                new Status(3244, 1972, 3006, 1989),
+                new Status(3389, 2096, 4751, 2113),
+                new Status(6235, 2220, 4897, 2237),
+            ],
             21,
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
@@ -3612,7 +4459,13 @@ public record Memoria(
             "これが私の、全力だぁ――！！",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(6235, 2220, 4897, 2237),
+            [
+                new Status(2004, 1725, 2016, 1742),
+                new Status(2149, 1848, 2861, 1865),
+                new Status(3244, 1972, 3006, 1989),
+                new Status(3389, 2096, 4751, 2113),
+                new Status(6235, 2220, 4897, 2237),
+            ],
             21,
             new Skill(
                 "水弱：ガードフォールB Ⅲ",
@@ -3636,7 +4489,13 @@ public record Memoria(
             "プランセス",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4152, 2719, 3649, 2734),
+            [
+                new Status(1392, 1158, 1401, 1193),
+                new Status(1491, 1242, 1650, 1277),
+                new Status(1739, 1326, 1748, 1361),
+                new Status(1837, 1410, 2146, 1445),
+                new Status(2736, 1494, 2245, 1529),
+            ],
             18,
             new Skill(
                 "ストライクD LG",
@@ -3661,7 +4520,13 @@ public record Memoria(
             "お祭りを味わって",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2246, 2215, 4876, 6250),
+            [
+                new Status(1751, 1720, 1995, 2019),
+                new Status(1874, 1843, 2840, 2164),
+                new Status(1998, 1967, 2985, 3259),
+                new Status(2122, 2091, 4730, 3404),
+                new Status(2246, 2215, 4876, 6250),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅳ+",
@@ -3685,7 +4550,13 @@ public record Memoria(
             "お祭りを味わって",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2246, 2215, 4876, 6250),
+            [
+                new Status(1751, 1720, 1995, 2019),
+                new Status(1874, 1843, 2840, 2164),
+                new Status(1998, 1967, 2985, 3259),
+                new Status(2122, 2091, 4730, 3404),
+                new Status(2246, 2215, 4876, 6250),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
@@ -3709,7 +4580,13 @@ public record Memoria(
             "瞳の中に映る花火",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(6248, 2216, 4901, 2228),
+            [
+                new Status(2017, 1721, 2020, 1733),
+                new Status(2162, 1844, 2865, 1856),
+                new Status(3257, 1968, 3010, 1980),
+                new Status(3402, 2092, 4755, 2104),
+                new Status(6248, 2216, 4901, 2228),
+            ],
             21,
             new Skill(
                 "カウンターウィンドパワーアシストC Ⅳ",
@@ -3733,7 +4610,13 @@ public record Memoria(
             "瞳の中に映る花火",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(6248, 2216, 4901, 2228),
+            [
+                new Status(2017, 1721, 2020, 1733),
+                new Status(2162, 1844, 2865, 1856),
+                new Status(3257, 1968, 3010, 1980),
+                new Status(3402, 2092, 4755, 2104),
+                new Status(6248, 2216, 4901, 2228),
+            ],
             21,
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
@@ -3757,7 +4640,13 @@ public record Memoria(
             "射的の景品です！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2216, 6250, 2231, 4896),
+            [
+                new Status(1721, 2019, 1736, 2015),
+                new Status(1844, 2164, 1859, 2860),
+                new Status(1968, 3259, 1983, 3005),
+                new Status(2092, 3404, 2107, 4750),
+                new Status(2216, 6250, 2231, 4896),
+            ],
             21,
             new Skill(
                 "Sp.カウンターガードバーストB Ⅲ",
@@ -3781,7 +4670,13 @@ public record Memoria(
             "射的の景品です！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2216, 6250, 2231, 4896),
+            [
+                new Status(1721, 2019, 1736, 2015),
+                new Status(1844, 2164, 1859, 2860),
+                new Status(1968, 3259, 1983, 3005),
+                new Status(2092, 3404, 2107, 4750),
+                new Status(2216, 6250, 2231, 4896),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドパワーアシストC Ⅳ",
@@ -3805,7 +4700,13 @@ public record Memoria(
             "切れた鼻緒と繋ぐ心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(6251, 2226, 4885, 2236),
+            [
+                new Status(2020, 1731, 2004, 1741),
+                new Status(2165, 1854, 2849, 1864),
+                new Status(3260, 1978, 2994, 1988),
+                new Status(3405, 2102, 4739, 2112),
+                new Status(6251, 2226, 4885, 2236),
+            ],
             21,
             new Skill(
                 "カウンターガードブレイクB Ⅲ",
@@ -3829,7 +4730,13 @@ public record Memoria(
             "切れた鼻緒と繋ぐ心",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(6251, 2226, 4885, 2236),
+            [
+                new Status(2020, 1731, 2004, 1741),
+                new Status(2165, 1854, 2849, 1864),
+                new Status(3260, 1978, 2994, 1988),
+                new Status(3405, 2102, 4739, 2112),
+                new Status(6251, 2226, 4885, 2236),
+            ],
             21,
             new Skill(
                 "水強：ヒールC Ⅳ",
@@ -3853,7 +4760,13 @@ public record Memoria(
             "明朗たる戦乙女",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6261, 2246, 4911, 2217),
+            [
+                new Status(2030, 1751, 2030, 1722),
+                new Status(2175, 1874, 2875, 1845),
+                new Status(3270, 1998, 3020, 1969),
+                new Status(3415, 2122, 4765, 2093),
+                new Status(6261, 2246, 4911, 2217),
+            ],
             21,
             new Skill(
                 "火弱：パワーストライクB Ⅲ",
@@ -3877,7 +4790,13 @@ public record Memoria(
             "明朗たる戦乙女",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(6261, 2246, 4911, 2217),
+            [
+                new Status(2030, 1751, 2030, 1722),
+                new Status(2175, 1874, 2875, 1845),
+                new Status(3270, 1998, 3020, 1969),
+                new Status(3415, 2122, 4765, 2093),
+                new Status(6261, 2246, 4911, 2217),
+            ],
             21,
             new Skill(
                 "[火攻風防]マイトアシストC Ⅳ",
@@ -3901,7 +4820,13 @@ public record Memoria(
             "陽だまりの女神",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2244, 2213, 4889, 6246),
+            [
+                new Status(1749, 1718, 2008, 2015),
+                new Status(1872, 1841, 2853, 2160),
+                new Status(1996, 1965, 2998, 3255),
+                new Status(2120, 2089, 4743, 3400),
+                new Status(2244, 2213, 4889, 6246),
+            ],
             21,
             new Skill(
                 "風強：ヒールD Ⅳ",
@@ -3925,7 +4850,13 @@ public record Memoria(
             "陽だまりの女神",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2244, 2213, 4889, 6246),
+            [
+                new Status(1749, 1718, 2008, 2015),
+                new Status(1872, 1841, 2853, 2160),
+                new Status(1996, 1965, 2998, 3255),
+                new Status(2120, 2089, 4743, 3400),
+                new Status(2244, 2213, 4889, 6246),
+            ],
             21,
             new Skill(
                 "火弱：Sp.パワースマッシュB Ⅲ",
@@ -3949,7 +4880,13 @@ public record Memoria(
             "燦然たる騎士",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2729, 6081, 2735, 5272),
+            [
+                new Status(2051, 3676, 2057, 3667),
+                new Status(2220, 4977, 2226, 3968),
+                new Status(2390, 5278, 2396, 4469),
+                new Status(2559, 5779, 2565, 4770),
+                new Status(2729, 6081, 2735, 5272),
+            ],
             23,
             new Skill(
                 "火：Sp.パワースマッシュB Ⅲ",
@@ -3974,7 +4911,13 @@ public record Memoria(
             "真実の刃＆リリコレ2023 開演！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(1676, 4481, 1658, 3503),
+            [
+                new Status(1331, 1526, 1313, 1548),
+                new Status(1417, 1627, 1399, 2049),
+                new Status(1503, 2378, 1485, 2150),
+                new Status(1589, 2479, 1571, 3401),
+                new Status(1676, 4481, 1658, 3503),
+            ],
             19,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
@@ -3998,7 +4941,13 @@ public record Memoria(
             "真実の刃＆リリコレ2023 開演！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1676, 4481, 1658, 3503),
+            [
+                new Status(1331, 1526, 1313, 1548),
+                new Status(1417, 1627, 1399, 2049),
+                new Status(1503, 2378, 1485, 2150),
+                new Status(1589, 2479, 1571, 3401),
+                new Status(1676, 4481, 1658, 3503),
+            ],
             19,
             new Skill(
                 "WパワーアシストA Ⅲ",
@@ -4022,7 +4971,13 @@ public record Memoria(
             "神の子は、水面に踊る",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2731, 4123, 2714, 3644),
+            [
+                new Status(1579, 1879, 1585, 1870),
+                new Status(1702, 2024, 1708, 2165),
+                new Status(1826, 2319, 1832, 2310),
+                new Status(1950, 2464, 1956, 2755),
+                new Status(2074, 3410, 2080, 2901),
+            ],
             21,
             new Skill(
                 "Sp.ガードバーストD LG",
@@ -4047,7 +5002,13 @@ public record Memoria(
             "夏尽くしの海",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2233, 6254, 2221, 4889),
+            [
+                new Status(1738, 2023, 1726, 2008),
+                new Status(1861, 2168, 1849, 2853),
+                new Status(1985, 3263, 1973, 2998),
+                new Status(2109, 3408, 2097, 4743),
+                new Status(2233, 6254, 2221, 4889),
+            ],
             21,
             new Skill(
                 "[風攻水防]マイトアシストC Ⅳ",
@@ -4071,7 +5032,13 @@ public record Memoria(
             "夏尽くしの海",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2233, 6254, 2221, 4889),
+            [
+                new Status(1738, 2023, 1726, 2008),
+                new Status(1861, 2168, 1849, 2853),
+                new Status(1985, 3263, 1973, 2998),
+                new Status(2109, 3408, 2097, 4743),
+                new Status(2233, 6254, 2221, 4889),
+            ],
             21,
             new Skill(
                 "風弱：Sp.パワースマッシュB Ⅲ",
@@ -4095,7 +5062,13 @@ public record Memoria(
             "壱撃必殺！！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(2221, 6251, 2211, 4906),
+            [
+                new Status(1726, 2020, 1716, 2025),
+                new Status(1849, 2165, 1839, 2870),
+                new Status(1973, 3260, 1963, 3015),
+                new Status(2097, 3405, 2087, 4760),
+                new Status(2221, 6251, 2211, 4906),
+            ],
             21,
             new Skill(
                 "風弱：Sp.パワースマッシュA Ⅳ",
@@ -4119,7 +5092,13 @@ public record Memoria(
             "壱撃必殺！！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(2221, 6251, 2211, 4906),
+            [
+                new Status(1726, 2020, 1716, 2025),
+                new Status(1849, 2165, 1839, 2870),
+                new Status(1973, 3260, 1963, 3015),
+                new Status(2097, 3405, 2087, 4760),
+                new Status(2221, 6251, 2211, 4906),
+            ],
             21,
             new Skill(
                 "風弱：Sp.ガードフォールC Ⅳ",
@@ -4143,7 +5122,13 @@ public record Memoria(
             "くすみんサマー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(6231, 2225, 4908, 2232),
+            [
+                new Status(2000, 1730, 2027, 1737),
+                new Status(2145, 1853, 2872, 1860),
+                new Status(3240, 1977, 3017, 1984),
+                new Status(3385, 2101, 4762, 2108),
+                new Status(6231, 2225, 4908, 2232),
+            ],
             21,
             new Skill(
                 "風弱：パワーストライクB Ⅲ",
@@ -4167,7 +5152,13 @@ public record Memoria(
             "くすみんサマー",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(6231, 2225, 4908, 2232),
+            [
+                new Status(2000, 1730, 2027, 1737),
+                new Status(2145, 1853, 2872, 1860),
+                new Status(3240, 1977, 3017, 1984),
+                new Status(3385, 2101, 4762, 2108),
+                new Status(6231, 2225, 4908, 2232),
+            ],
             21,
             new Skill(
                 "水強：ヒールC Ⅳ",
@@ -4191,7 +5182,13 @@ public record Memoria(
             "双刃無双",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(4071, 4094, 7066, 7069),
+            [
+                new Status(3271, 3294, 4816, 4819),
+                new Status(3471, 3494, 5316, 5319),
+                new Status(3671, 3694, 5866, 5869),
+                new Status(3871, 3894, 6416, 6419),
+                new Status(4071, 4094, 7066, 7069),
+            ],
             26,
             new Skill(
                 "リカバーヒールD Ⅳ",
@@ -4215,7 +5212,13 @@ public record Memoria(
             "双刃無双",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(7405, 4094, 6722, 4079),
+            [
+                new Status(4965, 3294, 4662, 3279),
+                new Status(5275, 3494, 5352, 3479),
+                new Status(6085, 3694, 5642, 3679),
+                new Status(6395, 3894, 6432, 3879),
+                new Status(7405, 4094, 6722, 4079),
+            ],
             26,
             new Skill(
                 "ウォーターパワーストライクA Ⅴ+",
@@ -4239,7 +5242,13 @@ public record Memoria(
             "無二なる二刀",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(7062, 7065, 4065, 4066),
+            [
+                new Status(4812, 4815, 3265, 3266),
+                new Status(5312, 5315, 3465, 3466),
+                new Status(5862, 5865, 3665, 3666),
+                new Status(6412, 6415, 3865, 3866),
+                new Status(7062, 7065, 4065, 4066),
+            ],
             26,
             new Skill(
                 "WパワーフォールD Ⅲ",
@@ -4263,7 +5272,13 @@ public record Memoria(
             "無二なる二刀",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(7406, 4075, 6711, 4066),
+            [
+                new Status(4966, 3275, 4651, 3266),
+                new Status(5276, 3475, 5341, 3466),
+                new Status(6086, 3675, 5631, 3666),
+                new Status(6396, 3875, 6421, 3866),
+                new Status(7406, 4075, 6711, 4066),
+            ],
             26,
             new Skill(
                 "火：ガードブレイクB Ⅲ",
@@ -4287,7 +5302,13 @@ public record Memoria(
             "幻奏乙女",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(7063, 7078, 4088, 4097),
+            [
+                new Status(4813, 4828, 3288, 3297),
+                new Status(5313, 5328, 3488, 3497),
+                new Status(5863, 5878, 3688, 3697),
+                new Status(6413, 6428, 3888, 3897),
+                new Status(7063, 7078, 4088, 4097),
+            ],
             26,
             new Skill(
                 "WパワーアシストD Ⅲ",
@@ -4311,7 +5332,13 @@ public record Memoria(
             "幻奏乙女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(4073, 7422, 4088, 6743),
+            [
+                new Status(3273, 4982, 3288, 4683),
+                new Status(3473, 5292, 3488, 5373),
+                new Status(3673, 6102, 3688, 5663),
+                new Status(3873, 6412, 3888, 6453),
+                new Status(4073, 7422, 4088, 6743),
+            ],
             26,
             new Skill(
                 "火：Sp.ガードバーストB Ⅲ",
@@ -4335,7 +5362,13 @@ public record Memoria(
             "終曲のタクト",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(4085, 7411, 4065, 6734),
+            [
+                new Status(3285, 4971, 3265, 4674),
+                new Status(3485, 5281, 3465, 5364),
+                new Status(3685, 6091, 3665, 5654),
+                new Status(3885, 6401, 3865, 6444),
+                new Status(4085, 7411, 4065, 6734),
+            ],
             26,
             new Skill(
                 "水：Sp.パワースマッシュB Ⅲ",
@@ -4359,7 +5392,13 @@ public record Memoria(
             "終曲のタクト",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(4085, 4077, 7055, 7078),
+            [
+                new Status(3285, 3277, 4805, 4828),
+                new Status(3485, 3477, 5305, 5328),
+                new Status(3685, 3677, 5855, 5878),
+                new Status(3885, 3877, 6405, 6428),
+                new Status(4085, 4077, 7055, 7078),
+            ],
             26,
             new Skill(
                 "WガードアシストD Ⅲ",
@@ -4383,7 +5422,13 @@ public record Memoria(
             "ヴィルトシュバイン",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(7428, 4098, 6721, 4097),
+            [
+                new Status(4988, 3298, 4661, 3297),
+                new Status(5298, 3498, 5351, 3497),
+                new Status(6108, 3698, 5641, 3697),
+                new Status(6418, 3898, 6431, 3897),
+                new Status(7428, 4098, 6721, 4097),
+            ],
             26,
             new Skill(
                 "水：パワーストライクB Ⅲ",
@@ -4407,7 +5452,13 @@ public record Memoria(
             "ヴィルトシュバイン",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(4094, 4098, 7065, 7087),
+            [
+                new Status(3294, 3298, 4815, 4837),
+                new Status(3494, 3498, 5315, 5337),
+                new Status(3694, 3698, 5865, 5887),
+                new Status(3894, 3898, 6415, 6437),
+                new Status(4094, 4098, 7065, 7087),
+            ],
             26,
             new Skill(
                 "WガードフォールD Ⅲ",
@@ -4431,7 +5482,13 @@ public record Memoria(
             "待ち望んだパーティナイト",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6232, 2214, 4874, 2220),
+            [
+                new Status(2001, 1719, 1993, 1725),
+                new Status(2146, 1842, 2838, 1848),
+                new Status(3241, 1966, 2983, 1972),
+                new Status(3386, 2090, 4728, 2096),
+                new Status(6232, 2214, 4874, 2220),
+            ],
             21,
             new Skill(
                 "水弱：パワーストライクB Ⅲ",
@@ -4455,7 +5512,13 @@ public record Memoria(
             "待ち望んだパーティナイト",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(6232, 2214, 4874, 2220),
+            [
+                new Status(2001, 1719, 1993, 1725),
+                new Status(2146, 1842, 2838, 1848),
+                new Status(3241, 1966, 2983, 1972),
+                new Status(3386, 2090, 4728, 2096),
+                new Status(6232, 2214, 4874, 2220),
+            ],
             21,
             new Skill(
                 "火強：ヒールC Ⅳ",
@@ -4479,7 +5542,13 @@ public record Memoria(
             "焦がれる夜",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(6229, 2231, 4896, 2245),
+            [
+                new Status(1998, 1736, 2015, 1750),
+                new Status(2143, 1859, 2860, 1873),
+                new Status(3238, 1983, 3005, 1997),
+                new Status(3383, 2107, 4750, 2121),
+                new Status(6229, 2231, 4896, 2245),
+            ],
             21,
             new Skill(
                 "火弱：パワーフォールB Ⅲ",
@@ -4503,7 +5572,13 @@ public record Memoria(
             "焦がれる夜",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6229, 2231, 4896, 2245),
+            [
+                new Status(1998, 1736, 2015, 1750),
+                new Status(2143, 1859, 2860, 1873),
+                new Status(3238, 1983, 3005, 1997),
+                new Status(3383, 2107, 4750, 2121),
+                new Status(6229, 2231, 4896, 2245),
+            ],
             21,
             new Skill(
                 "水弱：パワーストライクB Ⅲ",
@@ -4527,7 +5602,13 @@ public record Memoria(
             "いたずらトゥインクル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2226, 6235, 2211, 4909),
+            [
+                new Status(1731, 2004, 1716, 2028),
+                new Status(1854, 2149, 1839, 2873),
+                new Status(1978, 3244, 1963, 3018),
+                new Status(2102, 3389, 2087, 4763),
+                new Status(2226, 6235, 2211, 4909),
+            ],
             21,
             new Skill(
                 "水弱：Sp.パワースマッシュB Ⅲ",
@@ -4551,7 +5632,13 @@ public record Memoria(
             "いたずらトゥインクル",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2226, 6235, 2211, 4909),
+            [
+                new Status(1731, 2004, 1716, 2028),
+                new Status(1854, 2149, 1839, 2873),
+                new Status(1978, 3244, 1963, 3018),
+                new Status(2102, 3389, 2087, 4763),
+                new Status(2226, 6235, 2211, 4909),
+            ],
             21,
             new Skill(
                 "水強：Sp.パワーアシストB Ⅲ",
@@ -4575,7 +5662,13 @@ public record Memoria(
             "はにかみプールサイド",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(5655, 5678, 2746, 2730),
+            [
+                new Status(3650, 3673, 2068, 2052),
+                new Status(4451, 4474, 2237, 2221),
+                new Status(4852, 4875, 2407, 2391),
+                new Status(5253, 5276, 2576, 2560),
+                new Status(5655, 5678, 2746, 2730),
+            ],
             23,
             new Skill(
                 "水：WパワーアシストB Ⅲ",
@@ -4600,7 +5693,13 @@ public record Memoria(
             "真夏のステージ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2240, 2232, 6225, 4901),
+            [
+                new Status(1745, 1737, 1994, 2020),
+                new Status(1868, 1860, 2139, 2865),
+                new Status(1992, 1984, 3234, 3010),
+                new Status(2116, 2108, 3379, 4755),
+                new Status(2240, 2232, 6225, 4901),
+            ],
             21,
             new Skill(
                 "WカウンターガードヒールC Ⅳ",
@@ -4624,7 +5723,13 @@ public record Memoria(
             "真夏のステージ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2240, 2232, 6225, 4901),
+            [
+                new Status(1745, 1737, 1994, 2020),
+                new Status(1868, 1860, 2139, 2865),
+                new Status(1992, 1984, 3234, 3010),
+                new Status(2116, 2108, 3379, 4755),
+                new Status(2240, 2232, 6225, 4901),
+            ],
             21,
             new Skill(
                 "[風攻火防]マイトブレイクB Ⅲ+",
@@ -4648,7 +5753,13 @@ public record Memoria(
             "浮き輪でぷかぷか",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2216, 6224, 2234, 4913),
+            [
+                new Status(1721, 1993, 1739, 2032),
+                new Status(1844, 2138, 1862, 2877),
+                new Status(1968, 3233, 1986, 3022),
+                new Status(2092, 3378, 2110, 4767),
+                new Status(2216, 6224, 2234, 4913),
+            ],
             21,
             new Skill(
                 "WカウンターガードフォールB Ⅲ",
@@ -4672,7 +5783,13 @@ public record Memoria(
             "浮き輪でぷかぷか",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2216, 6224, 2234, 4913),
+            [
+                new Status(1721, 1993, 1739, 2032),
+                new Status(1844, 2138, 1862, 2877),
+                new Status(1968, 3233, 1986, 3022),
+                new Status(2092, 3378, 2110, 4767),
+                new Status(2216, 6224, 2234, 4913),
+            ],
             21,
             new Skill(
                 "[風攻火防]マイトバーストB Ⅲ+",
@@ -4696,7 +5813,13 @@ public record Memoria(
             "向日葵の咲く園",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2235, 6226, 2225, 4911),
+            [
+                new Status(1740, 1995, 1730, 2030),
+                new Status(1863, 2140, 1853, 2875),
+                new Status(1987, 3235, 1977, 3020),
+                new Status(2111, 3380, 2101, 4765),
+                new Status(2235, 6226, 2225, 4911),
+            ],
             21,
             new Skill(
                 "Sp.カウンターパワースマッシュB Ⅲ",
@@ -4720,7 +5843,13 @@ public record Memoria(
             "向日葵の咲く園",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2235, 6226, 2225, 4911),
+            [
+                new Status(1740, 1995, 1730, 2030),
+                new Status(1863, 2140, 1853, 2875),
+                new Status(1987, 3235, 1977, 3020),
+                new Status(2111, 3380, 2101, 4765),
+                new Status(2235, 6226, 2225, 4911),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
@@ -4744,7 +5873,13 @@ public record Memoria(
             "水着をお披露目",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6243, 2249, 4913, 2237),
+            [
+                new Status(2012, 1754, 2032, 1742),
+                new Status(2157, 1877, 2877, 1865),
+                new Status(3252, 2001, 3022, 1989),
+                new Status(3397, 2125, 4767, 2113),
+                new Status(6243, 2249, 4913, 2237),
+            ],
             21,
             new Skill(
                 "カウンターパワーストライクB Ⅲ",
@@ -4768,7 +5903,13 @@ public record Memoria(
             "水着をお披露目",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(6243, 2249, 4913, 2237),
+            [
+                new Status(2012, 1754, 2032, 1742),
+                new Status(2157, 1877, 2877, 1865),
+                new Status(3252, 2001, 3022, 1989),
+                new Status(3397, 2125, 4767, 2113),
+                new Status(6243, 2249, 4913, 2237),
+            ],
             21,
             new Skill(
                 "ファイアパワーアシストB Ⅲ",
@@ -4792,7 +5933,13 @@ public record Memoria(
             "楽しいを探して",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2218, 2247, 6228, 4876),
+            [
+                new Status(1723, 1752, 1997, 1995),
+                new Status(1846, 1875, 2142, 2840),
+                new Status(1970, 1999, 3237, 2985),
+                new Status(2094, 2123, 3382, 4730),
+                new Status(2218, 2247, 6228, 4876),
+            ],
             21,
             new Skill(
                 "WガードヒールD Ⅳ",
@@ -4816,7 +5963,13 @@ public record Memoria(
             "楽しいを探して",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(2218, 2247, 6228, 4876),
+            [
+                new Status(1723, 1752, 1997, 1995),
+                new Status(1846, 1875, 2142, 2840),
+                new Status(1970, 1999, 3237, 2985),
+                new Status(2094, 2123, 3382, 4730),
+                new Status(2218, 2247, 6228, 4876),
+            ],
             21,
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
@@ -4840,7 +5993,13 @@ public record Memoria(
             "祝2.5周年 リリサマ!!",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(4500, 1656, 3469, 1666),
+            [
+                new Status(1545, 1311, 1514, 1321),
+                new Status(1646, 1397, 2015, 1407),
+                new Status(2397, 1483, 2116, 1493),
+                new Status(2498, 1569, 3367, 1579),
+                new Status(4500, 1656, 3469, 1666),
+            ],
             19,
             new Skill(
                 "パワーストライクA Ⅳ+",
@@ -4864,7 +6023,13 @@ public record Memoria(
             "祝2.5周年 リリサマ!!",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(4500, 1656, 3469, 1666),
+            [
+                new Status(1545, 1311, 1514, 1321),
+                new Status(1646, 1397, 2015, 1407),
+                new Status(2397, 1483, 2116, 1493),
+                new Status(2498, 1569, 3367, 1579),
+                new Status(4500, 1656, 3469, 1666),
+            ],
             19,
             new Skill(
                 "WガードフォールA Ⅲ",
@@ -4888,7 +6053,13 @@ public record Memoria(
             "惹かれる手のひら",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2249, 2243, 4894, 6226),
+            [
+                new Status(1754, 1748, 2013, 1995),
+                new Status(1877, 1871, 2858, 2140),
+                new Status(2001, 1995, 3003, 3235),
+                new Status(2125, 2119, 4748, 3380),
+                new Status(2249, 2243, 4894, 6226),
+            ],
             21,
             new Skill(
                 "WカウンターガードヒールC Ⅳ",
@@ -4912,7 +6083,13 @@ public record Memoria(
             "惹かれる手のひら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2249, 2243, 4894, 6226),
+            [
+                new Status(1754, 1748, 2013, 1995),
+                new Status(1877, 1871, 2858, 2140),
+                new Status(2001, 1995, 3003, 3235),
+                new Status(2125, 2119, 4748, 3380),
+                new Status(2249, 2243, 4894, 6226),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターパワーバーストB Ⅲ+",
@@ -4936,7 +6113,13 @@ public record Memoria(
             "王家の夏休み",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(6238, 2227, 4892, 2216),
+            [
+                new Status(2007, 1732, 2011, 1721),
+                new Status(2152, 1855, 2856, 1844),
+                new Status(3247, 1979, 3001, 1968),
+                new Status(3392, 2103, 4746, 2092),
+                new Status(6238, 2227, 4892, 2216),
+            ],
             21,
             new Skill(
                 "WカウンターパワーフォールB Ⅲ",
@@ -4960,7 +6143,13 @@ public record Memoria(
             "王家の夏休み",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(6238, 2227, 4892, 2216),
+            [
+                new Status(2007, 1732, 2011, 1721),
+                new Status(2152, 1855, 2856, 1844),
+                new Status(3247, 1979, 3001, 1968),
+                new Status(3392, 2103, 4746, 2092),
+                new Status(6238, 2227, 4892, 2216),
+            ],
             21,
             new Skill(
                 "ウォーターパワーブレイクB Ⅲ+",
@@ -4984,7 +6173,13 @@ public record Memoria(
             "アグレッシヴ・ヒロイン",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2722, 6061, 2722, 5279),
+            [
+                new Status(2044, 3656, 2044, 3674),
+                new Status(2213, 4957, 2213, 3975),
+                new Status(2383, 5258, 2383, 4476),
+                new Status(2552, 5759, 2552, 4777),
+                new Status(2722, 6061, 2722, 5279),
+            ],
             23,
             new Skill(
                 "Sp.カウンターパワースマッシュB Ⅲ",
@@ -5009,7 +6204,13 @@ public record Memoria(
             "夏色スライダー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(6069, 2738, 5270, 2744),
+            [
+                new Status(3664, 2060, 3665, 2066),
+                new Status(4965, 2229, 3966, 2235),
+                new Status(5266, 2399, 4467, 2405),
+                new Status(5767, 2568, 4768, 2574),
+                new Status(6069, 2738, 5270, 2744),
+            ],
             23,
             new Skill(
                 "カウンターパワーストライクB Ⅲ",
@@ -5034,7 +6235,13 @@ public record Memoria(
             "星月夜の指揮者",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2245, 2219, 6227, 4885),
+            [
+                new Status(1750, 1724, 1996, 2004),
+                new Status(1873, 1847, 2141, 2849),
+                new Status(1997, 1971, 3236, 2994),
+                new Status(2121, 2095, 3381, 4739),
+                new Status(2245, 2219, 6227, 4885),
+            ],
             21,
             new Skill(
                 "ウィンドガードヒールD Ⅳ",
@@ -5058,7 +6265,13 @@ public record Memoria(
             "星月夜の指揮者",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(2245, 2219, 6227, 4885),
+            [
+                new Status(1750, 1724, 1996, 2004),
+                new Status(1873, 1847, 2141, 2849),
+                new Status(1997, 1971, 3236, 2994),
+                new Status(2121, 2095, 3381, 4739),
+                new Status(2245, 2219, 6227, 4885),
+            ],
             21,
             new Skill(
                 "ファイアパワーストライクA Ⅳ+",
@@ -5082,7 +6295,13 @@ public record Memoria(
             "月下に舞うプランセス",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2228, 6261, 2224, 4888),
+            [
+                new Status(1733, 2030, 1729, 2007),
+                new Status(1856, 2175, 1852, 2852),
+                new Status(1980, 3270, 1976, 2997),
+                new Status(2104, 3415, 2100, 4742),
+                new Status(2228, 6261, 2224, 4888),
+            ],
             21,
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
@@ -5106,7 +6325,13 @@ public record Memoria(
             "月下に舞うプランセス",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2228, 6261, 2224, 4888),
+            [
+                new Status(1733, 2030, 1729, 2007),
+                new Status(1856, 2175, 1852, 2852),
+                new Status(1980, 3270, 1976, 2997),
+                new Status(2104, 3415, 2100, 4742),
+                new Status(2228, 6261, 2224, 4888),
+            ],
             21,
             new Skill(
                 "[火攻風防]マイトアシストB Ⅲ",
@@ -5130,7 +6355,13 @@ public record Memoria(
             "蒼き月の夜",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6241, 2241, 4876, 2236),
+            [
+                new Status(2010, 1746, 1995, 1741),
+                new Status(2155, 1869, 2840, 1864),
+                new Status(3250, 1993, 2985, 1988),
+                new Status(3395, 2117, 4730, 2112),
+                new Status(6241, 2241, 4876, 2236),
+            ],
             21,
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
@@ -5154,7 +6385,13 @@ public record Memoria(
             "蒼き月の夜",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(6241, 2241, 4876, 2236),
+            [
+                new Status(2010, 1746, 1995, 1741),
+                new Status(2155, 1869, 2840, 1864),
+                new Status(3250, 1993, 2985, 1988),
+                new Status(3395, 2117, 4730, 2112),
+                new Status(6241, 2241, 4876, 2236),
+            ],
             21,
             new Skill(
                 "ウィンドパワーフォールC Ⅳ",
@@ -5178,7 +6415,13 @@ public record Memoria(
             "非常事態のその後",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2243, 2223, 4905, 6230),
+            [
+                new Status(1748, 1728, 2024, 1999),
+                new Status(1871, 1851, 2869, 2144),
+                new Status(1995, 1975, 3014, 3239),
+                new Status(2119, 2099, 4759, 3384),
+                new Status(2243, 2223, 4905, 6230),
+            ],
             21,
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
@@ -5202,7 +6445,13 @@ public record Memoria(
             "非常事態のその後",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2243, 2223, 4905, 6230),
+            [
+                new Status(1748, 1728, 2024, 1999),
+                new Status(1871, 1851, 2869, 2144),
+                new Status(1995, 1975, 3014, 3239),
+                new Status(2119, 2099, 4759, 3384),
+                new Status(2243, 2223, 4905, 6230),
+            ],
             21,
             new Skill(
                 "Sp.ファイアパワーバーストB Ⅲ+",
@@ -5226,7 +6475,13 @@ public record Memoria(
             "冷たい舌触り",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(6228, 2212, 4910, 2236),
+            [
+                new Status(1997, 1717, 2029, 1741),
+                new Status(2142, 1840, 2874, 1864),
+                new Status(3237, 1964, 3019, 1988),
+                new Status(3382, 2088, 4764, 2112),
+                new Status(6228, 2212, 4910, 2236),
+            ],
             21,
             new Skill(
                 "ファイアパワーフォールC Ⅳ",
@@ -5250,7 +6505,13 @@ public record Memoria(
             "冷たい舌触り",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6228, 2212, 4910, 2236),
+            [
+                new Status(1997, 1717, 2029, 1741),
+                new Status(2142, 1840, 2874, 1864),
+                new Status(3237, 1964, 3019, 1988),
+                new Status(3382, 2088, 4764, 2112),
+                new Status(6228, 2212, 4910, 2236),
+            ],
             21,
             new Skill(
                 "ファイアパワーブレイクB Ⅲ+",
@@ -5274,7 +6535,13 @@ public record Memoria(
             "灯莉の貝殻アート☆",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2235, 6223, 2229, 4884),
+            [
+                new Status(1740, 1992, 1734, 2003),
+                new Status(1863, 2137, 1857, 2848),
+                new Status(1987, 3232, 1981, 2993),
+                new Status(2111, 3377, 2105, 4738),
+                new Status(2235, 6223, 2229, 4884),
+            ],
             21,
             new Skill(
                 "水：Sp.ガードバーストB Ⅲ",
@@ -5298,7 +6565,13 @@ public record Memoria(
             "灯莉の貝殻アート☆",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2235, 6223, 2229, 4884),
+            [
+                new Status(1740, 1992, 1734, 2003),
+                new Status(1863, 2137, 1857, 2848),
+                new Status(1987, 3232, 1981, 2993),
+                new Status(2111, 3377, 2105, 4738),
+                new Status(2235, 6223, 2229, 4884),
+            ],
             21,
             new Skill(
                 "[水攻火防]マイトアシストB Ⅲ",
@@ -5322,7 +6595,13 @@ public record Memoria(
             "碧い海のふたり",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6253, 2235, 4880, 2250),
+            [
+                new Status(2022, 1740, 1999, 1755),
+                new Status(2167, 1863, 2844, 1878),
+                new Status(3262, 1987, 2989, 2002),
+                new Status(3407, 2111, 4734, 2126),
+                new Status(6253, 2235, 4880, 2250),
+            ],
             21,
             new Skill(
                 "水：ガードブレイクB Ⅲ",
@@ -5346,7 +6625,13 @@ public record Memoria(
             "碧い海のふたり",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(6253, 2235, 4880, 2250),
+            [
+                new Status(2022, 1740, 1999, 1755),
+                new Status(2167, 1863, 2844, 1878),
+                new Status(3262, 1987, 2989, 2002),
+                new Status(3407, 2111, 4734, 2126),
+                new Status(6253, 2235, 4880, 2250),
+            ],
             21,
             new Skill(
                 "ウォーターガードフォールB Ⅲ",
@@ -5370,7 +6655,13 @@ public record Memoria(
             "夢の果て、その先へ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2217, 6236, 2247, 4896),
+            [
+                new Status(1722, 2005, 1752, 2015),
+                new Status(1845, 2150, 1875, 2860),
+                new Status(1969, 3245, 1999, 3005),
+                new Status(2093, 3390, 2123, 4750),
+                new Status(2217, 6236, 2247, 4896),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
@@ -5394,7 +6685,13 @@ public record Memoria(
             "夢の果て、その先へ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2217, 6236, 2247, 4896),
+            [
+                new Status(1722, 2005, 1752, 2015),
+                new Status(1845, 2150, 1875, 2860),
+                new Status(1969, 3245, 1999, 3005),
+                new Status(2093, 3390, 2123, 4750),
+                new Status(2217, 6236, 2247, 4896),
+            ],
             21,
             new Skill(
                 "Sp.ファイアパワーフォールB Ⅳ",
@@ -5418,7 +6715,13 @@ public record Memoria(
             "正義の咆哮",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6244, 2250, 4897, 2238),
+            [
+                new Status(2013, 1755, 2016, 1743),
+                new Status(2158, 1878, 2861, 1866),
+                new Status(3253, 2002, 3006, 1990),
+                new Status(3398, 2126, 4751, 2114),
+                new Status(6244, 2250, 4897, 2238),
+            ],
             21,
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
@@ -5442,7 +6745,13 @@ public record Memoria(
             "正義の咆哮",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(6244, 2250, 4897, 2238),
+            [
+                new Status(2013, 1755, 2016, 1743),
+                new Status(2158, 1878, 2861, 1866),
+                new Status(3253, 2002, 3006, 1990),
+                new Status(3398, 2126, 4751, 2114),
+                new Status(6244, 2250, 4897, 2238),
+            ],
             21,
             new Skill(
                 "ファイアガードヒールD Ⅳ",
@@ -5466,7 +6775,13 @@ public record Memoria(
             "深炎のスキャルドメール",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(5650, 5662, 2753, 2723),
+            [
+                new Status(3645, 3657, 2075, 2045),
+                new Status(4446, 4458, 2244, 2214),
+                new Status(4847, 4859, 2414, 2384),
+                new Status(5248, 5260, 2583, 2553),
+                new Status(5650, 5662, 2753, 2723),
+            ],
             23,
             new Skill(
                 "水：WパワーフォールB Ⅲ",
@@ -5491,7 +6806,13 @@ public record Memoria(
             "七頭龍幻想の担い手",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2242, 6250, 2226, 4890),
+            [
+                new Status(1747, 2019, 1731, 2009),
+                new Status(1870, 2164, 1854, 2854),
+                new Status(1994, 3259, 1978, 2999),
+                new Status(2118, 3404, 2102, 4744),
+                new Status(2242, 6250, 2226, 4890),
+            ],
             21,
             new Skill(
                 "Sp.ファイアガードヒールD Ⅳ",
@@ -5515,7 +6836,13 @@ public record Memoria(
             "七頭龍幻想の担い手",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2242, 6250, 2226, 4890),
+            [
+                new Status(1747, 2019, 1731, 2009),
+                new Status(1870, 2164, 1854, 2854),
+                new Status(1994, 3259, 1978, 2999),
+                new Status(2118, 3404, 2102, 4744),
+                new Status(2242, 6250, 2226, 4890),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
@@ -5539,7 +6866,13 @@ public record Memoria(
             "竜のシャナ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6260, 2221, 4890, 2220),
+            [
+                new Status(2029, 1726, 2009, 1725),
+                new Status(2174, 1849, 2854, 1848),
+                new Status(3269, 1973, 2999, 1972),
+                new Status(3414, 2097, 4744, 2096),
+                new Status(6260, 2221, 4890, 2220),
+            ],
             21,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -5563,7 +6896,13 @@ public record Memoria(
             "竜のシャナ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(6260, 2221, 4890, 2220),
+            [
+                new Status(2029, 1726, 2009, 1725),
+                new Status(2174, 1849, 2854, 1848),
+                new Status(3269, 1973, 2999, 1972),
+                new Status(3414, 2097, 4744, 2096),
+                new Status(6260, 2221, 4890, 2220),
+            ],
             21,
             new Skill(
                 "ウォーターパワーアシストB Ⅲ",
@@ -5587,7 +6926,13 @@ public record Memoria(
             "ゴージャス☆おしゃ恋花",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2217, 6251, 2240, 4880),
+            [
+                new Status(1722, 2020, 1745, 1999),
+                new Status(1845, 2165, 1868, 2844),
+                new Status(1969, 3260, 1992, 2989),
+                new Status(2093, 3405, 2116, 4734),
+                new Status(2217, 6251, 2240, 4880),
+            ],
             21,
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
@@ -5611,7 +6956,13 @@ public record Memoria(
             "ゴージャス☆おしゃ恋花",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2217, 6251, 2240, 4880),
+            [
+                new Status(1722, 2020, 1745, 1999),
+                new Status(1845, 2165, 1868, 2844),
+                new Status(1969, 3260, 1992, 2989),
+                new Status(2093, 3405, 2116, 4734),
+                new Status(2217, 6251, 2240, 4880),
+            ],
             21,
             new Skill(
                 "[火攻風防]マイトアシストB Ⅲ",
@@ -5635,7 +6986,13 @@ public record Memoria(
             "枕投げチャンピオン",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6231, 2230, 4906, 2224),
+            [
+                new Status(2000, 1735, 2025, 1729),
+                new Status(2145, 1858, 2870, 1852),
+                new Status(3240, 1982, 3015, 1976),
+                new Status(3385, 2106, 4760, 2100),
+                new Status(6231, 2230, 4906, 2224),
+            ],
             21,
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
@@ -5659,7 +7016,13 @@ public record Memoria(
             "枕投げチャンピオン",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(6231, 2230, 4906, 2224),
+            [
+                new Status(2000, 1735, 2025, 1729),
+                new Status(2145, 1858, 2870, 1852),
+                new Status(3240, 1982, 3015, 1976),
+                new Status(3385, 2106, 4760, 2100),
+                new Status(6231, 2230, 4906, 2224),
+            ],
             21,
             new Skill(
                 "ウィンドパワーフォールB Ⅲ",
@@ -5683,7 +7046,13 @@ public record Memoria(
             "幸せな夢を見る前に",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2251, 2246, 6249, 4898),
+            [
+                new Status(1756, 1751, 2018, 2017),
+                new Status(1879, 1874, 2163, 2862),
+                new Status(2003, 1998, 3258, 3007),
+                new Status(2127, 2122, 3403, 4752),
+                new Status(2251, 2246, 6249, 4898),
+            ],
             21,
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
@@ -5707,7 +7076,13 @@ public record Memoria(
             "幸せな夢を見る前に",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2251, 2246, 6249, 4898),
+            [
+                new Status(1756, 1751, 2018, 2017),
+                new Status(1879, 1874, 2163, 2862),
+                new Status(2003, 1998, 3258, 3007),
+                new Status(2127, 2122, 3403, 4752),
+                new Status(2251, 2246, 6249, 4898),
+            ],
             21,
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
@@ -5731,7 +7106,13 @@ public record Memoria(
             "心を鋼鉄に変えて",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(2248, 6260, 2233, 4880),
+            [
+                new Status(1753, 2029, 1738, 1999),
+                new Status(1876, 2174, 1861, 2844),
+                new Status(2000, 3269, 1985, 2989),
+                new Status(2124, 3414, 2109, 4734),
+                new Status(2248, 6260, 2233, 4880),
+            ],
             21,
             new Skill(
                 "Sp.マイトスマッシュA Ⅳ+",
@@ -5755,7 +7136,13 @@ public record Memoria(
             "心を鋼鉄に変えて",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2248, 6260, 2233, 4880),
+            [
+                new Status(1753, 2029, 1738, 1999),
+                new Status(1876, 2174, 1861, 2844),
+                new Status(2000, 3269, 1985, 2989),
+                new Status(2124, 3414, 2109, 4734),
+                new Status(2248, 6260, 2233, 4880),
+            ],
             21,
             new Skill(
                 "[火防]Sp.マイトアシストB Ⅲ",
@@ -5779,7 +7166,13 @@ public record Memoria(
             "受け継がれし攻守の型",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(2250, 6246, 2249, 4876),
+            [
+                new Status(1755, 2015, 1754, 1995),
+                new Status(1878, 2160, 1877, 2840),
+                new Status(2002, 3255, 2001, 2985),
+                new Status(2126, 3400, 2125, 4730),
+                new Status(2250, 6246, 2249, 4876),
+            ],
             21,
             new Skill(
                 "水：Sp.ウォーターパワースマッシュA Ⅳ+",
@@ -5803,7 +7196,13 @@ public record Memoria(
             "受け継がれし攻守の型",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2250, 6246, 2249, 4876),
+            [
+                new Status(1755, 2015, 1754, 1995),
+                new Status(1878, 2160, 1877, 2840),
+                new Status(2002, 3255, 2001, 2985),
+                new Status(2126, 3400, 2125, 4730),
+                new Status(2250, 6246, 2249, 4876),
+            ],
             21,
             new Skill(
                 "Sp.ファイアパワーフォールB Ⅲ",
@@ -5827,7 +7226,13 @@ public record Memoria(
             "煉獄の守護天使",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2236, 6257, 2232, 4873),
+            [
+                new Status(1741, 2026, 1737, 1992),
+                new Status(1864, 2171, 1860, 2837),
+                new Status(1988, 3266, 1984, 2982),
+                new Status(2112, 3411, 2108, 4727),
+                new Status(2236, 6257, 2232, 4873),
+            ],
             21,
             new Skill(
                 "[水攻火防]マイトアシストB Ⅲ",
@@ -5851,7 +7256,13 @@ public record Memoria(
             "煉獄の守護天使",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2236, 6257, 2232, 4873),
+            [
+                new Status(1741, 2026, 1737, 1992),
+                new Status(1864, 2171, 1860, 2837),
+                new Status(1988, 3266, 1984, 2982),
+                new Status(2112, 3411, 2108, 4727),
+                new Status(2236, 6257, 2232, 4873),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
@@ -5875,7 +7286,13 @@ public record Memoria(
             "祈りの声が届く時",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6247, 2226, 4907, 2242),
+            [
+                new Status(2016, 1731, 2026, 1747),
+                new Status(2161, 1854, 2871, 1870),
+                new Status(3256, 1978, 3016, 1994),
+                new Status(3401, 2102, 4761, 2118),
+                new Status(6247, 2226, 4907, 2242),
+            ],
             21,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -5899,7 +7316,13 @@ public record Memoria(
             "祈りの声が届く時",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(6247, 2226, 4907, 2242),
+            [
+                new Status(2016, 1731, 2026, 1747),
+                new Status(2161, 1854, 2871, 1870),
+                new Status(3256, 1978, 3016, 1994),
+                new Status(3401, 2102, 4761, 2118),
+                new Status(6247, 2226, 4907, 2242),
+            ],
             21,
             new Skill(
                 "ファイアガードヒールC Ⅲ",
@@ -5923,7 +7346,13 @@ public record Memoria(
             "これなんかどう？",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2217, 2246, 4905, 6239),
+            [
+                new Status(1722, 1751, 2024, 2008),
+                new Status(1845, 1874, 2869, 2153),
+                new Status(1969, 1998, 3014, 3248),
+                new Status(2093, 2122, 4759, 3393),
+                new Status(2217, 2246, 4905, 6239),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
@@ -5947,7 +7376,13 @@ public record Memoria(
             "これなんかどう？",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2217, 2246, 4905, 6239),
+            [
+                new Status(1722, 1751, 2024, 2008),
+                new Status(1845, 1874, 2869, 2153),
+                new Status(1969, 1998, 3014, 3248),
+                new Status(2093, 2122, 4759, 3393),
+                new Status(2217, 2246, 4905, 6239),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
@@ -5971,7 +7406,13 @@ public record Memoria(
             "日差しを見上げて",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(6237, 2212, 4899, 2237),
+            [
+                new Status(2006, 1717, 2018, 1742),
+                new Status(2151, 1840, 2863, 1865),
+                new Status(3246, 1964, 3008, 1989),
+                new Status(3391, 2088, 4753, 2113),
+                new Status(6237, 2212, 4899, 2237),
+            ],
             21,
             new Skill(
                 "ウィンドガードフォールB Ⅲ",
@@ -5995,7 +7436,13 @@ public record Memoria(
             "日差しを見上げて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(6237, 2212, 4899, 2237),
+            [
+                new Status(2006, 1717, 2018, 1742),
+                new Status(2151, 1840, 2863, 1865),
+                new Status(3246, 1964, 3008, 1989),
+                new Status(3391, 2088, 4753, 2113),
+                new Status(6237, 2212, 4899, 2237),
+            ],
             21,
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
@@ -6019,7 +7466,13 @@ public record Memoria(
             "初夏の装い",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(6258, 2248, 4882, 2234),
+            [
+                new Status(2027, 1753, 2001, 1739),
+                new Status(2172, 1876, 2846, 1862),
+                new Status(3267, 2000, 2991, 1986),
+                new Status(3412, 2124, 4736, 2110),
+                new Status(6258, 2248, 4882, 2234),
+            ],
             21,
             new Skill(
                 "風：パワーストライクB Ⅲ",
@@ -6043,7 +7496,13 @@ public record Memoria(
             "初夏の装い",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(6258, 2248, 4882, 2234),
+            [
+                new Status(2027, 1753, 2001, 1739),
+                new Status(2172, 1876, 2846, 1862),
+                new Status(3267, 2000, 2991, 1986),
+                new Status(3412, 2124, 4736, 2110),
+                new Status(6258, 2248, 4882, 2234),
+            ],
             21,
             new Skill(
                 "ウィンドパワーアシストB Ⅲ",
@@ -6067,7 +7526,13 @@ public record Memoria(
             "水族館を探検",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2239, 6257, 2222, 4886),
+            [
+                new Status(1744, 2026, 1727, 2005),
+                new Status(1867, 2171, 1850, 2850),
+                new Status(1991, 3266, 1974, 2995),
+                new Status(2115, 3411, 2098, 4740),
+                new Status(2239, 6257, 2222, 4886),
+            ],
             21,
             new Skill(
                 "風：Sp.ガードバーストB Ⅲ",
@@ -6091,7 +7556,13 @@ public record Memoria(
             "水族館を探検",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(2239, 6257, 2222, 4886),
+            [
+                new Status(1744, 2026, 1727, 2005),
+                new Status(1867, 2171, 1850, 2850),
+                new Status(1991, 3266, 1974, 2995),
+                new Status(2115, 3411, 2098, 4740),
+                new Status(2239, 6257, 2222, 4886),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドガードフォールB Ⅲ",
@@ -6115,7 +7586,13 @@ public record Memoria(
             "桜花爛漫",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2219, 6251, 2237, 4873),
+            [
+                new Status(1724, 2020, 1742, 1992),
+                new Status(1847, 2165, 1865, 2837),
+                new Status(1971, 3260, 1989, 2982),
+                new Status(2095, 3405, 2113, 4727),
+                new Status(2219, 6251, 2237, 4873),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドパワーフォールB Ⅲ",
@@ -6139,7 +7616,13 @@ public record Memoria(
             "桜花爛漫",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2219, 6251, 2237, 4873),
+            [
+                new Status(1724, 2020, 1742, 1992),
+                new Status(1847, 2165, 1865, 2837),
+                new Status(1971, 3260, 1989, 2982),
+                new Status(2095, 3405, 2113, 4727),
+                new Status(2219, 6251, 2237, 4873),
+            ],
             21,
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
@@ -6163,7 +7646,13 @@ public record Memoria(
             "心の痛みを判る人",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(6247, 2225, 4883, 2222),
+            [
+                new Status(2016, 1730, 2002, 1727),
+                new Status(2161, 1853, 2847, 1850),
+                new Status(3256, 1977, 2992, 1974),
+                new Status(3401, 2101, 4737, 2098),
+                new Status(6247, 2225, 4883, 2222),
+            ],
             21,
             new Skill(
                 "[風防]マイトアシストB Ⅲ",
@@ -6187,7 +7676,13 @@ public record Memoria(
             "心の痛みを判る人",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6247, 2225, 4883, 2222),
+            [
+                new Status(2016, 1730, 2002, 1727),
+                new Status(2161, 1853, 2847, 1850),
+                new Status(3256, 1977, 2992, 1974),
+                new Status(3401, 2101, 4737, 2098),
+                new Status(6247, 2225, 4883, 2222),
+            ],
             21,
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
@@ -6211,7 +7706,13 @@ public record Memoria(
             "輝く心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6257, 2243, 4886, 2229),
+            [
+                new Status(2026, 1748, 2005, 1734),
+                new Status(2171, 1871, 2850, 1857),
+                new Status(3266, 1995, 2995, 1981),
+                new Status(3411, 2119, 4740, 2105),
+                new Status(6257, 2243, 4886, 2229),
+            ],
             21,
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
@@ -6235,7 +7736,13 @@ public record Memoria(
             "輝く心",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(6257, 2243, 4886, 2229),
+            [
+                new Status(2026, 1748, 2005, 1734),
+                new Status(2171, 1871, 2850, 1857),
+                new Status(3266, 1995, 2995, 1981),
+                new Status(3411, 2119, 4740, 2105),
+                new Status(6257, 2243, 4886, 2229),
+            ],
             21,
             new Skill(
                 "ファイアガードフォールB Ⅲ",
@@ -6259,7 +7766,13 @@ public record Memoria(
             "勇気の拳",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2216, 6258, 2225, 4906),
+            [
+                new Status(1721, 2027, 1730, 2025),
+                new Status(1844, 2172, 1853, 2870),
+                new Status(1968, 3267, 1977, 3015),
+                new Status(2092, 3412, 2101, 4760),
+                new Status(2216, 6258, 2225, 4906),
+            ],
             21,
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
@@ -6283,7 +7796,13 @@ public record Memoria(
             "勇気の拳",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2216, 6258, 2225, 4906),
+            [
+                new Status(1721, 2027, 1730, 2025),
+                new Status(1844, 2172, 1853, 2870),
+                new Status(1968, 3267, 1977, 3015),
+                new Status(2092, 3412, 2101, 4760),
+                new Status(2216, 6258, 2225, 4906),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
@@ -6307,7 +7826,13 @@ public record Memoria(
             "伝わる鼓動",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2237, 6250, 2217, 4876),
+            [
+                new Status(1742, 2019, 1722, 1995),
+                new Status(1865, 2164, 1845, 2840),
+                new Status(1989, 3259, 1969, 2985),
+                new Status(2113, 3404, 2093, 4730),
+                new Status(2237, 6250, 2217, 4876),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
@@ -6331,7 +7856,13 @@ public record Memoria(
             "伝わる鼓動",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2237, 6250, 2217, 4876),
+            [
+                new Status(1742, 2019, 1722, 1995),
+                new Status(1865, 2164, 1845, 2840),
+                new Status(1989, 3259, 1969, 2985),
+                new Status(2113, 3404, 2093, 4730),
+                new Status(2237, 6250, 2217, 4876),
+            ],
             21,
             new Skill(
                 "水：Sp.ガードフォールB Ⅲ",
@@ -6355,7 +7886,13 @@ public record Memoria(
             "二度寝のいいわけ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(6235, 2222, 4889, 2238),
+            [
+                new Status(2004, 1727, 2008, 1743),
+                new Status(2149, 1850, 2853, 1866),
+                new Status(3244, 1974, 2998, 1990),
+                new Status(3389, 2098, 4743, 2114),
+                new Status(6235, 2222, 4889, 2238),
+            ],
             21,
             new Skill(
                 "ウォーターパワーアシストB Ⅲ",
@@ -6379,7 +7916,13 @@ public record Memoria(
             "二度寝のいいわけ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6235, 2222, 4889, 2238),
+            [
+                new Status(2004, 1727, 2008, 1743),
+                new Status(2149, 1850, 2853, 1866),
+                new Status(3244, 1974, 2998, 1990),
+                new Status(3389, 2098, 4743, 2114),
+                new Status(6235, 2222, 4889, 2238),
+            ],
             21,
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
@@ -6403,7 +7946,13 @@ public record Memoria(
             "雨、舌戦のあと",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2239, 2211, 4886, 6226),
+            [
+                new Status(1744, 1716, 2005, 1995),
+                new Status(1867, 1839, 2850, 2140),
+                new Status(1991, 1963, 2995, 3235),
+                new Status(2115, 2087, 4740, 3380),
+                new Status(2239, 2211, 4886, 6226),
+            ],
             21,
             new Skill(
                 "水：Sp.ファイアガードヒールC Ⅲ",
@@ -6427,7 +7976,13 @@ public record Memoria(
             "雨、舌戦のあと",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2239, 2211, 4886, 6226),
+            [
+                new Status(1744, 1716, 2005, 1995),
+                new Status(1867, 1839, 2850, 2140),
+                new Status(1991, 1963, 2995, 3235),
+                new Status(2115, 2087, 4740, 3380),
+                new Status(2239, 2211, 4886, 6226),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
@@ -6451,7 +8006,13 @@ public record Memoria(
             "雨の日は紅茶を",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6258, 2234, 4901, 2216),
+            [
+                new Status(2027, 1739, 2020, 1721),
+                new Status(2172, 1862, 2865, 1844),
+                new Status(3267, 1986, 3010, 1968),
+                new Status(3412, 2110, 4755, 2092),
+                new Status(6258, 2234, 4901, 2216),
+            ],
             21,
             new Skill(
                 "水：パワーストライクB Ⅲ",
@@ -6475,7 +8036,13 @@ public record Memoria(
             "雨の日は紅茶を",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(6258, 2234, 4901, 2216),
+            [
+                new Status(2027, 1739, 2020, 1721),
+                new Status(2172, 1862, 2865, 1844),
+                new Status(3267, 1986, 3010, 1968),
+                new Status(3412, 2110, 4755, 2092),
+                new Status(6258, 2234, 4901, 2216),
+            ],
             21,
             new Skill(
                 "ファイアガードアシストB Ⅲ",
@@ -6499,7 +8066,13 @@ public record Memoria(
             "紫陽花の咲く頃",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2218, 6240, 2224, 4879),
+            [
+                new Status(1723, 2009, 1729, 1998),
+                new Status(1846, 2154, 1852, 2843),
+                new Status(1970, 3249, 1976, 2988),
+                new Status(2094, 3394, 2100, 4733),
+                new Status(2218, 6240, 2224, 4879),
+            ],
             21,
             new Skill(
                 "水：Sp.パワースマッシュB Ⅲ",
@@ -6523,7 +8096,13 @@ public record Memoria(
             "紫陽花の咲く頃",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2218, 6240, 2224, 4879),
+            [
+                new Status(1723, 2009, 1729, 1998),
+                new Status(1846, 2154, 1852, 2843),
+                new Status(1970, 3249, 1976, 2988),
+                new Status(2094, 3394, 2100, 4733),
+                new Status(2218, 6240, 2224, 4879),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードフォールB Ⅲ",
@@ -6547,7 +8126,13 @@ public record Memoria(
             "清純な心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6224, 2240, 4909, 2217),
+            [
+                new Status(1993, 1745, 2028, 1722),
+                new Status(2138, 1868, 2873, 1845),
+                new Status(3233, 1992, 3018, 1969),
+                new Status(3378, 2116, 4763, 2093),
+                new Status(6224, 2240, 4909, 2217),
+            ],
             21,
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
@@ -6571,7 +8156,13 @@ public record Memoria(
             "清純な心",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(6224, 2240, 4909, 2217),
+            [
+                new Status(1993, 1745, 2028, 1722),
+                new Status(2138, 1868, 2873, 1845),
+                new Status(3233, 1992, 3018, 1969),
+                new Status(3378, 2116, 4763, 2093),
+                new Status(6224, 2240, 4909, 2217),
+            ],
             21,
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
@@ -6595,7 +8186,13 @@ public record Memoria(
             "そよ風のシュッツエンゲル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2227, 6259, 2225, 4898),
+            [
+                new Status(1732, 2028, 1730, 2017),
+                new Status(1855, 2173, 1853, 2862),
+                new Status(1979, 3268, 1977, 3007),
+                new Status(2103, 3413, 2101, 4752),
+                new Status(2227, 6259, 2225, 4898),
+            ],
             21,
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
@@ -6619,7 +8216,13 @@ public record Memoria(
             "そよ風のシュッツエンゲル",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2227, 6259, 2225, 4898),
+            [
+                new Status(1732, 2028, 1730, 2017),
+                new Status(1855, 2173, 1853, 2862),
+                new Status(1979, 3268, 1977, 3007),
+                new Status(2103, 3413, 2101, 4752),
+                new Status(2227, 6259, 2225, 4898),
+            ],
             21,
             new Skill(
                 "Sp.ファイアパワーアシストB Ⅲ",
@@ -6643,7 +8246,13 @@ public record Memoria(
             "神の子",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2722, 2698, 4139, 3632),
+            [
+                new Status(1164, 1186, 1392, 1370),
+                new Status(1248, 1270, 1491, 1619),
+                new Status(1332, 1354, 1739, 1717),
+                new Status(1416, 1438, 1837, 2115),
+                new Status(1500, 1522, 2736, 2214),
+            ],
             18,
             new Skill(
                 "ヒールE LG",
@@ -6668,7 +8277,13 @@ public record Memoria(
             "交差する勇み花",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6255, 2248, 4901, 2222),
+            [
+                new Status(2024, 1753, 2020, 1727),
+                new Status(2169, 1876, 2865, 1850),
+                new Status(3264, 2000, 3010, 1974),
+                new Status(3409, 2124, 4755, 2098),
+                new Status(6255, 2248, 4901, 2222),
+            ],
             21,
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
@@ -6692,7 +8307,13 @@ public record Memoria(
             "交差する勇み花",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(6255, 2248, 4901, 2222),
+            [
+                new Status(2024, 1753, 2020, 1727),
+                new Status(2169, 1876, 2865, 1850),
+                new Status(3264, 2000, 3010, 1974),
+                new Status(3409, 2124, 4755, 2098),
+                new Status(6255, 2248, 4901, 2222),
+            ],
             21,
             new Skill(
                 "ファイアパワーアシストB Ⅲ",
@@ -6716,7 +8337,13 @@ public record Memoria(
             "情熱",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2245, 6238, 2225, 4910),
+            [
+                new Status(1750, 2007, 1730, 2029),
+                new Status(1873, 2152, 1853, 2874),
+                new Status(1997, 3247, 1977, 3019),
+                new Status(2121, 3392, 2101, 4764),
+                new Status(2245, 6238, 2225, 4910),
+            ],
             21,
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
@@ -6740,7 +8367,13 @@ public record Memoria(
             "情熱",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2245, 6238, 2225, 4910),
+            [
+                new Status(1750, 2007, 1730, 2029),
+                new Status(1873, 2152, 1853, 2874),
+                new Status(1997, 3247, 1977, 3019),
+                new Status(2121, 3392, 2101, 4764),
+                new Status(2245, 6238, 2225, 4910),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドパワーフォールB Ⅲ",
@@ -6764,7 +8397,13 @@ public record Memoria(
             "愛情の絆",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2227, 2232, 4909, 6256),
+            [
+                new Status(1732, 1737, 2028, 2025),
+                new Status(1855, 1860, 2873, 2170),
+                new Status(1979, 1984, 3018, 3265),
+                new Status(2103, 2108, 4763, 3410),
+                new Status(2227, 2232, 4909, 6256),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
@@ -6788,7 +8427,13 @@ public record Memoria(
             "愛情の絆",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2227, 2232, 4909, 6256),
+            [
+                new Status(1732, 1737, 2028, 2025),
+                new Status(1855, 1860, 2873, 2170),
+                new Status(1979, 1984, 3018, 3265),
+                new Status(2103, 2108, 4763, 3410),
+                new Status(2227, 2232, 4909, 6256),
+            ],
             21,
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
@@ -6812,7 +8457,13 @@ public record Memoria(
             "貴方に微笑む",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6224, 2243, 4905, 2213),
+            [
+                new Status(1993, 1748, 2024, 1718),
+                new Status(2138, 1871, 2869, 1841),
+                new Status(3233, 1995, 3014, 1965),
+                new Status(3378, 2119, 4759, 2089),
+                new Status(6224, 2243, 4905, 2213),
+            ],
             21,
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
@@ -6836,7 +8487,13 @@ public record Memoria(
             "貴方に微笑む",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(6224, 2243, 4905, 2213),
+            [
+                new Status(1993, 1748, 2024, 1718),
+                new Status(2138, 1871, 2869, 1841),
+                new Status(3233, 1995, 3014, 1965),
+                new Status(3378, 2119, 4759, 2089),
+                new Status(6224, 2243, 4905, 2213),
+            ],
             21,
             new Skill(
                 "ファイアガードフォールB Ⅲ",
@@ -6860,7 +8517,13 @@ public record Memoria(
             "つきしーMAX!!",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2727, 2719, 3873, 3899),
+            [
+                new Status(1571, 1567, 1865, 1882),
+                new Status(1694, 1690, 2160, 2027),
+                new Status(1818, 1814, 2305, 2322),
+                new Status(1942, 1938, 2600, 2617),
+                new Status(2066, 2062, 3146, 3163),
+            ],
             21,
             new Skill(
                 "WガードヒールE LG",
@@ -6885,7 +8548,13 @@ public record Memoria(
             "G戦場の百合亜",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(6248, 2218, 4905, 2236),
+            [
+                new Status(2017, 1723, 2024, 1741),
+                new Status(2162, 1846, 2869, 1864),
+                new Status(3257, 1970, 3014, 1988),
+                new Status(3402, 2094, 4759, 2112),
+                new Status(6248, 2218, 4905, 2236),
+            ],
             21,
             new Skill(
                 "ウィンドパワーストライクA Ⅳ+",
@@ -6909,7 +8578,13 @@ public record Memoria(
             "G戦場の百合亜",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(6248, 2218, 4905, 2236),
+            [
+                new Status(2017, 1723, 2024, 1741),
+                new Status(2162, 1846, 2869, 1864),
+                new Status(3257, 1970, 3014, 1988),
+                new Status(3402, 2094, 4759, 2112),
+                new Status(6248, 2218, 4905, 2236),
+            ],
             21,
             new Skill(
                 "WパワーフォールA Ⅲ",
@@ -6933,7 +8608,13 @@ public record Memoria(
             "焼け焦げた土を踏んで",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2220, 6233, 2222, 4913),
+            [
+                new Status(1725, 2002, 1727, 2032),
+                new Status(1848, 2147, 1850, 2877),
+                new Status(1972, 3242, 1974, 3022),
+                new Status(2096, 3387, 2098, 4767),
+                new Status(2220, 6233, 2222, 4913),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
@@ -6957,7 +8638,13 @@ public record Memoria(
             "焼け焦げた土を踏んで",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2220, 6233, 2222, 4913),
+            [
+                new Status(1725, 2002, 1727, 2032),
+                new Status(1848, 2147, 1850, 2877),
+                new Status(1972, 3242, 1974, 3022),
+                new Status(2096, 3387, 2098, 4767),
+                new Status(2220, 6233, 2222, 4913),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
@@ -6981,7 +8668,13 @@ public record Memoria(
             "黒蝕の夢",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2249, 6226, 2250, 4886),
+            [
+                new Status(1754, 1995, 1755, 2005),
+                new Status(1877, 2140, 1878, 2850),
+                new Status(2001, 3235, 2002, 2995),
+                new Status(2125, 3380, 2126, 4740),
+                new Status(2249, 6226, 2250, 4886),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドパワーアシストB Ⅲ",
@@ -7005,7 +8698,13 @@ public record Memoria(
             "黒蝕の夢",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2249, 6226, 2250, 4886),
+            [
+                new Status(1754, 1995, 1755, 2005),
+                new Status(1877, 2140, 1878, 2850),
+                new Status(2001, 3235, 2002, 2995),
+                new Status(2125, 3380, 2126, 4740),
+                new Status(2249, 6226, 2250, 4886),
+            ],
             21,
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
@@ -7029,7 +8728,13 @@ public record Memoria(
             "月光奏鳴",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(6225, 2244, 4904, 2231),
+            [
+                new Status(1994, 1749, 2023, 1736),
+                new Status(2139, 1872, 2868, 1859),
+                new Status(3234, 1996, 3013, 1983),
+                new Status(3379, 2120, 4758, 2107),
+                new Status(6225, 2244, 4904, 2231),
+            ],
             21,
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
@@ -7053,7 +8758,13 @@ public record Memoria(
             "月光奏鳴",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(6225, 2244, 4904, 2231),
+            [
+                new Status(1994, 1749, 2023, 1736),
+                new Status(2139, 1872, 2868, 1859),
+                new Status(3234, 1996, 3013, 1983),
+                new Status(3379, 2120, 4758, 2107),
+                new Status(6225, 2244, 4904, 2231),
+            ],
             21,
             new Skill(
                 "ウィンドガードフォールB Ⅲ",
@@ -7077,7 +8788,13 @@ public record Memoria(
             "式場を決めましたわ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2212, 2237, 6241, 4910),
+            [
+                new Status(1717, 1742, 2010, 2029),
+                new Status(1840, 1865, 2155, 2874),
+                new Status(1964, 1989, 3250, 3019),
+                new Status(2088, 2113, 3395, 4764),
+                new Status(2212, 2237, 6241, 4910),
+            ],
             21,
             new Skill(
                 "火：WガードアシストC Ⅳ",
@@ -7101,7 +8818,13 @@ public record Memoria(
             "式場を決めましたわ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2212, 2237, 6241, 4910),
+            [
+                new Status(1717, 1742, 2010, 2029),
+                new Status(1840, 1865, 2155, 2874),
+                new Status(1964, 1989, 3250, 3019),
+                new Status(2088, 2113, 3395, 4764),
+                new Status(2212, 2237, 6241, 4910),
+            ],
             21,
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
@@ -7125,7 +8848,13 @@ public record Memoria(
             "想像ウェディング",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2227, 2251, 4878, 6253),
+            [
+                new Status(1732, 1756, 1997, 2022),
+                new Status(1855, 1879, 2842, 2167),
+                new Status(1979, 2003, 2987, 3262),
+                new Status(2103, 2127, 4732, 3407),
+                new Status(2227, 2251, 4878, 6253),
+            ],
             21,
             new Skill(
                 "火：Sp.ウィンドガードヒールC Ⅲ",
@@ -7149,7 +8878,13 @@ public record Memoria(
             "想像ウェディング",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2227, 2251, 4878, 6253),
+            [
+                new Status(1732, 1756, 1997, 2022),
+                new Status(1855, 1879, 2842, 2167),
+                new Status(1979, 2003, 2987, 3262),
+                new Status(2103, 2127, 4732, 3407),
+                new Status(2227, 2251, 4878, 6253),
+            ],
             21,
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
@@ -7173,7 +8908,13 @@ public record Memoria(
             "ウェディングベア",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2246, 6244, 2224, 4899),
+            [
+                new Status(1751, 2013, 1729, 2018),
+                new Status(1874, 2158, 1852, 2863),
+                new Status(1998, 3253, 1976, 3008),
+                new Status(2122, 3398, 2100, 4753),
+                new Status(2246, 6244, 2224, 4899),
+            ],
             21,
             new Skill(
                 "火：Sp.ガードバーストB Ⅲ",
@@ -7197,7 +8938,13 @@ public record Memoria(
             "ウェディングベア",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2246, 6244, 2224, 4899),
+            [
+                new Status(1751, 2013, 1729, 2018),
+                new Status(1874, 2158, 1852, 2863),
+                new Status(1998, 3253, 1976, 3008),
+                new Status(2122, 3398, 2100, 4753),
+                new Status(2246, 6244, 2224, 4899),
+            ],
             21,
             new Skill(
                 "Sp.ファイアガードフォールB Ⅲ",
@@ -7221,7 +8968,13 @@ public record Memoria(
             "門出のブーケ・トス",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(6248, 2211, 4884, 2251),
+            [
+                new Status(2017, 1716, 2003, 1756),
+                new Status(2162, 1839, 2848, 1879),
+                new Status(3257, 1963, 2993, 2003),
+                new Status(3402, 2087, 4738, 2127),
+                new Status(6248, 2211, 4884, 2251),
+            ],
             21,
             new Skill(
                 "火：ガードブレイクB Ⅲ",
@@ -7245,7 +8998,13 @@ public record Memoria(
             "門出のブーケ・トス",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(6248, 2211, 4884, 2251),
+            [
+                new Status(2017, 1716, 2003, 1756),
+                new Status(2162, 1839, 2848, 1879),
+                new Status(3257, 1963, 2993, 2003),
+                new Status(3402, 2087, 4738, 2127),
+                new Status(6248, 2211, 4884, 2251),
+            ],
             21,
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
@@ -7269,7 +9028,13 @@ public record Memoria(
             "夢見る自分を、怖れずに",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2224, 6243, 2228, 4894),
+            [
+                new Status(1729, 2012, 1733, 2013),
+                new Status(1852, 2157, 1856, 2858),
+                new Status(1976, 3252, 1980, 3003),
+                new Status(2100, 3397, 2104, 4748),
+                new Status(2224, 6243, 2228, 4894),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
@@ -7293,7 +9058,13 @@ public record Memoria(
             "夢見る自分を、怖れずに",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2224, 6243, 2228, 4894),
+            [
+                new Status(1729, 2012, 1733, 2013),
+                new Status(1852, 2157, 1856, 2858),
+                new Status(1976, 3252, 1980, 3003),
+                new Status(2100, 3397, 2104, 4748),
+                new Status(2224, 6243, 2228, 4894),
+            ],
             21,
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
@@ -7317,7 +9088,13 @@ public record Memoria(
             "ウエディング・マーチ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(6262, 2233, 4903, 2231),
+            [
+                new Status(2031, 1738, 2022, 1736),
+                new Status(2176, 1861, 2867, 1859),
+                new Status(3271, 1985, 3012, 1983),
+                new Status(3416, 2109, 4757, 2107),
+                new Status(6262, 2233, 4903, 2231),
+            ],
             21,
             new Skill(
                 "ファイアパワーフォールB Ⅲ",
@@ -7341,7 +9118,13 @@ public record Memoria(
             "ウエディング・マーチ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6262, 2233, 4903, 2231),
+            [
+                new Status(2031, 1738, 2022, 1736),
+                new Status(2176, 1861, 2867, 1859),
+                new Status(3271, 1985, 3012, 1983),
+                new Status(3416, 2109, 4757, 2107),
+                new Status(6262, 2233, 4903, 2231),
+            ],
             21,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -7365,7 +9148,13 @@ public record Memoria(
             "エターナル・プロミス",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(6062, 2748, 5280, 2752),
+            [
+                new Status(3657, 2070, 3675, 2074),
+                new Status(4958, 2239, 3976, 2243),
+                new Status(5259, 2409, 4477, 2413),
+                new Status(5760, 2578, 4778, 2582),
+                new Status(6062, 2748, 5280, 2752),
+            ],
             23,
             new Skill(
                 "水拡：ガードブレイクB Ⅲ",
@@ -7390,7 +9179,13 @@ public record Memoria(
             "ピクニック日和",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(2049, 5285, 2012, 4178),
+            [
+                new Status(1606, 1865, 1569, 1858),
+                new Status(1716, 1995, 1679, 2488),
+                new Status(1827, 2825, 1790, 2618),
+                new Status(1938, 2955, 1901, 4048),
+                new Status(2049, 5285, 2012, 4178),
+            ],
             20,
             new Skill(
                 "Sp.ウォーターパワーフォールB Ⅲ",
@@ -7414,7 +9209,13 @@ public record Memoria(
             "ピクニック日和",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2049, 5285, 2012, 4178),
+            [
+                new Status(1606, 1865, 1569, 1858),
+                new Status(1716, 1995, 1679, 2488),
+                new Status(1827, 2825, 1790, 2618),
+                new Status(1938, 2955, 1901, 4048),
+                new Status(2049, 5285, 2012, 4178),
+            ],
             20,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -7438,7 +9239,13 @@ public record Memoria(
             "なでなで連鎖",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2039, 2039, 5259, 4174),
+            [
+                new Status(1596, 1596, 1839, 1854),
+                new Status(1706, 1706, 1969, 2484),
+                new Status(1817, 1817, 2799, 2614),
+                new Status(1928, 1928, 2929, 4044),
+                new Status(2039, 2039, 5259, 4174),
+            ],
             20,
             new Skill(
                 "風：ウォーターガードヒールC Ⅲ",
@@ -7462,7 +9269,13 @@ public record Memoria(
             "なでなで連鎖",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(2039, 2039, 5259, 4174),
+            [
+                new Status(1596, 1596, 1839, 1854),
+                new Status(1706, 1706, 1969, 2484),
+                new Status(1817, 1817, 2799, 2614),
+                new Status(1928, 1928, 2929, 4044),
+                new Status(2039, 2039, 5259, 4174),
+            ],
             20,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -7486,7 +9299,13 @@ public record Memoria(
             "尊さの不意打ち",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2038, 5280, 2037, 4157),
+            [
+                new Status(1595, 1860, 1594, 1837),
+                new Status(1705, 1990, 1704, 2467),
+                new Status(1816, 2820, 1815, 2597),
+                new Status(1927, 2950, 1926, 4027),
+                new Status(2038, 5280, 2037, 4157),
+            ],
             20,
             new Skill(
                 "風：Sp.パワースマッシュB Ⅲ",
@@ -7510,7 +9329,13 @@ public record Memoria(
             "尊さの不意打ち",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2038, 5280, 2037, 4157),
+            [
+                new Status(1595, 1860, 1594, 1837),
+                new Status(1705, 1990, 1704, 2467),
+                new Status(1816, 2820, 1815, 2597),
+                new Status(1927, 2950, 1926, 4027),
+                new Status(2038, 5280, 2037, 4157),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワーアシストB Ⅲ",
@@ -7534,7 +9359,13 @@ public record Memoria(
             "皐月の頃に",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(5266, 2032, 4178, 2031),
+            [
+                new Status(1846, 1589, 1858, 1588),
+                new Status(1976, 1699, 2488, 1698),
+                new Status(2806, 1810, 2618, 1809),
+                new Status(2936, 1921, 4048, 1920),
+                new Status(5266, 2032, 4178, 2031),
+            ],
             20,
             new Skill(
                 "風：パワーストライクB Ⅲ",
@@ -7558,7 +9389,13 @@ public record Memoria(
             "皐月の頃に",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(5266, 2032, 4178, 2031),
+            [
+                new Status(1846, 1589, 1858, 1588),
+                new Status(1976, 1699, 2488, 1698),
+                new Status(2806, 1810, 2618, 1809),
+                new Status(2936, 1921, 4048, 1920),
+                new Status(5266, 2032, 4178, 2031),
+            ],
             20,
             new Skill(
                 "ウィンドガードフォールB Ⅲ",
@@ -7582,7 +9419,13 @@ public record Memoria(
             "言葉無く吠える",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(5266, 2046, 4152, 2032),
+            [
+                new Status(1846, 1603, 1832, 1589),
+                new Status(1976, 1713, 2462, 1699),
+                new Status(2806, 1824, 2592, 1810),
+                new Status(2936, 1935, 4022, 1921),
+                new Status(5266, 2046, 4152, 2032),
+            ],
             20,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -7606,7 +9449,13 @@ public record Memoria(
             "言葉無く吠える",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(5266, 2046, 4152, 2032),
+            [
+                new Status(1846, 1603, 1832, 1589),
+                new Status(1976, 1713, 2462, 1699),
+                new Status(2806, 1824, 2592, 1810),
+                new Status(2936, 1935, 4022, 1921),
+                new Status(5266, 2046, 4152, 2032),
+            ],
             20,
             new Skill(
                 "ファイアパワーフォールB Ⅲ",
@@ -7630,7 +9479,13 @@ public record Memoria(
             "戦乙女の誇り",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2040, 5253, 2025, 4182),
+            [
+                new Status(1597, 1833, 1582, 1862),
+                new Status(1707, 1963, 1692, 2492),
+                new Status(1818, 2793, 1803, 2622),
+                new Status(1929, 2923, 1914, 4052),
+                new Status(2040, 5253, 2025, 4182),
+            ],
             20,
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
@@ -7654,7 +9509,13 @@ public record Memoria(
             "戦乙女の誇り",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2040, 5253, 2025, 4182),
+            [
+                new Status(1597, 1833, 1582, 1862),
+                new Status(1707, 1963, 1692, 2492),
+                new Status(1818, 2793, 1803, 2622),
+                new Status(1929, 2923, 1914, 4052),
+                new Status(2040, 5253, 2025, 4182),
+            ],
             20,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -7678,7 +9539,13 @@ public record Memoria(
             "竜のシャナと楯の乙女",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2018, 2046, 5254, 4167),
+            [
+                new Status(1575, 1603, 1834, 1847),
+                new Status(1685, 1713, 1964, 2477),
+                new Status(1796, 1824, 2794, 2607),
+                new Status(1907, 1935, 2924, 4037),
+                new Status(2018, 2046, 5254, 4167),
+            ],
             20,
             new Skill(
                 "ファイアガードヒールC Ⅲ",
@@ -7702,7 +9569,13 @@ public record Memoria(
             "竜のシャナと楯の乙女",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(2018, 2046, 5254, 4167),
+            [
+                new Status(1575, 1603, 1834, 1847),
+                new Status(1685, 1713, 1964, 2477),
+                new Status(1796, 1824, 2794, 2607),
+                new Status(1907, 1935, 2924, 4037),
+                new Status(2018, 2046, 5254, 4167),
+            ],
             20,
             new Skill(
                 "ウォーターパワーストライクA Ⅳ+",
@@ -7726,7 +9599,13 @@ public record Memoria(
             "パーフェクトエイム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(5258, 2038, 4149, 2015),
+            [
+                new Status(1838, 1595, 1829, 1572),
+                new Status(1968, 1705, 2459, 1682),
+                new Status(2798, 1816, 2589, 1793),
+                new Status(2928, 1927, 4019, 1904),
+                new Status(5258, 2038, 4149, 2015),
+            ],
             20,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -7750,7 +9629,13 @@ public record Memoria(
             "パーフェクトエイム",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(5258, 2038, 4149, 2015),
+            [
+                new Status(1838, 1595, 1829, 1572),
+                new Status(1968, 1705, 2459, 1682),
+                new Status(2798, 1816, 2589, 1793),
+                new Status(2928, 1927, 4019, 1904),
+                new Status(5258, 2038, 4149, 2015),
+            ],
             20,
             new Skill(
                 "ウォーターパワーアシストB Ⅲ",
@@ -7774,7 +9659,13 @@ public record Memoria(
             "征くと決めたこの道を",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2041, 5274, 2036, 4162),
+            [
+                new Status(1598, 1854, 1593, 1842),
+                new Status(1708, 1984, 1703, 2472),
+                new Status(1819, 2814, 1814, 2602),
+                new Status(1930, 2944, 1925, 4032),
+                new Status(2041, 5274, 2036, 4162),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワーフォールB Ⅲ",
@@ -7798,7 +9689,13 @@ public record Memoria(
             "征くと決めたこの道を",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2041, 5274, 2036, 4162),
+            [
+                new Status(1598, 1854, 1593, 1842),
+                new Status(1708, 1984, 1703, 2472),
+                new Status(1819, 2814, 1814, 2602),
+                new Status(1930, 2944, 1925, 4032),
+                new Status(2041, 5274, 2036, 4162),
+            ],
             20,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
@@ -7822,7 +9719,13 @@ public record Memoria(
             "藍だけが使える魔法",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2404, 5451, 2404, 4679),
+            [
+                new Status(1819, 3212, 1819, 3240),
+                new Status(1965, 4471, 1965, 3499),
+                new Status(2111, 4731, 2111, 3959),
+                new Status(2257, 5191, 2257, 4219),
+                new Status(2404, 5451, 2404, 4679),
+            ],
             22,
             new Skill(
                 "水拡：Sp.ガードバーストB Ⅲ",
@@ -7847,7 +9750,13 @@ public record Memoria(
             "エクセレントアイドル☆紗癒",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(5259, 2014, 4153, 2046),
+            [
+                new Status(1839, 1571, 1833, 1603),
+                new Status(1969, 1681, 2463, 1713),
+                new Status(2799, 1792, 2593, 1824),
+                new Status(2929, 1903, 4023, 1935),
+                new Status(5259, 2014, 4153, 2046),
+            ],
             20,
             new Skill(
                 "ウォーターパワーアシストB Ⅲ",
@@ -7871,7 +9780,13 @@ public record Memoria(
             "エクセレントアイドル☆紗癒",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(5259, 2014, 4153, 2046),
+            [
+                new Status(1839, 1571, 1833, 1603),
+                new Status(1969, 1681, 2463, 1713),
+                new Status(2799, 1792, 2593, 1824),
+                new Status(2929, 1903, 4023, 1935),
+                new Status(5259, 2014, 4153, 2046),
+            ],
             20,
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
@@ -7895,7 +9810,13 @@ public record Memoria(
             "ゴージャスアイドル☆楓",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2043, 5285, 2016, 4149),
+            [
+                new Status(1600, 1865, 1573, 1829),
+                new Status(1710, 1995, 1683, 2459),
+                new Status(1821, 2825, 1794, 2589),
+                new Status(1932, 2955, 1905, 4019),
+                new Status(2043, 5285, 2016, 4149),
+            ],
             20,
             new Skill(
                 "ディファースマッシュB Ⅲ+",
@@ -7919,7 +9840,13 @@ public record Memoria(
             "ゴージャスアイドル☆楓",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2043, 5285, 2016, 4149),
+            [
+                new Status(1600, 1865, 1573, 1829),
+                new Status(1710, 1995, 1683, 2459),
+                new Status(1821, 2825, 1794, 2589),
+                new Status(1932, 2955, 1905, 4019),
+                new Status(2043, 5285, 2016, 4149),
+            ],
             20,
             new Skill(
                 "水拡：Sp.ファイアパワーフォールB Ⅲ",
@@ -7943,7 +9870,13 @@ public record Memoria(
             "荒ぶる魂",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(1934, 5149, 1950, 4044),
+            [
+                new Status(1512, 1754, 1528, 1749),
+                new Status(1617, 1877, 1633, 2372),
+                new Status(1723, 2701, 1739, 2496),
+                new Status(1828, 2825, 1844, 3920),
+                new Status(1934, 5149, 1950, 4044),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワースマッシュA Ⅳ+",
@@ -7967,7 +9900,13 @@ public record Memoria(
             "荒ぶる魂",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1934, 5149, 1950, 4044),
+            [
+                new Status(1512, 1754, 1528, 1749),
+                new Status(1617, 1877, 1633, 2372),
+                new Status(1723, 2701, 1739, 2496),
+                new Status(1828, 2825, 1844, 3920),
+                new Status(1934, 5149, 1950, 4044),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
@@ -7991,7 +9930,13 @@ public record Memoria(
             "閑かなること、幻想の如く",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5254, 2019, 4186, 2035),
+            [
+                new Status(1834, 1576, 1866, 1592),
+                new Status(1964, 1686, 2496, 1702),
+                new Status(2794, 1797, 2626, 1813),
+                new Status(2924, 1908, 4056, 1924),
+                new Status(5254, 2019, 4186, 2035),
+            ],
             20,
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
@@ -8015,7 +9960,13 @@ public record Memoria(
             "閑かなること、幻想の如く",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(5254, 2019, 4186, 2035),
+            [
+                new Status(1834, 1576, 1866, 1592),
+                new Status(1964, 1686, 2496, 1702),
+                new Status(2794, 1797, 2626, 1813),
+                new Status(2924, 1908, 4056, 1924),
+                new Status(5254, 2019, 4186, 2035),
+            ],
             20,
             new Skill(
                 "ウィンドパワーフォールB Ⅲ",
@@ -8039,7 +9990,13 @@ public record Memoria(
             "猛禽の視点",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2043, 5266, 2015, 4158),
+            [
+                new Status(1600, 1846, 1572, 1838),
+                new Status(1710, 1976, 1682, 2468),
+                new Status(1821, 2806, 1793, 2598),
+                new Status(1932, 2936, 1904, 4028),
+                new Status(2043, 5266, 2015, 4158),
+            ],
             20,
             new Skill(
                 "[風防]Sp.マイトアシストB Ⅲ",
@@ -8063,7 +10020,13 @@ public record Memoria(
             "猛禽の視点",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2043, 5266, 2015, 4158),
+            [
+                new Status(1600, 1846, 1572, 1838),
+                new Status(1710, 1976, 1682, 2468),
+                new Status(1821, 2806, 1793, 2598),
+                new Status(1932, 2936, 1904, 4028),
+                new Status(2043, 5266, 2015, 4158),
+            ],
             20,
             new Skill(
                 "Sp.ディファーバーストB Ⅲ+",
@@ -8087,7 +10050,13 @@ public record Memoria(
             "戦場に差しこむ光",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2036, 2040, 5265, 4187),
+            [
+                new Status(1593, 1597, 1845, 1867),
+                new Status(1703, 1707, 1975, 2497),
+                new Status(1814, 1818, 2805, 2627),
+                new Status(1925, 1929, 2935, 4057),
+                new Status(2036, 2040, 5265, 4187),
+            ],
             20,
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
@@ -8111,7 +10080,13 @@ public record Memoria(
             "戦場に差しこむ光",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(2036, 2040, 5265, 4187),
+            [
+                new Status(1593, 1597, 1845, 1867),
+                new Status(1703, 1707, 1975, 2497),
+                new Status(1814, 1818, 2805, 2627),
+                new Status(1925, 1929, 2935, 4057),
+                new Status(2036, 2040, 5265, 4187),
+            ],
             20,
             new Skill(
                 "ファイアパワーストライクA Ⅳ+",
@@ -8135,7 +10110,13 @@ public record Memoria(
             "ウィステリアの誘い",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2043, 5269, 2040, 4184),
+            [
+                new Status(1600, 1849, 1597, 1864),
+                new Status(1710, 1979, 1707, 2494),
+                new Status(1821, 2809, 1818, 2624),
+                new Status(1932, 2939, 1929, 4054),
+                new Status(2043, 5269, 2040, 4184),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワーフォールB Ⅲ",
@@ -8159,7 +10140,13 @@ public record Memoria(
             "ウィステリアの誘い",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2043, 5269, 2040, 4184),
+            [
+                new Status(1600, 1849, 1597, 1864),
+                new Status(1710, 1979, 1707, 2494),
+                new Status(1821, 2809, 1818, 2624),
+                new Status(1932, 2939, 1929, 4054),
+                new Status(2043, 5269, 2040, 4184),
+            ],
             20,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -8183,7 +10170,13 @@ public record Memoria(
             "花言葉のように",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(5266, 2026, 4149, 2045),
+            [
+                new Status(1846, 1583, 1829, 1602),
+                new Status(1976, 1693, 2459, 1712),
+                new Status(2806, 1804, 2589, 1823),
+                new Status(2936, 1915, 4019, 1934),
+                new Status(5266, 2026, 4149, 2045),
+            ],
             20,
             new Skill(
                 "[風防]マイトアシストB Ⅲ",
@@ -8207,7 +10200,13 @@ public record Memoria(
             "花言葉のように",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5266, 2026, 4149, 2045),
+            [
+                new Status(1846, 1583, 1829, 1602),
+                new Status(1976, 1693, 2459, 1712),
+                new Status(2806, 1804, 2589, 1823),
+                new Status(2936, 1915, 4019, 1934),
+                new Status(5266, 2026, 4149, 2045),
+            ],
             20,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -8231,7 +10230,13 @@ public record Memoria(
             "藤棚の下で",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2041, 5248, 2050, 4183),
+            [
+                new Status(1598, 1828, 1607, 1863),
+                new Status(1708, 1958, 1717, 2493),
+                new Status(1819, 2788, 1828, 2623),
+                new Status(1930, 2918, 1939, 4053),
+                new Status(2041, 5248, 2050, 4183),
+            ],
             20,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -8255,7 +10260,13 @@ public record Memoria(
             "藤棚の下で",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2041, 5248, 2050, 4183),
+            [
+                new Status(1598, 1828, 1607, 1863),
+                new Status(1708, 1958, 1717, 2493),
+                new Status(1819, 2788, 1828, 2623),
+                new Status(1930, 2918, 1939, 4053),
+                new Status(2041, 5248, 2050, 4183),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワーアシストC Ⅲ",
@@ -8279,7 +10290,13 @@ public record Memoria(
             "紫に酔い、白に想う",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5275, 2038, 4170, 2017),
+            [
+                new Status(1855, 1595, 1850, 1574),
+                new Status(1985, 1705, 2480, 1684),
+                new Status(2815, 1816, 2610, 1795),
+                new Status(2945, 1927, 4040, 1906),
+                new Status(5275, 2038, 4170, 2017),
+            ],
             20,
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
@@ -8303,7 +10320,13 @@ public record Memoria(
             "紫に酔い、白に想う",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(5275, 2038, 4170, 2017),
+            [
+                new Status(1855, 1595, 1850, 1574),
+                new Status(1985, 1705, 2480, 1684),
+                new Status(2815, 1816, 2610, 1795),
+                new Status(2945, 1927, 4040, 1906),
+                new Status(5275, 2038, 4170, 2017),
+            ],
             20,
             new Skill(
                 "ウィンドパワーフォールB Ⅲ",
@@ -8327,7 +10350,13 @@ public record Memoria(
             "舞台「The Gleam of Dawn」開演！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1583, 3441, 1599, 2936),
+            [
+                new Status(1247, 1447, 1263, 1442),
+                new Status(1331, 1546, 1347, 1891),
+                new Status(1415, 2144, 1431, 1989),
+                new Status(1499, 2242, 1515, 2837),
+                new Status(1583, 3441, 1599, 2936),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -8351,7 +10380,13 @@ public record Memoria(
             "舞台「The Gleam of Dawn」開演！",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1583, 3441, 1599, 2936),
+            [
+                new Status(1247, 1447, 1263, 1442),
+                new Status(1331, 1546, 1347, 1891),
+                new Status(1415, 2144, 1431, 1989),
+                new Status(1499, 2242, 1515, 2837),
+                new Status(1583, 3441, 1599, 2936),
+            ],
             18,
             new Skill(
                 "Sp.パワーヒールC Ⅲ",
@@ -8375,7 +10410,13 @@ public record Memoria(
             "猪突猛進！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(4152, 2719, 3649, 2734),
+            [
+                new Status(1392, 1158, 1401, 1193),
+                new Status(1491, 1242, 1650, 1277),
+                new Status(1739, 1326, 1748, 1361),
+                new Status(1837, 1410, 2146, 1445),
+                new Status(2736, 1494, 2245, 1529),
+            ],
             18,
             new Skill(
                 "ストライクD LG",
@@ -8400,7 +10441,13 @@ public record Memoria(
             "さみしがりうさぎ",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(5260, 2021, 4172, 2038),
+            [
+                new Status(1840, 1578, 1852, 1595),
+                new Status(1970, 1688, 2482, 1705),
+                new Status(2800, 1799, 2612, 1816),
+                new Status(2930, 1910, 4042, 1927),
+                new Status(5260, 2021, 4172, 2038),
+            ],
             20,
             new Skill(
                 "ウィンドパワーフォールC Ⅲ",
@@ -8424,7 +10471,13 @@ public record Memoria(
             "さみしがりうさぎ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(5260, 2021, 4172, 2038),
+            [
+                new Status(1840, 1578, 1852, 1595),
+                new Status(1970, 1688, 2482, 1705),
+                new Status(2800, 1799, 2612, 1816),
+                new Status(2930, 1910, 4042, 1927),
+                new Status(5260, 2021, 4172, 2038),
+            ],
             20,
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
@@ -8448,7 +10501,13 @@ public record Memoria(
             "バニートラップ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2044, 5263, 2026, 4185),
+            [
+                new Status(1601, 1843, 1583, 1865),
+                new Status(1711, 1973, 1693, 2495),
+                new Status(1822, 2803, 1804, 2625),
+                new Status(1933, 2933, 1915, 4055),
+                new Status(2044, 5263, 2026, 4185),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
@@ -8472,7 +10531,13 @@ public record Memoria(
             "バニートラップ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2044, 5263, 2026, 4185),
+            [
+                new Status(1601, 1843, 1583, 1865),
+                new Status(1711, 1973, 1693, 2495),
+                new Status(1822, 2803, 1804, 2625),
+                new Status(1933, 2933, 1915, 4055),
+                new Status(2044, 5263, 2026, 4185),
+            ],
             20,
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
@@ -8496,7 +10561,13 @@ public record Memoria(
             "魅惑のセレクション",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2415, 2384, 5050, 5074),
+            [
+                new Status(1830, 1799, 3211, 3235),
+                new Status(1976, 1945, 3970, 3994),
+                new Status(2122, 2091, 4330, 4354),
+                new Status(2268, 2237, 4690, 4714),
+                new Status(2415, 2384, 5050, 5074),
+            ],
             22,
             new Skill(
                 "WガードヒールD Ⅳ",
@@ -8521,7 +10592,13 @@ public record Memoria(
             "イースターハント",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2037, 5253, 2040, 4165),
+            [
+                new Status(1594, 1833, 1597, 1845),
+                new Status(1704, 1963, 1707, 2475),
+                new Status(1815, 2793, 1818, 2605),
+                new Status(1926, 2923, 1929, 4035),
+                new Status(2037, 5253, 2040, 4165),
+            ],
             20,
             new Skill(
                 "火：Sp.ファイアパワーフォールC Ⅲ",
@@ -8545,7 +10622,13 @@ public record Memoria(
             "イースターハント",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2037, 5253, 2040, 4165),
+            [
+                new Status(1594, 1833, 1597, 1845),
+                new Status(1704, 1963, 1707, 2475),
+                new Status(1815, 2793, 1818, 2605),
+                new Status(1926, 2923, 1929, 4035),
+                new Status(2037, 5253, 2040, 4165),
+            ],
             20,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -8569,7 +10652,13 @@ public record Memoria(
             "花咲くイースター",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2017, 2039, 5268, 4171),
+            [
+                new Status(1574, 1596, 1848, 1851),
+                new Status(1684, 1706, 1978, 2481),
+                new Status(1795, 1817, 2808, 2611),
+                new Status(1906, 1928, 2938, 4041),
+                new Status(2017, 2039, 5268, 4171),
+            ],
             20,
             new Skill(
                 "火拡：WガードアシストB Ⅳ",
@@ -8593,7 +10682,13 @@ public record Memoria(
             "花咲くイースター",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2017, 2039, 5268, 4171),
+            [
+                new Status(1574, 1596, 1848, 1851),
+                new Status(1684, 1706, 1978, 2481),
+                new Status(1795, 1817, 2808, 2611),
+                new Status(1906, 1928, 2938, 4041),
+                new Status(2017, 2039, 5268, 4171),
+            ],
             20,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -8617,7 +10712,13 @@ public record Memoria(
             "イースターエッグ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2040, 5263, 2024, 4173),
+            [
+                new Status(1597, 1843, 1581, 1853),
+                new Status(1707, 1973, 1691, 2483),
+                new Status(1818, 2803, 1802, 2613),
+                new Status(1929, 2933, 1913, 4043),
+                new Status(2040, 5263, 2024, 4173),
+            ],
             20,
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
@@ -8641,7 +10742,13 @@ public record Memoria(
             "イースターエッグ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2040, 5263, 2024, 4173),
+            [
+                new Status(1597, 1843, 1581, 1853),
+                new Status(1707, 1973, 1691, 2483),
+                new Status(1818, 2803, 1802, 2613),
+                new Status(1929, 2933, 1913, 4043),
+                new Status(2040, 5263, 2024, 4173),
+            ],
             20,
             new Skill(
                 "Sp.ファイアガードフォールC Ⅲ",
@@ -8665,7 +10772,13 @@ public record Memoria(
             "エッグロール開始！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5286, 2047, 4186, 2018),
+            [
+                new Status(1866, 1604, 1866, 1575),
+                new Status(1996, 1714, 2496, 1685),
+                new Status(2826, 1825, 2626, 1796),
+                new Status(2956, 1936, 4056, 1907),
+                new Status(5286, 2047, 4186, 2018),
+            ],
             20,
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
@@ -8689,7 +10802,13 @@ public record Memoria(
             "エッグロール開始！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(5286, 2047, 4186, 2018),
+            [
+                new Status(1866, 1604, 1866, 1575),
+                new Status(1996, 1714, 2496, 1685),
+                new Status(2826, 1825, 2626, 1796),
+                new Status(2956, 1936, 4056, 1907),
+                new Status(5286, 2047, 4186, 2018),
+            ],
             20,
             new Skill(
                 "ファイアパワーアシストC Ⅲ",
@@ -8713,7 +10832,13 @@ public record Memoria(
             "天のアカリ目！",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2023, 5282, 2028, 4167),
+            [
+                new Status(1580, 1862, 1585, 1847),
+                new Status(1690, 1992, 1695, 2477),
+                new Status(1801, 2822, 1806, 2607),
+                new Status(1912, 2952, 1917, 4037),
+                new Status(2023, 5282, 2028, 4167),
+            ],
             20,
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
@@ -8737,7 +10862,13 @@ public record Memoria(
             "天のアカリ目！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2023, 5282, 2028, 4167),
+            [
+                new Status(1580, 1862, 1585, 1847),
+                new Status(1690, 1992, 1695, 2477),
+                new Status(1801, 2822, 1806, 2607),
+                new Status(1912, 2952, 1917, 4037),
+                new Status(2023, 5282, 2028, 4167),
+            ],
             20,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -8761,7 +10892,13 @@ public record Memoria(
             "これが、あたしの理！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5260, 2027, 4153, 2018),
+            [
+                new Status(1840, 1584, 1833, 1575),
+                new Status(1970, 1694, 2463, 1685),
+                new Status(2800, 1805, 2593, 1796),
+                new Status(2930, 1916, 4023, 1907),
+                new Status(5260, 2027, 4153, 2018),
+            ],
             20,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -8785,7 +10922,13 @@ public record Memoria(
             "これが、あたしの理！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(5260, 2027, 4153, 2018),
+            [
+                new Status(1840, 1584, 1833, 1575),
+                new Status(1970, 1694, 2463, 1685),
+                new Status(2800, 1805, 2593, 1796),
+                new Status(2930, 1916, 4023, 1907),
+                new Status(5260, 2027, 4153, 2018),
+            ],
             20,
             new Skill(
                 "ファイアパワーフォールC Ⅲ",
@@ -8809,7 +10952,13 @@ public record Memoria(
             "マルチカラード・ティアーズ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2721, 2736, 5111, 4320),
+            [
+                new Status(2047, 2062, 2420, 2429),
+                new Status(2215, 2230, 2617, 2926),
+                new Status(2384, 2399, 3215, 3124),
+                new Status(2552, 2567, 3413, 4122),
+                new Status(2721, 2736, 5111, 4320),
+            ],
             22,
             new Skill(
                 "ファイアガードヒールD Ⅲ",
@@ -8833,7 +10982,13 @@ public record Memoria(
             "尊き花を守るために",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(5273, 2029, 4153, 2040),
+            [
+                new Status(1853, 1586, 1833, 1597),
+                new Status(1983, 1696, 2463, 1707),
+                new Status(2813, 1807, 2593, 1818),
+                new Status(2943, 1918, 4023, 1929),
+                new Status(5273, 2029, 4153, 2040),
+            ],
             20,
             new Skill(
                 "ファイアパワーアシストC Ⅲ",
@@ -8857,7 +11012,13 @@ public record Memoria(
             "尊き花を守るために",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5273, 2029, 4153, 2040),
+            [
+                new Status(1853, 1586, 1833, 1597),
+                new Status(1983, 1696, 2463, 1707),
+                new Status(2813, 1807, 2593, 1818),
+                new Status(2943, 1918, 4023, 1929),
+                new Status(5273, 2029, 4153, 2040),
+            ],
             20,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -8881,7 +11042,13 @@ public record Memoria(
             "笑顔の夜明け",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2046, 5286, 2027, 4185),
+            [
+                new Status(1603, 1866, 1584, 1865),
+                new Status(1713, 1996, 1694, 2495),
+                new Status(1824, 2826, 1805, 2625),
+                new Status(1935, 2956, 1916, 4055),
+                new Status(2046, 5286, 2027, 4185),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワーフォールC Ⅲ",
@@ -8905,7 +11072,13 @@ public record Memoria(
             "笑顔の夜明け",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(2046, 5286, 2027, 4185),
+            [
+                new Status(1603, 1866, 1584, 1865),
+                new Status(1713, 1996, 1694, 2495),
+                new Status(1824, 2826, 1805, 2625),
+                new Status(1935, 2956, 1916, 4055),
+                new Status(2046, 5286, 2027, 4185),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワースマッシュA Ⅳ+",
@@ -8929,7 +11102,13 @@ public record Memoria(
             "天使の左手、堕天使の右手",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2041, 5269, 2014, 4176),
+            [
+                new Status(1598, 1849, 1571, 1856),
+                new Status(1708, 1979, 1681, 2486),
+                new Status(1819, 2809, 1792, 2616),
+                new Status(1930, 2939, 1903, 4046),
+                new Status(2041, 5269, 2014, 4176),
+            ],
             20,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -8953,7 +11132,13 @@ public record Memoria(
             "天使の左手、堕天使の右手",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2041, 5269, 2014, 4176),
+            [
+                new Status(1598, 1849, 1571, 1856),
+                new Status(1708, 1979, 1681, 2486),
+                new Status(1819, 2809, 1792, 2616),
+                new Status(1930, 2939, 1903, 4046),
+                new Status(2041, 5269, 2014, 4176),
+            ],
             20,
             new Skill(
                 "ライフアシストB Ⅱ",
@@ -8977,7 +11162,13 @@ public record Memoria(
             "朝寝坊のススメ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5253, 2013, 4171, 2052),
+            [
+                new Status(1833, 1570, 1851, 1609),
+                new Status(1963, 1680, 2481, 1719),
+                new Status(2793, 1791, 2611, 1830),
+                new Status(2923, 1902, 4041, 1941),
+                new Status(5253, 2013, 4171, 2052),
+            ],
             20,
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
@@ -9001,7 +11192,13 @@ public record Memoria(
             "朝寝坊のススメ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(5253, 2013, 4171, 2052),
+            [
+                new Status(1833, 1570, 1851, 1609),
+                new Status(1963, 1680, 2481, 1719),
+                new Status(2793, 1791, 2611, 1830),
+                new Status(2923, 1902, 4041, 1941),
+                new Status(5253, 2013, 4171, 2052),
+            ],
             20,
             new Skill(
                 "WガードヒールC Ⅲ",
@@ -9025,7 +11222,13 @@ public record Memoria(
             "千香瑠のエクササイズ",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2741, 2710, 4299, 5106),
+            [
+                new Status(2067, 2036, 2408, 2415),
+                new Status(2235, 2204, 2905, 2612),
+                new Status(2404, 2373, 3103, 3210),
+                new Status(2572, 2541, 4101, 3408),
+                new Status(2741, 2710, 4299, 5106),
+            ],
             22,
             new Skill(
                 "風：Sp.ウィンドガードヒールC Ⅲ",
@@ -9049,7 +11252,13 @@ public record Memoria(
             "玲瓏玉の如し",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(5096, 2745, 4302, 2736),
+            [
+                new Status(2405, 2071, 2411, 2062),
+                new Status(2602, 2239, 2908, 2230),
+                new Status(3200, 2408, 3106, 2399),
+                new Status(3398, 2576, 4104, 2567),
+                new Status(5096, 2745, 4302, 2736),
+            ],
             22,
             new Skill(
                 "風：ウィンドパワーフォールC Ⅲ",
@@ -9073,7 +11282,13 @@ public record Memoria(
             "ぱーふぇくとアカリズム",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2730, 2739, 4693, 4699),
+            [
+                new Status(2056, 2065, 2402, 2408),
+                new Status(2224, 2233, 2749, 2755),
+                new Status(2393, 2402, 3147, 3153),
+                new Status(2561, 2570, 3745, 3751),
+                new Status(2730, 2739, 4693, 4699),
+            ],
             22,
             new Skill(
                 "風：WガードアシストC Ⅳ",
@@ -9097,7 +11312,13 @@ public record Memoria(
             "グラスにラムネを注いだら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2718, 5111, 2708, 4316),
+            [
+                new Status(2044, 2420, 2034, 2425),
+                new Status(2212, 2617, 2202, 2922),
+                new Status(2381, 3215, 2371, 3120),
+                new Status(2549, 3413, 2539, 4118),
+                new Status(2718, 5111, 2708, 4316),
+            ],
             22,
             new Skill(
                 "風拡：Sp.パワースマッシュB Ⅲ",
@@ -9121,7 +11342,13 @@ public record Memoria(
             "ツインテじゃらし",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(5091, 2722, 4318, 2729),
+            [
+                new Status(2400, 2048, 2427, 2055),
+                new Status(2597, 2216, 2924, 2223),
+                new Status(3195, 2385, 3122, 2392),
+                new Status(3393, 2553, 4120, 2560),
+                new Status(5091, 2722, 4318, 2729),
+            ],
             22,
             new Skill(
                 "風拡：パワーストライクB Ⅲ",
@@ -9145,7 +11372,13 @@ public record Memoria(
             "反りし刃、誘うは棺",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(5151, 1954, 4070, 1934),
+            [
+                new Status(1756, 1532, 1775, 1512),
+                new Status(1879, 1637, 2398, 1617),
+                new Status(2703, 1743, 2522, 1723),
+                new Status(2827, 1848, 3946, 1828),
+                new Status(5151, 1954, 4070, 1934),
+            ],
             20,
             new Skill(
                 "ウィンドパワーストライクA Ⅳ+",
@@ -9169,7 +11402,13 @@ public record Memoria(
             "反りし刃、誘うは棺",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(5151, 1954, 4070, 1934),
+            [
+                new Status(1756, 1532, 1775, 1512),
+                new Status(1879, 1637, 2398, 1617),
+                new Status(2703, 1743, 2522, 1723),
+                new Status(2827, 1848, 3946, 1828),
+                new Status(5151, 1954, 4070, 1934),
+            ],
             20,
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
@@ -9193,7 +11432,13 @@ public record Memoria(
             "蒼き輝き、楯たる矜持",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2046, 6060, 2015, 3370),
+            [
+                new Status(1603, 1840, 1572, 1850),
+                new Status(1713, 2170, 1682, 2280),
+                new Status(1824, 3000, 1793, 2410),
+                new Status(1935, 3730, 1904, 3240),
+                new Status(2046, 6060, 2015, 3370),
+            ],
             20,
             new Skill(
                 "ディファースマッシュB Ⅲ+",
@@ -9217,7 +11462,13 @@ public record Memoria(
             "蒼き輝き、楯たる矜持",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2046, 6060, 2015, 3370),
+            [
+                new Status(1603, 1840, 1572, 1850),
+                new Status(1713, 2170, 1682, 2280),
+                new Status(1824, 3000, 1793, 2410),
+                new Status(1935, 3730, 1904, 3240),
+                new Status(2046, 6060, 2015, 3370),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワーアシストC Ⅲ",
@@ -9241,7 +11492,13 @@ public record Memoria(
             "その心、炎よりも熱く",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(6055, 2048, 3353, 2015),
+            [
+                new Status(1835, 1605, 1833, 1572),
+                new Status(2165, 1715, 2263, 1682),
+                new Status(2995, 1826, 2393, 1793),
+                new Status(3725, 1937, 3223, 1904),
+                new Status(6055, 2048, 3353, 2015),
+            ],
             20,
             new Skill(
                 "ウィンドパワーフォールC Ⅲ",
@@ -9265,7 +11522,13 @@ public record Memoria(
             "その心、炎よりも熱く",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(6055, 2048, 3353, 2015),
+            [
+                new Status(1835, 1605, 1833, 1572),
+                new Status(2165, 1715, 2263, 1682),
+                new Status(2995, 1826, 2393, 1793),
+                new Status(3725, 1937, 3223, 1904),
+                new Status(6055, 2048, 3353, 2015),
+            ],
             20,
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
@@ -9289,7 +11552,13 @@ public record Memoria(
             "贖いの祈り",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2050, 2044, 4169, 5251),
+            [
+                new Status(1607, 1601, 1849, 1831),
+                new Status(1717, 1711, 2479, 1961),
+                new Status(1828, 1822, 2609, 2791),
+                new Status(1939, 1933, 4039, 2921),
+                new Status(2050, 2044, 4169, 5251),
+            ],
             20,
             new Skill(
                 "Sp.ガードヒールD Ⅳ",
@@ -9313,7 +11582,13 @@ public record Memoria(
             "贖いの祈り",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(2050, 2044, 4169, 5251),
+            [
+                new Status(1607, 1601, 1849, 1831),
+                new Status(1717, 1711, 2479, 1961),
+                new Status(1828, 1822, 2609, 2791),
+                new Status(1939, 1933, 4039, 2921),
+                new Status(2050, 2044, 4169, 5251),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワースマッシュA Ⅳ+",
@@ -9337,7 +11612,13 @@ public record Memoria(
             "桜と貴女を",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2732, 2711, 5097, 4321),
+            [
+                new Status(2058, 2037, 2406, 2430),
+                new Status(2226, 2205, 2603, 2927),
+                new Status(2395, 2374, 3201, 3125),
+                new Status(2563, 2542, 3399, 4123),
+                new Status(2732, 2711, 5097, 4321),
+            ],
             22,
             new Skill(
                 "ガードヒールD Ⅳ",
@@ -9361,7 +11642,13 @@ public record Memoria(
             "GOGO新学期！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2728, 5121, 2748, 4309),
+            [
+                new Status(2054, 2430, 2074, 2418),
+                new Status(2222, 2627, 2242, 2915),
+                new Status(2391, 3225, 2411, 3113),
+                new Status(2559, 3423, 2579, 4111),
+                new Status(2728, 5121, 2748, 4309),
+            ],
             22,
             new Skill(
                 "火：Sp.ファイアパワーフォールC Ⅲ",
@@ -9385,7 +11672,13 @@ public record Memoria(
             "天に舞う花びら",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2717, 2711, 4684, 4692),
+            [
+                new Status(2043, 2037, 2393, 2401),
+                new Status(2211, 2205, 2740, 2748),
+                new Status(2380, 2374, 3138, 3146),
+                new Status(2548, 2542, 3736, 3744),
+                new Status(2717, 2711, 4684, 4692),
+            ],
             22,
             new Skill(
                 "火：WガードアシストC Ⅳ",
@@ -9409,7 +11702,13 @@ public record Memoria(
             "お花見ティータイム",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2714, 5103, 2731, 4317),
+            [
+                new Status(2040, 2412, 2057, 2426),
+                new Status(2208, 2609, 2225, 2923),
+                new Status(2377, 3207, 2394, 3121),
+                new Status(2545, 3405, 2562, 4119),
+                new Status(2714, 5103, 2731, 4317),
+            ],
             22,
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
@@ -9433,7 +11732,13 @@ public record Memoria(
             "春風に吹かれて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5098, 2720, 4283, 2744),
+            [
+                new Status(2407, 2046, 2392, 2070),
+                new Status(2604, 2214, 2889, 2238),
+                new Status(3202, 2383, 3087, 2407),
+                new Status(3400, 2551, 4085, 2575),
+                new Status(5098, 2720, 4283, 2744),
+            ],
             22,
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
@@ -9457,7 +11762,13 @@ public record Memoria(
             "堅固なる守り",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2736, 2730, 3892, 3874),
+            [
+                new Status(1581, 1582, 1861, 1847),
+                new Status(1704, 1705, 2156, 1992),
+                new Status(1828, 1829, 2301, 2287),
+                new Status(1952, 1953, 2596, 2582),
+                new Status(2076, 2077, 3142, 3128),
+            ],
             21,
             new Skill(
                 "WガードアシストE LG",
@@ -9482,7 +11793,13 @@ public record Memoria(
             "光咲く日々を抱いて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(5155, 1936, 4059, 1925),
+            [
+                new Status(1760, 1514, 1764, 1503),
+                new Status(1883, 1619, 2387, 1608),
+                new Status(2707, 1725, 2511, 1714),
+                new Status(2831, 1830, 3935, 1819),
+                new Status(5155, 1936, 4059, 1925),
+            ],
             20,
             new Skill(
                 "ウィンドガードブレイクB Ⅲ",
@@ -9506,7 +11823,13 @@ public record Memoria(
             "光咲く日々を抱いて",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(5155, 1936, 4059, 1925),
+            [
+                new Status(1760, 1514, 1764, 1503),
+                new Status(1883, 1619, 2387, 1608),
+                new Status(2707, 1725, 2511, 1714),
+                new Status(2831, 1830, 3935, 1819),
+                new Status(5155, 1936, 4059, 1925),
+            ],
             20,
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
@@ -9530,7 +11853,13 @@ public record Memoria(
             "泡立てチャレンジの結果",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1926, 5157, 1926, 4075),
+            [
+                new Status(1504, 1762, 1504, 1780),
+                new Status(1609, 1885, 1609, 2403),
+                new Status(1715, 2709, 1715, 2527),
+                new Status(1820, 2833, 1820, 3951),
+                new Status(1926, 5157, 1926, 4075),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワーフォールB Ⅱ",
@@ -9554,7 +11883,13 @@ public record Memoria(
             "泡立てチャレンジの結果",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1926, 5157, 1926, 4075),
+            [
+                new Status(1504, 1762, 1504, 1780),
+                new Status(1609, 1885, 1609, 2403),
+                new Status(1715, 2709, 1715, 2527),
+                new Status(1820, 2833, 1820, 3951),
+                new Status(1926, 5157, 1926, 4075),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ",
@@ -9578,7 +11913,13 @@ public record Memoria(
             "ぎゅーっとしてあげる",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(4869, 4866, 2292, 2294),
+            [
+                new Status(3079, 3076, 1735, 1737),
+                new Status(3826, 3823, 1874, 1876),
+                new Status(4174, 4171, 2013, 2015),
+                new Status(4521, 4518, 2152, 2154),
+                new Status(4869, 4866, 2292, 2294),
+            ],
             22,
             new Skill(
                 "風：WパワーアシストB Ⅲ",
@@ -9603,7 +11944,13 @@ public record Memoria(
             "シルト餌付け実験",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2613, 2587, 4935, 4143),
+            [
+                new Status(1971, 1945, 2281, 2289),
+                new Status(2131, 2105, 2470, 2778),
+                new Status(2292, 2266, 3058, 2966),
+                new Status(2452, 2426, 3246, 3954),
+                new Status(2613, 2587, 4935, 4143),
+            ],
             22,
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
@@ -9627,7 +11974,13 @@ public record Memoria(
             "苺飴の味わい",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(2596, 4969, 2592, 4146),
+            [
+                new Status(1954, 2315, 1950, 2292),
+                new Status(2114, 2504, 2110, 2781),
+                new Status(2275, 3092, 2271, 2969),
+                new Status(2435, 3280, 2431, 3957),
+                new Status(2596, 4969, 2592, 4146),
+            ],
             22,
             new Skill(
                 "Sp.ウィンドガードフォールC Ⅲ",
@@ -9651,7 +12004,13 @@ public record Memoria(
             "甘々苺クレープ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(4949, 2609, 4134, 2604),
+            [
+                new Status(2295, 1967, 2280, 1962),
+                new Status(2484, 2127, 2769, 2122),
+                new Status(3072, 2288, 2957, 2283),
+                new Status(3260, 2448, 3945, 2443),
+                new Status(4949, 2609, 4134, 2604),
+            ],
             22,
             new Skill(
                 "ウィンドパワーアシストC Ⅲ",
@@ -9675,7 +12034,13 @@ public record Memoria(
             "籠いっぱいの幸せ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2611, 4943, 2611, 4138),
+            [
+                new Status(1969, 2289, 1969, 2284),
+                new Status(2129, 2478, 2129, 2773),
+                new Status(2290, 3066, 2290, 2961),
+                new Status(2450, 3254, 2450, 3949),
+                new Status(2611, 4943, 2611, 4138),
+            ],
             22,
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
@@ -9699,7 +12064,13 @@ public record Memoria(
             "苺色に染めて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4936, 2580, 4168, 2604),
+            [
+                new Status(2282, 1938, 2314, 1962),
+                new Status(2471, 2098, 2803, 2122),
+                new Status(3059, 2259, 2991, 2283),
+                new Status(3247, 2419, 3979, 2443),
+                new Status(4936, 2580, 4168, 2604),
+            ],
             22,
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
@@ -9723,7 +12094,13 @@ public record Memoria(
             "差し出されたお菓子",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1950, 5164, 1927, 4079),
+            [
+                new Status(1528, 1769, 1505, 1784),
+                new Status(1633, 1892, 1610, 2407),
+                new Status(1739, 2716, 1716, 2531),
+                new Status(1844, 2840, 1821, 3955),
+                new Status(1950, 5164, 1927, 4079),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
@@ -9747,7 +12124,13 @@ public record Memoria(
             "差し出されたお菓子",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1950, 5164, 1927, 4079),
+            [
+                new Status(1528, 1769, 1505, 1784),
+                new Status(1633, 1892, 1610, 2407),
+                new Status(1739, 2716, 1716, 2531),
+                new Status(1844, 2840, 1821, 3955),
+                new Status(1950, 5164, 1927, 4079),
+            ],
             20,
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
@@ -9771,7 +12154,13 @@ public record Memoria(
             "共同戦線！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5146, 1948, 4069, 1927),
+            [
+                new Status(1751, 1526, 1774, 1505),
+                new Status(1874, 1631, 2397, 1610),
+                new Status(2698, 1737, 2521, 1716),
+                new Status(2822, 1842, 3945, 1821),
+                new Status(5146, 1948, 4069, 1927),
+            ],
             20,
             new Skill(
                 "ファイアガードブレイクB Ⅲ+",
@@ -9795,7 +12184,13 @@ public record Memoria(
             "共同戦線！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(5146, 1948, 4069, 1927),
+            [
+                new Status(1751, 1526, 1774, 1505),
+                new Status(1874, 1631, 2397, 1610),
+                new Status(2698, 1737, 2521, 1716),
+                new Status(2822, 1842, 3945, 1821),
+                new Status(5146, 1948, 4069, 1927),
+            ],
             20,
             new Skill(
                 "ファイアパワーフォールB Ⅱ",
@@ -9819,7 +12214,13 @@ public record Memoria(
             "僕と契約して、魔法少女になってよ！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(3456, 1569, 2950, 1580),
+            [
+                new Status(1462, 1233, 1456, 1244),
+                new Status(1561, 1317, 1905, 1328),
+                new Status(2159, 1401, 2003, 1412),
+                new Status(2257, 1485, 2851, 1496),
+                new Status(3456, 1569, 2950, 1580),
+            ],
             18,
             new Skill(
                 "ファイアパワーストライクA Ⅳ+",
@@ -9843,7 +12244,13 @@ public record Memoria(
             "僕と契約して、魔法少女になってよ！",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(3456, 1569, 2950, 1580),
+            [
+                new Status(1462, 1233, 1456, 1244),
+                new Status(1561, 1317, 1905, 1328),
+                new Status(2159, 1401, 2003, 1412),
+                new Status(2257, 1485, 2851, 1496),
+                new Status(3456, 1569, 2950, 1580),
+            ],
             18,
             new Skill(
                 "ガードヒールC Ⅲ",
@@ -9867,7 +12274,13 @@ public record Memoria(
             "奇跡の出会い！",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1928, 1939, 4073, 5153),
+            [
+                new Status(1506, 1517, 1778, 1758),
+                new Status(1611, 1622, 2401, 1881),
+                new Status(1717, 1728, 2525, 2705),
+                new Status(1822, 1833, 3949, 2829),
+                new Status(1928, 1939, 4073, 5153),
+            ],
             20,
             new Skill(
                 "Sp.ファイアガードヒールD Ⅲ",
@@ -9891,7 +12304,13 @@ public record Memoria(
             "奇跡の出会い！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(1928, 1939, 4073, 5153),
+            [
+                new Status(1506, 1517, 1778, 1758),
+                new Status(1611, 1622, 2401, 1881),
+                new Status(1717, 1728, 2525, 2705),
+                new Status(1822, 1833, 3949, 2829),
+                new Status(1928, 1939, 4073, 5153),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワースマッシュA Ⅳ+",
@@ -9915,7 +12334,13 @@ public record Memoria(
             "頼れる先輩",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5180, 1955, 4066, 1945),
+            [
+                new Status(1785, 1533, 1771, 1523),
+                new Status(1908, 1638, 2394, 1628),
+                new Status(2732, 1744, 2518, 1734),
+                new Status(2856, 1849, 3942, 1839),
+                new Status(5180, 1955, 4066, 1945),
+            ],
             20,
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
@@ -9939,7 +12364,13 @@ public record Memoria(
             "頼れる先輩",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(5180, 1955, 4066, 1945),
+            [
+                new Status(1785, 1533, 1771, 1523),
+                new Status(1908, 1638, 2394, 1628),
+                new Status(2732, 1744, 2518, 1734),
+                new Status(2856, 1849, 3942, 1839),
+                new Status(5180, 1955, 4066, 1945),
+            ],
             20,
             new Skill(
                 "ファイアパワーアシストC Ⅲ",
@@ -9963,7 +12394,13 @@ public record Memoria(
             "謎めいた魔法少女",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(1926, 5153, 1956, 4063),
+            [
+                new Status(1504, 1758, 1534, 1768),
+                new Status(1609, 1881, 1639, 2391),
+                new Status(1715, 2705, 1745, 2515),
+                new Status(1820, 2829, 1850, 3939),
+                new Status(1926, 5153, 1956, 4063),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワーアシストC Ⅲ",
@@ -9987,7 +12424,13 @@ public record Memoria(
             "謎めいた魔法少女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1926, 5153, 1956, 4063),
+            [
+                new Status(1504, 1758, 1534, 1768),
+                new Status(1609, 1881, 1639, 2391),
+                new Status(1715, 2705, 1745, 2515),
+                new Status(1820, 2829, 1850, 3939),
+                new Status(1926, 5153, 1956, 4063),
+            ],
             20,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -10011,7 +12454,13 @@ public record Memoria(
             "連携プレーの勝利！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1941, 5179, 1944, 4067),
+            [
+                new Status(1519, 1784, 1522, 1772),
+                new Status(1624, 1907, 1627, 2395),
+                new Status(1730, 2731, 1733, 2519),
+                new Status(1835, 2855, 1838, 3943),
+                new Status(1941, 5179, 1944, 4067),
+            ],
             20,
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ+",
@@ -10035,7 +12484,13 @@ public record Memoria(
             "連携プレーの勝利！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(1941, 5179, 1944, 4067),
+            [
+                new Status(1519, 1784, 1522, 1772),
+                new Status(1624, 1907, 1627, 2395),
+                new Status(1730, 2731, 1733, 2519),
+                new Status(1835, 2855, 1838, 3943),
+                new Status(1941, 5179, 1944, 4067),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワーフォールB Ⅱ",
@@ -10059,7 +12514,13 @@ public record Memoria(
             "氷嵐を断つ劔",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(1959, 5163, 1958, 4043),
+            [
+                new Status(1537, 1768, 1536, 1748),
+                new Status(1642, 1891, 1641, 2371),
+                new Status(1748, 2715, 1747, 2495),
+                new Status(1853, 2839, 1852, 3919),
+                new Status(1959, 5163, 1958, 4043),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワースマッシュA Ⅳ+",
@@ -10083,7 +12544,13 @@ public record Memoria(
             "氷嵐を断つ劔",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(1959, 5163, 1958, 4043),
+            [
+                new Status(1537, 1768, 1536, 1748),
+                new Status(1642, 1891, 1641, 2371),
+                new Status(1748, 2715, 1747, 2495),
+                new Status(1853, 2839, 1852, 3919),
+                new Status(1959, 5163, 1958, 4043),
+            ],
             20,
             new Skill(
                 "WパワーフォールA Ⅲ",
@@ -10107,7 +12574,13 @@ public record Memoria(
             "一意専心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5165, 1954, 4061, 1920),
+            [
+                new Status(1770, 1532, 1766, 1498),
+                new Status(1893, 1637, 2389, 1603),
+                new Status(2717, 1743, 2513, 1709),
+                new Status(2841, 1848, 3937, 1814),
+                new Status(5165, 1954, 4061, 1920),
+            ],
             20,
             new Skill(
                 "ファイアガードブレイクB Ⅲ",
@@ -10131,7 +12604,13 @@ public record Memoria(
             "一意専心",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(5165, 1954, 4061, 1920),
+            [
+                new Status(1770, 1532, 1766, 1498),
+                new Status(1893, 1637, 2389, 1603),
+                new Status(2717, 1743, 2513, 1709),
+                new Status(2841, 1848, 3937, 1814),
+                new Status(5165, 1954, 4061, 1920),
+            ],
             20,
             new Skill(
                 "ファイアガードフォールB Ⅱ",
@@ -10155,7 +12634,13 @@ public record Memoria(
             "六花、胡蝶の如く舞う",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1944, 1935, 5174, 4071),
+            [
+                new Status(1522, 1513, 1779, 1776),
+                new Status(1627, 1618, 1902, 2399),
+                new Status(1733, 1724, 2726, 2523),
+                new Status(1838, 1829, 2850, 3947),
+                new Status(1944, 1935, 5174, 4071),
+            ],
             20,
             new Skill(
                 "ファイアガードヒールC Ⅲ",
@@ -10179,7 +12664,13 @@ public record Memoria(
             "六花、胡蝶の如く舞う",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(1944, 1935, 5174, 4071),
+            [
+                new Status(1522, 1513, 1779, 1776),
+                new Status(1627, 1618, 1902, 2399),
+                new Status(1733, 1724, 2726, 2523),
+                new Status(1838, 1829, 2850, 3947),
+                new Status(1944, 1935, 5174, 4071),
+            ],
             20,
             new Skill(
                 "ファイアパワーストライクA Ⅳ+",
@@ -10203,7 +12694,13 @@ public record Memoria(
             "輝ける流星",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1926, 5175, 1952, 4056),
+            [
+                new Status(1504, 1780, 1530, 1761),
+                new Status(1609, 1903, 1635, 2384),
+                new Status(1715, 2727, 1741, 2508),
+                new Status(1820, 2851, 1846, 3932),
+                new Status(1926, 5175, 1952, 4056),
+            ],
             20,
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ",
@@ -10227,7 +12724,13 @@ public record Memoria(
             "輝ける流星",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(1926, 5175, 1952, 4056),
+            [
+                new Status(1504, 1780, 1530, 1761),
+                new Status(1609, 1903, 1635, 2384),
+                new Status(1715, 2727, 1741, 2508),
+                new Status(1820, 2851, 1846, 3932),
+                new Status(1926, 5175, 1952, 4056),
+            ],
             20,
             new Skill(
                 "Sp.ガードライフアシストD Ⅱ",
@@ -10251,7 +12754,13 @@ public record Memoria(
             "とろけるハート",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2585, 2597, 4168, 4938),
+            [
+                new Status(1981, 1993, 2360, 2330),
+                new Status(2132, 2144, 2837, 2507),
+                new Status(2283, 2295, 3014, 3084),
+                new Status(2434, 2446, 3991, 3261),
+                new Status(2585, 2597, 4168, 4938),
+            ],
             22,
             new Skill(
                 "Sp.ファイアガードヒールC Ⅲ",
@@ -10275,7 +12784,13 @@ public record Memoria(
             "甘いきらめき",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2610, 4958, 2594, 4148),
+            [
+                new Status(2006, 2350, 1990, 2340),
+                new Status(2157, 2527, 2141, 2817),
+                new Status(2308, 3104, 2292, 2994),
+                new Status(2459, 3281, 2443, 3971),
+                new Status(2610, 4958, 2594, 4148),
+            ],
             22,
             new Skill(
                 "Sp.ファイアパワーアシストC Ⅲ",
@@ -10299,7 +12814,13 @@ public record Memoria(
             "ショコラのゆうわく",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2616, 4941, 2596, 4140),
+            [
+                new Status(2012, 2333, 1992, 2332),
+                new Status(2163, 2510, 2143, 2809),
+                new Status(2314, 3087, 2294, 2986),
+                new Status(2465, 3264, 2445, 3963),
+                new Status(2616, 4941, 2596, 4140),
+            ],
             22,
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
@@ -10323,7 +12844,13 @@ public record Memoria(
             "いただきだゾ♪",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(4968, 2616, 4153, 2586),
+            [
+                new Status(2360, 2012, 2345, 1982),
+                new Status(2537, 2163, 2822, 2133),
+                new Status(3114, 2314, 2999, 2284),
+                new Status(3291, 2465, 3976, 2435),
+                new Status(4968, 2616, 4153, 2586),
+            ],
             22,
             new Skill(
                 "ファイアパワーストライクB Ⅲ+",
@@ -10347,7 +12874,13 @@ public record Memoria(
             "あなたにお茶を",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(5154, 1921, 4066, 1946),
+            [
+                new Status(1759, 1499, 1771, 1524),
+                new Status(1882, 1604, 2394, 1629),
+                new Status(2706, 1710, 2518, 1735),
+                new Status(2830, 1815, 3942, 1840),
+                new Status(5154, 1921, 4066, 1946),
+            ],
             20,
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
@@ -10371,7 +12904,13 @@ public record Memoria(
             "あなたにお茶を",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(5154, 1921, 4066, 1946),
+            [
+                new Status(1759, 1499, 1771, 1524),
+                new Status(1882, 1604, 2394, 1629),
+                new Status(2706, 1710, 2518, 1735),
+                new Status(2830, 1815, 3942, 1840),
+                new Status(5154, 1921, 4066, 1946),
+            ],
             20,
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
@@ -10395,7 +12934,13 @@ public record Memoria(
             "安らぎをあなたに",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1948, 5174, 1931, 4053),
+            [
+                new Status(1526, 1779, 1509, 1758),
+                new Status(1631, 1902, 1614, 2381),
+                new Status(1737, 2726, 1720, 2505),
+                new Status(1842, 2850, 1825, 3929),
+                new Status(1948, 5174, 1931, 4053),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
@@ -10419,7 +12964,13 @@ public record Memoria(
             "安らぎをあなたに",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1948, 5174, 1931, 4053),
+            [
+                new Status(1526, 1779, 1509, 1758),
+                new Status(1631, 1902, 1614, 2381),
+                new Status(1737, 2726, 1720, 2505),
+                new Status(1842, 2850, 1825, 3929),
+                new Status(1948, 5174, 1931, 4053),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドガードフォールC Ⅲ",
@@ -10443,7 +12994,13 @@ public record Memoria(
             "触れ合う吐息",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1928, 5168, 1946, 4040),
+            [
+                new Status(1506, 1773, 1524, 1745),
+                new Status(1611, 1896, 1629, 2368),
+                new Status(1717, 2720, 1735, 2492),
+                new Status(1822, 2844, 1840, 3916),
+                new Status(1928, 5168, 1946, 4040),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
@@ -10467,7 +13024,13 @@ public record Memoria(
             "触れ合う吐息",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1928, 5168, 1946, 4040),
+            [
+                new Status(1506, 1773, 1524, 1745),
+                new Status(1611, 1896, 1629, 2368),
+                new Status(1717, 2720, 1735, 2492),
+                new Status(1822, 2844, 1840, 3916),
+                new Status(1928, 5168, 1946, 4040),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
@@ -10491,7 +13054,13 @@ public record Memoria(
             "チョコを知らない君へ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(5164, 1934, 4050, 1931),
+            [
+                new Status(1769, 1512, 1755, 1509),
+                new Status(1892, 1617, 2378, 1614),
+                new Status(2716, 1723, 2502, 1720),
+                new Status(2840, 1828, 3926, 1825),
+                new Status(5164, 1934, 4050, 1931),
+            ],
             20,
             new Skill(
                 "ウィンドパワーアシストC Ⅲ",
@@ -10515,7 +13084,13 @@ public record Memoria(
             "チョコを知らない君へ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(5164, 1934, 4050, 1931),
+            [
+                new Status(1769, 1512, 1755, 1509),
+                new Status(1892, 1617, 2378, 1614),
+                new Status(2716, 1723, 2502, 1720),
+                new Status(2840, 1828, 3926, 1825),
+                new Status(5164, 1934, 4050, 1931),
+            ],
             20,
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
@@ -10539,7 +13114,13 @@ public record Memoria(
             "運命のトリニティ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(1927, 5157, 1933, 4046),
+            [
+                new Status(1505, 1762, 1511, 1751),
+                new Status(1610, 1885, 1616, 2374),
+                new Status(1716, 2709, 1722, 2498),
+                new Status(1821, 2833, 1827, 3922),
+                new Status(1927, 5157, 1933, 4046),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワーアシストB Ⅱ",
@@ -10563,7 +13144,13 @@ public record Memoria(
             "運命のトリニティ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1927, 5157, 1933, 4046),
+            [
+                new Status(1505, 1762, 1511, 1751),
+                new Status(1610, 1885, 1616, 2374),
+                new Status(1716, 2709, 1722, 2498),
+                new Status(1821, 2833, 1827, 3922),
+                new Status(1927, 5157, 1933, 4046),
+            ],
             20,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -10587,7 +13174,13 @@ public record Memoria(
             "貴女と共にあるために",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(5141, 1949, 4076, 1926),
+            [
+                new Status(1746, 1527, 1781, 1504),
+                new Status(1869, 1632, 2404, 1609),
+                new Status(2693, 1738, 2528, 1715),
+                new Status(2817, 1843, 3952, 1820),
+                new Status(5141, 1949, 4076, 1926),
+            ],
             20,
             new Skill(
                 "ガードヒールC Ⅲ+",
@@ -10611,7 +13204,13 @@ public record Memoria(
             "貴女と共にあるために",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5141, 1949, 4076, 1926),
+            [
+                new Status(1746, 1527, 1781, 1504),
+                new Status(1869, 1632, 2404, 1609),
+                new Status(2693, 1738, 2528, 1715),
+                new Status(2817, 1843, 3952, 1820),
+                new Status(5141, 1949, 4076, 1926),
+            ],
             20,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -10635,7 +13234,13 @@ public record Memoria(
             "貴女の笑顔を守るために",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(4547, 4567, 2593, 2604),
+            [
+                new Status(2339, 2359, 1989, 2000),
+                new Status(2666, 2686, 2140, 2151),
+                new Status(3043, 3063, 2291, 2302),
+                new Status(3620, 3640, 2442, 2453),
+                new Status(4547, 4567, 2593, 2604),
+            ],
             22,
             new Skill(
                 "WパワーアシストB Ⅲ",
@@ -10659,7 +13264,13 @@ public record Memoria(
             "光の盾",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1952, 5177, 1948, 4051),
+            [
+                new Status(1530, 1782, 1526, 1756),
+                new Status(1635, 1905, 1631, 2379),
+                new Status(1741, 2729, 1737, 2503),
+                new Status(1846, 2853, 1842, 3927),
+                new Status(1952, 5177, 1948, 4051),
+            ],
             20,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -10683,7 +13294,13 @@ public record Memoria(
             "光の盾",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1952, 5177, 1948, 4051),
+            [
+                new Status(1530, 1782, 1526, 1756),
+                new Status(1635, 1905, 1631, 2379),
+                new Status(1741, 2729, 1737, 2503),
+                new Status(1846, 2853, 1842, 3927),
+                new Status(1952, 5177, 1948, 4051),
+            ],
             20,
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
@@ -10707,7 +13324,13 @@ public record Memoria(
             "ハルナストライク！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5174, 1935, 4054, 1957),
+            [
+                new Status(1779, 1513, 1759, 1535),
+                new Status(1902, 1618, 2382, 1640),
+                new Status(2726, 1724, 2506, 1746),
+                new Status(2850, 1829, 3930, 1851),
+                new Status(5174, 1935, 4054, 1957),
+            ],
             20,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -10731,7 +13354,13 @@ public record Memoria(
             "ハルナストライク！！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(5174, 1935, 4054, 1957),
+            [
+                new Status(1779, 1513, 1759, 1535),
+                new Status(1902, 1618, 2382, 1640),
+                new Status(2726, 1724, 2506, 1746),
+                new Status(2850, 1829, 3930, 1851),
+                new Status(5174, 1935, 4054, 1957),
+            ],
             20,
             new Skill(
                 "ファイアガードフォールB Ⅱ",
@@ -10755,7 +13384,13 @@ public record Memoria(
             "吐息の距離",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1921, 5172, 1952, 4042),
+            [
+                new Status(1499, 1777, 1530, 1747),
+                new Status(1604, 1900, 1635, 2370),
+                new Status(1710, 2724, 1741, 2494),
+                new Status(1815, 2848, 1846, 3918),
+                new Status(1921, 5172, 1952, 4042),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ+",
@@ -10779,7 +13414,13 @@ public record Memoria(
             "吐息の距離",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(1921, 5172, 1952, 4042),
+            [
+                new Status(1499, 1777, 1530, 1747),
+                new Status(1604, 1900, 1635, 2370),
+                new Status(1710, 2724, 1741, 2494),
+                new Status(1815, 2848, 1846, 3918),
+                new Status(1921, 5172, 1952, 4042),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワーアシストB Ⅱ",
@@ -10803,7 +13444,13 @@ public record Memoria(
             "縦横無尽、阻む者無し",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(4085, 4067, 7082, 7075),
+            [
+                new Status(3285, 3267, 4832, 4825),
+                new Status(3485, 3467, 5332, 5325),
+                new Status(3685, 3667, 5882, 5875),
+                new Status(3885, 3867, 6432, 6425),
+                new Status(4085, 4067, 7082, 7075),
+            ],
             26,
             new Skill(
                 "リカバーヒールD Ⅳ",
@@ -10827,7 +13474,13 @@ public record Memoria(
             "縦横無尽、阻む者無し",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(4085, 7401, 4092, 6731),
+            [
+                new Status(3285, 4961, 3292, 4671),
+                new Status(3485, 5271, 3492, 5361),
+                new Status(3685, 6081, 3692, 5651),
+                new Status(3885, 6391, 3892, 6441),
+                new Status(4085, 7401, 4092, 6731),
+            ],
             26,
             new Skill(
                 "Sp.マイトスマッシュA Ⅴ+",
@@ -10851,7 +13504,13 @@ public record Memoria(
             "シリウス・ロア",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(7059, 7060, 4071, 4100),
+            [
+                new Status(4809, 4810, 3271, 3300),
+                new Status(5309, 5310, 3471, 3500),
+                new Status(5859, 5860, 3671, 3700),
+                new Status(6409, 6410, 3871, 3900),
+                new Status(7059, 7060, 4071, 4100),
+            ],
             26,
             new Skill(
                 "WパワーアシストD Ⅲ",
@@ -10875,7 +13534,13 @@ public record Memoria(
             "シリウス・ロア",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(7403, 4070, 6717, 4100),
+            [
+                new Status(4963, 3270, 4657, 3300),
+                new Status(5273, 3470, 5347, 3500),
+                new Status(6083, 3670, 5637, 3700),
+                new Status(6393, 3870, 6427, 3900),
+                new Status(7403, 4070, 6717, 4100),
+            ],
             26,
             new Skill(
                 "風：ガードブレイクB Ⅲ",
@@ -10899,7 +13564,13 @@ public record Memoria(
             "蒼き月、満ちる時",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(7088, 7053, 4099, 4073),
+            [
+                new Status(4838, 4803, 3299, 3273),
+                new Status(5338, 5303, 3499, 3473),
+                new Status(5888, 5853, 3699, 3673),
+                new Status(6438, 6403, 3899, 3873),
+                new Status(7088, 7053, 4099, 4073),
+            ],
             26,
             new Skill(
                 "WパワーフォールD Ⅲ",
@@ -10923,7 +13594,13 @@ public record Memoria(
             "蒼き月、満ちる時",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(4098, 7397, 4099, 6719),
+            [
+                new Status(3298, 4957, 3299, 4659),
+                new Status(3498, 5267, 3499, 5349),
+                new Status(3698, 6077, 3699, 5639),
+                new Status(3898, 6387, 3899, 6429),
+                new Status(4098, 7397, 4099, 6719),
+            ],
             26,
             new Skill(
                 "風：Sp.ガードバーストB Ⅲ",
@@ -10947,7 +13624,13 @@ public record Memoria(
             "フェノメノ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(4062, 7427, 4091, 6726),
+            [
+                new Status(3262, 4987, 3291, 4666),
+                new Status(3462, 5297, 3491, 5356),
+                new Status(3662, 6107, 3691, 5646),
+                new Status(3862, 6417, 3891, 6436),
+                new Status(4062, 7427, 4091, 6726),
+            ],
             26,
             new Skill(
                 "火：Sp.パワースマッシュB Ⅲ",
@@ -10971,7 +13654,13 @@ public record Memoria(
             "フェノメノ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(4062, 4093, 7081, 7070),
+            [
+                new Status(3262, 3293, 4831, 4820),
+                new Status(3462, 3493, 5331, 5320),
+                new Status(3662, 3693, 5881, 5870),
+                new Status(3862, 3893, 6431, 6420),
+                new Status(4062, 4093, 7081, 7070),
+            ],
             26,
             new Skill(
                 "WガードフォールD Ⅲ",
@@ -10995,7 +13684,13 @@ public record Memoria(
             "比類なき異能",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(7395, 4086, 6724, 4097),
+            [
+                new Status(4955, 3286, 4664, 3297),
+                new Status(5265, 3486, 5354, 3497),
+                new Status(6075, 3686, 5644, 3697),
+                new Status(6385, 3886, 6434, 3897),
+                new Status(7395, 4086, 6724, 4097),
+            ],
             26,
             new Skill(
                 "火：パワーストライクB Ⅲ",
@@ -11019,7 +13714,13 @@ public record Memoria(
             "比類なき異能",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(4061, 4086, 7068, 7087),
+            [
+                new Status(3261, 3286, 4818, 4837),
+                new Status(3461, 3486, 5318, 5337),
+                new Status(3661, 3686, 5868, 5887),
+                new Status(3861, 3886, 6418, 6437),
+                new Status(4061, 4086, 7068, 7087),
+            ],
             26,
             new Skill(
                 "WガードアシストD Ⅲ",
@@ -11043,7 +13744,13 @@ public record Memoria(
             "ありのままのわたしで",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1932, 5151, 1936, 4067),
+            [
+                new Status(1510, 1756, 1514, 1772),
+                new Status(1615, 1879, 1619, 2395),
+                new Status(1721, 2703, 1725, 2519),
+                new Status(1826, 2827, 1830, 3943),
+                new Status(1932, 5151, 1936, 4067),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワースマッシュB Ⅲ",
@@ -11067,7 +13774,13 @@ public record Memoria(
             "ありのままのわたしで",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(1932, 5151, 1936, 4067),
+            [
+                new Status(1510, 1756, 1514, 1772),
+                new Status(1615, 1879, 1619, 2395),
+                new Status(1721, 2703, 1725, 2519),
+                new Status(1826, 2827, 1830, 3943),
+                new Status(1932, 5151, 1936, 4067),
+            ],
             20,
             new Skill(
                 "Sp.ファイアガードフォールB Ⅱ",
@@ -11091,7 +13804,13 @@ public record Memoria(
             "いつも隣に",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5168, 1920, 4053, 1923),
+            [
+                new Status(1773, 1498, 1758, 1501),
+                new Status(1896, 1603, 2381, 1606),
+                new Status(2720, 1709, 2505, 1712),
+                new Status(2844, 1814, 3929, 1817),
+                new Status(5168, 1920, 4053, 1923),
+            ],
             20,
             new Skill(
                 "ファイアパワーストライクB Ⅲ",
@@ -11115,7 +13834,13 @@ public record Memoria(
             "いつも隣に",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(5168, 1920, 4053, 1923),
+            [
+                new Status(1773, 1498, 1758, 1501),
+                new Status(1896, 1603, 2381, 1606),
+                new Status(2720, 1709, 2505, 1712),
+                new Status(2844, 1814, 3929, 1817),
+                new Status(5168, 1920, 4053, 1923),
+            ],
             20,
             new Skill(
                 "ファイアパワーアシストB Ⅱ",
@@ -11139,7 +13864,13 @@ public record Memoria(
             "蝶の夢",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1955, 1943, 5168, 4045),
+            [
+                new Status(1533, 1521, 1773, 1750),
+                new Status(1638, 1626, 1896, 2373),
+                new Status(1744, 1732, 2720, 2497),
+                new Status(1849, 1837, 2844, 3921),
+                new Status(1955, 1943, 5168, 4045),
+            ],
             20,
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
@@ -11163,7 +13894,13 @@ public record Memoria(
             "蝶の夢",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(1955, 1943, 5168, 4045),
+            [
+                new Status(1533, 1521, 1773, 1750),
+                new Status(1638, 1626, 1896, 2373),
+                new Status(1744, 1732, 2720, 2497),
+                new Status(1849, 1837, 2844, 3921),
+                new Status(1955, 1943, 5168, 4045),
+            ],
             20,
             new Skill(
                 "ウィンドパワーストライクA Ⅳ+",
@@ -11187,7 +13924,13 @@ public record Memoria(
             "湯けむりの向こう側",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1954, 1952, 4603, 4608),
+            [
+                new Status(1532, 1530, 1758, 1763),
+                new Status(1637, 1635, 2131, 2136),
+                new Status(1743, 1741, 2605, 2610),
+                new Status(1848, 1846, 3379, 3384),
+                new Status(1954, 1952, 4603, 4608),
+            ],
             20,
             new Skill(
                 "WガードヒールD Ⅲ",
@@ -11211,7 +13954,13 @@ public record Memoria(
             "湯けむりの向こう側",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(1954, 1952, 4603, 4608),
+            [
+                new Status(1532, 1530, 1758, 1763),
+                new Status(1637, 1635, 2131, 2136),
+                new Status(1743, 1741, 2605, 2610),
+                new Status(1848, 1846, 3379, 3384),
+                new Status(1954, 1952, 4603, 4608),
+            ],
             20,
             new Skill(
                 "Sp.ファイアパワースマッシュA Ⅳ+",
@@ -11235,7 +13984,13 @@ public record Memoria(
             "宵に舞う華",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(5145, 1955, 4054, 1953),
+            [
+                new Status(1750, 1533, 1759, 1531),
+                new Status(1873, 1638, 2382, 1636),
+                new Status(2697, 1744, 2506, 1742),
+                new Status(2821, 1849, 3930, 1847),
+                new Status(5145, 1955, 4054, 1953),
+            ],
             20,
             new Skill(
                 "ウィンドガードブレイクB Ⅲ",
@@ -11259,7 +14014,13 @@ public record Memoria(
             "宵に舞う華",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(5145, 1955, 4054, 1953),
+            [
+                new Status(1750, 1533, 1759, 1531),
+                new Status(1873, 1638, 2382, 1636),
+                new Status(2697, 1744, 2506, 1742),
+                new Status(2821, 1849, 3930, 1847),
+                new Status(5145, 1955, 4054, 1953),
+            ],
             20,
             new Skill(
                 "ウィンドガードフォールB Ⅱ",
@@ -11283,7 +14044,13 @@ public record Memoria(
             "好いも甘いも受け止めて",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1946, 5167, 1926, 4043),
+            [
+                new Status(1524, 1772, 1504, 1748),
+                new Status(1629, 1895, 1609, 2371),
+                new Status(1735, 2719, 1715, 2495),
+                new Status(1840, 2843, 1820, 3919),
+                new Status(1946, 5167, 1926, 4043),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワーアシストC Ⅲ",
@@ -11307,7 +14074,13 @@ public record Memoria(
             "好いも甘いも受け止めて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1946, 5167, 1926, 4043),
+            [
+                new Status(1524, 1772, 1504, 1748),
+                new Status(1629, 1895, 1609, 2371),
+                new Status(1735, 2719, 1715, 2495),
+                new Status(1840, 2843, 1820, 3919),
+                new Status(1946, 5167, 1926, 4043),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ",
@@ -11331,7 +14104,13 @@ public record Memoria(
             "2周年祭り 絆の彩り",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1585, 3453, 1605, 2965),
+            [
+                new Status(1249, 1459, 1269, 1471),
+                new Status(1333, 1558, 1353, 1920),
+                new Status(1417, 2156, 1437, 2018),
+                new Status(1501, 2254, 1521, 2866),
+                new Status(1585, 3453, 1605, 2965),
+            ],
             18,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -11355,7 +14134,13 @@ public record Memoria(
             "2周年祭り 絆の彩り",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(1585, 3453, 1605, 2965),
+            [
+                new Status(1249, 1459, 1269, 1471),
+                new Status(1333, 1558, 1353, 1920),
+                new Status(1417, 2156, 1437, 2018),
+                new Status(1501, 2254, 1521, 2866),
+                new Status(1585, 3453, 1605, 2965),
+            ],
             18,
             new Skill(
                 "Sp.パワーアシストB Ⅲ",
@@ -11379,7 +14164,13 @@ public record Memoria(
             "ふたりのヒメゴト",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2595, 2619, 4536, 4561),
+            [
+                new Status(1953, 1977, 2282, 2307),
+                new Status(2113, 2137, 2621, 2646),
+                new Status(2274, 2298, 3009, 3034),
+                new Status(2434, 2458, 3597, 3622),
+                new Status(2595, 2619, 4536, 4561),
+            ],
             22,
             new Skill(
                 "WガードヒールD Ⅳ",
@@ -11403,7 +14194,13 @@ public record Memoria(
             "変わらない絆",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(4566, 4552, 2592, 2605),
+            [
+                new Status(2312, 2298, 1950, 1963),
+                new Status(2651, 2637, 2110, 2123),
+                new Status(3039, 3025, 2271, 2284),
+                new Status(3627, 3613, 2431, 2444),
+                new Status(4566, 4552, 2592, 2605),
+            ],
             22,
             new Skill(
                 "WパワーフォールB Ⅲ",
@@ -11427,7 +14224,13 @@ public record Memoria(
             "Cherishing",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5544, 2277, 4220, 2317),
+            [
+                new Status(3285, 1716, 2885, 1756),
+                new Status(4550, 1856, 3119, 1896),
+                new Status(4814, 1996, 3552, 2036),
+                new Status(5279, 2136, 3786, 2176),
+                new Status(5544, 2277, 4220, 2317),
+            ],
             22,
             new Skill(
                 "ファイアガードブレイクB Ⅲ",
@@ -11452,7 +14255,13 @@ public record Memoria(
             "止めどない熱",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(2290, 5539, 2294, 4230),
+            [
+                new Status(1729, 3280, 1733, 2895),
+                new Status(1869, 4545, 1873, 3129),
+                new Status(2009, 4809, 2013, 3562),
+                new Status(2149, 5274, 2153, 3796),
+                new Status(2290, 5539, 2294, 4230),
+            ],
             22,
             new Skill(
                 "Sp.ファイアガードバーストB Ⅲ",
@@ -11477,7 +14286,13 @@ public record Memoria(
             "戦場のコンダクター",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(2736, 4156, 2736, 3627),
+            [
+                new Status(1171, 1400, 1177, 1391),
+                new Status(1255, 1499, 1261, 1640),
+                new Status(1339, 1747, 1345, 1738),
+                new Status(1423, 1845, 1429, 2136),
+                new Status(1507, 2744, 1513, 2235),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュA LG",
@@ -11502,7 +14317,13 @@ public record Memoria(
             "引導を渡して差し上げますわ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(5179, 1942, 4070, 1940),
+            [
+                new Status(1784, 1520, 1775, 1518),
+                new Status(1907, 1625, 2398, 1623),
+                new Status(2731, 1731, 2522, 1729),
+                new Status(2855, 1836, 3946, 1834),
+                new Status(5179, 1942, 4070, 1940),
+            ],
             20,
             new Skill(
                 "パワーストライクA Ⅳ+",
@@ -11526,7 +14347,13 @@ public record Memoria(
             "引導を渡して差し上げますわ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(5179, 1942, 4070, 1940),
+            [
+                new Status(1784, 1520, 1775, 1518),
+                new Status(1907, 1625, 2398, 1623),
+                new Status(2731, 1731, 2522, 1729),
+                new Status(2855, 1836, 3946, 1834),
+                new Status(5179, 1942, 4070, 1940),
+            ],
             20,
             new Skill(
                 "マイトアシストB Ⅲ",
@@ -11550,7 +14377,13 @@ public record Memoria(
             "飢えし群れ、挑む狩人",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1938, 5172, 1956, 4076),
+            [
+                new Status(1516, 1777, 1534, 1781),
+                new Status(1621, 1900, 1639, 2404),
+                new Status(1727, 2724, 1745, 2528),
+                new Status(1832, 2848, 1850, 3952),
+                new Status(1938, 5172, 1956, 4076),
+            ],
             20,
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
@@ -11574,7 +14407,13 @@ public record Memoria(
             "飢えし群れ、挑む狩人",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1938, 5172, 1956, 4076),
+            [
+                new Status(1516, 1777, 1534, 1781),
+                new Status(1621, 1900, 1639, 2404),
+                new Status(1727, 2724, 1745, 2528),
+                new Status(1832, 2848, 1850, 3952),
+                new Status(1938, 5172, 1956, 4076),
+            ],
             20,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -11598,7 +14437,13 @@ public record Memoria(
             "うりゃうりゃうりゃうりゃ！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(5177, 1957, 4040, 1950),
+            [
+                new Status(1782, 1535, 1745, 1528),
+                new Status(1905, 1640, 2368, 1633),
+                new Status(2729, 1746, 2492, 1739),
+                new Status(2853, 1851, 3916, 1844),
+                new Status(5177, 1957, 4040, 1950),
+            ],
             20,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -11622,7 +14467,13 @@ public record Memoria(
             "うりゃうりゃうりゃうりゃ！！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(5177, 1957, 4040, 1950),
+            [
+                new Status(1782, 1535, 1745, 1528),
+                new Status(1905, 1640, 2368, 1633),
+                new Status(2729, 1746, 2492, 1739),
+                new Status(2853, 1851, 3916, 1844),
+                new Status(5177, 1957, 4040, 1950),
+            ],
             20,
             new Skill(
                 "ファイアパワーアシストB Ⅱ",
@@ -11646,7 +14497,13 @@ public record Memoria(
             "この手に劔がある限り",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2606, 2606, 4542, 4557),
+            [
+                new Status(1964, 1964, 2288, 2303),
+                new Status(2124, 2124, 2627, 2642),
+                new Status(2285, 2285, 3015, 3030),
+                new Status(2445, 2445, 3603, 3618),
+                new Status(2606, 2606, 4542, 4557),
+            ],
             22,
             new Skill(
                 "WガードフォールB Ⅲ",
@@ -11670,7 +14527,13 @@ public record Memoria(
             "今年もよろしくね",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2605, 2611, 4556, 4540),
+            [
+                new Status(1963, 1969, 2302, 2286),
+                new Status(2123, 2129, 2641, 2625),
+                new Status(2284, 2290, 3029, 3013),
+                new Status(2444, 2450, 3617, 3601),
+                new Status(2605, 2611, 4556, 4540),
+            ],
             22,
             new Skill(
                 "WガードヒールC Ⅲ",
@@ -11694,7 +14557,13 @@ public record Memoria(
             "謹賀新年です！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(2597, 4951, 2609, 4150),
+            [
+                new Status(1955, 2297, 1967, 2296),
+                new Status(2115, 2486, 2127, 2785),
+                new Status(2276, 3074, 2288, 2973),
+                new Status(2436, 3262, 2448, 3961),
+                new Status(2597, 4951, 2609, 4150),
+            ],
             22,
             new Skill(
                 "Sp.ウィンドパワーフォールB Ⅱ",
@@ -11718,7 +14587,13 @@ public record Memoria(
             "あけおめですっ♪",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(4549, 4565, 2583, 2599),
+            [
+                new Status(2295, 2311, 1941, 1957),
+                new Status(2634, 2650, 2101, 2117),
+                new Status(3022, 3038, 2262, 2278),
+                new Status(3610, 3626, 2422, 2438),
+                new Status(4549, 4565, 2583, 2599),
+            ],
             22,
             new Skill(
                 "WパワーアシストC Ⅳ",
@@ -11742,7 +14617,13 @@ public record Memoria(
             "新年を祝すわ！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2607, 4936, 2592, 4165),
+            [
+                new Status(1965, 2282, 1950, 2311),
+                new Status(2125, 2471, 2110, 2800),
+                new Status(2286, 3059, 2271, 2988),
+                new Status(2446, 3247, 2431, 3976),
+                new Status(2607, 4936, 2592, 4165),
+            ],
             22,
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
@@ -11766,7 +14647,13 @@ public record Memoria(
             "ことよろなのじゃ！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4937, 2613, 4137, 2598),
+            [
+                new Status(2283, 1971, 2283, 1956),
+                new Status(2472, 2131, 2772, 2116),
+                new Status(3060, 2292, 2960, 2277),
+                new Status(3248, 2452, 3948, 2437),
+                new Status(4937, 2613, 4137, 2598),
+            ],
             22,
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
@@ -11790,7 +14677,13 @@ public record Memoria(
             "賀正！！",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1930, 1946, 5141, 4043),
+            [
+                new Status(1508, 1524, 1746, 1748),
+                new Status(1613, 1629, 1869, 2371),
+                new Status(1719, 1735, 2693, 2495),
+                new Status(1824, 1840, 2817, 3919),
+                new Status(1930, 1946, 5141, 4043),
+            ],
             20,
             new Skill(
                 "ウィンドガードヒールC Ⅲ",
@@ -11814,7 +14707,13 @@ public record Memoria(
             "賀正！！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(1930, 1946, 5141, 4043),
+            [
+                new Status(1508, 1524, 1746, 1748),
+                new Status(1613, 1629, 1869, 2371),
+                new Status(1719, 1735, 2693, 2495),
+                new Status(1824, 1840, 2817, 3919),
+                new Status(1930, 1946, 5141, 4043),
+            ],
             20,
             new Skill(
                 "ウィンドガードブレイクA Ⅳ+",
@@ -11838,7 +14737,13 @@ public record Memoria(
             "思い出を抱きしめて",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1949, 5166, 1944, 4054),
+            [
+                new Status(1527, 1771, 1522, 1759),
+                new Status(1632, 1894, 1627, 2382),
+                new Status(1738, 2718, 1733, 2506),
+                new Status(1843, 2842, 1838, 3930),
+                new Status(1949, 5166, 1944, 4054),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワーアシストC Ⅲ",
@@ -11862,7 +14767,13 @@ public record Memoria(
             "思い出を抱きしめて",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(1949, 5166, 1944, 4054),
+            [
+                new Status(1527, 1771, 1522, 1759),
+                new Status(1632, 1894, 1627, 2382),
+                new Status(1738, 2718, 1733, 2506),
+                new Status(1843, 2842, 1838, 3930),
+                new Status(1949, 5166, 1944, 4054),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドガードバーストA Ⅳ+",
@@ -11886,7 +14797,13 @@ public record Memoria(
             "突きて返すは兎姉妹",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1944, 5144, 1944, 4072),
+            [
+                new Status(1522, 1749, 1522, 1777),
+                new Status(1627, 1872, 1627, 2400),
+                new Status(1733, 2696, 1733, 2524),
+                new Status(1838, 2820, 1838, 3948),
+                new Status(1944, 5144, 1944, 4072),
+            ],
             20,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -11910,7 +14827,13 @@ public record Memoria(
             "突きて返すは兎姉妹",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1944, 5144, 1944, 4072),
+            [
+                new Status(1522, 1749, 1522, 1777),
+                new Status(1627, 1872, 1627, 2400),
+                new Status(1733, 2696, 1733, 2524),
+                new Status(1838, 2820, 1838, 3948),
+                new Status(1944, 5144, 1944, 4072),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドガードフォールC Ⅲ",
@@ -11934,7 +14857,13 @@ public record Memoria(
             "雪兎に会えた日",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4942, 2581, 4136, 2613),
+            [
+                new Status(2288, 1939, 2282, 1971),
+                new Status(2477, 2099, 2771, 2131),
+                new Status(3065, 2260, 2959, 2292),
+                new Status(3253, 2420, 3947, 2452),
+                new Status(4942, 2581, 4136, 2613),
+            ],
             22,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -11958,7 +14887,13 @@ public record Memoria(
             "大丈夫、みんながいるから",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(4484, 3498, 1680, 1680),
+            [
+                new Status(1529, 1543, 1335, 1335),
+                new Status(1630, 2044, 1421, 1421),
+                new Status(2381, 2145, 1507, 1507),
+                new Status(2482, 3396, 1593, 1593),
+                new Status(4484, 3498, 1680, 1680),
+            ],
             19,
             new Skill(
                 "水：パワーフォールB Ⅲ",
@@ -11982,7 +14917,13 @@ public record Memoria(
             "大丈夫、みんながいるから",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4484, 3498, 1680, 1680),
+            [
+                new Status(1529, 1543, 1335, 1335),
+                new Status(1630, 2044, 1421, 1421),
+                new Status(2381, 2145, 1507, 1507),
+                new Status(2482, 3396, 1593, 1593),
+                new Status(4484, 3498, 1680, 1680),
+            ],
             19,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -12006,7 +14947,13 @@ public record Memoria(
             "高らかと響き渡る歌声の中で",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1681, 4503, 1644, 3496),
+            [
+                new Status(1336, 1548, 1299, 1541),
+                new Status(1422, 1649, 1385, 2042),
+                new Status(1508, 2400, 1471, 2143),
+                new Status(1594, 2501, 1557, 3394),
+                new Status(1681, 4503, 1644, 3496),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
@@ -12030,7 +14977,13 @@ public record Memoria(
             "高らかと響き渡る歌声の中で",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1681, 4503, 1644, 3496),
+            [
+                new Status(1336, 1548, 1299, 1541),
+                new Status(1422, 1649, 1385, 2042),
+                new Status(1508, 2400, 1471, 2143),
+                new Status(1594, 2501, 1557, 3394),
+                new Status(1681, 4503, 1644, 3496),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
@@ -12054,7 +15007,13 @@ public record Memoria(
             "スノーフレイク",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(1654, 5142, 1645, 2819),
+            [
+                new Status(1309, 1537, 1300, 1514),
+                new Status(1395, 1788, 1386, 1865),
+                new Status(1481, 2539, 1472, 1966),
+                new Status(1567, 3140, 1558, 2717),
+                new Status(1654, 5142, 1645, 2819),
+            ],
             19,
             new Skill(
                 "Sp.ウィンドパワースマッシュA Ⅳ+",
@@ -12078,7 +15037,13 @@ public record Memoria(
             "スノーフレイク",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1654, 5142, 1645, 2819),
+            [
+                new Status(1309, 1537, 1300, 1514),
+                new Status(1395, 1788, 1386, 1865),
+                new Status(1481, 2539, 1472, 1966),
+                new Status(1567, 3140, 1558, 2717),
+                new Status(1654, 5142, 1645, 2819),
+            ],
             19,
             new Skill(
                 "Sp.ウィンドパワーアシストB Ⅱ",
@@ -12102,7 +15067,13 @@ public record Memoria(
             "胸躍る聖夜",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(4495, 3492, 1668, 1658),
+            [
+                new Status(1540, 1537, 1323, 1313),
+                new Status(1641, 2038, 1409, 1399),
+                new Status(2392, 2139, 1495, 1485),
+                new Status(2493, 3390, 1581, 1571),
+                new Status(4495, 3492, 1668, 1658),
+            ],
             19,
             new Skill(
                 "WパワーフォールB Ⅲ",
@@ -12126,7 +15097,13 @@ public record Memoria(
             "胸躍る聖夜",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4495, 3492, 1668, 1658),
+            [
+                new Status(1540, 1537, 1323, 1313),
+                new Status(1641, 2038, 1409, 1399),
+                new Status(2392, 2139, 1495, 1485),
+                new Status(2493, 3390, 1581, 1571),
+                new Status(4495, 3492, 1668, 1658),
+            ],
             19,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -12150,7 +15127,13 @@ public record Memoria(
             "ここから先へ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1938, 4225, 1926, 3210),
+            [
+                new Status(1533, 1330, 1521, 1315),
+                new Status(1634, 1416, 1622, 1801),
+                new Status(1735, 2152, 1723, 1887),
+                new Status(1836, 2238, 1824, 3123),
+                new Status(1938, 4225, 1926, 3210),
+            ],
             19,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -12174,7 +15157,13 @@ public record Memoria(
             "ここから先へ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(1938, 4225, 1926, 3210),
+            [
+                new Status(1533, 1330, 1521, 1315),
+                new Status(1634, 1416, 1622, 1801),
+                new Status(1735, 2152, 1723, 1887),
+                new Status(1836, 2238, 1824, 3123),
+                new Status(1938, 4225, 1926, 3210),
+            ],
             19,
             new Skill(
                 "Sp.パワーアシストC Ⅳ",
@@ -12198,7 +15187,13 @@ public record Memoria(
             "無邪気な親近感",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(4476, 1672, 3466, 1677),
+            [
+                new Status(1521, 1327, 1511, 1332),
+                new Status(1622, 1413, 2012, 1418),
+                new Status(2373, 1499, 2113, 1504),
+                new Status(2474, 1585, 3364, 1590),
+                new Status(4476, 1672, 3466, 1677),
+            ],
             19,
             new Skill(
                 "パワーアシストC Ⅳ",
@@ -12222,7 +15217,13 @@ public record Memoria(
             "無邪気な親近感",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(4476, 1672, 3466, 1677),
+            [
+                new Status(1521, 1327, 1511, 1332),
+                new Status(1622, 1413, 2012, 1418),
+                new Status(2373, 1499, 2113, 1504),
+                new Status(2474, 1585, 3364, 1590),
+                new Status(4476, 1672, 3466, 1677),
+            ],
             19,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -12246,7 +15247,13 @@ public record Memoria(
             "かがみもち、できました！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(5171, 1957, 4044, 1921),
+            [
+                new Status(1776, 1535, 1749, 1499),
+                new Status(1899, 1640, 2372, 1604),
+                new Status(2723, 1746, 2496, 1710),
+                new Status(2847, 1851, 3920, 1815),
+                new Status(5171, 1957, 4044, 1921),
+            ],
             20,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -12270,7 +15277,13 @@ public record Memoria(
             "かがみもち、できました！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(5171, 1957, 4044, 1921),
+            [
+                new Status(1776, 1535, 1749, 1499),
+                new Status(1899, 1640, 2372, 1604),
+                new Status(2723, 1746, 2496, 1710),
+                new Status(2847, 1851, 3920, 1815),
+                new Status(5171, 1957, 4044, 1921),
+            ],
             20,
             new Skill(
                 "ウィンドパワーアシストC Ⅲ",
@@ -12294,7 +15307,13 @@ public record Memoria(
             "兎であけおめですわ！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(5154, 1929, 4070, 1924),
+            [
+                new Status(1759, 1507, 1775, 1502),
+                new Status(1882, 1612, 2398, 1607),
+                new Status(2706, 1718, 2522, 1713),
+                new Status(2830, 1823, 3946, 1818),
+                new Status(5154, 1929, 4070, 1924),
+            ],
             20,
             new Skill(
                 "ウィンドパワーフォールB Ⅱ",
@@ -12318,7 +15337,13 @@ public record Memoria(
             "兎であけおめですわ！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(5154, 1929, 4070, 1924),
+            [
+                new Status(1759, 1507, 1775, 1502),
+                new Status(1882, 1612, 2398, 1607),
+                new Status(2706, 1718, 2522, 1713),
+                new Status(2830, 1823, 3946, 1818),
+                new Status(5154, 1929, 4070, 1924),
+            ],
             20,
             new Skill(
                 "ウィンドパワーストライクA Ⅳ+",
@@ -12342,7 +15367,13 @@ public record Memoria(
             "新年、はっじまっるよ～♪",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1926, 1927, 4078, 5163),
+            [
+                new Status(1504, 1505, 1783, 1768),
+                new Status(1609, 1610, 2406, 1891),
+                new Status(1715, 1716, 2530, 2715),
+                new Status(1820, 1821, 3954, 2839),
+                new Status(1926, 1927, 4078, 5163),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
@@ -12366,7 +15397,13 @@ public record Memoria(
             "新年、はっじまっるよ～♪",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(1926, 1927, 4078, 5163),
+            [
+                new Status(1504, 1505, 1783, 1768),
+                new Status(1609, 1610, 2406, 1891),
+                new Status(1715, 1716, 2530, 2715),
+                new Status(1820, 1821, 3954, 2839),
+                new Status(1926, 1927, 4078, 5163),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワースマッシュA Ⅳ+",
@@ -12390,7 +15427,13 @@ public record Memoria(
             "初春の宴に貴女を想う",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2610, 4949, 2582, 4141),
+            [
+                new Status(1968, 2295, 1940, 2287),
+                new Status(2128, 2484, 2100, 2776),
+                new Status(2289, 3072, 2261, 2964),
+                new Status(2449, 3260, 2421, 3952),
+                new Status(2610, 4949, 2582, 4141),
+            ],
             22,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -12414,7 +15457,13 @@ public record Memoria(
             "約束された勝利の剣",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1944, 5168, 1937, 4079),
+            [
+                new Status(1522, 1773, 1515, 1784),
+                new Status(1627, 1896, 1620, 2407),
+                new Status(1733, 2720, 1726, 2531),
+                new Status(1838, 2844, 1831, 3955),
+                new Status(1944, 5168, 1937, 4079),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
@@ -12438,7 +15487,13 @@ public record Memoria(
             "約束された勝利の剣",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1944, 5168, 1937, 4079),
+            [
+                new Status(1522, 1773, 1515, 1784),
+                new Status(1627, 1896, 1620, 2407),
+                new Status(1733, 2720, 1726, 2531),
+                new Status(1838, 2844, 1831, 3955),
+                new Status(1944, 5168, 1937, 4079),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワーアシストC Ⅲ",
@@ -12462,7 +15517,13 @@ public record Memoria(
             "射殺す百頭",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(5171, 1941, 4068, 1956),
+            [
+                new Status(1776, 1519, 1773, 1534),
+                new Status(1899, 1624, 2396, 1639),
+                new Status(2723, 1730, 2520, 1745),
+                new Status(2847, 1835, 3944, 1850),
+                new Status(5171, 1941, 4068, 1956),
+            ],
             20,
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
@@ -12486,7 +15547,13 @@ public record Memoria(
             "射殺す百頭",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(5171, 1941, 4068, 1956),
+            [
+                new Status(1776, 1519, 1773, 1534),
+                new Status(1899, 1624, 2396, 1639),
+                new Status(2723, 1730, 2520, 1745),
+                new Status(2847, 1835, 3944, 1850),
+                new Status(5171, 1941, 4068, 1956),
+            ],
             20,
             new Skill(
                 "ウィンドパワーフォールB Ⅱ",
@@ -12510,7 +15577,13 @@ public record Memoria(
             "投影魔術",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(5158, 1934, 4041, 1953),
+            [
+                new Status(1763, 1512, 1746, 1531),
+                new Status(1886, 1617, 2369, 1636),
+                new Status(2710, 1723, 2493, 1742),
+                new Status(2834, 1828, 3917, 1847),
+                new Status(5158, 1934, 4041, 1953),
+            ],
             20,
             new Skill(
                 "ウィンドパワーストライクA Ⅳ+",
@@ -12534,7 +15607,13 @@ public record Memoria(
             "投影魔術",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(5158, 1934, 4041, 1953),
+            [
+                new Status(1763, 1512, 1746, 1531),
+                new Status(1886, 1617, 2369, 1636),
+                new Status(2710, 1723, 2493, 1742),
+                new Status(2834, 1828, 3917, 1847),
+                new Status(5158, 1934, 4041, 1953),
+            ],
             20,
             new Skill(
                 "WガードヒールC Ⅲ",
@@ -12558,7 +15637,13 @@ public record Memoria(
             "願いの魔法少女",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1949, 5140, 1958, 4075),
+            [
+                new Status(1527, 1745, 1536, 1780),
+                new Status(1632, 1868, 1641, 2403),
+                new Status(1738, 2692, 1747, 2527),
+                new Status(1843, 2816, 1852, 3951),
+                new Status(1949, 5140, 1958, 4075),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワーフォールB Ⅱ",
@@ -12582,7 +15667,13 @@ public record Memoria(
             "願いの魔法少女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1949, 5140, 1958, 4075),
+            [
+                new Status(1527, 1745, 1536, 1780),
+                new Status(1632, 1868, 1641, 2403),
+                new Status(1738, 2692, 1747, 2527),
+                new Status(1843, 2816, 1852, 3951),
+                new Status(1949, 5140, 1958, 4075),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
@@ -12606,7 +15697,13 @@ public record Memoria(
             "空想魔法少女",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(5167, 1946, 4062, 1925),
+            [
+                new Status(1772, 1524, 1767, 1503),
+                new Status(1895, 1629, 2390, 1608),
+                new Status(2719, 1735, 2514, 1714),
+                new Status(2843, 1840, 3938, 1819),
+                new Status(5167, 1946, 4062, 1925),
+            ],
             20,
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
@@ -12630,7 +15727,13 @@ public record Memoria(
             "空想魔法少女",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(5167, 1946, 4062, 1925),
+            [
+                new Status(1772, 1524, 1767, 1503),
+                new Status(1895, 1629, 2390, 1608),
+                new Status(2719, 1735, 2514, 1714),
+                new Status(2843, 1840, 3938, 1819),
+                new Status(5167, 1946, 4062, 1925),
+            ],
             20,
             new Skill(
                 "WパワーアシストC Ⅳ",
@@ -12654,7 +15757,13 @@ public record Memoria(
             "膝の子猫と窓の雪",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(2591, 2588, 4155, 4957),
+            [
+                new Status(1949, 1946, 2301, 2303),
+                new Status(2109, 2106, 2790, 2492),
+                new Status(2270, 2267, 2978, 3080),
+                new Status(2430, 2427, 3966, 3268),
+                new Status(2591, 2588, 4155, 4957),
+            ],
             22,
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
@@ -12678,7 +15787,13 @@ public record Memoria(
             "かずはをよしよし",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(4963, 2594, 4145, 2616),
+            [
+                new Status(2309, 1952, 2291, 1974),
+                new Status(2498, 2112, 2780, 2134),
+                new Status(3086, 2273, 2968, 2295),
+                new Status(3274, 2433, 3956, 2455),
+                new Status(4963, 2594, 4145, 2616),
+            ],
             22,
             new Skill(
                 "ウォーターパワーフォールC Ⅲ",
@@ -12702,7 +15817,13 @@ public record Memoria(
             "ゆー姉と一緒！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2614, 4935, 2582, 4158),
+            [
+                new Status(1972, 2281, 1940, 2304),
+                new Status(2132, 2470, 2100, 2793),
+                new Status(2293, 3058, 2261, 2981),
+                new Status(2453, 3246, 2421, 3969),
+                new Status(2614, 4935, 2582, 4158),
+            ],
             22,
             new Skill(
                 "風拡：Sp.パワーアシストB Ⅳ",
@@ -12726,7 +15847,13 @@ public record Memoria(
             "あつあつの肉まん",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(2604, 4936, 2607, 4148),
+            [
+                new Status(1962, 2282, 1965, 2294),
+                new Status(2122, 2471, 2125, 2783),
+                new Status(2283, 3059, 2286, 2971),
+                new Status(2443, 3247, 2446, 3959),
+                new Status(2604, 4936, 2607, 4148),
+            ],
             22,
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
@@ -12750,7 +15877,13 @@ public record Memoria(
             "どんがらがっしゃん",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4936, 2606, 4151, 2602),
+            [
+                new Status(2282, 1964, 2297, 1960),
+                new Status(2471, 2124, 2786, 2120),
+                new Status(3059, 2285, 2974, 2281),
+                new Status(3247, 2445, 3962, 2441),
+                new Status(4936, 2606, 4151, 2602),
+            ],
             22,
             new Skill(
                 "ウォーターガードブレイクB Ⅲ+",
@@ -12774,7 +15907,13 @@ public record Memoria(
             "懐かしくて、優しい味",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1948, 5155, 1932, 4065),
+            [
+                new Status(1526, 1760, 1510, 1770),
+                new Status(1631, 1883, 1615, 2393),
+                new Status(1737, 2707, 1721, 2517),
+                new Status(1842, 2831, 1826, 3941),
+                new Status(1948, 5155, 1932, 4065),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドパワーアシストC Ⅲ",
@@ -12798,7 +15937,13 @@ public record Memoria(
             "懐かしくて、優しい味",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1948, 5155, 1932, 4065),
+            [
+                new Status(1526, 1760, 1510, 1770),
+                new Status(1631, 1883, 1615, 2393),
+                new Status(1737, 2707, 1721, 2517),
+                new Status(1842, 2831, 1826, 3941),
+                new Status(1948, 5155, 1932, 4065),
+            ],
             20,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -12822,7 +15967,13 @@ public record Memoria(
             "聞こえし者",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(4601, 2722, 3178, 2737),
+            [
+                new Status(1848, 1594, 1871, 1573),
+                new Status(2143, 1717, 2016, 1696),
+                new Status(2438, 1841, 2161, 1820),
+                new Status(2883, 1965, 2306, 1944),
+                new Status(3829, 2089, 2452, 2068),
+            ],
             21,
             new Skill(
                 "パワーストライクA LG+",
@@ -12847,7 +15998,13 @@ public record Memoria(
             "ふーみんにインタビュー",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1953, 1922, 4056, 5163),
+            [
+                new Status(1531, 1500, 1761, 1768),
+                new Status(1636, 1605, 2384, 1891),
+                new Status(1742, 1711, 2508, 2715),
+                new Status(1847, 1816, 3932, 2839),
+                new Status(1953, 1922, 4056, 5163),
+            ],
             20,
             new Skill(
                 "Sp.ウィンドガードヒールC Ⅲ",
@@ -12871,7 +16028,13 @@ public record Memoria(
             "ふーみんにインタビュー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1953, 1922, 4056, 5163),
+            [
+                new Status(1531, 1500, 1761, 1768),
+                new Status(1636, 1605, 2384, 1891),
+                new Status(1742, 1711, 2508, 2715),
+                new Status(1847, 1816, 3932, 2839),
+                new Status(1953, 1922, 4056, 5163),
+            ],
             20,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -12895,7 +16058,13 @@ public record Memoria(
             "歴戦の余裕",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1933, 5177, 1939, 4068),
+            [
+                new Status(1511, 1782, 1517, 1773),
+                new Status(1616, 1905, 1622, 2396),
+                new Status(1722, 2729, 1728, 2520),
+                new Status(1827, 2853, 1833, 3944),
+                new Status(1933, 5177, 1939, 4068),
+            ],
             20,
             new Skill(
                 "Sp.マイトスマッシュA Ⅳ+",
@@ -12919,7 +16088,13 @@ public record Memoria(
             "歴戦の余裕",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1933, 5177, 1939, 4068),
+            [
+                new Status(1511, 1782, 1517, 1773),
+                new Status(1616, 1905, 1622, 2396),
+                new Status(1722, 2729, 1728, 2520),
+                new Status(1827, 2853, 1833, 3944),
+                new Status(1933, 5177, 1939, 4068),
+            ],
             20,
             new Skill(
                 "WパワーフォールA Ⅲ",
@@ -12943,7 +16118,13 @@ public record Memoria(
             "雪原に火花散る",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(5162, 1951, 4050, 1936),
+            [
+                new Status(1767, 1529, 1755, 1514),
+                new Status(1890, 1634, 2378, 1619),
+                new Status(2714, 1740, 2502, 1725),
+                new Status(2838, 1845, 3926, 1830),
+                new Status(5162, 1951, 4050, 1936),
+            ],
             20,
             new Skill(
                 "ウォーターガードフォールB Ⅱ",
@@ -12967,7 +16148,13 @@ public record Memoria(
             "雪原に火花散る",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(5162, 1951, 4050, 1936),
+            [
+                new Status(1767, 1529, 1755, 1514),
+                new Status(1890, 1634, 2378, 1619),
+                new Status(2714, 1740, 2502, 1725),
+                new Status(2838, 1845, 3926, 1830),
+                new Status(5162, 1951, 4050, 1936),
+            ],
             20,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -12991,7 +16178,13 @@ public record Memoria(
             "縮地、友の元へ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1930, 5168, 1920, 4073),
+            [
+                new Status(1508, 1773, 1498, 1778),
+                new Status(1613, 1896, 1603, 2401),
+                new Status(1719, 2720, 1709, 2525),
+                new Status(1824, 2844, 1814, 3949),
+                new Status(1930, 5168, 1920, 4073),
+            ],
             20,
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
@@ -13015,7 +16208,13 @@ public record Memoria(
             "縮地、友の元へ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1930, 5168, 1920, 4073),
+            [
+                new Status(1508, 1773, 1498, 1778),
+                new Status(1613, 1896, 1603, 2401),
+                new Status(1719, 2720, 1709, 2525),
+                new Status(1824, 2844, 1814, 3949),
+                new Status(1930, 5168, 1920, 4073),
+            ],
             20,
             new Skill(
                 "Sp.ウォーターパワースマッシュA Ⅳ+",
@@ -13039,7 +16238,13 @@ public record Memoria(
             "旋律に身を委ねて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1928, 5154, 1955, 4061),
+            [
+                new Status(1506, 1759, 1533, 1766),
+                new Status(1611, 1882, 1638, 2389),
+                new Status(1717, 2706, 1744, 2513),
+                new Status(1822, 2830, 1849, 3937),
+                new Status(1928, 5154, 1955, 4061),
+            ],
             20,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -13063,7 +16268,13 @@ public record Memoria(
             "旋律に身を委ねて",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1928, 5154, 1955, 4061),
+            [
+                new Status(1506, 1759, 1533, 1766),
+                new Status(1611, 1882, 1638, 2389),
+                new Status(1717, 2706, 1744, 2513),
+                new Status(1822, 2830, 1849, 3937),
+                new Status(1928, 5154, 1955, 4061),
+            ],
             20,
             new Skill(
                 "ライフアシストB Ⅱ",
@@ -13087,7 +16298,13 @@ public record Memoria(
             "神琳！？　これは違うの！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(4628, 4625, 1958, 1926),
+            [
+                new Status(1783, 1780, 1536, 1504),
+                new Status(2156, 2153, 1641, 1609),
+                new Status(2630, 2627, 1747, 1715),
+                new Status(3404, 3401, 1852, 1820),
+                new Status(4628, 4625, 1958, 1926),
+            ],
             20,
             new Skill(
                 "WパワーアシストB Ⅲ",
@@ -13111,7 +16328,13 @@ public record Memoria(
             "神琳！？　これは違うの！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4628, 4625, 1958, 1926),
+            [
+                new Status(1783, 1780, 1536, 1504),
+                new Status(2156, 2153, 1641, 1609),
+                new Status(2630, 2627, 1747, 1715),
+                new Status(3404, 3401, 1852, 1820),
+                new Status(4628, 4625, 1958, 1926),
+            ],
             20,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -13135,7 +16358,13 @@ public record Memoria(
             "サンタをつかまえて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1931, 1954, 4056, 5159),
+            [
+                new Status(1509, 1532, 1761, 1764),
+                new Status(1614, 1637, 2384, 1887),
+                new Status(1720, 1743, 2508, 2711),
+                new Status(1825, 1848, 3932, 2835),
+                new Status(1931, 1954, 4056, 5159),
+            ],
             20,
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
@@ -13159,7 +16388,13 @@ public record Memoria(
             "サンタをつかまえて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1931, 1954, 4056, 5159),
+            [
+                new Status(1509, 1532, 1761, 1764),
+                new Status(1614, 1637, 2384, 1887),
+                new Status(1720, 1743, 2508, 2711),
+                new Status(1825, 1848, 3932, 2835),
+                new Status(1931, 1954, 4056, 5159),
+            ],
             20,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -13183,7 +16418,13 @@ public record Memoria(
             "聖夜のテラリウム",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(5152, 1935, 4045, 1926),
+            [
+                new Status(1757, 1513, 1750, 1504),
+                new Status(1880, 1618, 2373, 1609),
+                new Status(2704, 1724, 2497, 1715),
+                new Status(2828, 1829, 3921, 1820),
+                new Status(5152, 1935, 4045, 1926),
+            ],
             20,
             new Skill(
                 "ウィンドガードフォールC Ⅲ",
@@ -13207,7 +16448,13 @@ public record Memoria(
             "聖夜のテラリウム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(5152, 1935, 4045, 1926),
+            [
+                new Status(1757, 1513, 1750, 1504),
+                new Status(1880, 1618, 2373, 1609),
+                new Status(2704, 1724, 2497, 1715),
+                new Status(2828, 1829, 3921, 1820),
+                new Status(5152, 1935, 4045, 1926),
+            ],
             20,
             new Skill(
                 "ウィンドガードブレイクB Ⅲ",
@@ -13231,7 +16478,13 @@ public record Memoria(
             "聖夜に乾杯",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1933, 5168, 1948, 4077),
+            [
+                new Status(1511, 1773, 1526, 1782),
+                new Status(1616, 1896, 1631, 2405),
+                new Status(1722, 2720, 1737, 2529),
+                new Status(1827, 2844, 1842, 3953),
+                new Status(1933, 5168, 1948, 4077),
+            ],
             20,
             new Skill(
                 "Sp.ウォーターパワーアシストC Ⅲ",
@@ -13255,7 +16508,13 @@ public record Memoria(
             "聖夜に乾杯",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1933, 5168, 1948, 4077),
+            [
+                new Status(1511, 1773, 1526, 1782),
+                new Status(1616, 1896, 1631, 2405),
+                new Status(1722, 2720, 1737, 2529),
+                new Status(1827, 2844, 1842, 3953),
+                new Status(1933, 5168, 1948, 4077),
+            ],
             20,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
@@ -13279,7 +16538,13 @@ public record Memoria(
             "手作りクリスマス",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1945, 5157, 1925, 4068),
+            [
+                new Status(1523, 1762, 1503, 1773),
+                new Status(1628, 1885, 1608, 2396),
+                new Status(1734, 2709, 1714, 2520),
+                new Status(1839, 2833, 1819, 3944),
+                new Status(1945, 5157, 1925, 4068),
+            ],
             20,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
@@ -13303,7 +16568,13 @@ public record Memoria(
             "手作りクリスマス",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1945, 5157, 1925, 4068),
+            [
+                new Status(1523, 1762, 1503, 1773),
+                new Status(1628, 1885, 1608, 2396),
+                new Status(1734, 2709, 1714, 2520),
+                new Status(1839, 2833, 1819, 3944),
+                new Status(1945, 5157, 1925, 4068),
+            ],
             20,
             new Skill(
                 "Sp.ウォーターパワーフォールB Ⅱ",
@@ -13327,7 +16598,13 @@ public record Memoria(
             "ひめひめ仕立て",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(5174, 1958, 4055, 1957),
+            [
+                new Status(1779, 1536, 1760, 1535),
+                new Status(1902, 1641, 2383, 1640),
+                new Status(2726, 1747, 2507, 1746),
+                new Status(2850, 1852, 3931, 1851),
+                new Status(5174, 1958, 4055, 1957),
+            ],
             20,
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
@@ -13351,7 +16628,13 @@ public record Memoria(
             "ひめひめ仕立て",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(5174, 1958, 4055, 1957),
+            [
+                new Status(1779, 1536, 1760, 1535),
+                new Status(1902, 1641, 2383, 1640),
+                new Status(2726, 1747, 2507, 1746),
+                new Status(2850, 1852, 3931, 1851),
+                new Status(5174, 1958, 4055, 1957),
+            ],
             20,
             new Skill(
                 "風：パワーフォールB Ⅲ",
@@ -13375,7 +16658,13 @@ public record Memoria(
             "はっぴーらっきーとっきー",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(5169, 1941, 4042, 1948),
+            [
+                new Status(1774, 1519, 1747, 1526),
+                new Status(1897, 1624, 2370, 1631),
+                new Status(2721, 1730, 2494, 1737),
+                new Status(2845, 1835, 3918, 1842),
+                new Status(5169, 1941, 4042, 1948),
+            ],
             20,
             new Skill(
                 "ウォーターパワーフォールB Ⅱ",
@@ -13399,7 +16688,13 @@ public record Memoria(
             "はっぴーらっきーとっきー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(5169, 1941, 4042, 1948),
+            [
+                new Status(1774, 1519, 1747, 1526),
+                new Status(1897, 1624, 2370, 1631),
+                new Status(2721, 1730, 2494, 1737),
+                new Status(2845, 1835, 3918, 1842),
+                new Status(5169, 1941, 4042, 1948),
+            ],
             20,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -13423,7 +16718,13 @@ public record Memoria(
             "サプライズゲーム",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(4595, 1921, 4613, 1960),
+            [
+                new Status(1750, 1499, 1768, 1538),
+                new Status(2123, 1604, 2141, 1643),
+                new Status(2597, 1710, 2615, 1749),
+                new Status(3371, 1815, 3389, 1854),
+                new Status(4595, 1921, 4613, 1960),
+            ],
             20,
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
@@ -13447,7 +16748,13 @@ public record Memoria(
             "サプライズゲーム",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(4595, 1921, 4613, 1960),
+            [
+                new Status(1750, 1499, 1768, 1538),
+                new Status(2123, 1604, 2141, 1643),
+                new Status(2597, 1710, 2615, 1749),
+                new Status(3371, 1815, 3389, 1854),
+                new Status(4595, 1921, 4613, 1960),
+            ],
             20,
             new Skill(
                 "ウォーターパワーストライクA Ⅳ+",
@@ -13471,7 +16778,13 @@ public record Memoria(
             "帯びる熱と急接近",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1944, 5143, 1934, 4078),
+            [
+                new Status(1522, 1748, 1512, 1783),
+                new Status(1627, 1871, 1617, 2406),
+                new Status(1733, 2695, 1723, 2530),
+                new Status(1838, 2819, 1828, 3954),
+                new Status(1944, 5143, 1934, 4078),
+            ],
             20,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -13495,7 +16808,13 @@ public record Memoria(
             "帯びる熱と急接近",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1944, 5143, 1934, 4078),
+            [
+                new Status(1522, 1748, 1512, 1783),
+                new Status(1627, 1871, 1617, 2406),
+                new Status(1733, 2695, 1723, 2530),
+                new Status(1838, 2819, 1828, 3954),
+                new Status(1944, 5143, 1934, 4078),
+            ],
             20,
             new Skill(
                 "Sp.ウォーターパワーアシストB Ⅱ",
@@ -13519,7 +16838,13 @@ public record Memoria(
             "レンズ越しの視点",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1695, 4540, 1715, 3528),
+            [
+                new Status(1344, 1578, 1364, 1566),
+                new Status(1431, 1681, 1451, 2069),
+                new Status(1519, 2434, 1539, 2172),
+                new Status(1607, 2537, 1627, 3425),
+                new Status(1695, 4540, 1715, 3528),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
@@ -13543,7 +16868,13 @@ public record Memoria(
             "レンズ越しの視点",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1695, 4540, 1715, 3528),
+            [
+                new Status(1344, 1578, 1364, 1566),
+                new Status(1431, 1681, 1451, 2069),
+                new Status(1519, 2434, 1539, 2172),
+                new Status(1607, 2537, 1627, 3425),
+                new Status(1695, 4540, 1715, 3528),
+            ],
             19,
             new Skill(
                 "Sp.ガードライフアシストD Ⅱ",
@@ -13567,7 +16898,13 @@ public record Memoria(
             "白に染まる世界",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(4475, 1647, 3467, 1653),
+            [
+                new Status(1520, 1302, 1512, 1308),
+                new Status(1621, 1388, 2013, 1394),
+                new Status(2372, 1474, 2114, 1480),
+                new Status(2473, 1560, 3365, 1566),
+                new Status(4475, 1647, 3467, 1653),
+            ],
             19,
             new Skill(
                 "マイトストライクA Ⅳ+",
@@ -13591,7 +16928,13 @@ public record Memoria(
             "白に染まる世界",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(4475, 1647, 3467, 1653),
+            [
+                new Status(1520, 1302, 1512, 1308),
+                new Status(1621, 1388, 2013, 1394),
+                new Status(2372, 1474, 2114, 1480),
+                new Status(2473, 1560, 3365, 1566),
+                new Status(4475, 1647, 3467, 1653),
+            ],
             19,
             new Skill(
                 "風：パワーアシストB Ⅲ",
@@ -13615,7 +16958,13 @@ public record Memoria(
             "雪風と踊る少女",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1650, 1664, 4489, 3500),
+            [
+                new Status(1305, 1319, 1534, 1545),
+                new Status(1391, 1405, 1635, 2046),
+                new Status(1477, 1491, 2386, 2147),
+                new Status(1563, 1577, 2487, 3398),
+                new Status(1650, 1664, 4489, 3500),
+            ],
             19,
             new Skill(
                 "ガードヒールC Ⅲ+",
@@ -13639,7 +16988,13 @@ public record Memoria(
             "雪風と踊る少女",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(1650, 1664, 4489, 3500),
+            [
+                new Status(1305, 1319, 1534, 1545),
+                new Status(1391, 1405, 1635, 2046),
+                new Status(1477, 1491, 2386, 2147),
+                new Status(1563, 1577, 2487, 3398),
+                new Status(1650, 1664, 4489, 3500),
+            ],
             19,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -13663,7 +17018,13 @@ public record Memoria(
             "雪原の白き魔女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1659, 4478, 1644, 3502),
+            [
+                new Status(1314, 1523, 1299, 1547),
+                new Status(1400, 1624, 1385, 2048),
+                new Status(1486, 2375, 1471, 2149),
+                new Status(1572, 2476, 1557, 3400),
+                new Status(1659, 4478, 1644, 3502),
+            ],
             19,
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ",
@@ -13687,7 +17048,13 @@ public record Memoria(
             "雪原の白き魔女",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1659, 4478, 1644, 3502),
+            [
+                new Status(1314, 1523, 1299, 1547),
+                new Status(1400, 1624, 1385, 2048),
+                new Status(1486, 2375, 1471, 2149),
+                new Status(1572, 2476, 1557, 3400),
+                new Status(1659, 4478, 1644, 3502),
+            ],
             19,
             new Skill(
                 "Sp.ウィンドガードフォールC Ⅲ",
@@ -13711,7 +17078,13 @@ public record Memoria(
             "鳴り響く狂乱の連弾",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4477, 1678, 3496, 1658),
+            [
+                new Status(1522, 1333, 1541, 1313),
+                new Status(1623, 1419, 2042, 1399),
+                new Status(2374, 1505, 2143, 1485),
+                new Status(2475, 1591, 3394, 1571),
+                new Status(4477, 1678, 3496, 1658),
+            ],
             19,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -13735,7 +17108,13 @@ public record Memoria(
             "鳴り響く狂乱の連弾",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(4477, 1678, 3496, 1658),
+            [
+                new Status(1522, 1333, 1541, 1313),
+                new Status(1623, 1419, 2042, 1399),
+                new Status(2374, 1505, 2143, 1485),
+                new Status(2475, 1591, 3394, 1571),
+                new Status(4477, 1678, 3496, 1658),
+            ],
             19,
             new Skill(
                 "ウィンドパワーアシストC Ⅲ",
@@ -13759,7 +17138,13 @@ public record Memoria(
             "ご一緒にいかが？",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1678, 1656, 3969, 3988),
+            [
+                new Status(1333, 1311, 1514, 1533),
+                new Status(1419, 1397, 1815, 1834),
+                new Status(1505, 1483, 2241, 2260),
+                new Status(1591, 1569, 2917, 2936),
+                new Status(1678, 1656, 3969, 3988),
+            ],
             19,
             new Skill(
                 "WガードヒールD Ⅲ",
@@ -13783,7 +17168,13 @@ public record Memoria(
             "ご一緒にいかが？",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1678, 1656, 3969, 3988),
+            [
+                new Status(1333, 1311, 1514, 1533),
+                new Status(1419, 1397, 1815, 1834),
+                new Status(1505, 1483, 2241, 2260),
+                new Status(1591, 1569, 2917, 2936),
+                new Status(1678, 1656, 3969, 3988),
+            ],
             19,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -13807,7 +17198,13 @@ public record Memoria(
             "いつものおやつ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(3973, 4002, 1649, 1647),
+            [
+                new Status(1518, 1547, 1304, 1302),
+                new Status(1819, 1848, 1390, 1388),
+                new Status(2245, 2274, 1476, 1474),
+                new Status(2921, 2950, 1562, 1560),
+                new Status(3973, 4002, 1649, 1647),
+            ],
             19,
             new Skill(
                 "WパワーフォールB Ⅲ",
@@ -13831,7 +17228,13 @@ public record Memoria(
             "いつものおやつ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(3973, 4002, 1649, 1647),
+            [
+                new Status(1518, 1547, 1304, 1302),
+                new Status(1819, 1848, 1390, 1388),
+                new Status(2245, 2274, 1476, 1474),
+                new Status(2921, 2950, 1562, 1560),
+                new Status(3973, 4002, 1649, 1647),
+            ],
             19,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -13855,7 +17258,13 @@ public record Memoria(
             "どたばたデイズ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(4504, 1676, 3487, 1647),
+            [
+                new Status(1549, 1331, 1532, 1302),
+                new Status(1650, 1417, 2033, 1388),
+                new Status(2401, 1503, 2134, 1474),
+                new Status(2502, 1589, 3385, 1560),
+                new Status(4504, 1676, 3487, 1647),
+            ],
             19,
             new Skill(
                 "ライフアシストB Ⅱ",
@@ -13879,7 +17288,13 @@ public record Memoria(
             "どたばたデイズ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4504, 1676, 3487, 1647),
+            [
+                new Status(1549, 1331, 1532, 1302),
+                new Status(1650, 1417, 2033, 1388),
+                new Status(2401, 1503, 2134, 1474),
+                new Status(2502, 1589, 3385, 1560),
+                new Status(4504, 1676, 3487, 1647),
+            ],
             19,
             new Skill(
                 "ウィンドガードブレイクB Ⅲ",
@@ -13903,7 +17318,13 @@ public record Memoria(
             "思い出がもう一つ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1659, 4482, 1663, 3471),
+            [
+                new Status(1314, 1527, 1318, 1516),
+                new Status(1400, 1628, 1404, 2017),
+                new Status(1486, 2379, 1490, 2118),
+                new Status(1572, 2480, 1576, 3369),
+                new Status(1659, 4482, 1663, 3471),
+            ],
             19,
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
@@ -13927,7 +17348,13 @@ public record Memoria(
             "思い出がもう一つ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1659, 4482, 1663, 3471),
+            [
+                new Status(1314, 1527, 1318, 1516),
+                new Status(1400, 1628, 1404, 2017),
+                new Status(1486, 2379, 1490, 2118),
+                new Status(1572, 2480, 1576, 3369),
+                new Status(1659, 4482, 1663, 3471),
+            ],
             19,
             new Skill(
                 "WガードアシストB Ⅲ",
@@ -13951,7 +17378,13 @@ public record Memoria(
             "もふもふな時間",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4472, 1661, 3472, 1679),
+            [
+                new Status(1517, 1316, 1517, 1334),
+                new Status(1618, 1402, 2018, 1420),
+                new Status(2369, 1488, 2119, 1506),
+                new Status(2470, 1574, 3370, 1592),
+                new Status(4472, 1661, 3472, 1679),
+            ],
             19,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -13975,7 +17408,13 @@ public record Memoria(
             "もふもふな時間",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(4472, 1661, 3472, 1679),
+            [
+                new Status(1517, 1316, 1517, 1334),
+                new Status(1618, 1402, 2018, 1420),
+                new Status(2369, 1488, 2119, 1506),
+                new Status(2470, 1574, 3370, 1592),
+                new Status(4472, 1661, 3472, 1679),
+            ],
             19,
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
@@ -13999,7 +17438,13 @@ public record Memoria(
             "覚醒の兆し",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1669, 4488, 1670, 3494),
+            [
+                new Status(1324, 1533, 1325, 1539),
+                new Status(1410, 1634, 1411, 2040),
+                new Status(1496, 2385, 1497, 2141),
+                new Status(1582, 2486, 1583, 3392),
+                new Status(1669, 4488, 1670, 3494),
+            ],
             19,
             new Skill(
                 "ライフアシストB Ⅱ",
@@ -14023,7 +17468,13 @@ public record Memoria(
             "覚醒の兆し",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1669, 4488, 1670, 3494),
+            [
+                new Status(1324, 1533, 1325, 1539),
+                new Status(1410, 1634, 1411, 2040),
+                new Status(1496, 2385, 1497, 2141),
+                new Status(1582, 2486, 1583, 3392),
+                new Status(1669, 4488, 1670, 3494),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュA Ⅳ+",
@@ -14047,7 +17498,13 @@ public record Memoria(
             "騒がし乙女の凱旋",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4500, 1652, 3470, 1656),
+            [
+                new Status(1545, 1307, 1515, 1311),
+                new Status(1646, 1393, 2016, 1397),
+                new Status(2397, 1479, 2117, 1483),
+                new Status(2498, 1565, 3368, 1569),
+                new Status(4500, 1652, 3470, 1656),
+            ],
             19,
             new Skill(
                 "ウォーターガードブレイクB Ⅲ",
@@ -14071,7 +17528,13 @@ public record Memoria(
             "騒がし乙女の凱旋",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(4500, 1652, 3470, 1656),
+            [
+                new Status(1545, 1307, 1515, 1311),
+                new Status(1646, 1393, 2016, 1397),
+                new Status(2397, 1479, 2117, 1483),
+                new Status(2498, 1565, 3368, 1569),
+                new Status(4500, 1652, 3470, 1656),
+            ],
             19,
             new Skill(
                 "ウォーターガードフォールB Ⅱ",
@@ -14095,7 +17558,13 @@ public record Memoria(
             "あなたとおそろい",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1661, 4504, 1657, 3481),
+            [
+                new Status(1316, 1549, 1312, 1526),
+                new Status(1402, 1650, 1398, 2027),
+                new Status(1488, 2401, 1484, 2128),
+                new Status(1574, 2502, 1570, 3379),
+                new Status(1661, 4504, 1657, 3481),
+            ],
             19,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -14119,7 +17588,13 @@ public record Memoria(
             "あなたとおそろい",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1661, 4504, 1657, 3481),
+            [
+                new Status(1316, 1549, 1312, 1526),
+                new Status(1402, 1650, 1398, 2027),
+                new Status(1488, 2401, 1484, 2128),
+                new Status(1574, 2502, 1570, 3379),
+                new Status(1661, 4504, 1657, 3481),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
@@ -14143,7 +17618,13 @@ public record Memoria(
             "ワンマンアーミー",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(4127, 3182, 3177, 2717),
+            [
+                new Status(1392, 1184, 1387, 1172),
+                new Status(1491, 1418, 1486, 1256),
+                new Status(1739, 1502, 1584, 1340),
+                new Status(1837, 1886, 1682, 1424),
+                new Status(2736, 1970, 1781, 1508),
+            ],
             18,
             new Skill(
                 "WパワーアシストD LG",
@@ -14168,7 +17649,13 @@ public record Memoria(
             "縄跳びトレーニング",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(4520, 1705, 3505, 1700),
+            [
+                new Status(1558, 1354, 1543, 1349),
+                new Status(1661, 1441, 2046, 1436),
+                new Status(2414, 1529, 2149, 1524),
+                new Status(2517, 1617, 3402, 1612),
+                new Status(4520, 1705, 3505, 1700),
+            ],
             19,
             new Skill(
                 "ウォーターパワーアシストC Ⅲ",
@@ -14192,7 +17679,13 @@ public record Memoria(
             "縄跳びトレーニング",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4520, 1705, 3505, 1700),
+            [
+                new Status(1558, 1354, 1543, 1349),
+                new Status(1661, 1441, 2046, 1436),
+                new Status(2414, 1529, 2149, 1524),
+                new Status(2517, 1617, 3402, 1612),
+                new Status(4520, 1705, 3505, 1700),
+            ],
             19,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -14216,7 +17709,13 @@ public record Memoria(
             "暮れなずむ空",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4534, 1687, 3534, 1682),
+            [
+                new Status(1572, 1336, 1572, 1331),
+                new Status(1675, 1423, 2075, 1418),
+                new Status(2428, 1511, 2178, 1506),
+                new Status(2531, 1599, 3431, 1594),
+                new Status(4534, 1687, 3534, 1682),
+            ],
             19,
             new Skill(
                 "ウィンドガードブレイクB Ⅲ+",
@@ -14240,7 +17739,13 @@ public record Memoria(
             "暮れなずむ空",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(4534, 1687, 3534, 1682),
+            [
+                new Status(1572, 1336, 1572, 1331),
+                new Status(1675, 1423, 2075, 1418),
+                new Status(2428, 1511, 2178, 1506),
+                new Status(2531, 1599, 3431, 1594),
+                new Status(4534, 1687, 3534, 1682),
+            ],
             19,
             new Skill(
                 "チャージガードフォールB Ⅱ",
@@ -14264,7 +17769,13 @@ public record Memoria(
             "かめ、のち、えがお",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1649, 1645, 4503, 3491),
+            [
+                new Status(1304, 1300, 1548, 1536),
+                new Status(1390, 1386, 1649, 2037),
+                new Status(1476, 1472, 2400, 2138),
+                new Status(1562, 1558, 2501, 3389),
+                new Status(1649, 1645, 4503, 3491),
+            ],
             19,
             new Skill(
                 "WガードヒールC Ⅲ",
@@ -14288,7 +17799,13 @@ public record Memoria(
             "かめ、のち、えがお",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1649, 1645, 4503, 3491),
+            [
+                new Status(1304, 1300, 1548, 1536),
+                new Status(1390, 1386, 1649, 2037),
+                new Status(1476, 1472, 2400, 2138),
+                new Status(1562, 1558, 2501, 3389),
+                new Status(1649, 1645, 4503, 3491),
+            ],
             19,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -14312,7 +17829,13 @@ public record Memoria(
             "ひめひめコールお願いっ！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1668, 4466, 1662, 3477),
+            [
+                new Status(1323, 1511, 1317, 1522),
+                new Status(1409, 1612, 1403, 2023),
+                new Status(1495, 2363, 1489, 2124),
+                new Status(1581, 2464, 1575, 3375),
+                new Status(1668, 4466, 1662, 3477),
+            ],
             19,
             new Skill(
                 "Sp.マイトフォールB Ⅲ",
@@ -14336,7 +17859,13 @@ public record Memoria(
             "ひめひめコールお願いっ！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1668, 4466, 1662, 3477),
+            [
+                new Status(1323, 1511, 1317, 1522),
+                new Status(1409, 1612, 1403, 2023),
+                new Status(1495, 2363, 1489, 2124),
+                new Status(1581, 2464, 1575, 3375),
+                new Status(1668, 4466, 1662, 3477),
+            ],
             19,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -14360,7 +17889,13 @@ public record Memoria(
             "カワウソづくし",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(4496, 1668, 3473, 1683),
+            [
+                new Status(1541, 1323, 1518, 1338),
+                new Status(1642, 1409, 2019, 1424),
+                new Status(2393, 1495, 2120, 1510),
+                new Status(2494, 1581, 3371, 1596),
+                new Status(4496, 1668, 3473, 1683),
+            ],
             19,
             new Skill(
                 "水：WパワーアシストB Ⅲ",
@@ -14384,7 +17919,13 @@ public record Memoria(
             "カワウソづくし",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4496, 1668, 3473, 1683),
+            [
+                new Status(1541, 1323, 1518, 1338),
+                new Status(1642, 1409, 2019, 1424),
+                new Status(2393, 1495, 2120, 1510),
+                new Status(2494, 1581, 3371, 1596),
+                new Status(4496, 1668, 3473, 1683),
+            ],
             19,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -14408,7 +17949,13 @@ public record Memoria(
             "不動劔と至宝",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1650, 4494, 1673, 3473),
+            [
+                new Status(1305, 1539, 1328, 1518),
+                new Status(1391, 1640, 1414, 2019),
+                new Status(1477, 2391, 1500, 2120),
+                new Status(1563, 2492, 1586, 3371),
+                new Status(1650, 4494, 1673, 3473),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
@@ -14432,7 +17979,13 @@ public record Memoria(
             "不動劔と至宝",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1650, 4494, 1673, 3473),
+            [
+                new Status(1305, 1539, 1328, 1518),
+                new Status(1391, 1640, 1414, 2019),
+                new Status(1477, 2391, 1500, 2120),
+                new Status(1563, 2492, 1586, 3371),
+                new Status(1650, 4494, 1673, 3473),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターガードフォールC Ⅲ",
@@ -14456,7 +18009,13 @@ public record Memoria(
             "ねんねこぐろっぴ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4474, 1663, 3499, 1657),
+            [
+                new Status(1519, 1318, 1544, 1312),
+                new Status(1620, 1404, 2045, 1398),
+                new Status(2371, 1490, 2146, 1484),
+                new Status(2472, 1576, 3397, 1570),
+                new Status(4474, 1663, 3499, 1657),
+            ],
             19,
             new Skill(
                 "ウィンドパワーストライクB Ⅲ+",
@@ -14480,7 +18039,13 @@ public record Memoria(
             "ねんねこぐろっぴ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(4474, 1663, 3499, 1657),
+            [
+                new Status(1519, 1318, 1544, 1312),
+                new Status(1620, 1404, 2045, 1398),
+                new Status(2371, 1490, 2146, 1484),
+                new Status(2472, 1576, 3397, 1570),
+                new Status(4474, 1663, 3499, 1657),
+            ],
             19,
             new Skill(
                 "Sp.ディファーアシストB Ⅲ",
@@ -14504,7 +18069,13 @@ public record Memoria(
             "CHARMという兵器",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(4506, 1679, 3492, 1669),
+            [
+                new Status(1551, 1334, 1537, 1324),
+                new Status(1652, 1420, 2038, 1410),
+                new Status(2403, 1506, 2139, 1496),
+                new Status(2504, 1592, 3390, 1582),
+                new Status(4506, 1679, 3492, 1669),
+            ],
             19,
             new Skill(
                 "ライフアシストB Ⅱ",
@@ -14528,7 +18099,13 @@ public record Memoria(
             "CHARMという兵器",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4506, 1679, 3492, 1669),
+            [
+                new Status(1551, 1334, 1537, 1324),
+                new Status(1652, 1420, 2038, 1410),
+                new Status(2403, 1506, 2139, 1496),
+                new Status(2504, 1592, 3390, 1582),
+                new Status(4506, 1679, 3492, 1669),
+            ],
             19,
             new Skill(
                 "ウィンドガードブレイクB Ⅲ",
@@ -14552,7 +18129,13 @@ public record Memoria(
             "ワーオ！　エキサイティン！！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(4472, 1657, 3502, 1667),
+            [
+                new Status(1517, 1312, 1547, 1322),
+                new Status(1618, 1398, 2048, 1408),
+                new Status(2369, 1484, 2149, 1494),
+                new Status(2470, 1570, 3400, 1580),
+                new Status(4472, 1657, 3502, 1667),
+            ],
             19,
             new Skill(
                 "ウィンドガードフォールC Ⅲ",
@@ -14576,7 +18159,13 @@ public record Memoria(
             "ワーオ！　エキサイティン！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4472, 1657, 3502, 1667),
+            [
+                new Status(1517, 1312, 1547, 1322),
+                new Status(1618, 1398, 2048, 1408),
+                new Status(2369, 1484, 2149, 1494),
+                new Status(2470, 1570, 3400, 1580),
+                new Status(4472, 1657, 3502, 1667),
+            ],
             19,
             new Skill(
                 "ウィンドパワーストライクB Ⅲ",
@@ -14600,7 +18189,13 @@ public record Memoria(
             "束の間の休息",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1665, 1683, 3490, 4493),
+            [
+                new Status(1320, 1338, 1535, 1538),
+                new Status(1406, 1424, 2036, 1639),
+                new Status(1492, 1510, 2137, 2390),
+                new Status(1578, 1596, 3388, 2491),
+                new Status(1665, 1683, 3490, 4493),
+            ],
             19,
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
@@ -14624,7 +18219,13 @@ public record Memoria(
             "束の間の休息",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1665, 1683, 3490, 4493),
+            [
+                new Status(1320, 1338, 1535, 1538),
+                new Status(1406, 1424, 2036, 1639),
+                new Status(1492, 1510, 2137, 2390),
+                new Status(1578, 1596, 3388, 2491),
+                new Status(1665, 1683, 3490, 4493),
+            ],
             19,
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ",
@@ -14648,7 +18249,13 @@ public record Memoria(
             "作戦会議です！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1462, 2918, 1493, 2657),
+            [
+                new Status(1157, 1360, 1188, 1349),
+                new Status(1233, 1449, 1264, 1788),
+                new Status(1309, 1989, 1340, 1878),
+                new Status(1385, 2078, 1416, 2567),
+                new Status(1462, 2918, 1493, 2657),
+            ],
             17,
             new Skill(
                 "ライフアシストB Ⅱ",
@@ -14672,7 +18279,13 @@ public record Memoria(
             "作戦会議です！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(1462, 2918, 1493, 2657),
+            [
+                new Status(1157, 1360, 1188, 1349),
+                new Status(1233, 1449, 1264, 1788),
+                new Status(1309, 1989, 1340, 1878),
+                new Status(1385, 2078, 1416, 2567),
+                new Status(1462, 2918, 1493, 2657),
+            ],
             17,
             new Skill(
                 "Sp.ウィンドパワースマッシュA Ⅳ",
@@ -14696,7 +18309,13 @@ public record Memoria(
             "予想外の事態",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4497, 1671, 3481, 1661),
+            [
+                new Status(1542, 1326, 1526, 1316),
+                new Status(1643, 1412, 2027, 1402),
+                new Status(2394, 1498, 2128, 1488),
+                new Status(2495, 1584, 3379, 1574),
+                new Status(4497, 1671, 3481, 1661),
+            ],
             19,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -14720,7 +18339,13 @@ public record Memoria(
             "予想外の事態",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(4497, 1671, 3481, 1661),
+            [
+                new Status(1542, 1326, 1526, 1316),
+                new Status(1643, 1412, 2027, 1402),
+                new Status(2394, 1498, 2128, 1488),
+                new Status(2495, 1584, 3379, 1574),
+                new Status(4497, 1671, 3481, 1661),
+            ],
             19,
             new Skill(
                 "ガードヒールC Ⅲ+",
@@ -14744,7 +18369,13 @@ public record Memoria(
             "優雅なティータイム",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1681, 4476, 1661, 3475),
+            [
+                new Status(1336, 1521, 1316, 1520),
+                new Status(1422, 1622, 1402, 2021),
+                new Status(1508, 2373, 1488, 2122),
+                new Status(1594, 2474, 1574, 3373),
+                new Status(1681, 4476, 1661, 3475),
+            ],
             19,
             new Skill(
                 "Sp.ウィンドガードバーストB Ⅲ+",
@@ -14768,7 +18399,13 @@ public record Memoria(
             "優雅なティータイム",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1681, 4476, 1661, 3475),
+            [
+                new Status(1336, 1521, 1316, 1520),
+                new Status(1422, 1622, 1402, 2021),
+                new Status(1508, 2373, 1488, 2122),
+                new Status(1594, 2474, 1574, 3373),
+                new Status(1681, 4476, 1661, 3475),
+            ],
             19,
             new Skill(
                 "ライフアシストB Ⅱ",
@@ -14792,7 +18429,13 @@ public record Memoria(
             "西住流の誇り",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1681, 4503, 1666, 3473),
+            [
+                new Status(1336, 1548, 1321, 1518),
+                new Status(1422, 1649, 1407, 2019),
+                new Status(1508, 2400, 1493, 2120),
+                new Status(1594, 2501, 1579, 3371),
+                new Status(1681, 4503, 1666, 3473),
+            ],
             19,
             new Skill(
                 "Sp.ウィンドパワースマッシュB Ⅲ+",
@@ -14816,7 +18459,13 @@ public record Memoria(
             "西住流の誇り",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1681, 4503, 1666, 3473),
+            [
+                new Status(1336, 1548, 1321, 1518),
+                new Status(1422, 1649, 1407, 2019),
+                new Status(1508, 2400, 1493, 2120),
+                new Status(1594, 2501, 1579, 3371),
+                new Status(1681, 4503, 1666, 3473),
+            ],
             19,
             new Skill(
                 "WパワーフォールB Ⅲ",
@@ -14840,7 +18489,13 @@ public record Memoria(
             "形勢逆転！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4505, 1667, 3504, 1647),
+            [
+                new Status(1550, 1322, 1549, 1302),
+                new Status(1651, 1408, 2050, 1388),
+                new Status(2402, 1494, 2151, 1474),
+                new Status(2503, 1580, 3402, 1560),
+                new Status(4505, 1667, 3504, 1647),
+            ],
             19,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -14864,7 +18519,13 @@ public record Memoria(
             "形勢逆転！！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(4505, 1667, 3504, 1647),
+            [
+                new Status(1550, 1322, 1549, 1302),
+                new Status(1651, 1408, 2050, 1388),
+                new Status(2402, 1494, 2151, 1474),
+                new Status(2503, 1580, 3402, 1560),
+                new Status(4505, 1667, 3504, 1647),
+            ],
             19,
             new Skill(
                 "ウィンドパワーアシストC Ⅲ",
@@ -14888,7 +18549,13 @@ public record Memoria(
             "ワイン色の思い出",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1669, 4500, 1665, 3466),
+            [
+                new Status(1324, 1545, 1320, 1511),
+                new Status(1410, 1646, 1406, 2012),
+                new Status(1496, 2397, 1492, 2113),
+                new Status(1582, 2498, 1578, 3364),
+                new Status(1669, 4500, 1665, 3466),
+            ],
             19,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -14912,7 +18579,13 @@ public record Memoria(
             "ワイン色の思い出",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1669, 4500, 1665, 3466),
+            [
+                new Status(1324, 1545, 1320, 1511),
+                new Status(1410, 1646, 1406, 2012),
+                new Status(1496, 2397, 1492, 2113),
+                new Status(1582, 2498, 1578, 3364),
+                new Status(1669, 4500, 1665, 3466),
+            ],
             19,
             new Skill(
                 "風：WガードフォールB Ⅲ",
@@ -14936,7 +18609,13 @@ public record Memoria(
             "月夜に吠える天狼",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(4160, 3644, 2736, 2701),
+            [
+                new Status(1867, 1876, 1587, 1566),
+                new Status(2012, 2171, 1710, 1689),
+                new Status(2307, 2316, 1834, 1813),
+                new Status(2452, 2761, 1958, 1937),
+                new Status(3398, 2907, 2082, 2061),
+            ],
             21,
             new Skill(
                 "WパワーフォールE LG",
@@ -14961,7 +18640,13 @@ public record Memoria(
             "雲間から差し込む光",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1672, 4500, 1655, 3479),
+            [
+                new Status(1327, 1545, 1310, 1524),
+                new Status(1413, 1646, 1396, 2025),
+                new Status(1499, 2397, 1482, 2126),
+                new Status(1585, 2498, 1568, 3377),
+                new Status(1672, 4500, 1655, 3479),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターガードバーストA Ⅳ",
@@ -14985,7 +18670,13 @@ public record Memoria(
             "雲間から差し込む光",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1672, 4500, 1655, 3479),
+            [
+                new Status(1327, 1545, 1310, 1524),
+                new Status(1413, 1646, 1396, 2025),
+                new Status(1499, 2397, 1482, 2126),
+                new Status(1585, 2498, 1568, 3377),
+                new Status(1672, 4500, 1655, 3479),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
@@ -15009,7 +18700,13 @@ public record Memoria(
             "好機を待つのじゃ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(4474, 1672, 3492, 1644),
+            [
+                new Status(1519, 1327, 1537, 1299),
+                new Status(1620, 1413, 2038, 1385),
+                new Status(2371, 1499, 2139, 1471),
+                new Status(2472, 1585, 3390, 1557),
+                new Status(4474, 1672, 3492, 1644),
+            ],
             19,
             new Skill(
                 "水：パワーアシストC Ⅳ",
@@ -15033,7 +18730,13 @@ public record Memoria(
             "好機を待つのじゃ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4474, 1672, 3492, 1644),
+            [
+                new Status(1519, 1327, 1537, 1299),
+                new Status(1620, 1413, 2038, 1385),
+                new Status(2371, 1499, 2139, 1471),
+                new Status(2472, 1585, 3390, 1557),
+                new Status(4474, 1672, 3492, 1644),
+            ],
             19,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -15057,7 +18760,13 @@ public record Memoria(
             "ひめひめ華麗に参上！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1668, 4480, 1654, 3477),
+            [
+                new Status(1323, 1525, 1309, 1522),
+                new Status(1409, 1626, 1395, 2023),
+                new Status(1495, 2377, 1481, 2124),
+                new Status(1581, 2478, 1567, 3375),
+                new Status(1668, 4480, 1654, 3477),
+            ],
             19,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -15081,7 +18790,13 @@ public record Memoria(
             "ひめひめ華麗に参上！",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1668, 4480, 1654, 3477),
+            [
+                new Status(1323, 1525, 1309, 1522),
+                new Status(1409, 1626, 1395, 2023),
+                new Status(1495, 2377, 1481, 2124),
+                new Status(1581, 2478, 1567, 3375),
+                new Status(1668, 4480, 1654, 3477),
+            ],
             19,
             new Skill(
                 "水拡：Sp.パワーフォールB Ⅳ",
@@ -15105,7 +18820,13 @@ public record Memoria(
             "紅葉の帳",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1668, 4481, 1678, 3497),
+            [
+                new Status(1323, 1526, 1333, 1542),
+                new Status(1409, 1627, 1419, 2043),
+                new Status(1495, 2378, 1505, 2144),
+                new Status(1581, 2479, 1591, 3395),
+                new Status(1668, 4481, 1678, 3497),
+            ],
             19,
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
@@ -15129,7 +18850,13 @@ public record Memoria(
             "紅葉の帳",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1668, 4481, 1678, 3497),
+            [
+                new Status(1323, 1526, 1333, 1542),
+                new Status(1409, 1627, 1419, 2043),
+                new Status(1495, 2378, 1505, 2144),
+                new Status(1581, 2479, 1591, 3395),
+                new Status(1668, 4481, 1678, 3497),
+            ],
             19,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -15153,7 +18880,13 @@ public record Memoria(
             "紅葉も頬も色づいて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1650, 1679, 4498, 3482),
+            [
+                new Status(1305, 1334, 1543, 1527),
+                new Status(1391, 1420, 1644, 2028),
+                new Status(1477, 1506, 2395, 2129),
+                new Status(1563, 1592, 2496, 3380),
+                new Status(1650, 1679, 4498, 3482),
+            ],
             19,
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
@@ -15177,7 +18910,13 @@ public record Memoria(
             "紅葉も頬も色づいて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(1650, 1679, 4498, 3482),
+            [
+                new Status(1305, 1334, 1543, 1527),
+                new Status(1391, 1420, 1644, 2028),
+                new Status(1477, 1506, 2395, 2129),
+                new Status(1563, 1592, 2496, 3380),
+                new Status(1650, 1679, 4498, 3482),
+            ],
             19,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -15201,7 +18940,13 @@ public record Memoria(
             "秋月夜の彩り",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1658, 4467, 1670, 3492),
+            [
+                new Status(1313, 1512, 1325, 1537),
+                new Status(1399, 1613, 1411, 2038),
+                new Status(1485, 2364, 1497, 2139),
+                new Status(1571, 2465, 1583, 3390),
+                new Status(1658, 4467, 1670, 3492),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
@@ -15225,7 +18970,13 @@ public record Memoria(
             "秋月夜の彩り",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1658, 4467, 1670, 3492),
+            [
+                new Status(1313, 1512, 1325, 1537),
+                new Status(1399, 1613, 1411, 2038),
+                new Status(1485, 2364, 1497, 2139),
+                new Status(1571, 2465, 1583, 3390),
+                new Status(1658, 4467, 1670, 3492),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワーアシストB Ⅱ",
@@ -15249,7 +19000,13 @@ public record Memoria(
             "秋の木漏れ日",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4501, 1681, 3475, 1667),
+            [
+                new Status(1546, 1336, 1520, 1322),
+                new Status(1647, 1422, 2021, 1408),
+                new Status(2398, 1508, 2122, 1494),
+                new Status(2499, 1594, 3373, 1580),
+                new Status(4501, 1681, 3475, 1667),
+            ],
             19,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -15273,7 +19030,13 @@ public record Memoria(
             "秋の木漏れ日",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(4501, 1681, 3475, 1667),
+            [
+                new Status(1546, 1336, 1520, 1322),
+                new Status(1647, 1422, 2021, 1408),
+                new Status(2398, 1508, 2122, 1494),
+                new Status(2499, 1594, 3373, 1580),
+                new Status(4501, 1681, 3475, 1667),
+            ],
             19,
             new Skill(
                 "ガードヒールC Ⅲ+",
@@ -15297,7 +19060,13 @@ public record Memoria(
             "はじらいマミー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4357, 2093, 3536, 2079),
+            [
+                new Status(1876, 1598, 1855, 1584),
+                new Status(2021, 1721, 2300, 1707),
+                new Status(2566, 1845, 2445, 1831),
+                new Status(2711, 1969, 3390, 1955),
+                new Status(4357, 2093, 3536, 2079),
+            ],
             21,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -15321,7 +19090,13 @@ public record Memoria(
             "どきどきデビル",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(4471, 1679, 3480, 1677),
+            [
+                new Status(1516, 1334, 1525, 1332),
+                new Status(1617, 1420, 2026, 1418),
+                new Status(2368, 1506, 2127, 1504),
+                new Status(2469, 1592, 3378, 1590),
+                new Status(4471, 1679, 3480, 1677),
+            ],
             19,
             new Skill(
                 "Sp.ディファーアシストC Ⅳ",
@@ -15345,7 +19120,13 @@ public record Memoria(
             "どきどきデビル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4471, 1679, 3480, 1677),
+            [
+                new Status(1516, 1334, 1525, 1332),
+                new Status(1617, 1420, 2026, 1418),
+                new Status(2368, 1506, 2127, 1504),
+                new Status(2469, 1592, 3378, 1590),
+                new Status(4471, 1679, 3480, 1677),
+            ],
             19,
             new Skill(
                 "ディファーブレイクB Ⅲ+",
@@ -15369,7 +19150,13 @@ public record Memoria(
             "いたずらゴースト",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1670, 4493, 1650, 3469),
+            [
+                new Status(1325, 1538, 1305, 1514),
+                new Status(1411, 1639, 1391, 2015),
+                new Status(1497, 2390, 1477, 2116),
+                new Status(1583, 2491, 1563, 3367),
+                new Status(1670, 4493, 1650, 3469),
+            ],
             19,
             new Skill(
                 "Sp.マイトフォールB Ⅲ",
@@ -15393,7 +19180,13 @@ public record Memoria(
             "いたずらゴースト",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1670, 4493, 1650, 3469),
+            [
+                new Status(1325, 1538, 1305, 1514),
+                new Status(1411, 1639, 1391, 2015),
+                new Status(1497, 2390, 1477, 2116),
+                new Status(1583, 2491, 1563, 3367),
+                new Status(1670, 4493, 1650, 3469),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ",
@@ -15417,7 +19210,13 @@ public record Memoria(
             "夜空に響く勝利の歌",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4478, 1655, 3482, 1671),
+            [
+                new Status(1523, 1310, 1527, 1326),
+                new Status(1624, 1396, 2028, 1412),
+                new Status(2375, 1482, 2129, 1498),
+                new Status(2476, 1568, 3380, 1584),
+                new Status(4478, 1655, 3482, 1671),
+            ],
             19,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -15441,7 +19240,13 @@ public record Memoria(
             "夜空に響く勝利の歌",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(4478, 1655, 3482, 1671),
+            [
+                new Status(1523, 1310, 1527, 1326),
+                new Status(1624, 1396, 2028, 1412),
+                new Status(2375, 1482, 2129, 1498),
+                new Status(2476, 1568, 3380, 1584),
+                new Status(4478, 1655, 3482, 1671),
+            ],
             19,
             new Skill(
                 "マイトアシストB Ⅲ",
@@ -15465,7 +19270,13 @@ public record Memoria(
             "陽だまりシュッツエンゲル",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1672, 4466, 1657, 3469),
+            [
+                new Status(1327, 1511, 1312, 1514),
+                new Status(1413, 1612, 1398, 2015),
+                new Status(1499, 2363, 1484, 2116),
+                new Status(1585, 2464, 1570, 3367),
+                new Status(1672, 4466, 1657, 3469),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワーヒールC Ⅲ",
@@ -15489,7 +19300,13 @@ public record Memoria(
             "陽だまりシュッツエンゲル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1672, 4466, 1657, 3469),
+            [
+                new Status(1327, 1511, 1312, 1514),
+                new Status(1413, 1612, 1398, 2015),
+                new Status(1499, 2363, 1484, 2116),
+                new Status(1585, 2464, 1570, 3367),
+                new Status(1672, 4466, 1657, 3469),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
@@ -15513,7 +19330,13 @@ public record Memoria(
             "くるくおーらんたん",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(4473, 1661, 3479, 1650),
+            [
+                new Status(1518, 1316, 1524, 1305),
+                new Status(1619, 1402, 2025, 1391),
+                new Status(2370, 1488, 2126, 1477),
+                new Status(2471, 1574, 3377, 1563),
+                new Status(4473, 1661, 3479, 1650),
+            ],
             19,
             new Skill(
                 "ウォーターパワーフォールC Ⅲ",
@@ -15537,7 +19360,13 @@ public record Memoria(
             "くるくおーらんたん",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4473, 1661, 3479, 1650),
+            [
+                new Status(1518, 1316, 1524, 1305),
+                new Status(1619, 1402, 2025, 1391),
+                new Status(2370, 1488, 2126, 1477),
+                new Status(2471, 1574, 3377, 1563),
+                new Status(4473, 1661, 3479, 1650),
+            ],
             19,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ",
@@ -15561,7 +19390,13 @@ public record Memoria(
             "こころにいたずら",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1645, 4495, 1680, 3472),
+            [
+                new Status(1300, 1540, 1335, 1517),
+                new Status(1386, 1641, 1421, 2018),
+                new Status(1472, 2392, 1507, 2119),
+                new Status(1558, 2493, 1593, 3370),
+                new Status(1645, 4495, 1680, 3472),
+            ],
             19,
             new Skill(
                 "水：Sp.パワーアシストC Ⅳ",
@@ -15585,7 +19420,13 @@ public record Memoria(
             "こころにいたずら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1645, 4495, 1680, 3472),
+            [
+                new Status(1300, 1540, 1335, 1517),
+                new Status(1386, 1641, 1421, 2018),
+                new Status(1472, 2392, 1507, 2119),
+                new Status(1558, 2493, 1593, 3370),
+                new Status(1645, 4495, 1680, 3472),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
@@ -15609,7 +19450,13 @@ public record Memoria(
             "Early Trick",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1660, 4502, 1658, 3491),
+            [
+                new Status(1315, 1547, 1313, 1536),
+                new Status(1401, 1648, 1399, 2037),
+                new Status(1487, 2399, 1485, 2138),
+                new Status(1573, 2500, 1571, 3389),
+                new Status(1660, 4502, 1658, 3491),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ+",
@@ -15633,7 +19480,13 @@ public record Memoria(
             "Early Trick",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1660, 4502, 1658, 3491),
+            [
+                new Status(1315, 1547, 1313, 1536),
+                new Status(1401, 1648, 1399, 2037),
+                new Status(1487, 2399, 1485, 2138),
+                new Status(1573, 2500, 1571, 3389),
+                new Status(1660, 4502, 1658, 3491),
+            ],
             19,
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
@@ -15657,7 +19510,13 @@ public record Memoria(
             "ジャックコーデ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4498, 1681, 3494, 1655),
+            [
+                new Status(1543, 1336, 1539, 1310),
+                new Status(1644, 1422, 2040, 1396),
+                new Status(2395, 1508, 2141, 1482),
+                new Status(2496, 1594, 3392, 1568),
+                new Status(4498, 1681, 3494, 1655),
+            ],
             19,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -15681,7 +19540,13 @@ public record Memoria(
             "ジャックコーデ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(4498, 1681, 3494, 1655),
+            [
+                new Status(1543, 1336, 1539, 1310),
+                new Status(1644, 1422, 2040, 1396),
+                new Status(2395, 1508, 2141, 1482),
+                new Status(2496, 1594, 3392, 1568),
+                new Status(4498, 1681, 3494, 1655),
+            ],
             19,
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
@@ -15705,7 +19570,13 @@ public record Memoria(
             "秋空ピクニック",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1679, 4489, 1672, 3471),
+            [
+                new Status(1334, 1534, 1327, 1516),
+                new Status(1420, 1635, 1413, 2017),
+                new Status(1506, 2386, 1499, 2118),
+                new Status(1592, 2487, 1585, 3369),
+                new Status(1679, 4489, 1672, 3471),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
@@ -15729,7 +19600,13 @@ public record Memoria(
             "秋空ピクニック",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1679, 4489, 1672, 3471),
+            [
+                new Status(1334, 1534, 1327, 1516),
+                new Status(1420, 1635, 1413, 2017),
+                new Status(1506, 2386, 1499, 2118),
+                new Status(1592, 2487, 1585, 3369),
+                new Status(1679, 4489, 1672, 3471),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
@@ -15753,7 +19630,13 @@ public record Memoria(
             "ソーイングマスター姫歌",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(4500, 1659, 3480, 1681),
+            [
+                new Status(1545, 1314, 1525, 1336),
+                new Status(1646, 1400, 2026, 1422),
+                new Status(2397, 1486, 2127, 1508),
+                new Status(2498, 1572, 3378, 1594),
+                new Status(4500, 1659, 3480, 1681),
+            ],
             19,
             new Skill(
                 "ウォーターパワーストライクA Ⅳ",
@@ -15777,7 +19660,13 @@ public record Memoria(
             "ソーイングマスター姫歌",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(4500, 1659, 3480, 1681),
+            [
+                new Status(1545, 1314, 1525, 1336),
+                new Status(1646, 1400, 2026, 1422),
+                new Status(2397, 1486, 2127, 1508),
+                new Status(2498, 1572, 3378, 1594),
+                new Status(4500, 1659, 3480, 1681),
+            ],
             19,
             new Skill(
                 "ウォーターパワーアシストC Ⅲ",
@@ -15801,7 +19690,13 @@ public record Memoria(
             "庭園の護り人",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1660, 4487, 1680, 3499),
+            [
+                new Status(1315, 1532, 1335, 1544),
+                new Status(1401, 1633, 1421, 2045),
+                new Status(1487, 2384, 1507, 2146),
+                new Status(1573, 2485, 1593, 3397),
+                new Status(1660, 4487, 1680, 3499),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
@@ -15825,7 +19720,13 @@ public record Memoria(
             "庭園の護り人",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1660, 4487, 1680, 3499),
+            [
+                new Status(1315, 1532, 1335, 1544),
+                new Status(1401, 1633, 1421, 2045),
+                new Status(1487, 2384, 1507, 2146),
+                new Status(1573, 2485, 1593, 3397),
+                new Status(1660, 4487, 1680, 3499),
+            ],
             19,
             new Skill(
                 "チャージSp.パワーフォールB Ⅱ",
@@ -15849,7 +19750,13 @@ public record Memoria(
             "ふたりの距離",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4467, 1676, 3498, 1646),
+            [
+                new Status(1512, 1331, 1543, 1301),
+                new Status(1613, 1417, 2044, 1387),
+                new Status(2364, 1503, 2145, 1473),
+                new Status(2465, 1589, 3396, 1559),
+                new Status(4467, 1676, 3498, 1646),
+            ],
             19,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -15873,7 +19780,13 @@ public record Memoria(
             "ふたりの距離",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(4467, 1676, 3498, 1646),
+            [
+                new Status(1512, 1331, 1543, 1301),
+                new Status(1613, 1417, 2044, 1387),
+                new Status(2364, 1503, 2145, 1473),
+                new Status(2465, 1589, 3396, 1559),
+                new Status(4467, 1676, 3498, 1646),
+            ],
             19,
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
@@ -15897,7 +19810,13 @@ public record Memoria(
             "ダイスキをキャンバスに",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(4491, 1651, 3498, 1669),
+            [
+                new Status(1536, 1306, 1543, 1324),
+                new Status(1637, 1392, 2044, 1410),
+                new Status(2388, 1478, 2145, 1496),
+                new Status(2489, 1564, 3396, 1582),
+                new Status(4491, 1651, 3498, 1669),
+            ],
             19,
             new Skill(
                 "ウォーターパワーアシストC Ⅲ",
@@ -15921,7 +19840,13 @@ public record Memoria(
             "ダイスキをキャンバスに",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4491, 1651, 3498, 1669),
+            [
+                new Status(1536, 1306, 1543, 1324),
+                new Status(1637, 1392, 2044, 1410),
+                new Status(2388, 1478, 2145, 1496),
+                new Status(2489, 1564, 3396, 1582),
+                new Status(4491, 1651, 3498, 1669),
+            ],
             19,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -15945,7 +19870,13 @@ public record Memoria(
             "らんとたづさのかくれんぼ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(4482, 1684, 3471, 1674),
+            [
+                new Status(1527, 1339, 1516, 1329),
+                new Status(1628, 1425, 2017, 1415),
+                new Status(2379, 1511, 2118, 1501),
+                new Status(2480, 1597, 3369, 1587),
+                new Status(4482, 1684, 3471, 1674),
+            ],
             19,
             new Skill(
                 "ウォーターパワーストライクA Ⅳ",
@@ -15969,7 +19900,13 @@ public record Memoria(
             "らんとたづさのかくれんぼ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(4482, 1684, 3471, 1674),
+            [
+                new Status(1527, 1339, 1516, 1329),
+                new Status(1628, 1425, 2017, 1415),
+                new Status(2379, 1511, 2118, 1501),
+                new Status(2480, 1597, 3369, 1587),
+                new Status(4482, 1684, 3471, 1674),
+            ],
             19,
             new Skill(
                 "ガードヒールC Ⅲ",
@@ -15993,7 +19930,13 @@ public record Memoria(
             "藍は舞い降りた",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1679, 4487, 1657, 3492),
+            [
+                new Status(1334, 1532, 1312, 1537),
+                new Status(1420, 1633, 1398, 2038),
+                new Status(1506, 2384, 1484, 2139),
+                new Status(1592, 2485, 1570, 3390),
+                new Status(1679, 4487, 1657, 3492),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
@@ -16017,7 +19960,13 @@ public record Memoria(
             "藍は舞い降りた",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1679, 4487, 1657, 3492),
+            [
+                new Status(1334, 1532, 1312, 1537),
+                new Status(1420, 1633, 1398, 2038),
+                new Status(1506, 2384, 1484, 2139),
+                new Status(1592, 2485, 1570, 3390),
+                new Status(1679, 4487, 1657, 3492),
+            ],
             19,
             new Skill(
                 "ディファーアシストC Ⅳ",
@@ -16041,7 +19990,13 @@ public record Memoria(
             "静寂に佇む狩人",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(4491, 1644, 3477, 1684),
+            [
+                new Status(1536, 1299, 1522, 1339),
+                new Status(1637, 1385, 2023, 1425),
+                new Status(2388, 1471, 2124, 1511),
+                new Status(2489, 1557, 3375, 1597),
+                new Status(4491, 1644, 3477, 1684),
+            ],
             19,
             new Skill(
                 "ガードフォールC Ⅳ",
@@ -16065,7 +20020,13 @@ public record Memoria(
             "静寂に佇む狩人",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4491, 1644, 3477, 1684),
+            [
+                new Status(1536, 1299, 1522, 1339),
+                new Status(1637, 1385, 2023, 1425),
+                new Status(2388, 1471, 2124, 1511),
+                new Status(2489, 1557, 3375, 1597),
+                new Status(4491, 1644, 3477, 1684),
+            ],
             19,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ",
@@ -16089,7 +20050,13 @@ public record Memoria(
             "好きなものを一緒に",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2070, 2071, 3534, 4363),
+            [
+                new Status(1575, 1576, 1853, 1882),
+                new Status(1698, 1699, 2298, 2027),
+                new Status(1822, 1823, 2443, 2572),
+                new Status(1946, 1947, 3388, 2717),
+                new Status(2070, 2071, 3534, 4363),
+            ],
             21,
             new Skill(
                 "WガードヒールC Ⅲ",
@@ -16113,7 +20080,13 @@ public record Memoria(
             "星空のどうぶつ探し",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2099, 2064, 4362, 3536),
+            [
+                new Status(1604, 1569, 1881, 1855),
+                new Status(1727, 1692, 2026, 2300),
+                new Status(1851, 1816, 2571, 2445),
+                new Status(1975, 1940, 2716, 3390),
+                new Status(2099, 2064, 4362, 3536),
+            ],
             21,
             new Skill(
                 "水：WガードアシストC Ⅳ",
@@ -16137,7 +20110,13 @@ public record Memoria(
             "二人の奏でる夜の歌",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2063, 4356, 2092, 3543),
+            [
+                new Status(1568, 1875, 1597, 1862),
+                new Status(1691, 2020, 1720, 2307),
+                new Status(1815, 2565, 1844, 2452),
+                new Status(1939, 2710, 1968, 3397),
+                new Status(2063, 4356, 2092, 3543),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ+",
@@ -16161,7 +20140,13 @@ public record Memoria(
             "すすきの道しるべ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4324, 2087, 3541, 2098),
+            [
+                new Status(1843, 1592, 1860, 1603),
+                new Status(1988, 1715, 2305, 1726),
+                new Status(2533, 1839, 2450, 1850),
+                new Status(2678, 1963, 3395, 1974),
+                new Status(4324, 2087, 3541, 2098),
+            ],
             21,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ+",
@@ -16185,7 +20170,13 @@ public record Memoria(
             "息を潜めて",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1657, 4486, 1661, 3487),
+            [
+                new Status(1312, 1531, 1316, 1532),
+                new Status(1398, 1632, 1402, 2033),
+                new Status(1484, 2383, 1488, 2134),
+                new Status(1570, 2484, 1574, 3385),
+                new Status(1657, 4486, 1661, 3487),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワーアシストC Ⅲ",
@@ -16209,7 +20200,13 @@ public record Memoria(
             "息を潜めて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1657, 4486, 1661, 3487),
+            [
+                new Status(1312, 1531, 1316, 1532),
+                new Status(1398, 1632, 1402, 2033),
+                new Status(1484, 2383, 1488, 2134),
+                new Status(1570, 2484, 1574, 3385),
+                new Status(1657, 4486, 1661, 3487),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
@@ -16233,7 +20230,13 @@ public record Memoria(
             "ミッドナイトスティール",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4505, 1666, 3496, 1664),
+            [
+                new Status(1550, 1321, 1541, 1319),
+                new Status(1651, 1407, 2042, 1405),
+                new Status(2402, 1493, 2143, 1491),
+                new Status(2503, 1579, 3394, 1577),
+                new Status(4505, 1666, 3496, 1664),
+            ],
             19,
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
@@ -16257,7 +20260,13 @@ public record Memoria(
             "ミッドナイトスティール",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(4505, 1666, 3496, 1664),
+            [
+                new Status(1550, 1321, 1541, 1319),
+                new Status(1651, 1407, 2042, 1405),
+                new Status(2402, 1493, 2143, 1491),
+                new Status(2503, 1579, 3394, 1577),
+                new Status(4505, 1666, 3496, 1664),
+            ],
             19,
             new Skill(
                 "ガードフォールC Ⅳ",
@@ -16281,7 +20290,13 @@ public record Memoria(
             "真夜中の極秘作戦",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2079, 2093, 3559, 4359),
+            [
+                new Status(1584, 1598, 1878, 1878),
+                new Status(1707, 1721, 2323, 2023),
+                new Status(1831, 1845, 2468, 2568),
+                new Status(1955, 1969, 3413, 2713),
+                new Status(2079, 2093, 3559, 4359),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードヒールC Ⅲ",
@@ -16305,7 +20320,13 @@ public record Memoria(
             "誠実なる守護者",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(4155, 2730, 3634, 2716),
+            [
+                new Status(1389, 1185, 1369, 1161),
+                new Status(1488, 1269, 1618, 1245),
+                new Status(1736, 1353, 1716, 1329),
+                new Status(1834, 1437, 2114, 1413),
+                new Status(2733, 1521, 2213, 1497),
+            ],
             18,
             new Skill(
                 "パワーストライクA LG",
@@ -16330,7 +20351,13 @@ public record Memoria(
             "一葉ののんびりタイム",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(4503, 1681, 3466, 1674),
+            [
+                new Status(1548, 1336, 1511, 1329),
+                new Status(1649, 1422, 2012, 1415),
+                new Status(2400, 1508, 2113, 1501),
+                new Status(2501, 1594, 3364, 1587),
+                new Status(4503, 1681, 3466, 1674),
+            ],
             19,
             new Skill(
                 "ガードフォールC Ⅳ",
@@ -16354,7 +20381,13 @@ public record Memoria(
             "一葉ののんびりタイム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4503, 1681, 3466, 1674),
+            [
+                new Status(1548, 1336, 1511, 1329),
+                new Status(1649, 1422, 2012, 1415),
+                new Status(2400, 1508, 2113, 1501),
+                new Status(2501, 1594, 3364, 1587),
+                new Status(4503, 1681, 3466, 1674),
+            ],
             19,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -16378,7 +20411,13 @@ public record Memoria(
             "ペアトレ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(2088, 2088, 4334, 3549),
+            [
+                new Status(1593, 1593, 1853, 1868),
+                new Status(1716, 1716, 1998, 2313),
+                new Status(1840, 1840, 2543, 2458),
+                new Status(1964, 1964, 2688, 3403),
+                new Status(2088, 2088, 4334, 3549),
+            ],
             21,
             new Skill(
                 "ウォーターガードヒールC Ⅲ",
@@ -16402,7 +20441,13 @@ public record Memoria(
             "先輩ふぁいと☆",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(3549, 4355, 2086, 2070),
+            [
+                new Status(1868, 1874, 1591, 1575),
+                new Status(2313, 2019, 1714, 1698),
+                new Status(2458, 2564, 1838, 1822),
+                new Status(3403, 2709, 1962, 1946),
+                new Status(3549, 4355, 2086, 2070),
+            ],
             21,
             new Skill(
                 "WパワーアシストC Ⅳ",
@@ -16426,7 +20471,13 @@ public record Memoria(
             "もっと優しく",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2079, 4343, 2091, 3542),
+            [
+                new Status(1584, 1862, 1596, 1861),
+                new Status(1707, 2007, 1719, 2306),
+                new Status(1831, 2552, 1843, 2451),
+                new Status(1955, 2697, 1967, 3396),
+                new Status(2079, 4343, 2091, 3542),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
@@ -16450,7 +20501,13 @@ public record Memoria(
             "りざるとちぇっく",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4341, 2095, 3527, 2081),
+            [
+                new Status(1860, 1600, 1846, 1586),
+                new Status(2005, 1723, 2291, 1709),
+                new Status(2550, 1847, 2436, 1833),
+                new Status(2695, 1971, 3381, 1957),
+                new Status(4341, 2095, 3527, 2081),
+            ],
             21,
             new Skill(
                 "ウォーターガードブレイクB Ⅲ",
@@ -16474,7 +20531,13 @@ public record Memoria(
             "親愛なるルームメイト",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2089, 4328, 2074, 3557),
+            [
+                new Status(1594, 1847, 1579, 1876),
+                new Status(1717, 1992, 1702, 2321),
+                new Status(1841, 2537, 1826, 2466),
+                new Status(1965, 2682, 1950, 3411),
+                new Status(2089, 4328, 2074, 3557),
+            ],
             21,
             new Skill(
                 "Sp.ウォーターガードバーストB Ⅲ",
@@ -16498,7 +20561,13 @@ public record Memoria(
             "戦場のお色直し",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1650, 4500, 1650, 3485),
+            [
+                new Status(1305, 1545, 1305, 1530),
+                new Status(1391, 1646, 1391, 2031),
+                new Status(1477, 2397, 1477, 2132),
+                new Status(1563, 2498, 1563, 3383),
+                new Status(1650, 4500, 1650, 3485),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターガードフォールB Ⅱ",
@@ -16522,7 +20591,13 @@ public record Memoria(
             "戦場のお色直し",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1650, 4500, 1650, 3485),
+            [
+                new Status(1305, 1545, 1305, 1530),
+                new Status(1391, 1646, 1391, 2031),
+                new Status(1477, 2397, 1477, 2132),
+                new Status(1563, 2498, 1563, 3383),
+                new Status(1650, 4500, 1650, 3485),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュA Ⅳ",
@@ -16546,7 +20621,13 @@ public record Memoria(
             "白鳥の姫騎士",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4476, 1670, 3467, 1647),
+            [
+                new Status(1521, 1325, 1512, 1302),
+                new Status(1622, 1411, 2013, 1388),
+                new Status(2373, 1497, 2114, 1474),
+                new Status(2474, 1583, 3365, 1560),
+                new Status(4476, 1670, 3467, 1647),
+            ],
             19,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -16570,7 +20651,13 @@ public record Memoria(
             "白鳥の姫騎士",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(4476, 1670, 3467, 1647),
+            [
+                new Status(1521, 1325, 1512, 1302),
+                new Status(1622, 1411, 2013, 1388),
+                new Status(2373, 1497, 2114, 1474),
+                new Status(2474, 1583, 3365, 1560),
+                new Status(4476, 1670, 3467, 1647),
+            ],
             19,
             new Skill(
                 "水拡：パワーアシストB Ⅳ",
@@ -16594,7 +20681,13 @@ public record Memoria(
             "氷帝",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1673, 1670, 4490, 3480),
+            [
+                new Status(1328, 1325, 1535, 1525),
+                new Status(1414, 1411, 1636, 2026),
+                new Status(1500, 1497, 2387, 2127),
+                new Status(1586, 1583, 2488, 3378),
+                new Status(1673, 1670, 4490, 3480),
+            ],
             19,
             new Skill(
                 "ウォーターパワーヒールC Ⅲ",
@@ -16618,7 +20711,13 @@ public record Memoria(
             "氷帝",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(1673, 1670, 4490, 3480),
+            [
+                new Status(1328, 1325, 1535, 1525),
+                new Status(1414, 1411, 1636, 2026),
+                new Status(1500, 1497, 2387, 2127),
+                new Status(1586, 1583, 2488, 3378),
+                new Status(1673, 1670, 4490, 3480),
+            ],
             19,
             new Skill(
                 "ウォーターパワーストライクA Ⅳ",
@@ -16642,7 +20741,13 @@ public record Memoria(
             "その瞳に映るモノ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1668, 4470, 1668, 3498),
+            [
+                new Status(1323, 1515, 1323, 1543),
+                new Status(1409, 1616, 1409, 2044),
+                new Status(1495, 2367, 1495, 2145),
+                new Status(1581, 2468, 1581, 3396),
+                new Status(1668, 4470, 1668, 3498),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュA Ⅳ",
@@ -16666,7 +20771,13 @@ public record Memoria(
             "その瞳に映るモノ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1668, 4470, 1668, 3498),
+            [
+                new Status(1323, 1515, 1323, 1543),
+                new Status(1409, 1616, 1409, 2044),
+                new Status(1495, 2367, 1495, 2145),
+                new Status(1581, 2468, 1581, 3396),
+                new Status(1668, 4470, 1668, 3498),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターガードフォールB Ⅱ",
@@ -16690,7 +20801,13 @@ public record Memoria(
             "アクロバット・シューター",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1655, 4468, 1649, 3500),
+            [
+                new Status(1310, 1513, 1304, 1545),
+                new Status(1396, 1614, 1390, 2046),
+                new Status(1482, 2365, 1476, 2147),
+                new Status(1568, 2466, 1562, 3398),
+                new Status(1655, 4468, 1649, 3500),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワースマッシュB Ⅲ",
@@ -16714,7 +20831,13 @@ public record Memoria(
             "アクロバット・シューター",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1655, 4468, 1649, 3500),
+            [
+                new Status(1310, 1513, 1304, 1545),
+                new Status(1396, 1614, 1390, 2046),
+                new Status(1482, 2365, 1476, 2147),
+                new Status(1568, 2466, 1562, 3398),
+                new Status(1655, 4468, 1649, 3500),
+            ],
             19,
             new Skill(
                 "Sp.ウォーターパワーヒールC Ⅲ",
@@ -16738,7 +20861,13 @@ public record Memoria(
             "天からの強襲",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(4497, 1681, 3470, 1645),
+            [
+                new Status(1542, 1336, 1515, 1300),
+                new Status(1643, 1422, 2016, 1386),
+                new Status(2394, 1508, 2117, 1472),
+                new Status(2495, 1594, 3368, 1558),
+                new Status(4497, 1681, 3470, 1645),
+            ],
             19,
             new Skill(
                 "ウォーターパワーアシストB Ⅱ",
@@ -16762,7 +20891,13 @@ public record Memoria(
             "天からの強襲",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(4497, 1681, 3470, 1645),
+            [
+                new Status(1542, 1336, 1515, 1300),
+                new Status(1643, 1422, 2016, 1386),
+                new Status(2394, 1508, 2117, 1472),
+                new Status(2495, 1594, 3368, 1558),
+                new Status(4497, 1681, 3470, 1645),
+            ],
             19,
             new Skill(
                 "ウォーターパワーストライクB Ⅲ",
@@ -16786,7 +20921,13 @@ public record Memoria(
             "ナイトガンスリンガー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(2703, 4156, 2712, 3654),
+            [
+                new Status(1592, 1869, 1572, 1845),
+                new Status(1715, 2014, 1695, 2140),
+                new Status(1839, 2309, 1819, 2285),
+                new Status(1963, 2454, 1943, 2730),
+                new Status(2087, 3400, 2067, 2876),
+            ],
             21,
             new Skill(
                 "Sp.ガードバーストD LG",
@@ -16811,7 +20952,13 @@ public record Memoria(
             "夏色日和",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(2075, 2070, 3553, 4327),
+            [
+                new Status(1580, 1575, 1872, 1846),
+                new Status(1703, 1698, 2317, 1991),
+                new Status(1827, 1822, 2462, 2536),
+                new Status(1951, 1946, 3407, 2681),
+                new Status(2075, 2070, 3553, 4327),
+            ],
             21,
             new Skill(
                 "Sp.ライトガードヒールC Ⅲ",
@@ -16835,7 +20982,13 @@ public record Memoria(
             "打ち上げ花火",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(4329, 2068, 3561, 2084),
+            [
+                new Status(1848, 1573, 1880, 1589),
+                new Status(1993, 1696, 2325, 1712),
+                new Status(2538, 1820, 2470, 1836),
+                new Status(2683, 1944, 3415, 1960),
+                new Status(4329, 2068, 3561, 2084),
+            ],
             21,
             new Skill(
                 "ダークパワーフォールB Ⅱ",
@@ -16859,7 +21012,13 @@ public record Memoria(
             "涼やかな響き",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(4354, 2079, 3526, 2071),
+            [
+                new Status(1873, 1584, 1845, 1576),
+                new Status(2018, 1707, 2290, 1699),
+                new Status(2563, 1831, 2435, 1823),
+                new Status(2708, 1955, 3380, 1947),
+                new Status(4354, 2079, 3526, 2071),
+            ],
             21,
             new Skill(
                 "ライトガードブレイクB Ⅲ",
@@ -16883,7 +21042,13 @@ public record Memoria(
             "納涼かき氷",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(2085, 4351, 2078, 3562),
+            [
+                new Status(1590, 1870, 1583, 1881),
+                new Status(1713, 2015, 1706, 2326),
+                new Status(1837, 2560, 1830, 2471),
+                new Status(1961, 2705, 1954, 3416),
+                new Status(2085, 4351, 2078, 3562),
+            ],
             21,
             new Skill(
                 "Sp.ダークガードバーストB Ⅲ",
@@ -16907,7 +21072,13 @@ public record Memoria(
             "飛び出せミリアム！",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(1676, 1659, 4480, 3503),
+            [
+                new Status(1331, 1314, 1525, 1548),
+                new Status(1417, 1400, 1626, 2049),
+                new Status(1503, 1486, 2377, 2150),
+                new Status(1589, 1572, 2478, 3401),
+                new Status(1676, 1659, 4480, 3503),
+            ],
             19,
             new Skill(
                 "ダークガードヒールC Ⅲ",
@@ -16931,7 +21102,13 @@ public record Memoria(
             "飛び出せミリアム！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
-            new Status(1676, 1659, 4480, 3503),
+            [
+                new Status(1331, 1314, 1525, 1548),
+                new Status(1417, 1400, 1626, 2049),
+                new Status(1503, 1486, 2377, 2150),
+                new Status(1589, 1572, 2478, 3401),
+                new Status(1676, 1659, 4480, 3503),
+            ],
             19,
             new Skill(
                 "ライトパワーストライクA Ⅳ+",
@@ -16955,7 +21132,13 @@ public record Memoria(
             "ポイ越しの笑顔",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1679, 4470, 1647, 3493),
+            [
+                new Status(1334, 1515, 1302, 1538),
+                new Status(1420, 1616, 1388, 2039),
+                new Status(1506, 2367, 1474, 2140),
+                new Status(1592, 2468, 1560, 3391),
+                new Status(1679, 4470, 1647, 3493),
+            ],
             19,
             new Skill(
                 "Sp.ライトパワーバーストB Ⅲ",
@@ -16979,7 +21162,13 @@ public record Memoria(
             "ポイ越しの笑顔",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(1679, 4470, 1647, 3493),
+            [
+                new Status(1334, 1515, 1302, 1538),
+                new Status(1420, 1616, 1388, 2039),
+                new Status(1506, 2367, 1474, 2140),
+                new Status(1592, 2468, 1560, 3391),
+                new Status(1679, 4470, 1647, 3493),
+            ],
             19,
             new Skill(
                 "Sp.ライトガードアシストB Ⅱ",
@@ -17003,7 +21192,13 @@ public record Memoria(
             "祭囃子と恋の音",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(4348, 2066, 3551, 2078),
+            [
+                new Status(1867, 1571, 1870, 1583),
+                new Status(2012, 1694, 2315, 1706),
+                new Status(2557, 1818, 2460, 1830),
+                new Status(2702, 1942, 3405, 1954),
+                new Status(4348, 2066, 3551, 2078),
+            ],
             21,
             new Skill(
                 "ライトパワーブレイクB Ⅲ",
@@ -17027,7 +21222,13 @@ public record Memoria(
             "想いを込めた歌声",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(2092, 2082, 4351, 3559),
+            [
+                new Status(1597, 1587, 1870, 1878),
+                new Status(1720, 1710, 2015, 2323),
+                new Status(1844, 1834, 2560, 2468),
+                new Status(1968, 1958, 2705, 3413),
+                new Status(2092, 2082, 4351, 3559),
+            ],
             21,
             new Skill(
                 "ライトガードヒールC Ⅲ",
@@ -17051,7 +21252,13 @@ public record Memoria(
             "花咲くハーモニー",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(4341, 2075, 3524, 2094),
+            [
+                new Status(1860, 1580, 1843, 1599),
+                new Status(2005, 1703, 2288, 1722),
+                new Status(2550, 1827, 2433, 1846),
+                new Status(2695, 1951, 3378, 1970),
+                new Status(4341, 2075, 3524, 2094),
+            ],
             21,
             new Skill(
                 "ダークガードアシストB Ⅱ",
@@ -17075,7 +21282,13 @@ public record Memoria(
             "躍動の旋律",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(4352, 2061, 3561, 2096),
+            [
+                new Status(1871, 1566, 1880, 1601),
+                new Status(2016, 1689, 2325, 1724),
+                new Status(2561, 1813, 2470, 1848),
+                new Status(2706, 1937, 3415, 1972),
+                new Status(4352, 2061, 3561, 2096),
+            ],
             21,
             new Skill(
                 "ダークパワーストライクB Ⅲ",
@@ -17099,7 +21312,13 @@ public record Memoria(
             "きらめきステージ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(2088, 4349, 2083, 3528),
+            [
+                new Status(1593, 1868, 1588, 1847),
+                new Status(1716, 2013, 1711, 2292),
+                new Status(1840, 2558, 1835, 2437),
+                new Status(1964, 2703, 1959, 3382),
+                new Status(2088, 4349, 2083, 3528),
+            ],
             21,
             new Skill(
                 "Sp.ライトパワースマッシュB Ⅲ",
@@ -17123,7 +21342,13 @@ public record Memoria(
             "夏の海とかき氷",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(4478, 1653, 3490, 1670),
+            [
+                new Status(1523, 1308, 1535, 1325),
+                new Status(1624, 1394, 2036, 1411),
+                new Status(2375, 1480, 2137, 1497),
+                new Status(2476, 1566, 3388, 1583),
+                new Status(4478, 1653, 3490, 1670),
+            ],
             19,
             new Skill(
                 "ダークガードブレイクB Ⅲ",
@@ -17147,7 +21372,13 @@ public record Memoria(
             "夏の海とかき氷",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(4478, 1653, 3490, 1670),
+            [
+                new Status(1523, 1308, 1535, 1325),
+                new Status(1624, 1394, 2036, 1411),
+                new Status(2375, 1480, 2137, 1497),
+                new Status(2476, 1566, 3388, 1583),
+                new Status(4478, 1653, 3490, 1670),
+            ],
             19,
             new Skill(
                 "ダークガードフォールB Ⅱ",
@@ -17171,7 +21402,13 @@ public record Memoria(
             "見返り美人",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1657, 4503, 1663, 3494),
+            [
+                new Status(1312, 1548, 1318, 1539),
+                new Status(1398, 1649, 1404, 2040),
+                new Status(1484, 2400, 1490, 2141),
+                new Status(1570, 2501, 1576, 3392),
+                new Status(1657, 4503, 1663, 3494),
+            ],
             19,
             new Skill(
                 "Sp.ライトガードバーストB Ⅲ",
@@ -17195,7 +21432,13 @@ public record Memoria(
             "見返り美人",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(1657, 4503, 1663, 3494),
+            [
+                new Status(1312, 1548, 1318, 1539),
+                new Status(1398, 1649, 1404, 2040),
+                new Status(1484, 2400, 1490, 2141),
+                new Status(1570, 2501, 1576, 3392),
+                new Status(1657, 4503, 1663, 3494),
+            ],
             19,
             new Skill(
                 "Sp.ダークパワーフォールB Ⅱ",
@@ -17219,7 +21462,13 @@ public record Memoria(
             "Diverse",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1649, 4493, 1664, 3489),
+            [
+                new Status(1304, 1538, 1319, 1534),
+                new Status(1390, 1639, 1405, 2035),
+                new Status(1476, 2390, 1491, 2136),
+                new Status(1562, 2491, 1577, 3387),
+                new Status(1649, 4493, 1664, 3489),
+            ],
             19,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -17243,7 +21492,13 @@ public record Memoria(
             "Diverse",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(1649, 4493, 1664, 3489),
+            [
+                new Status(1304, 1538, 1319, 1534),
+                new Status(1390, 1639, 1405, 2035),
+                new Status(1476, 2390, 1491, 2136),
+                new Status(1562, 2491, 1577, 3387),
+                new Status(1649, 4493, 1664, 3489),
+            ],
             19,
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
@@ -17267,7 +21522,13 @@ public record Memoria(
             "Cherish",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(4494, 1659, 3478, 1669),
+            [
+                new Status(1539, 1314, 1523, 1324),
+                new Status(1640, 1400, 2024, 1410),
+                new Status(2391, 1486, 2125, 1496),
+                new Status(2492, 1572, 3376, 1582),
+                new Status(4494, 1659, 3478, 1669),
+            ],
             19,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -17291,7 +21552,13 @@ public record Memoria(
             "Cherish",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(4494, 1659, 3478, 1669),
+            [
+                new Status(1539, 1314, 1523, 1324),
+                new Status(1640, 1400, 2024, 1410),
+                new Status(2391, 1486, 2125, 1496),
+                new Status(2492, 1572, 3376, 1582),
+                new Status(4494, 1659, 3478, 1669),
+            ],
             19,
             new Skill(
                 "パワーフォールC Ⅳ",
@@ -17315,7 +21582,13 @@ public record Memoria(
             "激戦の終わりに",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(2083, 4354, 2071, 3539),
+            [
+                new Status(1588, 1873, 1576, 1858),
+                new Status(1711, 2018, 1699, 2303),
+                new Status(1835, 2563, 1823, 2448),
+                new Status(1959, 2708, 1947, 3393),
+                new Status(2083, 4354, 2071, 3539),
+            ],
             21,
             new Skill(
                 "Sp.ライトガードバーストB Ⅲ",
@@ -17339,7 +21612,13 @@ public record Memoria(
             "極限コンビネーション",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(1654, 1672, 3466, 4499),
+            [
+                new Status(1309, 1327, 1511, 1544),
+                new Status(1395, 1413, 2012, 1645),
+                new Status(1481, 1499, 2113, 2396),
+                new Status(1567, 1585, 3364, 2497),
+                new Status(1654, 1672, 3466, 4499),
+            ],
             19,
             new Skill(
                 "Sp.ライトガードヒールC Ⅲ",
@@ -17363,7 +21642,13 @@ public record Memoria(
             "極限コンビネーション",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
-            new Status(1654, 1672, 3466, 4499),
+            [
+                new Status(1309, 1327, 1511, 1544),
+                new Status(1395, 1413, 2012, 1645),
+                new Status(1481, 1499, 2113, 2396),
+                new Status(1567, 1585, 3364, 2497),
+                new Status(1654, 1672, 3466, 4499),
+            ],
             19,
             new Skill(
                 "Sp.ダークパワースマッシュA Ⅳ",
@@ -17387,7 +21672,13 @@ public record Memoria(
             "不屈の一太刀",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(4474, 1658, 3501, 1665),
+            [
+                new Status(1519, 1313, 1546, 1320),
+                new Status(1620, 1399, 2047, 1406),
+                new Status(2371, 1485, 2148, 1492),
+                new Status(2472, 1571, 3399, 1578),
+                new Status(4474, 1658, 3501, 1665),
+            ],
             19,
             new Skill(
                 "ライトパワーストライクB Ⅲ",
@@ -17411,7 +21702,13 @@ public record Memoria(
             "不屈の一太刀",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(4474, 1658, 3501, 1665),
+            [
+                new Status(1519, 1313, 1546, 1320),
+                new Status(1620, 1399, 2047, 1406),
+                new Status(2371, 1485, 2148, 1492),
+                new Status(2472, 1571, 3399, 1578),
+                new Status(4474, 1658, 3501, 1665),
+            ],
             19,
             new Skill(
                 "ダークガードアシストB Ⅱ",
@@ -17435,7 +21732,13 @@ public record Memoria(
             "らぶらぶぴーす",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(4334, 2095, 3539, 2080),
+            [
+                new Status(1853, 1600, 1858, 1585),
+                new Status(1998, 1723, 2303, 1708),
+                new Status(2543, 1847, 2448, 1832),
+                new Status(2688, 1971, 3393, 1956),
+                new Status(4334, 2095, 3539, 2080),
+            ],
             21,
             new Skill(
                 "ダークガードアシストB Ⅱ",
@@ -17459,7 +21762,13 @@ public record Memoria(
             "ひまわりとんだよ",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(4335, 2076, 3528, 2067),
+            [
+                new Status(1854, 1581, 1847, 1572),
+                new Status(1999, 1704, 2292, 1695),
+                new Status(2544, 1828, 2437, 1819),
+                new Status(2689, 1952, 3382, 1943),
+                new Status(4335, 2076, 3528, 2067),
+            ],
             21,
             new Skill(
                 "ライトパワーフォールB Ⅱ",
@@ -17483,7 +21792,13 @@ public record Memoria(
             "レディーティータイム",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(2074, 4351, 2089, 3560),
+            [
+                new Status(1579, 1870, 1594, 1879),
+                new Status(1702, 2015, 1717, 2324),
+                new Status(1826, 2560, 1841, 2469),
+                new Status(1950, 2705, 1965, 3414),
+                new Status(2074, 4351, 2089, 3560),
+            ],
             21,
             new Skill(
                 "Sp.ライトパワースマッシュB Ⅲ",
@@ -17507,7 +21822,13 @@ public record Memoria(
             "月に顔をそむけて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(4348, 2078, 3528, 2089),
+            [
+                new Status(1867, 1583, 1847, 1594),
+                new Status(2012, 1706, 2292, 1717),
+                new Status(2557, 1830, 2437, 1841),
+                new Status(2702, 1954, 3382, 1965),
+                new Status(4348, 2078, 3528, 2089),
+            ],
             21,
             new Skill(
                 "ダークガードブレイクB Ⅲ",
@@ -17531,7 +21852,13 @@ public record Memoria(
             "バトル・デプロイメント",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
-            new Status(1673, 4487, 1646, 3494),
+            [
+                new Status(1328, 1532, 1301, 1539),
+                new Status(1414, 1633, 1387, 2040),
+                new Status(1500, 2384, 1473, 2141),
+                new Status(1586, 2485, 1559, 3392),
+                new Status(1673, 4487, 1646, 3494),
+            ],
             19,
             new Skill(
                 "Sp.ダークパワースマッシュA Ⅳ",
@@ -17555,7 +21882,13 @@ public record Memoria(
             "バトル・デプロイメント",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(1673, 4487, 1646, 3494),
+            [
+                new Status(1328, 1532, 1301, 1539),
+                new Status(1414, 1633, 1387, 2040),
+                new Status(1500, 2384, 1473, 2141),
+                new Status(1586, 2485, 1559, 3392),
+                new Status(1673, 4487, 1646, 3494),
+            ],
             19,
             new Skill(
                 "Sp.ライトガードアシストB Ⅱ",
@@ -17579,7 +21912,13 @@ public record Memoria(
             "淀みを蹴って",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1649, 4467, 1667, 3506),
+            [
+                new Status(1304, 1512, 1322, 1551),
+                new Status(1390, 1613, 1408, 2052),
+                new Status(1476, 2364, 1494, 2153),
+                new Status(1562, 2465, 1580, 3404),
+                new Status(1649, 4467, 1667, 3506),
+            ],
             19,
             new Skill(
                 "Sp.ダークパワースマッシュB Ⅲ",
@@ -17603,7 +21942,13 @@ public record Memoria(
             "淀みを蹴って",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(1649, 4467, 1667, 3506),
+            [
+                new Status(1304, 1512, 1322, 1551),
+                new Status(1390, 1613, 1408, 2052),
+                new Status(1476, 2364, 1494, 2153),
+                new Status(1562, 2465, 1580, 3404),
+                new Status(1649, 4467, 1667, 3506),
+            ],
             19,
             new Skill(
                 "Sp.ライトパワーフォールB Ⅱ",
@@ -17627,7 +21972,13 @@ public record Memoria(
             "アンブッシュ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(4490, 1647, 3480, 1682),
+            [
+                new Status(1535, 1302, 1525, 1337),
+                new Status(1636, 1388, 2026, 1423),
+                new Status(2387, 1474, 2127, 1509),
+                new Status(2488, 1560, 3378, 1595),
+                new Status(4490, 1647, 3480, 1682),
+            ],
             19,
             new Skill(
                 "ダークパワーストライクB Ⅲ",
@@ -17651,7 +22002,13 @@ public record Memoria(
             "アンブッシュ",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(4490, 1647, 3480, 1682),
+            [
+                new Status(1535, 1302, 1525, 1337),
+                new Status(1636, 1388, 2026, 1423),
+                new Status(2387, 1474, 2127, 1509),
+                new Status(2488, 1560, 3378, 1595),
+                new Status(4490, 1647, 3480, 1682),
+            ],
             19,
             new Skill(
                 "ライトガードヒールC Ⅲ",
@@ -17675,7 +22032,13 @@ public record Memoria(
             "晴れときどきサンオイル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(4486, 1682, 3506, 1670),
+            [
+                new Status(1531, 1337, 1551, 1325),
+                new Status(1632, 1423, 2052, 1411),
+                new Status(2383, 1509, 2153, 1497),
+                new Status(2484, 1595, 3404, 1583),
+                new Status(4486, 1682, 3506, 1670),
+            ],
             19,
             new Skill(
                 "ライトパワーストライクB Ⅲ",
@@ -17699,7 +22062,13 @@ public record Memoria(
             "晴れときどきサンオイル",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(4486, 1682, 3506, 1670),
+            [
+                new Status(1531, 1337, 1551, 1325),
+                new Status(1632, 1423, 2052, 1411),
+                new Status(2383, 1509, 2153, 1497),
+                new Status(2484, 1595, 3404, 1583),
+                new Status(4486, 1682, 3506, 1670),
+            ],
             19,
             new Skill(
                 "ダークガードヒールD Ⅲ",
@@ -17723,7 +22092,13 @@ public record Memoria(
             "楽しいを探しに行こう！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(4475, 1647, 3467, 1653),
+            [
+                new Status(1520, 1302, 1512, 1308),
+                new Status(1621, 1388, 2013, 1394),
+                new Status(2372, 1474, 2114, 1480),
+                new Status(2473, 1560, 3365, 1566),
+                new Status(4475, 1647, 3467, 1653),
+            ],
             19,
             new Skill(
                 "ダークパワーブレイクB Ⅲ",
@@ -17747,7 +22122,13 @@ public record Memoria(
             "楽しいを探しに行こう！",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(4475, 1647, 3467, 1653),
+            [
+                new Status(1520, 1302, 1512, 1308),
+                new Status(1621, 1388, 2013, 1394),
+                new Status(2372, 1474, 2114, 1480),
+                new Status(2473, 1560, 3365, 1566),
+                new Status(4475, 1647, 3467, 1653),
+            ],
             19,
             new Skill(
                 "ダークパワーフォールB Ⅱ",
@@ -17771,7 +22152,13 @@ public record Memoria(
             "ダイビング・アタッカー",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(1650, 4486, 1667, 3500),
+            [
+                new Status(1305, 1531, 1322, 1545),
+                new Status(1391, 1632, 1408, 2046),
+                new Status(1477, 2383, 1494, 2147),
+                new Status(1563, 2484, 1580, 3398),
+                new Status(1650, 4486, 1667, 3500),
+            ],
             19,
             new Skill(
                 "Sp.ダークガードアシストB Ⅱ",
@@ -17795,7 +22182,13 @@ public record Memoria(
             "ダイビング・アタッカー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1650, 4486, 1667, 3500),
+            [
+                new Status(1305, 1531, 1322, 1545),
+                new Status(1391, 1632, 1408, 2046),
+                new Status(1477, 2383, 1494, 2147),
+                new Status(1563, 2484, 1580, 3398),
+                new Status(1650, 4486, 1667, 3500),
+            ],
             19,
             new Skill(
                 "Sp.ライトガードバーストB Ⅲ",
@@ -17819,7 +22212,13 @@ public record Memoria(
             "ウッドクラフトに挑戦",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(4338, 2073, 3523, 2097),
+            [
+                new Status(1857, 1578, 1842, 1602),
+                new Status(2002, 1701, 2287, 1725),
+                new Status(2547, 1825, 2432, 1849),
+                new Status(2692, 1949, 3377, 1973),
+                new Status(4338, 2073, 3523, 2097),
+            ],
             21,
             new Skill(
                 "ダークガードブレイクB Ⅲ",
@@ -17843,7 +22242,13 @@ public record Memoria(
             "炊事は任せた！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(2072, 4357, 2091, 3537),
+            [
+                new Status(1577, 1876, 1596, 1856),
+                new Status(1700, 2021, 1719, 2301),
+                new Status(1824, 2566, 1843, 2446),
+                new Status(1948, 2711, 1967, 3391),
+                new Status(2072, 4357, 2091, 3537),
+            ],
             21,
             new Skill(
                 "Sp.ダークパワースマッシュB Ⅲ",
@@ -17867,7 +22272,13 @@ public record Memoria(
             "面目躍如のサバイバル",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(1678, 1656, 4469, 3488),
+            [
+                new Status(1333, 1311, 1514, 1533),
+                new Status(1419, 1397, 1615, 2034),
+                new Status(1505, 1483, 2366, 2135),
+                new Status(1591, 1569, 2467, 3386),
+                new Status(1678, 1656, 4469, 3488),
+            ],
             19,
             new Skill(
                 "ダークガードヒールC Ⅲ",
@@ -17891,7 +22302,13 @@ public record Memoria(
             "面目躍如のサバイバル",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
-            new Status(1678, 1656, 4469, 3488),
+            [
+                new Status(1333, 1311, 1514, 1533),
+                new Status(1419, 1397, 1615, 2034),
+                new Status(1505, 1483, 2366, 2135),
+                new Status(1591, 1569, 2467, 3386),
+                new Status(1678, 1656, 4469, 3488),
+            ],
             19,
             new Skill(
                 "ライトパワーストライクA Ⅳ",
@@ -17915,7 +22332,13 @@ public record Memoria(
             "殲滅のシルバーバレット",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(4473, 1680, 3471, 1647),
+            [
+                new Status(1518, 1335, 1516, 1302),
+                new Status(1619, 1421, 2017, 1388),
+                new Status(2370, 1507, 2118, 1474),
+                new Status(2471, 1593, 3369, 1560),
+                new Status(4473, 1680, 3471, 1647),
+            ],
             19,
             new Skill(
                 "ダークパワーフォールB Ⅱ",
@@ -17939,7 +22362,13 @@ public record Memoria(
             "殲滅のシルバーバレット",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(4473, 1680, 3471, 1647),
+            [
+                new Status(1518, 1335, 1516, 1302),
+                new Status(1619, 1421, 2017, 1388),
+                new Status(2370, 1507, 2118, 1474),
+                new Status(2471, 1593, 3369, 1560),
+                new Status(4473, 1680, 3471, 1647),
+            ],
             19,
             new Skill(
                 "ライトガードブレイクB Ⅲ",
@@ -17963,7 +22392,13 @@ public record Memoria(
             "やめられない刺激",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(4504, 1676, 3487, 1647),
+            [
+                new Status(1549, 1331, 1532, 1302),
+                new Status(1650, 1417, 2033, 1388),
+                new Status(2401, 1503, 2134, 1474),
+                new Status(2502, 1589, 3385, 1560),
+                new Status(4504, 1676, 3487, 1647),
+            ],
             19,
             new Skill(
                 "ライトパワーフォールB Ⅱ",
@@ -17987,7 +22422,13 @@ public record Memoria(
             "やめられない刺激",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(4504, 1676, 3487, 1647),
+            [
+                new Status(1549, 1331, 1532, 1302),
+                new Status(1650, 1417, 2033, 1388),
+                new Status(2401, 1503, 2134, 1474),
+                new Status(2502, 1589, 3385, 1560),
+                new Status(4504, 1676, 3487, 1647),
+            ],
             19,
             new Skill(
                 "ダークガードブレイクB Ⅲ",
@@ -18011,7 +22452,13 @@ public record Memoria(
             "光の注ぐ夜",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(1659, 1660, 3485, 4471),
+            [
+                new Status(1314, 1315, 1530, 1516),
+                new Status(1400, 1401, 2031, 1617),
+                new Status(1486, 1487, 2132, 2368),
+                new Status(1572, 1573, 3383, 2469),
+                new Status(1659, 1660, 3485, 4471),
+            ],
             19,
             new Skill(
                 "Sp.ダークガードヒールC Ⅲ",
@@ -18035,7 +22482,13 @@ public record Memoria(
             "光の注ぐ夜",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1659, 1660, 3485, 4471),
+            [
+                new Status(1314, 1315, 1530, 1516),
+                new Status(1400, 1401, 2031, 1617),
+                new Status(1486, 1487, 2132, 2368),
+                new Status(1572, 1573, 3383, 2469),
+                new Status(1659, 1660, 3485, 4471),
+            ],
             19,
             new Skill(
                 "Sp.ライトガードバーストB Ⅲ",
@@ -18059,7 +22512,13 @@ public record Memoria(
             "ゼロ距離のしあわせ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1650, 4483, 1650, 3501),
+            [
+                new Status(1305, 1528, 1305, 1546),
+                new Status(1391, 1629, 1391, 2047),
+                new Status(1477, 2380, 1477, 2148),
+                new Status(1563, 2481, 1563, 3399),
+                new Status(1650, 4483, 1650, 3501),
+            ],
             19,
             new Skill(
                 "Sp.ダークパワースマッシュB Ⅲ",
@@ -18083,7 +22542,13 @@ public record Memoria(
             "ゼロ距離のしあわせ",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(1650, 4483, 1650, 3501),
+            [
+                new Status(1305, 1528, 1305, 1546),
+                new Status(1391, 1629, 1391, 2047),
+                new Status(1477, 2380, 1477, 2148),
+                new Status(1563, 2481, 1563, 3399),
+                new Status(1650, 4483, 1650, 3501),
+            ],
             19,
             new Skill(
                 "Sp.ライトガードアシストB Ⅱ",
@@ -18107,7 +22572,13 @@ public record Memoria(
             "水も滴るいい乙女",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(4491, 1666, 3492, 1672),
+            [
+                new Status(1536, 1321, 1537, 1327),
+                new Status(1637, 1407, 2038, 1413),
+                new Status(2388, 1493, 2139, 1499),
+                new Status(2489, 1579, 3390, 1585),
+                new Status(4491, 1666, 3492, 1672),
+            ],
             19,
             new Skill(
                 "ライトパワーストライクB Ⅲ",
@@ -18131,7 +22602,13 @@ public record Memoria(
             "水も滴るいい乙女",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(4491, 1666, 3492, 1672),
+            [
+                new Status(1536, 1321, 1537, 1327),
+                new Status(1637, 1407, 2038, 1413),
+                new Status(2388, 1493, 2139, 1499),
+                new Status(2489, 1579, 3390, 1585),
+                new Status(4491, 1666, 3492, 1672),
+            ],
             19,
             new Skill(
                 "ライトパワーアシストB Ⅱ",
@@ -18155,7 +22632,13 @@ public record Memoria(
             "リトル・アークメイジ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2705, 2734, 4126, 3624),
+            [
+                new Status(1173, 1174, 1382, 1368),
+                new Status(1257, 1258, 1481, 1617),
+                new Status(1341, 1342, 1729, 1715),
+                new Status(1425, 1426, 1827, 2113),
+                new Status(1509, 1510, 2726, 2212),
+            ],
             18,
             new Skill(
                 "WガードフォールD LG",
@@ -18180,7 +22663,13 @@ public record Memoria(
             "信じる想いを力に変えて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1678, 4474, 1648, 3478),
+            [
+                new Status(1333, 1519, 1303, 1523),
+                new Status(1419, 1620, 1389, 2024),
+                new Status(1505, 2371, 1475, 2125),
+                new Status(1591, 2472, 1561, 3376),
+                new Status(1678, 4474, 1648, 3478),
+            ],
             19,
             new Skill(
                 "Sp.ライトパワースマッシュB Ⅲ",
@@ -18204,7 +22693,13 @@ public record Memoria(
             "信じる想いを力に変えて",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(1678, 4474, 1648, 3478),
+            [
+                new Status(1333, 1519, 1303, 1523),
+                new Status(1419, 1620, 1389, 2024),
+                new Status(1505, 2371, 1475, 2125),
+                new Status(1591, 2472, 1561, 3376),
+                new Status(1678, 4474, 1648, 3478),
+            ],
             19,
             new Skill(
                 "Sp.ダークガードヒールC Ⅲ",
@@ -18228,7 +22723,13 @@ public record Memoria(
             "絆のアルケミートレース",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(4483, 1682, 3479, 1659),
+            [
+                new Status(1528, 1337, 1524, 1314),
+                new Status(1629, 1423, 2025, 1400),
+                new Status(2380, 1509, 2126, 1486),
+                new Status(2481, 1595, 3377, 1572),
+                new Status(4483, 1682, 3479, 1659),
+            ],
             19,
             new Skill(
                 "ダークパワーストライクB Ⅲ",
@@ -18252,7 +22753,13 @@ public record Memoria(
             "絆のアルケミートレース",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(4483, 1682, 3479, 1659),
+            [
+                new Status(1528, 1337, 1524, 1314),
+                new Status(1629, 1423, 2025, 1400),
+                new Status(2380, 1509, 2126, 1486),
+                new Status(2481, 1595, 3377, 1572),
+                new Status(4483, 1682, 3479, 1659),
+            ],
             19,
             new Skill(
                 "ダークガードフォールB Ⅱ",
@@ -18276,7 +22783,13 @@ public record Memoria(
             "ピュリファイ・ラプラス",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(1662, 4496, 1647, 3491),
+            [
+                new Status(1317, 1541, 1302, 1536),
+                new Status(1403, 1642, 1388, 2037),
+                new Status(1489, 2393, 1474, 2138),
+                new Status(1575, 2494, 1560, 3389),
+                new Status(1662, 4496, 1647, 3491),
+            ],
             19,
             new Skill(
                 "Sp.ダークパワーアシストB Ⅱ",
@@ -18300,7 +22813,13 @@ public record Memoria(
             "ピュリファイ・ラプラス",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1662, 4496, 1647, 3491),
+            [
+                new Status(1317, 1541, 1302, 1536),
+                new Status(1403, 1642, 1388, 2037),
+                new Status(1489, 2393, 1474, 2138),
+                new Status(1575, 2494, 1560, 3389),
+                new Status(1662, 4496, 1647, 3491),
+            ],
             19,
             new Skill(
                 "Sp.ダークガードバーストB Ⅲ",
@@ -18324,7 +22843,13 @@ public record Memoria(
             "ヘイムスクリングラ・シスターズ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(4504, 1679, 3504, 1650),
+            [
+                new Status(1549, 1334, 1549, 1305),
+                new Status(1650, 1420, 2050, 1391),
+                new Status(2401, 1506, 2151, 1477),
+                new Status(2502, 1592, 3402, 1563),
+                new Status(4504, 1679, 3504, 1650),
+            ],
             19,
             new Skill(
                 "WパワーブレイクB Ⅲ+",
@@ -18348,7 +22873,13 @@ public record Memoria(
             "ヘイムスクリングラ・シスターズ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(4504, 1679, 3504, 1650),
+            [
+                new Status(1549, 1334, 1549, 1305),
+                new Status(1650, 1420, 2050, 1391),
+                new Status(2401, 1506, 2151, 1477),
+                new Status(2502, 1592, 3402, 1563),
+                new Status(4504, 1679, 3504, 1650),
+            ],
             19,
             new Skill(
                 "パワーアシストC Ⅳ",
@@ -18372,7 +22903,13 @@ public record Memoria(
             "黄昏の英雄たち",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1672, 1678, 3477, 4479),
+            [
+                new Status(1327, 1333, 1522, 1524),
+                new Status(1413, 1419, 2023, 1625),
+                new Status(1499, 1505, 2124, 2376),
+                new Status(1585, 1591, 3375, 2477),
+                new Status(1672, 1678, 3477, 4479),
+            ],
             19,
             new Skill(
                 "Sp.ガードフォールA Ⅳ",
@@ -18396,7 +22933,13 @@ public record Memoria(
             "黄昏の英雄たち",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1672, 1678, 3477, 4479),
+            [
+                new Status(1327, 1333, 1522, 1524),
+                new Status(1413, 1419, 2023, 1625),
+                new Status(1499, 1505, 2124, 2376),
+                new Status(1585, 1591, 3375, 2477),
+                new Status(1672, 1678, 3477, 4479),
+            ],
             19,
             new Skill(
                 "風：スマッシュB Ⅲ",
@@ -18420,7 +22963,13 @@ public record Memoria(
             "お姉様の水難",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(4498, 1656, 3498, 1651),
+            [
+                new Status(1543, 1311, 1543, 1306),
+                new Status(1644, 1397, 2044, 1392),
+                new Status(2395, 1483, 2145, 1478),
+                new Status(2496, 1569, 3396, 1564),
+                new Status(4498, 1656, 3498, 1651),
+            ],
             19,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -18444,7 +22993,13 @@ public record Memoria(
             "お姉様の水難",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(4498, 1656, 3498, 1651),
+            [
+                new Status(1543, 1311, 1543, 1306),
+                new Status(1644, 1397, 2044, 1392),
+                new Status(2395, 1483, 2145, 1478),
+                new Status(2496, 1569, 3396, 1564),
+                new Status(4498, 1656, 3498, 1651),
+            ],
             19,
             new Skill(
                 "マイトフォールB Ⅲ",
@@ -18468,7 +23023,13 @@ public record Memoria(
             "この勝利が小さな一歩でも",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(1649, 1645, 3503, 4491),
+            [
+                new Status(1304, 1300, 1548, 1536),
+                new Status(1390, 1386, 2049, 1637),
+                new Status(1476, 1472, 2150, 2388),
+                new Status(1562, 1558, 3401, 2489),
+                new Status(1649, 1645, 3503, 4491),
+            ],
             19,
             new Skill(
                 "Sp.ガードヒールD Ⅲ",
@@ -18492,7 +23053,13 @@ public record Memoria(
             "この勝利が小さな一歩でも",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Light,
-            new Status(1649, 1645, 3503, 4491),
+            [
+                new Status(1304, 1300, 1548, 1536),
+                new Status(1390, 1386, 2049, 1637),
+                new Status(1476, 1472, 2150, 2388),
+                new Status(1562, 1558, 3401, 2489),
+                new Status(1649, 1645, 3503, 4491),
+            ],
             19,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
@@ -18516,7 +23083,13 @@ public record Memoria(
             "巨影を討つ閃光",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(4490, 1644, 3484, 1655),
+            [
+                new Status(1535, 1299, 1529, 1310),
+                new Status(1636, 1385, 2030, 1396),
+                new Status(2387, 1471, 2131, 1482),
+                new Status(2488, 1557, 3382, 1568),
+                new Status(4490, 1644, 3484, 1655),
+            ],
             19,
             new Skill(
                 "光：パワーフォールB Ⅲ",
@@ -18540,7 +23113,13 @@ public record Memoria(
             "巨影を討つ閃光",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(4490, 1644, 3484, 1655),
+            [
+                new Status(1535, 1299, 1529, 1310),
+                new Status(1636, 1385, 2030, 1396),
+                new Status(2387, 1471, 2131, 1482),
+                new Status(2488, 1557, 3382, 1568),
+                new Status(4490, 1644, 3484, 1655),
+            ],
             19,
             new Skill(
                 "ディファーブレイクB Ⅲ+",
@@ -18564,7 +23143,13 @@ public record Memoria(
             "ここから先は通さない",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1674, 4490, 1651, 3505),
+            [
+                new Status(1329, 1535, 1306, 1550),
+                new Status(1415, 1636, 1392, 2051),
+                new Status(1501, 2387, 1478, 2152),
+                new Status(1587, 2488, 1564, 3403),
+                new Status(1674, 4490, 1651, 3505),
+            ],
             19,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -18588,7 +23173,13 @@ public record Memoria(
             "ここから先は通さない",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(1674, 4490, 1651, 3505),
+            [
+                new Status(1329, 1535, 1306, 1550),
+                new Status(1415, 1636, 1392, 2051),
+                new Status(1501, 2387, 1478, 2152),
+                new Status(1587, 2488, 1564, 3403),
+                new Status(1674, 4490, 1651, 3505),
+            ],
             19,
             new Skill(
                 "Sp.パワーアシストC Ⅳ",
@@ -18612,7 +23203,13 @@ public record Memoria(
             "猛る獅子の剣",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(4137, 2719, 3657, 2731),
+            [
+                new Status(1843, 1598, 1874, 1568),
+                new Status(1988, 1721, 2169, 1691),
+                new Status(2283, 1845, 2314, 1815),
+                new Status(2428, 1969, 2759, 1939),
+                new Status(3374, 2093, 2905, 2063),
+            ],
             21,
             new Skill(
                 "ガードブレイクD LG",
@@ -18637,7 +23234,13 @@ public record Memoria(
             "クローバー・クラウン",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1650, 4494, 1673, 3473),
+            [
+                new Status(1305, 1539, 1328, 1518),
+                new Status(1391, 1640, 1414, 2019),
+                new Status(1477, 2391, 1500, 2120),
+                new Status(1563, 2492, 1586, 3371),
+                new Status(1650, 4494, 1673, 3473),
+            ],
             19,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -18661,7 +23264,13 @@ public record Memoria(
             "クローバー・クラウン",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(1650, 4494, 1673, 3473),
+            [
+                new Status(1305, 1539, 1328, 1518),
+                new Status(1391, 1640, 1414, 2019),
+                new Status(1477, 2391, 1500, 2120),
+                new Status(1563, 2492, 1586, 3371),
+                new Status(1650, 4494, 1673, 3473),
+            ],
             19,
             new Skill(
                 "WパワーヒールC Ⅲ",
@@ -18685,7 +23294,13 @@ public record Memoria(
             "華の休息",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(1650, 4484, 1681, 3473),
+            [
+                new Status(1305, 1529, 1336, 1518),
+                new Status(1391, 1630, 1422, 2019),
+                new Status(1477, 2381, 1508, 2120),
+                new Status(1563, 2482, 1594, 3371),
+                new Status(1650, 4484, 1681, 3473),
+            ],
             19,
             new Skill(
                 "Sp.ガードフォールC Ⅳ",
@@ -18709,7 +23324,13 @@ public record Memoria(
             "華の休息",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
-            new Status(1650, 4484, 1681, 3473),
+            [
+                new Status(1305, 1529, 1336, 1518),
+                new Status(1391, 1630, 1422, 2019),
+                new Status(1477, 2381, 1508, 2120),
+                new Status(1563, 2482, 1594, 3371),
+                new Status(1650, 4484, 1681, 3473),
+            ],
             19,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
@@ -18733,7 +23354,13 @@ public record Memoria(
             "ビーチでバカンス",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(1675, 1671, 4481, 3483),
+            [
+                new Status(1330, 1326, 1526, 1528),
+                new Status(1416, 1412, 1627, 2029),
+                new Status(1502, 1498, 2378, 2130),
+                new Status(1588, 1584, 2479, 3381),
+                new Status(1675, 1671, 4481, 3483),
+            ],
             19,
             new Skill(
                 "パワーヒールD Ⅲ",
@@ -18757,7 +23384,13 @@ public record Memoria(
             "ビーチでバカンス",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Dark,
-            new Status(1675, 1671, 4481, 3483),
+            [
+                new Status(1330, 1326, 1526, 1528),
+                new Status(1416, 1412, 1627, 2029),
+                new Status(1502, 1498, 2378, 2130),
+                new Status(1588, 1584, 2479, 3381),
+                new Status(1675, 1671, 4481, 3483),
+            ],
             19,
             new Skill(
                 "マイトストライクA Ⅳ+",
@@ -18781,7 +23414,13 @@ public record Memoria(
             "乙女の非常事態",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1681, 4476, 1661, 3475),
+            [
+                new Status(1336, 1521, 1316, 1520),
+                new Status(1422, 1622, 1402, 2021),
+                new Status(1508, 2373, 1488, 2122),
+                new Status(1594, 2474, 1574, 3373),
+                new Status(1681, 4476, 1661, 3475),
+            ],
             19,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -18805,7 +23444,13 @@ public record Memoria(
             "乙女の非常事態",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(1681, 4476, 1661, 3475),
+            [
+                new Status(1336, 1521, 1316, 1520),
+                new Status(1422, 1622, 1402, 2021),
+                new Status(1508, 2373, 1488, 2122),
+                new Status(1594, 2474, 1574, 3373),
+                new Status(1681, 4476, 1661, 3475),
+            ],
             19,
             new Skill(
                 "闇：Sp.パワーアシストB Ⅲ",
@@ -18825,11 +23470,17 @@ public record Memoria(
         ),
         new Memoria(
             367,
-            "m.v.p.オンステージ",
+            "mvpオンステージ",
             "M.V.P.オンステージ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(4503, 1681, 3488, 1651),
+            [
+                new Status(1548, 1336, 1533, 1306),
+                new Status(1649, 1422, 2034, 1392),
+                new Status(2400, 1508, 2135, 1478),
+                new Status(2501, 1594, 3386, 1564),
+                new Status(4503, 1681, 3488, 1651),
+            ],
             19,
             new Skill(
                 "ディファーブレイクB Ⅲ+",
@@ -18849,11 +23500,17 @@ public record Memoria(
         ),
         new Memoria(
             366,
-            "m.v.p.オンステージ",
+            "mvpオンステージ",
             "M.V.P.オンステージ",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(4503, 1681, 3488, 1651),
+            [
+                new Status(1548, 1336, 1533, 1306),
+                new Status(1649, 1422, 2034, 1392),
+                new Status(2400, 1508, 2135, 1478),
+                new Status(2501, 1594, 3386, 1564),
+                new Status(4503, 1681, 3488, 1651),
+            ],
             19,
             new Skill(
                 "ディファーフォールB Ⅲ",
@@ -18877,7 +23534,13 @@ public record Memoria(
             "勝利のファンファーレ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(4505, 1667, 3504, 1647),
+            [
+                new Status(1550, 1322, 1549, 1302),
+                new Status(1651, 1408, 2050, 1388),
+                new Status(2402, 1494, 2151, 1474),
+                new Status(2503, 1580, 3402, 1560),
+                new Status(4505, 1667, 3504, 1647),
+            ],
             19,
             new Skill(
                 "チャージストライクB Ⅱ",
@@ -18901,7 +23564,13 @@ public record Memoria(
             "勝利のファンファーレ",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(4505, 1667, 3504, 1647),
+            [
+                new Status(1550, 1322, 1549, 1302),
+                new Status(1651, 1408, 2050, 1388),
+                new Status(2402, 1494, 2151, 1474),
+                new Status(2503, 1580, 3402, 1560),
+                new Status(4505, 1667, 3504, 1647),
+            ],
             19,
             new Skill(
                 "パワーヒールC Ⅲ",
@@ -18925,7 +23594,13 @@ public record Memoria(
             "お手当マイスター",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(1652, 4485, 1677, 3479),
+            [
+                new Status(1307, 1530, 1332, 1524),
+                new Status(1393, 1631, 1418, 2025),
+                new Status(1479, 2382, 1504, 2126),
+                new Status(1565, 2483, 1590, 3377),
+                new Status(1652, 4485, 1677, 3479),
+            ],
             19,
             new Skill(
                 "チャージSp.パワーフォールB Ⅱ",
@@ -18949,7 +23624,13 @@ public record Memoria(
             "お手当マイスター",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1652, 4485, 1677, 3479),
+            [
+                new Status(1307, 1530, 1332, 1524),
+                new Status(1393, 1631, 1418, 2025),
+                new Status(1479, 2382, 1504, 2126),
+                new Status(1565, 2483, 1590, 3377),
+                new Status(1652, 4485, 1677, 3479),
+            ],
             19,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -18973,7 +23654,13 @@ public record Memoria(
             "謳歌のミュージックアワー",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(4506, 1679, 3492, 1669),
+            [
+                new Status(1551, 1334, 1537, 1324),
+                new Status(1652, 1420, 2038, 1410),
+                new Status(2403, 1506, 2139, 1496),
+                new Status(2504, 1592, 3390, 1582),
+                new Status(4506, 1679, 3492, 1669),
+            ],
             19,
             new Skill(
                 "Sp.ディファーアシストB Ⅲ",
@@ -18997,7 +23684,13 @@ public record Memoria(
             "謳歌のミュージックアワー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(4506, 1679, 3492, 1669),
+            [
+                new Status(1551, 1334, 1537, 1324),
+                new Status(1652, 1420, 2038, 1410),
+                new Status(2403, 1506, 2139, 1496),
+                new Status(2504, 1592, 3390, 1582),
+                new Status(4506, 1679, 3492, 1669),
+            ],
             19,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -19021,7 +23714,13 @@ public record Memoria(
             "メイクアップ！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1650, 4479, 1680, 3489),
+            [
+                new Status(1305, 1524, 1335, 1534),
+                new Status(1391, 1625, 1421, 2035),
+                new Status(1477, 2376, 1507, 2136),
+                new Status(1563, 2477, 1593, 3387),
+                new Status(1650, 4479, 1680, 3489),
+            ],
             19,
             new Skill(
                 "ディファースマッシュB Ⅲ+",
@@ -19045,7 +23744,13 @@ public record Memoria(
             "メイクアップ！",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(1650, 4479, 1680, 3489),
+            [
+                new Status(1305, 1524, 1335, 1534),
+                new Status(1391, 1625, 1421, 2035),
+                new Status(1477, 2376, 1507, 2136),
+                new Status(1563, 2477, 1593, 3387),
+                new Status(1650, 4479, 1680, 3489),
+            ],
             19,
             new Skill(
                 "Sp.ガードヒールD Ⅲ",
@@ -19069,7 +23774,13 @@ public record Memoria(
             "回遊のススメ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(4487, 1683, 3490, 1671),
+            [
+                new Status(1532, 1338, 1535, 1326),
+                new Status(1633, 1424, 2036, 1412),
+                new Status(2384, 1510, 2137, 1498),
+                new Status(2485, 1596, 3388, 1584),
+                new Status(4487, 1683, 3490, 1671),
+            ],
             19,
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
@@ -19093,7 +23804,13 @@ public record Memoria(
             "回遊のススメ",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(4487, 1683, 3490, 1671),
+            [
+                new Status(1532, 1338, 1535, 1326),
+                new Status(1633, 1424, 2036, 1412),
+                new Status(2384, 1510, 2137, 1498),
+                new Status(2485, 1596, 3388, 1584),
+                new Status(4487, 1683, 3490, 1671),
+            ],
             19,
             new Skill(
                 "ガードフォールC Ⅳ",
@@ -19117,7 +23834,13 @@ public record Memoria(
             "尊みの探求者",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(1669, 4500, 1665, 3466),
+            [
+                new Status(1324, 1545, 1320, 1511),
+                new Status(1410, 1646, 1406, 2012),
+                new Status(1496, 2397, 1492, 2113),
+                new Status(1582, 2498, 1578, 3364),
+                new Status(1669, 4500, 1665, 3466),
+            ],
             19,
             new Skill(
                 "闇：Sp.パワーフォールB Ⅲ",
@@ -19141,7 +23864,13 @@ public record Memoria(
             "尊みの探求者",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1669, 4500, 1665, 3466),
+            [
+                new Status(1324, 1545, 1320, 1511),
+                new Status(1410, 1646, 1406, 2012),
+                new Status(1496, 2397, 1492, 2113),
+                new Status(1582, 2498, 1578, 3364),
+                new Status(1669, 4500, 1665, 3466),
+            ],
             19,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -19165,7 +23894,13 @@ public record Memoria(
             "生徒会のお仕事",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1668, 4481, 1678, 3497),
+            [
+                new Status(1323, 1526, 1333, 1542),
+                new Status(1409, 1627, 1419, 2043),
+                new Status(1495, 2378, 1505, 2144),
+                new Status(1581, 2479, 1591, 3395),
+                new Status(1668, 4481, 1678, 3497),
+            ],
             19,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -19189,7 +23924,13 @@ public record Memoria(
             "生徒会のお仕事",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(1668, 4481, 1678, 3497),
+            [
+                new Status(1323, 1526, 1333, 1542),
+                new Status(1409, 1627, 1419, 2043),
+                new Status(1495, 2378, 1505, 2144),
+                new Status(1581, 2479, 1591, 3395),
+                new Status(1668, 4481, 1678, 3497),
+            ],
             19,
             new Skill(
                 "光：Sp.パワーフォールB Ⅲ",
@@ -19213,7 +23954,13 @@ public record Memoria(
             "美しき師弟関係",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(4508, 1710, 3534, 1691),
+            [
+                new Status(1546, 1359, 1572, 1340),
+                new Status(1649, 1446, 2075, 1427),
+                new Status(2402, 1534, 2178, 1515),
+                new Status(2505, 1622, 3431, 1603),
+                new Status(4508, 1710, 3534, 1691),
+            ],
             19,
             new Skill(
                 "パワーアシストC Ⅳ",
@@ -19237,7 +23984,13 @@ public record Memoria(
             "美しき師弟関係",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
-            new Status(4508, 1710, 3534, 1691),
+            [
+                new Status(1546, 1359, 1572, 1340),
+                new Status(1649, 1446, 2075, 1427),
+                new Status(2402, 1534, 2178, 1515),
+                new Status(2505, 1622, 3431, 1603),
+                new Status(4508, 1710, 3534, 1691),
+            ],
             19,
             new Skill(
                 "マイトストライクA Ⅳ+",
@@ -19261,7 +24014,13 @@ public record Memoria(
             "最高のルームメイト",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(1689, 1676, 4028, 4028),
+            [
+                new Status(1338, 1325, 1566, 1566),
+                new Status(1425, 1412, 1869, 1869),
+                new Status(1513, 1500, 2297, 2297),
+                new Status(1601, 1588, 2975, 2975),
+                new Status(1689, 1676, 4028, 4028),
+            ],
             19,
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
@@ -19285,7 +24044,13 @@ public record Memoria(
             "最高のルームメイト",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Light,
-            new Status(1689, 1676, 4028, 4028),
+            [
+                new Status(1338, 1325, 1566, 1566),
+                new Status(1425, 1412, 1869, 1869),
+                new Status(1513, 1500, 2297, 2297),
+                new Status(1601, 1588, 2975, 2975),
+                new Status(1689, 1676, 4028, 4028),
+            ],
             19,
             new Skill(
                 "Sp.マイトスマッシュA Ⅳ+",
@@ -19309,7 +24074,13 @@ public record Memoria(
             "BZのプロフェッショナル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(4501, 1681, 3475, 1667),
+            [
+                new Status(1546, 1336, 1520, 1322),
+                new Status(1647, 1422, 2021, 1408),
+                new Status(2398, 1508, 2122, 1494),
+                new Status(2499, 1594, 3373, 1580),
+                new Status(4501, 1681, 3475, 1667),
+            ],
             19,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -19333,7 +24104,13 @@ public record Memoria(
             "BZのプロフェッショナル",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(4501, 1681, 3475, 1667),
+            [
+                new Status(1546, 1336, 1520, 1322),
+                new Status(1647, 1422, 2021, 1408),
+                new Status(2398, 1508, 2122, 1494),
+                new Status(2499, 1594, 3373, 1580),
+                new Status(4501, 1681, 3475, 1667),
+            ],
             19,
             new Skill(
                 "Sp.ディファーアシストB Ⅲ",
@@ -19357,7 +24134,13 @@ public record Memoria(
             "もう一度、何度でも",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Dark,
-            new Status(3492, 1613, 2978, 1610),
+            [
+                new Status(1490, 1271, 1476, 1268),
+                new Status(1590, 1356, 1926, 1353),
+                new Status(2191, 1442, 2027, 1439),
+                new Status(2291, 1527, 2877, 1524),
+                new Status(3492, 1613, 2978, 1610),
+            ],
             18,
             new Skill(
                 "マイトストライクA Ⅳ+",
@@ -19381,7 +24164,13 @@ public record Memoria(
             "もう一度、何度でも",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(3492, 1613, 2978, 1610),
+            [
+                new Status(1490, 1271, 1476, 1268),
+                new Status(1590, 1356, 1926, 1353),
+                new Status(2191, 1442, 2027, 1439),
+                new Status(2291, 1527, 2877, 1524),
+                new Status(3492, 1613, 2978, 1610),
+            ],
             18,
             new Skill(
                 "闇：ガードフォールB Ⅲ",
@@ -19405,7 +24194,13 @@ public record Memoria(
             "相生の水先案内人",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(3466, 1601, 2945, 1587),
+            [
+                new Status(1472, 1265, 1451, 1251),
+                new Status(1571, 1349, 1900, 1335),
+                new Status(2169, 1433, 1998, 1419),
+                new Status(2267, 1517, 2846, 1503),
+                new Status(3466, 1601, 2945, 1587),
+            ],
             18,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -19429,7 +24224,13 @@ public record Memoria(
             "相生の水先案内人",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(3466, 1601, 2945, 1587),
+            [
+                new Status(1472, 1265, 1451, 1251),
+                new Status(1571, 1349, 1900, 1335),
+                new Status(2169, 1433, 1998, 1419),
+                new Status(2267, 1517, 2846, 1503),
+                new Status(3466, 1601, 2945, 1587),
+            ],
             18,
             new Skill(
                 "ガードヒールC Ⅲ+",
@@ -19453,7 +24254,13 @@ public record Memoria(
             "心の炎は豪雨で消えず",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1574, 3467, 1583, 2965),
+            [
+                new Status(1238, 1473, 1247, 1471),
+                new Status(1322, 1572, 1331, 1920),
+                new Status(1406, 2170, 1415, 2018),
+                new Status(1490, 2268, 1499, 2866),
+                new Status(1574, 3467, 1583, 2965),
+            ],
             18,
             new Skill(
                 "ディファースマッシュB Ⅲ+",
@@ -19477,7 +24284,13 @@ public record Memoria(
             "心の炎は豪雨で消えず",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(1574, 3467, 1583, 2965),
+            [
+                new Status(1238, 1473, 1247, 1471),
+                new Status(1322, 1572, 1331, 1920),
+                new Status(1406, 2170, 1415, 2018),
+                new Status(1490, 2268, 1499, 2866),
+                new Status(1574, 3467, 1583, 2965),
+            ],
             18,
             new Skill(
                 "ディファーアシストB Ⅲ",
@@ -19501,7 +24314,13 @@ public record Memoria(
             "昼下がりのラプソディー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1595, 3459, 1575, 2935),
+            [
+                new Status(1259, 1465, 1239, 1441),
+                new Status(1343, 1564, 1323, 1890),
+                new Status(1427, 2162, 1407, 1988),
+                new Status(1511, 2260, 1491, 2836),
+                new Status(1595, 3459, 1575, 2935),
+            ],
             18,
             new Skill(
                 "ディファースマッシュB Ⅲ+",
@@ -19525,7 +24344,13 @@ public record Memoria(
             "昼下がりのラプソディー",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(1595, 3459, 1575, 2935),
+            [
+                new Status(1259, 1465, 1239, 1441),
+                new Status(1343, 1564, 1323, 1890),
+                new Status(1427, 2162, 1407, 1988),
+                new Status(1511, 2260, 1491, 2836),
+                new Status(1595, 3459, 1575, 2935),
+            ],
             18,
             new Skill(
                 "WガードヒールC Ⅲ",
@@ -19549,7 +24374,13 @@ public record Memoria(
             "私ヲ蝕ム悪イ夢",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(1581, 3443, 1585, 2959),
+            [
+                new Status(1245, 1449, 1249, 1465),
+                new Status(1329, 1548, 1333, 1914),
+                new Status(1413, 2146, 1417, 2012),
+                new Status(1497, 2244, 1501, 2860),
+                new Status(1581, 3443, 1585, 2959),
+            ],
             18,
             new Skill(
                 "チャージSp.パワーフォールB Ⅱ",
@@ -19573,7 +24404,13 @@ public record Memoria(
             "私ヲ蝕ム悪イ夢",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1581, 3443, 1585, 2959),
+            [
+                new Status(1245, 1449, 1249, 1465),
+                new Status(1329, 1548, 1333, 1914),
+                new Status(1413, 2146, 1417, 2012),
+                new Status(1497, 2244, 1501, 2860),
+                new Status(1581, 3443, 1585, 2959),
+            ],
             18,
             new Skill(
                 "チャージスマッシュB Ⅱ",
@@ -19597,7 +24434,13 @@ public record Memoria(
             "だいすきをあげる",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(3460, 1569, 2945, 1572),
+            [
+                new Status(1466, 1233, 1451, 1236),
+                new Status(1565, 1317, 1900, 1320),
+                new Status(2163, 1401, 1998, 1404),
+                new Status(2261, 1485, 2846, 1488),
+                new Status(3460, 1569, 2945, 1572),
+            ],
             18,
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
@@ -19621,7 +24464,13 @@ public record Memoria(
             "だいすきをあげる",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(3460, 1569, 2945, 1572),
+            [
+                new Status(1466, 1233, 1451, 1236),
+                new Status(1565, 1317, 1900, 1320),
+                new Status(2163, 1401, 1998, 1404),
+                new Status(2261, 1485, 2846, 1488),
+                new Status(3460, 1569, 2945, 1572),
+            ],
             18,
             new Skill(
                 "Sp.ディファーアシストB Ⅲ",
@@ -19645,7 +24494,13 @@ public record Memoria(
             "希望の光",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
-            new Status(1634, 3491, 1627, 2973),
+            [
+                new Status(1292, 1489, 1285, 1471),
+                new Status(1377, 1589, 1370, 1921),
+                new Status(1463, 2190, 1456, 2022),
+                new Status(1548, 2290, 1541, 2872),
+                new Status(1634, 3491, 1627, 2973),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
@@ -19669,7 +24524,13 @@ public record Memoria(
             "希望の光",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(1634, 3491, 1627, 2973),
+            [
+                new Status(1292, 1489, 1285, 1471),
+                new Status(1377, 1589, 1370, 1921),
+                new Status(1463, 2190, 1456, 2022),
+                new Status(1548, 2290, 1541, 2872),
+                new Status(1634, 3491, 1627, 2973),
+            ],
             18,
             new Skill(
                 "Sp.ガードヒールD Ⅲ",
@@ -19693,7 +24554,13 @@ public record Memoria(
             "思い出はカメラの中に",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(3318, 3324, 1831, 1833),
+            [
+                new Status(1673, 1679, 1409, 1411),
+                new Status(1896, 1902, 1514, 1516),
+                new Status(2170, 2176, 1620, 1622),
+                new Status(2594, 2600, 1725, 1727),
+                new Status(3318, 3324, 1831, 1833),
+            ],
             20,
             new Skill(
                 "WパワーアシストB Ⅲ",
@@ -19717,7 +24584,13 @@ public record Memoria(
             "ブレイク・タイム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(3648, 1848, 2966, 1820),
+            [
+                new Status(1653, 1426, 1671, 1398),
+                new Status(1776, 1531, 1994, 1503),
+                new Status(2200, 1637, 2118, 1609),
+                new Status(2324, 1742, 2842, 1714),
+                new Status(3648, 1848, 2966, 1820),
+            ],
             20,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -19741,7 +24614,13 @@ public record Memoria(
             "ラブリーアンドピース",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(3297, 3307, 1833, 1826),
+            [
+                new Status(1652, 1662, 1411, 1404),
+                new Status(1875, 1885, 1516, 1509),
+                new Status(2149, 2159, 1622, 1615),
+                new Status(2573, 2583, 1727, 1720),
+                new Status(3297, 3307, 1833, 1826),
+            ],
             20,
             new Skill(
                 "WパワーフォールB Ⅲ",
@@ -19765,7 +24644,13 @@ public record Memoria(
             "すってんあかりん",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1821, 3669, 1856, 2946),
+            [
+                new Status(1399, 1674, 1434, 1651),
+                new Status(1504, 1797, 1539, 1974),
+                new Status(1610, 2221, 1645, 2098),
+                new Status(1715, 2345, 1750, 2822),
+                new Status(1821, 3669, 1856, 2946),
+            ],
             20,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -19789,7 +24674,13 @@ public record Memoria(
             "獅子奮迅",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2722, 2698, 3639, 4132),
+            [
+                new Status(1180, 1202, 1410, 1388),
+                new Status(1265, 1287, 1661, 1489),
+                new Status(1351, 1373, 1761, 1739),
+                new Status(1437, 1459, 2162, 1840),
+                new Status(1523, 1545, 2263, 2741),
+            ],
             18,
             new Skill(
                 "WガードアシストD LG",
@@ -19814,7 +24705,13 @@ public record Memoria(
             "せめて、この子だけは",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(3450, 1583, 2933, 1602),
+            [
+                new Status(1456, 1247, 1439, 1266),
+                new Status(1555, 1331, 1888, 1350),
+                new Status(2153, 1415, 1986, 1434),
+                new Status(2251, 1499, 2834, 1518),
+                new Status(3450, 1583, 2933, 1602),
+            ],
             18,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -19838,7 +24735,13 @@ public record Memoria(
             "せめて、この子だけは",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(3450, 1583, 2933, 1602),
+            [
+                new Status(1456, 1247, 1439, 1266),
+                new Status(1555, 1331, 1888, 1350),
+                new Status(2153, 1415, 1986, 1434),
+                new Status(2251, 1499, 2834, 1518),
+                new Status(3450, 1583, 2933, 1602),
+            ],
             18,
             new Skill(
                 "水：パワーアシストB Ⅲ",
@@ -19862,7 +24765,13 @@ public record Memoria(
             "紅巴式夏祭りの楽しみ方",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1606, 3442, 1586, 2941),
+            [
+                new Status(1270, 1448, 1250, 1447),
+                new Status(1354, 1547, 1334, 1896),
+                new Status(1438, 2145, 1418, 1994),
+                new Status(1522, 2243, 1502, 2842),
+                new Status(1606, 3442, 1586, 2941),
+            ],
             18,
             new Skill(
                 "Sp.ディファーバーストB Ⅲ+",
@@ -19886,7 +24795,13 @@ public record Memoria(
             "紅巴式夏祭りの楽しみ方",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1606, 3442, 1586, 2941),
+            [
+                new Status(1270, 1448, 1250, 1447),
+                new Status(1354, 1547, 1334, 1896),
+                new Status(1438, 2145, 1418, 1994),
+                new Status(1522, 2243, 1502, 2842),
+                new Status(1606, 3442, 1586, 2941),
+            ],
             18,
             new Skill(
                 "Sp.マイトフォールB Ⅲ",
@@ -19910,7 +24825,13 @@ public record Memoria(
             "世界を越えて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(3457, 1591, 2958, 1597),
+            [
+                new Status(1463, 1255, 1464, 1261),
+                new Status(1562, 1339, 1913, 1345),
+                new Status(2160, 1423, 2011, 1429),
+                new Status(2258, 1507, 2859, 1513),
+                new Status(3457, 1591, 2958, 1597),
+            ],
             18,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -19934,7 +24855,13 @@ public record Memoria(
             "世界を越えて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(3457, 1591, 2958, 1597),
+            [
+                new Status(1463, 1255, 1464, 1261),
+                new Status(1562, 1339, 1913, 1345),
+                new Status(2160, 1423, 2011, 1429),
+                new Status(2258, 1507, 2859, 1513),
+                new Status(3457, 1591, 2958, 1597),
+            ],
             18,
             new Skill(
                 "パワーヒールC Ⅲ",
@@ -19958,7 +24885,13 @@ public record Memoria(
             "小さなシュッツエンゲル",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2703, 3440, 1573, 1844),
+            [
+                new Status(1267, 1446, 1237, 1450),
+                new Status(1701, 1545, 1321, 1549),
+                new Status(1785, 2143, 1405, 1647),
+                new Status(2619, 2241, 1489, 1745),
+                new Status(2703, 3440, 1573, 1844),
+            ],
             18,
             new Skill(
                 "WパワーフォールB Ⅲ",
@@ -19982,7 +24915,13 @@ public record Memoria(
             "小さなシュッツエンゲル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2703, 3440, 1573, 1844),
+            [
+                new Status(1267, 1446, 1237, 1450),
+                new Status(1701, 1545, 1321, 1549),
+                new Status(1785, 2143, 1405, 1647),
+                new Status(2619, 2241, 1489, 1745),
+                new Status(2703, 3440, 1573, 1844),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -20006,7 +24945,13 @@ public record Memoria(
             "束ねる絆の一夜",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(3450, 1599, 2935, 1594),
+            [
+                new Status(1456, 1263, 1441, 1258),
+                new Status(1555, 1347, 1890, 1342),
+                new Status(2153, 1431, 1988, 1426),
+                new Status(2251, 1515, 2836, 1510),
+                new Status(3450, 1599, 2935, 1594),
+            ],
             18,
             new Skill(
                 "Sp.ディファーストライクA Ⅳ+",
@@ -20030,7 +24975,13 @@ public record Memoria(
             "束ねる絆の一夜",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(3450, 1599, 2935, 1594),
+            [
+                new Status(1456, 1263, 1441, 1258),
+                new Status(1555, 1347, 1890, 1342),
+                new Status(2153, 1431, 1988, 1426),
+                new Status(2251, 1515, 2836, 1510),
+                new Status(3450, 1599, 2935, 1594),
+            ],
             18,
             new Skill(
                 "水：パワーアシストB Ⅲ",
@@ -20054,7 +25005,13 @@ public record Memoria(
             "救う願いの一閃",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1601, 3894, 1601, 2489),
+            [
+                new Status(1265, 1450, 1265, 1445),
+                new Status(1349, 1699, 1349, 1744),
+                new Status(1433, 2297, 1433, 1842),
+                new Status(1517, 2695, 1517, 2390),
+                new Status(1601, 3894, 1601, 2489),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
@@ -20078,7 +25035,13 @@ public record Memoria(
             "救う願いの一閃",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1601, 3894, 1601, 2489),
+            [
+                new Status(1265, 1450, 1265, 1445),
+                new Status(1349, 1699, 1349, 1744),
+                new Status(1433, 2297, 1433, 1842),
+                new Status(1517, 2695, 1517, 2390),
+                new Status(1601, 3894, 1601, 2489),
+            ],
             18,
             new Skill(
                 "水：Sp.パワーフォールB Ⅲ",
@@ -20102,7 +25065,13 @@ public record Memoria(
             "足踏み健康ロードの悲劇",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(3464, 1606, 2960, 1580),
+            [
+                new Status(1470, 1270, 1466, 1244),
+                new Status(1569, 1354, 1915, 1328),
+                new Status(2167, 1438, 2013, 1412),
+                new Status(2265, 1522, 2861, 1496),
+                new Status(3464, 1606, 2960, 1580),
+            ],
             18,
             new Skill(
                 "チャージストライクB Ⅱ",
@@ -20126,7 +25095,13 @@ public record Memoria(
             "足踏み健康ロードの悲劇",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(3464, 1606, 2960, 1580),
+            [
+                new Status(1470, 1270, 1466, 1244),
+                new Status(1569, 1354, 1915, 1328),
+                new Status(2167, 1438, 2013, 1412),
+                new Status(2265, 1522, 2861, 1496),
+                new Status(3464, 1606, 2960, 1580),
+            ],
             18,
             new Skill(
                 "闇：パワーフォールB Ⅲ",
@@ -20150,7 +25125,13 @@ public record Memoria(
             "みんなを守るために",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(1603, 1584, 3446, 2969),
+            [
+                new Status(1267, 1248, 1452, 1475),
+                new Status(1351, 1332, 1551, 1924),
+                new Status(1435, 1416, 2149, 2022),
+                new Status(1519, 1500, 2247, 2870),
+                new Status(1603, 1584, 3446, 2969),
+            ],
             18,
             new Skill(
                 "ガードヒールC Ⅲ+",
@@ -20174,7 +25155,13 @@ public record Memoria(
             "みんなを守るために",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
-            new Status(1603, 1584, 3446, 2969),
+            [
+                new Status(1267, 1248, 1452, 1475),
+                new Status(1351, 1332, 1551, 1924),
+                new Status(1435, 1416, 2149, 2022),
+                new Status(1519, 1500, 2247, 2870),
+                new Status(1603, 1584, 3446, 2969),
+            ],
             18,
             new Skill(
                 "Sp.ディファーストライクA Ⅳ+",
@@ -20198,7 +25185,13 @@ public record Memoria(
             "狂化フルスロットル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1585, 3453, 1605, 2965),
+            [
+                new Status(1249, 1459, 1269, 1471),
+                new Status(1333, 1558, 1353, 1920),
+                new Status(1417, 2156, 1437, 2018),
+                new Status(1501, 2254, 1521, 2866),
+                new Status(1585, 3453, 1605, 2965),
+            ],
             18,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -20222,7 +25215,13 @@ public record Memoria(
             "狂化フルスロットル",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(1585, 3453, 1605, 2965),
+            [
+                new Status(1249, 1459, 1269, 1471),
+                new Status(1333, 1558, 1353, 1920),
+                new Status(1417, 2156, 1437, 2018),
+                new Status(1501, 2254, 1521, 2866),
+                new Status(1585, 3453, 1605, 2965),
+            ],
             18,
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
@@ -20246,7 +25245,13 @@ public record Memoria(
             "友を守護する剣",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(3433, 1601, 2964, 1571),
+            [
+                new Status(1439, 1265, 1470, 1235),
+                new Status(1538, 1349, 1919, 1319),
+                new Status(2136, 1433, 2017, 1403),
+                new Status(2234, 1517, 2865, 1487),
+                new Status(3433, 1601, 2964, 1571),
+            ],
             18,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -20270,7 +25275,13 @@ public record Memoria(
             "友を守護する剣",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(3433, 1601, 2964, 1571),
+            [
+                new Status(1439, 1265, 1470, 1235),
+                new Status(1538, 1349, 1919, 1319),
+                new Status(2136, 1433, 2017, 1403),
+                new Status(2234, 1517, 2865, 1487),
+                new Status(3433, 1601, 2964, 1571),
+            ],
             18,
             new Skill(
                 "チャージガードフォールB Ⅱ",
@@ -20294,7 +25305,13 @@ public record Memoria(
             "不死身の刃",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(1594, 3439, 1601, 2957),
+            [
+                new Status(1258, 1445, 1265, 1463),
+                new Status(1342, 1544, 1349, 1912),
+                new Status(1426, 2142, 1433, 2010),
+                new Status(1510, 2240, 1517, 2858),
+                new Status(1594, 3439, 1601, 2957),
+            ],
             18,
             new Skill(
                 "ディファーアシストB Ⅲ",
@@ -20318,7 +25335,13 @@ public record Memoria(
             "不死身の刃",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Light,
-            new Status(1594, 3439, 1601, 2957),
+            [
+                new Status(1258, 1445, 1265, 1463),
+                new Status(1342, 1544, 1349, 1912),
+                new Status(1426, 2142, 1433, 2010),
+                new Status(1510, 2240, 1517, 2858),
+                new Status(1594, 3439, 1601, 2957),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
@@ -20342,7 +25365,13 @@ public record Memoria(
             "癒しの露天風呂",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1578, 3442, 1580, 2972),
+            [
+                new Status(1242, 1448, 1244, 1478),
+                new Status(1326, 1547, 1328, 1927),
+                new Status(1410, 2145, 1412, 2025),
+                new Status(1494, 2243, 1496, 2873),
+                new Status(1578, 3442, 1580, 2972),
+            ],
             18,
             new Skill(
                 "チャージスマッシュB Ⅱ",
@@ -20366,7 +25395,13 @@ public record Memoria(
             "癒しの露天風呂",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(1578, 3442, 1580, 2972),
+            [
+                new Status(1242, 1448, 1244, 1478),
+                new Status(1326, 1547, 1328, 1927),
+                new Status(1410, 2145, 1412, 2025),
+                new Status(1494, 2243, 1496, 2873),
+                new Status(1578, 3442, 1580, 2972),
+            ],
             18,
             new Skill(
                 "光：WガードアシストB Ⅲ",
@@ -20390,7 +25425,13 @@ public record Memoria(
             "アサルトリリィ ふるーつ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1683, 3524, 1684, 3034),
+            [
+                new Status(1331, 1510, 1332, 1520),
+                new Status(1419, 1614, 1420, 1974),
+                new Status(1507, 2217, 1508, 2077),
+                new Status(1595, 2320, 1596, 2930),
+                new Status(1683, 3524, 1684, 3034),
+            ],
             18,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -20414,7 +25455,13 @@ public record Memoria(
             "アサルトリリィ ふるーつ",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(1683, 3524, 1684, 3034),
+            [
+                new Status(1331, 1510, 1332, 1520),
+                new Status(1419, 1614, 1420, 1974),
+                new Status(1507, 2217, 1508, 2077),
+                new Status(1595, 2320, 1596, 2930),
+                new Status(1683, 3524, 1684, 3034),
+            ],
             18,
             new Skill(
                 "光：WガードフォールA Ⅲ",
@@ -20438,7 +25485,13 @@ public record Memoria(
             "ストームデュオ",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(3434, 1602, 2963, 1589),
+            [
+                new Status(1440, 1266, 1469, 1253),
+                new Status(1539, 1350, 1918, 1337),
+                new Status(2137, 1434, 2016, 1421),
+                new Status(2235, 1518, 2864, 1505),
+                new Status(3434, 1602, 2963, 1589),
+            ],
             18,
             new Skill(
                 "光：ガードアシストB Ⅲ",
@@ -20462,7 +25515,13 @@ public record Memoria(
             "ストームデュオ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
-            new Status(3434, 1602, 2963, 1589),
+            [
+                new Status(1440, 1266, 1469, 1253),
+                new Status(1539, 1350, 1918, 1337),
+                new Status(2137, 1434, 2016, 1421),
+                new Status(2235, 1518, 2864, 1505),
+                new Status(3434, 1602, 2963, 1589),
+            ],
             18,
             new Skill(
                 "マイトブレイクA Ⅳ+",
@@ -20486,7 +25545,13 @@ public record Memoria(
             "アクアストライク",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(3433, 1595, 2950, 1606),
+            [
+                new Status(1439, 1259, 1456, 1270),
+                new Status(1538, 1343, 1905, 1354),
+                new Status(2136, 1427, 2003, 1438),
+                new Status(2234, 1511, 2851, 1522),
+                new Status(3433, 1595, 2950, 1606),
+            ],
             18,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -20510,7 +25575,13 @@ public record Memoria(
             "アクアストライク",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(3433, 1595, 2950, 1606),
+            [
+                new Status(1439, 1259, 1456, 1270),
+                new Status(1538, 1343, 1905, 1354),
+                new Status(2136, 1427, 2003, 1438),
+                new Status(2234, 1511, 2851, 1522),
+                new Status(3433, 1595, 2950, 1606),
+            ],
             18,
             new Skill(
                 "チャージヒールC Ⅱ",
@@ -20534,7 +25605,13 @@ public record Memoria(
             "雷光一閃",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1585, 3472, 1574, 2962),
+            [
+                new Status(1249, 1478, 1238, 1468),
+                new Status(1333, 1577, 1322, 1917),
+                new Status(1417, 2175, 1406, 2015),
+                new Status(1501, 2273, 1490, 2863),
+                new Status(1585, 3472, 1574, 2962),
+            ],
             18,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -20558,7 +25635,13 @@ public record Memoria(
             "雷光一閃",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(1585, 3472, 1574, 2962),
+            [
+                new Status(1249, 1478, 1238, 1468),
+                new Status(1333, 1577, 1322, 1917),
+                new Status(1417, 2175, 1406, 2015),
+                new Status(1501, 2273, 1490, 2863),
+                new Status(1585, 3472, 1574, 2962),
+            ],
             18,
             new Skill(
                 "光：Sp.ガードフォールB Ⅲ",
@@ -20582,7 +25665,13 @@ public record Memoria(
             "ハッピーを見つけたら☆",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1575, 1589, 2955, 3466),
+            [
+                new Status(1239, 1253, 1461, 1472),
+                new Status(1323, 1337, 1910, 1571),
+                new Status(1407, 1421, 2008, 2169),
+                new Status(1491, 1505, 2856, 2267),
+                new Status(1575, 1589, 2955, 3466),
+            ],
             18,
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
@@ -20606,7 +25695,13 @@ public record Memoria(
             "ハッピーを見つけたら☆",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(1575, 1589, 2955, 3466),
+            [
+                new Status(1239, 1253, 1461, 1472),
+                new Status(1323, 1337, 1910, 1571),
+                new Status(1407, 1421, 2008, 2169),
+                new Status(1491, 1505, 2856, 2267),
+                new Status(1575, 1589, 2955, 3466),
+            ],
             18,
             new Skill(
                 "パワーブレイクA Ⅳ",
@@ -20630,7 +25725,13 @@ public record Memoria(
             "戦いを終えて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1595, 1596, 3438, 2935),
+            [
+                new Status(1259, 1260, 1444, 1441),
+                new Status(1343, 1344, 1543, 1890),
+                new Status(1427, 1428, 2141, 1988),
+                new Status(1511, 1512, 2239, 2836),
+                new Status(1595, 1596, 3438, 2935),
+            ],
             18,
             new Skill(
                 "ガードヒールB Ⅲ+",
@@ -20654,7 +25755,13 @@ public record Memoria(
             "戦いを終えて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1595, 1596, 3438, 2935),
+            [
+                new Status(1259, 1260, 1444, 1441),
+                new Status(1343, 1344, 1543, 1890),
+                new Status(1427, 1428, 2141, 1988),
+                new Status(1511, 1512, 2239, 2836),
+                new Status(1595, 1596, 3438, 2935),
+            ],
             18,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -20678,7 +25785,13 @@ public record Memoria(
             "通じ合うふたり",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1585, 3918, 1583, 2507),
+            [
+                new Status(1249, 1474, 1247, 1463),
+                new Status(1333, 1723, 1331, 1762),
+                new Status(1417, 2321, 1415, 1860),
+                new Status(1501, 2719, 1499, 2408),
+                new Status(1585, 3918, 1583, 2507),
+            ],
             18,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -20702,7 +25815,13 @@ public record Memoria(
             "通じ合うふたり",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(1585, 3918, 1583, 2507),
+            [
+                new Status(1249, 1474, 1247, 1463),
+                new Status(1333, 1723, 1331, 1762),
+                new Status(1417, 2321, 1415, 1860),
+                new Status(1501, 2719, 1499, 2408),
+                new Status(1585, 3918, 1583, 2507),
+            ],
             18,
             new Skill(
                 "火：Sp.パワーフォールB Ⅲ",
@@ -20726,7 +25845,13 @@ public record Memoria(
             "麗しき出立",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(3467, 1590, 2945, 1595),
+            [
+                new Status(1473, 1254, 1451, 1259),
+                new Status(1572, 1338, 1900, 1343),
+                new Status(2170, 1422, 1998, 1427),
+                new Status(2268, 1506, 2846, 1511),
+                new Status(3467, 1590, 2945, 1595),
+            ],
             18,
             new Skill(
                 "光：パワーアシストB Ⅲ",
@@ -20750,7 +25875,13 @@ public record Memoria(
             "麗しき出立",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(3467, 1590, 2945, 1595),
+            [
+                new Status(1473, 1254, 1451, 1259),
+                new Status(1572, 1338, 1900, 1343),
+                new Status(2170, 1422, 1998, 1427),
+                new Status(2268, 1506, 2846, 1511),
+                new Status(3467, 1590, 2945, 1595),
+            ],
             18,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -20774,7 +25905,13 @@ public record Memoria(
             "飛翔迎撃",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1594, 3432, 1580, 2972),
+            [
+                new Status(1258, 1438, 1244, 1478),
+                new Status(1342, 1537, 1328, 1927),
+                new Status(1426, 2135, 1412, 2025),
+                new Status(1510, 2233, 1496, 2873),
+                new Status(1594, 3432, 1580, 2972),
+            ],
             18,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -20798,7 +25935,13 @@ public record Memoria(
             "飛翔迎撃",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(1594, 3432, 1580, 2972),
+            [
+                new Status(1258, 1438, 1244, 1478),
+                new Status(1342, 1537, 1328, 1927),
+                new Status(1426, 2135, 1412, 2025),
+                new Status(1510, 2233, 1496, 2873),
+                new Status(1594, 3432, 1580, 2972),
+            ],
             18,
             new Skill(
                 "Sp.ガードヒールC Ⅲ",
@@ -20822,7 +25965,13 @@ public record Memoria(
             "不動剣の姫",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
-            new Status(3895, 1589, 2499, 1590),
+            [
+                new Status(1451, 1253, 1455, 1254),
+                new Status(1700, 1337, 1754, 1338),
+                new Status(2298, 1421, 1852, 1422),
+                new Status(2696, 1505, 2400, 1506),
+                new Status(3895, 1589, 2499, 1590),
+            ],
             18,
             new Skill(
                 "パワーストライクA Ⅳ+",
@@ -20846,7 +25995,13 @@ public record Memoria(
             "不動剣の姫",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(3895, 1589, 2499, 1590),
+            [
+                new Status(1451, 1253, 1455, 1254),
+                new Status(1700, 1337, 1754, 1338),
+                new Status(2298, 1421, 1852, 1422),
+                new Status(2696, 1505, 2400, 1506),
+                new Status(3895, 1589, 2499, 1590),
+            ],
             18,
             new Skill(
                 "チャージパワーフォールB Ⅱ",
@@ -20870,7 +26025,13 @@ public record Memoria(
             "そうさく倶楽部の活動",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1608, 3454, 1599, 2952),
+            [
+                new Status(1272, 1460, 1263, 1458),
+                new Status(1356, 1559, 1347, 1907),
+                new Status(1440, 2157, 1431, 2005),
+                new Status(1524, 2255, 1515, 2853),
+                new Status(1608, 3454, 1599, 2952),
+            ],
             18,
             new Skill(
                 "スマッシュC Ⅲ",
@@ -20894,7 +26055,13 @@ public record Memoria(
             "そうさく倶楽部の活動",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(1608, 3454, 1599, 2952),
+            [
+                new Status(1272, 1460, 1263, 1458),
+                new Status(1356, 1559, 1347, 1907),
+                new Status(1440, 2157, 1431, 2005),
+                new Status(1524, 2255, 1515, 2853),
+                new Status(1608, 3454, 1599, 2952),
+            ],
             18,
             new Skill(
                 "光：WガードフォールA Ⅲ",
@@ -20918,7 +26085,13 @@ public record Memoria(
             "愛しき人との待ち合わせ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(3450, 1601, 2968, 1605),
+            [
+                new Status(1456, 1265, 1474, 1269),
+                new Status(1555, 1349, 1923, 1353),
+                new Status(2153, 1433, 2021, 1437),
+                new Status(2251, 1517, 2869, 1521),
+                new Status(3450, 1601, 2968, 1605),
+            ],
             18,
             new Skill(
                 "チャージストライクB Ⅱ",
@@ -20942,7 +26115,13 @@ public record Memoria(
             "愛しき人との待ち合わせ",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(3450, 1601, 2968, 1605),
+            [
+                new Status(1456, 1265, 1474, 1269),
+                new Status(1555, 1349, 1923, 1353),
+                new Status(2153, 1433, 2021, 1437),
+                new Status(2251, 1517, 2869, 1521),
+                new Status(3450, 1601, 2968, 1605),
+            ],
             18,
             new Skill(
                 "パワーヒールD Ⅲ",
@@ -20966,7 +26145,13 @@ public record Memoria(
             "月下の傍観者",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(1606, 3469, 1569, 2962),
+            [
+                new Status(1270, 1475, 1233, 1468),
+                new Status(1354, 1574, 1317, 1917),
+                new Status(1438, 2172, 1401, 2015),
+                new Status(1522, 2270, 1485, 2863),
+                new Status(1606, 3469, 1569, 2962),
+            ],
             18,
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
@@ -20990,7 +26175,13 @@ public record Memoria(
             "月下の傍観者",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1606, 3469, 1569, 2962),
+            [
+                new Status(1270, 1475, 1233, 1468),
+                new Status(1354, 1574, 1317, 1917),
+                new Status(1438, 2172, 1401, 2015),
+                new Status(1522, 2270, 1485, 2863),
+                new Status(1606, 3469, 1569, 2962),
+            ],
             18,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -21014,7 +26205,13 @@ public record Memoria(
             "なかよしとわいらいと",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(3459, 1596, 2943, 1595),
+            [
+                new Status(1465, 1260, 1449, 1259),
+                new Status(1564, 1344, 1898, 1343),
+                new Status(2162, 1428, 1996, 1427),
+                new Status(2260, 1512, 2844, 1511),
+                new Status(3459, 1596, 2943, 1595),
+            ],
             18,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -21038,7 +26235,13 @@ public record Memoria(
             "なかよしとわいらいと",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(3459, 1596, 2943, 1595),
+            [
+                new Status(1465, 1260, 1449, 1259),
+                new Status(1564, 1344, 1898, 1343),
+                new Status(2162, 1428, 1996, 1427),
+                new Status(2260, 1512, 2844, 1511),
+                new Status(3459, 1596, 2943, 1595),
+            ],
             18,
             new Skill(
                 "光：WガードフォールB Ⅲ",
@@ -21062,7 +26265,13 @@ public record Memoria(
             "水流乱撃",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1595, 3464, 1594, 2941),
+            [
+                new Status(1259, 1470, 1258, 1447),
+                new Status(1343, 1569, 1342, 1896),
+                new Status(1427, 2167, 1426, 1994),
+                new Status(1511, 2265, 1510, 2842),
+                new Status(1595, 3464, 1594, 2941),
+            ],
             18,
             new Skill(
                 "チャージスマッシュB Ⅱ",
@@ -21086,7 +26295,13 @@ public record Memoria(
             "水流乱撃",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(1595, 3464, 1594, 2941),
+            [
+                new Status(1259, 1470, 1258, 1447),
+                new Status(1343, 1569, 1342, 1896),
+                new Status(1427, 2167, 1426, 1994),
+                new Status(1511, 2265, 1510, 2842),
+                new Status(1595, 3464, 1594, 2941),
+            ],
             18,
             new Skill(
                 "Sp.ガードアシストC Ⅳ",
@@ -21110,7 +26325,13 @@ public record Memoria(
             "踏み込む勇気",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2583, 1398, 2818, 1422),
+            [
+                new Status(1292, 1108, 1277, 1132),
+                new Status(1727, 1180, 1362, 1204),
+                new Status(1812, 1253, 1897, 1277),
+                new Status(2497, 1325, 1982, 1349),
+                new Status(2583, 1398, 2818, 1422),
+            ],
             17,
             new Skill(
                 "火：ガードフォールB Ⅲ",
@@ -21134,7 +26355,13 @@ public record Memoria(
             "踏み込む勇気",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2583, 1398, 2818, 1422),
+            [
+                new Status(1292, 1108, 1277, 1132),
+                new Status(1727, 1180, 1362, 1204),
+                new Status(1812, 1253, 1897, 1277),
+                new Status(2497, 1325, 1982, 1349),
+                new Status(2583, 1398, 2818, 1422),
+            ],
             17,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -21158,7 +26385,13 @@ public record Memoria(
             "吸血鬼のたしなみ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1593, 1572, 2946, 3470),
+            [
+                new Status(1257, 1236, 1452, 1476),
+                new Status(1341, 1320, 1901, 1575),
+                new Status(1425, 1404, 1999, 2173),
+                new Status(1509, 1488, 2847, 2271),
+                new Status(1593, 1572, 2946, 3470),
+            ],
             18,
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
@@ -21182,7 +26415,13 @@ public record Memoria(
             "吸血鬼のたしなみ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1593, 1572, 2946, 3470),
+            [
+                new Status(1257, 1236, 1452, 1476),
+                new Status(1341, 1320, 1901, 1575),
+                new Status(1425, 1404, 1999, 2173),
+                new Status(1509, 1488, 2847, 2271),
+                new Status(1593, 1572, 2946, 3470),
+            ],
             18,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -21206,7 +26445,13 @@ public record Memoria(
             "校舎屋上のストラグル",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2939, 3468, 1574, 1572),
+            [
+                new Status(1445, 1474, 1238, 1236),
+                new Status(1894, 1573, 1322, 1320),
+                new Status(1992, 2171, 1406, 1404),
+                new Status(2840, 2269, 1490, 1488),
+                new Status(2939, 3468, 1574, 1572),
+            ],
             18,
             new Skill(
                 "風：Sp.パワーアシストB Ⅲ",
@@ -21230,7 +26475,13 @@ public record Memoria(
             "校舎屋上のストラグル",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(2939, 3468, 1574, 1572),
+            [
+                new Status(1445, 1474, 1238, 1236),
+                new Status(1894, 1573, 1322, 1320),
+                new Status(1992, 2171, 1406, 1404),
+                new Status(2840, 2269, 1490, 1488),
+                new Status(2939, 3468, 1574, 1572),
+            ],
             18,
             new Skill(
                 "WパワーバーストA Ⅳ",
@@ -21254,7 +26505,13 @@ public record Memoria(
             "清淑なる黒き槍",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(3890, 1588, 2515, 1582),
+            [
+                new Status(1446, 1252, 1471, 1246),
+                new Status(1695, 1336, 1770, 1330),
+                new Status(2293, 1420, 1868, 1414),
+                new Status(2691, 1504, 2416, 1498),
+                new Status(3890, 1588, 2515, 1582),
+            ],
             18,
             new Skill(
                 "ガードブレイクA Ⅳ+",
@@ -21278,7 +26535,13 @@ public record Memoria(
             "清淑なる黒き槍",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(3890, 1588, 2515, 1582),
+            [
+                new Status(1446, 1252, 1471, 1246),
+                new Status(1695, 1336, 1770, 1330),
+                new Status(2293, 1420, 1868, 1414),
+                new Status(2691, 1504, 2416, 1498),
+                new Status(3890, 1588, 2515, 1582),
+            ],
             18,
             new Skill(
                 "火：パワーアシストB Ⅲ",
@@ -21302,7 +26565,13 @@ public record Memoria(
             "世界を守る剣たち",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(3450, 1603, 2936, 1589),
+            [
+                new Status(1456, 1267, 1442, 1253),
+                new Status(1555, 1351, 1891, 1337),
+                new Status(2153, 1435, 1989, 1421),
+                new Status(2251, 1519, 2837, 1505),
+                new Status(3450, 1603, 2936, 1589),
+            ],
             18,
             new Skill(
                 "光：パワーフォールB Ⅲ",
@@ -21326,7 +26595,13 @@ public record Memoria(
             "世界を守る剣たち",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(3450, 1603, 2936, 1589),
+            [
+                new Status(1456, 1267, 1442, 1253),
+                new Status(1555, 1351, 1891, 1337),
+                new Status(2153, 1435, 1989, 1421),
+                new Status(2251, 1519, 2837, 1505),
+                new Status(3450, 1603, 2936, 1589),
+            ],
             18,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -21350,7 +26625,13 @@ public record Memoria(
             "悪夢との共闘",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1597, 3437, 1582, 2966),
+            [
+                new Status(1261, 1443, 1246, 1472),
+                new Status(1345, 1542, 1330, 1921),
+                new Status(1429, 2140, 1414, 2019),
+                new Status(1513, 2238, 1498, 2867),
+                new Status(1597, 3437, 1582, 2966),
+            ],
             18,
             new Skill(
                 "チャージスマッシュB Ⅱ",
@@ -21374,7 +26655,13 @@ public record Memoria(
             "悪夢との共闘",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(1597, 3437, 1582, 2966),
+            [
+                new Status(1261, 1443, 1246, 1472),
+                new Status(1345, 1542, 1330, 1921),
+                new Status(1429, 2140, 1414, 2019),
+                new Status(1513, 2238, 1498, 2867),
+                new Status(1597, 3437, 1582, 2966),
+            ],
             18,
             new Skill(
                 "チャージSp.ガードアシストC Ⅲ",
@@ -21398,7 +26685,13 @@ public record Memoria(
             "扶翼の剣",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
-            new Status(1575, 3466, 1575, 2951),
+            [
+                new Status(1239, 1472, 1239, 1457),
+                new Status(1323, 1571, 1323, 1906),
+                new Status(1407, 2169, 1407, 2004),
+                new Status(1491, 2267, 1491, 2852),
+                new Status(1575, 3466, 1575, 2951),
+            ],
             18,
             new Skill(
                 "Sp.マイトバーストB Ⅲ+",
@@ -21422,7 +26715,13 @@ public record Memoria(
             "扶翼の剣",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
-            new Status(1575, 3466, 1575, 2951),
+            [
+                new Status(1239, 1472, 1239, 1457),
+                new Status(1323, 1571, 1323, 1906),
+                new Status(1407, 2169, 1407, 2004),
+                new Status(1491, 2267, 1491, 2852),
+                new Status(1575, 3466, 1575, 2951),
+            ],
             18,
             new Skill(
                 "Sp.マイトフォールB Ⅲ",
@@ -21446,7 +26745,13 @@ public record Memoria(
             "灼爛の一撃",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Light,
-            new Status(1579, 3458, 1570, 2935),
+            [
+                new Status(1243, 1464, 1234, 1441),
+                new Status(1327, 1563, 1318, 1890),
+                new Status(1411, 2161, 1402, 1988),
+                new Status(1495, 2259, 1486, 2836),
+                new Status(1579, 3458, 1570, 2935),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
@@ -21470,7 +26775,13 @@ public record Memoria(
             "灼爛の一撃",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
-            new Status(1579, 3458, 1570, 2935),
+            [
+                new Status(1243, 1464, 1234, 1441),
+                new Status(1327, 1563, 1318, 1890),
+                new Status(1411, 2161, 1402, 1988),
+                new Status(1495, 2259, 1486, 2836),
+                new Status(1579, 3458, 1570, 2935),
+            ],
             18,
             new Skill(
                 "Sp.パワーヒールD Ⅲ",
@@ -21494,7 +26805,13 @@ public record Memoria(
             "静寂の中で",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
-            new Status(3461, 1595, 2956, 1583),
+            [
+                new Status(1467, 1259, 1462, 1247),
+                new Status(1566, 1343, 1911, 1331),
+                new Status(2164, 1427, 2009, 1415),
+                new Status(2262, 1511, 2857, 1499),
+                new Status(3461, 1595, 2956, 1583),
+            ],
             18,
             new Skill(
                 "チャージストライクB Ⅱ",
@@ -21518,7 +26835,13 @@ public record Memoria(
             "静寂の中で",
             new Rearguard(RearguardKind.Support),
             Element.Light,
-            new Status(3461, 1595, 2956, 1583),
+            [
+                new Status(1467, 1259, 1462, 1247),
+                new Status(1566, 1343, 1911, 1331),
+                new Status(2164, 1427, 2009, 1415),
+                new Status(2262, 1511, 2857, 1499),
+                new Status(3461, 1595, 2956, 1583),
+            ],
             18,
             new Skill(
                 "チャージガードアシストC Ⅲ",
@@ -21542,7 +26865,13 @@ public record Memoria(
             "キラキラアイスクリーム！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(3443, 1571, 2937, 1603),
+            [
+                new Status(1449, 1235, 1443, 1267),
+                new Status(1548, 1319, 1892, 1351),
+                new Status(2146, 1403, 1990, 1435),
+                new Status(2244, 1487, 2838, 1519),
+                new Status(3443, 1571, 2937, 1603),
+            ],
             18,
             new Skill(
                 "パワーストライクB Ⅲ",
@@ -21566,7 +26895,13 @@ public record Memoria(
             "キラキラアイスクリーム！",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(3443, 1571, 2937, 1603),
+            [
+                new Status(1449, 1235, 1443, 1267),
+                new Status(1548, 1319, 1892, 1351),
+                new Status(2146, 1403, 1990, 1435),
+                new Status(2244, 1487, 2838, 1519),
+                new Status(3443, 1571, 2937, 1603),
+            ],
             18,
             new Skill(
                 "チャージヒールD Ⅱ",
@@ -21590,7 +26925,13 @@ public record Memoria(
             "迎え撃つ勇士たち",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1600, 3469, 1573, 2933),
+            [
+                new Status(1264, 1475, 1237, 1439),
+                new Status(1348, 1574, 1321, 1888),
+                new Status(1432, 2172, 1405, 1986),
+                new Status(1516, 2270, 1489, 2834),
+                new Status(1600, 3469, 1573, 2933),
+            ],
             18,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -21614,7 +26955,13 @@ public record Memoria(
             "迎え撃つ勇士たち",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(1600, 3469, 1573, 2933),
+            [
+                new Status(1264, 1475, 1237, 1439),
+                new Status(1348, 1574, 1321, 1888),
+                new Status(1432, 2172, 1405, 1986),
+                new Status(1516, 2270, 1489, 2834),
+                new Status(1600, 3469, 1573, 2933),
+            ],
             18,
             new Skill(
                 "Sp.パワーヒールC Ⅲ",
@@ -21638,7 +26985,13 @@ public record Memoria(
             "不撓不屈の心を胸に",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(3446, 1578, 2962, 1573),
+            [
+                new Status(1452, 1242, 1468, 1237),
+                new Status(1551, 1326, 1917, 1321),
+                new Status(2149, 1410, 2015, 1405),
+                new Status(2247, 1494, 2863, 1489),
+                new Status(3446, 1578, 2962, 1573),
+            ],
             18,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -21662,7 +27015,13 @@ public record Memoria(
             "不撓不屈の心を胸に",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(3446, 1578, 2962, 1573),
+            [
+                new Status(1452, 1242, 1468, 1237),
+                new Status(1551, 1326, 1917, 1321),
+                new Status(2149, 1410, 2015, 1405),
+                new Status(2247, 1494, 2863, 1489),
+                new Status(3446, 1578, 2962, 1573),
+            ],
             18,
             new Skill(
                 "闇：ガードフォールB Ⅲ",
@@ -21686,7 +27045,13 @@ public record Memoria(
             "ブレイブ・ショット",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(1575, 3439, 1607, 2955),
+            [
+                new Status(1239, 1445, 1271, 1461),
+                new Status(1323, 1544, 1355, 1910),
+                new Status(1407, 2142, 1439, 2008),
+                new Status(1491, 2240, 1523, 2856),
+                new Status(1575, 3439, 1607, 2955),
+            ],
             18,
             new Skill(
                 "チャージSp.パワーアシストB Ⅱ",
@@ -21710,7 +27075,13 @@ public record Memoria(
             "ブレイブ・ショット",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
-            new Status(1575, 3439, 1607, 2955),
+            [
+                new Status(1239, 1445, 1271, 1461),
+                new Status(1323, 1544, 1355, 1910),
+                new Status(1407, 2142, 1439, 2008),
+                new Status(1491, 2240, 1523, 2856),
+                new Status(1575, 3439, 1607, 2955),
+            ],
             18,
             new Skill(
                 "Sp.マイトスマッシュA Ⅳ+",
@@ -21734,7 +27105,13 @@ public record Memoria(
             "発進☆ユニコーン！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1578, 3885, 1570, 2491),
+            [
+                new Status(1242, 1441, 1234, 1447),
+                new Status(1326, 1690, 1318, 1746),
+                new Status(1410, 2288, 1402, 1844),
+                new Status(1494, 2686, 1486, 2392),
+                new Status(1578, 3885, 1570, 2491),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ+",
@@ -21758,7 +27135,13 @@ public record Memoria(
             "発進☆ユニコーン！",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1578, 3885, 1570, 2491),
+            [
+                new Status(1242, 1441, 1234, 1447),
+                new Status(1326, 1690, 1318, 1746),
+                new Status(1410, 2288, 1402, 1844),
+                new Status(1494, 2686, 1486, 2392),
+                new Status(1578, 3885, 1570, 2491),
+            ],
             18,
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
@@ -21782,7 +27165,13 @@ public record Memoria(
             "仮想訓練場の応酬",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(3912, 1593, 2489, 1608),
+            [
+                new Status(1468, 1257, 1445, 1272),
+                new Status(1717, 1341, 1744, 1356),
+                new Status(2315, 1425, 1842, 1440),
+                new Status(2713, 1509, 2390, 1524),
+                new Status(3912, 1593, 2489, 1608),
+            ],
             18,
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
@@ -21806,7 +27195,13 @@ public record Memoria(
             "仮想訓練場の応酬",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(3912, 1593, 2489, 1608),
+            [
+                new Status(1468, 1257, 1445, 1272),
+                new Status(1717, 1341, 1744, 1356),
+                new Status(2315, 1425, 1842, 1440),
+                new Status(2713, 1509, 2390, 1524),
+                new Status(3912, 1593, 2489, 1608),
+            ],
             18,
             new Skill(
                 "火：Sp.パワーフォールB Ⅲ",
@@ -21830,7 +27225,13 @@ public record Memoria(
             "優しい夕暮れ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(3463, 1596, 2947, 1586),
+            [
+                new Status(1469, 1260, 1453, 1250),
+                new Status(1568, 1344, 1902, 1334),
+                new Status(2166, 1428, 2000, 1418),
+                new Status(2264, 1512, 2848, 1502),
+                new Status(3463, 1596, 2947, 1586),
+            ],
             18,
             new Skill(
                 "ガードブレイクA Ⅴ",
@@ -21854,7 +27255,13 @@ public record Memoria(
             "優しい夕暮れ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(3463, 1596, 2947, 1586),
+            [
+                new Status(1469, 1260, 1453, 1250),
+                new Status(1568, 1344, 1902, 1334),
+                new Status(2166, 1428, 2000, 1418),
+                new Status(2264, 1512, 2848, 1502),
+                new Status(3463, 1596, 2947, 1586),
+            ],
             18,
             new Skill(
                 "WパワーフォールA Ⅲ",
@@ -21878,7 +27285,13 @@ public record Memoria(
             "静かに肩を寄せて",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(1587, 3452, 1599, 2951),
+            [
+                new Status(1251, 1458, 1263, 1457),
+                new Status(1335, 1557, 1347, 1906),
+                new Status(1419, 2155, 1431, 2004),
+                new Status(1503, 2253, 1515, 2852),
+                new Status(1587, 3452, 1599, 2951),
+            ],
             18,
             new Skill(
                 "Sp.マイトフォールB Ⅲ",
@@ -21902,7 +27315,13 @@ public record Memoria(
             "静かに肩を寄せて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1587, 3452, 1599, 2951),
+            [
+                new Status(1251, 1458, 1263, 1457),
+                new Status(1335, 1557, 1347, 1906),
+                new Status(1419, 2155, 1431, 2004),
+                new Status(1503, 2253, 1515, 2852),
+                new Status(1587, 3452, 1599, 2951),
+            ],
             18,
             new Skill(
                 "ディファースマッシュB Ⅲ+",
@@ -21926,7 +27345,13 @@ public record Memoria(
             "レスキューキャット",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(3463, 1587, 2935, 1579),
+            [
+                new Status(1469, 1251, 1441, 1243),
+                new Status(1568, 1335, 1890, 1327),
+                new Status(2166, 1419, 1988, 1411),
+                new Status(2264, 1503, 2836, 1495),
+                new Status(3463, 1587, 2935, 1579),
+            ],
             18,
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
@@ -21950,7 +27375,13 @@ public record Memoria(
             "レスキューキャット",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(3463, 1587, 2935, 1579),
+            [
+                new Status(1469, 1251, 1441, 1243),
+                new Status(1568, 1335, 1890, 1327),
+                new Status(2166, 1419, 1988, 1411),
+                new Status(2264, 1503, 2836, 1495),
+                new Status(3463, 1587, 2935, 1579),
+            ],
             18,
             new Skill(
                 "闇：WガードアシストB Ⅲ",
@@ -21974,7 +27405,13 @@ public record Memoria(
             "平穏を守るための哮り",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(3443, 1603, 2948, 1588),
+            [
+                new Status(1449, 1267, 1454, 1252),
+                new Status(1548, 1351, 1903, 1336),
+                new Status(2146, 1435, 2001, 1420),
+                new Status(2244, 1519, 2849, 1504),
+                new Status(3443, 1603, 2948, 1588),
+            ],
             18,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -21998,7 +27435,13 @@ public record Memoria(
             "平穏を守るための哮り",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(3443, 1603, 2948, 1588),
+            [
+                new Status(1449, 1267, 1454, 1252),
+                new Status(1548, 1351, 1903, 1336),
+                new Status(2146, 1435, 2001, 1420),
+                new Status(2244, 1519, 2849, 1504),
+                new Status(3443, 1603, 2948, 1588),
+            ],
             18,
             new Skill(
                 "パワーヒールC Ⅲ",
@@ -22022,7 +27465,13 @@ public record Memoria(
             "ハッピー＆トリート",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1589, 3920, 1609, 2508),
+            [
+                new Status(1253, 1476, 1273, 1464),
+                new Status(1337, 1725, 1357, 1763),
+                new Status(1421, 2323, 1441, 1861),
+                new Status(1505, 2721, 1525, 2409),
+                new Status(1589, 3920, 1609, 2508),
+            ],
             18,
             new Skill(
                 "Sp.ガードバーストA Ⅴ",
@@ -22046,7 +27495,13 @@ public record Memoria(
             "ハッピー＆トリート",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1589, 3920, 1609, 2508),
+            [
+                new Status(1253, 1476, 1273, 1464),
+                new Status(1337, 1725, 1357, 1763),
+                new Status(1421, 2323, 1441, 1861),
+                new Status(1505, 2721, 1525, 2409),
+                new Status(1589, 3920, 1609, 2508),
+            ],
             18,
             new Skill(
                 "Sp.パワーフォールC Ⅳ",
@@ -22070,7 +27525,13 @@ public record Memoria(
             "あなただけの守護天使",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1593, 3460, 1586, 2971),
+            [
+                new Status(1257, 1466, 1250, 1477),
+                new Status(1341, 1565, 1334, 1926),
+                new Status(1425, 2163, 1418, 2024),
+                new Status(1509, 2261, 1502, 2872),
+                new Status(1593, 3460, 1586, 2971),
+            ],
             18,
             new Skill(
                 "チャージスマッシュB Ⅱ",
@@ -22094,7 +27555,13 @@ public record Memoria(
             "あなただけの守護天使",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(1593, 3460, 1586, 2971),
+            [
+                new Status(1257, 1466, 1250, 1477),
+                new Status(1341, 1565, 1334, 1926),
+                new Status(1425, 2163, 1418, 2024),
+                new Status(1509, 2261, 1502, 2872),
+                new Status(1593, 3460, 1586, 2971),
+            ],
             18,
             new Skill(
                 "闇：WガードアシストB Ⅲ",
@@ -22118,7 +27585,13 @@ public record Memoria(
             "いつでも近くに",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Dark,
-            new Status(3463, 1590, 2960, 1605),
+            [
+                new Status(1469, 1254, 1466, 1269),
+                new Status(1568, 1338, 1915, 1353),
+                new Status(2166, 1422, 2013, 1437),
+                new Status(2264, 1506, 2861, 1521),
+                new Status(3463, 1590, 2960, 1605),
+            ],
             18,
             new Skill(
                 "パワーストライクA Ⅳ+",
@@ -22142,7 +27615,13 @@ public record Memoria(
             "いつでも近くに",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(3463, 1590, 2960, 1605),
+            [
+                new Status(1469, 1254, 1466, 1269),
+                new Status(1568, 1338, 1915, 1353),
+                new Status(2166, 1422, 2013, 1437),
+                new Status(2264, 1506, 2861, 1521),
+                new Status(3463, 1590, 2960, 1605),
+            ],
             18,
             new Skill(
                 "ガードヒールC Ⅲ+",
@@ -22166,7 +27645,13 @@ public record Memoria(
             "純白の想い",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(3450, 1583, 2933, 1602),
+            [
+                new Status(1456, 1247, 1439, 1266),
+                new Status(1555, 1331, 1888, 1350),
+                new Status(2153, 1415, 1986, 1434),
+                new Status(2251, 1499, 2834, 1518),
+                new Status(3450, 1583, 2933, 1602),
+            ],
             18,
             new Skill(
                 "闇：パワーフォールB Ⅲ",
@@ -22190,7 +27675,13 @@ public record Memoria(
             "純白の想い",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(3450, 1583, 2933, 1602),
+            [
+                new Status(1456, 1247, 1439, 1266),
+                new Status(1555, 1331, 1888, 1350),
+                new Status(2153, 1415, 1986, 1434),
+                new Status(2251, 1499, 2834, 1518),
+                new Status(3450, 1583, 2933, 1602),
+            ],
             18,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -22214,7 +27705,13 @@ public record Memoria(
             "蒼き月の御使い",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(2736, 4156, 2736, 3627),
+            [
+                new Status(1202, 1436, 1208, 1427),
+                new Status(1290, 1539, 1296, 1680),
+                new Status(1377, 1792, 1383, 1783),
+                new Status(1465, 1895, 1471, 2186),
+                new Status(1553, 2798, 1559, 2289),
+            ],
             18,
             new Skill(
                 "スマッシュD LG",
@@ -22239,7 +27736,13 @@ public record Memoria(
             "放課後のミューズ",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(1596, 3458, 1591, 2937),
+            [
+                new Status(1260, 1464, 1255, 1443),
+                new Status(1344, 1563, 1339, 1892),
+                new Status(1428, 2161, 1423, 1990),
+                new Status(1512, 2259, 1507, 2838),
+                new Status(1596, 3458, 1591, 2937),
+            ],
             18,
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
@@ -22263,7 +27766,13 @@ public record Memoria(
             "放課後のミューズ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1596, 3458, 1591, 2937),
+            [
+                new Status(1260, 1464, 1255, 1443),
+                new Status(1344, 1563, 1339, 1892),
+                new Status(1428, 2161, 1423, 1990),
+                new Status(1512, 2259, 1507, 2838),
+                new Status(1596, 3458, 1591, 2937),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -22287,7 +27796,13 @@ public record Memoria(
             "小春日和",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(3444, 1578, 2956, 1595),
+            [
+                new Status(1450, 1242, 1462, 1259),
+                new Status(1549, 1326, 1911, 1343),
+                new Status(2147, 1410, 2009, 1427),
+                new Status(2245, 1494, 2857, 1511),
+                new Status(3444, 1578, 2956, 1595),
+            ],
             18,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -22311,7 +27826,13 @@ public record Memoria(
             "小春日和",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(3444, 1578, 2956, 1595),
+            [
+                new Status(1450, 1242, 1462, 1259),
+                new Status(1549, 1326, 1911, 1343),
+                new Status(2147, 1410, 2009, 1427),
+                new Status(2245, 1494, 2857, 1511),
+                new Status(3444, 1578, 2956, 1595),
+            ],
             18,
             new Skill(
                 "WガードアシストC Ⅳ",
@@ -22335,7 +27856,13 @@ public record Memoria(
             "真夜中のクリエイター",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
-            new Status(1601, 3447, 1583, 2969),
+            [
+                new Status(1265, 1453, 1247, 1475),
+                new Status(1349, 1552, 1331, 1924),
+                new Status(1433, 2150, 1415, 2022),
+                new Status(1517, 2248, 1499, 2870),
+                new Status(1601, 3447, 1583, 2969),
+            ],
             18,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -22359,7 +27886,13 @@ public record Memoria(
             "真夜中のクリエイター",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(1601, 3447, 1583, 2969),
+            [
+                new Status(1265, 1453, 1247, 1475),
+                new Status(1349, 1552, 1331, 1924),
+                new Status(1433, 2150, 1415, 2022),
+                new Status(1517, 2248, 1499, 2870),
+                new Status(1601, 3447, 1583, 2969),
+            ],
             18,
             new Skill(
                 "闇：Sp.パワーアシストB Ⅲ",
@@ -22383,7 +27916,13 @@ public record Memoria(
             "遠い日の足跡",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
-            new Status(1604, 3436, 1572, 2959),
+            [
+                new Status(1268, 1442, 1236, 1465),
+                new Status(1352, 1541, 1320, 1914),
+                new Status(1436, 2139, 1404, 2012),
+                new Status(1520, 2237, 1488, 2860),
+                new Status(1604, 3436, 1572, 2959),
+            ],
             18,
             new Skill(
                 "チャージSp.パワーフォールB Ⅱ",
@@ -22407,7 +27946,13 @@ public record Memoria(
             "遠い日の足跡",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
-            new Status(1604, 3436, 1572, 2959),
+            [
+                new Status(1268, 1442, 1236, 1465),
+                new Status(1352, 1541, 1320, 1914),
+                new Status(1436, 2139, 1404, 2012),
+                new Status(1520, 2237, 1488, 2860),
+                new Status(1604, 3436, 1572, 2959),
+            ],
             18,
             new Skill(
                 "チャージスマッシュA Ⅲ",
@@ -22431,7 +27976,13 @@ public record Memoria(
             "先駆けプリンセス",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
-            new Status(3475, 1589, 2978, 1601),
+            [
+                new Status(1477, 1250, 1480, 1262),
+                new Status(1577, 1335, 1930, 1347),
+                new Status(2176, 1419, 2029, 1431),
+                new Status(2275, 1504, 2878, 1516),
+                new Status(3475, 1589, 2978, 1601),
+            ],
             18,
             new Skill(
                 "チャージパワーアシストB Ⅱ",
@@ -22455,7 +28006,13 @@ public record Memoria(
             "先駆けプリンセス",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Dark,
-            new Status(3475, 1589, 2978, 1601),
+            [
+                new Status(1477, 1250, 1480, 1262),
+                new Status(1577, 1335, 1930, 1347),
+                new Status(2176, 1419, 2029, 1431),
+                new Status(2275, 1504, 2878, 1516),
+                new Status(3475, 1589, 2978, 1601),
+            ],
             18,
             new Skill(
                 "チャージストライクA Ⅲ",
@@ -22479,7 +28036,13 @@ public record Memoria(
             "寂寥の美",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
-            new Status(3437, 1596, 2952, 1592),
+            [
+                new Status(1443, 1260, 1458, 1256),
+                new Status(1542, 1344, 1907, 1340),
+                new Status(2140, 1428, 2005, 1424),
+                new Status(2238, 1512, 2853, 1508),
+                new Status(3437, 1596, 2952, 1592),
+            ],
             18,
             new Skill(
                 "チャージストライクB Ⅱ",
@@ -22503,7 +28066,13 @@ public record Memoria(
             "寂寥の美",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
-            new Status(3437, 1596, 2952, 1592),
+            [
+                new Status(1443, 1260, 1458, 1256),
+                new Status(1542, 1344, 1907, 1340),
+                new Status(2140, 1428, 2005, 1424),
+                new Status(2238, 1512, 2853, 1508),
+                new Status(3437, 1596, 2952, 1592),
+            ],
             18,
             new Skill(
                 "チャージヒールC Ⅱ",
@@ -22527,7 +28096,13 @@ public record Memoria(
             "劔の妖精",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1857, 3650, 1837, 2949),
+            [
+                new Status(1435, 1655, 1415, 1654),
+                new Status(1540, 1778, 1520, 1977),
+                new Status(1646, 2202, 1626, 2101),
+                new Status(1751, 2326, 1731, 2825),
+                new Status(1857, 3650, 1837, 2949),
+            ],
             20,
             new Skill(
                 "WパワーバーストB Ⅲ",
@@ -22551,7 +28126,13 @@ public record Memoria(
             "セインツの宝石",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(3576, 1697, 3061, 1667),
+            [
+                new Status(1558, 1341, 1543, 1311),
+                new Status(1663, 1430, 1998, 1400),
+                new Status(2267, 1519, 2102, 1489),
+                new Status(2371, 1608, 2956, 1578),
+                new Status(3576, 1697, 3061, 1667),
+            ],
             18,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -22575,7 +28156,13 @@ public record Memoria(
             "セインツの宝石",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(3576, 1697, 3061, 1667),
+            [
+                new Status(1558, 1341, 1543, 1311),
+                new Status(1663, 1430, 1998, 1400),
+                new Status(2267, 1519, 2102, 1489),
+                new Status(2371, 1608, 2956, 1578),
+                new Status(3576, 1697, 3061, 1667),
+            ],
             18,
             new Skill(
                 "パワーアシストC Ⅳ",
@@ -22599,7 +28186,13 @@ public record Memoria(
             "暴君の花嫁",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1859, 1843, 3328, 3293),
+            [
+                new Status(1437, 1421, 1683, 1648),
+                new Status(1542, 1526, 1906, 1871),
+                new Status(1648, 1632, 2180, 2145),
+                new Status(1753, 1737, 2604, 2569),
+                new Status(1859, 1843, 3328, 3293),
+            ],
             20,
             new Skill(
                 "WガードヒールC Ⅲ",
@@ -22623,7 +28216,13 @@ public record Memoria(
             "約束の蕾",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2978, 1614, 3463, 1584),
+            [
+                new Status(1482, 1277, 1467, 1247),
+                new Status(1931, 1361, 1566, 1331),
+                new Status(2030, 1445, 2165, 1415),
+                new Status(2879, 1529, 2264, 1499),
+                new Status(2978, 1614, 3463, 1584),
+            ],
             18,
             new Skill(
                 "水：ガードアシストC Ⅳ",
@@ -22647,7 +28246,13 @@ public record Memoria(
             "約束の蕾",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(2978, 1614, 3463, 1584),
+            [
+                new Status(1482, 1277, 1467, 1247),
+                new Status(1931, 1361, 1566, 1331),
+                new Status(2030, 1445, 2165, 1415),
+                new Status(2879, 1529, 2264, 1499),
+                new Status(2978, 1614, 3463, 1584),
+            ],
             18,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -22671,7 +28276,13 @@ public record Memoria(
             "大切な存在",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1593, 3446, 1579, 2943),
+            [
+                new Status(1257, 1452, 1243, 1449),
+                new Status(1341, 1551, 1327, 1898),
+                new Status(1425, 2149, 1411, 1996),
+                new Status(1509, 2247, 1495, 2844),
+                new Status(1593, 3446, 1579, 2943),
+            ],
             18,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -22695,7 +28306,13 @@ public record Memoria(
             "大切な存在",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1593, 3446, 1579, 2943),
+            [
+                new Status(1257, 1452, 1243, 1449),
+                new Status(1341, 1551, 1327, 1898),
+                new Status(1425, 2149, 1411, 1996),
+                new Status(1509, 2247, 1495, 2844),
+                new Status(1593, 3446, 1579, 2943),
+            ],
             18,
             new Skill(
                 "Sp.パワーフォールC Ⅳ",
@@ -22719,7 +28336,13 @@ public record Memoria(
             "黄昏の研究者たち",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1487, 1477, 2828, 3336),
+            [
+                new Status(1182, 1172, 1370, 1378),
+                new Status(1258, 1248, 1809, 1467),
+                new Status(1334, 1324, 1899, 2057),
+                new Status(1410, 1400, 2738, 2146),
+                new Status(1487, 1477, 2828, 3336),
+            ],
             17,
             new Skill(
                 "Sp.ガードヒールC Ⅲ+",
@@ -22743,7 +28366,13 @@ public record Memoria(
             "黄昏の研究者たち",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(1487, 1477, 2828, 3336),
+            [
+                new Status(1182, 1172, 1370, 1378),
+                new Status(1258, 1248, 1809, 1467),
+                new Status(1334, 1324, 1899, 2057),
+                new Status(1410, 1400, 2738, 2146),
+                new Status(1487, 1477, 2828, 3336),
+            ],
             17,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -22767,7 +28396,13 @@ public record Memoria(
             "出逢いの約束",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1481, 1473, 2805, 3328),
+            [
+                new Status(1176, 1168, 1347, 1370),
+                new Status(1252, 1244, 1786, 1459),
+                new Status(1328, 1320, 1876, 2049),
+                new Status(1404, 1396, 2715, 2138),
+                new Status(1481, 1473, 2805, 3328),
+            ],
             17,
             new Skill(
                 "Sp.ガードヒールD Ⅲ",
@@ -22791,7 +28426,13 @@ public record Memoria(
             "出逢いの約束",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(1481, 1473, 2805, 3328),
+            [
+                new Status(1176, 1168, 1347, 1370),
+                new Status(1252, 1244, 1786, 1459),
+                new Status(1328, 1320, 1876, 2049),
+                new Status(1404, 1396, 2715, 2138),
+                new Status(1481, 1473, 2805, 3328),
+            ],
             17,
             new Skill(
                 "Sp.マイトバーストA Ⅳ+",
@@ -22815,7 +28456,13 @@ public record Memoria(
             "暁に笑う少女",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(3456, 1584, 2966, 1600),
+            [
+                new Status(1462, 1248, 1472, 1264),
+                new Status(1561, 1332, 1921, 1348),
+                new Status(2159, 1416, 2019, 1432),
+                new Status(2257, 1500, 2867, 1516),
+                new Status(3456, 1584, 2966, 1600),
+            ],
             18,
             new Skill(
                 "ガードフォールC Ⅳ",
@@ -22839,7 +28486,13 @@ public record Memoria(
             "暁に笑う少女",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(3456, 1584, 2966, 1600),
+            [
+                new Status(1462, 1248, 1472, 1264),
+                new Status(1561, 1332, 1921, 1348),
+                new Status(2159, 1416, 2019, 1432),
+                new Status(2257, 1500, 2867, 1516),
+                new Status(3456, 1584, 2966, 1600),
+            ],
             18,
             new Skill(
                 "ガードブレイクA Ⅳ+",
@@ -22863,7 +28516,13 @@ public record Memoria(
             "ハンドメイド・リリィ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1575, 3467, 1601, 2948),
+            [
+                new Status(1239, 1473, 1265, 1454),
+                new Status(1323, 1572, 1349, 1903),
+                new Status(1407, 2170, 1433, 2001),
+                new Status(1491, 2268, 1517, 2849),
+                new Status(1575, 3467, 1601, 2948),
+            ],
             18,
             new Skill(
                 "Sp.ガードアシストD Ⅲ",
@@ -22887,7 +28546,13 @@ public record Memoria(
             "ハンドメイド・リリィ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(1575, 3467, 1601, 2948),
+            [
+                new Status(1239, 1473, 1265, 1454),
+                new Status(1323, 1572, 1349, 1903),
+                new Status(1407, 2170, 1433, 2001),
+                new Status(1491, 2268, 1517, 2849),
+                new Status(1575, 3467, 1601, 2948),
+            ],
             18,
             new Skill(
                 "Sp.マイトスマッシュA Ⅳ+",
@@ -22911,7 +28576,13 @@ public record Memoria(
             "ハッピーバレンタインだにゃん♪",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1834, 1821, 3316, 3316),
+            [
+                new Status(1412, 1399, 1671, 1671),
+                new Status(1517, 1504, 1894, 1894),
+                new Status(1623, 1610, 2168, 2168),
+                new Status(1728, 1715, 2592, 2592),
+                new Status(1834, 1821, 3316, 3316),
+            ],
             20,
             new Skill(
                 "WパワーヒールC Ⅲ",
@@ -22935,7 +28606,13 @@ public record Memoria(
             "まごころをこめて！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(3675, 1857, 2949, 1843),
+            [
+                new Status(1680, 1435, 1654, 1421),
+                new Status(1803, 1540, 1977, 1526),
+                new Status(2227, 1646, 2101, 1632),
+                new Status(2351, 1751, 2825, 1737),
+                new Status(3675, 1857, 2949, 1843),
+            ],
             20,
             new Skill(
                 "Sp.ディファーストライクB Ⅲ+",
@@ -22959,7 +28636,13 @@ public record Memoria(
             "ドキドキ・ショコラーデ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1848, 3674, 1831, 2953),
+            [
+                new Status(1426, 1679, 1409, 1658),
+                new Status(1531, 1802, 1514, 1981),
+                new Status(1637, 2226, 1620, 2105),
+                new Status(1742, 2350, 1725, 2829),
+                new Status(1848, 3674, 1831, 2953),
+            ],
             20,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -22983,7 +28666,13 @@ public record Memoria(
             "煌めく花々",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1518, 1527, 3115, 3094),
+            [
+                new Status(1199, 1208, 1391, 1370),
+                new Status(1279, 1288, 1659, 1638),
+                new Status(1358, 1367, 2003, 1982),
+                new Status(1438, 1447, 2471, 2450),
+                new Status(1518, 1527, 3115, 3094),
+            ],
             18,
             new Skill(
                 "ヒールD Ⅳ",
@@ -23007,7 +28696,13 @@ public record Memoria(
             "煌めく花々",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(1518, 1527, 3115, 3094),
+            [
+                new Status(1199, 1208, 1391, 1370),
+                new Status(1279, 1288, 1659, 1638),
+                new Status(1358, 1367, 2003, 1982),
+                new Status(1438, 1447, 2471, 2450),
+                new Status(1518, 1527, 3115, 3094),
+            ],
             18,
             new Skill(
                 "パワーストライクB Ⅲ",
@@ -23031,7 +28726,13 @@ public record Memoria(
             "一筆の心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(3440, 1597, 2958, 1569),
+            [
+                new Status(1446, 1261, 1464, 1233),
+                new Status(1545, 1345, 1913, 1317),
+                new Status(2143, 1429, 2011, 1401),
+                new Status(2241, 1513, 2859, 1485),
+                new Status(3440, 1597, 2958, 1569),
+            ],
             18,
             new Skill(
                 "WパワーブレイクB Ⅲ+",
@@ -23055,7 +28756,13 @@ public record Memoria(
             "一筆の心",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(3440, 1597, 2958, 1569),
+            [
+                new Status(1446, 1261, 1464, 1233),
+                new Status(1545, 1345, 1913, 1317),
+                new Status(2143, 1429, 2011, 1401),
+                new Status(2241, 1513, 2859, 1485),
+                new Status(3440, 1597, 2958, 1569),
+            ],
             18,
             new Skill(
                 "Sp.ガードヒールD Ⅲ",
@@ -23079,7 +28786,13 @@ public record Memoria(
             "飾らぬ想いに咲き誇る",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1602, 3434, 1585, 2955),
+            [
+                new Status(1266, 1440, 1249, 1461),
+                new Status(1350, 1539, 1333, 1910),
+                new Status(1434, 2137, 1417, 2008),
+                new Status(1518, 2235, 1501, 2856),
+                new Status(1602, 3434, 1585, 2955),
+            ],
             18,
             new Skill(
                 "Sp.マイトスマッシュB Ⅲ+",
@@ -23103,7 +28816,13 @@ public record Memoria(
             "飾らぬ想いに咲き誇る",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1602, 3434, 1585, 2955),
+            [
+                new Status(1266, 1440, 1249, 1461),
+                new Status(1350, 1539, 1333, 1910),
+                new Status(1434, 2137, 1417, 2008),
+                new Status(1518, 2235, 1501, 2856),
+                new Status(1602, 3434, 1585, 2955),
+            ],
             18,
             new Skill(
                 "Sp.パワーヒールC Ⅲ",
@@ -23127,7 +28846,13 @@ public record Memoria(
             "ヘルヴォルのお嫁さん",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1598, 3453, 1571, 2960),
+            [
+                new Status(1262, 1459, 1235, 1466),
+                new Status(1346, 1558, 1319, 1915),
+                new Status(1430, 2156, 1403, 2013),
+                new Status(1514, 2254, 1487, 2861),
+                new Status(1598, 3453, 1571, 2960),
+            ],
             18,
             new Skill(
                 "Sp.マイトフォールB Ⅲ",
@@ -23151,7 +28876,13 @@ public record Memoria(
             "ヘルヴォルのお嫁さん",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1598, 3453, 1571, 2960),
+            [
+                new Status(1262, 1459, 1235, 1466),
+                new Status(1346, 1558, 1319, 1915),
+                new Status(1430, 2156, 1403, 2013),
+                new Status(1514, 2254, 1487, 2861),
+                new Status(1598, 3453, 1571, 2960),
+            ],
             18,
             new Skill(
                 "Sp.ガードバーストA Ⅳ+",
@@ -23175,7 +28906,13 @@ public record Memoria(
             "楽しい遊園地",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(1590, 3471, 1593, 2959),
+            [
+                new Status(1254, 1477, 1257, 1465),
+                new Status(1338, 1576, 1341, 1914),
+                new Status(1422, 2174, 1425, 2012),
+                new Status(1506, 2272, 1509, 2860),
+                new Status(1590, 3471, 1593, 2959),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
@@ -23199,7 +28936,13 @@ public record Memoria(
             "楽しい遊園地",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(1590, 3471, 1593, 2959),
+            [
+                new Status(1254, 1477, 1257, 1465),
+                new Status(1338, 1576, 1341, 1914),
+                new Status(1422, 2174, 1425, 2012),
+                new Status(1506, 2272, 1509, 2860),
+                new Status(1590, 3471, 1593, 2959),
+            ],
             18,
             new Skill(
                 "Sp.ガードアシストC Ⅳ",
@@ -23223,7 +28966,13 @@ public record Memoria(
             "リフレッシュ！エンジン",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(3888, 1587, 2519, 1576),
+            [
+                new Status(1444, 1251, 1475, 1240),
+                new Status(1693, 1335, 1774, 1324),
+                new Status(2291, 1419, 1872, 1408),
+                new Status(2689, 1503, 2420, 1492),
+                new Status(3888, 1587, 2519, 1576),
+            ],
             18,
             new Skill(
                 "パワーストライクA Ⅳ+",
@@ -23247,7 +28996,13 @@ public record Memoria(
             "リフレッシュ！エンジン",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(3888, 1587, 2519, 1576),
+            [
+                new Status(1444, 1251, 1475, 1240),
+                new Status(1693, 1335, 1774, 1324),
+                new Status(2291, 1419, 1872, 1408),
+                new Status(2689, 1503, 2420, 1492),
+                new Status(3888, 1587, 2519, 1576),
+            ],
             18,
             new Skill(
                 "ガードフォールC Ⅳ",
@@ -23271,7 +29026,13 @@ public record Memoria(
             "夜の闇を切り拓く者たち",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(1601, 1606, 3460, 2943),
+            [
+                new Status(1265, 1270, 1466, 1449),
+                new Status(1349, 1354, 1565, 1898),
+                new Status(1433, 1438, 2163, 1996),
+                new Status(1517, 1522, 2261, 2844),
+                new Status(1601, 1606, 3460, 2943),
+            ],
             18,
             new Skill(
                 "WガードアシストB Ⅲ",
@@ -23295,7 +29056,13 @@ public record Memoria(
             "夜の闇を切り拓く者たち",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(1601, 1606, 3460, 2943),
+            [
+                new Status(1265, 1270, 1466, 1449),
+                new Status(1349, 1354, 1565, 1898),
+                new Status(1433, 1438, 2163, 1996),
+                new Status(1517, 1522, 2261, 2844),
+                new Status(1601, 1606, 3460, 2943),
+            ],
             18,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -23319,7 +29086,13 @@ public record Memoria(
             "エクストリームブースト",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(3456, 1583, 2942, 1580),
+            [
+                new Status(1462, 1247, 1448, 1244),
+                new Status(1561, 1331, 1897, 1328),
+                new Status(2159, 1415, 1995, 1412),
+                new Status(2257, 1499, 2843, 1496),
+                new Status(3456, 1583, 2942, 1580),
+            ],
             18,
             new Skill(
                 "ガードアシストC Ⅳ",
@@ -23343,7 +29116,13 @@ public record Memoria(
             "エクストリームブースト",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(3456, 1583, 2942, 1580),
+            [
+                new Status(1462, 1247, 1448, 1244),
+                new Status(1561, 1331, 1897, 1328),
+                new Status(2159, 1415, 1995, 1412),
+                new Status(2257, 1499, 2843, 1496),
+                new Status(3456, 1583, 2942, 1580),
+            ],
             18,
             new Skill(
                 "パワーストライクA Ⅲ+",
@@ -23367,7 +29146,13 @@ public record Memoria(
             "ガーディアン・パワー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1854, 3672, 1833, 2958),
+            [
+                new Status(1432, 1677, 1411, 1663),
+                new Status(1537, 1800, 1516, 1986),
+                new Status(1643, 2224, 1622, 2110),
+                new Status(1748, 2348, 1727, 2834),
+                new Status(1854, 3672, 1833, 2958),
+            ],
             20,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -23391,7 +29176,13 @@ public record Memoria(
             "コール・ユア・ネーム",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1825, 1855, 3654, 2973),
+            [
+                new Status(1403, 1433, 1659, 1678),
+                new Status(1508, 1538, 1782, 2001),
+                new Status(1614, 1644, 2206, 2125),
+                new Status(1719, 1749, 2330, 2849),
+                new Status(1825, 1855, 3654, 2973),
+            ],
             20,
             new Skill(
                 "ガードヒールC Ⅲ",
@@ -23415,7 +29206,13 @@ public record Memoria(
             "ジャスト・ザ・ブレイブ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(3666, 1847, 2946, 1823),
+            [
+                new Status(1671, 1425, 1651, 1401),
+                new Status(1794, 1530, 1974, 1506),
+                new Status(2218, 1636, 2098, 1612),
+                new Status(2342, 1741, 2822, 1717),
+                new Status(3666, 1847, 2946, 1823),
+            ],
             20,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -23439,7 +29236,13 @@ public record Memoria(
             "大切なあなたを想い",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1529, 1517, 2485, 2212),
+            [
+                new Status(1193, 1181, 1391, 1368),
+                new Status(1277, 1265, 1490, 1617),
+                new Status(1361, 1349, 1788, 1715),
+                new Status(1445, 1433, 1886, 2113),
+                new Status(1529, 1517, 2485, 2212),
+            ],
             18,
             new Skill(
                 "パワーヒールB Ⅲ",
@@ -23463,7 +29266,13 @@ public record Memoria(
             "戦火の結束",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(3439, 1586, 2945, 1575),
+            [
+                new Status(1445, 1250, 1451, 1239),
+                new Status(1544, 1334, 1900, 1323),
+                new Status(2142, 1418, 1998, 1407),
+                new Status(2240, 1502, 2846, 1491),
+                new Status(3439, 1586, 2945, 1575),
+            ],
             18,
             new Skill(
                 "マイトアシストB Ⅲ",
@@ -23487,7 +29296,13 @@ public record Memoria(
             "戦火の結束",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(3439, 1586, 2945, 1575),
+            [
+                new Status(1445, 1250, 1451, 1239),
+                new Status(1544, 1334, 1900, 1323),
+                new Status(2142, 1418, 1998, 1407),
+                new Status(2240, 1502, 2846, 1491),
+                new Status(3439, 1586, 2945, 1575),
+            ],
             18,
             new Skill(
                 "マイトストライクA Ⅳ+",
@@ -23511,7 +29326,13 @@ public record Memoria(
             "ラ・ピュセル",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1821, 4469, 1856, 2146),
+            [
+                new Status(1399, 1674, 1434, 1651),
+                new Status(1504, 1997, 1539, 1774),
+                new Status(1610, 2421, 1645, 1898),
+                new Status(1715, 3145, 1750, 2022),
+                new Status(1821, 4469, 1856, 2146),
+            ],
             20,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
@@ -23535,7 +29356,13 @@ public record Memoria(
             "鬼神の意志を継ぐ者",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(3656, 2976, 1834, 1845),
+            [
+                new Status(1661, 1681, 1412, 1423),
+                new Status(1784, 2004, 1517, 1528),
+                new Status(2208, 2128, 1623, 1634),
+                new Status(2332, 2852, 1728, 1739),
+                new Status(3656, 2976, 1834, 1845),
+            ],
             20,
             new Skill(
                 "パワーフォールC Ⅳ",
@@ -23559,7 +29386,13 @@ public record Memoria(
             "台場の白き魔女",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(3672, 1857, 2968, 1831),
+            [
+                new Status(1677, 1435, 1673, 1409),
+                new Status(1800, 1540, 1996, 1514),
+                new Status(2224, 1646, 2120, 1620),
+                new Status(2348, 1751, 2844, 1725),
+                new Status(3672, 1857, 2968, 1831),
+            ],
             20,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -23583,7 +29416,13 @@ public record Memoria(
             "狂乱の姫巫女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1854, 3655, 1834, 2977),
+            [
+                new Status(1432, 1660, 1412, 1682),
+                new Status(1537, 1783, 1517, 2005),
+                new Status(1643, 2207, 1623, 2129),
+                new Status(1748, 2331, 1728, 2853),
+                new Status(1854, 3655, 1834, 2977),
+            ],
             20,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -23607,7 +29446,13 @@ public record Memoria(
             "親愛なる仲間",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1561, 3005, 2760, 1531),
+            [
+                new Status(1241, 1429, 1434, 1211),
+                new Status(1321, 1523, 1878, 1291),
+                new Status(1401, 2067, 1972, 1371),
+                new Status(1481, 2161, 2666, 1451),
+                new Status(1561, 3005, 2760, 1531),
+            ],
             17,
             new Skill(
                 "ディファースマッシュB Ⅲ+",
@@ -23631,7 +29476,13 @@ public record Memoria(
             "親愛なる仲間",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1561, 3005, 2760, 1531),
+            [
+                new Status(1241, 1429, 1434, 1211),
+                new Status(1321, 1523, 1878, 1291),
+                new Status(1401, 2067, 1972, 1371),
+                new Status(1481, 2161, 2666, 1451),
+                new Status(1561, 3005, 2760, 1531),
+            ],
             17,
             new Skill(
                 "Sp.パワーヒールC Ⅲ",
@@ -23655,7 +29506,13 @@ public record Memoria(
             "そこにある笑顔",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(2842, 1386, 2586, 1397),
+            [
+                new Status(1301, 1096, 1295, 1107),
+                new Status(1386, 1168, 1730, 1179),
+                new Status(1921, 1241, 1815, 1252),
+                new Status(2006, 1313, 2500, 1324),
+                new Status(2842, 1386, 2586, 1397),
+            ],
             17,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -23679,7 +29536,13 @@ public record Memoria(
             "そこにある笑顔",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(2842, 1386, 2586, 1397),
+            [
+                new Status(1301, 1096, 1295, 1107),
+                new Status(1386, 1168, 1730, 1179),
+                new Status(1921, 1241, 1815, 1252),
+                new Status(2006, 1313, 2500, 1324),
+                new Status(2842, 1386, 2586, 1397),
+            ],
             17,
             new Skill(
                 "マイトフォールA Ⅲ",
@@ -23703,7 +29566,13 @@ public record Memoria(
             "ふたりのアーセナル",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(1402, 1422, 1632, 3793),
+            [
+                new Status(1112, 1132, 1291, 1302),
+                new Status(1184, 1204, 1376, 1737),
+                new Status(1257, 1277, 1461, 2272),
+                new Status(1329, 1349, 1546, 2957),
+                new Status(1402, 1422, 1632, 3793),
+            ],
             17,
             new Skill(
                 "火：Sp.ガードアシストB Ⅲ",
@@ -23727,7 +29596,13 @@ public record Memoria(
             "ふたりのアーセナル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1402, 1422, 1632, 3793),
+            [
+                new Status(1112, 1132, 1291, 1302),
+                new Status(1184, 1204, 1376, 1737),
+                new Status(1257, 1277, 1461, 2272),
+                new Status(1329, 1349, 1546, 2957),
+                new Status(1402, 1422, 1632, 3793),
+            ],
             17,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -23751,7 +29626,13 @@ public record Memoria(
             "パジャマパーティー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1556, 2977, 1560, 2493),
+            [
+                new Status(1211, 1422, 1215, 1438),
+                new Status(1297, 1523, 1301, 1689),
+                new Status(1383, 1874, 1387, 1790),
+                new Status(1469, 1975, 1473, 2391),
+                new Status(1556, 2977, 1560, 2493),
+            ],
             19,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -23775,7 +29656,13 @@ public record Memoria(
             "ファイア・ダッシュ",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(3441, 1579, 2943, 1609),
+            [
+                new Status(1447, 1243, 1449, 1273),
+                new Status(1546, 1327, 1898, 1357),
+                new Status(2144, 1411, 1996, 1441),
+                new Status(2242, 1495, 2844, 1525),
+                new Status(3441, 1579, 2943, 1609),
+            ],
             18,
             new Skill(
                 "風：ガードフォールB Ⅲ",
@@ -23799,7 +29686,13 @@ public record Memoria(
             "ファイア・ダッシュ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(3441, 1579, 2943, 1609),
+            [
+                new Status(1447, 1243, 1449, 1273),
+                new Status(1546, 1327, 1898, 1357),
+                new Status(2144, 1411, 1996, 1441),
+                new Status(2242, 1495, 2844, 1525),
+                new Status(3441, 1579, 2943, 1609),
+            ],
             18,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -23823,7 +29716,13 @@ public record Memoria(
             "ミューチュアルプロテクション",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1607, 3435, 1608, 2945),
+            [
+                new Status(1271, 1441, 1272, 1451),
+                new Status(1355, 1540, 1356, 1900),
+                new Status(1439, 2138, 1440, 1998),
+                new Status(1523, 2236, 1524, 2846),
+                new Status(1607, 3435, 1608, 2945),
+            ],
             18,
             new Skill(
                 "ヒールスマッシュC Ⅲ",
@@ -23847,7 +29746,13 @@ public record Memoria(
             "ミューチュアルプロテクション",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1607, 3435, 1608, 2945),
+            [
+                new Status(1271, 1441, 1272, 1451),
+                new Status(1355, 1540, 1356, 1900),
+                new Status(1439, 2138, 1440, 1998),
+                new Status(1523, 2236, 1524, 2846),
+                new Status(1607, 3435, 1608, 2945),
+            ],
             18,
             new Skill(
                 "Sp.パワーアシストC Ⅳ",
@@ -23871,7 +29776,13 @@ public record Memoria(
             "海の世界に想いを馳せて",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1585, 1590, 2968, 3465),
+            [
+                new Status(1249, 1254, 1474, 1471),
+                new Status(1333, 1338, 1923, 1570),
+                new Status(1417, 1422, 2021, 2168),
+                new Status(1501, 1506, 2869, 2266),
+                new Status(1585, 1590, 2968, 3465),
+            ],
             18,
             new Skill(
                 "ガードヒールD Ⅲ",
@@ -23895,7 +29806,13 @@ public record Memoria(
             "海の世界に想いを馳せて",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(1585, 1590, 2968, 3465),
+            [
+                new Status(1249, 1254, 1474, 1471),
+                new Status(1333, 1338, 1923, 1570),
+                new Status(1417, 1422, 2021, 2168),
+                new Status(1501, 1506, 2869, 2266),
+                new Status(1585, 1590, 2968, 3465),
+            ],
             18,
             new Skill(
                 "ディファースマッシュA Ⅳ+",
@@ -23919,7 +29836,13 @@ public record Memoria(
             "CHARMを絵筆に替えて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1570, 3464, 1601, 2934),
+            [
+                new Status(1234, 1470, 1265, 1440),
+                new Status(1318, 1569, 1349, 1889),
+                new Status(1402, 2167, 1433, 1987),
+                new Status(1486, 2265, 1517, 2835),
+                new Status(1570, 3464, 1601, 2934),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -23943,7 +29866,13 @@ public record Memoria(
             "CHARMを絵筆に替えて",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1570, 3464, 1601, 2934),
+            [
+                new Status(1234, 1470, 1265, 1440),
+                new Status(1318, 1569, 1349, 1889),
+                new Status(1402, 2167, 1433, 1987),
+                new Status(1486, 2265, 1517, 2835),
+                new Status(1570, 3464, 1601, 2934),
+            ],
             18,
             new Skill(
                 "Sp.ディファーフォールB Ⅲ",
@@ -23967,7 +29896,13 @@ public record Memoria(
             "ボナペティ！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(3457, 1576, 2964, 1594),
+            [
+                new Status(1463, 1240, 1470, 1258),
+                new Status(1562, 1324, 1919, 1342),
+                new Status(2160, 1408, 2017, 1426),
+                new Status(2258, 1492, 2865, 1510),
+                new Status(3457, 1576, 2964, 1594),
+            ],
             18,
             new Skill(
                 "パワーストライクB Ⅲ",
@@ -23991,7 +29926,13 @@ public record Memoria(
             "ボナペティ！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(3457, 1576, 2964, 1594),
+            [
+                new Status(1463, 1240, 1470, 1258),
+                new Status(1562, 1324, 1919, 1342),
+                new Status(2160, 1408, 2017, 1426),
+                new Status(2258, 1492, 2865, 1510),
+                new Status(3457, 1576, 2964, 1594),
+            ],
             18,
             new Skill(
                 "火：パワーアシストB Ⅲ",
@@ -24015,7 +29956,13 @@ public record Memoria(
             "恋花様ダイエット大作戦",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(2663, 1484, 2928, 1493),
+            [
+                new Status(1355, 1179, 1370, 1188),
+                new Status(1794, 1255, 1459, 1264),
+                new Status(1884, 1331, 1999, 1340),
+                new Status(2573, 1407, 2088, 1416),
+                new Status(2663, 1484, 2928, 1493),
+            ],
             17,
             new Skill(
                 "風：パワーフォールB Ⅲ",
@@ -24039,7 +29986,13 @@ public record Memoria(
             "恋花様ダイエット大作戦",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(2663, 1484, 2928, 1493),
+            [
+                new Status(1355, 1179, 1370, 1188),
+                new Status(1794, 1255, 1459, 1264),
+                new Status(1884, 1331, 1999, 1340),
+                new Status(2573, 1407, 2088, 1416),
+                new Status(2663, 1484, 2928, 1493),
+            ],
             17,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -24063,7 +30016,13 @@ public record Memoria(
             "復讐の炎",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1490, 3288, 1471, 2337),
+            [
+                new Status(1185, 1380, 1166, 1379),
+                new Status(1261, 1619, 1242, 1668),
+                new Status(1337, 2159, 1318, 1758),
+                new Status(1413, 2448, 1394, 2247),
+                new Status(1490, 3288, 1471, 2337),
+            ],
             17,
             new Skill(
                 "ディファースマッシュB Ⅲ+",
@@ -24087,7 +30046,13 @@ public record Memoria(
             "復讐の炎",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1490, 3288, 1471, 2337),
+            [
+                new Status(1185, 1380, 1166, 1379),
+                new Status(1261, 1619, 1242, 1668),
+                new Status(1337, 2159, 1318, 1758),
+                new Status(1413, 2448, 1394, 2247),
+                new Status(1490, 3288, 1471, 2337),
+            ],
             17,
             new Skill(
                 "Sp.パワーアシストC Ⅳ",
@@ -24111,7 +30076,13 @@ public record Memoria(
             "強くなるために",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1417, 1423, 2822, 2569),
+            [
+                new Status(1127, 1133, 1281, 1278),
+                new Status(1199, 1205, 1366, 1713),
+                new Status(1272, 1278, 1901, 1798),
+                new Status(1344, 1350, 1986, 2483),
+                new Status(1417, 1423, 2822, 2569),
+            ],
             17,
             new Skill(
                 "ガードヒールC Ⅲ",
@@ -24135,7 +30106,13 @@ public record Memoria(
             "強くなるために",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(1417, 1423, 2822, 2569),
+            [
+                new Status(1127, 1133, 1281, 1278),
+                new Status(1199, 1205, 1366, 1713),
+                new Status(1272, 1278, 1901, 1798),
+                new Status(1344, 1350, 1986, 2483),
+                new Status(1417, 1423, 2822, 2569),
+            ],
             17,
             new Skill(
                 "ガードブレイクA Ⅳ+",
@@ -24159,7 +30136,13 @@ public record Memoria(
             "大切な貴女への贈り物",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(3434, 1602, 2963, 1589),
+            [
+                new Status(1440, 1266, 1469, 1253),
+                new Status(1539, 1350, 1918, 1337),
+                new Status(2137, 1434, 2016, 1421),
+                new Status(2235, 1518, 2864, 1505),
+                new Status(3434, 1602, 2963, 1589),
+            ],
             18,
             new Skill(
                 "火：パワーフォールB Ⅲ",
@@ -24183,7 +30166,13 @@ public record Memoria(
             "大切な貴女への贈り物",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(3434, 1602, 2963, 1589),
+            [
+                new Status(1440, 1266, 1469, 1253),
+                new Status(1539, 1350, 1918, 1337),
+                new Status(2137, 1434, 2016, 1421),
+                new Status(2235, 1518, 2864, 1505),
+                new Status(3434, 1602, 2963, 1589),
+            ],
             18,
             new Skill(
                 "パワーブレイクA Ⅳ",
@@ -24207,7 +30196,13 @@ public record Memoria(
             "罰執行のお時間です",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(3433, 1595, 2950, 1606),
+            [
+                new Status(1439, 1259, 1456, 1270),
+                new Status(1538, 1343, 1905, 1354),
+                new Status(2136, 1427, 2003, 1438),
+                new Status(2234, 1511, 2851, 1522),
+                new Status(3433, 1595, 2950, 1606),
+            ],
             18,
             new Skill(
                 "パワーヒールC Ⅲ",
@@ -24231,7 +30226,13 @@ public record Memoria(
             "罰執行のお時間です",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(3433, 1595, 2950, 1606),
+            [
+                new Status(1439, 1259, 1456, 1270),
+                new Status(1538, 1343, 1905, 1354),
+                new Status(2136, 1427, 2003, 1438),
+                new Status(2234, 1511, 2851, 1522),
+                new Status(3433, 1595, 2950, 1606),
+            ],
             18,
             new Skill(
                 "パワーストライクB Ⅲ",
@@ -24255,7 +30256,13 @@ public record Memoria(
             "故郷へ想い馳せながら",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1836, 2980, 1825, 3670),
+            [
+                new Status(1414, 1685, 1403, 1675),
+                new Status(1519, 2008, 1508, 1798),
+                new Status(1625, 2132, 1614, 2222),
+                new Status(1730, 2856, 1719, 2346),
+                new Status(1836, 2980, 1825, 3670),
+            ],
             20,
             new Skill(
                 "Sp.マイトアシストB Ⅲ",
@@ -24279,7 +30286,13 @@ public record Memoria(
             "心弛ぶひととき",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1855, 3661, 1833, 2966),
+            [
+                new Status(1433, 1666, 1411, 1671),
+                new Status(1538, 1789, 1516, 1994),
+                new Status(1644, 2213, 1622, 2118),
+                new Status(1749, 2337, 1727, 2842),
+                new Status(1855, 3661, 1833, 2966),
+            ],
             20,
             new Skill(
                 "水：スマッシュB Ⅲ",
@@ -24303,7 +30316,13 @@ public record Memoria(
             "元日の決斗！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1845, 3640, 1831, 2980),
+            [
+                new Status(1423, 1645, 1409, 1685),
+                new Status(1528, 1768, 1514, 2008),
+                new Status(1634, 2192, 1620, 2132),
+                new Status(1739, 2316, 1725, 2856),
+                new Status(1845, 3640, 1831, 2980),
+            ],
             20,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
@@ -24327,7 +30346,13 @@ public record Memoria(
             "気高き錬金術師",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(2993, 1571, 2477, 1570),
+            [
+                new Status(1438, 1226, 1422, 1225),
+                new Status(1539, 1312, 1673, 1311),
+                new Status(1890, 1398, 1774, 1397),
+                new Status(1991, 1484, 2375, 1483),
+                new Status(2993, 1571, 2477, 1570),
+            ],
             19,
             new Skill(
                 "パワーストライクA Ⅳ",
@@ -24351,7 +30376,13 @@ public record Memoria(
             "ガンズ・パーティー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2992, 1576, 2491, 1553),
+            [
+                new Status(1437, 1231, 1436, 1208),
+                new Status(1538, 1317, 1687, 1294),
+                new Status(1889, 1403, 1788, 1380),
+                new Status(1990, 1489, 2389, 1466),
+                new Status(2992, 1576, 2491, 1553),
+            ],
             19,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -24375,7 +30406,13 @@ public record Memoria(
             "神獣鏡の輝き",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(1562, 1564, 2996, 2485),
+            [
+                new Status(1217, 1219, 1441, 1430),
+                new Status(1303, 1305, 1542, 1681),
+                new Status(1389, 1391, 1893, 1782),
+                new Status(1475, 1477, 1994, 2383),
+                new Status(1562, 1564, 2996, 2485),
+            ],
             19,
             new Skill(
                 "WガードアシストB Ⅲ",
@@ -24399,7 +30436,13 @@ public record Memoria(
             "絆の歌",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(1544, 3366, 1530, 2402),
+            [
+                new Status(1224, 1440, 1210, 1426),
+                new Status(1304, 1684, 1290, 1720),
+                new Status(1384, 2228, 1370, 1814),
+                new Status(1464, 2522, 1450, 2308),
+                new Status(1544, 3366, 1530, 2402),
+            ],
             17,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
@@ -24423,7 +30466,13 @@ public record Memoria(
             "絆の歌",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(1544, 3366, 1530, 2402),
+            [
+                new Status(1224, 1440, 1210, 1426),
+                new Status(1304, 1684, 1290, 1720),
+                new Status(1384, 2228, 1370, 1814),
+                new Status(1464, 2522, 1450, 2308),
+                new Status(1544, 3366, 1530, 2402),
+            ],
             17,
             new Skill(
                 "Sp.パワーフォールB Ⅲ",
@@ -24447,7 +30496,13 @@ public record Memoria(
             "戦いの合間に",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1522, 2462, 1507, 2241),
+            [
+                new Status(1186, 1368, 1171, 1397),
+                new Status(1270, 1467, 1255, 1646),
+                new Status(1354, 1765, 1339, 1744),
+                new Status(1438, 1863, 1423, 2142),
+                new Status(1522, 2462, 1507, 2241),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -24471,7 +30526,13 @@ public record Memoria(
             "輝きの海岸線",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1494, 1459, 2689, 2913),
+            [
+                new Status(1189, 1154, 1381, 1355),
+                new Status(1265, 1230, 1820, 1444),
+                new Status(1341, 1306, 1910, 1984),
+                new Status(1417, 1382, 2599, 2073),
+                new Status(1494, 1459, 2689, 2913),
+            ],
             17,
             new Skill(
                 "WガードフォールB Ⅲ",
@@ -24495,7 +30556,13 @@ public record Memoria(
             "輝きの海岸線",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(1494, 1459, 2689, 2913),
+            [
+                new Status(1189, 1154, 1381, 1355),
+                new Status(1265, 1230, 1820, 1444),
+                new Status(1341, 1306, 1910, 1984),
+                new Status(1417, 1382, 2599, 2073),
+                new Status(1494, 1459, 2689, 2913),
+            ],
             17,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -24519,7 +30586,13 @@ public record Memoria(
             "ざっぱ～～ん！",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1532, 2766, 1532, 3001),
+            [
+                new Status(1212, 1440, 1212, 1425),
+                new Status(1292, 1884, 1292, 1519),
+                new Status(1372, 1978, 1372, 2063),
+                new Status(1452, 2672, 1452, 2157),
+                new Status(1532, 2766, 1532, 3001),
+            ],
             17,
             new Skill(
                 "水：Sp.パワーアシストB Ⅲ",
@@ -24543,7 +30616,13 @@ public record Memoria(
             "ざっぱ～～ん！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1532, 2766, 1532, 3001),
+            [
+                new Status(1212, 1440, 1212, 1425),
+                new Status(1292, 1884, 1292, 1519),
+                new Status(1372, 1978, 1372, 2063),
+                new Status(1452, 2672, 1452, 2157),
+                new Status(1532, 2766, 1532, 3001),
+            ],
             17,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -24567,7 +30646,13 @@ public record Memoria(
             "白花咲く港",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(1461, 2901, 2687, 1481),
+            [
+                new Status(1156, 1343, 1379, 1176),
+                new Status(1232, 1432, 1818, 1252),
+                new Status(1308, 1972, 1908, 1328),
+                new Status(1384, 2061, 2597, 1404),
+                new Status(1461, 2901, 2687, 1481),
+            ],
             17,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
@@ -24591,7 +30676,13 @@ public record Memoria(
             "白花咲く港",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1461, 2901, 2687, 1481),
+            [
+                new Status(1156, 1343, 1379, 1176),
+                new Status(1232, 1432, 1818, 1252),
+                new Status(1308, 1972, 1908, 1328),
+                new Status(1384, 2061, 2597, 1404),
+                new Status(1461, 2901, 2687, 1481),
+            ],
             17,
             new Skill(
                 "Sp.パワーアシストA Ⅳ",
@@ -24615,7 +30706,13 @@ public record Memoria(
             "一柳隊、大特集！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2857, 1409, 2606, 1389),
+            [
+                new Status(1316, 1119, 1315, 1099),
+                new Status(1401, 1191, 1750, 1171),
+                new Status(1936, 1264, 1835, 1244),
+                new Status(2021, 1336, 2520, 1316),
+                new Status(2857, 1409, 2606, 1389),
+            ],
             17,
             new Skill(
                 "火：ガードアシストC Ⅳ",
@@ -24639,7 +30736,13 @@ public record Memoria(
             "一柳隊、大特集！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2857, 1409, 2606, 1389),
+            [
+                new Status(1316, 1119, 1315, 1099),
+                new Status(1401, 1191, 1750, 1171),
+                new Status(1936, 1264, 1835, 1244),
+                new Status(2021, 1336, 2520, 1316),
+                new Status(2857, 1409, 2606, 1389),
+            ],
             17,
             new Skill(
                 "ストライクC Ⅲ",
@@ -24663,7 +30766,13 @@ public record Memoria(
             "あなたに傘を",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1469, 2670, 1473, 2921),
+            [
+                new Status(1164, 1362, 1168, 1363),
+                new Status(1240, 1801, 1244, 1452),
+                new Status(1316, 1891, 1320, 1992),
+                new Status(1392, 2580, 1396, 2081),
+                new Status(1469, 2670, 1473, 2921),
+            ],
             17,
             new Skill(
                 "Sp.ガードフォールC Ⅳ",
@@ -24687,7 +30796,13 @@ public record Memoria(
             "あなたに傘を",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1469, 2670, 1473, 2921),
+            [
+                new Status(1164, 1362, 1168, 1363),
+                new Status(1240, 1801, 1244, 1452),
+                new Status(1316, 1891, 1320, 1992),
+                new Status(1392, 2580, 1396, 2081),
+                new Status(1469, 2670, 1473, 2921),
+            ],
             17,
             new Skill(
                 "Sp.パワースマッシュA Ⅲ+",
@@ -24711,7 +30826,13 @@ public record Memoria(
             "情熱の取材前夜！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(2939, 1478, 2680, 1476),
+            [
+                new Status(1381, 1173, 1372, 1171),
+                new Status(1470, 1249, 1811, 1247),
+                new Status(2010, 1325, 1901, 1323),
+                new Status(2099, 1401, 2590, 1399),
+                new Status(2939, 1478, 2680, 1476),
+            ],
             17,
             new Skill(
                 "マイトストライクA Ⅳ+",
@@ -24735,7 +30856,13 @@ public record Memoria(
             "情熱の取材前夜！",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(2939, 1478, 2680, 1476),
+            [
+                new Status(1381, 1173, 1372, 1171),
+                new Status(1470, 1249, 1811, 1247),
+                new Status(2010, 1325, 1901, 1323),
+                new Status(2099, 1401, 2590, 1399),
+                new Status(2939, 1478, 2680, 1476),
+            ],
             17,
             new Skill(
                 "ガードヒールC Ⅲ",
@@ -24759,7 +30886,13 @@ public record Memoria(
             "姫歌を脅かす2つの新星",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1421, 1423, 2827, 2591),
+            [
+                new Status(1131, 1133, 1286, 1300),
+                new Status(1203, 1205, 1371, 1735),
+                new Status(1276, 1278, 1906, 1820),
+                new Status(1348, 1350, 1991, 2505),
+                new Status(1421, 1423, 2827, 2591),
+            ],
             17,
             new Skill(
                 "パワーヒールC Ⅲ",
@@ -24783,7 +30916,13 @@ public record Memoria(
             "姫歌を脅かす2つの新星",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1421, 1423, 2827, 2591),
+            [
+                new Status(1131, 1133, 1286, 1300),
+                new Status(1203, 1205, 1371, 1735),
+                new Status(1276, 1278, 1906, 1820),
+                new Status(1348, 1350, 1991, 2505),
+                new Status(1421, 1423, 2827, 2591),
+            ],
             17,
             new Skill(
                 "Sp.ガードバーストA Ⅳ+",
@@ -24807,7 +30946,13 @@ public record Memoria(
             "ハッピー☆シューティングスター",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(2842, 1400, 1396, 2579),
+            [
+                new Status(1301, 1110, 1106, 1288),
+                new Status(1386, 1182, 1178, 1723),
+                new Status(1921, 1255, 1251, 1808),
+                new Status(2006, 1327, 1323, 2493),
+                new Status(2842, 1400, 1396, 2579),
+            ],
             17,
             new Skill(
                 "ヒールストライクA Ⅳ",
@@ -24831,7 +30976,13 @@ public record Memoria(
             "ハッピー☆シューティングスター",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2842, 1400, 1396, 2579),
+            [
+                new Status(1301, 1110, 1106, 1288),
+                new Status(1386, 1182, 1178, 1723),
+                new Status(1921, 1255, 1251, 1808),
+                new Status(2006, 1327, 1323, 2493),
+                new Status(2842, 1400, 1396, 2579),
+            ],
             17,
             new Skill(
                 "マイトアシストB Ⅲ",
@@ -24855,7 +31006,13 @@ public record Memoria(
             "プレゼントはお任せ♪",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(2906, 1490, 2656, 1475),
+            [
+                new Status(1348, 1185, 1348, 1170),
+                new Status(1437, 1261, 1787, 1246),
+                new Status(1977, 1337, 1877, 1322),
+                new Status(2066, 1413, 2566, 1398),
+                new Status(2906, 1490, 2656, 1475),
+            ],
             17,
             new Skill(
                 "マイトブレイクB Ⅲ+",
@@ -24879,7 +31036,13 @@ public record Memoria(
             "プレゼントはお任せ♪",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2906, 1490, 2656, 1475),
+            [
+                new Status(1348, 1185, 1348, 1170),
+                new Status(1437, 1261, 1787, 1246),
+                new Status(1977, 1337, 1877, 1322),
+                new Status(2066, 1413, 2566, 1398),
+                new Status(2906, 1490, 2656, 1475),
+            ],
             17,
             new Skill(
                 "風：ガードアシストB Ⅲ",
@@ -24903,7 +31066,13 @@ public record Memoria(
             "リリィのすべてを伝えるために",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1527, 3358, 1544, 2419),
+            [
+                new Status(1207, 1432, 1224, 1443),
+                new Status(1287, 1676, 1304, 1737),
+                new Status(1367, 2220, 1384, 1831),
+                new Status(1447, 2514, 1464, 2325),
+                new Status(1527, 3358, 1544, 2419),
+            ],
             17,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -24927,7 +31096,13 @@ public record Memoria(
             "リリィのすべてを伝えるために",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1527, 3358, 1544, 2419),
+            [
+                new Status(1207, 1432, 1224, 1443),
+                new Status(1287, 1676, 1304, 1737),
+                new Status(1367, 2220, 1384, 1831),
+                new Status(1447, 2514, 1464, 2325),
+                new Status(1527, 3358, 1544, 2419),
+            ],
             17,
             new Skill(
                 "Sp.パワーヒールC Ⅲ",
@@ -24951,7 +31126,13 @@ public record Memoria(
             "キャッチ＆リリース＆イート",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2548, 1410, 2725, 1425),
+            [
+                new Status(1307, 1120, 1284, 1135),
+                new Status(1742, 1192, 1369, 1207),
+                new Status(1827, 1265, 1854, 1280),
+                new Status(2462, 1337, 1939, 1352),
+                new Status(2548, 1410, 2725, 1425),
+            ],
             17,
             new Skill(
                 "マイトアシストB Ⅲ",
@@ -24975,7 +31156,13 @@ public record Memoria(
             "キャッチ＆リリース＆イート",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(2548, 1410, 2725, 1425),
+            [
+                new Status(1307, 1120, 1284, 1135),
+                new Status(1742, 1192, 1369, 1207),
+                new Status(1827, 1265, 1854, 1280),
+                new Status(2462, 1337, 1939, 1352),
+                new Status(2548, 1410, 2725, 1425),
+            ],
             17,
             new Skill(
                 "ガードストライクA Ⅳ",
@@ -24999,7 +31186,13 @@ public record Memoria(
             "これまでも、これからも隣で",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(3170, 1419, 2249, 1406),
+            [
+                new Status(1279, 1129, 1308, 1116),
+                new Status(1514, 1201, 1593, 1188),
+                new Status(2049, 1274, 1678, 1261),
+                new Status(2334, 1346, 2163, 1333),
+                new Status(3170, 1419, 2249, 1406),
+            ],
             17,
             new Skill(
                 "パワーストライクB Ⅲ",
@@ -25023,7 +31216,13 @@ public record Memoria(
             "これまでも、これからも隣で",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(3170, 1419, 2249, 1406),
+            [
+                new Status(1279, 1129, 1308, 1116),
+                new Status(1514, 1201, 1593, 1188),
+                new Status(2049, 1274, 1678, 1261),
+                new Status(2334, 1346, 2163, 1333),
+                new Status(3170, 1419, 2249, 1406),
+            ],
             17,
             new Skill(
                 "パワーフォールB Ⅲ",
@@ -25047,7 +31246,13 @@ public record Memoria(
             "リリィになるために！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1568, 2970, 1568, 2498),
+            [
+                new Status(1223, 1415, 1223, 1443),
+                new Status(1309, 1516, 1309, 1694),
+                new Status(1395, 1867, 1395, 1795),
+                new Status(1481, 1968, 1481, 2396),
+                new Status(1568, 2970, 1568, 2498),
+            ],
             19,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -25071,7 +31276,13 @@ public record Memoria(
             "結梨の大好きな場所",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1467, 2902, 1461, 2684),
+            [
+                new Status(1162, 1344, 1156, 1376),
+                new Status(1238, 1433, 1232, 1815),
+                new Status(1314, 1973, 1308, 1905),
+                new Status(1390, 2062, 1384, 2594),
+                new Status(1467, 2902, 1461, 2684),
+            ],
             17,
             new Skill(
                 "Sp.ガードバーストA Ⅳ+",
@@ -25095,7 +31306,13 @@ public record Memoria(
             "結梨の大好きな場所",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1467, 2902, 1461, 2684),
+            [
+                new Status(1162, 1344, 1156, 1376),
+                new Status(1238, 1433, 1232, 1815),
+                new Status(1314, 1973, 1308, 1905),
+                new Status(1390, 2062, 1384, 2594),
+                new Status(1467, 2902, 1461, 2684),
+            ],
             17,
             new Skill(
                 "Sp.パワーフォールB Ⅲ",
@@ -25119,7 +31336,13 @@ public record Memoria(
             "みんな、ガンバレー！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(2997, 1581, 2470, 1545),
+            [
+                new Status(1442, 1236, 1415, 1200),
+                new Status(1543, 1322, 1666, 1286),
+                new Status(1894, 1408, 1767, 1372),
+                new Status(1995, 1494, 2368, 1458),
+                new Status(2997, 1581, 2470, 1545),
+            ],
             19,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -25143,7 +31366,13 @@ public record Memoria(
             "冷たいラムネをどうぞ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1558, 1553, 2496, 2970),
+            [
+                new Status(1213, 1208, 1441, 1415),
+                new Status(1299, 1294, 1692, 1516),
+                new Status(1385, 1380, 1793, 1867),
+                new Status(1471, 1466, 2394, 1968),
+                new Status(1558, 1553, 2496, 2970),
+            ],
             19,
             new Skill(
                 "ヒールD Ⅲ",
@@ -25167,7 +31396,13 @@ public record Memoria(
             "リワード・マイセルフ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2906, 1463, 2688, 1479),
+            [
+                new Status(1348, 1158, 1380, 1174),
+                new Status(1437, 1234, 1819, 1250),
+                new Status(1977, 1310, 1909, 1326),
+                new Status(2066, 1386, 2598, 1402),
+                new Status(2906, 1463, 2688, 1479),
+            ],
             17,
             new Skill(
                 "パワーアシストC Ⅳ",
@@ -25191,7 +31426,13 @@ public record Memoria(
             "リワード・マイセルフ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2906, 1463, 2688, 1479),
+            [
+                new Status(1348, 1158, 1380, 1174),
+                new Status(1437, 1234, 1819, 1250),
+                new Status(1977, 1310, 1909, 1326),
+                new Status(2066, 1386, 2598, 1402),
+                new Status(2906, 1463, 2688, 1479),
+            ],
             17,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -25215,7 +31456,13 @@ public record Memoria(
             "トライング・オン",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(2931, 1474, 2653, 1466),
+            [
+                new Status(1373, 1169, 1345, 1161),
+                new Status(1462, 1245, 1784, 1237),
+                new Status(2002, 1321, 1874, 1313),
+                new Status(2091, 1397, 2563, 1389),
+                new Status(2931, 1474, 2653, 1466),
+            ],
             17,
             new Skill(
                 "パワーストライクA Ⅳ",
@@ -25239,7 +31486,13 @@ public record Memoria(
             "トライング・オン",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(2931, 1474, 2653, 1466),
+            [
+                new Status(1373, 1169, 1345, 1161),
+                new Status(1462, 1245, 1784, 1237),
+                new Status(2002, 1321, 1874, 1313),
+                new Status(2091, 1397, 2563, 1389),
+                new Status(2931, 1474, 2653, 1466),
+            ],
             17,
             new Skill(
                 "Sp.マイトフォールA Ⅲ",
@@ -25263,7 +31516,13 @@ public record Memoria(
             "気まぐれのツーショット",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(1568, 2994, 1561, 2505),
+            [
+                new Status(1223, 1439, 1216, 1450),
+                new Status(1309, 1540, 1302, 1701),
+                new Status(1395, 1891, 1388, 1802),
+                new Status(1481, 1992, 1474, 2403),
+                new Status(1568, 2994, 1561, 2505),
+            ],
             19,
             new Skill(
                 "Sp.ガードフォールC Ⅳ",
@@ -25287,7 +31546,13 @@ public record Memoria(
             "藍の宝物",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1410, 2383, 2220, 2249),
+            [
+                new Status(1120, 1292, 1130, 1308),
+                new Status(1192, 1527, 1202, 1593),
+                new Status(1265, 1762, 1575, 1678),
+                new Status(1337, 2047, 1647, 2163),
+                new Status(1410, 2383, 2220, 2249),
+            ],
             17,
             new Skill(
                 "Sp.パワーアシストC Ⅳ",
@@ -25311,7 +31576,13 @@ public record Memoria(
             "藍の宝物",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1410, 2383, 2220, 2249),
+            [
+                new Status(1120, 1292, 1130, 1308),
+                new Status(1192, 1527, 1202, 1593),
+                new Status(1265, 1762, 1575, 1678),
+                new Status(1337, 2047, 1647, 2163),
+                new Status(1410, 2383, 2220, 2249),
+            ],
             17,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -25335,7 +31606,13 @@ public record Memoria(
             "指先と白いペン",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(3391, 1743, 2764, 1750),
+            [
+                new Status(1347, 1152, 1365, 1191),
+                new Status(1436, 1228, 1704, 1267),
+                new Status(1776, 1304, 1794, 1343),
+                new Status(1865, 1380, 2383, 1419),
+                new Status(3055, 1457, 2473, 1496),
+            ],
             17,
             new Skill(
                 "パワーストライクB Ⅲ",
@@ -25360,7 +31637,13 @@ public record Memoria(
             "指先と白いペン",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(3391, 1743, 2764, 1750),
+            [
+                new Status(1347, 1152, 1365, 1191),
+                new Status(1436, 1228, 1704, 1267),
+                new Status(1776, 1304, 1794, 1343),
+                new Status(1865, 1380, 2383, 1419),
+                new Status(3055, 1457, 2473, 1496),
+            ],
             17,
             new Skill(
                 "ヒールD Ⅲ",
@@ -25385,7 +31668,13 @@ public record Memoria(
             "エレクトロンバウト！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1575, 2987, 1572, 2502),
+            [
+                new Status(1230, 1432, 1227, 1447),
+                new Status(1316, 1533, 1313, 1698),
+                new Status(1402, 1884, 1399, 1799),
+                new Status(1488, 1985, 1485, 2400),
+                new Status(1575, 2987, 1572, 2502),
+            ],
             19,
             new Skill(
                 "ヒールスマッシュB Ⅲ",
@@ -25409,7 +31698,13 @@ public record Memoria(
             "悲壮の華",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1464, 1484, 3276, 2300),
+            [
+                new Status(1159, 1179, 1368, 1342),
+                new Status(1235, 1255, 1607, 1631),
+                new Status(1311, 1331, 2147, 1721),
+                new Status(1387, 1407, 2436, 2210),
+                new Status(1464, 1484, 3276, 2300),
+            ],
             17,
             new Skill(
                 "ガードアシストD Ⅲ",
@@ -25433,7 +31728,13 @@ public record Memoria(
             "悲壮の華",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(1464, 1484, 3276, 2300),
+            [
+                new Status(1159, 1179, 1368, 1342),
+                new Status(1235, 1255, 1607, 1631),
+                new Status(1311, 1331, 2147, 1721),
+                new Status(1387, 1407, 2436, 2210),
+                new Status(1464, 1484, 3276, 2300),
+            ],
             17,
             new Skill(
                 "パワーブレイクB Ⅲ",
@@ -25457,7 +31758,13 @@ public record Memoria(
             "鬼さんズ、こちら",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(3356, 1554, 2399, 1565),
+            [
+                new Status(1430, 1234, 1423, 1245),
+                new Status(1674, 1314, 1717, 1325),
+                new Status(2218, 1394, 1811, 1405),
+                new Status(2512, 1474, 2305, 1485),
+                new Status(3356, 1554, 2399, 1565),
+            ],
             17,
             new Skill(
                 "ガードブレイクA Ⅳ+",
@@ -25481,7 +31788,13 @@ public record Memoria(
             "鬼さんズ、こちら",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(3356, 1554, 2399, 1565),
+            [
+                new Status(1430, 1234, 1423, 1245),
+                new Status(1674, 1314, 1717, 1325),
+                new Status(2218, 1394, 1811, 1405),
+                new Status(2512, 1474, 2305, 1485),
+                new Status(3356, 1554, 2399, 1565),
+            ],
             17,
             new Skill(
                 "ガードヒールC Ⅲ",
@@ -25505,7 +31818,13 @@ public record Memoria(
             "優美なる舞",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1397, 1652, 2598, 2600),
+            [
+                new Status(1107, 1311, 1307, 1110),
+                new Status(1179, 1396, 1742, 1182),
+                new Status(1252, 1481, 1827, 1705),
+                new Status(1324, 1566, 2512, 1777),
+                new Status(1397, 1652, 2598, 2600),
+            ],
             17,
             new Skill(
                 "WガードスマッシュB Ⅲ+",
@@ -25529,7 +31848,13 @@ public record Memoria(
             "優美なる舞",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(1397, 1652, 2598, 2600),
+            [
+                new Status(1107, 1311, 1307, 1110),
+                new Status(1179, 1396, 1742, 1182),
+                new Status(1252, 1481, 1827, 1705),
+                new Status(1324, 1566, 2512, 1777),
+                new Status(1397, 1652, 2598, 2600),
+            ],
             17,
             new Skill(
                 "Sp.ガードフォールB Ⅲ",
@@ -25553,7 +31878,13 @@ public record Memoria(
             "美しき鉄糸の舞",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1485, 2900, 1494, 2685),
+            [
+                new Status(1180, 1342, 1189, 1377),
+                new Status(1256, 1431, 1265, 1816),
+                new Status(1332, 1971, 1341, 1906),
+                new Status(1408, 2060, 1417, 2595),
+                new Status(1485, 2900, 1494, 2685),
+            ],
             17,
             new Skill(
                 "Sp.パワーアシストC Ⅳ",
@@ -25577,7 +31908,13 @@ public record Memoria(
             "美しき鉄糸の舞",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1485, 2900, 1494, 2685),
+            [
+                new Status(1180, 1342, 1189, 1377),
+                new Status(1256, 1431, 1265, 1816),
+                new Status(1332, 1971, 1341, 1906),
+                new Status(1408, 2060, 1417, 2595),
+                new Status(1485, 2900, 1494, 2685),
+            ],
             17,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -25601,7 +31938,13 @@ public record Memoria(
             "駆けろ！エージェント",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1571, 2992, 1838, 2471),
+            [
+                new Status(1226, 1437, 1433, 1416),
+                new Status(1312, 1538, 1534, 1667),
+                new Status(1398, 1889, 1635, 1768),
+                new Status(1484, 1990, 1736, 2369),
+                new Status(1571, 2992, 1838, 2471),
+            ],
             19,
             new Skill(
                 "Sp.パワースマッシュA Ⅲ",
@@ -25625,7 +31968,13 @@ public record Memoria(
             "スピード☆スター",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2469, 2216, 1518, 1520),
+            [
+                new Status(1375, 1372, 1182, 1184),
+                new Status(1474, 1621, 1266, 1268),
+                new Status(1772, 1719, 1350, 1352),
+                new Status(1870, 2117, 1434, 1436),
+                new Status(2469, 2216, 1518, 1520),
+            ],
             18,
             new Skill(
                 "WパワーアシストB Ⅲ",
@@ -25649,7 +31998,13 @@ public record Memoria(
             "電光石火でご到着！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(2489, 1509, 2221, 1531),
+            [
+                new Status(1395, 1173, 1377, 1195),
+                new Status(1494, 1257, 1626, 1279),
+                new Status(1792, 1341, 1724, 1363),
+                new Status(1890, 1425, 2122, 1447),
+                new Status(2489, 1509, 2221, 1531),
+            ],
             18,
             new Skill(
                 "風：ストライクC Ⅲ",
@@ -25673,7 +32028,13 @@ public record Memoria(
             "街角の寡黙な花",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1574, 2515, 1542, 2288),
+            [
+                new Status(1229, 1409, 1197, 1432),
+                new Status(1315, 1510, 1283, 1683),
+                new Status(1401, 1812, 1369, 1785),
+                new Status(1487, 1913, 1455, 2186),
+                new Status(1574, 2515, 1542, 2288),
+            ],
             18,
             new Skill(
                 "ディファースマッシュB Ⅲ",
@@ -25697,7 +32058,13 @@ public record Memoria(
             "アクアプラクティス",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(2925, 1461, 2678, 1473),
+            [
+                new Status(1367, 1156, 1370, 1168),
+                new Status(1456, 1232, 1809, 1244),
+                new Status(1996, 1308, 1899, 1320),
+                new Status(2085, 1384, 2588, 1396),
+                new Status(2925, 1461, 2678, 1473),
+            ],
             17,
             new Skill(
                 "パワーストライクA Ⅲ+",
@@ -25721,7 +32088,13 @@ public record Memoria(
             "アクアプラクティス",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2925, 1461, 2678, 1473),
+            [
+                new Status(1367, 1156, 1370, 1168),
+                new Status(1456, 1232, 1809, 1244),
+                new Status(1996, 1308, 1899, 1320),
+                new Status(2085, 1384, 2588, 1396),
+                new Status(2925, 1461, 2678, 1473),
+            ],
             17,
             new Skill(
                 "WガードアシストB Ⅲ",
@@ -25745,7 +32118,13 @@ public record Memoria(
             "二水のヘイムスクリングラ体験",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1499, 2484, 1514, 2230),
+            [
+                new Status(1163, 1390, 1178, 1386),
+                new Status(1247, 1489, 1262, 1635),
+                new Status(1331, 1787, 1346, 1733),
+                new Status(1415, 1885, 1430, 2131),
+                new Status(1499, 2484, 1514, 2230),
+            ],
             18,
             new Skill(
                 "Sp.パワーフォールB Ⅲ",
@@ -25769,7 +32148,13 @@ public record Memoria(
             "勝利の女神が微笑む時",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1522, 1509, 2219, 2482),
+            [
+                new Status(1186, 1173, 1375, 1388),
+                new Status(1270, 1257, 1624, 1487),
+                new Status(1354, 1341, 1722, 1785),
+                new Status(1438, 1425, 2120, 1883),
+                new Status(1522, 1509, 2219, 2482),
+            ],
             18,
             new Skill(
                 "パワーヒールB Ⅲ",
@@ -25793,7 +32178,13 @@ public record Memoria(
             "プレシャス・モーニング",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2954, 1528, 2710, 1519),
+            [
+                new Status(1387, 1215, 1393, 1206),
+                new Status(1478, 1293, 1834, 1284),
+                new Status(2020, 1371, 1926, 1362),
+                new Status(2112, 1449, 2618, 1440),
+                new Status(2954, 1528, 2710, 1519),
+            ],
             17,
             new Skill(
                 "マイトアシストB Ⅲ",
@@ -25817,7 +32208,13 @@ public record Memoria(
             "プレシャス・モーニング",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(2954, 1528, 2710, 1519),
+            [
+                new Status(1387, 1215, 1393, 1206),
+                new Status(1478, 1293, 1834, 1284),
+                new Status(2020, 1371, 1926, 1362),
+                new Status(2112, 1449, 2618, 1440),
+                new Status(2954, 1528, 2710, 1519),
+            ],
             17,
             new Skill(
                 "マイトストライクB Ⅲ+",
@@ -25841,7 +32238,13 @@ public record Memoria(
             "フォール・ダウン・アタック",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1502, 1508, 2492, 2228),
+            [
+                new Status(1166, 1172, 1398, 1384),
+                new Status(1250, 1256, 1497, 1633),
+                new Status(1334, 1340, 1795, 1731),
+                new Status(1418, 1424, 1893, 2129),
+                new Status(1502, 1508, 2492, 2228),
+            ],
             18,
             new Skill(
                 "ガードヒールD Ⅲ",
@@ -25865,7 +32268,13 @@ public record Memoria(
             "ホワイト・ラビット・マジック！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1506, 2472, 1499, 2213),
+            [
+                new Status(1170, 1378, 1163, 1369),
+                new Status(1254, 1477, 1247, 1618),
+                new Status(1338, 1775, 1331, 1716),
+                new Status(1422, 1873, 1415, 2114),
+                new Status(1506, 2472, 1499, 2213),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -25889,7 +32298,13 @@ public record Memoria(
             "プレ・ハロウィンパーティー！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(1507, 2485, 1522, 2244),
+            [
+                new Status(1171, 1391, 1186, 1400),
+                new Status(1255, 1490, 1270, 1649),
+                new Status(1339, 1788, 1354, 1747),
+                new Status(1423, 1886, 1438, 2145),
+                new Status(1507, 2485, 1522, 2244),
+            ],
             18,
             new Skill(
                 "Sp.パワーフォールB Ⅲ",
@@ -25913,7 +32328,13 @@ public record Memoria(
             "ようこそ！ふしぎの国へ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1569, 1561, 2471, 2994),
+            [
+                new Status(1224, 1216, 1416, 1439),
+                new Status(1310, 1302, 1667, 1540),
+                new Status(1396, 1388, 1768, 1891),
+                new Status(1482, 1474, 2369, 1992),
+                new Status(1569, 1561, 2471, 2994),
+            ],
             19,
             new Skill(
                 "パワーヒールC Ⅲ",
@@ -25937,7 +32358,13 @@ public record Memoria(
             "おいでよ☆ハロウィン",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(2971, 1545, 2489, 1584),
+            [
+                new Status(1416, 1200, 1434, 1239),
+                new Status(1517, 1286, 1685, 1325),
+                new Status(1868, 1372, 1786, 1411),
+                new Status(1969, 1458, 2387, 1497),
+                new Status(2971, 1545, 2489, 1584),
+            ],
             19,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -25961,7 +32388,13 @@ public record Memoria(
             "一直線上のストラテジー",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(1532, 2939, 1515, 1760),
+            [
+                new Status(1196, 1395, 1179, 1366),
+                new Status(1280, 1644, 1263, 1465),
+                new Status(1364, 1942, 1347, 1563),
+                new Status(1448, 2340, 1431, 1661),
+                new Status(1532, 2939, 1515, 1760),
+            ],
             18,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
@@ -25985,7 +32418,13 @@ public record Memoria(
             "この空の下で",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1509, 1506, 2207, 2493),
+            [
+                new Status(1173, 1170, 1363, 1399),
+                new Status(1257, 1254, 1612, 1498),
+                new Status(1341, 1338, 1710, 1796),
+                new Status(1425, 1422, 2108, 1894),
+                new Status(1509, 1506, 2207, 2493),
+            ],
             18,
             new Skill(
                 "Sp.ガードフォールB Ⅲ",
@@ -26009,7 +32448,13 @@ public record Memoria(
             "追跡者",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(2468, 2241, 1524, 1508),
+            [
+                new Status(1374, 1397, 1188, 1172),
+                new Status(1473, 1646, 1272, 1256),
+                new Status(1771, 1744, 1356, 1340),
+                new Status(1869, 2142, 1440, 1424),
+                new Status(2468, 2241, 1524, 1508),
+            ],
             18,
             new Skill(
                 "Sp.パワーブレイクB Ⅲ",
@@ -26033,7 +32478,13 @@ public record Memoria(
             "花を束ねる者",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1578, 2978, 1547, 2488),
+            [
+                new Status(1233, 1423, 1202, 1433),
+                new Status(1319, 1524, 1288, 1684),
+                new Status(1405, 1875, 1374, 1785),
+                new Status(1491, 1976, 1460, 2386),
+                new Status(1578, 2978, 1547, 2488),
+            ],
             19,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -26057,7 +32508,13 @@ public record Memoria(
             "姉妹の休息",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1509, 1510, 2226, 2462),
+            [
+                new Status(1173, 1174, 1382, 1368),
+                new Status(1257, 1258, 1631, 1467),
+                new Status(1341, 1342, 1729, 1765),
+                new Status(1425, 1426, 2127, 1863),
+                new Status(1509, 1510, 2226, 2462),
+            ],
             18,
             new Skill(
                 "Sp.ガードヒールD Ⅲ",
@@ -26081,7 +32538,13 @@ public record Memoria(
             "凛々しい花々",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
-            new Status(2552, 1587, 2302, 1605),
+            [
+                new Status(1438, 1235, 1438, 1253),
+                new Status(1542, 1323, 1692, 1341),
+                new Status(1845, 1411, 1795, 1429),
+                new Status(1948, 1499, 2198, 1517),
+                new Status(2552, 1587, 2302, 1605),
+            ],
             18,
             new Skill(
                 "パワーストライクB Ⅲ",
@@ -26105,7 +32568,13 @@ public record Memoria(
             "わたしたちの魔法",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(1561, 2504, 1557, 2981),
+            [
+                new Status(1216, 1449, 1212, 1426),
+                new Status(1302, 1700, 1298, 1527),
+                new Status(1388, 1801, 1384, 1878),
+                new Status(1474, 2402, 1470, 1979),
+                new Status(1561, 2504, 1557, 2981),
+            ],
             19,
             new Skill(
                 "Sp.ガードアシストC Ⅳ",
@@ -26129,7 +32598,13 @@ public record Memoria(
             "貫く想いの一撃",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1549, 2967, 1581, 2491),
+            [
+                new Status(1204, 1412, 1236, 1436),
+                new Status(1290, 1513, 1322, 1687),
+                new Status(1376, 1864, 1408, 1788),
+                new Status(1462, 1965, 1494, 2389),
+                new Status(1549, 2967, 1581, 2491),
+            ],
             19,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -26153,7 +32628,13 @@ public record Memoria(
             "プリンセスひめひめ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2913, 1522, 1786, 1501),
+            [
+                new Status(1369, 1186, 1392, 1165),
+                new Status(1618, 1270, 1491, 1249),
+                new Status(1916, 1354, 1589, 1333),
+                new Status(2314, 1438, 1687, 1417),
+                new Status(2913, 1522, 1786, 1501),
+            ],
             18,
             new Skill(
                 "パワーフォールC Ⅳ",
@@ -26177,7 +32658,13 @@ public record Memoria(
             "いつかみんなと見る景色",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(3006, 1579, 2492, 1569),
+            [
+                new Status(1451, 1234, 1437, 1224),
+                new Status(1552, 1320, 1688, 1310),
+                new Status(1903, 1406, 1789, 1396),
+                new Status(2004, 1492, 2390, 1482),
+                new Status(3006, 1579, 2492, 1569),
+            ],
             19,
             new Skill(
                 "パワーストライクB Ⅲ",
@@ -26201,7 +32688,13 @@ public record Memoria(
             "繋げたい言葉",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(1500, 2470, 1530, 2230),
+            [
+                new Status(1164, 1376, 1194, 1386),
+                new Status(1248, 1475, 1278, 1635),
+                new Status(1332, 1773, 1362, 1733),
+                new Status(1416, 1871, 1446, 2131),
+                new Status(1500, 2470, 1530, 2230),
+            ],
             18,
             new Skill(
                 "Sp.ガードフォールB Ⅲ",
@@ -26225,7 +32718,13 @@ public record Memoria(
             "夏祭りのスナイパー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(2496, 1517, 2245, 1497),
+            [
+                new Status(1402, 1181, 1401, 1161),
+                new Status(1501, 1265, 1650, 1245),
+                new Status(1799, 1349, 1748, 1329),
+                new Status(1897, 1433, 2146, 1413),
+                new Status(2496, 1517, 2245, 1497),
+            ],
             18,
             new Skill(
                 "ガードストライクB Ⅲ",
@@ -26249,7 +32748,13 @@ public record Memoria(
             "もう何も奪わせない",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1476, 1485, 2128, 2057),
+            [
+                new Status(1156, 1165, 1352, 1331),
+                new Status(1236, 1245, 1446, 1575),
+                new Status(1316, 1325, 1690, 1669),
+                new Status(1396, 1405, 1784, 1963),
+                new Status(1476, 1485, 2128, 2057),
+            ],
             17,
             new Skill(
                 "ガードヒールB Ⅲ",
@@ -26273,7 +32778,13 @@ public record Memoria(
             "夜空に咲く約束の花",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1568, 2981, 1578, 2497),
+            [
+                new Status(1223, 1426, 1233, 1442),
+                new Status(1309, 1527, 1319, 1693),
+                new Status(1395, 1878, 1405, 1794),
+                new Status(1481, 1979, 1491, 2395),
+                new Status(1568, 2981, 1578, 2497),
+            ],
             19,
             new Skill(
                 "Sp.ガードスマッシュA Ⅳ",
@@ -26297,7 +32808,13 @@ public record Memoria(
             "のびのびトレーニング！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(1529, 2494, 1503, 2230),
+            [
+                new Status(1193, 1400, 1167, 1386),
+                new Status(1277, 1499, 1251, 1635),
+                new Status(1361, 1797, 1335, 1733),
+                new Status(1445, 1895, 1419, 2131),
+                new Status(1529, 2494, 1503, 2230),
+            ],
             18,
             new Skill(
                 "Sp.マイトアシストA Ⅲ",
@@ -26321,7 +32838,13 @@ public record Memoria(
             "神宿りの暴走",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(3000, 1576, 2479, 1562),
+            [
+                new Status(1445, 1231, 1424, 1217),
+                new Status(1546, 1317, 1675, 1303),
+                new Status(1897, 1403, 1776, 1389),
+                new Status(1998, 1489, 2377, 1475),
+                new Status(3000, 1576, 2479, 1562),
+            ],
             19,
             new Skill(
                 "ガードストライクA Ⅳ",
@@ -26345,7 +32868,13 @@ public record Memoria(
             "信頼の背中",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1393, 2036, 1397, 2002),
+            [
+                new Status(1088, 1278, 1092, 1294),
+                new Status(1164, 1367, 1168, 1533),
+                new Status(1240, 1607, 1244, 1623),
+                new Status(1316, 1696, 1320, 1912),
+                new Status(1393, 2036, 1397, 2002),
+            ],
             17,
             new Skill(
                 "Sp.パワーフォールB Ⅲ",
@@ -26369,7 +32898,13 @@ public record Memoria(
             "単騎無双",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(2485, 1494, 2220, 1497),
+            [
+                new Status(1391, 1158, 1376, 1161),
+                new Status(1490, 1242, 1625, 1245),
+                new Status(1788, 1326, 1723, 1329),
+                new Status(1886, 1410, 2121, 1413),
+                new Status(2485, 1494, 2220, 1497),
+            ],
             18,
             new Skill(
                 "ヒールストライクB Ⅲ",
@@ -26393,7 +32928,13 @@ public record Memoria(
             "ラプラスの発動",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(2059, 1396, 1989, 1418),
+            [
+                new Status(1301, 1091, 1281, 1113),
+                new Status(1390, 1167, 1520, 1189),
+                new Status(1630, 1243, 1610, 1265),
+                new Status(1719, 1319, 1899, 1341),
+                new Status(2059, 1396, 1989, 1418),
+            ],
             17,
             new Skill(
                 "ストライクC Ⅲ",
@@ -26417,7 +32958,13 @@ public record Memoria(
             "顕現する脅威",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2108, 1480, 2093, 1457),
+            [
+                new Status(1332, 1160, 1367, 1137),
+                new Status(1426, 1240, 1611, 1217),
+                new Status(1670, 1320, 1705, 1297),
+                new Status(1764, 1400, 1999, 1377),
+                new Status(2108, 1480, 2093, 1457),
+            ],
             17,
             new Skill(
                 "ガードストライクB Ⅲ",
@@ -26441,7 +32988,13 @@ public record Memoria(
             "スーパーかわいいジャンプ！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
-            new Status(2073, 2128, 1487, 1484),
+            [
+                new Status(1347, 1352, 1167, 1164),
+                new Status(1591, 1446, 1247, 1244),
+                new Status(1685, 1690, 1327, 1324),
+                new Status(1979, 1784, 1407, 1404),
+                new Status(2073, 2128, 1487, 1484),
+            ],
             17,
             new Skill(
                 "WパワーアシストA Ⅲ",
@@ -26465,7 +33018,13 @@ public record Memoria(
             "きみとぼくの創作世界",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(1382, 2057, 1413, 1977),
+            [
+                new Status(1077, 1299, 1108, 1269),
+                new Status(1153, 1388, 1184, 1508),
+                new Status(1229, 1628, 1260, 1598),
+                new Status(1305, 1717, 1336, 1887),
+                new Status(1382, 2057, 1413, 1977),
+            ],
             17,
             new Skill(
                 "Sp.パワースマッシュA Ⅳ",
@@ -26489,7 +33048,13 @@ public record Memoria(
             "グリーンライフ",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1406, 1388, 1657, 2400),
+            [
+                new Status(1101, 1083, 1299, 1292),
+                new Status(1177, 1159, 1388, 1531),
+                new Status(1253, 1235, 1478, 1771),
+                new Status(1329, 1311, 1567, 2060),
+                new Status(1406, 1388, 1657, 2400),
+            ],
             17,
             new Skill(
                 "Sp.ガードヒールB Ⅲ",
@@ -26513,7 +33078,13 @@ public record Memoria(
             "馳せたる海辺",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1568, 2994, 1570, 2524),
+            [
+                new Status(1220, 1435, 1222, 1465),
+                new Status(1307, 1537, 1309, 1717),
+                new Status(1394, 1889, 1396, 1819),
+                new Status(1481, 1991, 1483, 2421),
+                new Status(1568, 2994, 1570, 2524),
+            ],
             19,
             new Skill(
                 "スマッシュC Ⅲ",
@@ -26537,7 +33108,13 @@ public record Memoria(
             "エスコートナイト",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(2027, 1414, 2006, 1401),
+            [
+                new Status(1269, 1109, 1298, 1096),
+                new Status(1358, 1185, 1537, 1172),
+                new Status(1598, 1261, 1627, 1248),
+                new Status(1687, 1337, 1916, 1324),
+                new Status(2027, 1414, 2006, 1401),
+            ],
             17,
             new Skill(
                 "パワーストライクA Ⅳ",
@@ -26561,7 +33138,13 @@ public record Memoria(
             "おもちゃのプール",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1469, 2141, 1455, 2077),
+            [
+                new Status(1149, 1365, 1135, 1351),
+                new Status(1229, 1459, 1215, 1595),
+                new Status(1309, 1703, 1295, 1689),
+                new Status(1389, 1797, 1375, 1983),
+                new Status(1469, 2141, 1455, 2077),
+            ],
             17,
             new Skill(
                 "ヒールスマッシュA Ⅲ",
@@ -26585,7 +33168,13 @@ public record Memoria(
             "ランペイジクラフト",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(2467, 1477, 1708, 1454),
+            [
+                new Status(1341, 1157, 1332, 1134),
+                new Status(1585, 1237, 1426, 1214),
+                new Status(1829, 1317, 1520, 1294),
+                new Status(2123, 1397, 1614, 1374),
+                new Status(2467, 1477, 1708, 1454),
+            ],
             17,
             new Skill(
                 "パワーストライクB Ⅲ",
@@ -26609,7 +33198,13 @@ public record Memoria(
             "あなたと甘いひとときを",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(2133, 1483, 1476, 2066),
+            [
+                new Status(1357, 1163, 1156, 1340),
+                new Status(1451, 1243, 1236, 1584),
+                new Status(1695, 1323, 1316, 1678),
+                new Status(1789, 1403, 1396, 1972),
+                new Status(2133, 1483, 1476, 2066),
+            ],
             17,
             new Skill(
                 "Sp.パワーブレイクA Ⅲ+",
@@ -26633,7 +33228,13 @@ public record Memoria(
             "水の車窓",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1409, 1980, 1394, 2059),
+            [
+                new Status(1104, 1272, 1089, 1301),
+                new Status(1180, 1511, 1165, 1390),
+                new Status(1256, 1601, 1241, 1630),
+                new Status(1332, 1890, 1317, 1719),
+                new Status(1409, 1980, 1394, 2059),
+            ],
             17,
             new Skill(
                 "Sp.パワーフォールB Ⅲ",
@@ -26657,7 +33258,13 @@ public record Memoria(
             "ラ・ヴァカンス・パルフェ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
-            new Status(1410, 1407, 1999, 2039),
+            [
+                new Status(1105, 1102, 1291, 1281),
+                new Status(1181, 1178, 1530, 1370),
+                new Status(1257, 1254, 1620, 1610),
+                new Status(1333, 1330, 1909, 1699),
+                new Status(1410, 1407, 1999, 2039),
+            ],
             17,
             new Skill(
                 "Sp.パワーヒールB Ⅲ",
@@ -26681,7 +33288,13 @@ public record Memoria(
             "ウォーター・レイルウェイ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(2131, 1455, 2081, 1483),
+            [
+                new Status(1355, 1135, 1355, 1163),
+                new Status(1449, 1215, 1599, 1243),
+                new Status(1693, 1295, 1693, 1323),
+                new Status(1787, 1375, 1987, 1403),
+                new Status(2131, 1455, 2081, 1483),
+            ],
             17,
             new Skill(
                 "Sp.ガードストライクA Ⅲ",
@@ -26705,7 +33318,13 @@ public record Memoria(
             "アナザーワールド",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1392, 1977, 1386, 2059),
+            [
+                new Status(1087, 1269, 1081, 1301),
+                new Status(1163, 1508, 1157, 1390),
+                new Status(1239, 1598, 1233, 1630),
+                new Status(1315, 1887, 1309, 1719),
+                new Status(1392, 1977, 1386, 2059),
+            ],
             17,
             new Skill(
                 "Sp.パワースマッシュB Ⅲ",
@@ -26729,7 +33348,13 @@ public record Memoria(
             "勝負の鍵は",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(2473, 1491, 1712, 1481),
+            [
+                new Status(1347, 1171, 1336, 1161),
+                new Status(1591, 1251, 1430, 1241),
+                new Status(1835, 1331, 1524, 1321),
+                new Status(2129, 1411, 1618, 1401),
+                new Status(2473, 1491, 1712, 1481),
+            ],
             17,
             new Skill(
                 "ストライクB Ⅲ",
@@ -26753,7 +33378,13 @@ public record Memoria(
             "アンブレイカブル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(2406, 1399, 1628, 1391),
+            [
+                new Status(1298, 1094, 1270, 1086),
+                new Status(1537, 1170, 1359, 1162),
+                new Status(1777, 1246, 1449, 1238),
+                new Status(2066, 1322, 1538, 1314),
+                new Status(2406, 1399, 1628, 1391),
+            ],
             17,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -26777,7 +33408,13 @@ public record Memoria(
             "ひとりはみんなのために",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1738, 1488, 2461, 1452),
+            [
+                new Status(1362, 1168, 1335, 1132),
+                new Status(1456, 1248, 1579, 1212),
+                new Status(1550, 1328, 1823, 1292),
+                new Status(1644, 1408, 2117, 1372),
+                new Status(1738, 1488, 2461, 1452),
+            ],
             17,
             new Skill(
                 "ガードフォールC Ⅳ",
@@ -26801,7 +33438,13 @@ public record Memoria(
             "文武両道の乙女",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
-            new Status(2121, 1460, 2087, 1455),
+            [
+                new Status(1345, 1140, 1361, 1135),
+                new Status(1439, 1220, 1605, 1215),
+                new Status(1683, 1300, 1699, 1295),
+                new Status(1777, 1380, 1993, 1375),
+                new Status(2121, 1460, 2087, 1455),
+            ],
             17,
             new Skill(
                 "パワーストライクA Ⅳ",
@@ -26825,7 +33468,13 @@ public record Memoria(
             "アーセナルの絆",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1469, 2471, 1452, 1740),
+            [
+                new Status(1149, 1345, 1132, 1364),
+                new Status(1229, 1589, 1212, 1458),
+                new Status(1309, 1833, 1292, 1552),
+                new Status(1389, 2127, 1372, 1646),
+                new Status(1469, 2471, 1452, 1740),
+            ],
             17,
             new Skill(
                 "スマッシュB Ⅲ",
@@ -26849,7 +33498,13 @@ public record Memoria(
             "未来を切り開く武器",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2993, 1570, 2488, 1549),
+            [
+                new Status(1438, 1225, 1433, 1204),
+                new Status(1539, 1311, 1684, 1290),
+                new Status(1890, 1397, 1785, 1376),
+                new Status(1991, 1483, 2386, 1462),
+                new Status(2993, 1570, 2488, 1549),
+            ],
             19,
             new Skill(
                 "パワーブレイクB Ⅲ",
@@ -26873,7 +33528,13 @@ public record Memoria(
             "この地にて芽吹く",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2010, 1385, 2028, 1408),
+            [
+                new Status(1302, 1080, 1270, 1103),
+                new Status(1541, 1156, 1359, 1179),
+                new Status(1631, 1232, 1599, 1255),
+                new Status(1920, 1308, 1688, 1331),
+                new Status(2010, 1385, 2028, 1408),
+            ],
             17,
             new Skill(
                 "ガードアシストC Ⅳ",
@@ -26897,7 +33558,13 @@ public record Memoria(
             "おこづかいのゆくえ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1386, 2052, 1401, 1998),
+            [
+                new Status(1081, 1294, 1096, 1290),
+                new Status(1157, 1383, 1172, 1529),
+                new Status(1233, 1623, 1248, 1619),
+                new Status(1309, 1712, 1324, 1908),
+                new Status(1386, 2052, 1401, 1998),
+            ],
             17,
             new Skill(
                 "Sp.ガードバーストA Ⅳ",
@@ -26921,7 +33588,13 @@ public record Memoria(
             "カワイイのシャッターチャンス",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2013, 1416, 2063, 1387),
+            [
+                new Status(1305, 1111, 1305, 1082),
+                new Status(1544, 1187, 1394, 1158),
+                new Status(1634, 1263, 1634, 1234),
+                new Status(1923, 1339, 1723, 1310),
+                new Status(2013, 1416, 2063, 1387),
+            ],
             17,
             new Skill(
                 "ストライクB Ⅲ",
@@ -26945,7 +33618,13 @@ public record Memoria(
             "不滅のホワイトナイト",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1473, 2488, 1461, 1723),
+            [
+                new Status(1153, 1362, 1141, 1347),
+                new Status(1233, 1606, 1221, 1441),
+                new Status(1313, 1850, 1301, 1535),
+                new Status(1393, 2144, 1381, 1629),
+                new Status(1473, 2488, 1461, 1723),
+            ],
             17,
             new Skill(
                 "Sp.ガードバーストB Ⅲ",
@@ -26969,7 +33648,13 @@ public record Memoria(
             "果断なる漆黒の騎士",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2468, 1485, 1723, 1470),
+            [
+                new Status(1342, 1165, 1347, 1150),
+                new Status(1586, 1245, 1441, 1230),
+                new Status(1830, 1325, 1535, 1310),
+                new Status(2124, 1405, 1629, 1390),
+                new Status(2468, 1485, 1723, 1470),
+            ],
             17,
             new Skill(
                 "パワーフォールB Ⅲ",
@@ -26993,7 +33678,13 @@ public record Memoria(
             "不完全ゆえに愛おしく",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(2008, 1383, 2041, 1404),
+            [
+                new Status(1300, 1078, 1283, 1099),
+                new Status(1539, 1154, 1372, 1175),
+                new Status(1629, 1230, 1612, 1251),
+                new Status(1918, 1306, 1701, 1327),
+                new Status(2008, 1383, 2041, 1404),
+            ],
             17,
             new Skill(
                 "マイトアシストA Ⅲ",
@@ -27017,7 +33708,13 @@ public record Memoria(
             "甘いスイーツでおもてなし♪",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(2404, 1402, 1627, 1409),
+            [
+                new Status(1296, 1097, 1269, 1104),
+                new Status(1535, 1173, 1358, 1180),
+                new Status(1775, 1249, 1448, 1256),
+                new Status(2064, 1325, 1537, 1332),
+                new Status(2404, 1402, 1627, 1409),
+            ],
             17,
             new Skill(
                 "ヒールストライクA Ⅲ",
@@ -27041,7 +33738,13 @@ public record Memoria(
             "見切れ希望女子",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2381, 1401, 1648, 1415),
+            [
+                new Status(1273, 1096, 1290, 1110),
+                new Status(1512, 1172, 1379, 1186),
+                new Status(1752, 1248, 1469, 1262),
+                new Status(2041, 1324, 1558, 1338),
+                new Status(2381, 1401, 1648, 1415),
+            ],
             17,
             new Skill(
                 "ガードブレイクB Ⅲ",
@@ -27065,7 +33768,13 @@ public record Memoria(
             "ハッピーハッピー☆タピオカ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
-            new Status(1388, 1661, 2563, 1202),
+            [
+                new Status(1083, 1303, 1415, 9364),
+                new Status(1159, 1392, 1664, 1003),
+                new Status(1235, 1482, 1914, 1069),
+                new Status(1311, 1571, 2213, 1135),
+                new Status(1388, 1661, 2563, 1202),
+            ],
             17,
             new Skill(
                 "スマッシュA Ⅲ",
@@ -27089,7 +33798,13 @@ public record Memoria(
             "レンズに咲く百合の花",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(2063, 1413, 1996, 1384),
+            [
+                new Status(1305, 1108, 1288, 1079),
+                new Status(1394, 1184, 1527, 1155),
+                new Status(1634, 1260, 1617, 1231),
+                new Status(1723, 1336, 1906, 1307),
+                new Status(2063, 1413, 1996, 1384),
+            ],
             17,
             new Skill(
                 "パワーストライクB Ⅲ",
@@ -27113,7 +33828,13 @@ public record Memoria(
             "不器用なお姉様",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
-            new Status(1981, 1642, 1787, 1416),
+            [
+                new Status(1273, 1284, 1082, 1111),
+                new Status(1512, 1373, 1158, 1187),
+                new Status(1602, 1463, 1384, 1263),
+                new Status(1891, 1552, 1460, 1339),
+                new Status(1981, 1642, 1787, 1416),
+            ],
             17,
             new Skill(
                 "パワーアシストB Ⅲ",
@@ -27137,7 +33858,13 @@ public record Memoria(
             "ワンショット",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1415, 1389, 1979, 2037),
+            [
+                new Status(1110, 1084, 1271, 1279),
+                new Status(1186, 1160, 1510, 1368),
+                new Status(1262, 1236, 1600, 1608),
+                new Status(1338, 1312, 1889, 1697),
+                new Status(1415, 1389, 1979, 2037),
+            ],
             17,
             new Skill(
                 "ヒールC Ⅲ",
@@ -27161,7 +33888,13 @@ public record Memoria(
             "ふたつのふれあい",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(2042, 2013, 1394, 1396),
+            [
+                new Status(1284, 1305, 1089, 1091),
+                new Status(1373, 1544, 1165, 1167),
+                new Status(1613, 1634, 1241, 1243),
+                new Status(1702, 1923, 1317, 1319),
+                new Status(2042, 2013, 1394, 1396),
+            ],
             17,
             new Skill(
                 "WパワーフォールA Ⅲ",
@@ -27185,7 +33918,13 @@ public record Memoria(
             "アイドルリリィをつかまえて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
-            new Status(2321, 1345, 1554, 1324),
+            [
+                new Status(1230, 1055, 1213, 1034),
+                new Status(1465, 1127, 1298, 1106),
+                new Status(1700, 1200, 1383, 1179),
+                new Status(1985, 1272, 1468, 1251),
+                new Status(2321, 1345, 1554, 1324),
+            ],
             17,
             new Skill(
                 "ストライクB Ⅲ",
@@ -27209,7 +33948,13 @@ public record Memoria(
             "うさぎになったカメ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1323, 1554, 1677, 1970),
+            [
+                new Status(1033, 1213, 1037, 1229),
+                new Status(1105, 1298, 1259, 1314),
+                new Status(1178, 1383, 1332, 1549),
+                new Status(1250, 1468, 1604, 1634),
+                new Status(1323, 1554, 1677, 1970),
+            ],
             17,
             new Skill(
                 "Sp.ガードスマッシュB Ⅲ",
@@ -27233,7 +33978,13 @@ public record Memoria(
             "迷子のクマ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(2321, 1311, 1556, 1314),
+            [
+                new Status(1230, 1021, 1215, 1024),
+                new Status(1465, 1093, 1300, 1096),
+                new Status(1700, 1166, 1385, 1169),
+                new Status(1985, 1238, 1470, 1241),
+                new Status(2321, 1311, 1556, 1314),
+            ],
             17,
             new Skill(
                 "ストライクA Ⅲ",
@@ -27257,7 +34008,13 @@ public record Memoria(
             "晴れのちラムネ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
-            new Status(1387, 2393, 1418, 1632),
+            [
+                new Status(1082, 1285, 1113, 1274),
+                new Status(1158, 1524, 1189, 1363),
+                new Status(1234, 1764, 1265, 1453),
+                new Status(1310, 2053, 1341, 1542),
+                new Status(1387, 2393, 1418, 1632),
+            ],
             17,
             new Skill(
                 "スマッシュB Ⅲ",
@@ -27281,7 +34038,13 @@ public record Memoria(
             "湯けむりの園",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
-            new Status(1317, 1978, 1925, 1327),
+            [
+                new Status(1027, 1237, 1234, 1037),
+                new Status(1099, 1322, 1469, 1109),
+                new Status(1172, 1557, 1554, 1182),
+                new Status(1244, 1642, 1839, 1254),
+                new Status(1317, 1978, 1925, 1327),
+            ],
             17,
             new Skill(
                 "ヒールスマッシュA Ⅲ",
@@ -27305,7 +34068,13 @@ public record Memoria(
             "姫歌イメチェン大作戦!!",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
-            new Status(1316, 1346, 1907, 1976),
+            [
+                new Status(1026, 1056, 1216, 1235),
+                new Status(1098, 1128, 1451, 1320),
+                new Status(1171, 1201, 1536, 1555),
+                new Status(1243, 1273, 1821, 1640),
+                new Status(1316, 1346, 1907, 1976),
+            ],
             17,
             new Skill(
                 "ヒールD Ⅲ",
@@ -27329,7 +34098,13 @@ public record Memoria(
             "ガラスの中の大切な世界",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
-            new Status(1346, 1334, 2321, 1548),
+            [
+                new Status(1056, 1044, 1230, 1207),
+                new Status(1128, 1116, 1465, 1292),
+                new Status(1201, 1189, 1700, 1377),
+                new Status(1273, 1261, 1985, 1462),
+                new Status(1346, 1334, 2321, 1548),
+            ],
             17,
             new Skill(
                 "ガードフォールB Ⅲ",
@@ -27353,7 +34128,13 @@ public record Memoria(
             "あたしがこの手で守るもの",
             new Rearguard(RearguardKind.Support),
             Element.Water,
-            new Status(2300, 1560, 1324, 1317),
+            [
+                new Status(1209, 1219, 1034, 1027),
+                new Status(1444, 1304, 1106, 1099),
+                new Status(1679, 1389, 1179, 1172),
+                new Status(1964, 1474, 1251, 1244),
+                new Status(2300, 1560, 1324, 1317),
+            ],
             17,
             new Skill(
                 "パワーアシストB Ⅲ",
@@ -27377,7 +34158,13 @@ public record Memoria(
             "CHARMにお疲れ様",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
-            new Status(1312, 2022, 1347, 1849),
+            [
+                new Status(1022, 1231, 1057, 1208),
+                new Status(1094, 1316, 1129, 1443),
+                new Status(1167, 1401, 1202, 1678),
+                new Status(1239, 1686, 1274, 1763),
+                new Status(1312, 2022, 1347, 1849),
+            ],
             17,
             new Skill(
                 "スマッシュB Ⅲ",
@@ -27401,7 +34188,13 @@ public record Memoria(
             "一柳隊の知恵袋",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
-            new Status(1930, 1348, 1965, 1318),
+            [
+                new Status(1239, 1058, 1224, 1028),
+                new Status(1474, 1130, 1309, 1100),
+                new Status(1559, 1203, 1544, 1173),
+                new Status(1844, 1275, 1629, 1245),
+                new Status(1930, 1348, 1965, 1318),
+            ],
             17,
             new Skill(
                 "Sp.ガードストライクA Ⅲ",
@@ -27425,7 +34218,13 @@ public record Memoria(
             "ロイヤル・ホスピタリティ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(1968, 1345, 1914, 1311),
+            [
+                new Status(1227, 1055, 1223, 1021),
+                new Status(1312, 1127, 1458, 1093),
+                new Status(1547, 1200, 1543, 1166),
+                new Status(1632, 1272, 1828, 1238),
+                new Status(1968, 1345, 1914, 1311),
+            ],
             17,
             new Skill(
                 "パワーフォールB Ⅲ",
@@ -27449,7 +34248,13 @@ public record Memoria(
             "わたしにできること",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(1345, 1558, 1907, 1748),
+            [
+                new Status(1055, 1217, 1216, 1058),
+                new Status(1127, 1302, 1451, 1130),
+                new Status(1200, 1387, 1536, 1353),
+                new Status(1272, 1472, 1821, 1425),
+                new Status(1345, 1558, 1907, 1748),
+            ],
             17,
             new Skill(
                 "スマッシュA Ⅲ",
@@ -27473,7 +34278,13 @@ public record Memoria(
             "安らぎの帰り道",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1312, 1343, 1925, 1945),
+            [
+                new Status(1022, 1053, 1234, 1204),
+                new Status(1094, 1125, 1469, 1289),
+                new Status(1167, 1198, 1554, 1524),
+                new Status(1239, 1270, 1839, 1609),
+                new Status(1312, 1343, 1925, 1945),
+            ],
             17,
             new Skill(
                 "ヒールA Ⅲ",
@@ -27497,7 +34308,13 @@ public record Memoria(
             "猫の誘惑",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
-            new Status(1320, 2303, 1322, 1583),
+            [
+                new Status(1030, 1212, 1032, 1242),
+                new Status(1102, 1447, 1104, 1327),
+                new Status(1175, 1682, 1177, 1412),
+                new Status(1247, 1967, 1249, 1497),
+                new Status(1320, 2303, 1322, 1583),
+            ],
             17,
             new Skill(
                 "スマッシュB Ⅲ",
@@ -27521,7 +34338,13 @@ public record Memoria(
             "星降る夜の約束",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
-            new Status(1349, 1314, 1582, 2306),
+            [
+                new Status(1059, 1024, 1241, 1215),
+                new Status(1131, 1096, 1326, 1450),
+                new Status(1204, 1169, 1411, 1685),
+                new Status(1276, 1241, 1496, 1970),
+                new Status(1349, 1314, 1582, 2306),
+            ],
             17,
             new Skill(
                 "ヒールC Ⅲ",
@@ -27545,7 +34368,13 @@ public record Memoria(
             "私たちの正義",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
-            new Status(1346, 1914, 1324, 1969),
+            [
+                new Status(1056, 1223, 1034, 1228),
+                new Status(1128, 1458, 1106, 1313),
+                new Status(1201, 1543, 1179, 1548),
+                new Status(1273, 1828, 1251, 1633),
+                new Status(1346, 1914, 1324, 1969),
+            ],
             17,
             new Skill(
                 "Sp.ガードフォールB Ⅲ",
@@ -27569,7 +34398,13 @@ public record Memoria(
             "放課後ファンタズム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
-            new Status(1970, 1338, 1904, 1337),
+            [
+                new Status(1229, 1048, 1213, 1047),
+                new Status(1314, 1120, 1448, 1119),
+                new Status(1549, 1193, 1533, 1192),
+                new Status(1634, 1265, 1818, 1264),
+                new Status(1970, 1338, 1904, 1337),
+            ],
             17,
             new Skill(
                 "ストライクB Ⅲ",
@@ -27593,7 +34428,13 @@ public record Memoria(
             "雨上がりの朝稽古",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
-            new Status(1337, 1925, 1336, 1952),
+            [
+                new Status(1047, 1234, 1046, 1211),
+                new Status(1119, 1469, 1118, 1296),
+                new Status(1192, 1554, 1191, 1531),
+                new Status(1264, 1839, 1263, 1616),
+                new Status(1337, 1925, 1336, 1952),
+            ],
             17,
             new Skill(
                 "Sp.ガードフォールB Ⅲ",
@@ -27617,7 +34458,13 @@ public record Memoria(
             "アフタヌーンティー",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
-            new Status(1335, 2297, 1335, 1575),
+            [
+                new Status(1045, 1206, 1045, 1234),
+                new Status(1117, 1441, 1117, 1319),
+                new Status(1190, 1676, 1190, 1404),
+                new Status(1262, 1961, 1262, 1489),
+                new Status(1335, 2297, 1335, 1575),
+            ],
             17,
             new Skill(
                 "Sp.ガードスマッシュA Ⅲ",
@@ -27641,7 +34488,13 @@ public record Memoria(
             "Dear Schutzengel",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
-            new Status(1954, 1313, 1898, 1345),
+            [
+                new Status(1213, 1023, 1207, 1055),
+                new Status(1298, 1095, 1442, 1127),
+                new Status(1533, 1168, 1527, 1200),
+                new Status(1618, 1240, 1812, 1272),
+                new Status(1954, 1313, 1898, 1345),
+            ],
             17,
             new Skill(
                 "ストライクA Ⅲ",

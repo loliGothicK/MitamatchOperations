@@ -30,19 +30,19 @@
                                 <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
                                     <StackPanel Orientation="Vertical" Margin="0 0 5 0">
                                         <TextBlock Text="ATK"/>
-                                        <Button Content="{x:Bind Status.Atk}" />
+                                        <Button Content="{x:Bind Status[4].Atk}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical" Margin="5 0">
                                         <TextBlock Text="DEF"/>
-                                        <Button Content="{x:Bind Status.Def}" />
+                                        <Button Content="{x:Bind Status[4].Def}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical" Margin="5 0">
                                         <TextBlock Text="Sp.ATK"/>
-                                        <Button Content="{x:Bind Status.SpAtk}" />
+                                        <Button Content="{x:Bind Status[4].SpAtk}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical" Margin="5 0">
                                         <TextBlock Text="Sp.DEF"/>
-                                        <Button Content="{x:Bind Status.SpDef}" />
+                                        <Button Content="{x:Bind Status[4].SpDef}" />
                                     </StackPanel>
                                 </StackPanel>
                                 <Button Grid.Row="2" Content="{x:Bind Skill.Name}" Margin="5"/>

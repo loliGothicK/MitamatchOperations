@@ -143,7 +143,7 @@ namespace mitama.Pages.DeckBuilder
         {
             selectedMemorias.Clear();
 
-            var (atk, spatk, def, spdef) = Deck.Concat(LegendaryDeck).Select(m => m.Status).Aggregate((a, b) => a + b);
+            var (atk, spatk, def, spdef) = Deck.Concat(LegendaryDeck).Select(m => m.Status[4]).Aggregate((a, b) => a + b);
             Atk.Content = $"Atk: {atk}";
             SpAtk.Content = $"SpAtk: {spatk}";
             Def.Content = $"Def: {def}";
@@ -1872,22 +1872,22 @@ namespace mitama.Pages.DeckBuilder
                     BuilderPageHelpers.Sort(Pool, (a, b) => b.Id.CompareTo(a.Id));
                     break;
                 case 1:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.Atk.CompareTo(a.Status.Atk));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status[4].Atk.CompareTo(a.Status[4].Atk));
                     break;
                 case 2:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.SpAtk.CompareTo(a.Status.SpAtk));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status[4].SpAtk.CompareTo(a.Status[4].SpAtk));
                     break;
                 case 3:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.Def.CompareTo(a.Status.Def));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status[4].Def.CompareTo(a.Status[4].Def));
                     break;
                 case 4:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.SpDef.CompareTo(a.Status.SpDef));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status[4].SpDef.CompareTo(a.Status[4].SpDef));
                     break;
                 case 5:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.ASA.CompareTo(a.Status.ASA));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status[4].ASA.CompareTo(a.Status[4].ASA));
                     break;
                 case 6:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.DSD.CompareTo(a.Status.DSD));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status[4].DSD.CompareTo(a.Status[4].DSD));
                     break;
             }
         }

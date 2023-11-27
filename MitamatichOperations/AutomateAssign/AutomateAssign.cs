@@ -4,8 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using mitama.Pages.OrderConsole;
 using mitama.Domain;
-using System.IO;
-using System.Text;
 using mitama.Pages.Common;
 using WinRT;
 
