@@ -38,8 +38,7 @@ public sealed partial class UnitViewer
         var (isLegacy, unit) = Unit.FromJson(json);
         if (isLegacy)
         {
-            using var unitFile = File.OpenWrite(path);
-            await unitFile.WriteAsync(new UTF8Encoding(true).GetBytes(unit.ToJson()));
+            File.WriteAllBytes(path, new UTF8Encoding(true).GetBytes(unit.ToJson()));
         }
         UnitView.ItemsSource = unit.Memorias;
     }
@@ -61,13 +60,13 @@ public sealed partial class UnitViewer
                 Children = new ObservableCollection<ExplorerItem>(
                     Directory.GetFiles($"{Director.UnitDir(_regionName, name)}").Select(path =>
                     {
-                        using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+                        var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                         var json = sr.ReadToEnd();
                         var (isLegacy, unit) = Unit.FromJson(json);
+                        sr.Close();
                         if (isLegacy)
                         {
-                            using var unitFile = File.OpenWrite(path);
-                            unitFile.Write(new UTF8Encoding(true).GetBytes(unit.ToJson()));
+                            File.WriteAllBytes(path, new UTF8Encoding(true).GetBytes(unit.ToJson()));
                         }
                         return new ExplorerItem
                         {
@@ -79,7 +78,6 @@ public sealed partial class UnitViewer
                     }))
             };
         }));
-
     }
 
     private void DeleteConfirmation_Click(object sender, RoutedEventArgs e)

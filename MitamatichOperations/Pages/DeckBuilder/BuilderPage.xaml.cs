@@ -1980,8 +1980,7 @@ namespace mitama.Pages.DeckBuilder
             var (isLegacy, unit) = Unit.FromJson(json);
             if (isLegacy)
             {
-                using var unitFile = File.OpenWrite(path);
-                await unitFile.WriteAsync(new UTF8Encoding(true).GetBytes(unit.ToJson()));
+                File.WriteAllBytes(path, new UTF8Encoding(true).GetBytes(unit.ToJson()));
             }
             if (unit.IsFront != Switch.IsOn)
             {

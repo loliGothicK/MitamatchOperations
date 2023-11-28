@@ -25,7 +25,7 @@ public record struct Unit(string UnitName, bool IsFront, List<MemoriaWithConcent
         {
             var dto = JsonSerializer.Deserialize<UnitDto>(json);
             var selector = Memoria.List.ToDictionary(m => m.Id);
-            return (true, new Unit(
+            return (false, new Unit(
                 dto.UnitName,
                 dto.IsFront,
                 dto.Items.Select(item => new MemoriaWithConcentration(selector[item.Id], item.Concentration)).ToList()
@@ -35,7 +35,7 @@ public record struct Unit(string UnitName, bool IsFront, List<MemoriaWithConcent
         {
             var dto = JsonSerializer.Deserialize<RegacyUnitDto>(json);
             var selector = Memoria.List.ToDictionary(m => m.Id);
-            return (false, new Unit(
+            return (true, new Unit(
                 dto.UnitName,
                 dto.IsFront,
                 dto.Items.Select(item => new MemoriaWithConcentration(selector[item], 4)).ToList()
