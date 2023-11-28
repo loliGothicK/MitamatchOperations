@@ -156,7 +156,7 @@ namespace mitama.Pages.DeckBuilder
         {
             selectedMemorias.Clear();
 
-            if (Deck.Concat(LegendaryDeck).Count() == 0)
+            if (Deck.Concat(LegendaryDeck).Any())
             {
                 var (atk, spatk, def, spdef) = Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Status[m.Concentration]).Aggregate((a, b) => a + b);
                 Atk.Content = $"Atk: {atk}";
