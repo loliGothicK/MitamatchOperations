@@ -13,7 +13,7 @@ using Windows.Storage;
 namespace mitama.Algorithm.IR;
 
 internal class Match {
-    public static async Task<(Bitmap, Memoria[])> Recognise(Bitmap img, Position position) {
+    public static async Task<(Bitmap, Memoria[])> Recognise(Bitmap img, bool IsVanguard) {
         var target = img.ToMat();
         var grayMat = target.CvtColor(ColorConversionCodes.BGR2GRAY);
         var thresholdMat = grayMat.Threshold(230, 255, ThresholdTypes.BinaryInv);
@@ -40,7 +40,7 @@ internal class Match {
         rects = Clean(rects);
         rects = Interpolation(rects, img.Width);
 
-        var dummyCostume = position is Front ? Costume.List[0] : Costume.List[1];
+        var dummyCostume = IsVanguard ? Costume.List[0] : Costume.List[1];
 
         foreach (var rect in rects) Cv2.Rectangle(target, rect, Scalar.Aquamarine, 5);
 

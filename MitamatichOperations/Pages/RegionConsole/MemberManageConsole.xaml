@@ -61,8 +61,7 @@
                               Margin="1 1 1 50"
                               BorderThickness="1"
                               BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
-                              HorizontalAlignment="Left"
-                              SelectionChanged="Selector_OnSelectionChanged">
+                              HorizontalAlignment="Left">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>

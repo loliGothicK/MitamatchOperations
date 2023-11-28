@@ -14,6 +14,11 @@ using mitama.Pages.Common;
 using Windows.ApplicationModel.DataTransfer;
 using WinRT;
 using SimdLinq;
+using mitama.Algorithm.IR;
+using Microsoft.UI.Xaml.Media;
+using Windows.UI;
+using Microsoft.UI.Text;
+using Windows.Storage;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -2017,6 +2022,82 @@ namespace mitama.Pages.DeckBuilder
                     Deck[idx] = newItem;
                 }
             }
+        }
+
+        private void Import_DragOver(object sender, DragEventArgs e)
+        {
+            e.AcceptedOperation = DataPackageOperation.Copy;
+        }
+
+        private async void Import_Drop(object sender, DragEventArgs e)
+        {
+            if (!e.DataView.Contains(StandardDataFormats.StorageItems)) return;
+
+            var items = await e.DataView.GetStorageItemsAsync();
+
+            if (items.Count <= 0) return;
+
+            try
+            {
+                using var img = new System.Drawing.Bitmap(items[0].As<StorageFile>()!.Path);
+                var (result, detected) = await Match.Recognise(img, Switch.IsOn);
+                LegendaryDeck.Clear();
+                Deck.Clear();
+                foreach (var memoria in detected.Where(m => m.IsLegendary))
+                {
+                    LegendaryDeck.Add(new MemoriaWithConcentration(memoria, 4));
+                }
+                foreach (var memoria in detected.Where(m => !m.IsLegendary))
+                {
+                    Deck.Add(new MemoriaWithConcentration(memoria, 4));
+                }
+            }
+            catch (Exception ex)
+            {
+                var dialog = new DialogBuilder(XamlRoot)
+                    .WithTitle("読込失敗")
+                    .WithPrimary("OK")
+                    .WithBody(new TextBlock
+                    {
+                        Text = ex.ToString()
+                    })
+                    .Build();
+
+                await dialog.ShowAsync();
+            }
+        }
+
+        private async void ImportButton_Click(object sender, RoutedEventArgs e)
+        {
+            var content = new Grid {
+                AllowDrop = true,
+                MinHeight = 300,
+                MinWidth = 300,
+                // LightBlue
+                Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xAD, 0xD8, 0xE6)),
+                Children =
+                {
+                    new TextBlock
+                    {
+                        Text = "ここに画像をドラッグ＆ドロップしてください",
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        FontSize = 24,
+                        FontWeight = FontWeights.Bold,
+                    }
+                }
+            };
+
+            content.DragOver += Import_DragOver;
+            content.Drop += Import_Drop;
+
+            var dialog = new DialogBuilder(XamlRoot)
+                .WithTitle("読み込み")
+                .WithCancel("閉じる")
+                .WithBody(content)
+                .Build();
+
+            await dialog.ShowAsync();
         }
     }
 

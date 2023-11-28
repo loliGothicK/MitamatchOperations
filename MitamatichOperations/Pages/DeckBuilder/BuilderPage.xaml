@@ -264,7 +264,8 @@
                                 </Flyout>
                             </AppBarButton.Flyout>
                         </AppBarButton>
-                        <AppBarButton Icon="Import" Label="Load" AllowFocusOnInteraction="True">
+                        <AppBarButton Icon="Import" Label="Import" AllowFocusOnInteraction="True" Click="ImportButton_Click" />
+                        <AppBarButton Icon="OpenFile" Label="Load" AllowFocusOnInteraction="True">
                             <AppBarButton.Flyout>
                                 <Flyout>
                                     <StackPanel MinWidth="400" Orientation="Vertical">
