@@ -19,6 +19,7 @@ using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 using Microsoft.UI.Text;
 using Windows.Storage;
+using Microsoft.EntityFrameworkCore;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -127,8 +128,15 @@ namespace mitama.Pages.DeckBuilder
 
         private void Memeria_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
         {
-            selectedMemorias = e.Items.Select(v => (Memoria)v).ToList();
-            e.Data.RequestedOperation = DataPackageOperation.Move;
+            try
+            {
+                selectedMemorias = e.Items.Select(v => (Memoria)v).ToList();
+                e.Data.RequestedOperation = DataPackageOperation.Move;
+            } catch
+            {
+                selectedMemorias = e.Items.Select(v => ((MemoriaWithConcentration)v).Memoria).ToList();
+                e.Data.RequestedOperation = DataPackageOperation.Move;
+            }
         }
 
         private void MemeriaSources_DragOver(object sender, DragEventArgs e)
@@ -148,11 +156,22 @@ namespace mitama.Pages.DeckBuilder
         {
             selectedMemorias.Clear();
 
-            var (atk, spatk, def, spdef) = Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Status[m.Concentration]).Aggregate((a, b) => a + b);
-            Atk.Content = $"Atk: {atk}";
-            SpAtk.Content = $"SpAtk: {spatk}";
-            Def.Content = $"Def: {def}";
-            SpDef.Content = $"SpDef: {spdef}";
+            if (Deck.Concat(LegendaryDeck).Count() == 0)
+            {
+                var (atk, spatk, def, spdef) = Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Status[m.Concentration]).Aggregate((a, b) => a + b);
+                Atk.Content = $"Atk: {atk}";
+                SpAtk.Content = $"SpAtk: {spatk}";
+                Def.Content = $"Def: {def}";
+                SpDef.Content = $"SpDef: {spdef}";
+            }
+            else
+            {
+                Atk.Content = $"Atk: 0";
+                SpAtk.Content = $"SpAtk: 0";
+                Def.Content = $"Def: 0";
+                SpDef.Content = $"SpDef: 0";
+            }
+
 
             Fire.Content = $"‰Î: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Fire)}";
             Water.Content = $"…: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Water)}";
