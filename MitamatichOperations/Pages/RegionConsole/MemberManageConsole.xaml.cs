@@ -123,15 +123,11 @@ public sealed partial class MemberManageConsole
     private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         _selectedMember = e.AddedItems[0].As<MemberInfo>();
-        TargetMember.Text = _selectedMember.Name;
     }
 }
 
 // GroupInfoList class definition:
-internal class GroupInfoList : List<MemberInfo>
+internal class GroupInfoList(IEnumerable<MemberInfo> items) : List<MemberInfo>(items)
 {
-    public GroupInfoList(IEnumerable<MemberInfo> items) : base(items)
-    {
-    }
     public object Key { get; set; } = null!;
 }

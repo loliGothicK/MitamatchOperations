@@ -84,17 +84,5 @@
                 </ListView.GroupStyle>
             </ListView>
         </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <TextBlock x:Name="TargetMember" Text="{x:Bind _selectedMember.Name, FallbackValue='Please select a member.'}" Margin="5"/>
-            <Grid Grid.Row="1" AllowDrop="True" DragOver="Grid_DragOver" Drop="Grid_Drop"
-                  MinHeight="300"
-                  Background="LightBlue" Margin="10,10,10,50">
-                <Image Source="/Assets/Images/drag-and-drop.svg" MaxWidth="100" MaxHeight="80"/>
-            </Grid>
-        </Grid>
     </Grid>
 </Page>
