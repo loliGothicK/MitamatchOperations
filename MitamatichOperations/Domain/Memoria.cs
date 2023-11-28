@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 using System.Web;
+using mitama.Pages.Common;
+using System.Xml.Linq;
 using mitama.Pages.DeckBuilder;
 
 namespace mitama.Domain;
@@ -14,19 +19,33 @@ public record struct Unit(string UnitName, bool IsFront, List<MemoriaWithConcent
     public readonly string ToJson() =>
         JsonSerializer.Serialize(new UnitDto(UnitName, IsFront, Memorias.Select(m => new IdAndConcentration(m.Memoria.Id, m.Concentration)).ToArray()));
 
-    public static Unit FromJson(string json)
+    public static (bool, Unit) FromJson(string json)
     {
-        var dto = JsonSerializer.Deserialize<UnitDto>(json);
-        var selector = Memoria.List.ToDictionary(m => m.Id);
-        return new Unit(
-            dto.UnitName,
-            dto.IsFront,
-            dto.Items.Select(item => new MemoriaWithConcentration(selector[item.Id], item.Concentration)).ToList()
-        );
+        try
+        {
+            var dto = JsonSerializer.Deserialize<UnitDto>(json);
+            var selector = Memoria.List.ToDictionary(m => m.Id);
+            return (true, new Unit(
+                dto.UnitName,
+                dto.IsFront,
+                dto.Items.Select(item => new MemoriaWithConcentration(selector[item.Id], item.Concentration)).ToList()
+            ));
+        }
+        catch
+        {
+            var dto = JsonSerializer.Deserialize<RegacyUnitDto>(json);
+            var selector = Memoria.List.ToDictionary(m => m.Id);
+            return (false, new Unit(
+                dto.UnitName,
+                dto.IsFront,
+                dto.Items.Select(item => new MemoriaWithConcentration(selector[item], 4)).ToList()
+            ));
+        }
     }
 }
 
 public record struct UnitDto(string UnitName, bool IsFront, IdAndConcentration[] Items);
+public record struct RegacyUnitDto(string UnitName, bool IsFront, int[] Items);
 
 public enum Type
 {

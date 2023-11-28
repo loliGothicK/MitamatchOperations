@@ -26,16 +26,21 @@ public sealed partial class UnitViewer
         _regionName = Director.ReadCache().Region;
     }
 
-    private void UnitTreeView_OnItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
+    private async void UnitTreeView_OnItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
     {
         if (Util.LoadMemberNames(_regionName).Contains(args.InvokedItem.As<ExplorerItem>().Name!))
         {
             return;
         }
-        using var sr =
-            new StreamReader(@$"{Director.UnitDir(_regionName, args.InvokedItem.As<ExplorerItem>().Parent!)}\{args.InvokedItem.As<ExplorerItem>().Name!}.json");
+        var path = @$"{Director.UnitDir(_regionName, args.InvokedItem.As<ExplorerItem>().Parent!)}\{args.InvokedItem.As<ExplorerItem>().Name!}.json";
+        using var sr = new StreamReader(path);
         var json = sr.ReadToEnd();
-        var unit = Unit.FromJson(json);
+        var (isLegacy, unit) = Unit.FromJson(json);
+        if (isLegacy)
+        {
+            using var unitFile = File.OpenWrite(path);
+            await unitFile.WriteAsync(new UTF8Encoding(true).GetBytes(unit.ToJson()));
+        }
         UnitView.ItemsSource = unit.Memorias;
     }
 
@@ -58,10 +63,16 @@ public sealed partial class UnitViewer
                     {
                         using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                         var json = sr.ReadToEnd();
+                        var (isLegacy, unit) = Unit.FromJson(json);
+                        if (isLegacy)
+                        {
+                            using var unitFile = File.OpenWrite(path);
+                            unitFile.Write(new UTF8Encoding(true).GetBytes(unit.ToJson()));
+                        }
                         return new ExplorerItem
                         {
                             Parent = name,
-                            Name = Unit.FromJson(json).UnitName,
+                            Name = unit.UnitName,
                             Path = path,
                             Type = ExplorerItem.ExplorerItemType.File
                         };

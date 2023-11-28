@@ -1977,7 +1977,12 @@ namespace mitama.Pages.DeckBuilder
             var path = $@"{Director.ProjectDir()}\{region}\Members\{name}\Units\{deck}.json";
             using var sr = new StreamReader(path);
             var json = sr.ReadToEnd();
-            var unit = Unit.FromJson(json);
+            var (isLegacy, unit) = Unit.FromJson(json);
+            if (isLegacy)
+            {
+                using var unitFile = File.OpenWrite(path);
+                await unitFile.WriteAsync(new UTF8Encoding(true).GetBytes(unit.ToJson()));
+            }
             if (unit.IsFront != Switch.IsOn)
             {
                 GeneralInfoBar.Title = "前衛モードで後衛編成をロードすること（またはその逆）はできません！";
