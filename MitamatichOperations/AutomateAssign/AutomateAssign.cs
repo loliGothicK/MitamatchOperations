@@ -76,13 +76,13 @@ internal class AutomateAssign {
             };
         }
 
-        public abstract int CompareTo(Assginability? other);
+        public abstract int CompareTo(Assginability other);
     }
     private record Assignable : Assginability, IComparable<Assginability> {
         public override bool IsAssignableBefore() => true;
 
         public override bool IsAssignableAfter() => true;
-        public override int CompareTo(Assginability? other) {
+        public override int CompareTo(Assginability other) {
             if (other == null) return 1;
             return other switch {
                 Assignable => 0,
@@ -95,7 +95,7 @@ internal class AutomateAssign {
         public override bool IsAssignableBefore() => true;
 
         public override bool IsAssignableAfter() => false;
-        public override int CompareTo(Assginability? other) {
+        public override int CompareTo(Assginability other) {
             if (other == null) return 1;
             return other switch {
                 Assignable => 1,
@@ -109,7 +109,7 @@ internal class AutomateAssign {
         public override bool IsAssignableBefore() => false;
 
         public override bool IsAssignableAfter() => true;
-        public override int CompareTo(Assginability? other) {
+        public override int CompareTo(Assginability other) {
             if (other == null) return 1;
             return other switch {
                 Assignable or Before => 1,
@@ -123,7 +123,7 @@ internal class AutomateAssign {
         public override bool IsAssignableBefore() => false;
 
         public override bool IsAssignableAfter() => false;
-        public override int CompareTo(Assginability? other) {
+        public override int CompareTo(Assginability other) {
             if (other == null) return 1;
             return other switch {
                 Unassignable => 0,

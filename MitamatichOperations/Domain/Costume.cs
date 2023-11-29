@@ -3,7 +3,8 @@ using System.Diagnostics;
 
 namespace mitama.Domain;
 
-public record struct Costume(string Lily = "", string Name = "", string Type = "") {
+public record struct Costume(string Lily = "", string Name = "", string Type = "") 
+{
     public readonly Uri Uri => new($"ms-appx:///Assets/costume/{Lily}/{Name}.jpg");
     public string Path = $"/Assets/costume/{Lily}/{Name}.jpg";
 

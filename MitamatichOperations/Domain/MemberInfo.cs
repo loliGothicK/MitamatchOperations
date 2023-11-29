@@ -3,7 +3,8 @@ using System.Text.Json;
 
 namespace mitama.Domain;
 
-public abstract record Position : IComparable<Position> {
+public abstract record Position : IComparable<Position>
+{
     internal abstract int GetCategory();
     public abstract string Display { get; }
 
@@ -16,10 +17,11 @@ public abstract record Position : IComparable<Position> {
         _ => throw new ArgumentOutOfRangeException(nameof(pos), pos, null)
     };
 
-    public int CompareTo(Position? other) => GetCategory().CompareTo(other?.GetCategory());
+    public int CompareTo(Position other) => GetCategory().CompareTo(other?.GetCategory());
 }
 
-public record Front(FrontCategory Category) : Position {
+public record Front(FrontCategory Category) : Position 
+{
     internal override int GetCategory() => (int)Category;
     public override string Display {
         get {
@@ -32,12 +34,14 @@ public record Front(FrontCategory Category) : Position {
     }
 }
 
-public enum FrontCategory {
+public enum FrontCategory
+{
     Normal = 0,
     Special = 1
 }
 
-public record Back(BackCategory Category) : Position {
+public record Back(BackCategory Category) : Position
+{
     internal override int GetCategory() => (int)Category;
 
     public override string Display {
@@ -52,7 +56,8 @@ public record Back(BackCategory Category) : Position {
     }
 }
 
-public enum BackCategory {
+public enum BackCategory
+{
     Buffer = 2,
     DeBuffer = 3,
     Healer = 4

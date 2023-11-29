@@ -230,7 +230,7 @@ public sealed partial class MainPage
     private async void LogInUser_OnClick(object sender, RoutedEventArgs e)
     {
         // placeholder
-        string? loggedIn = null;
+        string loggedIn = null;
 
         // dialog forward definition
         var dialog = new DialogBuilder(XamlRoot)

@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Web;
-using mitama.Pages.Common;
-using System.Xml.Linq;
 using mitama.Pages.DeckBuilder;
 
 namespace mitama.Domain;

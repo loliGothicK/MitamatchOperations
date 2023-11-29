@@ -1,7 +1,7 @@
 ﻿namespace mitama.Algorithm;
 
 internal class Algo {
-    public static int LevenshteinDistance(string? str1, string? str2) {
+    public static int LevenshteinDistance(string str1, string str2) {
         var n1 = 0;
         var n2 = str2!.Length + 2;
         var d = new int[n2 << 1];
@@ -36,7 +36,7 @@ internal class Algo {
         return d[d.Length - n2 - 2];
     }
 
-    public static float LevenshteinRate(string? str1, string? str2) {
+    public static float LevenshteinRate(string str1, string str2) {
         var len1 = str1?.Length ?? 0;
         var len2 = str2?.Length ?? 0;
 

@@ -172,7 +172,6 @@ namespace mitama.Pages.DeckBuilder
                 SpDef.Content = $"SpDef: 0";
             }
 
-
             Fire.Content = $"‰Î: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Fire)}";
             Water.Content = $"…: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Water)}";
             Wind.Content = $"•—: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Wind)}";

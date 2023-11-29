@@ -7,12 +7,13 @@ using System.Text.Json;
 using mitama.Domain;
 using static System.IO.Directory;
 using static System.Environment;
-using static Tensorflow.TensorShapeProto.Types;
 
 namespace mitama.Pages.Common;
 
-internal class Util {
-    internal static string[] LoadRegionNames() {
+internal class Util
+{
+    internal static string[] LoadRegionNames()
+    {
         if (Exists(Director.ProjectDir())) {
             var dirs = GetDirectories(Director.ProjectDir());
             return dirs
@@ -24,7 +25,8 @@ internal class Util {
         return [];
     }
 
-    internal static string[] LoadMemberNames(string project) {
+    internal static string[] LoadMemberNames(string project)
+    {
         var membersDir = @$"{Director.ProjectDir()}\{project}\Members";
         if (Exists(membersDir)) {
             return GetDirectories(membersDir)
@@ -50,7 +52,8 @@ internal class Util {
         return [];
     }
 
-    internal static MemberInfo[] LoadMembersInfo(string project) {
+    internal static MemberInfo[] LoadMembersInfo(string project)
+    {
         var membersDir = @$"{Director.ProjectDir()}\{project}\Members";
 
         static void WaitForFile(string filePath)
@@ -79,11 +82,9 @@ internal class Util {
     {
         try
         {
-            using (FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
-            {
-                // ファイルを開ける場合は利用中でないとみなす
-                return false;
-            }
+            using FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None);
+            // ファイルを開ける場合は利用中でないとみなす
+            return false;
         }
         catch (IOException)
         {
@@ -98,11 +99,9 @@ internal class Director {
     {
         try
         {
-            using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
-            {
-                // ファイルを開けた場合は使用中ではない
-                return false;
-            }
+            using FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            // ファイルを開けた場合は使用中ではない
+            return false;
         }
         catch (IOException)
         {

@@ -43,18 +43,18 @@ internal enum Windows
 public sealed partial class ControlDashboardPage
 {
     // ウィンドウキャプチャのためのリソースを司る
-    private WindowCapture? _capture;
-    private WindowCapture? _subCapture;
+    private WindowCapture _capture;
+    private WindowCapture _subCapture;
 
     // ウィンドウキャプチャのためのラッチ
     private readonly CountdownEvent _captureEvent = new(1);
     private readonly CountdownEvent _subCaptureEvent = new(1);
     // サブスクライバーのスケジューラ
-    private readonly HistoricalScheduler[] _schedulers = { new(), new(), new(), new(), new() };
+    private readonly HistoricalScheduler[] _schedulers = [new(), new(), new(), new(), new()];
     
     // オーダーの表示を行うためのコレクション
-    private readonly ObservableCollection<TimeTableItem> _reminds = new();
-    private readonly ObservableHashSet<ResultItem> _results = new();
+    private readonly ObservableCollection<TimeTableItem> _reminds = [];
+    private readonly ObservableHashSet<ResultItem> _results = [];
     
     // スケジューラを進めるためのタイマー
     private static readonly Lazy<DispatcherTimer> Timer = new(() => 
@@ -97,10 +97,10 @@ public sealed partial class ControlDashboardPage
 
     // なんやかんやで使う状態変数
     private int _cursor = 4;
-    private List<TimeTableItem> _deck = new();
+    private List<TimeTableItem> _deck = [];
     private DateTime _nextTimePoint;
     private DateTime? _firstTimePoint;
-    private readonly string? _user = Director.ReadCache().User;
+    private readonly string _user = Director.ReadCache().User;
     private readonly string _project = Director.ReadCache().Region;
     private bool _picFlag = true;
     private OpOrderStatus _orderStat = new None();
@@ -453,7 +453,8 @@ public sealed partial class ControlDashboardPage
                                         else
                                         {
                                             var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
-                                            _orderStat = new[] { 5, 15, 20, 30 }.MinBy(t => Math.Abs(prepareTime - t)) switch
+                                            int[] ints = [5, 15, 20, 30];
+                                            _orderStat = ints.MinBy(t => Math.Abs(prepareTime - t)) switch
                                             {
                                                 5 => new Active(null, DateTime.Now, 120 - 1),
                                                 15 => new Active(null, DateTime.Now, 60 - 1),
@@ -794,11 +795,11 @@ public sealed partial class ControlDashboardPage
 internal record ResultItem(string Pic, Order Order, int Deviation, DateTime ActivatedAt)
 {
     public string DeviationFmt => $"({Deviation})";
-    bool IEquatable<ResultItem?>.Equals(ResultItem? other) => Order.Index == other?.Order.Index;
+    bool IEquatable<ResultItem>.Equals(ResultItem other) => Order.Index == other?.Order.Index;
 
 }
 
 internal abstract record OpOrderStatus;
 internal record Waiting : OpOrderStatus;
-internal record Active(string? Name, DateTime Point, int Span): OpOrderStatus;
+internal record Active(string Name, DateTime Point, int Span): OpOrderStatus;
 internal record None : OpOrderStatus;

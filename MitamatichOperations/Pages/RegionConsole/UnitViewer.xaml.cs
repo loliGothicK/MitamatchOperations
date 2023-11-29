@@ -26,7 +26,7 @@ public sealed partial class UnitViewer
         _regionName = Director.ReadCache().Region;
     }
 
-    private async void UnitTreeView_OnItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
+    private void UnitTreeView_OnItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
     {
         if (Util.LoadMemberNames(_regionName).Contains(args.InvokedItem.As<ExplorerItem>().Name!))
         {
@@ -90,7 +90,7 @@ public sealed partial class UnitViewer
 
 public class ExplorerItem : INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
+    public event PropertyChangedEventHandler PropertyChanged;
     public enum ExplorerItemType { Folder, File };
     public string Parent { get; set; }
     public string Name { get; set; }

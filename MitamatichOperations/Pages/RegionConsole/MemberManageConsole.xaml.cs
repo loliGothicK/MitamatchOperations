@@ -13,7 +13,6 @@ namespace mitama.Pages.RegionConsole;
 public sealed partial class MemberManageConsole
 {
     private string _regionName = Director.ReadCache().Region;
-    private MemberInfo _selectedMember;
 
     public MemberManageConsole()
     {

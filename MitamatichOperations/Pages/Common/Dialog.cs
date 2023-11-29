@@ -15,7 +15,7 @@ internal record struct DialogBuilder(
     string SecondaryButtonText = null,
     string CloseButtonText = null
 ) {
-    internal ContentDialog Build()
+    internal readonly ContentDialog Build()
         => new() {
             // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
             XamlRoot = Root,
@@ -28,9 +28,9 @@ internal record struct DialogBuilder(
             Content = Body
         };
 
-    internal DialogBuilder WithTitle(string title) => this with { Title = title };
-    internal DialogBuilder WithBody(object body) => this with { Body = body };
-    internal DialogBuilder WithPrimary(string primary) => this with { PrimaryButtonText = primary };
-    internal DialogBuilder WithSecondary(string secondary) => this with { SecondaryButtonText = secondary };
-    internal DialogBuilder WithCancel(string cancel) => this with { CloseButtonText = cancel };
+    internal readonly DialogBuilder WithTitle(string title) => this with { Title = title };
+    internal readonly DialogBuilder WithBody(object body) => this with { Body = body };
+    internal readonly DialogBuilder WithPrimary(string primary) => this with { PrimaryButtonText = primary };
+    internal readonly DialogBuilder WithSecondary(string secondary) => this with { SecondaryButtonText = secondary };
+    internal readonly DialogBuilder WithCancel(string cancel) => this with { CloseButtonText = cancel };
 }

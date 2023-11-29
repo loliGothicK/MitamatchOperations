@@ -277,7 +277,7 @@ public sealed partial class OrderManagerPage
 
     private async void Load_OnClick(object sender, RoutedEventArgs e)
     {
-        string? selectedMember = null;
+        string selectedMember = null;
 
         var dialog = Dialog.Builder(XamlRoot)
             .WithTitle("メンバーを選択してください")
@@ -317,7 +317,7 @@ public sealed partial class OrderManagerPage
     private async void Save_OnClick(object sender, RoutedEventArgs e)
     {
         var selectedRegion = Director.ReadCache().Region;
-        string? selectedMember = null;
+        string selectedMember = null;
 
         var dialog = Dialog.Builder(XamlRoot)
             .WithTitle("メンバーを選択してください")

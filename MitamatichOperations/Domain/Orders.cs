@@ -2,10 +2,12 @@
 using System.Linq;
 using mitama.Domain.OrderKinds;
 
-namespace mitama.Domain {
+namespace mitama.Domain 
+{
     public abstract record Kind;
 
-    namespace OrderKinds {
+    namespace OrderKinds
+    {
         public record Elemental(Element Element) : Kind;
         public record Buff : Kind;
         public record DeBuff : Kind;
@@ -17,8 +19,10 @@ namespace mitama.Domain {
         public record Other : Kind;
     }
 
-    public class Kinds {
-        public class Elemental {
+    public class Kinds
+    {
+        public class Elemental
+        {
             public static OrderKinds.Elemental Fire => new(Element.Fire);
             public static OrderKinds.Elemental Water => new(Element.Water);
             public static OrderKinds.Elemental Wind => new(Element.Wind);
@@ -37,7 +41,8 @@ namespace mitama.Domain {
         public static Other Other => new();
     }
 
-    public enum Element {
+    public enum Element
+    {
         Fire,
         Water,
         Wind,

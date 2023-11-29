@@ -13,7 +13,8 @@ using Windows.Storage;
 namespace mitama.Algorithm.IR;
 
 internal class Match {
-    public static async Task<(Bitmap, Memoria[])> Recognise(Bitmap img, bool IsVanguard) {
+    public static async Task<(Bitmap, Memoria[])> Recognise(Bitmap img, bool IsVanguard) 
+    {
         var target = img.ToMat();
         var grayMat = target.CvtColor(ColorConversionCodes.BGR2GRAY);
         var thresholdMat = grayMat.Threshold(230, 255, ThresholdTypes.BinaryInv);
@@ -82,7 +83,8 @@ internal class Match {
     private static bool IsSquare(Rect rect)
         => Math.Min(Math.Abs(rect.Height), Math.Abs(rect.Width)) > 0.95 * Math.Max(Math.Abs(rect.Height), Math.Abs(rect.Width));
 
-    private static List<Rect> Clean(ICollection<Rect> memorias) {
+    private static List<Rect> Clean(List<Rect> memorias) 
+    {
         var size = (int)memorias.Select(memoria => (memoria.Width + memoria.Height) / 2.0).Mean();
 
         List<List<Rect>> lines = new();
@@ -120,7 +122,8 @@ internal class Match {
         return lines.SelectMany(xs => xs).ToList();
     }
 
-    private static List<Rect> Interpolation(ICollection<Rect> memorias, int width) {
+    private static List<Rect> Interpolation(List<Rect> memorias, int width)
+    {
         var size = (int)memorias.Select(memoria => (memoria.Width + memoria.Height) / 2.0).Mean();
 
         List<List<Rect>> lines = new();
@@ -197,8 +200,8 @@ internal class Match {
         var verticalMargins = lines[0].Zip(lines[1]).Select(t => t.Second.Top - t.First.Bottom).ToList();
         verticalMargins.Sort();
         var verticalMargin = verticalMargins[verticalMargins.Count / 2];
-        lines.Insert(2, new List<Rect>
-        {
+        lines.Insert(2,
+        [
             Cv2.BoundingRect(new[]
             {
                 lines[1][0].TopLeft with { Y = lines[1][0].TopLeft.Y + verticalMargin + size },
@@ -219,7 +222,7 @@ internal class Match {
                 lines[1][3].TopLeft with { Y = lines[1][3].TopLeft.Y + verticalMargin + size },
                 lines[1][3].BottomRight with { Y = lines[1][3].BottomRight.Y + verticalMargin + size }
             })
-        });
+        ]);
 
         return lines.Take(3).SelectMany(xs => xs).ToList();
     }
