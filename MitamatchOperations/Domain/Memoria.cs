@@ -239,6 +239,606 @@ public record Memoria(
     public static readonly Memoria[] List =
     [
         new Memoria(
+            1161,
+            "emotionalmemoria箱入り神琳",
+            "箱入り神琳",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new Status(2309, 1949, 2309, 1944),
+                new Status(2498, 2109, 3348, 2104),
+                new Status(3836, 2270, 3536, 2265),
+                new Status(4024, 2430, 5474, 2425),
+                new Status(7063, 2591, 5663, 2586),
+            ],
+            22,
+            new Skill(
+                "カウンターファイアガードブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new GuardDown(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1160,
+            "emotionalmemoria箱入り神琳",
+            "箱入り神琳",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new Status(1969, 2289, 1969, 2284),
+                new Status(2129, 2478, 2129, 3323),
+                new Status(2290, 3816, 2290, 3511),
+                new Status(2450, 4004, 2450, 5449),
+                new Status(2611, 7043, 2611, 5638),
+            ],
+            22,
+            new Skill(
+                "Sp.カウンターファイアパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1159,
+            "emotionalmemoria箱入り神琳",
+            "箱入り神琳",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new Status(2309, 2289, 1969, 1944),
+                new Status(2923, 2903, 2129, 2104),
+                new Status(3686, 3666, 2290, 2265),
+                new Status(4749, 4729, 2450, 2425),
+                new Status(6363, 6343, 2611, 2586),
+            ],
+            22,
+            new Skill(
+                "WカウンターパワーアシストC Ⅳ",
+                "味方1～3体のATKとSp.ATKを大アップさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1158,
+            "emotionalmemoria箱入り神琳",
+            "箱入り神琳",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            [
+                new Status(2309, 1949, 2309, 1944),
+                new Status(2498, 2109, 3348, 2104),
+                new Status(3836, 2270, 3536, 2265),
+                new Status(4024, 2430, 5474, 2425),
+                new Status(7063, 2591, 5663, 2586),
+            ],
+            22,
+            new Skill(
+                "カウンターファイアパワーフォールC Ⅳ",
+                "敵1～3体のATKと火属性攻撃力を大ダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1157,
+            "emotionalmemoria箱入り神琳",
+            "箱入り神琳",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Fire,
+            [
+                new Status(1969, 1949, 2309, 2284),
+                new Status(2129, 2109, 3348, 2473),
+                new Status(2290, 2270, 3536, 3811),
+                new Status(2450, 2430, 5474, 3999),
+                new Status(2611, 2591, 5663, 7038),
+            ],
+            22,
+            new Skill(
+                "Sp.カウンターファイアガードヒールD Ⅳ",
+                "味方2体のHPを大回復し、Sp.DEFと火属性防御力を小アップする。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
+                Level.Four,
+                Range.D
+            ),
+            new SupportSkill(
+                "回:回復UP/副援:火ガードUP Ⅲ",
+                "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の火属性防御力を大アップさせる。",
+                Trigger.Support,
+                [new RecoveryUp(), new ElementGuardUp(Element.Fire)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1156,
+            "クリエイターズコラボ2人のおもてなし",
+            "2人のおもてなし",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            [
+                new Status(2282, 1938, 2314, 1962),
+                new Status(2471, 2098, 3353, 2122),
+                new Status(3809, 2259, 3541, 2283),
+                new Status(3997, 2419, 5479, 2443),
+                new Status(7036, 2580, 5668, 2604),
+            ],
+            22,
+            new Skill(
+                "ウォーターパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1155,
+            "クリエイターズコラボ2人のおもてなし",
+            "2人のおもてなし",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Water,
+            [
+                new Status(1942, 2278, 1974, 2302),
+                new Status(2102, 2467, 2134, 3341),
+                new Status(2263, 3805, 2295, 3529),
+                new Status(2423, 3993, 2455, 5467),
+                new Status(2584, 7032, 2616, 5656),
+            ],
+            22,
+            new Skill(
+                "Sp.カウンターウォーターガードバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new GuardDown(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1154,
+            "クリエイターズコラボ2人のおもてなし",
+            "2人のおもてなし",
+            new Rearguard(RearguardKind.Support),
+            Element.Water,
+            [
+                new Status(1942, 2278, 1974, 2302),
+                new Status(2102, 2467, 2134, 3341),
+                new Status(2263, 3805, 2295, 3529),
+                new Status(2423, 3993, 2455, 5467),
+                new Status(2584, 7032, 2616, 5656),
+            ],
+            22,
+            new Skill(
+                "Sp.カウンターパワーアシストC Ⅳ",
+                "味方1～3体のSp.ATKを大アップさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new SpAtk(), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1153,
+            "クリエイターズコラボ2人のおもてなし",
+            "2人のおもてなし",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Water,
+            [
+                new Status(1942, 1938, 2314, 2302),
+                new Status(2102, 2098, 2503, 3341),
+                new Status(2263, 2259, 3841, 3529),
+                new Status(2423, 2419, 4029, 5467),
+                new Status(2584, 2580, 7068, 5656),
+            ],
+            22,
+            new Skill(
+                "ウォーターガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のDEFと水属性防御力を小アップする。",
+                [],
+                [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
+                Level.Three,
+                Range.C
+            ),
+            new SupportSkill(
+                "回:ガードUP/副援:水ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の水属性防御力を大アップさせる。",
+                Trigger.Support,
+                [new GuardUp(Type.Normal), new ElementGuardUp(Element.Water)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1152,
+            "クリエイターズコラボ初雪を見上げて",
+            "初雪を見上げて",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            [
+                new Status(2451, 2087, 2445, 2098),
+                new Status(2640, 2247, 3334, 2258),
+                new Status(3828, 2408, 3522, 2419),
+                new Status(4016, 2568, 5310, 2579),
+                new Status(6905, 2729, 5499, 2740),
+            ],
+            22,
+            new Skill(
+                "カウンターウォーターパワーブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のATKと水属性攻撃力をダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1151,
+            "クリエイターズコラボ初雪を見上げて",
+            "初雪を見上げて",
+            new Rearguard(RearguardKind.Interference),
+            Element.Water,
+            [
+                new Status(2451, 2087, 2445, 2098),
+                new Status(2640, 2247, 3334, 2258),
+                new Status(3828, 2408, 3522, 2419),
+                new Status(4016, 2568, 5310, 2579),
+                new Status(6905, 2729, 5499, 2740),
+            ],
+            22,
+            new Skill(
+                "カウンターウォーターパワーフォールC Ⅳ",
+                "敵1～3体のATKと水属性攻撃力を大ダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:支援UP/副援:水パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体の水属性攻撃力を大ダウンさせる。さらに、支援/妨害効果を特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new ElementPowerDown(Element.Water)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1150,
+            "真打ち登場やで",
+            "真打ち登場やで！",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new Status(2117, 2451, 2094, 2466),
+                new Status(2277, 2640, 2254, 3355),
+                new Status(2438, 3828, 2415, 3543),
+                new Status(2598, 4016, 2575, 5331),
+                new Status(2759, 6905, 2736, 5520),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアガードバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。",
+                [],
+                [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
+                Trigger.Attack,
+                [new GuardDown(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1149,
+            "真打ち登場やで",
+            "真打ち登場やで！",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new Status(2117, 2451, 2094, 2466),
+                new Status(2277, 2640, 2254, 3355),
+                new Status(2438, 3828, 2415, 3543),
+                new Status(2598, 4016, 2575, 5331),
+                new Status(2759, 6905, 2736, 5520),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアパワーアシストB Ⅲ",
+                "味方1～2体のSp.ATKと火属性攻撃力を大アップさせる。",
+                [],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "援:Sp.パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。",
+                Trigger.Support,
+                [new PowerUp(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1148,
+            "邪眼解放",
+            "邪眼解放",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new Status(2433, 2115, 2456, 2094),
+                new Status(2622, 2275, 3345, 2254),
+                new Status(3810, 2436, 3533, 2415),
+                new Status(3998, 2596, 5321, 2575),
+                new Status(6887, 2757, 5510, 2736),
+            ],
+            22,
+            new Skill(
+                "ファイアガードブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
+                [],
+                [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
+                Trigger.Attack,
+                [new GuardDown(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1147,
+            "邪眼解放",
+            "邪眼解放",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new Status(2433, 2115, 2456, 2094),
+                new Status(2622, 2275, 3345, 2254),
+                new Status(3810, 2436, 3533, 2415),
+                new Status(3998, 2596, 5321, 2575),
+                new Status(6887, 2757, 5510, 2736),
+            ],
+            22,
+            new Skill(
+                "火強：パワーアシストB Ⅲ",
+                "味方1～2体のATKを大アップさせる。さらに味方の火属性攻撃力が高いほどスキル効果が上昇する。",
+                [new ElementStrengthen(Element.Fire)],
+                [new StatusUp(new Atk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "援:パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
+                Trigger.Support,
+                [new PowerUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1146,
+            "決着の引き金、魂を重ねて",
+            "決着の引き金、魂を重ねて",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new Status(2285, 1956, 2310, 1950),
+                new Status(2474, 2116, 3349, 2110),
+                new Status(3812, 2277, 3537, 2271),
+                new Status(4000, 2437, 5475, 2431),
+                new Status(7039, 2598, 5664, 2592),
+            ],
+            22,
+            new Skill(
+                "火弱：パワーストライクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに敵の火属性防御力が低いほど与えるダメージが上昇する。",
+                [new ElementWeaken(Element.Fire)],
+                [new StatusUp(new Atk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1145,
+            "決着の引き金、魂を重ねて",
+            "決着の引き金、魂を重ねて",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new Status(1945, 2296, 1970, 2290),
+                new Status(2105, 2485, 2130, 3329),
+                new Status(2266, 3823, 2291, 3517),
+                new Status(2426, 4011, 2451, 5455),
+                new Status(2587, 7050, 2612, 5644),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1144,
+            "決着の引き金、魂を重ねて",
+            "決着の引き金、魂を重ねて",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            [
+                new Status(1945, 2296, 1970, 2290),
+                new Status(2105, 2485, 2130, 3329),
+                new Status(2266, 3823, 2291, 3517),
+                new Status(2426, 4011, 2451, 5455),
+                new Status(2587, 7050, 2612, 5644),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアパワーフォールB Ⅲ",
+                "敵1～2体のSp.ATKと火属性攻撃力を大ダウンさせる。",
+                [],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "援:Sp.パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。",
+                Trigger.Support,
+                [new PowerDown(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1143,
+            "決着の引き金、魂を重ねて",
+            "決着の引き金、魂を重ねて",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Fire,
+            [
+                new Status(1945, 1956, 2310, 2290),
+                new Status(2105, 2116, 3349, 2479),
+                new Status(2266, 2277, 3537, 3817),
+                new Status(2426, 2437, 5475, 4005),
+                new Status(2587, 2598, 5664, 7044),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のSp.DEFと火属性防御力を小アップする。",
+                [],
+                [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
+                Level.Three,
+                Range.C
+            ),
+            new SupportSkill(
+                "回:Sp.ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
+                Trigger.Recovery,
+                [new GuardUp(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1142,
+            "やがて運命は扉を叩く",
+            "やがて運命は扉を叩く",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new Status(4278, 2410, 4264, 2400),
+                new Status(5635, 2610, 4621, 2600),
+                new Status(5992, 2811, 5178, 2801),
+                new Status(6549, 3012, 5535, 3002),
+                new Status(6906, 3213, 6092, 3203),
+            ],
+            24,
+            new Skill(
+                "火拡：パワーストライクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。オーダースキル「火属性効果増加」を発動中は敵2体に通常大ダメージを与え、自身のATKをアップさせる。※...",
+                [new ElementSpread(Element.Fire)],
+                [new StatusUp(new Atk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
             1141,
             "クリエイターズコラボ秋の日に描く面影",
             "秋の日に描く面影",
