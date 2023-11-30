@@ -68,8 +68,8 @@ public record struct Costume(
         };
     }
 
-    public static Costume DummyVanguard => new Costume("dummy", "dummy", new NormalSingleCostume(0), new RareSkill("", ""), [], Optional<ExSkill>.None);
-    public static Costume DummyReaguard => new Costume("dummy", "dummy", new RecoveryCostume(0), new RareSkill("", ""), [], Optional<ExSkill>.None);
+    public static Costume DummyVanguard => new("dummy", "dummy", new NormalSingleCostume(0), new RareSkill("", ""), [], Optional<ExSkill>.None);
+    public static Costume DummyReaguard => new("dummy", "dummy", new RecoveryCostume(0), new RareSkill("", ""), [], Optional<ExSkill>.None);
 
     public static Costume[] List =>
     [
