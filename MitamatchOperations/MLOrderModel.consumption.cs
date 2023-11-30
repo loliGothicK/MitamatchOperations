@@ -2,9 +2,6 @@
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using System;
-using System.Linq;
-using System.IO;
-using System.Collections.Generic;
 namespace MitamatchOperations
 {
     public partial class MLOrderModel

@@ -4,21 +4,51 @@ using DynamicData.Kernel;
 
 namespace mitama.Domain;
 
-public abstract record CostumeType;
+public abstract record CostumeType
+{
+    abstract public double Value { get; }
+}
 // 通単
-public record NormalSingleCostume(double Calibration) : CostumeType;
+public record NormalSingleCostume(double Calibration) : CostumeType
+{
+    public override double Value => Calibration;
+}
+
 // 通範
-public record NormalRangeCostume(double Calibration) : CostumeType;
+public record NormalRangeCostume(double Calibration) : CostumeType
+{
+    public override double Value => Calibration;
+}
+
 // 特単
-public record SpecialSingleCostume(double Calibration) : CostumeType;
+public record SpecialSingleCostume(double Calibration) : CostumeType
+{
+    public override double Value => Calibration;
+}
+
 // 特範
-public record SpecialRangeCostume(double Calibration) : CostumeType;
+public record SpecialRangeCostume(double Calibration) : CostumeType
+{
+    public override double Value => Calibration;
+}
+
 // 支援
-public record AssistCostume(double Calibration) : CostumeType;
+public record AssistCostume(double Calibration) : CostumeType
+{
+    public override double Value => Calibration;
+}
+
 // 妨害
-public record InterferenceCostume(double Calibration) : CostumeType;
+public record InterferenceCostume(double Calibration) : CostumeType
+{
+    public override double Value => Calibration;
+}
+
 // 回復
-public record RecoveryCostume(double Calibration) : CostumeType;
+public record RecoveryCostume(double Calibration) : CostumeType
+{
+    public override double Value => Calibration;
+}
 
 public record RareSkill(string Name, string Description);
 public record ExSkill(string Name, string Description);
@@ -70,6 +100,10 @@ public record struct Costume(
 
     public static Costume DummyVanguard => new("dummy", "dummy", new NormalSingleCostume(0), new RareSkill("", ""), [], Optional<ExSkill>.None);
     public static Costume DummyReaguard => new("dummy", "dummy", new RecoveryCostume(0), new RareSkill("", ""), [], Optional<ExSkill>.None);
+
+    readonly bool IEquatable<Costume>.Equals(Costume other) => Name == other.Name && Lily == other.Lily;
+
+    public override readonly int GetHashCode() => HashCode.Combine(Name, Lily);
 
     public static Costume[] List =>
     [
@@ -294,7 +328,7 @@ public record struct Costume(
         ),
         new Costume(
             "一柳梨璃",
-            "GROWING*",
+            "GROWING",
             new NormalSingleCostume(10),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
@@ -1042,7 +1076,7 @@ public record struct Costume(
         ),
         new Costume(
             "白井夢結",
-            "GROWING*",
+            "GROWING",
             new NormalSingleCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
@@ -3933,7 +3967,7 @@ public record struct Costume(
         ),
         new Costume(
             "一柳結梨",
-            "GROWING*",
+            "GROWING",
             new NormalSingleCostume(10),
             new RareSkill("応援", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [

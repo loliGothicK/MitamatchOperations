@@ -11,6 +11,7 @@ using Microsoft.UI.Xaml.Navigation;
 using mitama.Domain;
 using mitama.Pages.Common;
 using mitama.Pages.Main;
+using MitamatchOperations.Pages;
 using WinRT;
 
 namespace mitama.Pages;
@@ -101,6 +102,7 @@ public sealed partial class MainPage
             {"order console", typeof(OrderConsolePage)},
             {"control dashboard", typeof(ControlDashboardPage)},
             {"deck builder", typeof(DeckBuilderPage)},
+            {"library", typeof(LibraryPage)},
         };
 
         var pageType = mapping[(string)item.Tag];
