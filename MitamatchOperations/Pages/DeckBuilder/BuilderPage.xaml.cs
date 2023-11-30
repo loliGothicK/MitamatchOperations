@@ -33,7 +33,7 @@ namespace mitama.Pages.DeckBuilder
 
         private ObservableCollection<MemoriaWithConcentration> Deck { get; set; } = [];
         private ObservableCollection<MemoriaWithConcentration> LegendaryDeck { get; set; } = [];
-        private ObservableCollection<Memoria> Pool { get; set; } = new(Memoria.List.Where(Costume.List[1].CanBeEquipped));
+        private ObservableCollection<Memoria> Pool { get; set; } = new(Memoria.List.Where(Costume.DummyReaguard.CanBeEquipped));
         private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = [];
         private HashSet<FilterType> _currentFilters = [];
         private readonly Status StatSum = new();
@@ -286,7 +286,7 @@ namespace mitama.Pages.DeckBuilder
 
         private void MemeriaSources_Drop(object sender, DragEventArgs e)
         {
-            var dummyCostume = Switch.IsOn ? Costume.List[0] : Costume.List[1];
+            var dummyCostume = Switch.IsOn ? Costume.DummyVanguard : Costume.DummyReaguard;
             foreach (var toAdd in Memoria
                 .List
                 .Where(dummyCostume.CanBeEquipped)
@@ -328,7 +328,7 @@ namespace mitama.Pages.DeckBuilder
                 if (toggleSwitch.IsOn)
                 {
                     VoR.Label = "‘O‰q";
-                    Pool = new(Memoria.List.Where(memoria => Costume.List[0].CanBeEquipped(memoria)));
+                    Pool = new(Memoria.List.Where(memoria => Costume.DummyVanguard.CanBeEquipped(memoria)));
                     MemoriaSources.ItemsSource = Pool;
                     TreeNodes[0].Children.Clear();
                     TreeNodes[0].Children.Add(new() { Text = "’Êí’P‘Ì" });
@@ -349,7 +349,7 @@ namespace mitama.Pages.DeckBuilder
                 else
                 {
                     VoR.Label = "Œã‰q";
-                    Pool = new(Memoria.List.Where(memoria => Costume.List[1].CanBeEquipped(memoria)));
+                    Pool = new(Memoria.List.Where(memoria => Costume.DummyReaguard.CanBeEquipped(memoria)));
                     TreeNodes[0].Children.Clear();
                     TreeNodes[0].Children.Add(new() { Text = "Žx‰‡" });
                     TreeNodes[0].Children.Add(new() { Text = "–WŠQ" });
