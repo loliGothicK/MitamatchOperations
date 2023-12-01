@@ -1,8 +1,5 @@
-using System.Collections.ObjectModel;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using mitama.Domain;
-using mitama.Pages.RegionConsole;
 using MitamatchOperations.Pages.Library;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -23,7 +20,7 @@ namespace MitamatchOperations.Pages
             NavigationCacheMode = NavigationCacheMode.Enabled;
 
             CostumeLibraryFrame.Navigate(typeof(CostumeLibraryPage));
-            MemoriaLibraryFrame.Navigate(typeof(UnitViewer));
+            MemoriaLibraryFrame.Navigate(typeof(MemoriaLibraryPage));
         }
     }
 }

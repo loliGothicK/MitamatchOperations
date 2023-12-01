@@ -5,7 +5,6 @@ using mitama.Domain;
 using System;
 using Microsoft.UI.Xaml;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -58,6 +57,7 @@ namespace MitamatchOperations.Pages.Library
                     "Žx‰‡" => costume.Type is not AssistCostume,
                     "–WŠQ" => costume.Type is not InterferenceCostume,
                     "‰ñ•œ" => costume.Type is not RecoveryCostume,
+                    _ => false,
                 }))
                 {
                     _costumes.Remove(costume);
@@ -136,23 +136,12 @@ namespace MitamatchOperations.Pages.Library
         private void OnSuggestionRequested(RichSuggestBox sender, SuggestionRequestedEventArgs args)
         {
             sender.ItemsSource = args.Prefix switch {
-              "@" => _costumes.Where(costume => costume.Lily.Contains(args.QueryText, StringComparison.OrdinalIgnoreCase)).Select(costume => new Lily(costume.Lily, costume.Path)).DistinctBy(lily => lily.Name),
-              "#" => _costumes.Where(costume => costume.RareSkill.Name.Contains(args.QueryText, StringComparison.OrdinalIgnoreCase)).Select(costume => costume.RareSkill).DistinctBy(RareSkill => RareSkill.Name),
-              "\\" => new Position[]{ new("’Êí’P‘Ì"), new("’Êí”ÍˆÍ"), new("“ÁŽê’P‘Ì"), new("“ÁŽê”ÍˆÍ"), new("Žx‰‡"), new("–WŠQ"), new("‰ñ•œ") },
-              "!" => new Other[]{ new("‰Î"), new("…"), new("•—"), new("15%"), new("Lv.16"), new("’Êí"), new("“ÁŽê")  },
-              _ => null,
+                "@" => _costumes.Where(costume => costume.Lily.Contains(args.QueryText, StringComparison.OrdinalIgnoreCase)).Select(costume => new Lily(costume.Lily, costume.Path)).DistinctBy(lily => lily.Name),
+                "#" => _costumes.Where(costume => costume.RareSkill.Name.Contains(args.QueryText, StringComparison.OrdinalIgnoreCase)).Select(costume => costume.RareSkill).DistinctBy(RareSkill => RareSkill.Name),
+                "\\" => new Position[]{ new("’Êí’P‘Ì"), new("’Êí”ÍˆÍ"), new("“ÁŽê’P‘Ì"), new("“ÁŽê”ÍˆÍ"), new("Žx‰‡"), new("–WŠQ"), new("‰ñ•œ") },
+                "!" => new Other[]{ new("‰Î"), new("…"), new("•—"), new("15%"), new("Lv.16"), new("’Êí"), new("“ÁŽê")  },
+                _ => null,
             };
-        }
-
-        private void Redo(RichSuggestToken redo, ReadOnlyObservableCollection<RichSuggestToken> currents)
-        {
-            if (redo.Item is Lily lily)
-            {
-                foreach (var costume in Costume.List.Where(costume => costume.Lily == lily.Name))
-                {
-                    _costumes.Add(costume);
-                }
-            }
         }
 
         private void OnClear(object _, RoutedEventArgs _e)
