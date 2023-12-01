@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using DynamicData.Kernel;
 
 namespace mitama.Domain;
@@ -54,14 +55,28 @@ public record RareSkill(string Name, string Description);
 public record ExSkill(string Name, string Description);
 
 public abstract record LilySkill;
-public record Common(LilySkill[] LilySkill): LilySkill;
-public record Unique(LilySkill[] LilySkill): LilySkill;
+public record Common(LilySkill[] Skills): LilySkill;
+public record Unique(LilySkill[] Skills): LilySkill;
 public record LilyHp(int Value) : LilySkill;
 public record LilyAtk(int Value) : LilySkill;
 public record LilyDef(int Value) : LilySkill;
 public record LilySpAtk(int Value) : LilySkill;
 public record LilySpDef(int Value) : LilySkill;
 public record Calibration(double Percentage): LilySkill;
+
+public record struct LilyStatus(int Hp, int Atk, int Def, int SpAtk, int SpDef)
+{
+    public static LilyStatus operator +(LilyStatus a, LilyStatus b) => new(a.Hp + b.Hp, a.Atk + b.Atk, a.Def + b.Def, a.SpAtk + b.SpAtk, a.SpDef + b.SpDef);
+    public static LilyStatus operator -(LilyStatus a, LilyStatus b) => new(a.Hp - b.Hp, a.Atk - b.Atk, a.Def - b.Def, a.SpAtk - b.SpAtk, a.SpDef - b.SpDef);
+    public static LilyStatus operator *(LilyStatus a, LilyStatus b) => new(a.Hp * b.Hp, a.Atk * b.Atk, a.Def * b.Def, a.SpAtk * b.SpAtk, a.SpDef * b.SpDef);
+    public static LilyStatus operator /(LilyStatus a, LilyStatus b) => new(a.Hp / b.Hp, a.Atk / b.Atk, a.Def / b.Def, a.SpAtk / b.SpAtk, a.SpDef / b.SpDef);
+    public static LilyStatus operator %(LilyStatus a, LilyStatus b) => new(a.Hp % b.Hp, a.Atk % b.Atk, a.Def % b.Def, a.SpAtk % b.SpAtk, a.SpDef % b.SpDef);
+    public static LilyStatus operator +(LilyStatus a, int b) => new(a.Hp + b, a.Atk + b, a.Def + b, a.SpAtk + b, a.SpDef + b);
+    public static LilyStatus operator -(LilyStatus a, int b) => new(a.Hp - b, a.Atk - b, a.Def - b, a.SpAtk - b, a.SpDef - b);
+    public static LilyStatus operator *(LilyStatus a, int b) => new(a.Hp * b, a.Atk * b, a.Def * b, a.SpAtk * b, a.SpDef * b);
+    public static LilyStatus operator /(LilyStatus a, int b) => new(a.Hp / b, a.Atk / b, a.Def / b, a.SpAtk / b, a.SpDef / b);
+    public static LilyStatus operator %(LilyStatus a, int b) => new(a.Hp % b, a.Atk % b, a.Def % b, a.SpAtk % b, a.SpDef % b);
+}
 
 public record struct Costume(
     string Lily,
@@ -74,6 +89,36 @@ public record struct Costume(
 {
     public readonly Uri Uri => new($"ms-appx:///Assets/costume/{Lily}/{Name}.png");
     public string Path = $"/Assets/costume/{Lily}/{Name}.png";
+    public readonly LilyStatus Status => LilySkills.Aggregate(new LilyStatus(), (stat, skill) => {
+        return skill switch
+        {
+            Common common => common.Skills.Aggregate(stat, (stat, skill) =>
+            {
+                return skill switch
+                {
+                    LilyHp hp => stat with { Hp = stat.Hp + hp.Value },
+                    LilyAtk atk => stat with { Atk = stat.Atk + atk.Value },
+                    LilyDef def => stat with { Def = stat.Def + def.Value },
+                    LilySpAtk spAtk => stat with { SpAtk = stat.SpAtk + spAtk.Value },
+                    LilySpDef spDef => stat with { SpDef = stat.SpDef + spDef.Value },
+                    _ => throw new UnreachableException(""),
+                };
+            }),
+            Unique unique => unique.Skills.Aggregate(stat, (stat, skill) =>
+            {
+                return skill switch
+                {
+                    LilyHp hp => stat with { Hp = stat.Hp + hp.Value },
+                    LilyAtk atk => stat with { Atk = stat.Atk + atk.Value },
+                    LilyDef def => stat with { Def = stat.Def + def.Value },
+                    LilySpAtk spAtk => stat with { SpAtk = stat.SpAtk + spAtk.Value },
+                    LilySpDef spDef => stat with { SpDef = stat.SpDef + spDef.Value },
+                    _ => throw new UnreachableException(""),
+                };
+            }),
+            _ => throw new UnreachableException(""),
+        };
+    });
 
     public readonly bool CanBeEquipped(Memoria memoria)
     {
@@ -110,7 +155,7 @@ public record struct Costume(
         new Costume(
             "富永真",
             "ピュアリティプロミス",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ヘリオスフィアS", "一定時間、敵全体の攻撃力/防御力をダウンし、味方全体の防御力をアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -135,7 +180,7 @@ public record struct Costume(
         new Costume(
             "富永真",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ヘリオスフィアS", "一定時間、敵全体の攻撃力/防御力をダウンし、味方全体の防御力をアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -160,7 +205,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "ブラッディクライ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("邪眼", "[異能]一定時間、自身のメモリアスキル使用後の待機時間が短縮され、敵全体の攻撃力をダウンする。"),
             [
                 new Common([new LilyDef(150)]),
@@ -185,7 +230,7 @@ public record struct Costume(
         new Costume(
             "吉村・Thi・梅",
             "ピュアリティプロミス",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("縮地", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -235,7 +280,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "アラウンドザウィロー",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -260,7 +305,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "ムーンライト",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilyDef(50)]),
@@ -283,7 +328,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "ナイトルージュ",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -306,7 +351,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "百合ヶ丘訓練制服",
-            new NormalSingleCostume(7.5),
+            new SpecialSingleCostume(7.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -329,7 +374,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "GROWING",
-            new NormalSingleCostume(10),
+            new AssistCostume(10),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -352,7 +397,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "リリティカルサマー",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -375,7 +420,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "ラプラスの目覚め",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("ラプラス", "味方全体の攻撃力を上昇させ、敵全体の防御力を低下させる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -398,7 +443,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "ライトウィンド",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -421,7 +466,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "ブリリアントスピカ",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -444,7 +489,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "ファンシーフラワー",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -467,7 +512,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "聖夜のプレゼント",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -490,7 +535,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "リディアン音楽院制服",
-            new NormalSingleCostume(7.5),
+            new RecoveryCostume(7.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -513,7 +558,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "ハピネスブーケ",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -536,7 +581,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "メイドバレンタイン",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -559,7 +604,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -582,7 +627,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "秦祀隊試作レギオン制服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -605,7 +650,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "グロリアスカラー",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("ラプラス", "味方全体の攻撃力を上昇させ、敵全体の防御力を低下させる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -628,7 +673,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "りりふぇす!!フラワー",
-            new NormalSingleCostume(7.5),
+            new InterferenceCostume(7.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -651,7 +696,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "星花の浴衣",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -674,7 +719,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "ディアフレンド",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -697,7 +742,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "望月兎着",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -720,7 +765,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "千紫万紅の宴",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -766,7 +811,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "ハピネスブーケα",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -791,7 +836,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "トウメイダイアリーNP",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -816,7 +861,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "リリサマ!!シャイン",
-            new NormalSingleCostume(7.5),
+            new RecoveryCostume(7.5),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -841,7 +886,7 @@ public record struct Costume(
         new Costume(
             "一柳梨璃",
             "ピュアリティプロミス",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ラプラス", "味方全体の攻撃力を上昇させ、敵全体の防御力を低下させる。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -866,7 +911,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -891,7 +936,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "アラウンドザウィロー",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("ルナティックトランサー", "50秒 (攻30%、防30%)一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -939,7 +984,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "ムーンライト",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -962,7 +1007,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "ナイトルージュ",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -985,7 +1030,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "百合ヶ丘訓練制服",
-            new NormalSingleCostume(7.5),
+            new InterferenceCostume(7.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -1054,7 +1099,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "ブリリアントスピカ",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1077,7 +1122,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "GROWING",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -1098,7 +1143,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "聖夜のプレゼント",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1121,7 +1166,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "リディアン音楽院制服",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -1144,7 +1189,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "幸福晴着",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1167,7 +1212,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "ハピネスブーケ",
-            new NormalSingleCostume(7.5),
+            new InterferenceCostume(7.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -1190,7 +1235,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "メイドホワイトデー",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1213,7 +1258,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "秦祀隊試作レギオン制服",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1236,7 +1281,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "りりふぇす!!フラワー",
-            new NormalSingleCostume(7.5),
+            new SpecialRangeCostume(7.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -1259,7 +1304,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -1282,7 +1327,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "望月兎着",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1305,7 +1350,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "淑女の嗜み",
-            new NormalSingleCostume(7.5),
+            new SpecialSingleCostume(7.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -1328,7 +1373,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "ハピネスブーケα",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -1353,7 +1398,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "セイクリッドロザリオ",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1378,7 +1423,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "トウメイダイアリーNP",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -1428,7 +1473,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "ピュアリティプロミス",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("オーバークロック", "[MCCブースト]一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -1453,7 +1498,7 @@ public record struct Costume(
         new Costume(
             "白井夢結",
             "ファンシーフラワー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1478,7 +1523,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(50)]),
@@ -1503,7 +1548,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "アラウンドザウィロー",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -1528,7 +1573,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "ブリリアントスピカ",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1551,7 +1596,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "アーセナリーローズ",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -1574,7 +1619,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "百合ヶ丘訓練制服",
-            new NormalSingleCostume(7.5),
+            new AssistCostume(7.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -1597,7 +1642,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "リリティカルサマー",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1620,7 +1665,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "聖夜のプレゼント",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -1643,7 +1688,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "水夕会試作隊服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1666,7 +1711,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "星花の浴衣",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -1689,7 +1734,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "望月兎着",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1712,7 +1757,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "おやすみスタイル",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1735,7 +1780,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "ドリーミングアイドル",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1758,7 +1803,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "ブリリアントスピカα",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1783,7 +1828,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "リリサマ!!シャイン",
-            new NormalSingleCostume(7.5),
+            new SpecialSingleCostume(7.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -1808,7 +1853,7 @@ public record struct Costume(
         new Costume(
             "楓・J・ヌーベル",
             "星花の浴衣α",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -1833,7 +1878,7 @@ public record struct Costume(
         new Costume(
             "二川二水",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("鷹の目", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilyDef(50)]),
@@ -1858,7 +1903,7 @@ public record struct Costume(
         new Costume(
             "二川二水",
             "アラウンドザウィロー",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("鷹の目", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -1883,7 +1928,7 @@ public record struct Costume(
         new Costume(
             "二川二水",
             "ブリリアントスピカ",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("鷹の目", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1906,7 +1951,7 @@ public record struct Costume(
         new Costume(
             "二川二水",
             "アーセナリーローズ",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("鷹の目", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -1929,7 +1974,7 @@ public record struct Costume(
         new Costume(
             "二川二水",
             "百合ヶ丘訓練制服",
-            new NormalSingleCostume(7.5),
+            new RecoveryCostume(7.5),
             new RareSkill("鷹の目", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -1952,7 +1997,7 @@ public record struct Costume(
         new Costume(
             "二川二水",
             "涼風の浴衣",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("鷹の目", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilyDef(75)]),
@@ -1975,7 +2020,7 @@ public record struct Costume(
         new Costume(
             "二川二水",
             "ヘイムスクリングラ制服",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("鷹の目", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -1998,7 +2043,7 @@ public record struct Costume(
         new Costume(
             "二川二水",
             "水夕会試作隊服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("鷹の目", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2021,7 +2066,7 @@ public record struct Costume(
         new Costume(
             "二川二水",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("鷹の目", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2044,7 +2089,7 @@ public record struct Costume(
         new Costume(
             "二川二水",
             "セイクリッドロザリオ",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("鷹の目", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2067,7 +2112,7 @@ public record struct Costume(
         new Costume(
             "二川二水",
             "アーセナリーローズα",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("鷹の目", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilyDef(75)]),
@@ -2092,7 +2137,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -2117,7 +2162,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "アラウンドザウィロー",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -2165,7 +2210,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "百合ヶ丘訓練制服",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -2188,7 +2233,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "防衛軍式典制服",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2211,7 +2256,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "サマースタイル",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2234,7 +2279,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "ふしぎの国のハロウィン",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2257,7 +2302,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "ブリリアントスピカ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2280,7 +2325,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "グロリアスカラー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("アルケミートレース", "」を編成している場合、CHARM特性のメモリアスキル効果UPとCHARMの戦闘力を増加させる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -2303,7 +2348,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2326,7 +2371,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2349,7 +2394,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "ブリザードイェーガー",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2372,7 +2417,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "望月兎着",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -2395,7 +2440,7 @@ public record struct Costume(
         new Costume(
             "安藤鶴紗",
             "おやすみスタイル",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2445,7 +2490,7 @@ public record struct Costume(
         new Costume(
             "吉村・Thi・梅",
             "アラウンドザウィロー",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("縮地", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -2470,7 +2515,7 @@ public record struct Costume(
         new Costume(
             "吉村・Thi・梅",
             "ムーンライト",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("縮地", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -2493,7 +2538,7 @@ public record struct Costume(
         new Costume(
             "吉村・Thi・梅",
             "百合ヶ丘訓練制服",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("縮地", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -2516,7 +2561,7 @@ public record struct Costume(
         new Costume(
             "吉村・Thi・梅",
             "エレガントストライカー",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("縮地", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2539,7 +2584,7 @@ public record struct Costume(
         new Costume(
             "吉村・Thi・梅",
             "ふしぎの国のハロウィン",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("縮地", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2562,7 +2607,7 @@ public record struct Costume(
         new Costume(
             "吉村・Thi・梅",
             "防衛軍式典制服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("縮地", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -2585,7 +2630,7 @@ public record struct Costume(
         new Costume(
             "吉村・Thi・梅",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("縮地", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2608,7 +2653,7 @@ public record struct Costume(
         new Costume(
             "吉村・Thi・梅",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("縮地", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2631,7 +2676,7 @@ public record struct Costume(
         new Costume(
             "吉村・Thi・梅",
             "ブリザードイェーガー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("縮地", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2654,7 +2699,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -2679,7 +2724,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "アラウンドザウィロー",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -2704,7 +2749,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "百合ヶ丘訓練制服",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -2727,7 +2772,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "防衛軍式典制服",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2773,7 +2818,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "リリティカルサマー",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2796,7 +2841,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "ヘイムスクリングラ制服",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2819,7 +2864,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "ファストブレイカー",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -2842,7 +2887,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "幸福晴着",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2865,7 +2910,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "王家修練服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2888,7 +2933,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "千紫万紅の宴",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2911,7 +2956,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "メイドバレンタイン",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -2934,7 +2979,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "ブリザードイェーガー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2957,7 +3002,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "おやすみスタイル",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -2980,7 +3025,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "リリティカルサマーα",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -3005,7 +3050,7 @@ public record struct Costume(
         new Costume(
             "郭神琳",
             "ラムのメイド服風",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3055,7 +3100,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "アラウンドザウィロー",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -3080,7 +3125,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "百合ヶ丘訓練制服",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -3103,7 +3148,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "防衛軍式典制服",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -3126,7 +3171,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "ブリリアントスピカ",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3172,7 +3217,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "ヘイムスクリングラ制服",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -3195,7 +3240,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "幸福晴着",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3218,7 +3263,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "和装猫耳メイド",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3241,7 +3286,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3264,7 +3309,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "グロリアスカラー",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3287,7 +3332,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "王家修練服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3310,7 +3355,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "聖夜のプレゼント",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3333,7 +3378,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "千紫万紅の宴",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3356,7 +3401,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "ブリザードイェーガー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -3379,7 +3424,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "惑わしバニー",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3402,7 +3447,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "リリティカルサマーα",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3427,7 +3472,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "スタースプラッシュ",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3452,7 +3497,7 @@ public record struct Costume(
         new Costume(
             "王雨嘉",
             "レムのメイド服風",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3477,7 +3522,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -3502,7 +3547,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "アラウンドザウィロー",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -3550,7 +3595,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "アーセナリーローズ",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilyDef(50)]),
@@ -3573,7 +3618,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "百合ヶ丘訓練制服",
-            new NormalSingleCostume(10),
+            new RecoveryCostume(10),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -3594,7 +3639,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "レゾナンスオブハート",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3617,7 +3662,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "ふしぎの国のハロウィン",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3640,7 +3685,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "ムーンライト",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3663,7 +3708,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "メイドバレンタイン",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3686,7 +3731,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -3709,7 +3754,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "星花の浴衣",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3732,7 +3777,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3755,7 +3800,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "レゾナンスオブハートα",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3780,7 +3825,7 @@ public record struct Costume(
         new Costume(
             "ミリアム",
             "ノクターンミラージュ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3805,7 +3850,7 @@ public record struct Costume(
         new Costume(
             "真島百由",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3828,7 +3873,7 @@ public record struct Costume(
         new Costume(
             "真島百由",
             "レゾナンスオブハート",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -3851,7 +3896,7 @@ public record struct Costume(
         new Costume(
             "真島百由",
             "アーセナリーローズ",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3874,7 +3919,7 @@ public record struct Costume(
         new Costume(
             "真島百由",
             "ムーンライト",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3920,7 +3965,7 @@ public record struct Costume(
         new Costume(
             "真島百由",
             "ノクターンミラージュ",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3945,7 +3990,7 @@ public record struct Costume(
         new Costume(
             "一柳結梨",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("応援", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3968,7 +4013,7 @@ public record struct Costume(
         new Costume(
             "一柳結梨",
             "GROWING",
-            new NormalSingleCostume(10),
+            new InterferenceCostume(10),
             new RareSkill("応援", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -3989,7 +4034,7 @@ public record struct Costume(
         new Costume(
             "一柳結梨",
             "ファンシーフラワー",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("応援", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -4012,7 +4057,7 @@ public record struct Costume(
         new Costume(
             "一柳結梨",
             "千紫万紅の宴",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("応援", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -4035,7 +4080,7 @@ public record struct Costume(
         new Costume(
             "一柳結梨",
             "淑女の嗜み",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("応援", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -4058,7 +4103,7 @@ public record struct Costume(
         new Costume(
             "一柳結梨",
             "百合ヶ丘訓練制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("応援", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -4081,7 +4126,7 @@ public record struct Costume(
         new Costume(
             "一柳結梨",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("応援", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -4106,7 +4151,7 @@ public record struct Costume(
         new Costume(
             "早川弥宏",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタS", "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。"),
             [
                 new Common([new LilyDef(150)]),
@@ -4131,7 +4176,7 @@ public record struct Costume(
         new Costume(
             "早川弥宏",
             "ピュアリティプロミス",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("レジスタS", "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -4156,7 +4201,7 @@ public record struct Costume(
         new Costume(
             "天野天葉",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ヘリオスフィアS", "一定時間、敵全体の攻撃力/防御力をダウンし、味方全体の防御力をアップする。"),
             [
                 new Common([new LilySpDef(1000)]),
@@ -4179,7 +4224,7 @@ public record struct Costume(
         new Costume(
             "天野天葉",
             "高難度外征レギオン制服",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ヘリオスフィアS", "一定時間、敵全体の攻撃力/防御力をダウンし、味方全体の防御力をアップする。"),
             [
                 new Common([new LilySpDef(1500)]),
@@ -4198,7 +4243,7 @@ public record struct Costume(
         new Costume(
             "天野天葉",
             "メイドホワイトデー",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("ヘリオスフィアS", "一定時間、敵全体の攻撃力/防御力をダウンし、味方全体の防御力をアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -4221,7 +4266,7 @@ public record struct Costume(
         new Costume(
             "天野天葉",
             "セレスティアルサマー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ヘリオスフィアS", "一定時間、敵全体の攻撃力/防御力をダウンし、味方全体の防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -4246,7 +4291,7 @@ public record struct Costume(
         new Costume(
             "番匠谷依奈",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilyDef(1000)]),
@@ -4267,7 +4312,7 @@ public record struct Costume(
         new Costume(
             "番匠谷依奈",
             "セレスティアルサマー",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -4292,7 +4337,7 @@ public record struct Costume(
         new Costume(
             "番匠谷依奈",
             "高難度外征レギオン制服",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(1500)]),
@@ -4311,7 +4356,7 @@ public record struct Costume(
         new Costume(
             "遠藤亜羅椰",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("Ph.トランセンデンスS", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。"),
             [
                 new Common([new LilySpDef(1000)]),
@@ -4334,7 +4379,7 @@ public record struct Costume(
         new Costume(
             "遠藤亜羅椰",
             "高難度外征レギオン制服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("Ph.トランセンデンスS", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。"),
             [
                 new Common([new LilyDef(1500)]),
@@ -4353,7 +4398,7 @@ public record struct Costume(
         new Costume(
             "遠藤亜羅椰",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("Ph.トランセンデンスS", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。"),
             [
                 new Common([new LilyDef(75)]),
@@ -4378,7 +4423,7 @@ public record struct Costume(
         new Costume(
             "遠藤亜羅椰",
             "セレスティアルサマー",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("Ph.トランセンデンスS", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -4426,7 +4471,7 @@ public record struct Costume(
         new Costume(
             "田中壱",
             "高難度外征レギオン制服",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("この世の理S", "一定時間、自身の防御力が大アップし、攻撃力がアップする。さらに、自身が使用したメモリアスキルの50％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(1500)]),
@@ -4445,7 +4490,7 @@ public record struct Costume(
         new Costume(
             "田中壱",
             "セレスティアルサマー",
-            new NormalSingleCostume(15),
+            new SpecialSingleCostume(15),
             new RareSkill("この世の理S", "一定時間、自身の防御力が大アップし、攻撃力がアップする。さらに、自身が使用したメモリアスキルの50％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -4470,7 +4515,7 @@ public record struct Costume(
         new Costume(
             "江川樟美",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ファンタズムS", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。"),
             [
                 new Common([new LilySpDef(1000)]),
@@ -4491,7 +4536,7 @@ public record struct Costume(
         new Costume(
             "江川樟美",
             "高難度外征レギオン制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ファンタズムS", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。"),
             [
                 new Common([new LilySpDef(1500)]),
@@ -4510,7 +4555,7 @@ public record struct Costume(
         new Costume(
             "江川樟美",
             "セレスティアルサマー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ファンタズムS", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -4535,7 +4580,7 @@ public record struct Costume(
         new Costume(
             "金箱弥宙",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("レジスタS", "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。"),
             [
                 new Common([new LilySpDef(1000)]),
@@ -4558,7 +4603,7 @@ public record struct Costume(
         new Costume(
             "金箱弥宙",
             "高難度外征レギオン制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタS", "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。"),
             [
                 new Common([new LilySpDef(1500)]),
@@ -4577,7 +4622,7 @@ public record struct Costume(
         new Costume(
             "金箱弥宙",
             "セレスティアルサマー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタS", "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -4602,7 +4647,7 @@ public record struct Costume(
         new Costume(
             "渡邉茜",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new SpecialSingleCostume(15),
             new RareSkill("テスタメントS", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。"),
             [
                 new Common([new LilySpDef(1000)]),
@@ -4623,7 +4668,7 @@ public record struct Costume(
         new Costume(
             "渡邉茜",
             "高難度外征レギオン制服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("テスタメントS", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。"),
             [
                 new Common([new LilySpDef(1500)]),
@@ -4642,7 +4687,7 @@ public record struct Costume(
         new Costume(
             "渡邉茜",
             "セレスティアルサマー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("テスタメントS", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -4667,7 +4712,7 @@ public record struct Costume(
         new Costume(
             "高須賀月詩",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilyDef(1000)]),
@@ -4688,7 +4733,7 @@ public record struct Costume(
         new Costume(
             "高須賀月詩",
             "高難度外征レギオン制服",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(1500)]),
@@ -4707,7 +4752,7 @@ public record struct Costume(
         new Costume(
             "高須賀月詩",
             "セレスティアルサマー",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -4732,7 +4777,7 @@ public record struct Costume(
         new Costume(
             "森辰姫",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("ルナティックトランサーS", "一定時間、自身の攻撃力/防御力が大幅にアップする。"),
             [
                 new Common([new LilySpDef(1000)]),
@@ -4774,7 +4819,7 @@ public record struct Costume(
         new Costume(
             "森辰姫",
             "セレスティアルサマー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ルナティックトランサーS", "一定時間、自身の攻撃力/防御力が大幅にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -4799,7 +4844,7 @@ public record struct Costume(
         new Costume(
             "六角汐里",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -4845,7 +4890,7 @@ public record struct Costume(
         new Costume(
             "六角汐里",
             "望月兎着",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -4868,7 +4913,7 @@ public record struct Costume(
         new Costume(
             "六角汐里",
             "セイクリッドロザリオ",
-            new NormalSingleCostume(15),
+            new SpecialSingleCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -4893,7 +4938,7 @@ public record struct Costume(
         new Costume(
             "六角汐里",
             "ノクターンミラージュ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -4918,7 +4963,7 @@ public record struct Costume(
         new Costume(
             "秦祀",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ゼノンパラドキサS", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の攻撃力/防御力が大幅にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -4941,7 +4986,7 @@ public record struct Costume(
         new Costume(
             "秦祀",
             "秦祀隊レギオン制服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ゼノンパラドキサS", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の攻撃力/防御力が大幅にアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -4964,7 +5009,7 @@ public record struct Costume(
         new Costume(
             "伊東閑",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -4987,7 +5032,7 @@ public record struct Costume(
         new Costume(
             "伊東閑",
             "ディアフレンド",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5010,7 +5055,7 @@ public record struct Costume(
         new Costume(
             "伊東閑",
             "セイクリッドロザリオ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -5033,7 +5078,7 @@ public record struct Costume(
         new Costume(
             "伊東閑",
             "ノクターンミラージュ",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5058,7 +5103,7 @@ public record struct Costume(
         new Costume(
             "立原紗癒",
             "ローエングリン隊服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -5081,7 +5126,7 @@ public record struct Costume(
         new Costume(
             "立原紗癒",
             "ドリーミングアイドル",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5104,7 +5149,7 @@ public record struct Costume(
         new Costume(
             "立原紗癒",
             "シャイニングスピカ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5129,7 +5174,7 @@ public record struct Costume(
         new Costume(
             "倉又雪陽",
             "ローエングリン隊服",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -5154,7 +5199,7 @@ public record struct Costume(
         new Costume(
             "倉又雪陽",
             "ノクターンミラージュ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -5179,7 +5224,7 @@ public record struct Costume(
         new Costume(
             "妹島広夢",
             "ローエングリン隊服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilyDef(150)]),
@@ -5204,7 +5249,7 @@ public record struct Costume(
         new Costume(
             "妹島広夢",
             "ノクターンミラージュ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5229,7 +5274,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "エレンスゲ標準制服",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -5254,7 +5299,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "エレンスゲオーダー",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(50)]),
@@ -5279,7 +5324,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "マリンセーラー",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5302,7 +5347,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "オブシダンスーツ",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5325,7 +5370,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "リリティカルサマー",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -5348,7 +5393,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "ライトウィンド",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -5371,7 +5416,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "ガーディアンスーツ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5394,7 +5439,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5417,7 +5462,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "カオスナイトメア",
-            new NormalSingleCostume(15),
+            new SpecialSingleCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5440,7 +5485,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "りりふぇす!!フラワー",
-            new NormalSingleCostume(7.5),
+            new AssistCostume(7.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -5463,7 +5508,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "イージスガード",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -5486,7 +5531,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "のんびりスタイル",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5509,7 +5554,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "ナイトリキャプチャー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5532,7 +5577,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "ハッピージングルベル",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5555,7 +5600,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "メイドホワイトデー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -5578,7 +5623,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "セイクリッドロザリオ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5601,7 +5646,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "ソルギナックシステム",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ブーステッドインサニティ", "[ブーステッドスキル]一定時間、自身の攻撃力/防御力がアップし、敵から受ける妨害効果を大幅にダウンする。さらに、5秒毎に自身のHPを一定の割合分だけ回復する。ただし、味方からの支援/回復効果も大幅にダウンする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -5626,7 +5671,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "ブリッツアングリフα",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5651,7 +5696,7 @@ public record struct Costume(
         new Costume(
             "相澤一葉",
             "ファンシーフラワー",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5701,7 +5746,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "エレンスゲオーダー",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -5726,7 +5771,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "マリンセーラー",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5749,7 +5794,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "オブシダンスーツ",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5772,7 +5817,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "リリティカルサマー",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5795,7 +5840,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "サマースタイル",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5818,7 +5863,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "ナイトルージュ",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5841,7 +5886,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "カオスナイトメア",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -5864,7 +5909,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5887,7 +5932,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "ハッピーハロウィン",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5910,7 +5955,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "ブリザードイェーガー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5933,7 +5978,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "メイドホワイトデー",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5956,7 +6001,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "ソルギナックシステム",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("アルケミートレース", "」を編成している場合、CHARM特性のメモリアスキル効果UPとCHARMの戦闘力を増加させる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -5979,7 +6024,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "おやすみスタイル",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -6004,7 +6049,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "リリティカルサマーα",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6029,7 +6074,7 @@ public record struct Costume(
         new Costume(
             "佐々木藍",
             "オブシダンスーツα",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6054,7 +6099,7 @@ public record struct Costume(
         new Costume(
             "飯島恋花",
             "エレンスゲ標準制服",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilyDef(50)]),
@@ -6079,7 +6124,7 @@ public record struct Costume(
         new Costume(
             "飯島恋花",
             "エレンスゲオーダー",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -6104,7 +6149,7 @@ public record struct Costume(
         new Costume(
             "飯島恋花",
             "マリンセーラー",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6127,7 +6172,7 @@ public record struct Costume(
         new Costume(
             "飯島恋花",
             "華麗なるエージェント",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6150,7 +6195,7 @@ public record struct Costume(
         new Costume(
             "飯島恋花",
             "ガーディアンスーツ",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6173,7 +6218,7 @@ public record struct Costume(
         new Costume(
             "飯島恋花",
             "イージスガード",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6196,7 +6241,7 @@ public record struct Costume(
         new Costume(
             "飯島恋花",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6219,7 +6264,7 @@ public record struct Costume(
         new Costume(
             "飯島恋花",
             "メイドバレンタイン",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6242,7 +6287,7 @@ public record struct Costume(
         new Costume(
             "飯島恋花",
             "ソルギナックシステム",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ドレインタッチ", "[異能]味方1体の攻撃力/防御力減少効果を打ち消し、一定時間、攻撃力/防御力をアップする。さらに、敵1体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6267,7 +6312,7 @@ public record struct Costume(
         new Costume(
             "飯島恋花",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -6292,7 +6337,7 @@ public record struct Costume(
         new Costume(
             "飯島恋花",
             "マリンセーラーα",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6317,7 +6362,7 @@ public record struct Costume(
         new Costume(
             "飯島恋花",
             "オブシダンスーツ",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6342,7 +6387,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "エレンスゲ標準制服",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -6367,7 +6412,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "エレンスゲオーダー",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -6392,7 +6437,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "デモリッシャーフォーム",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6415,7 +6460,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "華麗なるエージェント",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -6438,7 +6483,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "ガーディアンスーツ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -6461,7 +6506,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6484,7 +6529,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6507,7 +6552,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "マリンセーラー",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6530,7 +6575,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "イージスガード",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6553,7 +6598,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "ナイトリキャプチャー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -6576,7 +6621,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "ハッピーハロウィン",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6599,7 +6644,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "メイドバレンタイン",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6622,7 +6667,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "ソルギナックシステム",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -6645,7 +6690,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "マリンセーラーα",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6670,7 +6715,7 @@ public record struct Costume(
         new Costume(
             "初鹿野瑤",
             "オブシダンスーツ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ブレイブ", "一定時間、味方前衛1体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -6695,7 +6740,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "エレンスゲ標準制服",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -6720,7 +6765,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "エレンスゲオーダー",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -6745,7 +6790,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "エレガントストライカー",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6791,7 +6836,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "華麗なるエージェント",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6814,7 +6859,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -6837,7 +6882,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "カオスナイトメア",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6860,7 +6905,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6883,7 +6928,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "涼風の浴衣",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6906,7 +6951,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "ナイトリキャプチャー",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6929,7 +6974,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "ハッピーハロウィン",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -6952,7 +6997,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "メイドバレンタイン",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6975,7 +7020,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "惑わしバニー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -6998,7 +7043,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "ソルギナックシステム",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7021,7 +7066,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "セイクリッドロザリオ",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7046,7 +7091,7 @@ public record struct Costume(
         new Costume(
             "芹沢千香瑠",
             "涼風の浴衣α",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -7071,7 +7116,7 @@ public record struct Costume(
         new Costume(
             "松村優珂",
             "エレンスゲ標準制服",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -7096,7 +7141,7 @@ public record struct Costume(
         new Costume(
             "松村優珂",
             "ソルギナックシステム",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ヘリオマグススフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。※「ヘリオスフィア」より効果時間が長く、攻撃力/防御力の減少量が大きい。"),
             [
                 new Common([new LilyDef(150)]),
@@ -7121,7 +7166,7 @@ public record struct Costume(
         new Costume(
             "松村優珂",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7146,7 +7191,7 @@ public record struct Costume(
         new Costume(
             "松村優珂",
             "黒紅の竜装",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7171,7 +7216,7 @@ public record struct Costume(
         new Costume(
             "牧野美岳",
             "エレンスゲ標準制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -7194,7 +7239,7 @@ public record struct Costume(
         new Costume(
             "牧野美岳",
             "ソルギナックシステム",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("マグスレジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。※「レジスタ」より効果時間が長く、攻撃力/防御力の増加量が大きい。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -7217,7 +7262,7 @@ public record struct Costume(
         new Costume(
             "牧野美岳",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7242,7 +7287,7 @@ public record struct Costume(
         new Costume(
             "牧野美岳",
             "黒紅の竜装",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -7267,7 +7312,7 @@ public record struct Costume(
         new Costume(
             "賀川蒔菜",
             "エレンスゲ標準制服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -7290,7 +7335,7 @@ public record struct Costume(
         new Costume(
             "賀川蒔菜",
             "ソルギナックシステム",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("サークリットマグス", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。※「円環の御手」より効果時間が長い。"),
             [
                 new Common([new LilyDef(150)]),
@@ -7313,7 +7358,7 @@ public record struct Costume(
         new Costume(
             "賀川蒔菜",
             "黒紅の竜装",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7338,7 +7383,7 @@ public record struct Costume(
         new Costume(
             "森本結爾",
             "エレンスゲ標準制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -7363,7 +7408,7 @@ public record struct Costume(
         new Costume(
             "森本結爾",
             "ソルギナックシステム",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("マグスファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。※「ファンタズム」より効果時間が長く、対象人数が最大数になる確率が高い。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -7388,7 +7433,7 @@ public record struct Costume(
         new Costume(
             "森本結爾",
             "黒紅の竜装",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7413,7 +7458,7 @@ public record struct Costume(
         new Costume(
             "苅谷緋紅",
             "エレンスゲ標準制服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -7438,7 +7483,7 @@ public record struct Costume(
         new Costume(
             "苅谷緋紅",
             "黒紅の竜装",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("プレステスタ", "プレステスタ一定時間、味方全員が使用したメモリアスキルの25％の効果が、他のリリィ・ヒュージ1体にも適用される。※「テスタメント」より効果時間が長く、適用される効果量が高い。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -7463,7 +7508,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "神庭女子標準制服",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -7488,7 +7533,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "フローラルクインテット",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -7513,7 +7558,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "マルチカラードフラワー",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7559,7 +7604,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "リリティカルサマー",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7582,7 +7627,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "涼風の浴衣",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7605,7 +7650,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "ライトウィンド",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7628,7 +7673,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "モンスターハロウィン",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7651,7 +7696,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -7674,7 +7719,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "りりふぇす!!フラワー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -7697,7 +7742,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "フラワーフレグランス",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7720,7 +7765,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "エレガントストライカー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -7743,7 +7788,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "ハッピージングルベル",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7766,7 +7811,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "ブルーミングノネット",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7789,7 +7834,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "メイドホワイトデー",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7812,7 +7857,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "ミラージュマリアージュ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -7837,7 +7882,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "セイクリッドロザリオ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7862,7 +7907,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "涼風の浴衣α",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7887,7 +7932,7 @@ public record struct Costume(
         new Costume(
             "今叶星",
             "シャイニーアクトレス",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7912,7 +7957,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "神庭女子標準制服",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilyDef(50)]),
@@ -7937,7 +7982,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "フローラルクインテット",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -7962,7 +8007,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "プリンセスナイト",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -7985,7 +8030,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "涼風の浴衣",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8008,7 +8053,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "モンスターハロウィン",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8031,7 +8076,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "マルチカラードフラワー",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8054,7 +8099,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -8077,7 +8122,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "フラワーフレグランス",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -8100,7 +8145,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "ブルーミングノネット",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8123,7 +8168,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "惑わしバニー",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8146,7 +8191,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "エレガントフォーマル",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8171,7 +8216,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8196,7 +8241,7 @@ public record struct Costume(
         new Costume(
             "宮川高嶺",
             "プリンセスナイトα",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ゼノンパラドキサ", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -8246,7 +8291,7 @@ public record struct Costume(
         new Costume(
             "土岐紅巴",
             "フローラルクインテット",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -8271,7 +8316,7 @@ public record struct Costume(
         new Costume(
             "土岐紅巴",
             "涼風の浴衣",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8294,7 +8339,7 @@ public record struct Costume(
         new Costume(
             "土岐紅巴",
             "マルチカラードフラワー",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8317,7 +8362,7 @@ public record struct Costume(
         new Costume(
             "土岐紅巴",
             "ビューティフルワールド",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -8340,7 +8385,7 @@ public record struct Costume(
         new Costume(
             "土岐紅巴",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8363,7 +8408,7 @@ public record struct Costume(
         new Costume(
             "土岐紅巴",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8386,7 +8431,7 @@ public record struct Costume(
         new Costume(
             "土岐紅巴",
             "ハッピージングルベル",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8409,7 +8454,7 @@ public record struct Costume(
         new Costume(
             "土岐紅巴",
             "ブルーミングノネット",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8432,7 +8477,7 @@ public record struct Costume(
         new Costume(
             "土岐紅巴",
             "リリティカルサマーα",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -8457,7 +8502,7 @@ public record struct Costume(
         new Costume(
             "土岐紅巴",
             "ビューティフルワールドα",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8482,7 +8527,7 @@ public record struct Costume(
         new Costume(
             "丹羽灯莉",
             "神庭女子標準制服",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -8507,7 +8552,7 @@ public record struct Costume(
         new Costume(
             "丹羽灯莉",
             "フローラルクインテット",
-            new NormalSingleCostume(12.5),
+            new RecoveryCostume(12.5),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -8555,7 +8600,7 @@ public record struct Costume(
         new Costume(
             "丹羽灯莉",
             "リリティカルサマー",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8578,7 +8623,7 @@ public record struct Costume(
         new Costume(
             "丹羽灯莉",
             "モンスターハロウィン",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -8601,7 +8646,7 @@ public record struct Costume(
         new Costume(
             "丹羽灯莉",
             "ファストブレイカー",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8624,7 +8669,7 @@ public record struct Costume(
         new Costume(
             "丹羽灯莉",
             "ビューティフルワールド",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8647,7 +8692,7 @@ public record struct Costume(
         new Costume(
             "丹羽灯莉",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8670,7 +8715,7 @@ public record struct Costume(
         new Costume(
             "丹羽灯莉",
             "ブリザードイェーガー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -8693,7 +8738,7 @@ public record struct Costume(
         new Costume(
             "丹羽灯莉",
             "ブルーミングノネット",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8716,7 +8761,7 @@ public record struct Costume(
         new Costume(
             "丹羽灯莉",
             "マルチカラードフラワーα",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -8741,7 +8786,7 @@ public record struct Costume(
         new Costume(
             "定盛姫歌",
             "神庭女子標準制服",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(50)]),
@@ -8791,7 +8836,7 @@ public record struct Costume(
         new Costume(
             "定盛姫歌",
             "マルチカラードフラワー",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8814,7 +8859,7 @@ public record struct Costume(
         new Costume(
             "定盛姫歌",
             "プリンセスナイト",
-            new NormalSingleCostume(12.5),
+            new InterferenceCostume(12.5),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8837,7 +8882,7 @@ public record struct Costume(
         new Costume(
             "定盛姫歌",
             "デモリッシャーフォーム",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -8860,7 +8905,7 @@ public record struct Costume(
         new Costume(
             "定盛姫歌",
             "ビューティフルワールド",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8883,7 +8928,7 @@ public record struct Costume(
         new Costume(
             "定盛姫歌",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -8929,7 +8974,7 @@ public record struct Costume(
         new Costume(
             "定盛姫歌",
             "ブリッツアングリフ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8952,7 +8997,7 @@ public record struct Costume(
         new Costume(
             "定盛姫歌",
             "ブリザードイェーガー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -8975,7 +9020,7 @@ public record struct Costume(
         new Costume(
             "定盛姫歌",
             "ブルーミングノネット",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -8998,7 +9043,7 @@ public record struct Costume(
         new Costume(
             "定盛姫歌",
             "マルチカラードフラワーα",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9023,7 +9068,7 @@ public record struct Costume(
         new Costume(
             "定盛姫歌",
             "シャイニーアクトレス",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9048,7 +9093,7 @@ public record struct Costume(
         new Costume(
             "横田悠夏",
             "神庭女子標準制服",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("フェイズトランセンデンス", "50秒 (攻20%、防20%)一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9071,7 +9116,7 @@ public record struct Costume(
         new Costume(
             "横田悠夏",
             "ブルーミングノネット",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -9094,7 +9139,7 @@ public record struct Costume(
         new Costume(
             "横田悠夏",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9119,7 +9164,7 @@ public record struct Costume(
         new Costume(
             "本間秋日",
             "神庭女子標準制服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9142,7 +9187,7 @@ public record struct Costume(
         new Costume(
             "本間秋日",
             "ブルーミングノネット",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9165,7 +9210,7 @@ public record struct Costume(
         new Costume(
             "本間秋日",
             "ミラージュマリアージュ",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9190,7 +9235,7 @@ public record struct Costume(
         new Costume(
             "本間秋日",
             "サプライズハロウィン",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ヘリオスフィア", "一定時間、敵全体の攻撃力/防御力をダウンする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -9215,7 +9260,7 @@ public record struct Costume(
         new Costume(
             "石塚藤乃",
             "ブルーミングノネット",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -9238,7 +9283,7 @@ public record struct Costume(
         new Costume(
             "石塚藤乃",
             "神庭女子標準制服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -9261,7 +9306,7 @@ public record struct Costume(
         new Costume(
             "石塚藤乃",
             "サプライズハロウィン",
-            new NormalSingleCostume(15),
+            new SpecialSingleCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9286,7 +9331,7 @@ public record struct Costume(
         new Costume(
             "石塚藤乃",
             "シャイニーアクトレス",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -9311,7 +9356,7 @@ public record struct Costume(
         new Costume(
             "塩崎鈴夢",
             "神庭女子標準制服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(150)]),
@@ -9334,7 +9379,7 @@ public record struct Costume(
         new Costume(
             "塩崎鈴夢",
             "ブルーミングノネット",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -9357,7 +9402,7 @@ public record struct Costume(
         new Costume(
             "塩崎鈴夢",
             "ミラージュマリアージュ",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9382,7 +9427,7 @@ public record struct Costume(
         new Costume(
             "塩崎鈴夢",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9407,7 +9452,7 @@ public record struct Costume(
         new Costume(
             "塩崎鈴夢",
             "サプライズハロウィン",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9432,7 +9477,7 @@ public record struct Costume(
         new Costume(
             "船田純",
             "御台場女学校制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9455,7 +9500,7 @@ public record struct Costume(
         new Costume(
             "船田純",
             "ブリザードイェーガー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -9478,7 +9523,7 @@ public record struct Costume(
         new Costume(
             "船田純",
             "千紫万紅の宴",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9501,7 +9546,7 @@ public record struct Costume(
         new Costume(
             "船田初",
             "御台場女学校制服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(75)]),
@@ -9524,7 +9569,7 @@ public record struct Costume(
         new Costume(
             "船田初",
             "ブリザードイェーガー",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9547,7 +9592,7 @@ public record struct Costume(
         new Costume(
             "船田初",
             "千紫万紅の宴",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9570,7 +9615,7 @@ public record struct Costume(
         new Costume(
             "川村楪",
             "御台場女学校制服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -9593,7 +9638,7 @@ public record struct Costume(
         new Costume(
             "川村楪",
             "ブリザードイェーガー",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9616,7 +9661,7 @@ public record struct Costume(
         new Costume(
             "月岡椛",
             "御台場女学校制服",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9639,7 +9684,7 @@ public record struct Costume(
         new Costume(
             "藤田槿",
             "御台場女学校制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9662,7 +9707,7 @@ public record struct Costume(
         new Costume(
             "藤田槿",
             "ブリザードイェーガー",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("レジスタ", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9685,7 +9730,7 @@ public record struct Costume(
         new Costume(
             "来夢",
             "私立ルドビコ女学院制服",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9708,7 +9753,7 @@ public record struct Costume(
         new Costume(
             "来夢",
             "千紫万紅の宴",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -9731,7 +9776,7 @@ public record struct Costume(
         new Costume(
             "来夢",
             "セイクリッドロザリオ",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("カリスマ", "一定時間、味方全体の攻撃力を10秒毎にアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9754,7 +9799,7 @@ public record struct Costume(
         new Costume(
             "幸恵",
             "私立ルドビコ女学院制服",
-            new NormalSingleCostume(15),
+            new SpecialSingleCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9777,7 +9822,7 @@ public record struct Costume(
         new Costume(
             "幸恵",
             "千紫万紅の宴",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9800,7 +9845,7 @@ public record struct Costume(
         new Costume(
             "幸恵",
             "セイクリッドロザリオ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -9825,7 +9870,7 @@ public record struct Costume(
         new Costume(
             "百合亜",
             "私立ルドビコ女学院制服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9848,7 +9893,7 @@ public record struct Costume(
         new Costume(
             "百合亜",
             "セイクリッドロザリオ",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -9873,7 +9918,7 @@ public record struct Costume(
         new Costume(
             "聖恋",
             "私立ルドビコ女学院制服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -9896,7 +9941,7 @@ public record struct Costume(
         new Costume(
             "聖恋",
             "セイクリッドロザリオ",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9919,7 +9964,7 @@ public record struct Costume(
         new Costume(
             "佳世",
             "私立ルドビコ女学院制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9942,7 +9987,7 @@ public record struct Costume(
         new Costume(
             "佳世",
             "セイクリッドロザリオ",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("ルナティックトランサー", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9965,7 +10010,7 @@ public record struct Costume(
         new Costume(
             "高町なのは",
             "バリアジャケット",
-            new NormalSingleCostume(12.5),
+            new SpecialRangeCostume(12.5),
             new RareSkill("いくよレイジングハート！", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -9988,7 +10033,7 @@ public record struct Costume(
         new Costume(
             "高町なのは",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(7.5),
+            new NormalRangeCostume(7.5),
             new RareSkill("いくよレイジングハート！", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilyDef(25)]),
@@ -10011,7 +10056,7 @@ public record struct Costume(
         new Costume(
             "フェイト",
             "バリアジャケット",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("応えて、バルディッシュ！", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -10057,7 +10102,7 @@ public record struct Costume(
         new Costume(
             "立花響",
             "エクスドライブ",
-            new NormalSingleCostume(12.5),
+            new SpecialSingleCostume(12.5),
             new RareSkill("ガングニールッ！", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -10080,7 +10125,7 @@ public record struct Costume(
         new Costume(
             "立花響",
             "ラストイグニッション",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ガングニールッ！", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -10103,7 +10148,7 @@ public record struct Costume(
         new Costume(
             "小日向未来",
             "エクスドライブ",
-            new NormalSingleCostume(12.5),
+            new AssistCostume(12.5),
             new RareSkill("神獣鏡ッ！", "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可"),
             [
                 new Common([new LilySpDef(75)]),
@@ -10126,7 +10171,7 @@ public record struct Costume(
         new Costume(
             "雪音クリス",
             "エクスドライブ",
-            new NormalSingleCostume(12.5),
+            new NormalRangeCostume(12.5),
             new RareSkill("イチイバルッ！", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。※同効果のスキル発動中は発動不可【テスタメント】"),
             [
                 new Common([new LilyDef(75)]),
@@ -10172,7 +10217,7 @@ public record struct Costume(
         new Costume(
             "時崎狂三",
             "神威霊装・三番",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("悪夢へお連れしますわ", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilyDef(75)]),
@@ -10195,7 +10240,7 @@ public record struct Costume(
         new Costume(
             "五河琴里",
             "神威霊装・五番",
-            new NormalSingleCostume(15),
+            new SpecialSingleCostume(15),
             new RareSkill("手加減は出来ないわよ", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -10218,7 +10263,7 @@ public record struct Costume(
         new Costume(
             "夜刀神十香",
             "神威霊装・十番",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("この刃は決して折れぬ", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -10241,7 +10286,7 @@ public record struct Costume(
         new Costume(
             "西住みほ",
             "パンツァージャケット",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("パンツァー・フォー！", "一定時間、味方全体の攻撃力/防御力をアップする。"),
             [
                 new Common([new LilyDef(150)]),
@@ -10264,7 +10309,7 @@ public record struct Costume(
         new Costume(
             "西住まほ",
             "パンツァージャケット",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("これも戦車道よ", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10287,7 +10332,7 @@ public record struct Costume(
         new Costume(
             "ダージリン",
             "パンツァージャケット",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("茶柱が立ったわ", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10310,7 +10355,7 @@ public record struct Costume(
         new Costume(
             "アンチョビ",
             "パンツァージャケット",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("マカロニ作戦開始！", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilyDef(150)]),
@@ -10333,7 +10378,7 @@ public record struct Costume(
         new Costume(
             "イリヤ",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(7.5),
+            new RecoveryCostume(7.5),
             new RareSkill("空想魔法", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -10356,7 +10401,7 @@ public record struct Costume(
         new Costume(
             "イリヤ",
             "カレイドルビー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("空想魔法", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilyDef(150)]),
@@ -10379,7 +10424,7 @@ public record struct Costume(
         new Costume(
             "イリヤ",
             "アルトリア",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("空想魔法", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10402,7 +10447,7 @@ public record struct Costume(
         new Costume(
             "美遊",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("魔力解放", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10425,7 +10470,7 @@ public record struct Costume(
         new Costume(
             "美遊",
             "カレイドサファイア",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("魔力解放", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10448,7 +10493,7 @@ public record struct Costume(
         new Costume(
             "美遊",
             "バーサーカー",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("魔力解放", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(150)]),
@@ -10471,7 +10516,7 @@ public record struct Costume(
         new Costume(
             "クロエ",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(7.5),
+            new AssistCostume(7.5),
             new RareSkill("心技", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -10517,7 +10562,7 @@ public record struct Costume(
         new Costume(
             "鹿目まどか",
             "魔法少女服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("わたしの祈り、わたしの願い", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10540,7 +10585,7 @@ public record struct Costume(
         new Costume(
             "鹿目まどか",
             "見滝原中学校制服",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("わたしの祈り、わたしの願い", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10563,7 +10608,7 @@ public record struct Costume(
         new Costume(
             "暁美ほむら",
             "魔法少女服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("決着をつけましょう", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10586,7 +10631,7 @@ public record struct Costume(
         new Costume(
             "暁美ほむら",
             "見滝原中学校制服",
-            new NormalSingleCostume(7.5),
+            new SpecialSingleCostume(7.5),
             new RareSkill("決着をつけましょう", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -10609,7 +10654,7 @@ public record struct Costume(
         new Costume(
             "巴マミ",
             "魔法少女服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("もう何も恐くない", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
             [
                 new Common([new LilyDef(150)]),
@@ -10632,7 +10677,7 @@ public record struct Costume(
         new Costume(
             "美樹さやか",
             "魔法少女服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("後悔なんて、あるわけない", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(150)]),
@@ -10655,7 +10700,7 @@ public record struct Costume(
         new Costume(
             "佐倉杏子",
             "魔法少女服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("こいつはあたしが引き受ける", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10678,7 +10723,7 @@ public record struct Costume(
         new Costume(
             "結城友奈",
             "勇者服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("なせば大抵なんとかなる！", "一定時間、味方全体の攻撃力を10秒毎にアップする。※同効果のスキル発動中は発動不可【カリスマ】"),
             [
                 new Common([new LilyDef(150)]),
@@ -10703,7 +10748,7 @@ public record struct Costume(
         new Costume(
             "結城友奈",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(7.5),
+            new AssistCostume(7.5),
             new RareSkill("なせば大抵なんとかなる！", "一定時間、味方全体の攻撃力を10秒毎にアップする。※同効果のスキル発動中は発動不可【カリスマ】"),
             [
                 new Common([new LilySpDef(25)]),
@@ -10728,7 +10773,7 @@ public record struct Costume(
         new Costume(
             "結城友奈",
             "勇者服(満開)",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("なせば大抵なんとかなる！", "一定時間、味方全体の攻撃力を10秒毎にアップする。※同効果のスキル発動中は発動不可【カリスマ】"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10753,7 +10798,7 @@ public record struct Costume(
         new Costume(
             "東郷美森",
             "勇者服",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("なるべく諦めない！", "0秒 (延長20秒)使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10778,7 +10823,7 @@ public record struct Costume(
         new Costume(
             "東郷美森",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("なるべく諦めない！", "使用時、発動中のオーダーの発動効果時間を延長する。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10803,7 +10848,7 @@ public record struct Costume(
         new Costume(
             "三好夏凜",
             "勇者服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("悩んだら相談！", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10828,7 +10873,7 @@ public record struct Costume(
         new Costume(
             "三好夏凜",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new SpecialSingleCostume(15),
             new RareSkill("悩んだら相談！", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10853,7 +10898,7 @@ public record struct Costume(
         new Costume(
             "乃木園子",
             "勇者服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("自分も幸せであること！", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilyDef(150)]),
@@ -10878,7 +10923,7 @@ public record struct Costume(
         new Costume(
             "乃木園子",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("自分も幸せであること！", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10903,7 +10948,7 @@ public record struct Costume(
         new Costume(
             "犬吠埼風",
             "勇者服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("よく寝てよく食べる！", "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可"),
             [
                 new Common([new LilyDef(150)]),
@@ -10928,7 +10973,7 @@ public record struct Costume(
         new Costume(
             "犬吠埼風",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("よく寝てよく食べる！", "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10953,7 +10998,7 @@ public record struct Costume(
         new Costume(
             "犬吠埼樹",
             "勇者服",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("挨拶はきちんと！", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。※同効果のスキル発動中は発動不可【テスタメント】"),
             [
                 new Common([new LilySpDef(150)]),
@@ -10978,7 +11023,7 @@ public record struct Costume(
         new Costume(
             "犬吠埼樹",
             "百合ヶ丘標準制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("挨拶はきちんと！", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。※同効果のスキル発動中は発動不可【テスタメント】"),
             [
                 new Common([new LilySpDef(150)]),
@@ -11003,7 +11048,7 @@ public record struct Costume(
         new Costume(
             "御坂美琴",
             "常盤台中学制服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("電撃使い", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilyDef(150)]),
@@ -11028,7 +11073,7 @@ public record struct Costume(
         new Costume(
             "御坂美琴",
             "メイドスタイル",
-            new NormalSingleCostume(7.5),
+            new AssistCostume(7.5),
             new RareSkill("電撃使い", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilySpDef(25)]),
@@ -11053,7 +11098,7 @@ public record struct Costume(
         new Costume(
             "御坂美琴",
             "ドリーミングアイドル",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("電撃使い", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -11078,7 +11123,7 @@ public record struct Costume(
         new Costume(
             "白井黒子",
             "常盤台中学制服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("空間移動", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -11128,7 +11173,7 @@ public record struct Costume(
         new Costume(
             "白井黒子",
             "ドリーミングアイドル",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("空間移動", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -11153,7 +11198,7 @@ public record struct Costume(
         new Costume(
             "食蜂操祈",
             "常盤台中学制服",
-            new NormalSingleCostume(15),
+            new RecoveryCostume(15),
             new RareSkill("心理掌握", "一定時間、敵全体の攻撃力/防御力をダウンする。※同効果のスキル発動中は発動不可【ヘリオスフィア】"),
             [
                 new Common([new LilySpDef(150)]),
@@ -11178,7 +11223,7 @@ public record struct Costume(
         new Costume(
             "エミリア",
             "エミリアの服",
-            new NormalSingleCostume(15),
+            new SpecialRangeCostume(15),
             new RareSkill("エミリアの氷魔法", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。※同効果のスキル発動中は発動不可【ファンタズム】"),
             [
                 new Common([new LilySpDef(150)]),
@@ -11203,7 +11248,7 @@ public record struct Costume(
         new Costume(
             "エミリア",
             "エミリアのローブ",
-            new NormalSingleCostume(7.5),
+            new AssistCostume(7.5),
             new RareSkill("エミリアの氷魔法", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。※同効果のスキル発動中は発動不可【ファンタズム】"),
             [
                 new Common([new LilySpDef(25)]),
@@ -11228,7 +11273,7 @@ public record struct Costume(
         new Costume(
             "レム",
             "レムのメイド服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("レムの水魔法", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilyDef(150)]),
@@ -11253,7 +11298,7 @@ public record struct Costume(
         new Costume(
             "幼少期レム",
             "幼少期レムの着物",
-            new NormalSingleCostume(15),
+            new AssistCostume(15),
             new RareSkill("レムの水魔法", "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。"),
             [
                 new Common([new LilySpDef(150)]),
@@ -11278,7 +11323,7 @@ public record struct Costume(
         new Costume(
             "ラム",
             "ラムのメイド服",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ラムの風魔法", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。※同効果のスキル発動中は発動不可【テスタメント】"),
             [
                 new Common([new LilySpDef(150)]),
@@ -11303,7 +11348,7 @@ public record struct Costume(
         new Costume(
             "幼少期ラム",
             "幼少期ラムの着物",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ラムの風魔法", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。※同効果のスキル発動中は発動不可【テスタメント】"),
             [
                 new Common([new LilyDef(150)]),
@@ -11328,7 +11373,7 @@ public record struct Costume(
         new Costume(
             "王莉芬",
             "ヘイムスクリングラ制服",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(75)]),
@@ -11351,7 +11396,7 @@ public record struct Costume(
         new Costume(
             "王莉芬",
             "王家修練服",
-            new NormalSingleCostume(15),
+            new NormalRangeCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilyDef(75)]),
@@ -11374,7 +11419,7 @@ public record struct Costume(
         new Costume(
             "王莉芬",
             "リリティカルサマー",
-            new NormalSingleCostume(15),
+            new InterferenceCostume(15),
             new RareSkill("ファンタズム", "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。"),
             [
                 new Common([new LilySpDef(75)]),

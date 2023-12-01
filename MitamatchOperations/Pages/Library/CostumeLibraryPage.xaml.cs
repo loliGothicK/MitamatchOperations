@@ -2,12 +2,10 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.WinUI.Controls;
 using Microsoft.UI.Xaml.Controls;
 using mitama.Domain;
-using System.Linq;
-using SimdLinq;
 using System;
 using Microsoft.UI.Xaml;
-using System.Xml.Linq;
-using DynamicData.Kernel;
+using System.Linq;
+using Newtonsoft.Json.Linq;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -47,6 +45,24 @@ namespace MitamatchOperations.Pages.Library
                     _costumes.Remove(costume);
                 }
             }
+            else if (args.Prefix == "\\")
+            {
+                var name = ((Position)args.SelectedItem).Text;
+                args.DisplayText = name;
+                foreach (var costume in _costumes.ToList().Where(costume => name switch
+                {
+                    "’Êí’P‘Ì" => costume.Type is not NormalSingleCostume,
+                    "’Êí”ÍˆÍ" => costume.Type is not NormalRangeCostume,
+                    "“ÁŽê’P‘Ì" => costume.Type is not SpecialSingleCostume,
+                    "“ÁŽê”ÍˆÍ" => costume.Type is not SpecialRangeCostume,
+                    "Žx‰‡" => costume.Type is not AssistCostume,
+                    "–WŠQ" => costume.Type is not InterferenceCostume,
+                    "‰ñ•œ" => costume.Type is not RecoveryCostume,
+                }))
+                {
+                    _costumes.Remove(costume);
+                }
+            }
             else
             {
                 var other = (Other)args.SelectedItem;
@@ -74,7 +90,39 @@ namespace MitamatchOperations.Pages.Library
                         _costumes.Remove(costume);
                     }
                 }
-                else
+                else if (other.Value == "’Êí")
+                {
+                    args.DisplayText = "’Êí";
+                    foreach (var costume in _costumes.ToList().Where(costume => 
+                    {
+                        var status = costume.Status;
+                        return status.Atk < status.SpAtk;
+                    }))
+                    {
+                        _costumes.Remove(costume);
+                    }
+                }
+                else if (other.Value == "“ÁŽê")
+                {
+                    args.DisplayText = "“ÁŽê";
+                    foreach (var costume in _costumes.ToList().Where(costume => {
+                        var status = costume.Status;
+                        return status.Atk > status.SpAtk;
+                    }))
+
+                    {
+                        _costumes.Remove(costume);
+                    }
+                }
+                else if (other.Value == "Lv.16")
+                {
+                    args.DisplayText = "Lv.16";
+                    foreach (var costume in _costumes.ToList().Where(costume => costume.LilySkills.Length != 16))
+                    {
+                        _costumes.Remove(costume);
+                    }
+                }
+                else if (other.Value == "15%")
                 {
                     args.DisplayText = "15%";
                     foreach (var costume in _costumes.ToList().Where(costume => costume.Type.Value != 15))
@@ -90,9 +138,31 @@ namespace MitamatchOperations.Pages.Library
             sender.ItemsSource = args.Prefix switch {
               "@" => _costumes.Where(costume => costume.Lily.Contains(args.QueryText, StringComparison.OrdinalIgnoreCase)).Select(costume => new Lily(costume.Lily, costume.Path)).DistinctBy(lily => lily.Name),
               "#" => _costumes.Where(costume => costume.RareSkill.Name.Contains(args.QueryText, StringComparison.OrdinalIgnoreCase)).Select(costume => costume.RareSkill).DistinctBy(RareSkill => RareSkill.Name),
-              "!" => new Other[]{ new("‰Î"), new("…"), new("•—"), new("15%"),  },
+              "\\" => new Position[]{ new("’Êí’P‘Ì"), new("’Êí”ÍˆÍ"), new("“ÁŽê’P‘Ì"), new("“ÁŽê”ÍˆÍ"), new("Žx‰‡"), new("–WŠQ"), new("‰ñ•œ") },
+              "!" => new Other[]{ new("‰Î"), new("…"), new("•—"), new("15%"), new("Lv.16"), new("’Êí"), new("“ÁŽê")  },
               _ => null,
             };
+        }
+
+        private void Redo(RichSuggestToken redo, ReadOnlyObservableCollection<RichSuggestToken> currents)
+        {
+            if (redo.Item is Lily lily)
+            {
+                foreach (var costume in Costume.List.Where(costume => costume.Lily == lily.Name))
+                {
+                    _costumes.Add(costume);
+                }
+            }
+        }
+
+        private void OnClear(object _, RoutedEventArgs _e)
+        {
+            SuggestingBox.Clear();
+            _costumes.Clear();
+            foreach (var costume in Costume.List)
+            {
+                _costumes.Add(costume);
+            }
         }
     }
 
@@ -102,17 +172,21 @@ namespace MitamatchOperations.Pages.Library
 
         public DataTemplate RareSkill { get; set; }
 
+        public DataTemplate Position { get; set; }
+
         public DataTemplate Other { get; set; }
 
         protected override DataTemplate SelectTemplateCore(object item)
         {
             return item is RareSkill ? RareSkill!
                 : item is Lily ? Lily!
+                : item is Position ? Position!
                 : Other;
         }
     }
 
     public record Lily(string Name, string Path);
     public record Element(string Text);
+    public record Position(string Text);
     public record Other(string Value);
 }
