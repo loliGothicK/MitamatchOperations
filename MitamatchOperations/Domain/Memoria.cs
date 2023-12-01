@@ -33,7 +33,7 @@ public record struct Unit(string UnitName, bool IsFront, List<MemoriaWithConcent
             return (true, new Unit(
                 dto.UnitName,
                 dto.IsFront,
-                dto.Items.Select(item => new MemoriaWithConcentration(selector[item], 4)).ToList()
+                dto.Items.Select(idx => new MemoriaWithConcentration(selector[idx], 4)).ToList()
             ));
         }
     }
