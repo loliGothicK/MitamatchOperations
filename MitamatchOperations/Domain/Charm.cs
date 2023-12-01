@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
-using mitama.Domain;
 
-namespace MitamatchOperations.Domain;
+namespace mitama.Domain;
 
 public record Charm(
     string Name,

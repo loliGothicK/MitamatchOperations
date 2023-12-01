@@ -20,7 +20,7 @@ namespace MitamatchOperations.Pages
             NavigationCacheMode = NavigationCacheMode.Enabled;
 
             CostumeLibraryFrame.Navigate(typeof(CostumeLibraryPage));
-            MemoriaLibraryFrame.Navigate(typeof(MemoriaLibraryPage));
+            CharmLibraryFrame.Navigate(typeof(CharmLibraryPage));
         }
     }
 }

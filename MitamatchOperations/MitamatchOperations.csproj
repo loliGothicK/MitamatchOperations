@@ -28,8 +28,8 @@
     <None Remove="Assets\BadgeLogo.scale-200.png" />
     <None Remove="Assets\BadgeLogo.scale-400.png" />
     <None Remove="Pages\LibraryPage.xaml" />
+    <None Remove="Pages\Library\CharmLibraryPage.xaml" />
     <None Remove="Pages\Library\CostumeLibraryPage.xaml" />
-    <None Remove="Pages\Library\MemoriaLibraryPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,7 +72,7 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\Library\MemoriaLibraryPage.xaml">
+    <Page Update="Pages\Library\CharmLibraryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

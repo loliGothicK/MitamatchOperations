@@ -18,11 +18,11 @@
                     </TabViewItem.IconSource>
                     <Frame x:Name="CostumeLibraryFrame" />
                 </TabViewItem>
-                <TabViewItem Header="Memoria" IsClosable="False">
+                <TabViewItem Header="Charm" IsClosable="False">
                     <TabViewItem.IconSource>
                         <SymbolIconSource Symbol="Bullets" />
                     </TabViewItem.IconSource>
-                    <Frame x:Name="MemoriaLibraryFrame" />
+                    <Frame x:Name="CharmLibraryFrame" />
                 </TabViewItem>
             </TabView.TabItems>
         </TabView>
