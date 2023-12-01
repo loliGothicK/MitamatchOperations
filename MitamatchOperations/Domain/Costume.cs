@@ -92,7 +92,7 @@ public record struct Costume(
     public readonly LilyStatus Status => LilySkills.Aggregate(new LilyStatus(), (stat, skill) => {
         return skill switch
         {
-            Common common => common.Skills.Aggregate(stat, (stat, skill) =>
+            Common common => common.Skills.Where(x => x is not Calibration).Aggregate(stat, (stat, skill) =>
             {
                 return skill switch
                 {
@@ -104,7 +104,7 @@ public record struct Costume(
                     _ => throw new UnreachableException(""),
                 };
             }),
-            Unique unique => unique.Skills.Aggregate(stat, (stat, skill) =>
+            Unique unique => unique.Skills.Where(x => x is not Calibration).Aggregate(stat, (stat, skill) =>
             {
                 return skill switch
                 {
