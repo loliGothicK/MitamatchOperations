@@ -23,7 +23,7 @@
                            VerticalAlignment="Center"
                            Width="30" Height="30"
                            Margin="5 0"/>
-                    <TextBlock Text="Mitamatch Operations -Myosotis-"
+                    <TextBlock Text="Mitamatch Operations -Osmanthus-"
                                TextWrapping="NoWrap"
                                Style="{StaticResource CaptionTextBlockStyle}" 
                                VerticalAlignment="Center"
