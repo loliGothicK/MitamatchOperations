@@ -162,7 +162,8 @@
                         <!-- レアスキル/ノインヴェルト戦術 -->
                         <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                            Text="Step 2" />
-                        <controls:SettingsExpander Description="今日のレアスキルは……"
+                        <controls:SettingsExpander x:Name="RareSkillSettings"
+                                                   Description="今日のレアスキルは……"
                                                    Header="レアスキル"
                                                    HeaderIcon="{ui:FontIcon Glyph=&#xE91B;}">
                             <controls:SettingsExpander.Items>
@@ -213,7 +214,8 @@
                             </controls:SettingsExpander.Items>
                         </controls:SettingsExpander>
 
-                        <controls:SettingsCard Description="今日のノインヴェルト戦術は……"
+                        <controls:SettingsCard x:Name="NauntWeltSettings"
+                                               Description="今日のノインヴェルト戦術は……"
                                                Header="ノインヴェルト戦術"
                                                HeaderIcon="{ui:FontIcon Glyph=&#xE768;}">
                             <Grid>
@@ -239,7 +241,8 @@
                             </Grid>
                         </controls:SettingsCard>
 
-                        <controls:SettingsCard Description="今日のオーダー順は……"
+                        <controls:SettingsCard x:Name="TimelineSettings"
+                                               Description="今日のオーダー順は……"
                                                Header="オーダー順"
                                                HeaderIcon="{ui:FontIcon Glyph=&#xE768;}">
                             <ComboBox x:Name="Timeline"

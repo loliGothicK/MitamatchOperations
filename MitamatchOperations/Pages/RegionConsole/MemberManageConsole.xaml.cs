@@ -83,11 +83,27 @@ public sealed partial class MemberManageConsole
     private void Skill1_SelectionChanged(object sender, SelectionChangedEventArgs _)
     {
         skill1 = sender.As<ComboBox>().SelectedItem.As<string>();
+        if (chara2 is not null && skill2 is not null)
+        {
+            RareSkillSettings.Description = $"{chara1}({skill1}) / {chara2}({skill2})";
+        }
+        else
+        {
+            RareSkillSettings.Description = $"{chara1}({skill1})";
+        }
     }
 
     private void Skill2_SelectionChanged(object sender, SelectionChangedEventArgs _)
     {
         skill2 = sender.As<ComboBox>().SelectedItem.As<string>();
+        if (chara1 is not null && skill1 is not null)
+        {
+            RareSkillSettings.Description = $"{chara1}({skill1}) / {chara2}({skill2})";
+        }
+        else
+        {
+            RareSkillSettings.Description = $"{chara2}({skill2})";
+        }
     }
 
     private void Personnel1_SelectionChanged(object sender, SelectionChangedEventArgs _)
@@ -127,12 +143,28 @@ public sealed partial class MemberManageConsole
     {
         string[] v = ["íPëÃ", "îÕàÕ"];
         tatic1 = v[sender.As<ComboBox>().SelectedIndex];
+        if (tatic2 is not null)
+        {
+            NauntWeltSettings.Description = $"{tatic1} / {tatic2}";
+        }
+        else
+        {
+            NauntWeltSettings.Description = $"{tatic1}";
+        }
     }
 
     private void Tactic2_SelectionChanged(object sender, SelectionChangedEventArgs _)
     {
         string[] v = ["éxâá", "ñWäQ", "âÒïú"];
         tatic2 = v[sender.As<ComboBox>().SelectedIndex];
+        if (tatic1 is not null)
+        {
+            NauntWeltSettings.Description = $"{tatic1} / {tatic2}";
+        }
+        else
+        {
+            NauntWeltSettings.Description = $"{tatic2}";
+        }
     }
 
     private void Timeline_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -141,6 +173,7 @@ public sealed partial class MemberManageConsole
         if (box.SelectedItem is not DeckJson deck) return;
 
         timeline = [.. deck.Items];
+        TimelineSettings.Description = deck.Name;
     }
 
     private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
@@ -167,23 +200,23 @@ public sealed partial class MemberManageConsole
 
         var text = $@"
 # {opponent}({kousei})
-
 ## Rare Skill
-
+```
 - {chara1}:{skill1} ÅÀ {personnel1}
 - {chara2}:{skill2} ÅÀ {personnel2}
-
-## Naunt Welt
-
+```
+## Neun Welt
+```
 - {tatic1}/{tatic2}
-
+```
 ## Timeline
-
+```
 {order}
-
+```
 ## Remarks
-
+```
 {remarks}
+```
 ";
         System.Windows.Clipboard.SetText(text);
     }
