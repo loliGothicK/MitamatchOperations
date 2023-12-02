@@ -33,8 +33,7 @@ namespace mitama.Pages;
 internal enum Windows
 {
     Main,
-    SubPc,
-    SubMobile,
+    Sub,
 }
 
 /// <summary>
@@ -71,28 +70,16 @@ public sealed partial class ControlDashboardPage
     {
         // メインPC
         [Windows.Main] = ((1800, 620), (120, 120)),
-        // たいちょースマホ
-        [Windows.SubMobile] = ((1610, 840), (80, 80)),
-        // たいちょーPC
-        [Windows.SubPc] = ((1485, 545), (70, 70)),
     };
     private readonly Dictionary<Windows, ((int, int), (int, int))> _opOrderActivatePos = new()
     {
         // メインPC
         [Windows.Main] = ((260, 120), (500, 120)),
-        // たいちょースマホ
-        [Windows.SubMobile] = ((1110, 160), (600, 520)),
-        // たいちょーPC
-        [Windows.SubPc] = ((1100, 250), (540, 520)),
     };
     private readonly Dictionary<Windows, ((int, int), (int, int))> _allyOrderInfoPos = new()
     {
         // メインPC
         [Windows.Main] = ((260, 120), (500, 120)),
-        // たいちょースマホ
-        [Windows.SubMobile] = ((450, 170), (350, 70)),
-        // たいちょーPC
-        [Windows.SubPc] = ((450, 170), (350, 70)),
     };
 
     // なんやかんやで使う状態変数
@@ -199,7 +186,7 @@ public sealed partial class ControlDashboardPage
                     case FailureResult when _useSub:
                     {
                         _subCaptureEvent.Wait();
-                        switch (await Analyze(await _subCapture!.TryCaptureOrderInfo(_allyOrderInfoPos[Windows.SubMobile].Item1, _allyOrderInfoPos[Windows.SubMobile].Item2)))
+                        switch (await Analyze(await _subCapture!.TryCaptureOrderInfo(_allyOrderInfoPos[Windows.Sub].Item1, _allyOrderInfoPos[Windows.Sub].Item2)))
                         {
                             case SuccessResult(var user, var order):
                             {
@@ -355,11 +342,11 @@ public sealed partial class ControlDashboardPage
         // カタログデータをあらかじめメモリリージョンにのせておくために一度 Predict を呼ぶ
         var sampleData1 = new MLOrderModel.ModelInput
         {
-            ImageSource = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\wait_or_active\active\active01.png"),
+            ImageSource = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\Assets\dataset\wait_or_active\active\active01.png"),
         };
         var sampleData2 = new MLActivatingModel.ModelInput
         {
-            ImageSource = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\MitamatchOperations\Assets\dataset\is_activating\False\False01.png"),
+            ImageSource = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\Assets\dataset\is_activating\False\False01.png"),
         };
 
         _ = MLOrderModel.Predict(sampleData1);
@@ -408,7 +395,7 @@ public sealed partial class ControlDashboardPage
                             {
                                 if (!_useSub) break;
                                 _subCaptureEvent.Wait();
-                                switch (_subCapture!.CaptureOpponentsOrder(_opOrderIconPos[Windows.SubMobile].Item1, _opOrderIconPos[Windows.SubMobile].Item2))
+                                switch (_subCapture!.CaptureOpponentsOrder(_opOrderIconPos[Windows.Sub].Item1, _opOrderIconPos[Windows.Sub].Item2))
                                 {
                                     // オーダー準備中を検知
                                     case WaitStat(var image):
@@ -471,7 +458,7 @@ public sealed partial class ControlDashboardPage
                                 {
                                     if (!_useSub) break;
                                     _subCaptureEvent.Wait();
-                                    switch (_subCapture!.IsActivating(_opOrderActivatePos[Windows.SubMobile].Item1, _opOrderActivatePos[Windows.SubMobile].Item2))
+                                    switch (_subCapture!.IsActivating(_opOrderActivatePos[Windows.Sub].Item1, _opOrderActivatePos[Windows.Sub].Item2))
                                     {
                                         case ActiveStat:
                                         {
@@ -505,7 +492,7 @@ public sealed partial class ControlDashboardPage
                             default:
                                 {
                                     if (!_useSub) break;
-                                    switch (_subCapture!.IsActivating(_opOrderActivatePos[Windows.SubMobile].Item1, _opOrderActivatePos[Windows.SubMobile].Item2))
+                                    switch (_subCapture!.IsActivating(_opOrderActivatePos[Windows.Sub].Item1, _opOrderActivatePos[Windows.Sub].Item2))
                                     {
                                         case ActiveStat(var image):
                                             _opOrderInfo = null;
