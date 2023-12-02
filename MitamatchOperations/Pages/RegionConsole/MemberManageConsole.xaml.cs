@@ -11,6 +11,9 @@ using mitama.Pages.OrderConsole;
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using OpenCvSharp.Detail;
+using System.ComponentModel;
+using Microsoft.UI.Text;
 
 namespace mitama.Pages.RegionConsole;
 
@@ -20,12 +23,16 @@ namespace mitama.Pages.RegionConsole;
 public sealed partial class MemberManageConsole
 {
     private string _regionName = Director.ReadCache().Region;
+    private string opponent;
     private string chara1;
     private string chara2;
     private string skill1;
     private string skill2;
     private string personnel1;
     private string personnel2;
+    private string tatic1;
+    private string tatic2;
+    private List<TimeTableItem> timeline;
 
     public MemberManageConsole()
     {
@@ -51,12 +58,12 @@ public sealed partial class MemberManageConsole
         MemberCvs.Source = new ObservableCollection<GroupInfoList>(query);
     }
 
-    private void Opponent_TextChanged(object sender, TextChangedEventArgs e)
+    private void Opponent_TextChanged(object sender, TextChangedEventArgs _)
     {
-        OpponentSettings.Description = sender.As<TextBox>().Text;
+        OpponentSettings.Description = opponent = sender.As<TextBox>().Text;
     }
 
-    private void RareSkill_Loaded(object sender, RoutedEventArgs e)
+    private void RareSkill_Loaded(object sender, RoutedEventArgs _)
     {
         sender.As<ComboBox>().ItemsSource = Costume.List.Select(x => x.Lily).Distinct();
     }
@@ -73,7 +80,7 @@ public sealed partial class MemberManageConsole
         Skill2.ItemsSource = Costume.List.Where(x => x.Lily == chara2).Select(x => x.RareSkill.Name).Distinct();
     }
 
-    private void Skill1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void Skill1_SelectionChanged(object sender, SelectionChangedEventArgs _)
     {
         skill1 = sender.As<ComboBox>().SelectedItem.As<string>();
     }
@@ -93,12 +100,12 @@ public sealed partial class MemberManageConsole
         personnel2 = sender.As<ComboBox>().SelectedItem.As<string>();
     }
 
-    private void Personnel_Loaded(object sender, RoutedEventArgs e)
+    private void Personnel_Loaded(object sender, RoutedEventArgs _)
     {
         sender.As<ComboBox>().ItemsSource = Util.LoadMembersInfo(_regionName).Select(x => x.Name);
     }
 
-    private void Timeline_Loaded(object sender, RoutedEventArgs e)
+    private void Timeline_Loaded(object sender, RoutedEventArgs _)
     {
         if (sender is not ComboBox box) return;
 
@@ -116,9 +123,69 @@ public sealed partial class MemberManageConsole
         box.ItemsSource = decks;
     }
 
+    private void Tactic1_SelectionChanged(object sender, SelectionChangedEventArgs _)
+    {
+        string[] v = ["íPëÃ", "îÕàÕ"];
+        tatic1 = v[sender.As<ComboBox>().SelectedIndex];
+    }
+
+    private void Tactic2_SelectionChanged(object sender, SelectionChangedEventArgs _)
+    {
+        string[] v = ["éxâá", "ñWäQ", "âÒïú"];
+        tatic2 = v[sender.As<ComboBox>().SelectedIndex];
+    }
+
+    private void Timeline_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (sender is not ComboBox box) return;
+        if (box.SelectedItem is not DeckJson deck) return;
+
+        timeline = [.. deck.Items];
+    }
+
     private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
     {
+        if (opponent == null) return;
+        if (chara1 == null) return;
+        if (chara2 == null) return;
+        if (skill1 == null) return;
+        if (skill2 == null) return;
+        if (personnel1 == null) return;
+        if (personnel2 == null) return;
+        if (tatic1 == null) return;
+        if (tatic2 == null) return;
+        if (timeline == null) return;
 
+        var kousei = "";
+        kousei += Normal.SelectedIndex == 0 ? "" : $"í èÌ{Normal.SelectedIndex} ";
+        kousei += Special.SelectedIndex == 0 ? "" : $"ì¡éÍ{Special.SelectedIndex} ";
+        kousei += Both.SelectedIndex == 0 ? "" : $"óºìÅ{Both.SelectedIndex} ";
+
+        var order = string.Join("\n", timeline.Select(x => $"{x.Order.Name}: {x.Pic}"));
+        
+        Remarks.Document.GetText(TextGetOptions.UseCrlf, out var remarks);
+
+        var text = $@"
+# {opponent}({kousei})
+
+## Rare Skill
+
+- {chara1}:{skill1} ÅÀ {personnel1}
+- {chara2}:{skill2} ÅÀ {personnel2}
+
+## Naunt Welt
+
+- {tatic1}/{tatic2}
+
+## Timeline
+
+{order}
+
+## Remarks
+
+{remarks}
+";
+        System.Windows.Clipboard.SetText(text);
     }
 }
 

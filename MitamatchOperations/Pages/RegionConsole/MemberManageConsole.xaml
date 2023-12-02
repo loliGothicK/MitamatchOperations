@@ -221,11 +221,17 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <ComboBox x:Name="Tactic1" Grid.Column="0" Header="前衛">
+                                <ComboBox x:Name="Tactic1"
+                                          Grid.Column="0"
+                                          Header="前衛"
+                                          SelectionChanged="Tactic1_SelectionChanged">
                                     <ComboBoxItem>単体</ComboBoxItem>
                                     <ComboBoxItem>範囲</ComboBoxItem>
                                 </ComboBox>
-                                <ComboBox x:Name="Tactic2" Grid.Column="1" Header="後衛">
+                                <ComboBox x:Name="Tactic2"
+                                          Grid.Column="1"
+                                          Header="後衛"
+                                          SelectionChanged="Tactic2_SelectionChanged">
                                     <ComboBoxItem>支援</ComboBoxItem>
                                     <ComboBoxItem>妨害</ComboBoxItem>
                                     <ComboBoxItem>回復</ComboBoxItem>
@@ -239,8 +245,12 @@
                             <ComboBox x:Name="Timeline"
                                       Header="オーダーデッキ"
                                       Loaded="Timeline_Loaded"
-                                      ItemTemplate="{StaticResource DeckJsonTemplate}"/>
+                                      ItemTemplate="{StaticResource DeckJsonTemplate}"
+                                      SelectionChanged="Timeline_SelectionChanged"/>
                         </controls:SettingsCard>
+
+                        <RichEditBox x:Name="Remarks"
+                                     AutomationProperties.Name="remarks"/>
 
                         <HyperlinkButton Margin="0,8,0,0"
                                          Content="Copy to Clipboard"

@@ -31,6 +31,7 @@
     <None Remove="Pages\LibraryPage.xaml" />
     <None Remove="Pages\Library\CharmLibraryPage.xaml" />
     <None Remove="Pages\Library\CostumeLibraryPage.xaml" />
+    <None Remove="Pages\RegionConsole\HistoriaViewer.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +49,7 @@
     <PackageReference Include="CommunityToolkit.WinUI.Controls.Sizers" Version="8.0.230907" />
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.0.230907" />
     <PackageReference Include="DynamicData" Version="8.1.1" />
+    <PackageReference Include="Google.Apis" Version="1.64.0" />
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.ML" Version="2.0.1" />
@@ -71,6 +73,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\RegionConsole\HistoriaViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\Library\CharmLibraryPage.xaml">
