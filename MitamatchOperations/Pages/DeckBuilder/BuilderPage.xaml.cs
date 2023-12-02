@@ -310,11 +310,11 @@ namespace mitama.Pages.DeckBuilder
         {
             if (sender is ToggleSwitch toggleSwitch)
             {
+                SupporBreakdowns.Clear();
                 LegendaryDeck.Clear();
                 Deck.Clear();
                 Breakdown.Items.Clear();
                 SkillSummary.Items.Clear();
-                SupportSummary.Items.Clear();
                 Atk.Content = $"Atk: 0";
                 SpAtk.Content = $"SpAtk: 0";
                 Def.Content = $"Def: 0";
@@ -328,7 +328,7 @@ namespace mitama.Pages.DeckBuilder
                 if (toggleSwitch.IsOn)
                 {
                     VoR.Label = "‘O‰q";
-                    Pool = new(Memoria.List.Where(memoria => Costume.DummyVanguard.CanBeEquipped(memoria)));
+                    Pool = new(Memoria.List.Where(Costume.DummyVanguard.CanBeEquipped));
                     MemoriaSources.ItemsSource = Pool;
                     TreeNodes[0].Children.Clear();
                     TreeNodes[0].Children.Add(new() { Text = "’Êí’P‘Ì" });
@@ -349,7 +349,7 @@ namespace mitama.Pages.DeckBuilder
                 else
                 {
                     VoR.Label = "Œã‰q";
-                    Pool = new(Memoria.List.Where(memoria => Costume.DummyReaguard.CanBeEquipped(memoria)));
+                    Pool = new(Memoria.List.Where(Costume.DummyReaguard.CanBeEquipped));
                     TreeNodes[0].Children.Clear();
                     TreeNodes[0].Children.Add(new() { Text = "Žx‰‡" });
                     TreeNodes[0].Children.Add(new() { Text = "–WŠQ" });
