@@ -194,13 +194,19 @@ public sealed partial class MemberManageConsole
         kousei += Special.SelectedIndex == 0 ? "" : $"“Áê{Special.SelectedIndex} ";
         kousei += Both.SelectedIndex == 0 ? "" : $"—¼“{Both.SelectedIndex} ";
 
-        var order = string.Join("\n", timeline.Select(x => $"{x.Order.Name}: {x.Pic}"));
-        
+        var order = string.Join("\n", (new string[] {
+            $"{timeline[0].Order.Name}: {timeline[0].Pic}"
+        }).Concat(timeline.Skip(1).Select(x => x switch 
+        {
+            _ when x.Conditional => $"{x.Order.Name}: {x.Pic}i—\”õj",
+            _ => $"«\n{x.Order.Name}: {x.Pic}",
+        })));
+
         Remarks.Document.GetText(TextGetOptions.UseCrlf, out var remarks);
 
         var text = $@"
 # {opponent}({kousei})
-## Rare Skill
+## Rare Skills
 ```
 - {chara1}:{skill1} Ë {personnel1}
 - {chara2}:{skill2} Ë {personnel2}
