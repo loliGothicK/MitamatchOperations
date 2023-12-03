@@ -204,26 +204,26 @@ public sealed partial class MemberManageConsole
 
         Remarks.Document.GetText(TextGetOptions.UseCrlf, out var remarks);
 
-        var text = $@"
-# {opponent}({kousei})
-## Rare Skills
-```
-- {chara1}:{skill1} ÅÀ {personnel1}
-- {chara2}:{skill2} ÅÀ {personnel2}
-```
-## Neun Welt
-```
-- {tatic1}/{tatic2}
-```
-## Timeline
-```
-{order}
-```
-## Remarks
-```
-{remarks}
-```
-";
+        var text = $"""
+            # {opponent}({kousei})
+            ## Rare Skills
+            ```
+            - {chara1}:{skill1} ÅÀ {personnel1}
+            - {chara2}:{skill2} ÅÀ {personnel2}
+            ```
+            ## Neun Welt
+            ```
+            - {tatic1}/{tatic2}
+            ```
+            ## Timeline
+            ```
+            {order}
+            ```
+            ## Remarks
+            ```
+            {remarks}
+            ```
+        """;
         System.Windows.Clipboard.SetText(text);
     }
 }
