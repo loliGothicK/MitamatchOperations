@@ -17,6 +17,7 @@ public sealed partial class RegionConsolePage
         ManageConsoleFrame.Navigate(typeof(MemberManageConsole));
         UnitViewerFrame.Navigate(typeof(UnitViewer));
         HistoriaViewerFrame.Navigate(typeof(HistoriaViewer));
+        ResultInputFrame.Navigate(typeof(ResultInput));
 
         ManageConsoleFrame.Navigated += (_, _) => { ManageConsoleFrame.Navigate(typeof(MemberManageConsole)); };
     }

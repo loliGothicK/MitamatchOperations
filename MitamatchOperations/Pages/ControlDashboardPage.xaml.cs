@@ -30,7 +30,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace mitama.Pages;
 
-internal enum Windows
+internal enum WindowPicker
 {
     Main,
     Sub,
@@ -66,20 +66,20 @@ public sealed partial class ControlDashboardPage
         return timer;
     });
 
-    private readonly Dictionary<Windows, ((int, int), (int, int))> _opOrderIconPos = new()
+    private readonly Dictionary<WindowPicker, ((int, int), (int, int))> _opOrderIconPos = new()
     {
         // メインPC
-        [Windows.Main] = ((1800, 620), (120, 120)),
+        [WindowPicker.Main] = ((1800, 620), (120, 120)),
     };
-    private readonly Dictionary<Windows, ((int, int), (int, int))> _opOrderActivatePos = new()
+    private readonly Dictionary<WindowPicker, ((int, int), (int, int))> _opOrderActivatePos = new()
     {
         // メインPC
-        [Windows.Main] = ((260, 120), (500, 120)),
+        [WindowPicker.Main] = ((260, 120), (500, 120)),
     };
-    private readonly Dictionary<Windows, ((int, int), (int, int))> _allyOrderInfoPos = new()
+    private readonly Dictionary<WindowPicker, ((int, int), (int, int))> _allyOrderInfoPos = new()
     {
         // メインPC
-        [Windows.Main] = ((260, 120), (500, 120)),
+        [WindowPicker.Main] = ((260, 120), (500, 120)),
     };
 
     // なんやかんやで使う状態変数
@@ -186,7 +186,7 @@ public sealed partial class ControlDashboardPage
                     case FailureResult when _useSub:
                     {
                         _subCaptureEvent.Wait();
-                        switch (await Analyze(await _subCapture!.TryCaptureOrderInfo(_allyOrderInfoPos[Windows.Sub].Item1, _allyOrderInfoPos[Windows.Sub].Item2)))
+                        switch (await Analyze(await _subCapture!.TryCaptureOrderInfo(_allyOrderInfoPos[WindowPicker.Sub].Item1, _allyOrderInfoPos[WindowPicker.Sub].Item2)))
                         {
                             case SuccessResult(var user, var order):
                             {
@@ -395,7 +395,7 @@ public sealed partial class ControlDashboardPage
                             {
                                 if (!_useSub) break;
                                 _subCaptureEvent.Wait();
-                                switch (_subCapture!.CaptureOpponentsOrder(_opOrderIconPos[Windows.Sub].Item1, _opOrderIconPos[Windows.Sub].Item2))
+                                switch (_subCapture!.CaptureOpponentsOrder(_opOrderIconPos[WindowPicker.Sub].Item1, _opOrderIconPos[WindowPicker.Sub].Item2))
                                 {
                                     // オーダー準備中を検知
                                     case WaitStat(var image):
@@ -458,7 +458,7 @@ public sealed partial class ControlDashboardPage
                                 {
                                     if (!_useSub) break;
                                     _subCaptureEvent.Wait();
-                                    switch (_subCapture!.IsActivating(_opOrderActivatePos[Windows.Sub].Item1, _opOrderActivatePos[Windows.Sub].Item2))
+                                    switch (_subCapture!.IsActivating(_opOrderActivatePos[WindowPicker.Sub].Item1, _opOrderActivatePos[WindowPicker.Sub].Item2))
                                     {
                                         case ActiveStat:
                                         {
@@ -492,7 +492,7 @@ public sealed partial class ControlDashboardPage
                             default:
                                 {
                                     if (!_useSub) break;
-                                    switch (_subCapture!.IsActivating(_opOrderActivatePos[Windows.Sub].Item1, _opOrderActivatePos[Windows.Sub].Item2))
+                                    switch (_subCapture!.IsActivating(_opOrderActivatePos[WindowPicker.Sub].Item1, _opOrderActivatePos[WindowPicker.Sub].Item2))
                                     {
                                         case ActiveStat(var image):
                                             _opOrderInfo = null;

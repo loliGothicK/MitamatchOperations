@@ -9,6 +9,7 @@ using mitama.Pages.Common;
 using WinRT;
 using System.Linq;
 using System.Text;
+using System;
 
 namespace mitama.Pages.RegionConsole;
 
@@ -18,6 +19,7 @@ namespace mitama.Pages.RegionConsole;
 public sealed partial class UnitViewer
 {
     private readonly string _regionName;
+    private string _picked = null;
 
     public UnitViewer()
     {
@@ -32,7 +34,11 @@ public sealed partial class UnitViewer
         {
             return;
         }
-        var path = @$"{Director.UnitDir(_regionName, args.InvokedItem.As<ExplorerItem>().Parent!)}\{args.InvokedItem.As<ExplorerItem>().Name!}.json";
+        var path = _picked switch
+        {
+            _ when _picked is not null => $@"{_picked}\{args.InvokedItem.As<ExplorerItem>().Parent!}\{args.InvokedItem.As<ExplorerItem>().Name!}.json",
+            _ => @$"{Director.UnitDir(_regionName, args.InvokedItem.As<ExplorerItem>().Parent!)}\{args.InvokedItem.As<ExplorerItem>().Name!}.json",
+        };
         using var sr = new StreamReader(path);
         var json = sr.ReadToEnd();
         var (isLegacy, unit) = Unit.FromJson(json);
@@ -80,11 +86,58 @@ public sealed partial class UnitViewer
         }));
     }
 
-    private void DeleteConfirmation_Click(object sender, RoutedEventArgs e)
+    private void DeleteConfirmation_Click(object sender, RoutedEventArgs _)
     {
         if (sender is not Button  button) return;
         File.Delete(button.AccessKey);
         Init(ref UnitTreeView);
+    }
+
+    private void Reset_Click(object _, RoutedEventArgs _e)
+    {
+        Init(ref UnitTreeView);
+        _picked = null;
+    }
+
+    private void Load_Click(object sender, RoutedEventArgs e)
+    {
+        Load(ref UnitTreeView);
+    }
+
+    private void Load(ref TreeView unitTreeView)
+    {
+        var date = $"{Calendar.Date:yyyy-MM-dd}";
+
+        var opponent = Directory.GetDirectories(@$"{Director.LogDir(_regionName)}\{date}").Select(path => path.Split('\\').Last()).ToArray()[0];
+        var OpponentDir = _picked = @$"{Director.LogDir(_regionName)}/{date}/{opponent}";
+        var opponentNames = Directory.GetDirectories(OpponentDir).Select(path => path.Split('\\').Last()).ToArray();
+        unitTreeView.ItemsSource = new ObservableCollection<ExplorerItem>(opponentNames.Select(name =>
+        {
+            return new ExplorerItem
+            {
+                Name = name,
+                Type = ExplorerItem.ExplorerItemType.Folder,
+                Children = new ObservableCollection<ExplorerItem>(
+                    Directory.GetFiles(@$"{OpponentDir}\{name}").Select(path =>
+                    {
+                        var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+                        var json = sr.ReadToEnd();
+                        var (isLegacy, unit) = Unit.FromJson(json);
+                        sr.Close();
+                        if (isLegacy)
+                        {
+                            File.WriteAllBytes(path, new UTF8Encoding(true).GetBytes(unit.ToJson()));
+                        }
+                        return new ExplorerItem
+                        {
+                            Parent = name,
+                            Name = unit.UnitName,
+                            Path = path,
+                            Type = ExplorerItem.ExplorerItemType.File
+                        };
+                    }))
+            };
+        }));
     }
 }
 

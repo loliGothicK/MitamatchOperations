@@ -56,17 +56,9 @@ internal class Util
     {
         var membersDir = @$"{Director.ProjectDir()}\{project}\Members";
 
-        static void WaitForFile(string filePath)
-        {
-            while (IsFileInUse(filePath))
-            {
-                System.Threading.Thread.Sleep(1000); // 1秒待機して再試行
-            }
-        }
         if (Exists(membersDir)) {
             return GetDirectories(membersDir)
                 .Select(dir => {
-                    WaitForFile($@"{dir}\info.json");
                     using var sr = new StreamReader($@"{dir}\info.json", Encoding.GetEncoding("UTF-8"));
                     var json = sr.ReadToEnd();
                     return MemberInfo.FromJson(json);
@@ -154,6 +146,13 @@ internal class Director {
 
     internal static string UnitDir(string project, string member) {
         var dir = $@"{ProjectDir()}\{project}\Members\{member}\Units";
+        if (!Exists(dir)) CreateDirectory(dir);
+        return dir;
+    }
+
+    internal static string LogDir(string project)
+    {
+        var dir = $@"{ProjectDir()}\{project}\BattleLog\";
         if (!Exists(dir)) CreateDirectory(dir);
         return dir;
     }

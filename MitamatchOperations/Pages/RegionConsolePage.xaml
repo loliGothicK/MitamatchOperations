@@ -25,6 +25,12 @@
                     </TabViewItem.IconSource>
                     <Frame x:Name="UnitViewerFrame" />
                 </TabViewItem>
+                <TabViewItem Header="Result input" IsClosable="False">
+                    <TabViewItem.IconSource>
+                        <SymbolIconSource Symbol="Back" />
+                    </TabViewItem.IconSource>
+                    <Frame x:Name="ResultInputFrame" />
+                </TabViewItem>
                 <TabViewItem Header="Historia" IsClosable="False">
                     <TabViewItem.IconSource>
                         <SymbolIconSource Symbol="Back" />

@@ -11,8 +11,6 @@ using mitama.Pages.OrderConsole;
 using System.IO;
 using System.Text;
 using System.Text.Json;
-using OpenCvSharp.Detail;
-using System.ComponentModel;
 using Microsoft.UI.Text;
 
 namespace mitama.Pages.RegionConsole;

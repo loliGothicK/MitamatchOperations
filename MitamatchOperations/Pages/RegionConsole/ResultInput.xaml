@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="mitama.Pages.RegionConsole.ResultInput"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <InfoBar x:Name="GeneralInfoBar" />
+        <Grid Grid.Row="1">
+            <CommandBar>
+                <!-- Pick Open -->
+                <AppBarButton>
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE8E5;" />
+                    </AppBarButton.Icon>
+                    <AppBarButton.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <Button x:Name="PickOpenButton" Content="バトルログを開く" Click="PickOpenButton_Click" />
+                            </StackPanel>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </CommandBar>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="5">
+                    <TextBlock Text="味方レギオン名" FontSize="20" />
+                    <TextBox x:Name="AllyRegionName" Text="びたちょこ。" />
+                    <TextBlock Text="味方プレイヤー名" FontSize="20" />
+                    <TextBox x:Name="AllyPlayer1" Text="みたま"/>
+                    <TextBox x:Name="AllyPlayer2" Text="キュアななち"/>
+                    <TextBox x:Name="AllyPlayer3" Text="ひめひめジーター"/>
+                    <TextBox x:Name="AllyPlayer4" Text="chaove"/>
+                    <TextBox x:Name="AllyPlayer5" Text="clarente"/>
+                    <TextBox x:Name="AllyPlayer6" Text="chocolat"/>
+                    <TextBox x:Name="AllyPlayer7" Text="あきっちゃちん"/>
+                    <TextBox x:Name="AllyPlayer8" Text="久遠寺有珠"/>
+                    <TextBox x:Name="AllyPlayer9" Text="ヒロユキ"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="5">
+                    <TextBlock Text="相手レギオン名" FontSize="20" />
+                    <TextBox x:Name="OpponentRegionName" Text="百合庭園。"/>
+                    <TextBlock Text="相手プレイヤー名" FontSize="20" />
+                    <TextBox x:Name="OpponentPlayer1" Text="佐天れいん"/>
+                    <TextBox x:Name="OpponentPlayer2" Text="たわっしー"/>
+                    <TextBox x:Name="OpponentPlayer3" Text="べーと"/>
+                    <TextBox x:Name="OpponentPlayer4" Text="misa"/>
+                    <TextBox x:Name="OpponentPlayer5" Text="リアリありあリア"/>
+                    <TextBox x:Name="OpponentPlayer6" Text="園田"/>
+                    <TextBox x:Name="OpponentPlayer7" Text="EiEi"/>
+                    <TextBox x:Name="OpponentPlayer8" Text="."/>
+                    <TextBox x:Name="OpponentPlayer9" Text="peridot"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Button Content="Analyse" Click="Analyse" HorizontalAlignment="Left"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

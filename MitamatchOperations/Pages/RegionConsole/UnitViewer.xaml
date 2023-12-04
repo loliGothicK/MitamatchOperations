@@ -1,6 +1,3 @@
-<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
-<!-- Licensed under the MIT License. See LICENSE in the project root for license information. -->
-
 <Page
     x:Class="mitama.Pages.RegionConsole.UnitViewer"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -13,33 +10,53 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-
-        <Grid.Resources>
-            <DataTemplate x:Key="FileTemplate" x:DataType="local:ExplorerItem">
-                <TextBlock Text="{x:Bind Name}">
-                    <TextBlock.ContextFlyout>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <CommandBar>
+                <AppBarButton Icon="Refresh" Label="Reset" Click="Reset_Click"/>
+                <AppBarButton Icon="Calendar" Label="Pick">
+                    <AppBarButton.Flyout>
                         <Flyout>
                             <StackPanel>
-                                <Button Click="DeleteConfirmation_Click" Content="Delete" AccessKey="{x:Bind Path}"/>
+                                <CalendarDatePicker x:Name="Calendar" PlaceholderText="Pick a date" Header="Calendar" />
+                                <Button Content="Load" Click="Load_Click"/>
                             </StackPanel>
                         </Flyout>
-                    </TextBlock.ContextFlyout>
-                </TextBlock>
-            </DataTemplate>
-            <DataTemplate x:Key="FolderTemplate" x:DataType="local:ExplorerItem">
-                <TreeViewItem ItemsSource="{x:Bind Children}" Content="{x:Bind Name}" IsExpanded="True"/>
-            </DataTemplate>
-            <local:ExplorerItemTemplateSelector
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </CommandBar>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.Resources>
+                <DataTemplate x:Key="FileTemplate" x:DataType="local:ExplorerItem">
+                    <TextBlock Text="{x:Bind Name}">
+                        <TextBlock.ContextFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <Button Click="DeleteConfirmation_Click" Content="Delete" AccessKey="{x:Bind Path}"/>
+                                </StackPanel>
+                            </Flyout>
+                        </TextBlock.ContextFlyout>
+                    </TextBlock>
+                </DataTemplate>
+                <DataTemplate x:Key="FolderTemplate" x:DataType="local:ExplorerItem">
+                    <TreeViewItem ItemsSource="{x:Bind Children}" Content="{x:Bind Name}" IsExpanded="True"/>
+                </DataTemplate>
+                <local:ExplorerItemTemplateSelector
                 x:Key="ExplorerItemTemplateSelector"
                 FolderTemplate="{StaticResource FolderTemplate}"
                 FileTemplate="{StaticResource FileTemplate}" />
-        </Grid.Resources>
- 
-        <TreeView x:Name="UnitTreeView"
+            </Grid.Resources>
+
+            <TreeView x:Name="UnitTreeView"
                   Margin="0,12,0,0"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Top"
@@ -47,71 +64,72 @@
                   ItemTemplateSelector="{StaticResource ExplorerItemTemplateSelector}"
                   Loaded="UnitTreeView_OnLoaded"/>
 
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.Resources>
-                <DataTemplate x:Name="MemoriaWithConcentrationTemplate" x:DataType="builder:MemoriaWithConcentration">
-                    <Grid Width="100">
-                        <Image Source="{x:Bind Memoria.Path}" Stretch="UniformToFill"/>
-                        <Image Source="/Assets/Images/Concentration.png"
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <DataTemplate x:Name="MemoriaWithConcentrationTemplate" x:DataType="builder:MemoriaWithConcentration">
+                        <Grid Width="100">
+                            <Image Source="{x:Bind Memoria.Path}" Stretch="UniformToFill"/>
+                            <Image Source="/Assets/Images/Concentration.png"
                            Height="30"
                            Width="30"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Top"
                            Margin="0,25,6,0" />
-                        <TextBlock Text="{x:Bind LimitBreak}"
+                            <TextBlock Text="{x:Bind LimitBreak}"
                                FontSize="{x:Bind FontSize}"
                                Height="30"
                                Width="30"
                                HorizontalAlignment="Right"
                                VerticalAlignment="Top"
                                Margin="{x:Bind Margin}" />
-                        <Grid.ContextFlyout>
-                            <Flyout>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-                                    <StackPanel>
-                                        <Button Content="{x:Bind Memoria.Name}" Margin="5" FontSize="20"/>
-                                    </StackPanel>
-                                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-                                        <StackPanel Orientation="Vertical" Margin="0 0 5 0">
-                                            <TextBlock Text="ATK"/>
-                                            <Button Content="{x:Bind Status.Atk}" />
+                            <Grid.ContextFlyout>
+                                <Flyout>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel>
+                                            <Button Content="{x:Bind Memoria.Name}" Margin="5" FontSize="20"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Vertical" Margin="5 0">
-                                            <TextBlock Text="DEF"/>
-                                            <Button Content="{x:Bind Status.Def}" />
+                                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                                            <StackPanel Orientation="Vertical" Margin="0 0 5 0">
+                                                <TextBlock Text="ATK"/>
+                                                <Button Content="{x:Bind Status.Atk}" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="5 0">
+                                                <TextBlock Text="DEF"/>
+                                                <Button Content="{x:Bind Status.Def}" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="5 0">
+                                                <TextBlock Text="Sp.ATK"/>
+                                                <Button Content="{x:Bind Status.SpAtk}" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="5 0">
+                                                <TextBlock Text="Sp.DEF"/>
+                                                <Button Content="{x:Bind Status.SpDef}" />
+                                            </StackPanel>
                                         </StackPanel>
-                                        <StackPanel Orientation="Vertical" Margin="5 0">
-                                            <TextBlock Text="Sp.ATK"/>
-                                            <Button Content="{x:Bind Status.SpAtk}" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Vertical" Margin="5 0">
-                                            <TextBlock Text="Sp.DEF"/>
-                                            <Button Content="{x:Bind Status.SpDef}" />
-                                        </StackPanel>
-                                    </StackPanel>
-                                    <Button Grid.Row="2" Content="{x:Bind Memoria.Skill.Name}" Margin="5"/>
-                                    <Button Grid.Row="3" Content="{x:Bind Memoria.SupportSkill.Name}" Margin="5"/>
-                                </Grid>
-                            </Flyout>
-                        </Grid.ContextFlyout>
-                    </Grid>
-                </DataTemplate>
-            </Grid.Resources>
-            <GridView
+                                        <Button Grid.Row="2" Content="{x:Bind Memoria.Skill.Name}" Margin="5"/>
+                                        <Button Grid.Row="3" Content="{x:Bind Memoria.SupportSkill.Name}" Margin="5"/>
+                                    </Grid>
+                                </Flyout>
+                            </Grid.ContextFlyout>
+                        </Grid>
+                    </DataTemplate>
+                </Grid.Resources>
+                <GridView
                 Grid.Row="1" 
                 x:Name="UnitView"
                 Margin=" 10"
                 ItemTemplate="{StaticResource MemoriaWithConcentrationTemplate}"/>
+            </Grid>
         </Grid>
     </Grid>
 </Page>
