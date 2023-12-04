@@ -19,7 +19,6 @@ using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 using Microsoft.UI.Text;
 using Windows.Storage;
-using Microsoft.EntityFrameworkCore;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -262,7 +261,7 @@ namespace mitama.Pages.DeckBuilder
                 Breakdown.Items.Add(new Button()
                 {
                     Content = $"{BuilderPageHelpers.KindTypeToString(type)}: {num}",
-                    Width = 100,
+                    Width = 120,
                 });
             }
         }

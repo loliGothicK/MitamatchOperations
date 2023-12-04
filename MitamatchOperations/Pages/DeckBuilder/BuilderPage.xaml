@@ -130,7 +130,7 @@
             </DataTemplate>
             <DataTemplate x:Name="BreakdownTemplate" x:DataType="local:SupportBreakdown">
                 <Grid>
-                    <Button Content="{x:Bind Content}" />
+                    <Button Content="{x:Bind Content}" Width="120"/>
                     <Grid.ContextFlyout>
                         <Flyout>
                             <GridView ItemsSource="{x:Bind Data}" ItemTemplate="{StaticResource BreakdownItemTemplate}" />

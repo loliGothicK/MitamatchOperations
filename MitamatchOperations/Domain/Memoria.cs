@@ -836,7 +836,8 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1141,
