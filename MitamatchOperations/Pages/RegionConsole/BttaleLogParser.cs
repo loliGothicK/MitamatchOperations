@@ -74,24 +74,24 @@ internal partial class BttaleLogParser
     [GeneratedRegex(@"^\[(?<region>.+)\] (?<player>.*)$")]
     private static partial Regex SourceRegex();
 
-    internal static EventDetail ParseEvent(string concent)
+    internal static EventDetail ParseEvent(string content)
     {
         var memoriaRegex = MemoriaRegex();
         var prepareOrderRegex = PrepareOrderRegex();
         var activateOrderRegex = ActivateOrderRegex();
         var rareSkillRegex = RareSkillRegex();
 
-        if (concent.Contains("ユニットを変更"))
+        if (content.Contains("ユニットを変更"))
         {
             return new UnitChange();
         }
-        else if (concent.Contains("クリティカル発生"))
+        else if (content.Contains("クリティカル発生"))
         {
             return new Critical();
         }
-        else if (memoriaRegex.IsMatch(concent))
+        else if (memoriaRegex.IsMatch(content))
         {
-            var match = memoriaRegex.Match(concent);
+            var match = memoriaRegex.Match(content);
             var name = match.Groups["memoria"].Value;
             var skill = match.Groups["skill"].Value;
             var memoria = Memoria
@@ -112,31 +112,35 @@ internal partial class BttaleLogParser
             };
             return new UseMemoria(new(memoria, concentration));
         }
-        else if (prepareOrderRegex.IsMatch(concent))
+        else if (prepareOrderRegex.IsMatch(content))
         {
-            var match = prepareOrderRegex.Match(concent);
+            var match = prepareOrderRegex.Match(content);
             var order = match.Groups["order"].Value;
             return new PrepareOrder(Order.List.MinBy(o => Algo.LevenshteinRate(order, o.Name)));
         }
-        else if (activateOrderRegex.IsMatch(concent))
+        else if (activateOrderRegex.IsMatch(content))
         {
-            var match = activateOrderRegex.Match(concent);
+            var match = activateOrderRegex.Match(content);
             var order = match.Groups["order"].Value;
             return new ActivateOrder(Order.List.MinBy(o => Algo.LevenshteinRate(order, o.Name)));
         }
-        else if (rareSkillRegex.IsMatch(concent))
+        else if (rareSkillRegex.IsMatch(content))
         {
-            var match = rareSkillRegex.Match(concent);
+            var match = rareSkillRegex.Match(content);
             var skill = match.Groups["skill"].Value;
             return new UseSkill(skill);
         }
-        else if (concent.Contains("スタンバイフェーズ"))
+        else if (content.Contains("スタンバイフェーズ"))
         {
             return new StandBy();
         }
-        else if (concent.Contains("復活"))
+        else if (content.Contains("復活"))
         {
             return new Revival();
+        }
+        else if (content.Contains("マギ"))
+        {
+            return new NoenWelt(content);
         }
         else
         {

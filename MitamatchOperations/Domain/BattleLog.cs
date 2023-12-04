@@ -156,6 +156,7 @@ public record ActivateOrder(Order Order) : EventDetail;
 public record UseSkill(string Skill) : EventDetail;
 public record StandBy : EventDetail;
 public record Revival : EventDetail;
+public record NoenWelt(string Raw): EventDetail;
 public record Error : EventDetail;
 
 internal class Helper
