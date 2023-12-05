@@ -25,11 +25,29 @@ namespace mitama.Pages.RegionConsole
     public sealed partial class ResultInput : Page
     {
         private StorageFile log;
-        private SortedDictionary<uint, BattleLogItem> battleLogMap = [];
+        private readonly SortedDictionary<uint, BattleLogItem> battleLogMap = [];
+        private DateTime? _date = null;
 
         public ResultInput()
         {
             InitializeComponent();
+            Init();
+        }
+
+        private void Init()
+        {
+            var region = Director.ReadCache().Region;
+            AllyRegionName.Text = region;
+            var players = Util.LoadMemberNames(region);
+            AllyPlayer1.Text = players[0];
+            AllyPlayer2.Text = players[1];
+            AllyPlayer3.Text = players[2];
+            AllyPlayer4.Text = players[3];
+            AllyPlayer5.Text = players[4];
+            AllyPlayer6.Text = players[5];
+            AllyPlayer7.Text = players[6];
+            AllyPlayer8.Text = players[7];
+            AllyPlayer9.Text = players[8];
         }
 
         private async void PickOpenButton_Click(object sender, RoutedEventArgs e)
@@ -127,6 +145,8 @@ namespace mitama.Pages.RegionConsole
             using TextFieldParser parser = new(log.Path);
             parser.TextFieldType = FieldType.Delimited;
             parser.SetDelimiters(",");
+            // Skip header
+            if (!parser.EndOfData) parser.ReadLine();
             while (!parser.EndOfData)
             {
                 string[] fields = parser.ReadFields();
@@ -153,7 +173,7 @@ namespace mitama.Pages.RegionConsole
             {
                 Director.CreateDirectory(logDir);
             }
-            var path = @$"{logDir}\{DateTime.Now:yyyy-MM-dd}";
+            var path = @$"{logDir}\{_date??DateTime.Now:yyyy-MM-dd}";
             if (!Directory.Exists(path))
             {
                 Director.CreateDirectory(path);
@@ -177,7 +197,7 @@ namespace mitama.Pages.RegionConsole
         {
             foreach (var player in players)
             {
-                var path = $@"{logDir}\{DateTime.Now:yyyy-MM-dd}\{player.Region}\「{player.Name}」";
+                var path = $@"{logDir}\{_date??DateTime.Now:yyyy-MM-dd}\{player.Region}\「{player.Name}」";
                 Director.CreateDirectory(path);
                 var units = await battleLog.ExtractUnits(player.Name);
                 foreach (var (unit, index) in units.Select((unit, index) => (unit, index)))
@@ -186,6 +206,11 @@ namespace mitama.Pages.RegionConsole
                     await unitFile.WriteAsync(new UTF8Encoding(true).GetBytes(unit.ToJson()));
                 }
             }
+        }
+
+        private void CalendarDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        {
+            _date = sender.Date?.Date;
         }
     }
 }

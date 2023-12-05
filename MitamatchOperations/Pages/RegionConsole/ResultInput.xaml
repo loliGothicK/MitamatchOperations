@@ -30,6 +30,17 @@
                         </Flyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
+                <!-- Calendar Date Picker -->
+                <AppBarButton>
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE787;" />
+                    </AppBarButton.Icon>
+                    <AppBarButton.Flyout>
+                        <Flyout>
+                            <CalendarDatePicker x:Name="CalendarDatePicker" DateChanged="CalendarDatePicker_DateChanged"/>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
             </CommandBar>
         </Grid>
         <Grid Grid.Row="2">
@@ -44,31 +55,31 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Margin="5">
                     <TextBlock Text="味方レギオン名" FontSize="20" />
-                    <TextBox x:Name="AllyRegionName" Text="びたちょこ。" />
+                    <TextBox x:Name="AllyRegionName" />
                     <TextBlock Text="味方プレイヤー名" FontSize="20" />
-                    <TextBox x:Name="AllyPlayer1" Text="みたま"/>
-                    <TextBox x:Name="AllyPlayer2" Text="キュアななち"/>
-                    <TextBox x:Name="AllyPlayer3" Text="ひめひめジーター"/>
-                    <TextBox x:Name="AllyPlayer4" Text="chaove"/>
-                    <TextBox x:Name="AllyPlayer5" Text="clarente"/>
-                    <TextBox x:Name="AllyPlayer6" Text="chocolat"/>
-                    <TextBox x:Name="AllyPlayer7" Text="あきっちゃちん"/>
-                    <TextBox x:Name="AllyPlayer8" Text="久遠寺有珠"/>
-                    <TextBox x:Name="AllyPlayer9" Text="ヒロユキ"/>
+                    <TextBox x:Name="AllyPlayer1" />
+                    <TextBox x:Name="AllyPlayer2" />
+                    <TextBox x:Name="AllyPlayer3" />
+                    <TextBox x:Name="AllyPlayer4" />
+                    <TextBox x:Name="AllyPlayer5" />
+                    <TextBox x:Name="AllyPlayer6" />
+                    <TextBox x:Name="AllyPlayer7" />
+                    <TextBox x:Name="AllyPlayer8" />
+                    <TextBox x:Name="AllyPlayer9" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" Margin="5">
                     <TextBlock Text="相手レギオン名" FontSize="20" />
-                    <TextBox x:Name="OpponentRegionName" Text="百合庭園。"/>
+                    <TextBox x:Name="OpponentRegionName" />
                     <TextBlock Text="相手プレイヤー名" FontSize="20" />
-                    <TextBox x:Name="OpponentPlayer1" Text="佐天れいん"/>
-                    <TextBox x:Name="OpponentPlayer2" Text="たわっしー"/>
-                    <TextBox x:Name="OpponentPlayer3" Text="べーと"/>
-                    <TextBox x:Name="OpponentPlayer4" Text="misa"/>
-                    <TextBox x:Name="OpponentPlayer5" Text="リアリありあリア"/>
-                    <TextBox x:Name="OpponentPlayer6" Text="園田"/>
-                    <TextBox x:Name="OpponentPlayer7" Text="EiEi"/>
-                    <TextBox x:Name="OpponentPlayer8" Text="."/>
-                    <TextBox x:Name="OpponentPlayer9" Text="peridot"/>
+                    <TextBox x:Name="OpponentPlayer1" />
+                    <TextBox x:Name="OpponentPlayer2" />
+                    <TextBox x:Name="OpponentPlayer3" />
+                    <TextBox x:Name="OpponentPlayer4" />
+                    <TextBox x:Name="OpponentPlayer5" />
+                    <TextBox x:Name="OpponentPlayer6" />
+                    <TextBox x:Name="OpponentPlayer7" />
+                    <TextBox x:Name="OpponentPlayer8" />
+                    <TextBox x:Name="OpponentPlayer9" />
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">

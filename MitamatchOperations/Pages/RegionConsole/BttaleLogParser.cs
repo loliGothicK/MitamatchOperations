@@ -162,7 +162,7 @@ internal partial class BttaleLogParser
                         .List
                         .MinBy(memoria =>
                         {
-                            return Algo.LevenshteinRate(memoria.Name, name)
+                            return Algo.LevenshteinRate(memoria.Name, Fix(name))
                                  + Algo.LevenshteinRate(memoria.Skill.Name, skill);
                         });
                 var concentration = match.Groups["level"].Value switch
@@ -179,6 +179,29 @@ internal partial class BttaleLogParser
             .ToArray();
     }
 
+    private static string Fix(string name)
+    {
+        var creatorRegex = CreatorRegex();
+        var ultimateRegex = UltimateRegex();
+        var emotionalRegex = EmotionalRegex();
+        if (creatorRegex.IsMatch(name))
+        {
+            return creatorRegex.Match(name).Groups["name"].Value;
+        }
+        else if (ultimateRegex.IsMatch(name))
+        {
+            return ultimateRegex.Match(name).Groups["name"].Value;
+        }
+        else if (emotionalRegex.IsMatch(name))
+        {
+            return emotionalRegex.Match(name).Groups["name"].Value;
+        }
+        else
+        {
+            return name;
+        }
+    }
+
     [GeneratedRegex(@"^「(?<memoria>.+?)」 *の *「(?<skill>.+?)」 *Lv(?<level>\d{2}) *が発動$")]
     private static partial Regex MemoriaRegex();
 
@@ -190,4 +213,13 @@ internal partial class BttaleLogParser
 
     [GeneratedRegex(@"^.+ *が レアスキル「(?<skill>.+?)」 *を発動$")]
     private static partial Regex RareSkillRegex();
+
+    [GeneratedRegex(@"^クリエイターズコラボ *-(?<name>.+?)-$")]
+    private static partial Regex CreatorRegex();
+
+    [GeneratedRegex(@"^Ultimate Memoria *-(?<name>.+?)-$")]
+    private static partial Regex UltimateRegex();
+
+    [GeneratedRegex(@"^Emotional Memoria *-(?<name>.+?)-$")]
+    private static partial Regex EmotionalRegex();
 }
