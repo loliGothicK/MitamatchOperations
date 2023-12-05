@@ -35,7 +35,7 @@ namespace mitama.Pages.DeckBuilder
         private ObservableCollection<Memoria> Pool { get; set; } = new(Memoria.List.Where(Costume.DummyReaguard.CanBeEquipped));
         private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = [];
         private HashSet<FilterType> _currentFilters = [];
-        private readonly Status StatSum = new();
+        private readonly BasicStatus StatSum = new();
         private string region = "";
         private MemberInfo[] members = [];
         readonly Dictionary<KindType, int> kindPairs = [];
@@ -2332,7 +2332,7 @@ namespace mitama.Pages.DeckBuilder
 
         public static implicit operator Memoria(MemoriaWithConcentration m) => m.Memoria;
 
-        public Status Status => Memoria.Status[Concentration];
+        public BasicStatus Status => Memoria.Status[Concentration];
 
         public override int GetHashCode() => Memoria.GetHashCode();
     }

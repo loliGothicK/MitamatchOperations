@@ -51,9 +51,9 @@ namespace mitama.Domain
         Special
     }
 
-    public readonly record struct Status(int Atk=0, int SpAtk=0, int Def=0, int SpDef=0)
+    public readonly record struct BasicStatus(int Atk=0, int SpAtk=0, int Def=0, int SpDef=0)
     {
-        public static implicit operator Status(ValueTuple<int, int, int, int> from) => new()
+        public static implicit operator BasicStatus(ValueTuple<int, int, int, int> from) => new()
         {
             Atk = from.Item1,
             SpAtk = from.Item2,
@@ -64,7 +64,7 @@ namespace mitama.Domain
         public int ASA => Atk + SpAtk;
         public int DSD => Def + SpDef;
 
-        public static Status operator+(Status a, Status b) => new()
+        public static BasicStatus operator+(BasicStatus a, BasicStatus b) => new()
         {
             Atk = a.Atk + b.Atk,
             SpAtk = a.SpAtk + b.SpAtk,
@@ -78,7 +78,7 @@ namespace mitama.Domain
         string Name,
         string Effect,
         string Description,
-        Status Status,
+        BasicStatus Status,
         int PrepareTime,
         int ActiveTime,
         Kind Kind

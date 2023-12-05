@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using mitama.Pages.DeckBuilder;
 using mitama.Pages.RegionConsole;
@@ -72,7 +73,7 @@ public record Regendary(string Value): Fragment
 
 public record BattleLogItem(Source Source, TimeOnly Time, List<Fragment> Fragments);
 
-public record BattleLog(List<BattleLogItem> Data)
+public partial record BattleLog(List<BattleLogItem> Data)
 {
     private record struct SourceDto(SourceKind Kind, Player Content);
     private record struct FragmentDto(FragmentKind Kind, string Content);
@@ -144,6 +145,52 @@ public record BattleLog(List<BattleLogItem> Data)
                 return new Unit($"Unit-{index+1}", Costume.DummyVanguard.CanBeEquipped(list[0].Memoria), [.. list.DistinctBy(m => m.Memoria.Name)]);
             }).ToList());
     }
+
+    public Dictionary<string, StatusIncreaseDecrease[]> ExtractIncreaseDecrease()
+    {
+        Regex regex = StatusRegex();
+        var stats = Data
+            .SelectMany(log => log.Fragments)
+            .Where(fragment => fragment.Kind == FragmentKind.Result)
+            .Where(fragment => regex.IsMatch(fragment.Content))
+            .Select(fragment =>
+            {
+                var match = regex.Match(fragment.Content);
+                var player = match.Groups["player"].Value;
+                var status = match.Groups["status"].Value;
+                var value = match.Groups["value"].Value;
+                return (player, new StatusIncreaseDecrease(status switch
+                {
+                    "ATK" => new Attack(int.Parse(value)),
+                    "Sp.ATK" => new SpecialAttack(int.Parse(value)),
+                    "DEF" => new Defense(int.Parse(value)),
+                    "Sp.DEF" => new SpecialDefense(int.Parse(value)),
+                    "風属性攻撃" => new WindAttack(int.Parse(value)),
+                    "風属性防御" => new WindDefense(int.Parse(value)),
+                    "火属性攻撃" => new FireAttack(int.Parse(value)),
+                    "火属性防御" => new FireDefense(int.Parse(value)),
+                    "水属性攻撃" => new WaterAttack(int.Parse(value)),
+                    "水属性防御" => new WaterDefense(int.Parse(value)),
+                    _ => throw new UnreachableException("CRITICAL ERROR!"),
+                }));
+            })
+            .ToArray();
+
+        Dictionary<string, StatusIncreaseDecrease[]> res = [];
+        var (allies, opponents) = ExtractPlayers();
+        foreach (var player in allies)
+        {
+            res.Add(player.Name, stats.Where(stat => stat.player == player.Name).Select(stat => stat.Item2).ToArray());
+        }
+        foreach (var player in opponents)
+        {
+            res.Add(player.Name, stats.Where(stat => stat.player == player.Name).Select(stat => stat.Item2).ToArray());
+        }
+        return res;
+    }
+
+    [GeneratedRegex(@"(?<player>).*の(?<status>).*が.*(?<value>\d+([,.]\d+)+).*増加$")]
+    private static partial Regex StatusRegex();
 }
 
 public abstract record EventDetail;
@@ -158,6 +205,23 @@ public record StandBy : EventDetail;
 public record Revival : EventDetail;
 public record NoenWelt(string Raw): EventDetail;
 public record Error : EventDetail;
+
+public abstract record ResultDetail;
+public record Damage(int Value) : ResultDetail;
+public record Healing(int Value) : ResultDetail;
+public record StatusIncreaseDecrease(Status Value) : ResultDetail;
+
+public abstract record Status;
+public record Attack(int Value) : Status;
+public record SpecialAttack(int Value) : Status;
+public record Defense(int Value) : Status;
+public record SpecialDefense(int Value) : Status;
+public record WindAttack(int Value) : Status;
+public record WindDefense(int Value) : Status;
+public record FireAttack(int Value) : Status;
+public record FireDefense(int Value) : Status;
+public record WaterAttack(int Value) : Status;
+public record WaterDefense(int Value) : Status;
 
 internal class Helper
 {

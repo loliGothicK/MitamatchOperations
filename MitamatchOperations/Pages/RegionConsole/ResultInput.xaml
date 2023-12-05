@@ -41,6 +41,20 @@
                         </Flyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
+                <!-- Checkboxes for Options -->
+                <AppBarButton>
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE8FB;" />
+                    </AppBarButton.Icon>
+                    <AppBarButton.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <CheckBox x:Name="IsOpponentOnly" Content="相手レギオン解析" IsChecked="True"/>
+                                <CheckBox x:Name="IsAllyOnly" Content="味方レギオン解析" IsChecked="True"/>
+                            </StackPanel>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
             </CommandBar>
         </Grid>
         <Grid Grid.Row="2">

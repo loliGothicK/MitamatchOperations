@@ -182,7 +182,7 @@ namespace mitama.Pages.RegionConsole
             BattleLog battleLog = new([.. battleLogMap.Values]);
             await JsonSerializer.SerializeAsync(new FileStream($@"{path}/all.json", FileMode.Create), battleLog);
 
-            var (_, opponents) = battleLog.ExtractPlayers();
+            var (allies, opponents) = battleLog.ExtractPlayers();
 
             await SaveUnits(logDir, battleLog, opponents);
 

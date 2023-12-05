@@ -5,7 +5,7 @@ namespace mitama.Domain;
 public record Charm(
     string Name,
     string Ability,
-    Status Status,
+    BasicStatus Status,
     DateOnly Date
 )
 {
