@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -117,6 +119,10 @@ namespace mitama.Pages.RegionConsole
                 return;
             }
 
+            GeneralInfoBar.Title = $"解析中...";
+            GeneralInfoBar.Severity = InfoBarSeverity.Informational;
+            GeneralInfoBar.IsOpen = true;
+
             var hints = new Hints(
                 new RegionHint(AllyRegionName.Text, [
                     AllyPlayer1.Text,
@@ -185,10 +191,10 @@ namespace mitama.Pages.RegionConsole
             var (allies, opponents) = battleLog.ExtractPlayers();
 
             await SaveUnits(logDir, battleLog, opponents);
+            await SaveStatusInfo(logDir, battleLog, allies);
 
             GeneralInfoBar.Title = $"解析が完了しました。";
             GeneralInfoBar.Severity = InfoBarSeverity.Success;
-            GeneralInfoBar.IsOpen = true;
             await Task.Delay(3000);
             GeneralInfoBar.IsOpen = false;
         }
@@ -197,7 +203,7 @@ namespace mitama.Pages.RegionConsole
         {
             foreach (var player in players)
             {
-                var path = $@"{logDir}\{_date??DateTime.Now:yyyy-MM-dd}\{player.Region}\「{player.Name}」";
+                var path = $@"{logDir}\{_date??DateTime.Now:yyyy-MM-dd}\{ToRemoveRegex().Replace(player.Region, string.Empty)}\「{ToRemoveRegex().Replace(player.Name, string.Empty)}」";
                 Director.CreateDirectory(path);
                 var units = await battleLog.ExtractUnits(player.Name);
                 foreach (var (unit, index) in units.Select((unit, index) => (unit, index)))
@@ -208,9 +214,104 @@ namespace mitama.Pages.RegionConsole
             }
         }
 
+        private async Task SaveStatusInfo(string logDir, BattleLog battleLog, Player[] players)
+        {
+            var data = battleLog.ExtractIncreaseDecrease();
+            foreach (var player in players)
+            {
+#pragma warning disable CA1854 // Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
+                if (!data.ContainsKey(player.Name) || data[player.Name].Length == 0) continue;
+#pragma warning restore CA1854 // Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
+                var path = $@"{logDir}\{_date ?? DateTime.Now:yyyy-MM-dd}\{ToRemoveRegex().Replace(player.Region, string.Empty)}\「{ToRemoveRegex().Replace(player.Name, string.Empty)}」";
+                Director.CreateDirectory(path);
+                using var playerFile = File.Create($@"{path}\[{player.Name}].csv");
+                var status = new AllStatus();
+                await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{{time}},{{Attack}},{{SpecialAttack}},{{Defense}},{{SpecialDefense}},{{WindAttack}},{{WindDefense}},{{FireAttack}},{{FireDefense}},{{WaterAttack}},{{WaterDefense}},{{LightAttack}},{{LightDefense}},{{DarkAttack}},{{DarkDefense}},{{MaxHp}}\n"));
+                bool isStandBy = false;
+                foreach (var (time, stat) in data[player.Name])
+                {
+                    switch (stat.Value)
+                    {
+                        case Attack atk:
+                            status.Attack += atk.Value;
+                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
+                            isStandBy = false;
+                            break;
+                        case Defense def:
+                            status.Defense += def.Value;
+                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
+                            isStandBy = false;
+                            break;
+                        case SpecialAttack spatk:
+                            status.SpecialAttack += spatk.Value;
+                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
+                            isStandBy = false;
+                            break;
+                        case SpecialDefense spdef:
+                            status.SpecialDefense += spdef.Value;
+                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
+                            isStandBy = false;
+                            break;
+                        case WaterAttack waterAttack:
+                            status.WaterAttack += waterAttack.Value;
+                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
+                            isStandBy = false;
+                            break;
+                        case WaterDefense waterDefense:
+                            status.WaterDefense += waterDefense.Value;
+                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
+                            isStandBy = false;
+                            break;
+                        case FireAttack fireAttack:
+                            status.FireAttack += fireAttack.Value;
+                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
+                            isStandBy = false;
+                            break;
+                        case FireDefense fireDefense:
+                            status.FireDefense += fireDefense.Value;
+                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
+                            isStandBy = false;
+                            break;
+                        case WindAttack windAttack:
+                            status.WindAttack += windAttack.Value;
+                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
+                            isStandBy = false;
+                            break;
+                        case WindDefense windDefense:
+                            status.WindDefense += windDefense.Value;
+                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
+                            isStandBy = false;
+                            break;
+                        case StandByPhase standBy:
+                            if (!isStandBy)
+                            {
+                                status.Attack = status.Attack > 0 ? status.Attack : 0;
+                                status.Defense = status.Defense > 0 ? status.Defense : 0;
+                                status.SpecialAttack = status.SpecialAttack > 0 ? status.SpecialAttack : 0;
+                                status.SpecialDefense = status.SpecialDefense > 0 ? status.SpecialDefense : 0;
+                                status.WaterAttack = status.WaterAttack > 0 ? status.WaterAttack : 0;
+                                status.WaterDefense = status.WaterDefense > 0 ? status.WaterDefense : 0;
+                                status.FireAttack = status.FireAttack > 0 ? status.FireAttack : 0;
+                                status.FireDefense = status.FireDefense > 0 ? status.FireDefense : 0;
+                                status.WindAttack = status.WindAttack > 0 ? status.WindAttack : 0;
+                                status.WindDefense = status.WindDefense > 0 ? status.WindDefense : 0;
+                            }
+                            isStandBy = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
         private void CalendarDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
         {
             _date = sender.Date?.Date;
         }
+
+        [GeneratedRegex("""/|:|\*|\?|"|<|>|\|""")]
+        private static partial Regex ToRemoveRegex();
+
     }
 }

@@ -7,7 +7,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using mitama.Pages.DeckBuilder;
 using mitama.Pages.RegionConsole;
-using SimdLinq;
 
 namespace mitama.Domain;
 
@@ -146,50 +145,82 @@ public partial record BattleLog(List<BattleLogItem> Data)
             }).ToList());
     }
 
-    public Dictionary<string, StatusIncreaseDecrease[]> ExtractIncreaseDecrease()
+    public Dictionary<string, (TimeOnly Time, StatusIncreaseDecrease Stat)[]> ExtractIncreaseDecrease()
     {
-        Regex regex = StatusRegex();
-        var stats = Data
-            .SelectMany(log => log.Fragments)
-            .Where(fragment => fragment.Kind == FragmentKind.Result)
-            .Where(fragment => regex.IsMatch(fragment.Content))
-            .Select(fragment =>
+        var StatRegex = StatusRegex();
+        var standbyRegex = StandByRegex();
+        var data = Data
+            .SelectMany(log => log.Fragments.Select(Fragment => (log.Time, Fragment)))
+            .Where(item => item.Fragment.Kind is FragmentKind.Result or FragmentKind.Event)
+            .Where(item => StatRegex.IsMatch(item.Fragment.Content) || standbyRegex.IsMatch(item.Fragment.Content))
+            .Select(item =>
             {
-                var match = regex.Match(fragment.Content);
-                var player = match.Groups["player"].Value;
-                var status = match.Groups["status"].Value;
-                var value = match.Groups["value"].Value;
-                return (player, new StatusIncreaseDecrease(status switch
+                if (standbyRegex.IsMatch(item.Fragment.Content))
                 {
-                    "ATK" => new Attack(int.Parse(value)),
-                    "Sp.ATK" => new SpecialAttack(int.Parse(value)),
-                    "DEF" => new Defense(int.Parse(value)),
-                    "Sp.DEF" => new SpecialDefense(int.Parse(value)),
-                    "風属性攻撃" => new WindAttack(int.Parse(value)),
-                    "風属性防御" => new WindDefense(int.Parse(value)),
-                    "火属性攻撃" => new FireAttack(int.Parse(value)),
-                    "火属性防御" => new FireDefense(int.Parse(value)),
-                    "水属性攻撃" => new WaterAttack(int.Parse(value)),
-                    "水属性防御" => new WaterDefense(int.Parse(value)),
-                    _ => throw new UnreachableException("CRITICAL ERROR!"),
-                }));
+                    var match = standbyRegex.Match(item.Fragment.Content);
+                    var status = match.Groups["status"].Value;
+                    var Player = "スタンバイフェーズ";
+                    return (Player, item.Time, new StatusIncreaseDecrease(new StandByPhase(status switch
+                    {
+                        "ATK" => new Attack(5000),
+                        "Sp.ATK" => new SpecialAttack(5000),
+                        "DEF" => new Defense(5000),
+                        "Sp.DEF" => new SpecialDefense(5000),
+                    })));
+                }
+                else
+                {
+                    var match = StatRegex.Match(item.Fragment.Content);
+                    var Player = match.Groups["player"].Value;
+                    var status = match.Groups["status"].Value;
+                    var value = match.Groups["value"].Value.Replace(",", string.Empty).Replace(".", string.Empty);
+                    var iord = match.Groups["iord"].Value switch
+                    {
+                        "増加" => 1,
+                        "減少" => -1,
+                        _ => throw new UnreachableException("CRITICAL ERROR!"),
+                    };
+
+                    return (Player, item.Time, new StatusIncreaseDecrease(status switch
+                    {
+                        "ATK" => new Attack(iord * int.Parse(value)),
+                        "Sp.ATK" => new SpecialAttack(iord * int.Parse(value)),
+                        "DEF" => new Defense(iord * int.Parse(value)),
+                        "Sp.DEF" => new SpecialDefense(iord * int.Parse(value)),
+                        "風属性攻撃" => new WindAttack(iord * int.Parse(value)),
+                        "風属性防御" => new WindDefense(iord * int.Parse(value)),
+                        "火属性攻撃" => new FireAttack(iord * int.Parse(value)),
+                        "火属性防御" => new FireDefense(iord * int.Parse(value)),
+                        "水属性攻撃" => new WaterAttack(iord * int.Parse(value)),
+                        "水属性防御" => new WaterDefense(iord * int.Parse(value)),
+                        "光属性攻撃" => new LightAttack(iord * int.Parse(value)),
+                        "光属性防御" => new LightDefense(iord * int.Parse(value)),
+                        "闇属性攻撃" => new DarkAttack(iord * int.Parse(value)),
+                        "闇属性防御" => new DarkDefense(iord * int.Parse(value)),
+                        "最大HP" => new MaxHp(int.Parse(value)),
+                        _ => new ParseError(iord * int.Parse(value)),
+                    }));
+                }
             })
             .ToArray();
 
-        Dictionary<string, StatusIncreaseDecrease[]> res = [];
+        Dictionary<string, (TimeOnly, StatusIncreaseDecrease)[]> res = [];
         var (allies, opponents) = ExtractPlayers();
         foreach (var player in allies)
         {
-            res.Add(player.Name, stats.Where(stat => stat.player == player.Name).Select(stat => stat.Item2).ToArray());
+            res.Add(player.Name, data.Where(datum => datum.Player== player.Name || datum.Player == "スタンバイフェーズ").Select(datum => (datum.Time, datum.Item3)).ToArray());
         }
         foreach (var player in opponents)
         {
-            res.Add(player.Name, stats.Where(stat => stat.player == player.Name).Select(stat => stat.Item2).ToArray());
+            res.Add(player.Name, data.Where(datum => datum.Player == player.Name || datum.Player == "スタンバイフェーズ").Select(datum => (datum.Time, datum.Item3)).ToArray());
         }
         return res;
     }
 
-    [GeneratedRegex(@"(?<player>).*の(?<status>).*が.*(?<value>\d+([,.]\d+)+).*増加$")]
+    [GeneratedRegex(@"^ *スタンバイフェーズにて *(?<status>.+?) *を増加$")]
+    private static partial Regex StandByRegex();
+
+    [GeneratedRegex(@"^ *(?<player>.+?) *の *(?<status>.+?) *が *(?<value>\d+([,.]\d+)+?).*(?<iord>増加|減少)$")]
     private static partial Regex StatusRegex();
 }
 
@@ -222,6 +253,37 @@ public record FireAttack(int Value) : Status;
 public record FireDefense(int Value) : Status;
 public record WaterAttack(int Value) : Status;
 public record WaterDefense(int Value) : Status;
+public record LightAttack(int Value) : Status;
+public record LightDefense(int Value) : Status;
+public record DarkAttack(int Value) : Status;
+public record DarkDefense(int Value) : Status;
+public record MaxHp(int Value) : Status;
+public record ParseError(int Value) : Status;
+public record StandByPhase(Status Status) : Status;
+
+public record struct AllStatus(
+    int Attack,
+    int SpecialAttack,
+    int Defense,
+    int SpecialDefense,
+    int WindAttack,
+    int WindDefense,
+    int FireAttack,
+    int FireDefense,
+    int WaterAttack,
+    int WaterDefense,
+    int LightAttack,
+    int LightDefense,
+    int DarkAttack,
+    int DarkDefense,
+    int MaxHp
+)
+{
+    public readonly string ToCSV()
+    {
+        return $"{Attack},{SpecialAttack},{Defense},{SpecialDefense},{WindAttack},{WindDefense},{FireAttack},{FireDefense},{WaterAttack},{WaterDefense},{LightAttack},{LightDefense},{DarkAttack},{DarkDefense},{MaxHp}";
+    }
+}
 
 internal class Helper
 {
