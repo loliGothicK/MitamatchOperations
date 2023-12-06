@@ -166,6 +166,7 @@ public partial record BattleLog(List<BattleLogItem> Data)
                         "Sp.ATK" => new SpecialAttack(5000),
                         "DEF" => new Defense(5000),
                         "Sp.DEF" => new SpecialDefense(5000),
+                        _ => throw new NotImplementedException(),
                     })));
                 }
                 else
