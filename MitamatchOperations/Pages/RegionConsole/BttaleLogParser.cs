@@ -178,6 +178,7 @@ internal partial class BattleLogParser
                 };
                 return new MemoriaWithConcentration(memoria, concentration);
             })
+            .Where(memoria => memoria is not null)
             .ToArray();
     }
 

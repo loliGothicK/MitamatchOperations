@@ -2334,8 +2334,6 @@ namespace mitama.Pages.DeckBuilder
 
         public BasicStatus Status => Memoria.Status[Concentration];
 
-        public override int GetHashCode() => Memoria.GetHashCode();
-
         bool IEquatable<MemoriaWithConcentration>.Equals(MemoriaWithConcentration other)
             => other is not null
             && Memoria.Id == other.Memoria.Id

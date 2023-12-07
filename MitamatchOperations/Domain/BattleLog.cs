@@ -166,7 +166,7 @@ public partial record BattleLog(List<BattleLogItem> Data)
                 {
                     memorias.Add(memoria);
                 }
-                List<MemoriaWithConcentration> list = [.. memorias];
+                List<MemoriaWithConcentration> list = [.. memorias.Where(m => m.Memoria is not null)];
                 return new Unit($"Unit-{index+1}", vanguard > rearguard, [.. list.DistinctBy(m => m.Memoria.Name)]);
             }).ToList());
     }
