@@ -94,13 +94,13 @@ internal partial class BttaleLogParser
             var match = memoriaRegex.Match(content);
             var name = match.Groups["memoria"].Value;
             var skill = match.Groups["skill"].Value;
-            var memoria = Memoria
+            var memoriaCandidate = Memoria
                     .List
-                    .MinBy(memoria =>
-                    {
-                        return Algo.LevenshteinRate(memoria.Name, name)
-                             + Algo.LevenshteinRate(memoria.Skill.Name, skill);
-                    });
+                    .MinBy(memoria => Algo.LevenshteinRate(memoria.Name, name));
+            var memoria = Memoria
+                .List
+                .Where(memoria => memoria.Name == memoriaCandidate.Name)
+                .MinBy(memoria => Algo.LevenshteinDistance(memoria.Skill.Name, skill));
             var concentration = match.Groups["level"].Value switch
             {
                 "15" => 0,

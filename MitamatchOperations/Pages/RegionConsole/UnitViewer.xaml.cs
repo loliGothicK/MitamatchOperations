@@ -108,8 +108,7 @@ public sealed partial class UnitViewer
     {
         var date = $"{Calendar.Date:yyyy-MM-dd}";
 
-        var opponent = Directory.GetDirectories(@$"{Director.LogDir(_regionName)}\{date}").Select(path => path.Split('\\').Last()).ToArray()[0];
-        var OpponentDir = _picked = @$"{Director.LogDir(_regionName)}/{date}/{opponent}";
+        var OpponentDir = _picked = @$"{Director.LogDir(_regionName)}/{date}/Opponents";
         var opponentNames = Directory.GetDirectories(OpponentDir).Select(path => path.Split('\\').Last()).ToArray();
         unitTreeView.ItemsSource = new ObservableCollection<ExplorerItem>(opponentNames.Select(name =>
         {

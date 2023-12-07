@@ -202,7 +202,7 @@ namespace mitama.Pages.RegionConsole
         {
             foreach (var player in players)
             {
-                var path = $@"{logDir}\{_date??DateTime.Now:yyyy-MM-dd}\{ToRemoveRegex().Replace(player.Region, string.Empty)}\「{ToRemoveRegex().Replace(player.Name, string.Empty)}」";
+                var path = $@"{logDir}\{_date??DateTime.Now:yyyy-MM-dd}\Opponents\[{ToRemoveRegex().Replace(player.Name, string.Empty)}]";
                 Director.CreateDirectory(path);
                 var units = await battleLog.ExtractUnits(player.Name);
                 foreach (var (unit, index) in units.Select((unit, index) => (unit, index)))
@@ -221,7 +221,7 @@ namespace mitama.Pages.RegionConsole
 #pragma warning disable CA1854 // Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
                 if (!data.ContainsKey(player.Name) || data[player.Name].Length == 0) continue;
 #pragma warning restore CA1854 // Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
-                var path = $@"{logDir}\{_date ?? DateTime.Now:yyyy-MM-dd}\{ToRemoveRegex().Replace(player.Region, string.Empty)}\「{ToRemoveRegex().Replace(player.Name, string.Empty)}」";
+                var path = $@"{logDir}\{_date ?? DateTime.Now:yyyy-MM-dd}\Ally\[{ToRemoveRegex().Replace(player.Name, string.Empty)}]";
                 Director.CreateDirectory(path);
                 using var playerFile = File.Create($@"{path}\[{player.Name}].csv");
                 var status = new AllStatus();
