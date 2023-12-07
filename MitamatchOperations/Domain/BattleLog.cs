@@ -127,7 +127,7 @@ public partial record BattleLog(List<BattleLogItem> Data)
             .Where(log => log.Source.Content.Name == player)
             .Where(log =>
             {
-                return BttaleLogParser.ParseEvent(log.Fragments[0].Content) is UseMemoria or UnitChange;
+                return BattleLogParser.ParseEvent(log.Fragments[0].Content) is UseMemoria or UnitChange;
             })
             .ToList();
 
@@ -136,12 +136,38 @@ public partial record BattleLog(List<BattleLogItem> Data)
             .Select((sprint, index) =>
             {
                 HashSet<MemoriaWithConcentration> memorias = [];
-                foreach (var memoria in sprint.SelectMany(e => BttaleLogParser.ExtractMemoria(e)))
+                foreach (var item in sprint.Select(item => BattleLogParser.ParseEvent(item.Fragments[0].Content)))
+                {
+                    switch (item)
+                    {
+                        case UseMemoria memoria:
+                            memorias.Add(memoria.Memoria);
+                            break;
+                        default: continue;
+                    }
+                }
+                var vanguard = 0;
+                var rearguard = 0;
+                foreach (var kind in memorias.Select(memoria => memoria.Memoria.Kind))
+                {
+                    switch (kind)
+                    {
+                        case Vanguard:
+                            vanguard++;
+                            break;
+                        case Rearguard:
+                            rearguard++;
+                            break;
+                        default:
+                            throw new UnreachableException("CRITICAL ERROR!");
+                    }
+                }
+                foreach (var memoria in sprint.SelectMany(e => BattleLogParser.ExtractMemoria(e, vanguard > rearguard)))
                 {
                     memorias.Add(memoria);
                 }
                 List<MemoriaWithConcentration> list = [.. memorias];
-                return new Unit($"Unit-{index+1}", Costume.DummyVanguard.CanBeEquipped(list[0].Memoria), [.. list.DistinctBy(m => m.Memoria.Name)]);
+                return new Unit($"Unit-{index+1}", vanguard > rearguard, [.. list.DistinctBy(m => m.Memoria.Name)]);
             }).ToList());
     }
 

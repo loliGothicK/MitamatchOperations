@@ -19,6 +19,7 @@ using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 using Microsoft.UI.Text;
 using Windows.Storage;
+using System.Xml.Linq;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -32,7 +33,7 @@ namespace mitama.Pages.DeckBuilder
 
         private ObservableCollection<MemoriaWithConcentration> Deck { get; set; } = [];
         private ObservableCollection<MemoriaWithConcentration> LegendaryDeck { get; set; } = [];
-        private ObservableCollection<Memoria> Pool { get; set; } = new(Memoria.List.Where(Costume.DummyReaguard.CanBeEquipped));
+        private ObservableCollection<Memoria> Pool { get; set; } = new(Memoria.List.Where(Costume.DummyRearguard.CanBeEquipped));
         private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = [];
         private HashSet<FilterType> _currentFilters = [];
         private readonly BasicStatus StatSum = new();
@@ -285,7 +286,7 @@ namespace mitama.Pages.DeckBuilder
 
         private void MemeriaSources_Drop(object sender, DragEventArgs e)
         {
-            var dummyCostume = Switch.IsOn ? Costume.DummyVanguard : Costume.DummyReaguard;
+            var dummyCostume = Switch.IsOn ? Costume.DummyVanguard : Costume.DummyRearguard;
             foreach (var toAdd in Memoria
                 .List
                 .Where(dummyCostume.CanBeEquipped)
@@ -348,7 +349,7 @@ namespace mitama.Pages.DeckBuilder
                 else
                 {
                     VoR.Label = "Œã‰q";
-                    Pool = new(Memoria.List.Where(Costume.DummyReaguard.CanBeEquipped));
+                    Pool = new(Memoria.List.Where(Costume.DummyRearguard.CanBeEquipped));
                     TreeNodes[0].Children.Clear();
                     TreeNodes[0].Children.Add(new() { Text = "Žx‰‡" });
                     TreeNodes[0].Children.Add(new() { Text = "–WŠQ" });
@@ -2335,5 +2336,10 @@ namespace mitama.Pages.DeckBuilder
         public BasicStatus Status => Memoria.Status[Concentration];
 
         public override int GetHashCode() => Memoria.GetHashCode();
+
+        bool IEquatable<MemoriaWithConcentration>.Equals(MemoriaWithConcentration other)
+            => other is not null
+            && Memoria.Id == other.Memoria.Id
+            && Concentration == other.Concentration;
     }
 }

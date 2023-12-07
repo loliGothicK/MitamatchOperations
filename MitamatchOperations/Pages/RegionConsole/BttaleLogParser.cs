@@ -10,7 +10,7 @@ using mitama.Pages.DeckBuilder;
 
 namespace mitama.Pages.RegionConsole;
 
-internal partial class BttaleLogParser
+internal partial class BattleLogParser
 {
     internal record RegionHint(string Name, List<string> Members);
 
@@ -148,8 +148,9 @@ internal partial class BttaleLogParser
         }
     }
 
-    public static MemoriaWithConcentration[] ExtractMemoria(BattleLogItem item)
+    public static MemoriaWithConcentration[] ExtractMemoria(BattleLogItem item, bool isVanguard)
     {
+        var dummyCostume = isVanguard ? Costume.DummyVanguard : Costume.DummyRearguard;
         var memoriaRegex = MemoriaRegex();
         return item.Fragments
             .Where(fragment => memoriaRegex.IsMatch(fragment.Content))
@@ -158,13 +159,14 @@ internal partial class BttaleLogParser
                 var match = memoriaRegex.Match(fragment.Content);
                 var name = match.Groups["memoria"].Value;
                 var skill = match.Groups["skill"].Value;
-                var memoria = Memoria
+                var memoriaCandidate = Memoria
                         .List
-                        .MinBy(memoria =>
-                        {
-                            return Algo.LevenshteinRate(memoria.Link, Fix(name))
-                                 + Algo.LevenshteinRate(memoria.Skill.Name, skill);
-                        });
+                        .MinBy(memoria => Algo.LevenshteinRate(memoria.Name, name));
+                var memoria = Memoria
+                    .List
+                    .Where(dummyCostume.CanBeEquipped)
+                    .Where(memoria => memoria.Name == memoriaCandidate.Name)
+                    .MinBy(memoria => Algo.LevenshteinDistance(memoria.Skill.Name, skill));
                 var concentration = match.Groups["level"].Value switch
                 {
                     "15" => 0,

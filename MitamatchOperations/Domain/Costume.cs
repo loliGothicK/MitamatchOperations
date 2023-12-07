@@ -144,7 +144,7 @@ public record struct Costume(
     }
 
     public static Costume DummyVanguard => new("dummy", "dummy", new NormalSingleCostume(0), new RareSkill("", ""), [], Optional<ExSkill>.None);
-    public static Costume DummyReaguard => new("dummy", "dummy", new RecoveryCostume(0), new RareSkill("", ""), [], Optional<ExSkill>.None);
+    public static Costume DummyRearguard => new("dummy", "dummy", new RecoveryCostume(0), new RareSkill("", ""), [], Optional<ExSkill>.None);
 
     readonly bool IEquatable<Costume>.Equals(Costume other) => Name == other.Name && Lily == other.Lily;
 

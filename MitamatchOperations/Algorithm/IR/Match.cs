@@ -41,7 +41,7 @@ internal class Match {
         rects = Clean(rects);
         rects = Interpolation(rects, img.Width);
 
-        var dummyCostume = IsVanguard ? Costume.DummyVanguard : Costume.DummyReaguard;
+        var dummyCostume = IsVanguard ? Costume.DummyVanguard : Costume.DummyRearguard;
 
         foreach (var rect in rects) Cv2.Rectangle(target, rect, Scalar.Aquamarine, 5);
 
