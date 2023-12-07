@@ -184,7 +184,7 @@ internal partial class BttaleLogParser
         return ToRemoveRegex().Replace(name, string.Empty).ToLower();
     }
 
-    [GeneratedRegex(@"^ *「(?<memoria>.+?)」*「(?<skill>.+?)」*Lv(?<level>\d{2}) *が発動 *$")]
+    [GeneratedRegex(@"^ *「(?<memoria>.+?)」 *の *「(?<skill>.+?)」*Lv(?<level>\d{2}) *が発動 *$")]
     private static partial Regex MemoriaRegex();
 
     [GeneratedRegex(@"^.+が「(?<order>.+?)」 *の発動準備を開始 *$")]
