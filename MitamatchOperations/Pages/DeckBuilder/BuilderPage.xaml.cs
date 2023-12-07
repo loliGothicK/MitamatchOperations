@@ -19,7 +19,6 @@ using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 using Microsoft.UI.Text;
 using Windows.Storage;
-using System.Xml.Linq;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -2301,42 +2300,5 @@ namespace mitama.Pages.DeckBuilder
         public int Value { get; set; } = pair.Value;
 
         public string Content => $"{BuilderPageHelpers.LevelToString(Level)}: {Value}";
-    }
-
-    public record MemoriaWithConcentration(Memoria Memoria, int Concentration)
-    {
-        public Memoria Memoria { get; set; } = Memoria;
-        public int Concentration { get; set; } = Concentration;
-
-        public int FontSize => Concentration switch
-        {
-            4 => 12,
-            _ => 18,
-        };
-
-        public Thickness Margin => Concentration switch
-        { 
-            4 => new(0, 30, 2, 0),
-            _ => new(0, 26, -4, 0) 
-        };
-
-        public string LimitBreak => Concentration switch
-        {
-            0 => "0",
-            1 => "1",
-            2 => "2",
-            3 => "3",
-            4 => "MAX",
-            _ => throw new UnreachableException("Unreachable"),
-        };
-
-        public static implicit operator Memoria(MemoriaWithConcentration m) => m.Memoria;
-
-        public BasicStatus Status => Memoria.Status[Concentration];
-
-        bool IEquatable<MemoriaWithConcentration>.Equals(MemoriaWithConcentration other)
-            => other is not null
-            && Memoria.Id == other.Memoria.Id
-            && Concentration == other.Concentration;
     }
 }

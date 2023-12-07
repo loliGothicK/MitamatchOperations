@@ -61,7 +61,7 @@
                     </Grid.ContextFlyout>
                 </Grid>
             </DataTemplate>
-            <DataTemplate x:Name="MemoriaWithConcentrationTemplate" x:DataType="local:MemoriaWithConcentration">
+            <DataTemplate x:Name="MemoriaWithConcentrationTemplate" x:DataType="domain:MemoriaWithConcentration">
                 <Grid Width="100">
                     <Image Source="{x:Bind Memoria.Path}" Stretch="UniformToFill"/>
                     <Border Background="LightPink"

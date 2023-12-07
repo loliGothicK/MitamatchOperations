@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using DynamicData.Kernel;
 using mitama.Algorithm;
 using mitama.Domain;
-using mitama.Pages.DeckBuilder;
 
 namespace mitama.Pages.RegionConsole;
 

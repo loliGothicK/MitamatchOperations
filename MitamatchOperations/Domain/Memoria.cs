@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Web;
-using mitama.Pages.DeckBuilder;
+using Microsoft.UI.Xaml;
 
 namespace mitama.Domain;
 
@@ -233,6 +234,45 @@ public record Rearguard(RearguardKind Kind) : MemoriaKind
         RearguardKind.Recovery => "/Assets/Images/Recovery.png",
         _ => throw new NotImplementedException(),
     };
+}
+
+public record MemoriaWithConcentration(Memoria Memoria, int Concentration)
+{
+    public Memoria Memoria { get; set; } = Memoria;
+    public int Concentration { get; set; } = Concentration;
+
+    public int FontSize => Concentration switch
+    {
+        4 => 12,
+        _ => 18,
+    };
+
+    public Thickness Margin => Concentration switch
+    {
+        4 => new(0, 30, 2, 0),
+        _ => new(0, 26, -4, 0)
+    };
+
+    public string LimitBreak => Concentration switch
+    {
+        0 => "0",
+        1 => "1",
+        2 => "2",
+        3 => "3",
+        4 => "MAX",
+        _ => throw new UnreachableException("Unreachable"),
+    };
+
+    public static implicit operator Memoria(MemoriaWithConcentration m) => m.Memoria;
+
+    public BasicStatus Status => Memoria.Status[Concentration];
+
+    public override int GetHashCode() => HashCode.Combine(Memoria.Id, Concentration);
+
+    bool IEquatable<MemoriaWithConcentration>.Equals(MemoriaWithConcentration other)
+        => other is not null
+        && Memoria.Id == other.Memoria.Id
+        && Concentration == other.Concentration;
 }
 
 public record Memoria(
