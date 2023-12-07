@@ -36,7 +36,6 @@ namespace mitama.Pages.DeckBuilder
         private ObservableCollection<Memoria> Pool { get; set; } = new(Memoria.List.Where(Costume.DummyRearguard.CanBeEquipped));
         private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = [];
         private HashSet<FilterType> _currentFilters = [];
-        private readonly BasicStatus StatSum = new();
         private string region = "";
         private MemberInfo[] members = [];
         readonly Dictionary<KindType, int> kindPairs = [];
