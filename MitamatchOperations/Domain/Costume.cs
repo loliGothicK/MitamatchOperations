@@ -152,6 +152,56 @@ public record struct Costume(
 
     public static Costume[] List =>
     [
+new Costume(
+            "郭神琳",
+            "聖夜のプレゼント",
+            new AssistCostume(15),
+            new RareSkill("テスタメント", "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。"),
+            [
+                new Common([new LilySpDef(75)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyHp(200)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyDef(75)]),
+                new Common([new LilyHp(200)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilySpAtk(75)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyAtk(75)]),
+                new Common([new LilySpDef(125), new LilySpAtk(125)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyHp(400), new LilySpAtk(150)]),
+                new Unique([new LilySpAtk(1500), new LilySpDef(1500)]),
+                new Common([new LilySpAtk(500), new LilySpDef(500)]),
+                new Unique([new LilySpAtk(1500), new LilySpDef(1500)]),
+            ],
+            new ExSkill("火属性メモリア効果増加AⅢ", "自身が使用する火属性メモリアのスキル効果5％UP")
+        ),
+        new Costume(
+            "ミリアム",
+            "ムーンライトα",
+            new NormalRangeCostume(15),
+            new RareSkill("フェイズトランセンデンス", "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。"),
+            [
+                new Common([new LilyDef(75)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyHp(200)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyAtk(75)]),
+                new Common([new LilyHp(200)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyDef(75)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyAtk(75)]),
+                new Common([new LilyDef(125), new LilyAtk(125)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyHp(400), new LilyAtk(150)]),
+                new Unique([new LilyAtk(1500), new LilyDef(1500)]),
+                new Common([new LilyAtk(500), new LilyDef(500)]),
+                new Unique([new LilyAtk(1500), new LilyDef(1500)]),
+            ],
+            new ExSkill("水属性メモリア効果増加AⅡ", "自身が使用する水属性メモリアのスキル効果3％UP火属性メモリア効果耐性AⅠ自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN")
+        ),
         new Costume(
             "富永真",
             "ピュアリティプロミス",
