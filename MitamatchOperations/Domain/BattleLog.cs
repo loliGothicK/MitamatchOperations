@@ -156,7 +156,7 @@ public partial record BattleLog(List<BattleLogItem> Data)
             })
             .ToList();
 
-        var sprints = Helper.SplitList(events, e => e.Fragments[0].Content.Contains("ユニットを変更"));
+        var sprints = Helper.SplitList(events, e => e.Fragments[0].Content.Contains("ユニット"));
         return Task.FromResult(sprints
             .Select((sprint, index) =>
             {

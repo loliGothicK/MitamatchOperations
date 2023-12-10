@@ -80,7 +80,7 @@ internal partial class BattleLogParser
         var activateOrderRegex = ActivateOrderRegex();
         var rareSkillRegex = RareSkillRegex();
 
-        if (content.Contains("ユニットを変更"))
+        if (content.Contains("ユニット"))
         {
             return new UnitChange();
         }
