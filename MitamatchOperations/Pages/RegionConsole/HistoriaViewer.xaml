@@ -31,13 +31,31 @@
         <Grid Grid.Row="1">
             <Pivot Title="Battle Result">
                 <PivotItem Header="Summary">
-                    <TextBlock x:Name="Title" />
+                    <StackPanel>
+                        <TextBlock x:Name="Date" />
+                        <TextBlock x:Name="Title" FontSize="20"/>
+                        <TextBlock x:Name="NeunWelt" FontSize="12"/>
+                    </StackPanel>
                 </PivotItem>
                 <PivotItem Header="Ally">
-                    <StackPanel x:Name="AllyStackPanel" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" x:Name="AllyMembers" />
+                        <StackPanel Grid.Column="1" x:Name="AllyOrders" />
+                    </Grid>
                 </PivotItem>
                 <PivotItem Header="Opponent">
-                    <StackPanel x:Name="OpponentStackPanel" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" x:Name="OpponentMembers" />
+                        <StackPanel Grid.Column="1" x:Name="OpponentOrders" />
+                    </Grid>
                 </PivotItem>
             </Pivot>
         </Grid>

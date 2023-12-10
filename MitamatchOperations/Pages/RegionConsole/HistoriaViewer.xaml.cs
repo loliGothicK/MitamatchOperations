@@ -22,22 +22,26 @@ public sealed partial class HistoriaViewer : Page
 
     private void Load_Click(object _, RoutedEventArgs _e)
     {
-        var logDir = @$"{Director.ProjectDir()}\{Director.ReadCache().Region}\BattleLog";
+        var allyRegion = Director.ReadCache().Region;
+        var logDir = @$"{Director.ProjectDir()}\{allyRegion}\BattleLog";
         var path = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\summary.json";
         if (!File.Exists(path))
         {
             return;
         }
         var summary = JsonSerializer.Deserialize<Summary>(File.ReadAllText(path));
-        var result = summary.AllyPoints > summary.OpponentPoints ? "Win" : "Lose";
-        Title.Text = $"{summary.Opponent}（{result}）, ノイン: {summary.NeunWelt}";
+        var r1 = summary.AllyPoints > summary.OpponentPoints ? "Win" : "Lose";
+        var r2 = summary.AllyPoints > summary.OpponentPoints ? "Lose" : "Win";
+        Date.Text = $"{Calendar.Date:yyyy-MM-dd}";
+        Title.Text = $"{r1}: {allyRegion}（{summary.AllyPoints}） - {r2}: {summary.Opponent}（{summary.OpponentPoints}）";
+        NeunWelt.Text = $"ノイン: {summary.NeunWelt}";
         foreach (var x in summary.AllyOrders)
         {
-            AllyStackPanel.Children.Add(new TextBlock { Text = $"{x.Time}: {Order.List[x.Index].Name}" });
+            AllyOrders.Children.Add(new TextBlock { Text = $"{x.Time}: {Order.List[x.Index].Name}" });
         }
         foreach (var x in summary.OpponentOrders)
         {
-            OpponentStackPanel.Children.Add(new TextBlock { Text = $"{x.Time}: {Order.List[x.Index].Name}" });
+            OpponentOrders.Children.Add(new TextBlock { Text = $"{x.Time}: {Order.List[x.Index].Name}" });
         }
     }
 }

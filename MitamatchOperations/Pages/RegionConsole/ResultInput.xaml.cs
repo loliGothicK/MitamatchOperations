@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reactive;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -41,15 +40,22 @@ namespace mitama.Pages.RegionConsole
             var region = Director.ReadCache().Region;
             AllyRegionName.Text = region;
             var players = Util.LoadMemberNames(region);
-            AllyPlayer1.Text = players[0];
-            AllyPlayer2.Text = players[1];
-            AllyPlayer3.Text = players[2];
-            AllyPlayer4.Text = players[3];
-            AllyPlayer5.Text = players[4];
-            AllyPlayer6.Text = players[5];
-            AllyPlayer7.Text = players[6];
-            AllyPlayer8.Text = players[7];
-            AllyPlayer9.Text = players[8];
+            List<TextBox> list =
+            [
+                AllyPlayer1,
+                AllyPlayer2,
+                AllyPlayer3,
+                AllyPlayer4,
+                AllyPlayer5,
+                AllyPlayer6,
+                AllyPlayer7,
+                AllyPlayer8,
+                AllyPlayer9,
+            ];
+            for (int i = 0; i < players.Length; i++)
+            {
+                list[i].Text = players[i];
+            }
         }
 
         private async void PickOpenButton_Click(object sender, RoutedEventArgs e)
