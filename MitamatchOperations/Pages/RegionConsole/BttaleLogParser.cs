@@ -70,7 +70,7 @@ internal partial class BattleLogParser
         };
     }
 
-    [GeneratedRegex(@"^\[(?<region>.+)\] (?<player>.*)$")]
+    [GeneratedRegex(@"^\[(?<region>.+)\] *?(?<player>.*)$")]
     private static partial Regex SourceRegex();
 
     internal static EventDetail ParseEvent(string content)
