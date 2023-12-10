@@ -58,7 +58,7 @@ public sealed partial class SettingsPage
                     {
                         Content = $"https://github.com/LoliGothick/MitamatchOperations/releases/tag/{version}",
                     };
-                    link.Click += (s, e) => { _ = Launcher.LaunchUriAsync(new Uri(link.Content.ToString())); };
+                    link.Click += (_s, _e) => { _ = Launcher.LaunchUriAsync(new Uri(link.Content.ToString())); };
                     InfoBar.ActionButton = link;
                     InfoBar.IsOpen = true;
                 }

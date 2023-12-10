@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reactive;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -191,11 +192,32 @@ namespace mitama.Pages.RegionConsole
 
             await SaveUnits(logDir, battleLog, opponents);
             await SaveStatusInfo(logDir, battleLog, allies);
+            await SaveSummary(logDir, battleLog);
 
             GeneralInfoBar.Title = $"âêÕÇ™äÆóπÇµÇ‹ÇµÇΩÅB";
             GeneralInfoBar.Severity = InfoBarSeverity.Success;
             await Task.Delay(3000);
             GeneralInfoBar.IsOpen = false;
+        }
+
+        private async Task SaveSummary(string logDir, BattleLog battleLog)
+        {
+            var AllyPoints = AllyRegionPoints.Text == string.Empty ? 0 : int.Parse(AllyRegionPoints.Text);
+            var OpponentPoints = OpponentRegionPoints.Text == string.Empty ? 0 : int.Parse(OpponentRegionPoints.Text);
+            var NeunWelt = NeunWeltResult.SelectedIndex == 0 ? "èüÇø" : "ïâÇØ";
+            var (AllyOrders, OpponentOrders) = await battleLog.ExtractOrders();
+            // output as json
+            var path = $@"{logDir}\{_date ?? DateTime.Now:yyyy-MM-dd}\summary.json";
+            using var unitFile = File.Create(path);
+            await unitFile.WriteAsync(new UTF8Encoding(true).GetBytes(JsonSerializer.Serialize(new
+            {
+                Opponent = OpponentRegionName.Text,
+                AllyPoints,
+                OpponentPoints,
+                NeunWelt,
+                AllyOrders,
+                OpponentOrders,
+            })));
         }
 
         private async Task SaveUnits(string logDir, BattleLog battleLog, Player[] players)

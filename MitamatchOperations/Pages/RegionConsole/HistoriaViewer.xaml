@@ -9,6 +9,37 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <WebView2 x:Name="MyWebView2" Source="https://www.youtube.com/embed/3nkRkdnTsrE" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" MinHeight="200" MinWidth="200" Margin="50"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <CommandBar>
+                <AppBarButton Icon="Calendar" Label="Pick">
+                    <AppBarButton.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <CalendarDatePicker x:Name="Calendar" PlaceholderText="Pick a date" Header="Calendar" />
+                                <Button Content="Load" Click="Load_Click" Margin="2"/>
+                            </StackPanel>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </CommandBar>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Pivot Title="Battle Result">
+                <PivotItem Header="Summary">
+                    <TextBlock x:Name="Title" />
+                </PivotItem>
+                <PivotItem Header="Ally">
+                    <StackPanel x:Name="AllyStackPanel" />
+                </PivotItem>
+                <PivotItem Header="Opponent">
+                    <StackPanel x:Name="OpponentStackPanel" />
+                </PivotItem>
+            </Pivot>
+        </Grid>
     </Grid>
 </Page>

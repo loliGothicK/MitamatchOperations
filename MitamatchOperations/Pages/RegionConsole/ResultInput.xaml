@@ -2,6 +2,7 @@
 <Page
     x:Class="mitama.Pages.RegionConsole.ResultInput"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -60,44 +61,80 @@
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Margin="5">
-                    <TextBlock Text="味方レギオン名" FontSize="20" />
-                    <TextBox x:Name="AllyRegionName" />
-                    <TextBlock Text="味方プレイヤー名" FontSize="20" />
-                    <TextBox x:Name="AllyPlayer1" />
-                    <TextBox x:Name="AllyPlayer2" />
-                    <TextBox x:Name="AllyPlayer3" />
-                    <TextBox x:Name="AllyPlayer4" />
-                    <TextBox x:Name="AllyPlayer5" />
-                    <TextBox x:Name="AllyPlayer6" />
-                    <TextBox x:Name="AllyPlayer7" />
-                    <TextBox x:Name="AllyPlayer8" />
-                    <TextBox x:Name="AllyPlayer9" />
-                </StackPanel>
-                <StackPanel Grid.Column="1" Margin="5">
-                    <TextBlock Text="相手レギオン名" FontSize="20" />
-                    <TextBox x:Name="OpponentRegionName" />
-                    <TextBlock Text="相手プレイヤー名" FontSize="20" />
-                    <TextBox x:Name="OpponentPlayer1" />
-                    <TextBox x:Name="OpponentPlayer2" />
-                    <TextBox x:Name="OpponentPlayer3" />
-                    <TextBox x:Name="OpponentPlayer4" />
-                    <TextBox x:Name="OpponentPlayer5" />
-                    <TextBox x:Name="OpponentPlayer6" />
-                    <TextBox x:Name="OpponentPlayer7" />
-                    <TextBox x:Name="OpponentPlayer8" />
-                    <TextBox x:Name="OpponentPlayer9" />
-                </StackPanel>
+                <controls:SettingsExpander x:Name="Basics" Header="基礎情報" IsExpanded="True">
+                    <controls:SettingsExpander.Items>
+                        <controls:SettingsCard Header="味方">
+                            <StackPanel>
+                                <TextBlock Text="レギオン名" FontSize="20" />
+                                <TextBox x:Name="AllyRegionName" />
+                                <TextBlock Text="ポイント" FontSize="20" />
+                                <TextBox x:Name="AllyRegionPoints" />
+                            </StackPanel>
+                        </controls:SettingsCard>
+                        <controls:SettingsCard Header="相手">
+                            <StackPanel>
+                                <TextBlock Text="レギオン名" FontSize="20" />
+                                <TextBox x:Name="OpponentRegionName" />
+                                <TextBlock Text="ポイント" FontSize="20" />
+                                <TextBox x:Name="OpponentRegionPoints" />
+                            </StackPanel>
+                        </controls:SettingsCard>
+                    </controls:SettingsExpander.Items>
+                </controls:SettingsExpander>
             </Grid>
             <Grid Grid.Row="1">
-                <Button Content="Analyse" Click="Analyse" HorizontalAlignment="Left"/>
+                <controls:SettingsCard Header="ノイン">
+                    <ComboBox x:Name="NeunWeltResult" SelectedIndex="0">
+                        <ComboBoxItem Content="勝ち" />
+                        <ComboBoxItem Content="負け" />
+                    </ComboBox>
+                </controls:SettingsCard>
+            </Grid>
+            <Grid Grid.Row="2">
+                <controls:SettingsExpander x:Name="Options" Header="解析のためのヒント">
+                    <controls:SettingsExpander.Items>
+                        <controls:SettingsCard Header="メンバー入力">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="5">
+                                    <TextBlock Text="味方プレイヤー名" FontSize="20" />
+                                    <TextBox x:Name="AllyPlayer1" />
+                                    <TextBox x:Name="AllyPlayer2" />
+                                    <TextBox x:Name="AllyPlayer3" />
+                                    <TextBox x:Name="AllyPlayer4" />
+                                    <TextBox x:Name="AllyPlayer5" />
+                                    <TextBox x:Name="AllyPlayer6" />
+                                    <TextBox x:Name="AllyPlayer7" />
+                                    <TextBox x:Name="AllyPlayer8" />
+                                    <TextBox x:Name="AllyPlayer9" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="5">
+                                    <TextBlock Text="相手プレイヤー名" FontSize="20" />
+                                    <TextBox x:Name="OpponentPlayer1" />
+                                    <TextBox x:Name="OpponentPlayer2" />
+                                    <TextBox x:Name="OpponentPlayer3" />
+                                    <TextBox x:Name="OpponentPlayer4" />
+                                    <TextBox x:Name="OpponentPlayer5" />
+                                    <TextBox x:Name="OpponentPlayer6" />
+                                    <TextBox x:Name="OpponentPlayer7" />
+                                    <TextBox x:Name="OpponentPlayer8" />
+                                    <TextBox x:Name="OpponentPlayer9" />
+                                </StackPanel>
+                            </Grid>
+                        </controls:SettingsCard>
+                    </controls:SettingsExpander.Items>
+                </controls:SettingsExpander>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Button Content="Analyse" Click="Analyse" HorizontalAlignment="Right" Margin="5"/>
             </Grid>
         </Grid>
     </Grid>

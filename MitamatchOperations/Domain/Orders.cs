@@ -73,6 +73,8 @@ namespace mitama.Domain
         };
     }
 
+    public record struct OrderIndexAndTime(int Index, TimeOnly Time);
+
     public readonly record struct Order(
         ushort Index,
         string Name,

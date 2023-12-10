@@ -29,7 +29,7 @@ public record Ally(Player Player) : Source
 }
 public record Opponent(Player Player) : Source
 {
-    public override SourceKind Kind => SourceKind.Ally;
+    public override SourceKind Kind => SourceKind.Opponent;
     public override Player Content => Player;
 }
 
@@ -120,6 +120,32 @@ public partial record BattleLog(List<BattleLogItem> Data)
         return (ally, opponent);
     }
 
+    public Task<(List<OrderIndexAndTime>, List<OrderIndexAndTime>)> ExtractOrders()
+    {
+        List<OrderIndexAndTime> ally = [];
+        List<OrderIndexAndTime> opponent = [];
+
+        foreach (var (time, source, order) in Data
+            .Select(item => (item.Time, item.Source, BattleLogParser.ParseEvent(item.Fragments[0].Content)))
+            .Where(pair => pair.Item3 is PrepareOrder)
+            .Select(pair => (pair.Time, pair.Source, (pair.Item3 as PrepareOrder).Order)))
+        {
+            switch (source.Kind)
+            {
+                case SourceKind.Ally:
+                    ally.Add(new(order.Index, time));
+                    break;
+                case SourceKind.Opponent:
+                    opponent.Add(new(order.Index, time));
+                    break;
+                default:
+                    throw new UnreachableException("CRITICAL ERROR!");
+            }
+        }
+
+        return Task.FromResult((ally, opponent));
+    }
+
     public Task<List<Unit>> ExtractUnits(string player)
     {
         var events = Data
@@ -161,11 +187,11 @@ public partial record BattleLog(List<BattleLogItem> Data)
                             throw new UnreachableException("CRITICAL ERROR!");
                     }
                 }
-                foreach (var memoria in sprint.SelectMany(e => BattleLogParser.ExtractMemoria(e, vanguard > rearguard)))
+                foreach (var memoria in sprint.SelectMany(e => BattleLogParser.ExtractMemoria(e, vanguard > rearguard)).Where(m => m.Memoria is not null))
                 {
                     memorias.Add(memoria);
                 }
-                List<MemoriaWithConcentration> list = [.. memorias.Where(m => m.Memoria is not null)];
+                List<MemoriaWithConcentration> list = [.. memorias];
                 return new Unit($"Unit-{index+1}", vanguard > rearguard, [.. list.DistinctBy(m => m.Memoria.Name)]);
             }).ToList());
     }

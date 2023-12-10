@@ -189,10 +189,10 @@ internal partial class BattleLogParser
     [GeneratedRegex(@"^ *「(?<memoria>.+?)」 *の *「(?<skill>.+?)」*Lv(?<level>\d{2}) *が発動 *$")]
     private static partial Regex MemoriaRegex();
 
-    [GeneratedRegex(@"^.+が「(?<order>.+?)」 *の発動準備を開始 *$")]
+    [GeneratedRegex(@"^.+が *「(?<order>.+?)」 *の発動準備を開始 *$")]
     private static partial Regex PrepareOrderRegex();
 
-    [GeneratedRegex(@"^.+が「(?<order>.+?)」 *を発動 *$")]
+    [GeneratedRegex(@"^.+が *「(?<order>.+?)」 *を発動 *$")]
     private static partial Regex ActivateOrderRegex();
 
     [GeneratedRegex(@"^.*レアスキル「(?<skill>.+?)」*を発動 *$")]
