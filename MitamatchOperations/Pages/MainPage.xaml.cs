@@ -191,6 +191,7 @@ public sealed partial class MainPage
                 return;
             }
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Members\{name}");
+            Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Members\{name}\Units");
             await using var fs = Director.CreateFile($@"{Director.ProjectDir()}\{Project}\Members\{name}\info.json");
             var memberJson = new MemberInfo(DateTime.Now, DateTime.Now, name!, position!, []).ToJson();
             var save = new UTF8Encoding(true).GetBytes(memberJson);
