@@ -5,9 +5,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:mitama.Pages.RegionConsole"
+    xmlns:domain="using:mitama.Domain"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <DataTemplate x:Name="OrderTemplate" x:DataType="local:OrderLog">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <ImageIcon Source="{x:Bind Order.Path}" Width="40" Height="40" Margin="0,0,5,0"/>
+                <StackPanel>
+                    <TextBlock Text="{x:Bind Time}" Margin="0,0,5,0" FontSize="20"/>
+                    <TextBlock Text="{x:Bind Order.Name}" Margin="0,0,5,0" FontSize="20"/>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Name="PlayerTemplate" x:DataType="domain:Player">
+            <Grid AccessKey="{x:Bind Name}">
+                <TextBlock Text="{x:Bind Name}" Margin="0,0,5,0" FontSize="20"/>
+                <Grid.ContextFlyout>
+                    <MenuFlyout Opening="MenuFlyout_Opening" />
+                </Grid.ContextFlyout>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -37,24 +58,52 @@
                         <TextBlock x:Name="NeunWelt" FontSize="12"/>
                     </StackPanel>
                 </PivotItem>
-                <PivotItem Header="Ally">
-                    <Grid>
+                <PivotItem Header="Orders">
+                    <Grid Margin="10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" x:Name="AllyMembers" />
-                        <StackPanel Grid.Column="1" x:Name="AllyOrders" />
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Ally" FontSize="20"/>
+                            <ScrollViewer Grid.Column="0"
+                                      Height="600"
+                                      IsVerticalScrollChainingEnabled="False"
+                                      Padding="0,0,16,0">
+                                <ItemsRepeater ItemsSource="{x:Bind AllyOrders}"
+                                           ItemTemplate="{StaticResource OrderTemplate}" />
+                            </ScrollViewer>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Opponent" FontSize="20"/>
+                            <ScrollViewer Grid.Column="0"
+                                      Height="600"
+                                      IsVerticalScrollChainingEnabled="False"
+                                      Padding="0,0,16,0">
+                                <ItemsRepeater ItemsSource="{x:Bind OpponentOrders}"
+                                           ItemTemplate="{StaticResource OrderTemplate}" />
+                            </ScrollViewer>
+                        </StackPanel>
                     </Grid>
                 </PivotItem>
-                <PivotItem Header="Opponent">
-                    <Grid>
+                <PivotItem Header="Players">
+                    <Grid Margin="10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" x:Name="OpponentMembers" />
-                        <StackPanel Grid.Column="1" x:Name="OpponentOrders" />
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Ally" FontSize="20"/>
+                            <ListView Grid.Column="0"
+                                      ItemsSource="{x:Bind AllyMembers}"
+                                      ItemTemplate="{StaticResource PlayerTemplate}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Opponent" FontSize="20"/>
+                            <ListView Grid.Column="0"
+                                      ItemsSource="{x:Bind OpponentMembers}"
+                                      ItemTemplate="{StaticResource PlayerTemplate}"/>
+                        </StackPanel>
                     </Grid>
                 </PivotItem>
             </Pivot>

@@ -117,7 +117,7 @@ public sealed partial class UnitViewer
                 Name = name,
                 Type = ExplorerItem.ExplorerItemType.Folder,
                 Children = new ObservableCollection<ExplorerItem>(
-                    Directory.GetFiles(@$"{OpponentDir}\{name}").Select(path =>
+                    Directory.GetFiles(@$"{OpponentDir}\{name}\Units").Select(path =>
                     {
                         var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                         var json = sr.ReadToEnd();

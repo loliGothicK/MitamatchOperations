@@ -133,10 +133,10 @@
                     </DataTemplate>
                 </Grid.Resources>
                 <GridView
-                Grid.Row="1" 
-                x:Name="UnitView"
-                Margin=" 10"
-                ItemTemplate="{StaticResource MemoriaWithConcentrationTemplate}"/>
+                    Grid.Row="1" 
+                    x:Name="UnitView"
+                    Margin=" 10"
+                    ItemTemplate="{StaticResource MemoriaWithConcentrationTemplate}"/>
             </Grid>
         </Grid>
     </Grid>
