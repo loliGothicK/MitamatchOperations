@@ -22,26 +22,26 @@ namespace MitamatchOperations.Pages.RegionConsole
             History = history;
             Target = target;
             InitializeComponent();
-            foreach (var (x, y) in History.Select(item => (item.Key.Minute * 60 + item.Key.Second + 50, -ToTarget(item.Value) / 1000.0 + 200)))
+            foreach (var (x, y) in History.Select(item => (item.Key.Minute * 60 + item.Key.Second + 50, -ToTarget(item.Value) + 200)))
             {
                 Graph.Points.Add(new(x, y));
             }
         }
 
-        private int ToTarget(AllStatus status)
+        private float ToTarget(AllStatus status)
         {
             return Target switch
             {
-                "ATK" => status.Attack,
-                "Sp.ATK" => status.SpecialAttack,
-                "DEF" => status.Defense,
-                "Sp.DEF" => status.SpecialDefense,
-                "Wind ATK" => status.WindAttack,
-                "Wind DEF" => status.WindDefense,
-                "Fire ATK" => status.FireAttack,
-                "Fire DEF" => status.FireDefense,
-                "Water ATK" => status.WaterAttack,
-                "Water DEF" => status.WaterDefense,
+                "ATK" => status.Attack / 2000.0f,
+                "Sp.ATK" => status.SpecialAttack / 2000.0f,
+                "DEF" => status.Defense / 2000.0f,
+                "Sp.DEF" => status.SpecialDefense / 2000.0f,
+                "Wind ATK" => status.WindAttack / 1000.0f,
+                "Wind DEF" => status.WindDefense / 1000.0f,
+                "Fire ATK" => status.FireAttack / 1000.0f,
+                "Fire DEF" => status.FireDefense / 1000.0f,
+                "Water ATK" => status.WaterAttack / 1000.0f,
+                "Water DEF" => status.WaterDefense / 1000.0f,
                 _ => throw new ArgumentException("Invalid target"),
             };
         }

@@ -8,9 +8,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Height="400" Width="600">
+    <Grid>
+        <Rectangle Height="400" Width="600" Fill="WhiteSmoke"/>
         <Line X1="50" Y1="200" X2="500" Y2="200" Stroke="DimGray" StrokeThickness="2" />
         <Line X1="50" Y1="50" X2="50" Y2="350" Stroke="DimGray" StrokeThickness="2" />
-        <Polyline x:Name="Graph" Stroke="CadetBlue"/>
+        <Polyline x:Name="Graph" Stroke="CadetBlue" StrokeThickness="1"/>
     </Grid>
 </Page>
