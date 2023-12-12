@@ -31,6 +31,7 @@
     <None Remove="Pages\LibraryPage.xaml" />
     <None Remove="Pages\Library\CharmLibraryPage.xaml" />
     <None Remove="Pages\Library\CostumeLibraryPage.xaml" />
+    <None Remove="Pages\RegionConsole\GraphDialog.xaml" />
     <None Remove="Pages\RegionConsole\HistoriaViewer.xaml" />
     <None Remove="Pages\RegionConsole\ResultInput.xaml" />
     <None Remove="Pages\RegionConsole\UnitViewDialog.xaml" />
@@ -79,6 +80,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\RegionConsole\GraphDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\RegionConsole\UnitViewDialog.xaml">

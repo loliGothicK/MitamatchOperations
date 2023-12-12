@@ -63,6 +63,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
@@ -96,6 +97,19 @@
                 </controls:SettingsCard>
             </Grid>
             <Grid Grid.Row="2">
+                <controls:SettingsExpander Header="コメント">
+                    <controls:SettingsExpander.Items>
+                        <controls:SettingsCard>
+                            <controls:SettingsCard.Resources>
+                                <x:Double x:Key="SettingsCardWrapThreshold">800</x:Double>
+                                <x:Double x:Key="SettingsCardWrapNoIconThreshold">600</x:Double>
+                            </controls:SettingsCard.Resources>
+                            <RichEditBox x:Name="Comment" Width="500" />
+                        </controls:SettingsCard>
+                    </controls:SettingsExpander.Items>
+                </controls:SettingsExpander>
+            </Grid>
+            <Grid Grid.Row="3">
                 <controls:SettingsExpander x:Name="Options" Header="解析のためのヒント">
                     <controls:SettingsExpander.Items>
                         <controls:SettingsCard Header="メンバー入力">
@@ -133,7 +147,7 @@
                     </controls:SettingsExpander.Items>
                 </controls:SettingsExpander>
             </Grid>
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="4">
                 <Button Content="Analyse" Click="Analyse" HorizontalAlignment="Right" Margin="5"/>
             </Grid>
         </Grid>

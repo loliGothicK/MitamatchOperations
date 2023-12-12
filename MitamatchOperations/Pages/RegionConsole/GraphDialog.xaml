@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MitamatchOperations.Pages.RegionConsole.GraphDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Height="400" Width="600">
+        <Line X1="50" Y1="200" X2="500" Y2="200" Stroke="DimGray" StrokeThickness="2" />
+        <Line X1="50" Y1="50" X2="50" Y2="350" Stroke="DimGray" StrokeThickness="2" />
+        <Polyline x:Name="Graph" Stroke="CadetBlue"/>
+    </Grid>
+</Page>

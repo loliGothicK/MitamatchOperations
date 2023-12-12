@@ -6,10 +6,12 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.VisualBasic.FileIO;
 using mitama.Domain;
+using mitama.Domain.OrderKinds;
 using mitama.Pages.Common;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -87,34 +89,6 @@ namespace mitama.Pages.RegionConsole
 
         private async void Analyse(object _, RoutedEventArgs _e)
         {
-            if (AllyRegionName.Text == string.Empty
-             || AllyPlayer1.Text == string.Empty
-             || AllyPlayer2.Text == string.Empty
-             || AllyPlayer3.Text == string.Empty
-             || AllyPlayer4.Text == string.Empty
-             || AllyPlayer5.Text == string.Empty
-             || AllyPlayer6.Text == string.Empty
-             || AllyPlayer7.Text == string.Empty
-             || AllyPlayer8.Text == string.Empty
-             || AllyPlayer9.Text == string.Empty
-             || OpponentRegionName.Text == string.Empty
-             || OpponentPlayer1.Text == string.Empty
-             || OpponentPlayer2.Text == string.Empty
-             || OpponentPlayer3.Text == string.Empty
-             || OpponentPlayer4.Text == string.Empty
-             || OpponentPlayer5.Text == string.Empty
-             || OpponentPlayer6.Text == string.Empty
-             || OpponentPlayer7.Text == string.Empty
-             || OpponentPlayer8.Text == string.Empty
-             || OpponentPlayer9.Text == string.Empty)
-            {
-                GeneralInfoBar.Title = "全てのプレイヤー名を入力してください";
-                GeneralInfoBar.Severity = InfoBarSeverity.Error;
-                GeneralInfoBar.IsOpen = true;
-                await Task.Delay(3000);
-                GeneralInfoBar.IsOpen = false;
-                return;
-            }
             if (log is null)
             {
                 GeneralInfoBar.Title = "ログファイルを選択してください";
@@ -123,6 +97,46 @@ namespace mitama.Pages.RegionConsole
                 await Task.Delay(3000);
                 GeneralInfoBar.IsOpen = false;
                 return;
+            }
+            else if (AllyRegionName.Text == string.Empty || OpponentRegionName.Text == string.Empty)
+            {
+                GeneralInfoBar.Title = "レギオン名を入力してください";
+                GeneralInfoBar.Severity = InfoBarSeverity.Error;
+                GeneralInfoBar.IsOpen = true;
+                await Task.Delay(3000);
+                GeneralInfoBar.IsOpen = false;
+                return;
+            }
+            else if (AllyPlayer1.Text == string.Empty
+                  || AllyPlayer2.Text == string.Empty
+                  || AllyPlayer3.Text == string.Empty
+                  || AllyPlayer4.Text == string.Empty
+                  || AllyPlayer5.Text == string.Empty
+                  || AllyPlayer6.Text == string.Empty
+                  || AllyPlayer7.Text == string.Empty
+                  || AllyPlayer8.Text == string.Empty
+                  || AllyPlayer9.Text == string.Empty
+                  || OpponentPlayer1.Text == string.Empty
+                  || OpponentPlayer2.Text == string.Empty
+                  || OpponentPlayer3.Text == string.Empty
+                  || OpponentPlayer4.Text == string.Empty
+                  || OpponentPlayer5.Text == string.Empty
+                  || OpponentPlayer6.Text == string.Empty
+                  || OpponentPlayer7.Text == string.Empty
+                  || OpponentPlayer8.Text == string.Empty
+                  || OpponentPlayer9.Text == string.Empty)
+            {
+                var flag = false;
+                var dialog = new DialogBuilder(XamlRoot)
+                    .WithTitle("全てのプレイヤーが入力されていませんが解析しますか？")
+                    .WithPrimary("解析", new Defer(delegate { flag = true; return Task.CompletedTask; }))
+                    .WithCancel("キャンセル")
+                    .Build();
+                await dialog.ShowAsync();
+                while (!flag)
+                {
+                    await Task.Delay(100);
+                }
             }
 
             GeneralInfoBar.Title = $"解析中...";
@@ -215,12 +229,14 @@ namespace mitama.Pages.RegionConsole
             var NeunWelt = NeunWeltResult.SelectedIndex == 0 ? "勝ち" : "負け";
             var (AllyOrders, OpponentOrders) = await battleLog.ExtractOrders();
             var (Allies, Opponents) = battleLog.ExtractPlayers();
+            Comment.TextDocument.GetText(TextGetOptions.UseCrlf, out var comment);
             // output as json
             var path = $@"{logDir}\{_date ?? DateTime.Now:yyyy-MM-dd}\summary.json";
             using var unitFile = File.Create(path);
             await unitFile.WriteAsync(new UTF8Encoding(true).GetBytes(JsonSerializer.Serialize(new
             {
                 Opponent = OpponentRegionName.Text,
+                Comment = comment,
                 AllyPoints,
                 OpponentPoints,
                 NeunWelt,
@@ -256,85 +272,90 @@ namespace mitama.Pages.RegionConsole
 #pragma warning restore CA1854 // Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
                 var path = $@"{logDir}\{_date ?? DateTime.Now:yyyy-MM-dd}\{v}\[{ToRemoveRegex().Replace(player.Name, string.Empty)}]";
                 Director.CreateDirectory(path);
-                using var playerFile = File.Create($@"{path}\status.csv");
-                var status = new AllStatus();
-                await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{{time}},{{Attack}},{{SpecialAttack}},{{Defense}},{{SpecialDefense}},{{WindAttack}},{{WindDefense}},{{FireAttack}},{{FireDefense}},{{WaterAttack}},{{WaterDefense}},{{LightAttack}},{{LightDefense}},{{DarkAttack}},{{DarkDefense}},{{MaxHp}}\n"));
+                using var playerFile = File.Create($@"{path}\status.json");
                 bool isStandBy = false;
+                SortedDictionary<TimeOnly, AllStatus> history = [];
                 foreach (var (time, stat) in data[player.Name])
                 {
-                    switch (stat.Value)
-                    {
-                        case Attack atk:
-                            status.Attack += atk.Value;
-                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
-                            isStandBy = false;
-                            break;
-                        case Defense def:
-                            status.Defense += def.Value;
-                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
-                            isStandBy = false;
-                            break;
-                        case SpecialAttack spatk:
-                            status.SpecialAttack += spatk.Value;
-                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
-                            isStandBy = false;
-                            break;
-                        case SpecialDefense spdef:
-                            status.SpecialDefense += spdef.Value;
-                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
-                            isStandBy = false;
-                            break;
-                        case WaterAttack waterAttack:
-                            status.WaterAttack += waterAttack.Value;
-                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
-                            isStandBy = false;
-                            break;
-                        case WaterDefense waterDefense:
-                            status.WaterDefense += waterDefense.Value;
-                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
-                            isStandBy = false;
-                            break;
-                        case FireAttack fireAttack:
-                            status.FireAttack += fireAttack.Value;
-                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
-                            isStandBy = false;
-                            break;
-                        case FireDefense fireDefense:
-                            status.FireDefense += fireDefense.Value;
-                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
-                            isStandBy = false;
-                            break;
-                        case WindAttack windAttack:
-                            status.WindAttack += windAttack.Value;
-                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
-                            isStandBy = false;
-                            break;
-                        case WindDefense windDefense:
-                            status.WindDefense += windDefense.Value;
-                            await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes($"{time},{status.ToCSV()}\n"));
-                            isStandBy = false;
-                            break;
-                        case StandByPhase standBy:
-                            if (!isStandBy)
-                            {
-                                status.Attack = status.Attack > 0 ? status.Attack : 0;
-                                status.Defense = status.Defense > 0 ? status.Defense : 0;
-                                status.SpecialAttack = status.SpecialAttack > 0 ? status.SpecialAttack : 0;
-                                status.SpecialDefense = status.SpecialDefense > 0 ? status.SpecialDefense : 0;
-                                status.WaterAttack = status.WaterAttack > 0 ? status.WaterAttack : 0;
-                                status.WaterDefense = status.WaterDefense > 0 ? status.WaterDefense : 0;
-                                status.FireAttack = status.FireAttack > 0 ? status.FireAttack : 0;
-                                status.FireDefense = status.FireDefense > 0 ? status.FireDefense : 0;
-                                status.WindAttack = status.WindAttack > 0 ? status.WindAttack : 0;
-                                status.WindDefense = status.WindDefense > 0 ? status.WindDefense : 0;
-                            }
-                            isStandBy = true;
-                            break;
-                        default:
-                            break;
-                    }
+                    isStandBy = Update(ref history, time, stat, isStandBy);
                 }
+                await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes(JsonSerializer.Serialize(history)));
             }
+        }
+
+        private bool Update(ref SortedDictionary<TimeOnly, AllStatus> history, TimeOnly time, StatusIncreaseDecrease stat, bool isStandBy)
+        {
+            var status = history.Keys.Count != 0 ? history.Last().Value : new AllStatus();
+            switch (stat.Value)
+            {
+                case Attack atk:
+                    status.Attack += atk.Value;
+                    isStandBy = false;
+                    break;
+                case Defense def:
+                    status.Defense += def.Value;
+                    isStandBy = false;
+                    break;
+                case SpecialAttack spatk:
+                    status.SpecialAttack += spatk.Value;
+                    isStandBy = false;
+                    break;
+                case SpecialDefense spdef:
+                    status.SpecialDefense += spdef.Value;
+                    isStandBy = false;
+                    break;
+                case WaterAttack waterAttack:
+                    status.WaterAttack += waterAttack.Value;
+                    isStandBy = false;
+                    break;
+                case WaterDefense waterDefense:
+                    status.WaterDefense += waterDefense.Value;
+                    isStandBy = false;
+                    break;
+                case FireAttack fireAttack:
+                    status.FireAttack += fireAttack.Value;
+                    isStandBy = false;
+                    break;
+                case FireDefense fireDefense:
+                    status.FireDefense += fireDefense.Value;
+                    isStandBy = false;
+                    break;
+                case WindAttack windAttack:
+                    status.WindAttack += windAttack.Value;
+                    isStandBy = false;
+                    break;
+                case WindDefense windDefense:
+                    status.WindDefense += windDefense.Value;
+                    isStandBy = false;
+                    break;
+                case StandByPhase standBy:
+                    if (!isStandBy)
+                    {
+                        status.Attack = status.Attack > 0 ? status.Attack : 0;
+                        status.Defense = status.Defense > 0 ? status.Defense : 0;
+                        status.SpecialAttack = status.SpecialAttack > 0 ? status.SpecialAttack : 0;
+                        status.SpecialDefense = status.SpecialDefense > 0 ? status.SpecialDefense : 0;
+                        status.WaterAttack = status.WaterAttack > 0 ? status.WaterAttack : 0;
+                        status.WaterDefense = status.WaterDefense > 0 ? status.WaterDefense : 0;
+                        status.FireAttack = status.FireAttack > 0 ? status.FireAttack : 0;
+                        status.FireDefense = status.FireDefense > 0 ? status.FireDefense : 0;
+                        status.WindAttack = status.WindAttack > 0 ? status.WindAttack : 0;
+                        status.WindDefense = status.WindDefense > 0 ? status.WindDefense : 0;
+                    }
+                    isStandBy = true;
+                    break;
+                default:
+                    break;
+            }
+            if (history.ContainsKey(time))
+            {
+                history[time] = status;
+            }
+            else
+            {
+                history.Add(time, status);
+            }
+            return isStandBy;
         }
 
         private void CalendarDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
