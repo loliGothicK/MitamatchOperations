@@ -118,7 +118,6 @@ public sealed partial class HistoriaViewer : Page
         {
             var dialog = new DialogBuilder(XamlRoot)
                 .WithTitle(text)
-                .WithSize(800, 600)
                 .WithBody(new GraphDialog(text, history))
                 .WithCancel("•Â‚¶‚é")
                 .Build();
