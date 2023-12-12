@@ -2029,6 +2029,15 @@ namespace mitama.Pages.DeckBuilder
             var comboBox = sender.As<ComboBox>();
             if (comboBox.AccessKey == string.Empty) return;
             var id = int.Parse(comboBox.AccessKey);
+            foreach (var item in LegendaryDeck.ToList())
+            {
+                if (item.Memoria.Id == id)
+                {
+                    var newItem = item with { Concentration = comboBox.SelectedIndex };
+                    var idx = LegendaryDeck.IndexOf(item);
+                    LegendaryDeck[idx] = newItem;
+                }
+            }
             foreach (var item in Deck.ToList())
             {
                 if (item.Memoria.Id == id)
