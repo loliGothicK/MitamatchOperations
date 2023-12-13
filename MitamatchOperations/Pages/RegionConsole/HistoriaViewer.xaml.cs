@@ -110,7 +110,7 @@ public sealed partial class HistoriaViewer : Page
         var history = JsonSerializer.Deserialize<SortedDictionary<TimeOnly, AllStatus>>(File.ReadAllText(statusPath));
         foreach (var text in new List<string> 
         {
-            "ATK", "Sp.ATK", "DEF", "Sp.DEF",
+            //"ATK", "Sp.ATK", "DEF", "Sp.DEF", <- 正確にデータが取れないので一旦コメントアウト
             "Wind ATK", "Wind DEF",
             "Fire ATK", "Fire DEF",
             "Water ATK", "Water DEF"
