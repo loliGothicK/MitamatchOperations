@@ -31,7 +31,8 @@
     <None Remove="Pages\LibraryPage.xaml" />
     <None Remove="Pages\Library\CharmLibraryPage.xaml" />
     <None Remove="Pages\Library\CostumeLibraryPage.xaml" />
-    <None Remove="Pages\RegionConsole\GraphDialog.xaml" />
+    <None Remove="Pages\RegionConsole\BasicStatusGraphDialog.xaml" />
+    <None Remove="Pages\RegionConsole\ElementalGraphDialog.xaml" />
     <None Remove="Pages\RegionConsole\HistoriaViewer.xaml" />
     <None Remove="Pages\RegionConsole\ResultInput.xaml" />
     <None Remove="Pages\RegionConsole\UnitViewDialog.xaml" />
@@ -82,7 +83,11 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\RegionConsole\GraphDialog.xaml">
+    <Page Update="Pages\RegionConsole\BasicStatusGraphDialog.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\RegionConsole\ElementalGraphDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

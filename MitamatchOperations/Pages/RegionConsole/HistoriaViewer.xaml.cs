@@ -116,11 +116,60 @@ public sealed partial class HistoriaViewer : Page
             "Water ATK", "Water DEF"
         })
         {
-            var dialog = new DialogBuilder(XamlRoot)
-                .WithTitle(text)
-                .WithBody(new GraphDialog(text, history))
-                .WithCancel("•Â‚¶‚é")
-                .Build();
+            var dialog = text switch
+            {
+                "ATK" => new DialogBuilder(XamlRoot)
+                    .WithTitle(text)
+                    .WithBody(new BasicStatusGraphDialog(text, history))
+                    .WithCancel("•Â‚¶‚é")
+                    .Build(),
+                "Sp.ATK" => new DialogBuilder(XamlRoot)
+                    .WithTitle(text)
+                    .WithBody(new BasicStatusGraphDialog(text, history))
+                    .WithCancel("•Â‚¶‚é")
+                    .Build(),
+                "DEF" => new DialogBuilder(XamlRoot)
+                     .WithTitle(text)
+                    .WithBody(new BasicStatusGraphDialog(text, history))
+                    .WithCancel("•Â‚¶‚é")
+                    .Build(),
+                "Sp.DEF" => new DialogBuilder(XamlRoot)
+                    .WithTitle(text)
+                    .WithBody(new BasicStatusGraphDialog(text, history))
+                    .WithCancel("•Â‚¶‚é")
+                    .Build(),
+                "Wind ATK" => new DialogBuilder(XamlRoot)
+                    .WithTitle(text)
+                    .WithBody(new ElementalGraphDialog(text, history))
+                    .WithCancel("•Â‚¶‚é")
+                    .Build(),
+                "Wind DEF" => new DialogBuilder(XamlRoot)
+                    .WithTitle(text)
+                    .WithBody(new ElementalGraphDialog(text, history))
+                    .WithCancel("•Â‚¶‚é")
+                    .Build(),
+                "Fire ATK" => new DialogBuilder(XamlRoot)
+                    .WithTitle(text)
+                    .WithBody(new ElementalGraphDialog(text, history))
+                    .WithCancel("•Â‚¶‚é")
+                    .Build(),
+                "Fire DEF" => new DialogBuilder(XamlRoot)
+                    .WithTitle(text)
+                    .WithBody(new ElementalGraphDialog(text, history))
+                    .WithCancel("•Â‚¶‚é")
+                    .Build(),
+                "Water ATK" => new DialogBuilder(XamlRoot)
+                    .WithTitle(text)
+                    .WithBody(new ElementalGraphDialog(text, history))
+                    .WithCancel("•Â‚¶‚é")
+                    .Build(),
+                "Water DEF" => new DialogBuilder(XamlRoot)
+                    .WithTitle(text)
+                    .WithBody(new ElementalGraphDialog(text, history))
+                    .WithCancel("•Â‚¶‚é")
+                    .Build(),
+                _ => throw new ArgumentException("Invalid target"),
+            };
 
             statusSubItem.Items.Add(new MenuFlyoutItem
             {

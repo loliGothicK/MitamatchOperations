@@ -12,17 +12,17 @@ namespace MitamatchOperations.Pages.RegionConsole
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class GraphDialog : Page
+    public sealed partial class ElementalGraphDialog : Page
     {
         private readonly SortedDictionary<TimeOnly, AllStatus> History;
         private readonly string Target;
 
-        public GraphDialog(string target, SortedDictionary<TimeOnly, AllStatus> history)
+        public ElementalGraphDialog(string target, SortedDictionary<TimeOnly, AllStatus> history)
         {
             History = history;
             Target = target;
             InitializeComponent();
-            foreach (var (x, y) in History.Select(item => ((item.Key.Minute * 60 + item.Key.Second) * 500 / 600 + 50, -ToTarget(item.Value) + 200)))
+            foreach (var (x, y) in History.Select(item => ((item.Key.Minute * 60 + item.Key.Second) * 500 / 600 + 50, -ToTarget(item.Value) + 250)))
             {
                 Graph.Points.Add(new(x, y));
             }
