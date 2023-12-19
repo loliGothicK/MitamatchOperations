@@ -301,6 +301,397 @@ public record Memoria(
     public static readonly Memoria[] List =
     [
         new Memoria(
+            1194,
+            "約束のサンタクロース",
+            "約束のサンタクロース",
+            new Vanguard(VanguardKind.NormalSingle),
+            Element.Water,
+            [
+                new BasicStatus(2283, 1957, 2300, 1971),
+                new BasicStatus(2472, 2117, 3339, 2131),
+                new BasicStatus(3810, 2278, 3527, 2292),
+                new BasicStatus(3998, 2438, 5465, 2452),
+                new BasicStatus(7037, 2599, 5654, 2613),
+            ],
+            22,
+            new Skill(
+                "ウォーターパワーストライクA Ⅳ+",
+                "敵1体に通常特大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.A
+            ),
+            new SupportSkill(
+                "攻:パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1193,
+            "約束のサンタクロース",
+            "約束のサンタクロース",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Water,
+            [
+                new BasicStatus(1943, 2297, 1960, 2311),
+                new BasicStatus(2103, 2486, 2120, 3350),
+                new BasicStatus(2264, 3824, 2281, 3538),
+                new BasicStatus(2424, 4012, 2441, 5476),
+                new BasicStatus(2585, 7051, 2602, 5665),
+            ],
+            22,
+            new Skill(
+                "Sp.ウォーターガードバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
+                [],
+                [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:Sp.ガードDOWN/副攻:水ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、水属性防御力を大ダウンさせる。",
+                Trigger.Attack,
+                [new GuardDown(Type.Special), new ElementGuardDown(Element.Water)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1192,
+            "約束のサンタクロース",
+            "約束のサンタクロース",
+            new Rearguard(RearguardKind.Support),
+            Element.Water,
+            [
+                new BasicStatus(2283, 1957, 2300, 1971),
+                new BasicStatus(2472, 2117, 3339, 2131),
+                new BasicStatus(3810, 2278, 3527, 2292),
+                new BasicStatus(3998, 2438, 5465, 2452),
+                new BasicStatus(7037, 2599, 5654, 2613),
+            ],
+            22,
+            new Skill(
+                "水強：パワーアシストB Ⅲ",
+                "味方1～2体のATKを大アップさせる。さらに味方の水属性攻撃力が高いほどスキル効果が上昇する。",
+                [new ElementStrengthen(Element.Water)],
+                [new StatusUp(new Atk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "援:パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
+                Trigger.Support,
+                [new PowerUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1191,
+            "約束のサンタクロース",
+            "約束のサンタクロース",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Water,
+            [
+                new BasicStatus(1943, 1957, 2300, 2311),
+                new BasicStatus(2103, 2117, 3339, 2500),
+                new BasicStatus(2264, 2278, 3527, 3838),
+                new BasicStatus(2424, 2438, 5465, 4026),
+                new BasicStatus(2585, 2599, 5654, 7065),
+            ],
+            22,
+            new Skill(
+                "Sp.ウォーターガードヒールC Ⅳ",
+                "味方1～3体のHPを大回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
+                [],
+                [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "回:Sp.ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。",
+                Trigger.Recovery,
+                [new GuardUp(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1190,
+            "聖夜のスニーキングミッション",
+            "聖夜のスニーキングミッション",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            [
+                new BasicStatus(2442, 2099, 2427, 2123),
+                new BasicStatus(2631, 2259, 3316, 2283),
+                new BasicStatus(3819, 2420, 3504, 2444),
+                new BasicStatus(4007, 2580, 5292, 2604),
+                new BasicStatus(6896, 2741, 5481, 2765),
+            ],
+            22,
+            new Skill(
+                "ウォーターガードブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のDEFと水属性防御力をダウンさせる。",
+                [],
+                [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1189,
+            "聖夜のスニーキングミッション",
+            "聖夜のスニーキングミッション",
+            new Rearguard(RearguardKind.Interference),
+            Element.Water,
+            [
+                new BasicStatus(2442, 2099, 2427, 2123),
+                new BasicStatus(2631, 2259, 3316, 2283),
+                new BasicStatus(3819, 2420, 3504, 2444),
+                new BasicStatus(4007, 2580, 5292, 2604),
+                new BasicStatus(6896, 2741, 5481, 2765),
+            ],
+            22,
+            new Skill(
+                "ウォーターパワーフォールC Ⅳ",
+                "敵1～3体のATKと水属性攻撃力を大ダウンさせる。",
+                [],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。",
+                Trigger.Support,
+                [new PowerDown(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1188,
+            "聖夜の竜星",
+            "聖夜の竜星",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new BasicStatus(4249, 4272, 2405, 2389),
+                new BasicStatus(5106, 5129, 2605, 2589),
+                new BasicStatus(5563, 5586, 2806, 2790),
+                new BasicStatus(6020, 6043, 3007, 2991),
+                new BasicStatus(6477, 6500, 3208, 3192),
+            ],
+            24,
+            new Skill(
+                "WカウンターパワーアシストB Ⅲ",
+                "味方1～2体のATKとSp.ATKを大アップさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp()],
+                Level.Four
+            ),
+            true
+        ),
+        new Memoria(
+            1187,
+            "クリエイターズコラボ雨上がりレインボー",
+            "雨上がりレインボー",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new BasicStatus(2284, 1973, 2282, 1940),
+                new BasicStatus(2473, 2133, 3321, 2100),
+                new BasicStatus(3811, 2294, 3509, 2261),
+                new BasicStatus(3999, 2454, 5447, 2421),
+                new BasicStatus(7038, 2615, 5636, 2582),
+            ],
+            22,
+            new Skill(
+                "火弱：パワーストライクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。さらに敵の火属性防御力が低いほど与えるダメージが上昇する。",
+                [new ElementWeaken(Element.Fire)],
+                [new StatusUp(new Atk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1186,
+            "クリエイターズコラボ雨上がりレインボー",
+            "雨上がりレインボー",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new BasicStatus(1944, 2313, 1942, 2280),
+                new BasicStatus(2104, 2502, 2102, 3319),
+                new BasicStatus(2265, 3840, 2263, 3507),
+                new BasicStatus(2425, 4028, 2423, 5445),
+                new BasicStatus(2586, 7067, 2584, 5634),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1185,
+            "クリエイターズコラボ雨上がりレインボー",
+            "雨上がりレインボー",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new BasicStatus(2284, 1973, 2282, 1940),
+                new BasicStatus(2473, 2133, 3321, 2100),
+                new BasicStatus(3811, 2294, 3509, 2261),
+                new BasicStatus(3999, 2454, 5447, 2421),
+                new BasicStatus(7038, 2615, 5636, 2582),
+            ],
+            22,
+            new Skill(
+                "ファイアパワーアシストC Ⅳ",
+                "味方1～3体のATKと火属性攻撃力を大アップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:支援UP/副援:火パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力を大アップさせる。さらに、支援/妨害効果を特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new ElementPowerUp(Element.Fire)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1184,
+            "クリエイターズコラボ雨上がりレインボー",
+            "雨上がりレインボー",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            [
+                new BasicStatus(1944, 2313, 1942, 2280),
+                new BasicStatus(2104, 2502, 2102, 3319),
+                new BasicStatus(2265, 3840, 2263, 3507),
+                new BasicStatus(2425, 4028, 2423, 5445),
+                new BasicStatus(2586, 7067, 2584, 5634),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアパワーフォールC Ⅳ",
+                "敵1～3体のSp.ATKと火属性攻撃力を大ダウンさせる。",
+                [],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:Sp.パワーDOWN/副援:火パワーDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。さらに、火属性攻撃力を大ダウンさせる。",
+                Trigger.Support,
+                [new PowerDown(Type.Special), new ElementPowerDown(Element.Fire)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1183,
+            "クリエイターズコラボ相合い傘越しの虹",
+            "相合い傘越しの虹",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new BasicStatus(2465, 2119, 2448, 2090),
+                new BasicStatus(2654, 2279, 3337, 2250),
+                new BasicStatus(3842, 2440, 3525, 2411),
+                new BasicStatus(4030, 2600, 5313, 2571),
+                new BasicStatus(6919, 2761, 5502, 2732),
+            ],
+            22,
+            new Skill(
+                "ファイアガードブレイクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
+                [],
+                [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1182,
+            "クリエイターズコラボ相合い傘越しの虹",
+            "相合い傘越しの虹",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Fire,
+            [
+                new BasicStatus(2465, 2119, 2448, 2090),
+                new BasicStatus(2654, 2279, 3337, 2250),
+                new BasicStatus(3842, 2440, 3525, 2411),
+                new BasicStatus(4030, 2600, 5313, 2571),
+                new BasicStatus(6919, 2761, 5502, 2732),
+            ],
+            22,
+            new Skill(
+                "ファイアガードヒールC Ⅳ",
+                "味方1～3体のHPを大回復する。さらに味方のDEFと火属性防御力を小アップする。",
+                [],
+                [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "回:回復UP/副援:支援UP Ⅲ",
+                "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
+                Trigger.Support,
+                [new RecoveryUp(), new SupportUp()],
+                Level.Three
+            )
+        ),
+        new Memoria(
             1181,
             "新たな闘いの幕開け",
             "新たな闘いの幕開け",
