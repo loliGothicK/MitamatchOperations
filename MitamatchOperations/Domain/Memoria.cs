@@ -300,7 +300,7 @@ public record Memoria(
 
     public static readonly Memoria[] List =
     [
-new Memoria(
+        new Memoria(
             1200,
             "クリエイターズコラボサンタを待ちながら",
             "サンタを待ちながら",
