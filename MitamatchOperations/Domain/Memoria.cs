@@ -300,6 +300,186 @@ public record Memoria(
 
     public static readonly Memoria[] List =
     [
+new Memoria(
+            1200,
+            "クリエイターズコラボサンタを待ちながら",
+            "サンタを待ちながら",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new BasicStatus(2297, 1975, 2317, 1963),
+                new BasicStatus(2486, 2135, 3356, 2123),
+                new BasicStatus(3824, 2296, 3544, 2284),
+                new BasicStatus(4012, 2456, 5482, 2444),
+                new BasicStatus(7051, 2617, 5671, 2605),
+            ],
+            22,
+            new Skill(
+                "火：ファイアパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1199,
+            "クリエイターズコラボサンタを待ちながら",
+            "サンタを待ちながら",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new BasicStatus(1957, 2315, 1977, 2303),
+                new BasicStatus(2117, 2504, 2137, 3342),
+                new BasicStatus(2278, 3842, 2298, 3530),
+                new BasicStatus(2438, 4030, 2458, 5468),
+                new BasicStatus(2599, 7069, 2619, 5657),
+            ],
+            22,
+            new Skill(
+                "Sp.カウンターファイアガードバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1198,
+            "クリエイターズコラボサンタを待ちながら",
+            "サンタを待ちながら",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new BasicStatus(1957, 2315, 1977, 2303),
+                new BasicStatus(2117, 2504, 2137, 3342),
+                new BasicStatus(2278, 3842, 2298, 3530),
+                new BasicStatus(2438, 4030, 2458, 5468),
+                new BasicStatus(2599, 7069, 2619, 5657),
+            ],
+            22,
+            new Skill(
+                "火：Sp.ファイアパワーアシストC Ⅳ",
+                "味方1～3体のSp.ATKと火属性攻撃力を大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:支援UP/副援:火パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力を大アップさせる。さらに、支援/妨害効果を特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new ElementPowerUp(Element.Fire)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1197,
+            "クリエイターズコラボサンタを待ちながら",
+            "サンタを待ちながら",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Fire,
+            [
+                new BasicStatus(1957, 1975, 2317, 2303),
+                new BasicStatus(2117, 2135, 2506, 3342),
+                new BasicStatus(2278, 2296, 3844, 3530),
+                new BasicStatus(2438, 2456, 4032, 5468),
+                new BasicStatus(2599, 2617, 7071, 5657),
+            ],
+            22,
+            new Skill(
+                "火：ファイアガードヒールC Ⅳ",
+                "味方1～3体のHPを大回復し、DEFと火属性防御力を小アップする。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "回:回復UP/副援:支援UP Ⅲ",
+                "HP回復時、一定確率でHPの回復量を特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を大アップさせる。",
+                Trigger.Support,
+                [new RecoveryUp(), new SupportUp()],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1196,
+            "クリエイターズコラボ聖夜のデュオ",
+            "聖夜のデュオ",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            [
+                new BasicStatus(2096, 2430, 2088, 2436),
+                new BasicStatus(2256, 2619, 2248, 3325),
+                new BasicStatus(2417, 3807, 2409, 3513),
+                new BasicStatus(2577, 3995, 2569, 5301),
+                new BasicStatus(2738, 6884, 2730, 5490),
+            ],
+            22,
+            new Skill(
+                "火：Sp.ファイアパワーフォールC Ⅳ",
+                "敵1～3体のSp.ATKと火属性攻撃力を大ダウンさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1195,
+            "クリエイターズコラボ聖夜のデュオ",
+            "聖夜のデュオ",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new BasicStatus(2096, 2430, 2088, 2436),
+                new BasicStatus(2256, 2619, 2248, 3325),
+                new BasicStatus(2417, 3807, 2409, 3513),
+                new BasicStatus(2577, 3995, 2569, 5301),
+                new BasicStatus(2738, 6884, 2730, 5490),
+            ],
+            22,
+            new Skill(
+                "火：Sp.ファイアパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Special)],
+                Level.Three
+            )
+        ),
         new Memoria(
             1194,
             "約束のサンタクロース",
