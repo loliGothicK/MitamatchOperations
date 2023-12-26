@@ -153,6 +153,31 @@ public record struct Costume(
     public static Costume[] List =>
     [
         new Costume(
+            "定盛姫歌",
+            "プリンセスナイトα",
+            new InterferenceCostume(15),
+            new RareSkill("この世の理", "一定時間、自身の防御力が大アップし、攻撃力がアップする。"),
+            [
+                new Common([new LilySpDef(75)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyHp(200)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyDef(75)]),
+                new Common([new LilyHp(200)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilySpAtk(75)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyAtk(75)]),
+                new Common([new LilyDef(125), new LilyAtk(125)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyHp(400), new LilySpAtk(150)]),
+                new Unique([new LilySpAtk(1500), new LilySpDef(1500)]),
+                new Common([new LilySpAtk(500), new LilySpDef(500)]),
+                new Unique([new LilySpAtk(1500), new LilySpDef(1500)]),
+            ],
+            new ExSkill("火属性メモリア効果増加AⅢ", "自身が使用する火属性メモリアのスキル効果5％UP")
+        ),
+        new Costume(
             "松村優珂",
             "ホーリーナイトキャット",
             new AssistCostume(15),
