@@ -12,6 +12,8 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 using Microsoft.UI.Text;
+using System;
+using mitama.Pages.Main;
 
 namespace mitama.Pages.RegionConsole;
 
@@ -31,6 +33,7 @@ public sealed partial class MemberManageConsole
     private string tatic1;
     private string tatic2;
     private List<TimeTableItem> timeline;
+    private readonly ObservableCollection<MemberInfo> _members = [];
 
     public MemberManageConsole()
     {
@@ -39,21 +42,27 @@ public sealed partial class MemberManageConsole
         Init();
     }
 
-    protected override void OnNavigatedTo(NavigationEventArgs e)
+    private void Update()
     {
-        base.OnNavigatedTo(e);
-        Init();
+        _regionName = Director.ReadCache().Region;
+        _members.Clear();
+        foreach (var item in from item in Util.LoadMembersInfo(_regionName)
+                             orderby item.Position
+                             select item)
+        {
+            _members.Add(item);
+        }
     }
 
     private void Init()
     {
         _regionName = Director.ReadCache().Region;
-        var query = from item in Util.LoadMembersInfo(_regionName)
-                    group item by item.Position into g
-                    orderby g.Key
-                    select new GroupInfoList(g) { Key = g.Key };
-
-        MemberCvs.Source = new ObservableCollection<GroupInfoList>(query);
+        foreach (var item in from item in Util.LoadMembersInfo(_regionName)
+                             orderby item.Position
+                             select item)
+        {
+            _members.Add(item);
+        }
     }
 
     private void Opponent_TextChanged(object sender, TextChangedEventArgs _)
@@ -223,6 +232,67 @@ public sealed partial class MemberManageConsole
             ```
         """;
         System.Windows.Clipboard.SetText(text);
+    }
+
+    private async void Delete_Click(object sender, RoutedEventArgs e)
+    {
+        var toDelete = sender.As<MenuFlyoutItem>().AccessKey;
+        // dialog forward definition
+        var dialog = new DialogBuilder(XamlRoot)
+            .WithTitle("本当におわかれしますか？")
+            .WithPrimary("おわかれする")
+            .WithCancel("やっぱりやめる")
+            .Build();
+
+        // ReSharper disable once AsyncVoidLambda
+        dialog.PrimaryButtonCommand = new Defer(delegate {
+            new DirectoryInfo($@"{Director.ProjectDir()}\{_regionName}\Members\{toDelete}").Delete(true);
+            Update();
+            return System.Threading.Tasks.Task.CompletedTask;
+        });
+        await dialog.ShowAsync();
+    }
+
+    private async void AddMember_OnClick(object sender, RoutedEventArgs e)
+    {
+        var dialog = new DialogBuilder(XamlRoot)
+            .WithTitle("レギオンメンバを追加します")
+            .WithPrimary("Add")
+            .WithCancel("Cancel")
+            .Build();
+        dialog.IsPrimaryButtonEnabled = false;
+
+        string name = null;
+        Position position = null;
+
+        var body = new AddNewMemberDialogContent(fragment =>
+        {
+            switch (fragment)
+            {
+                case NewMemberName(var s):
+                    name = s;
+                    break;
+                case NewMemberPosition(var p):
+                    position = p;
+                    break;
+            }
+            if (name != null && position != null) dialog.IsPrimaryButtonEnabled = true;
+        });
+
+        dialog.Content = body;
+        dialog.PrimaryButtonCommand = new Defer(delegate {
+            Director.CreateDirectory($@"{Director.ProjectDir()}\{_regionName}\Members\{name}");
+            Director.CreateDirectory($@"{Director.ProjectDir()}\{_regionName}\Members\{name}\Units");
+            var fs = File.Create($@"{Director.ProjectDir()}\{_regionName}\Members\{name}\info.json");
+            var memberJson = new MemberInfo(DateTime.Now, DateTime.Now, name!, position!, []).ToJson();
+            var save = new UTF8Encoding(true).GetBytes(memberJson);
+            fs.Write(save, 0, save.Length);
+            fs.Close();
+            Update();
+            return System.Threading.Tasks.Task.CompletedTask;
+        });
+
+        await dialog.ShowAsync();
     }
 }
 

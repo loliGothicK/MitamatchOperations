@@ -56,17 +56,6 @@
                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE748;"/>
                                 </AppBarButton.Icon>
                             </AppBarButton>
-                            <AppBarButton Label="add member" Click="AddMemberButton_OnClick">
-                                <AppBarButton.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8FA;"/>
-                                </AppBarButton.Icon>
-                            </AppBarButton>
-                            <AppBarButton Label="remove member" Click="RemoveMemberButton_OnClick">
-                                <AppBarButton.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE748;"/>
-                                </AppBarButton.Icon>
-                            </AppBarButton>
-                            <AppBarSeparator />
                         </StackPanel>
                         <AppBarButton x:Name="LogInUser" Grid.Column="1" Label="Anonymous" HorizontalAlignment="Right" Click="LogInUser_OnClick">
                             <PersonPicture/>

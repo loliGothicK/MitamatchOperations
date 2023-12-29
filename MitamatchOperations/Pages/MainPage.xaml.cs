@@ -157,53 +157,6 @@ public sealed partial class MainPage
         await dialog.ShowAsync();
     }
 
-    private async void AddMemberButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        var dialog = new DialogBuilder(XamlRoot)
-            .WithTitle("レギオンメンバを追加します")
-            .WithPrimary("Add")
-            .WithCancel("Cancel")
-            .Build();
-        dialog.IsPrimaryButtonEnabled = false;
-
-        string name = null;
-        Position position = null;
-
-        var body = new AddNewMemberDialogContent(fragment =>
-        {
-            switch (fragment)
-            {
-                case NewMemberName(var s):
-                    name = s;
-                    break;
-                case NewMemberPosition(var p):
-                    position = p;
-                    break;
-            }
-            if (name != null && position != null) dialog.IsPrimaryButtonEnabled = true;
-        });
-
-        dialog.Content = body;
-        dialog.PrimaryButtonCommand = new Defer(async delegate {
-            if (!Directory.Exists($@"{Director.ProjectDir()}\{Project}"))
-            {
-                await FailureInfo($"{Project} は作成されていないレギオン名です、新規作成してください");
-                return;
-            }
-            Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Members\{name}");
-            Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Members\{name}\Units");
-            await using var fs = Director.CreateFile($@"{Director.ProjectDir()}\{Project}\Members\{name}\info.json");
-            var memberJson = new MemberInfo(DateTime.Now, DateTime.Now, name!, position!, []).ToJson();
-            var save = new UTF8Encoding(true).GetBytes(memberJson);
-            fs.Write(save, 0, save.Length);
-            await SuccessInfo("Successfully saved!");
-        });
-
-        Navigate(typeof(RegionConsolePage), Project);
-
-        await dialog.ShowAsync();
-    }
-
     private async Task SuccessInfo(string msg)
     {
         InfoBar.IsOpen = true;
@@ -281,53 +234,6 @@ public sealed partial class MainPage
         {
             LogInUser.Label = User = loggedIn!;
             await LoginInfo();
-        });
-
-        await dialog.ShowAsync();
-    }
-
-    private async void RemoveMemberButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        // dialog forward definition
-        var dialog = new DialogBuilder(XamlRoot)
-            .WithTitle("おわかれするユーザーを選択してください")
-            .WithPrimary("おわかれする")
-            .WithCancel("やっぱりやめる")
-            .Build();
-        dialog.IsPrimaryButtonEnabled = false;
-
-        // dialog content forward definition
-        var body = new StackPanel();
-
-        // init flyout items
-        foreach (var member in Util.LoadMemberNames(Project))
-        {
-            body.Children.Add(new CheckBox
-            {
-                AccessKey = member,
-                Content = member,
-                Command = new Defer(delegate
-                {
-                    if (body.Children.Select(box => box.As<CheckBox>()).Any(box => box.IsChecked ?? false))
-                    {
-                        dialog.IsPrimaryButtonEnabled = true;
-                    }
-                    return Task.CompletedTask;
-                })
-            });
-        }
-
-        // inject controls
-        dialog.Content = body;
-
-        // ReSharper disable once AsyncVoidLambda
-        dialog.PrimaryButtonCommand = new Defer(async delegate
-        {
-            foreach (var member in body.Children.Select(box => box.As<CheckBox>()).Where(box => box.IsChecked ?? false).Select(box => box.AccessKey!))
-            {
-                new DirectoryInfo($@"{Director.ProjectDir()}\{Project}\Members\{member}").Delete(true);
-            }
-            await SuccessInfo("Successfully deleted!");
         });
 
         await dialog.ShowAsync();

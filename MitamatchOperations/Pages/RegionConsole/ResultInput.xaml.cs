@@ -54,7 +54,7 @@ namespace mitama.Pages.RegionConsole
                 AllyPlayer8,
                 AllyPlayer9,
             ];
-            for (int i = 0; i < players.Length; i++)
+            for (int i = 0; i < players.Take(9).Count(); i++)
             {
                 list[i].Text = players[i];
             }
