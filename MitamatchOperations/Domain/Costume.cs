@@ -9,6 +9,7 @@ public abstract record CostumeType
 {
     abstract public double Value { get; }
 }
+
 // 通単
 public record NormalSingleCostume(double Calibration) : CostumeType
 {
