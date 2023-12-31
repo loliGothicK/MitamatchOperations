@@ -10,7 +10,7 @@
   <Identity
     Name="d3277203-5eee-43f3-bd67-d080a5c5bd06"
     Publisher="CN=Mitama"
-    Version="4.3.9.0" />
+    Version="4.4.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="d3277203-5eee-43f3-bd67-d080a5c5bd06" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
