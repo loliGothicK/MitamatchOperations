@@ -146,8 +146,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -159,7 +159,7 @@
 
             <InfoBar x:Name="GeneralInfoBar" />
 
-            <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,0,0">
                 <SymbolIcon Symbol="Sort" Rotation="90"/>
             </Grid>
 
@@ -172,6 +172,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
@@ -235,14 +236,39 @@
                     </CommandBar>
                 </Grid>
 
-                <Grid x:Name="DeckGrid" Grid.Row="1" CornerRadius="10" VerticalAlignment="Stretch">
-                    <ListView
-                        x:Name="OrderDeck"
+                <StackPanel Grid.Row="1" Grid.Column="1" >
+                    <TextBlock Text="味方" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                    <Grid x:Name="DeckGrid1" CornerRadius="10" VerticalAlignment="Stretch" Margin="5">
+                        <ListView
+                            x:Name="OrderDeck"
+                            AccessKey="Ally"
+                            MinHeight="500"
+                            MinWidth="500"
+                            Background="Transparent"
+                            BorderBrush="{StaticResource SystemControlForegroundBaseMediumLowBrush}"
+                            ItemsSource="{x:Bind _deck}"
+                            ItemTemplate="{StaticResource DeckItemTemplate}"
+                            CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="Single"
+                            DragOver="Target_DragOver"
+                            Drop="View_Drop"
+                            DragItemsStarting="Target_DragItemsStarting"
+                            DragEnter="Target_DragEnter"
+                            DragItemsCompleted="OrderDeck_OnChanged"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Left"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="0" >
+                    <TextBlock Text="相手" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                    <Grid x:Name="DeckGrid2" CornerRadius="10" VerticalAlignment="Stretch" Margin="5">
+                        <ListView
+                        x:Name="ReferOrderDeck"
+                        AccessKey="Opponent"
                         MinHeight="500"
                         MinWidth="500"
                         Background="Transparent"
                         BorderBrush="{StaticResource SystemControlForegroundBaseMediumLowBrush}"
-                        ItemsSource="{x:Bind _deck}"
+                        ItemsSource="{x:Bind _referDeck}"
                         ItemTemplate="{StaticResource DeckItemTemplate}"
                         CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="Single"
                         DragOver="Target_DragOver"
@@ -252,7 +278,8 @@
                         DragItemsCompleted="OrderDeck_OnChanged"
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Left"/>
-                </Grid>
+                    </Grid>
+                </StackPanel>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="2">
                 <Grid.RowDefinitions>

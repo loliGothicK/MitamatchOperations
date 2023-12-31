@@ -29,6 +29,7 @@ public sealed partial class DeckEditorPage
 {
     public static readonly int[] TimeSource = Enumerable.Range(0, 12).Select(t => t * 5).ToArray();
     private ObservableCollection<TimeTableItem> _deck = [];
+    private ObservableCollection<TimeTableItem> _referDeck = [];
     private ObservableCollection<Order> Sources { get; set; } = [];
     private new int Margin { get; set; } = 5;
     private MemberInfo[] _members = [];
@@ -57,7 +58,7 @@ public sealed partial class DeckEditorPage
             = ShieldCheckBox.IsChecked
             = OthersCheckBox.IsChecked = true;
 
-        DeckGrid.Background = ((FrameworkElement)Content).ActualTheme == ElementTheme.Dark
+        DeckGrid1.Background = DeckGrid2.Background = ((FrameworkElement)Content).ActualTheme == ElementTheme.Dark
             ? new AcrylicBrush { TintColor = Color.FromArgb(90, 200, 200, 200) }
             : new AcrylicBrush { TintColor = Color.FromArgb(90, 20, 20, 20) };
     }
@@ -148,6 +149,33 @@ public sealed partial class DeckEditorPage
             _deck.Add(previous);
         }
         OrderDeck.ItemsSource = _deck;
+
+        if (_referDeck.Count == 0) return;
+        table = [.. _referDeck];
+        _referDeck.Clear();
+        first = table.First();
+        previous = first with
+        {
+            Start = 15 * 60 - first.Delay,
+            End = 15 * 60 - first.Order.PrepareTime - first.Order.ActiveTime
+        };
+        _referDeck.Add(previous);
+
+        foreach (var item in table.Skip(1))
+        {
+            var prepareTime = previous.Order.Index switch
+            {
+                52 => 5, // レギオンマッチスキル準備時間短縮Lv.3
+                _ => item.Order.PrepareTime
+            };
+            previous = item with
+            {
+                Start = previous.End - item.Delay,
+                End = (previous.End - item.Delay) - prepareTime - item.Order.ActiveTime
+            };
+            _referDeck.Add(previous);
+        }
+        ReferOrderDeck.ItemsSource = _referDeck;
     }
 
     //===================================================================================================================
@@ -205,7 +233,6 @@ public sealed partial class DeckEditorPage
         {
             ListView list => list.Name,
             GridView grid => grid.Name,
-            StackPanel panel => panel.Name,
             _ => throw new UnreachableException("Unreachable")
         };
         var def = e.GetDeferral();
@@ -227,15 +254,25 @@ public sealed partial class DeckEditorPage
             // Find correct source list
             case "OrderSources":
                 {
-                    foreach (var order in _selectedOrder)
+                    if (e.Data.Properties.TryGetValue("From", out object from))
                     {
-                        _deck.Remove(TimeTableItem.Proxy(order));
-                        Push(Sources, order, (x, y) => x.Index > y.Index);
+                        var key = from.As<ListView>().AccessKey;
+                        var deck = key == "Ally"
+                            ? ref _deck
+                            : ref _referDeck;
+                        foreach (var order in _selectedOrder)
+                        {
+                            deck.Remove(TimeTableItem.Proxy(order));
+                            if (key == "Ally")
+                            {
+                                Push(Sources, order, (x, y) => x.Index > y.Index);
+                            }
+                        }
                     }
 
                     break;
                 }
-            case "OrderDeck" or "DeckPanel":
+            case "OrderDeck":
                 {
                     var pos = e.GetPosition(OrderDeck);
                     var index = 0;
@@ -260,8 +297,38 @@ public sealed partial class DeckEditorPage
                     foreach (var item in _selectedOrder.Reverse())
                     {
                         Sources.Remove(item);
-                        var margin = _deck.Count == 0 ? 0 : Margin;
+                        var margin = index == 0 ? 0 : Margin;
                         _deck.Insert(index, (TimeTableItem)item with { Delay = margin });
+                    }
+
+                    break;
+                }
+            case "ReferOrderDeck":
+                {
+                    var pos = e.GetPosition(OrderDeck);
+                    var index = 0;
+
+                    if (ReferOrderDeck.Items.Count != 0)
+                    {
+
+                        var topItem = ReferOrderDeck.ContainerFromIndex(0).As<ListViewItem>();
+                        var itemHeight = topItem.ActualHeight + topItem.Margin.Top + topItem.Margin.Bottom;
+                        index = Math.Min(ReferOrderDeck.Items.Count - 1, (int)(pos.Y / itemHeight));
+                        var targetItem = ReferOrderDeck.ContainerFromIndex(index).As<ListViewItem>();
+                        var positionInItem = e.GetPosition(targetItem);
+
+                        if (positionInItem.Y > itemHeight / 2)
+                        {
+                            index++;
+                        }
+
+                        index = Math.Min(ReferOrderDeck.Items.Count, index);
+                    }
+
+                    foreach (var item in _selectedOrder.Reverse())
+                    {
+                        var margin = index == 0 ? 0 : Margin;
+                        _referDeck.Insert(index, (TimeTableItem)item with { Delay = margin });
                     }
 
                     break;
@@ -281,6 +348,7 @@ public sealed partial class DeckEditorPage
 
         _selectedOrder = e.Items.Select(item => ((TimeTableItem)item).Order).ToArray();
         e.Data.RequestedOperation = DataPackageOperation.Move;
+        e.Data.Properties.Add("From", sender);
     }
 
     private void Target_DragEnter(object sender, DragEventArgs e)
