@@ -567,7 +567,7 @@ public sealed partial class DeckEditorPage
         var save = new UTF8Encoding(true).GetBytes(jsonStr);
         fs.Write(save, 0, save.Length);
 
-        if (((Button)sender).Parent is StackPanel { Parent: FlyoutPresenter { Parent: Popup popup } })
+        if (sender.As<Button>().Parent is StackPanel { Parent: FlyoutPresenter { Parent: Popup popup } })
         {
             popup.IsOpen = false;
         }
