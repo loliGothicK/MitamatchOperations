@@ -29,7 +29,7 @@ public sealed partial class DeckEditorPage
 {
     public static readonly int[] TimeSource = Enumerable.Range(0, 12).Select(t => t * 5).ToArray();
     private ObservableCollection<TimeTableItem> _deck = [];
-    private ObservableCollection<TimeTableItem> _referDeck = [];
+    private readonly ObservableCollection<TimeTableItem> _referDeck = [];
     private ObservableCollection<Order> Sources { get; set; } = [];
     private new int Margin { get; set; } = 5;
     private MemberInfo[] _members = [];
