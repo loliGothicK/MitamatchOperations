@@ -293,7 +293,7 @@ public sealed partial class DeckEditorPage
 
                         index = Math.Min(OrderDeck.Items.Count, index);
                     }
-
+                    _selectedOrder = _selectedOrder.Where(item => !_deck.Contains(item)).ToArray();
                     foreach (var item in _selectedOrder.Reverse())
                     {
                         Sources.Remove(item);
@@ -325,6 +325,7 @@ public sealed partial class DeckEditorPage
                         index = Math.Min(ReferOrderDeck.Items.Count, index);
                     }
 
+                    _selectedOrder = _selectedOrder.Where(item => !_referDeck.Contains(item)).ToArray();
                     foreach (var item in _selectedOrder.Reverse())
                     {
                         var margin = index == 0 ? 0 : Margin;
