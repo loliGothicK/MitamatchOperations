@@ -154,6 +154,31 @@ public record struct Costume(
     public static Costume[] List =>
     [
         new Costume(
+            "吉村・Thi・梅",
+            "ムーンライトα",
+            new NormalRangeCostume(15),
+            new RareSkill("縮地", "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。"),
+            [
+                new Common([new LilyDef(75)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyHp(200)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyAtk(75)]),
+                new Common([new LilyHp(200)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyDef(75)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyAtk(75)]),
+                new Common([new LilyDef(125), new LilyAtk(125)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyHp(400), new LilyAtk(150)]),
+                new Unique([new LilyAtk(1500), new LilyDef(1500)]),
+                new Common([new LilyAtk(500), new LilyDef(500)]),
+                new Unique([new LilyAtk(1500), new LilyDef(1500)]),
+            ],
+            new ExSkill("水属性メモリア効果増加AⅡ", "自身が使用する水属性メモリアのスキル効果3％UP火属性メモリア効果耐性AⅠ自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN")
+        ),
+        new Costume(
             "初鹿野瑤",
             "SPYチャイナフォーム",
             new SpecialRangeCostume(15),
