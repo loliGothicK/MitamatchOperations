@@ -37,7 +37,6 @@
     <None Remove="Pages\RegionConsole\ResultInput.xaml" />
     <None Remove="Pages\RegionConsole\UnitViewDialog.xaml" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
@@ -45,7 +44,6 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.0.230907" />
     <PackageReference Include="CommunityToolkit.WinUI.Controls.RichSuggestBox" Version="8.0.230907" />
@@ -73,7 +71,6 @@
     <PackageReference Include="System.Reactive.Linq" Version="6.0.0" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
-
   <!-- 
     Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
     Tools extension to be activated for this project even if the Windows App SDK Nuget
@@ -121,7 +118,16 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
+  <ItemGroup Label="MLActivatingModel">
+    <None Include="MLActivatingModel.mlnet">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLOrderModel">
+    <None Include="MLOrderModel.mlnet">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <!-- 
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution 
     Explorer "Package and Publish" context menu entry to be enabled for this project even if 
