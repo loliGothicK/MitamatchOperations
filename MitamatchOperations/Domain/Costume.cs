@@ -154,6 +154,31 @@ public record struct Costume(
     public static Costume[] List =>
     [
         new Costume(
+            "六角汐里",
+            "水夕会試作隊服α",
+            new SpecialRangeCostume(15),
+            new RareSkill("円環の御手", "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。"),
+            [
+                new Common([new LilySpDef(75)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyHp(200)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilySpAtk(75)]),
+                new Common([new LilyHp(200)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilySpDef(75)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilySpAtk(75)]),
+                new Common([new LilySpDef(125), new LilySpAtk(125)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyHp(400), new LilySpAtk(150)]),
+                new Unique([new LilySpAtk(1500), new LilySpDef(1500)]),
+                new Common([new LilySpAtk(500), new LilySpDef(500)]),
+                new Unique([new LilySpAtk(1500), new LilySpDef(1500)]),
+            ],
+            new ExSkill("火属性メモリア効果増加AⅡ", "自身が使用する火属性メモリアのスキル効果3％UP風属性メモリア効果耐性AⅠ自身に対する風属性メモリアのダメージ/妨害スキル効果2%DOWN")
+        ),
+        new Costume(
             "秦祀",
             "ノクターンミラージュ",
             new RecoveryCostume(15),
