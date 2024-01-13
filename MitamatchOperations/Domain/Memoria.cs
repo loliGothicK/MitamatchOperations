@@ -301,6 +301,186 @@ public record Memoria(
     public static readonly Memoria[] List =
     [
         new Memoria(
+            1234,
+            "クリエイターズコラボお手軽sweettime",
+            "お手軽Sweet Time",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            [
+                new BasicStatus(2287, 1965, 2277, 1970),
+                new BasicStatus(2476, 2125, 3316, 2130),
+                new BasicStatus(3814, 2286, 3504, 2291),
+                new BasicStatus(4002, 2446, 5442, 2451),
+                new BasicStatus(7041, 2607, 5631, 2612),
+            ],
+            22,
+            new Skill(
+                "水：ウォーターパワーストライクB Ⅲ+",
+                "敵1～2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1233,
+            "クリエイターズコラボお手軽sweettime",
+            "お手軽Sweet Time",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Water,
+            [
+                new BasicStatus(1947, 2305, 1937, 2310),
+                new BasicStatus(2107, 2494, 2097, 3349),
+                new BasicStatus(2268, 3832, 2258, 3537),
+                new BasicStatus(2428, 4020, 2418, 5475),
+                new BasicStatus(2589, 7059, 2579, 5664),
+            ],
+            22,
+            new Skill(
+                "Sp.カウンターウォーターガードバーストB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP Ⅳ",
+                "攻撃時、一定確率で攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1232,
+            "クリエイターズコラボお手軽sweettime",
+            "お手軽Sweet Time",
+            new Rearguard(RearguardKind.Interference),
+            Element.Water,
+            [
+                new BasicStatus(1947, 2305, 1937, 2310),
+                new BasicStatus(2107, 2494, 2097, 3349),
+                new BasicStatus(2268, 3832, 2258, 3537),
+                new BasicStatus(2428, 4020, 2418, 5475),
+                new BasicStatus(2589, 7059, 2579, 5664),
+            ],
+            22,
+            new Skill(
+                "水：Sp.ウォーターパワーフォールC Ⅳ",
+                "敵1～3体のSp.ATKと水属性攻撃力を大ダウンさせる。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1231,
+            "クリエイターズコラボお手軽sweettime",
+            "お手軽Sweet Time",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Water,
+            [
+                new BasicStatus(1947, 1965, 2277, 2310),
+                new BasicStatus(2107, 2125, 2466, 3349),
+                new BasicStatus(2268, 2286, 3804, 3537),
+                new BasicStatus(2428, 2446, 3992, 5475),
+                new BasicStatus(2589, 2607, 7031, 5664),
+            ],
+            22,
+            new Skill(
+                "水：ウォーターガードヒールC Ⅳ",
+                "味方1～3体のHPを大回復し、DEFと水属性防御力を小アップする。さらに味方がオーダースキル「水属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "回:回復UP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。",
+                Trigger.Recovery,
+                [new RecoveryUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1230,
+            "クリエイターズコラボ冬のパンづくし",
+            "冬のパンづくし",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new BasicStatus(2095, 2441, 2122, 2448),
+                new BasicStatus(2255, 2630, 2282, 3337),
+                new BasicStatus(2416, 3818, 2443, 3525),
+                new BasicStatus(2576, 4006, 2603, 5313),
+                new BasicStatus(2737, 6895, 2764, 5502),
+            ],
+            22,
+            new Skill(
+                "火：Sp.ファイアパワースマッシュB Ⅲ+",
+                "敵1～2体に特殊大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/Sp.パワーUP Ⅲ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1229,
+            "クリエイターズコラボ冬のパンづくし",
+            "冬のパンづくし",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new BasicStatus(2095, 2441, 2122, 2448),
+                new BasicStatus(2255, 2630, 2282, 3337),
+                new BasicStatus(2416, 3818, 2443, 3525),
+                new BasicStatus(2576, 4006, 2603, 5313),
+                new BasicStatus(2737, 6895, 2764, 5502),
+            ],
+            22,
+            new Skill(
+                "火：Sp.ファイアパワーアシストC Ⅳ",
+                "味方1～3体のSp.ATKと火属性攻撃力を大アップさせる。さらに味方がオーダースキル「火属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.C
+            ),
+            new SupportSkill(
+                "援:支援UP Ⅳ",
+                "支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
             1228,
             "夜会を彩る花",
             "夜会を彩る花",
