@@ -300,6 +300,576 @@ public record Memoria(
 
     public static readonly Memoria[] List =
     [
+new Memoria(
+            1253,
+            "3rdanniversarydream",
+            "3rd Anniversary DREAM",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            [
+                new BasicStatus(1390, 1184, 1385, 1163),
+                new BasicStatus(1489, 1268, 1759, 1247),
+                new BasicStatus(1862, 1352, 1857, 1331),
+                new BasicStatus(1960, 1436, 2230, 1415),
+                new BasicStatus(2334, 1520, 2329, 1499),
+            ],
+            18,
+            new Skill(
+                "ガードブレイクB Ⅲ",
+                "敵1～2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
+                [],
+                [new StatusDown(new Def(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のDEFを特大ダウンさせる。",
+                Trigger.Attack,
+                [new GuardDown(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1252,
+            "3rdanniversarydream",
+            "3rd Anniversary DREAM",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Water,
+            [
+                new BasicStatus(1185, 1389, 1180, 1368),
+                new BasicStatus(1269, 1488, 1264, 1742),
+                new BasicStatus(1353, 1861, 1348, 1840),
+                new BasicStatus(1437, 1959, 1432, 2213),
+                new BasicStatus(1521, 2333, 1516, 2312),
+            ],
+            18,
+            new Skill(
+                "Sp.ガードバーストB Ⅲ",
+                "敵1～2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
+                [],
+                [new StatusDown(new SpDef(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:Sp.ガードDOWN Ⅲ",
+                "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。",
+                Trigger.Attack,
+                [new GuardDown(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1251,
+            "3rdanniversarydream",
+            "3rd Anniversary DREAM",
+            new Rearguard(RearguardKind.Support),
+            Element.Water,
+            [
+                new BasicStatus(1390, 1184, 1385, 1163),
+                new BasicStatus(1489, 1268, 1759, 1247),
+                new BasicStatus(1862, 1352, 1857, 1331),
+                new BasicStatus(1960, 1436, 2230, 1415),
+                new BasicStatus(2334, 1520, 2329, 1499),
+            ],
+            18,
+            new Skill(
+                "パワーアシストB Ⅲ",
+                "味方1～2体のATKを大アップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "援:パワーUP Ⅲ",
+                "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。",
+                Trigger.Support,
+                [new PowerUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1250,
+            "3rdanniversarydream",
+            "3rd Anniversary DREAM",
+            new Rearguard(RearguardKind.Interference),
+            Element.Water,
+            [
+                new BasicStatus(1185, 1389, 1180, 1368),
+                new BasicStatus(1269, 1488, 1264, 1742),
+                new BasicStatus(1353, 1861, 1348, 1840),
+                new BasicStatus(1437, 1959, 1432, 2213),
+                new BasicStatus(1521, 2333, 1516, 2312),
+            ],
+            18,
+            new Skill(
+                "Sp.ガードフォールB Ⅲ",
+                "敵1～2体のSp.DEFを大ダウンさせる。",
+                [],
+                [new StatusDown(new SpDef(), Amount.Medium)],
+                Level.Three,
+                Range.B
+            ),
+            new SupportSkill(
+                "援:Sp.ガードDOWN Ⅲ",
+                "支援/妨害時、一定確率で敵前衛1体のSp.DEFを特大ダウンさせる。",
+                Trigger.Support,
+                [new GuardDown(Type.Special)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1249,
+            "3rdanniversarydream",
+            "3rd Anniversary DREAM",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Water,
+            [
+                new BasicStatus(1185, 1184, 1385, 1368),
+                new BasicStatus(1269, 1268, 1484, 1742),
+                new BasicStatus(1353, 1352, 1857, 1840),
+                new BasicStatus(1437, 1436, 1955, 2213),
+                new BasicStatus(1521, 1520, 2329, 2312),
+            ],
+            18,
+            new Skill(
+                "ガードヒールC Ⅲ",
+                "味方1～3体のHPを回復する。さらに味方のDEFを小アップする。",
+                [],
+                [new StatusUp(new Def(), Amount.Small)],
+                Level.Three,
+                Range.C
+            ),
+            new SupportSkill(
+                "回:ガードUP Ⅲ",
+                "HP回復時、一定確率で味方前衛1体のDEFを特大アップさせる。",
+                Trigger.Recovery,
+                [new GuardUp(Type.Normal)],
+                Level.Three
+            )
+        ),
+        new Memoria(
+            1248,
+            "熱に浮かされて",
+            "熱に浮かされて",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            [
+                new BasicStatus(2305, 1952, 2289, 1962),
+                new BasicStatus(2494, 2112, 3328, 2122),
+                new BasicStatus(3832, 2273, 3516, 2283),
+                new BasicStatus(4020, 2433, 5454, 2443),
+                new BasicStatus(7059, 2594, 5643, 2604),
+            ],
+            22,
+            new Skill(
+                "ウォーターパワーストライクB Ⅳ+",
+                "敵1～2体に通常特大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:マイトUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身のATKとDEFを超特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Normal), new GuardUp(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1247,
+            "熱に浮かされて",
+            "熱に浮かされて",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Water,
+            [
+                new BasicStatus(1965, 2292, 1949, 2302),
+                new BasicStatus(2125, 2481, 2109, 3341),
+                new BasicStatus(2286, 3819, 2270, 3529),
+                new BasicStatus(2446, 4007, 2430, 5467),
+                new BasicStatus(2607, 7046, 2591, 5656),
+            ],
+            22,
+            new Skill(
+                "Sp.ウォーターガードバーストD Ⅲ+",
+                "敵2体に特殊大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
+                [],
+                [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.D
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/Sp.ガードDOWN Ⅳ",
+                "攻撃時、一定確率で敵のSp.DEFを超特大ダウンさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new GuardDown(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1246,
+            "熱に浮かされて",
+            "熱に浮かされて",
+            new Rearguard(RearguardKind.Support),
+            Element.Water,
+            [
+                new BasicStatus(2305, 2292, 1949, 1962),
+                new BasicStatus(2919, 2906, 2109, 2122),
+                new BasicStatus(3682, 3669, 2270, 2283),
+                new BasicStatus(4745, 4732, 2430, 2443),
+                new BasicStatus(6359, 6346, 2591, 2604),
+            ],
+            22,
+            new Skill(
+                "WパワーアシストE Ⅳ",
+                "味方2～3体のATKとSp.ATKを大アップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:WパワーUP Ⅳ",
+                "支援/妨害時、一定確率で味方前衛1体のATKとSp.ATKを超特大アップさせる。",
+                Trigger.Support,
+                [new PowerUp(Type.Normal), new PowerUp(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1245,
+            "熱に浮かされて",
+            "熱に浮かされて",
+            new Rearguard(RearguardKind.Interference),
+            Element.Water,
+            [
+                new BasicStatus(2305, 1952, 2289, 1962),
+                new BasicStatus(2494, 2112, 3328, 2122),
+                new BasicStatus(3832, 2273, 3516, 2283),
+                new BasicStatus(4020, 2433, 5454, 2443),
+                new BasicStatus(7059, 2594, 5643, 2604),
+            ],
+            22,
+            new Skill(
+                "マイトフォールE Ⅳ",
+                "敵2～3体のATKとDEFを大ダウンさせる。",
+                [],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:支援UP/パワーDOWN Ⅳ",
+                "支援/妨害時、一定確率で敵前衛1体のATKを超特大ダウンさせる。さらに、支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new PowerDown(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1244,
+            "月影のロマンス",
+            "月影のロマンス",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            [
+                new BasicStatus(2315, 1972, 2315, 1943),
+                new BasicStatus(2504, 2132, 3354, 2103),
+                new BasicStatus(3842, 2293, 3542, 2264),
+                new BasicStatus(4030, 2453, 5480, 2424),
+                new BasicStatus(7069, 2614, 5669, 2585),
+            ],
+            22,
+            new Skill(
+                "ウォーターガードブレイクD Ⅲ+",
+                "敵2体に通常大ダメージを与え、敵のDEFと水属性防御力をダウンさせる。",
+                [],
+                [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.D
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/ガードDOWN Ⅳ",
+                "攻撃時、一定確率で敵のDEFを超特大ダウンさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new GuardDown(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1243,
+            "月影のロマンス",
+            "月影のロマンス",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Water,
+            [
+                new BasicStatus(1975, 2312, 1975, 2283),
+                new BasicStatus(2135, 2501, 2135, 3322),
+                new BasicStatus(2296, 3839, 2296, 3510),
+                new BasicStatus(2456, 4027, 2456, 5448),
+                new BasicStatus(2617, 7066, 2617, 5637),
+            ],
+            22,
+            new Skill(
+                "Sp.ウォーターパワーバーストB Ⅳ+",
+                "敵1～2体に特殊特大ダメージを与え、敵のSp.ATKと水属性攻撃力をダウンさせる。",
+                [],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:Sp.マイトDOWN Ⅳ",
+                "攻撃時、一定確率で敵のSp.ATKとSp.DEFを超特大ダウンさせる。",
+                Trigger.Attack,
+                [new PowerDown(Type.Special), new GuardDown(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1242,
+            "月影のロマンス",
+            "月影のロマンス",
+            new Rearguard(RearguardKind.Interference),
+            Element.Water,
+            [
+                new BasicStatus(2315, 2312, 1975, 1943),
+                new BasicStatus(2929, 2926, 2135, 2103),
+                new BasicStatus(3692, 3689, 2296, 2264),
+                new BasicStatus(4755, 4752, 2456, 2424),
+                new BasicStatus(6369, 6366, 2617, 2585),
+            ],
+            22,
+            new Skill(
+                "WパワーフォールE Ⅳ",
+                "敵2～3体のATKとSp.ATKを大ダウンさせる。",
+                [],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:WパワーDOWN Ⅳ",
+                "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを超特大ダウンさせる。",
+                Trigger.Support,
+                [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1241,
+            "月影のロマンス",
+            "月影のロマンス",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Water,
+            [
+                new BasicStatus(1975, 1972, 2315, 2283),
+                new BasicStatus(2135, 2132, 2504, 3322),
+                new BasicStatus(2296, 2293, 3842, 3510),
+                new BasicStatus(2456, 2453, 4030, 5448),
+                new BasicStatus(2617, 2614, 7069, 5637),
+            ],
+            22,
+            new Skill(
+                "ウォーターガードヒールE Ⅳ",
+                "味方2～3体のHPを大回復する。さらに味方のDEFと水属性防御力を小アップする。",
+                [],
+                [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "回:ガードUP/副援:水ガードUP Ⅳ",
+                "HP回復時、一定確率で味方前衛1体のDEFを超特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の水属性防御力を特大アップさせる。",
+                Trigger.Support,
+                [new GuardUp(Type.Normal), new ElementGuardUp(Element.Water)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1240,
+            "尊みエスコート",
+            "尊みエスコート",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Water,
+            [
+                new BasicStatus(2408, 4240, 2391, 4261),
+                new BasicStatus(2608, 5597, 2591, 4618),
+                new BasicStatus(2809, 5954, 2792, 5175),
+                new BasicStatus(3010, 6511, 2993, 5532),
+                new BasicStatus(3211, 6868, 3194, 6089),
+            ],
+            24,
+            new Skill(
+                "Sp.ウォーターパワースマッシュB Ⅳ+",
+                "敵1～2体に特殊特大ダメージを与え、自身のSp.ATKと水属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/Sp.パワーUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを超特大アップさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1239,
+            "尊みエスコート",
+            "尊みエスコート",
+            new Rearguard(RearguardKind.Interference),
+            Element.Water,
+            [
+                new BasicStatus(2408, 4240, 2391, 4261),
+                new BasicStatus(2608, 5597, 2591, 4618),
+                new BasicStatus(2809, 5954, 2792, 5175),
+                new BasicStatus(3010, 6511, 2993, 5532),
+                new BasicStatus(3211, 6868, 3194, 6089),
+            ],
+            24,
+            new Skill(
+                "Sp.ウォーターパワーフォールE Ⅳ",
+                "敵2～3体のSp.ATKと水属性攻撃力を大ダウンさせる。",
+                [],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:支援UP/Sp.パワーDOWN Ⅳ",
+                "支援/妨害時、一定確率で敵前衛1体のSp.ATKを超特大ダウンさせる。さらに、支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new PowerDown(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1238,
+            "尊みエスコート",
+            "尊みエスコート",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Water,
+            [
+                new BasicStatus(2408, 2377, 4254, 4261),
+                new BasicStatus(2608, 2577, 4611, 5618),
+                new BasicStatus(2809, 2778, 5168, 5975),
+                new BasicStatus(3010, 2979, 5525, 6532),
+                new BasicStatus(3211, 3180, 6082, 6889),
+            ],
+            24,
+            new Skill(
+                "Sp.ウォーターガードヒールC Ⅴ",
+                "味方1～3体のHPを特大回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
+                [],
+                [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
+                Level.Five,
+                Range.C
+            ),
+            new SupportSkill(
+                "回:回復UP/副援:水ガードUP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の水属性防御力を特大アップさせる。",
+                Trigger.Support,
+                [new RecoveryUp(), new ElementGuardUp(Element.Water)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1237,
+            "夢のようなひとときを",
+            "夢のようなひとときを",
+            new Vanguard(VanguardKind.NormalSingle),
+            Element.Water,
+            [
+                new BasicStatus(4251, 2412, 4257, 2403),
+                new BasicStatus(5608, 2612, 4614, 2603),
+                new BasicStatus(5965, 2813, 5171, 2804),
+                new BasicStatus(6522, 3014, 5528, 3005),
+                new BasicStatus(6879, 3215, 6085, 3206),
+            ],
+            24,
+            new Skill(
+                "ウォーターパワーストライクA Ⅴ+",
+                "敵1体に通常超特大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Five,
+                Range.A
+            ),
+            new SupportSkill(
+                "攻:パワーUP/副攻:水パワーUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身のATKを超特大アップさせる。さらに、水属性攻撃力を特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Normal), new ElementPowerUp(Element.Water)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1236,
+            "夢のようなひとときを",
+            "夢のようなひとときを",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            [
+                new BasicStatus(4251, 2412, 4257, 2403),
+                new BasicStatus(5608, 2612, 4614, 2603),
+                new BasicStatus(5965, 2813, 5171, 2804),
+                new BasicStatus(6522, 3014, 5528, 3005),
+                new BasicStatus(6879, 3215, 6085, 3206),
+            ],
+            24,
+            new Skill(
+                "ウォーターパワーストライクB Ⅳ+",
+                "敵1～2体に通常特大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/パワーUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身のATKを超特大アップさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1235,
+            "夢のようなひとときを",
+            "夢のようなひとときを",
+            new Rearguard(RearguardKind.Support),
+            Element.Water,
+            [
+                new BasicStatus(4251, 2412, 4257, 2403),
+                new BasicStatus(5608, 2612, 4614, 2603),
+                new BasicStatus(5965, 2813, 5171, 2804),
+                new BasicStatus(6522, 3014, 5528, 3005),
+                new BasicStatus(6879, 3215, 6085, 3206),
+            ],
+            24,
+            new Skill(
+                "ウォーターパワーアシストE Ⅳ",
+                "味方2～3体のATKと水属性攻撃力を大アップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:支援UP/副援:水パワーUP Ⅳ",
+                "支援/妨害時、一定確率で味方前衛1体の水属性攻撃力を特大アップさせる。さらに、支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new ElementPowerUp(Element.Water)],
+                Level.Four
+            )
+        ),
         new Memoria(
             1234,
             "クリエイターズコラボお手軽sweettime",
