@@ -300,7 +300,7 @@ public record Memoria(
 
     public static readonly Memoria[] List =
     [
-new Memoria(
+        new Memoria(
             1253,
             "3rdanniversarydream",
             "3rd Anniversary DREAM",
