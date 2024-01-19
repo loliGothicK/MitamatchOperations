@@ -1936,7 +1936,7 @@ namespace mitama.Pages.DeckBuilder
                 GeneralInfoBar.IsOpen = false;
                 return;
             }
-            if (LegendaryDeck.Count > 4 || Deck.Count > 20)
+            if (LegendaryDeck.Count > 5 || Deck.Count > 20)
             {
                 GeneralInfoBar.Title = "デッキは20枚までです（レジェンダリーは4枚までです）。";
                 GeneralInfoBar.IsOpen = true;
