@@ -1170,7 +1170,8 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Special)],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1239,
@@ -1200,7 +1201,8 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp(), new PowerDown(Type.Special)],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1238,
@@ -1230,7 +1232,8 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new ElementGuardUp(Element.Water)],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1237,
@@ -1260,7 +1263,8 @@ public record Memoria(
                 Trigger.Attack,
                 [new PowerUp(Type.Normal), new ElementPowerUp(Element.Water)],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1236,
@@ -1290,7 +1294,8 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1235,
@@ -1320,7 +1325,8 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp(), new ElementPowerUp(Element.Water)],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1234,
@@ -1350,7 +1356,8 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new PowerUp(Type.Normal)],
                 Level.Three
-            )
+            ),
+            true
         ),
         new Memoria(
             1233,
@@ -1380,7 +1387,8 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp()],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1232,
