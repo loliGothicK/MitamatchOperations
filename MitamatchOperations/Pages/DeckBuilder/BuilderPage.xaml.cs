@@ -1936,18 +1936,9 @@ namespace mitama.Pages.DeckBuilder
                 GeneralInfoBar.IsOpen = false;
                 return;
             }
-            if (LegendaryDeck.Count > 5 || Deck.Count > 20)
+            else if (LegendaryDeck.Count > 5 || Deck.Count > 20)
             {
-                GeneralInfoBar.Title = "デッキは20枚までです（レジェンダリーは4枚までです）。";
-                GeneralInfoBar.IsOpen = true;
-                GeneralInfoBar.Severity = InfoBarSeverity.Error;
-                await Task.Delay(3000);
-                GeneralInfoBar.IsOpen = false;
-                return;
-            }
-            if (Deck.Count == 0)
-            {
-                GeneralInfoBar.Title = "必須装備枠がありません。最低1枚は編成してください。";
+                GeneralInfoBar.Title = "デッキは20枚までです（レジェンダリーは5枚までです）。";
                 GeneralInfoBar.IsOpen = true;
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
                 await Task.Delay(3000);
