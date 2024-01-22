@@ -343,7 +343,6 @@
                             DragItemsStarting="Memeria_DragItemsStarting"
                             DragOver="Deck_DragOver"
                             Drop="Deck_Drop"
-                            DropCompleted="MyDropCompleted"
                             VerticalAlignment="Stretch"
                             HorizontalAlignment="Left"/>
                     </Grid>
@@ -361,7 +360,6 @@
                             DragItemsStarting="Memeria_DragItemsStarting"
                             DragOver="Deck_DragOver"
                             Drop="Deck_Drop"
-                            DropCompleted="MyDropCompleted"
                             VerticalAlignment="Stretch"
                             HorizontalAlignment="Left"/>
                     </Grid>
@@ -445,7 +443,6 @@
                         DragItemsStarting="Memeria_DragItemsStarting"
                         DragOver="MemeriaSources_DragOver"
                         Drop="MemeriaSources_Drop"
-                        DropCompleted="MyDropCompleted"
                         BorderThickness="1"
                         BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"/>
                 </Grid>

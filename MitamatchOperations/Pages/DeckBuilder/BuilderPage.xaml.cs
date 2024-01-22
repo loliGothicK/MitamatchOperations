@@ -146,10 +146,6 @@ namespace mitama.Pages.DeckBuilder
             e.AcceptedOperation = DataPackageOperation.Move;
         }
 
-        private void MyDropCompleted(UIElement sender, DropCompletedEventArgs args)
-        {
-        }
-
         private void Cleanup()
         {
             selectedMemorias.Clear();
