@@ -130,7 +130,8 @@ namespace mitama.Pages.DeckBuilder
             {
                 selectedMemorias = e.Items.Select(v => (Memoria)v).ToList();
                 e.Data.RequestedOperation = DataPackageOperation.Move;
-            } catch
+            }
+            catch
             {
                 selectedMemorias = e.Items.Select(v => ((MemoriaWithConcentration)v).Memoria).ToList();
                 e.Data.RequestedOperation = DataPackageOperation.Move;
@@ -177,7 +178,8 @@ namespace mitama.Pages.DeckBuilder
                 GeneralInfoBar.Title = "超覚醒のメモリアが重複しています";
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
                 GeneralInfoBar.IsOpen = true;
-            } else
+            }
+            else
             {
                 GeneralInfoBar.IsOpen = false;
             }
@@ -230,7 +232,8 @@ namespace mitama.Pages.DeckBuilder
             SkillSummary.Items.Clear();
             foreach (var (type, num) in skillPairs)
             {
-                SkillSummary.Items.Add(new Button() {
+                SkillSummary.Items.Add(new Button()
+                {
                     Content = $"{BuilderPageHelpers.SkillTypeToString(type)}: {num}",
                     Width = 120,
                 });
@@ -1748,7 +1751,7 @@ namespace mitama.Pages.DeckBuilder
                     )
             );
             // ヒール
-            Filters.Add(FilterType.Heal,　memoria => memoria.Skill.Effects.Any(eff =>　eff is Heal));
+            Filters.Add(FilterType.Heal, memoria => memoria.Skill.Effects.Any(eff => eff is Heal));
             // チャージ
             Filters.Add(FilterType.Charge, memoria => memoria.Skill.Effects.Any(eff => eff is Charge));
             // リカバー
@@ -2081,7 +2084,8 @@ namespace mitama.Pages.DeckBuilder
 
         private async void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            var content = new Grid {
+            var content = new Grid
+            {
                 AllowDrop = true,
                 MinHeight = 300,
                 MinWidth = 300,
@@ -2258,7 +2262,7 @@ namespace mitama.Pages.DeckBuilder
         WaterGuardDown,
         WindGuardDown,
         SupportUp,
-        RecoveryUp, 
+        RecoveryUp,
         MpCostDown,
     }
 
