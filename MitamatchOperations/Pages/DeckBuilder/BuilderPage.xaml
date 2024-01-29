@@ -232,7 +232,7 @@
                             <TextBlock Grid.Row="0" Text="補助"/>
                             <GridView Grid.Row="1"
                                       x:Name="SupportSummary"
-                                      ItemsSource="{x:Bind SupporBreakdowns}"
+                                      ItemsSource="{x:Bind SupportBreakdowns}"
                                       ItemTemplate="{StaticResource BreakdownTemplate}" />
                         </Grid>
                         <Grid Grid.Row="3" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center">

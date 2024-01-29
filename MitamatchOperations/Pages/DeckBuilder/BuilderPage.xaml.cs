@@ -42,7 +42,7 @@ namespace mitama.Pages.DeckBuilder
         readonly Dictionary<SupportType, SupportBreakdown> supportPairs = [];
         private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = [];
         private readonly string _regionName;
-        private readonly ObservableCollection<SupportBreakdown> SupporBreakdowns = [];
+        private readonly ObservableCollection<SupportBreakdown> SupportBreakdowns = [];
 
         public BuilderPage()
         {
@@ -207,10 +207,10 @@ namespace mitama.Pages.DeckBuilder
                 }
             }
 
-            SupporBreakdowns.Clear();
+            SupportBreakdowns.Clear();
             foreach (var (_, breakdown) in supportPairs)
             {
-                SupporBreakdowns.Add(breakdown);
+                SupportBreakdowns.Add(breakdown);
             }
 
             skillPairs.Clear();
@@ -304,7 +304,7 @@ namespace mitama.Pages.DeckBuilder
         {
             if (sender is ToggleSwitch toggleSwitch)
             {
-                SupporBreakdowns.Clear();
+                SupportBreakdowns.Clear();
                 LegendaryDeck.Clear();
                 Deck.Clear();
                 Breakdown.Items.Clear();
