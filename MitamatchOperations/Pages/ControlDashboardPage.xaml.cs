@@ -758,7 +758,7 @@ public sealed partial class ControlDashboardPage
         LoadButton.IsEnabled = true;
     }
 
-    [GeneratedRegex("(.+)がオーダー(.+)を準備")]
+    [GeneratedRegex(@"(.+)がオーダー(.+)を準備")]
     private static partial Regex OrderPrepareRegex();
 
     private void AddScreen_OnClick(object sender, RoutedEventArgs e)
