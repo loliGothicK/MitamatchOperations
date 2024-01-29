@@ -203,7 +203,7 @@ public sealed partial class MemberManageConsole
 
         var order = string.Join("\n", (new string[] {
             $"{timeline[0].Order.Name}: {timeline[0].Pic}"
-        }).Concat(timeline.Skip(1).Select(x => x switch 
+        }).Concat(timeline.Skip(1).Select(x => x switch
         {
             _ when x.Conditional => $"{x.Order.Name}: {x.Pic}i—\”õj",
             _ => $"«\n{x.Order.Name}: {x.Pic}",
