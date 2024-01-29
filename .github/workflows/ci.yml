@@ -52,6 +52,7 @@ jobs:
         $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_PFX }}")
         $certificatePath = "GitHubActionsWorkflow.pfx"
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
+        Get-Content .\GitHubActionsWorkflow.pfx
 
     # Create the app package by building and packaging the project
     - name: Create the app package
