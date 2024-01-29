@@ -646,7 +646,7 @@ public sealed partial class ControlDashboardPage
 
     private static Task<AnalyzeResult> Analyze(string raw)
     {
-        var orderedRegex = OrderPrepareRegex();
+        var orderedRegex = new Regex(@"(.+)がオーダー(.+)を準備");
         var match = orderedRegex.Match(raw);
 
         return Task.FromResult<AnalyzeResult>(match.Success
@@ -757,10 +757,7 @@ public sealed partial class ControlDashboardPage
     {
         LoadButton.IsEnabled = true;
     }
-
-    [GeneratedRegex(@"(.+)がオーダー(.+)を準備")]
-    private static partial Regex OrderPrepareRegex();
-
+    
     private void AddScreen_OnClick(object sender, RoutedEventArgs e)
     {
         if (sender is not ToggleButton toggle) return;
