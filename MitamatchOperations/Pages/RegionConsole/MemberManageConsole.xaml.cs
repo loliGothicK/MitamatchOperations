@@ -205,7 +205,7 @@ public sealed partial class MemberManageConsole
             $"{timeline[0].Order.Name}: {timeline[0].Pic}"
         }).Concat(timeline.Skip(1).Select(x => x switch
         {
-            _ when x.Conditional => $"{x.Order.Name}: {x.Pic}（予備）",
+            _ when x.Conditional => @$"{x.Order.Name}: {x.Pic}（予備）",
             _ => $"↓\n{x.Order.Name}: {x.Pic}",
         })));
 
