@@ -646,7 +646,7 @@ public sealed partial class ControlDashboardPage
 
     private static Task<AnalyzeResult> Analyze(string raw)
     {
-        var orderedRegex = new Regex(@"(.+)がオーダー(.+)を準備");
+        var orderedRegex = MyRegex();
         var match = orderedRegex.Match(raw);
 
         return Task.FromResult<AnalyzeResult>(match.Success
@@ -774,6 +774,9 @@ public sealed partial class ControlDashboardPage
         // ウィンドウを表示
         newWindow.Activate();
     }
+
+    [GeneratedRegex(@"(.+)がオーダー(.+)を準備")]
+    private static partial Regex MyRegex();
 }
 
 internal record ResultItem(string Pic, Order Order, int Deviation, DateTime ActivatedAt)
