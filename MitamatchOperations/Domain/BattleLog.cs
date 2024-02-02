@@ -143,7 +143,10 @@ public partial record BattleLog(List<BattleLogItem> Data)
             }
         }
 
-        return Task.FromResult((ally, opponent));
+        return Task.FromResult((
+            ally.DistinctBy(item => item.Index).ToList(),
+            opponent.DistinctBy(item => item.Index).ToList()
+        ));
     }
 
     public Task<List<Unit>> ExtractUnits(string player)
