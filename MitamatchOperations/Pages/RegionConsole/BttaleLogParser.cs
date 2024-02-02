@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using DynamicData.Kernel;
@@ -156,11 +157,11 @@ internal partial class BattleLogParser
             .Select(fragment =>
             {
                 var match = memoriaRegex.Match(fragment.Content);
-                var name = match.Groups["memoria"].Value;
+                var name = Preprocessing(match.Groups["memoria"].Value);
                 var skill = match.Groups["skill"].Value;
                 var memoriaCandidate = Memoria
                         .List
-                        .MinBy(memoria => Algo.LevenshteinRate(memoria.Name, name));
+                        .MinBy(memoria => Algo.LevenshteinRate(memoria.Link, name));
                 var memoria = Memoria
                     .List
                     .Where(dummyCostume.CanBeEquipped)
@@ -199,4 +200,17 @@ internal partial class BattleLogParser
     private static partial Regex RareSkillRegex();
     [GeneratedRegex(@"\.|!|！|\?|？|\s+|")]
     private static partial Regex ToRemoveRegex();
+
+    internal static string Preprocessing(string name)
+    {
+        return name
+            .ToLower(CultureInfo.InvariantCulture)
+            .Replace("-", string.Empty)
+            .Replace("!", string.Empty)
+            .Replace("！", string.Empty)
+            .Replace("?", string.Empty)
+            .Replace("？", string.Empty)
+            .Replace(".", string.Empty)
+            .Replace(" ", string.Empty);
+    }
 }
