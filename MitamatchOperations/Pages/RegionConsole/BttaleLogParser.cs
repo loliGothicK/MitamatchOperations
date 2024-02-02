@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using DynamicData.Kernel;
@@ -92,11 +91,11 @@ internal partial class BattleLogParser
         else if (memoriaRegex.IsMatch(content))
         {
             var match = memoriaRegex.Match(content);
-            var name = match.Groups["memoria"].Value;
+            var name = Preprocessing(match.Groups["memoria"].Value);
             var skill = match.Groups["skill"].Value;
             var memoriaCandidate = Memoria
                     .List
-                    .MinBy(memoria => Algo.LevenshteinRate(memoria.Name, name));
+                    .MinBy(memoria => Algo.LevenshteinRate(memoria.Link, name));
             var memoria = Memoria
                 .List
                 .Where(memoria => memoria.Name == memoriaCandidate.Name)
@@ -182,7 +181,7 @@ internal partial class BattleLogParser
             .ToArray();
     }
 
-    private static string Fix(string name)
+    private static string Preprocessing(string name)
     {
         return ToRemoveRegex().Replace(name, string.Empty).ToLower();
     }
@@ -200,17 +199,4 @@ internal partial class BattleLogParser
     private static partial Regex RareSkillRegex();
     [GeneratedRegex(@"\.|!|！|\?|？|\s+|")]
     private static partial Regex ToRemoveRegex();
-
-    internal static string Preprocessing(string name)
-    {
-        return name
-            .ToLower(CultureInfo.InvariantCulture)
-            .Replace("-", string.Empty)
-            .Replace("!", string.Empty)
-            .Replace("！", string.Empty)
-            .Replace("?", string.Empty)
-            .Replace("？", string.Empty)
-            .Replace(".", string.Empty)
-            .Replace(" ", string.Empty);
-    }
 }
