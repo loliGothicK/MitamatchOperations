@@ -12,7 +12,7 @@
     <Grid>
         <Grid.Resources>
             <DataTemplate x:Name="MemoriaWithConcentrationTemplate" x:DataType="domain:MemoriaWithConcentration">
-                <Grid Width="100">
+                <Grid Width="90">
                     <Image Source="{x:Bind Memoria.Path}" Stretch="UniformToFill"/>
                     <Border Background="LightPink"
                             CornerRadius="30"
