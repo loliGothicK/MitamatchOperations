@@ -10,6 +10,7 @@ using mitama.Pages.RegionConsole;
 namespace mitama.Domain;
 
 public record struct Player(string Region, string Name);
+public record struct UnitChangePoint(string Name, TimeOnly Time);
 
 public enum SourceKind
 {
@@ -268,6 +269,28 @@ public partial record BattleLog(List<BattleLogItem> Data)
         foreach (var player in opponents)
         {
             res.Add(player.Name, data.Where(datum => datum.Player == player.Name || datum.Player == "スタンバイフェーズ").Select(datum => (datum.Time, datum.Item3)).ToArray());
+        }
+        return res;
+    }
+
+    public List<UnitChangePoint> ExtractUnitChanges()
+    {
+        List<UnitChangePoint> res = [];
+
+        foreach (var (time, source) in Data
+            .Select(item => (item.Time, item.Source, BattleLogParser.ParseEvent(item.Fragments[0].Content)))
+            .Where(pair => pair.Item3 is UnitChange)
+            .Select(pair => (pair.Time, pair.Source)))
+        {
+            if (time.Minute > 15) continue;
+            switch (source.Kind)
+            {
+                case SourceKind.Opponent:
+                    res.Add(new(source.Content.Name, time));
+                    break;
+                default:
+                    break;
+            }
         }
         return res;
     }

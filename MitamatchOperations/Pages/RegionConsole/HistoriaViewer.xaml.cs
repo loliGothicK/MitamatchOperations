@@ -25,6 +25,7 @@ public sealed partial class HistoriaViewer : Page
     private readonly ObservableCollection<OrderLog> OpponentOrders = [];
     private readonly ObservableCollection<Player> AllyMembers = [];
     private readonly ObservableCollection<Player> OpponentMembers = [];
+    private readonly ObservableCollection<UnitChangeLog> unitChanges = [];
 
     public HistoriaViewer()
     {
@@ -69,6 +70,16 @@ public sealed partial class HistoriaViewer : Page
         foreach (var x in summary.OpponentOrders)
         {
             OpponentOrders.Add(new OrderLog(Order.List[x.Index], $"{x.Time.Minute:D2}:{x.Time.Second:D2}"));
+        }
+        unitChanges.Clear();
+        path = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\unitChanges.json";
+        if (File.Exists(path))
+        {
+            var unitChangesData = JsonSerializer.Deserialize<UnitChanges>(File.ReadAllText(path));
+            foreach (var (name, time) in unitChangesData.Data)
+            {
+                unitChanges.Add(new(name, time));
+            }
         }
     }
 
@@ -181,7 +192,13 @@ public sealed partial class HistoriaViewer : Page
     }
 }
 
-internal record OrderLog(Order Order, string Time);
+internal record struct OrderLog(Order Order, string Time);
+internal record struct UnitChangeLog(string Name, TimeOnly Time)
+{
+    public string Display => $@"{Time} => {Name}";
+}
+
+internal record UnitChanges(List<UnitChangePoint> Data);
 
 internal record Summary(
     string Opponent,

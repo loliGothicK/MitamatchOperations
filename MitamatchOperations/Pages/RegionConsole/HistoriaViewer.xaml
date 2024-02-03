@@ -28,6 +28,11 @@
                 </Grid.ContextFlyout>
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Name="UnitChangeTemplate" x:DataType="local:UnitChangeLog">
+            <Grid AccessKey="{x:Bind Name}">
+                <TextBlock Text="{x:Bind Display}" Margin="0,0,5,0" FontSize="20"/>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -68,9 +73,9 @@
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Ally" FontSize="20"/>
                             <ScrollViewer Grid.Column="0"
-                                      Height="600"
-                                      IsVerticalScrollChainingEnabled="False"
-                                      Padding="0,0,16,0">
+                                          Height="600"
+                                          IsVerticalScrollChainingEnabled="False"
+                                          Padding="0,0,16,0">
                                 <ItemsRepeater ItemsSource="{x:Bind AllyOrders}"
                                                ItemTemplate="{StaticResource OrderTemplate}" />
                             </ScrollViewer>
@@ -84,6 +89,16 @@
                                 <ItemsRepeater ItemsSource="{x:Bind OpponentOrders}"
                                                ItemTemplate="{StaticResource OrderTemplate}" />
                             </ScrollViewer>
+                        </StackPanel>
+                    </Grid>
+                </PivotItem>
+                <PivotItem Header="Unit Changes">
+                    <Grid Margin="10">
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Opponent" FontSize="20"/>
+                            <ListView Grid.Column="0"
+                                      ItemsSource="{x:Bind unitChanges}"
+                                      ItemTemplate="{StaticResource UnitChangeTemplate}"/>
                         </StackPanel>
                     </Grid>
                 </PivotItem>

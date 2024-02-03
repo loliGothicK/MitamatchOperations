@@ -215,11 +215,24 @@ namespace mitama.Pages.RegionConsole
             await SaveStatusInfo(logDir, battleLog, allies, "Ally");
             await SaveStatusInfo(logDir, battleLog, opponents, "Opponent");
             await SaveSummary(logDir, battleLog);
+            await SaveUnitChanges(logDir, battleLog);
 
             GeneralInfoBar.Title = $"âêÕÇ™äÆóπÇµÇ‹ÇµÇΩÅB";
             GeneralInfoBar.Severity = InfoBarSeverity.Success;
             await Task.Delay(3000);
             GeneralInfoBar.IsOpen = false;
+        }
+
+        private async Task SaveUnitChanges(string logDir, BattleLog battleLog)
+        {
+            var unitChanges = battleLog.ExtractUnitChanges();
+            // output as json
+            var path = $@"{logDir}\{_date ?? DateTime.Now:yyyy-MM-dd}\unitChanges.json";
+            using var unitChangesFile = File.Create(path);
+            await unitChangesFile.WriteAsync(new UTF8Encoding(true).GetBytes(JsonSerializer.Serialize(new
+            {
+                Data = unitChanges
+            })));
         }
 
         private async Task SaveSummary(string logDir, BattleLog battleLog)
