@@ -11,7 +11,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.VisualBasic.FileIO;
 using mitama.Domain;
-using mitama.Domain.OrderKinds;
 using mitama.Pages.Common;
 using Windows.Storage;
 using Windows.Storage.Pickers;
