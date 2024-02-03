@@ -295,7 +295,7 @@ namespace mitama.Pages.RegionConsole
             }
         }
 
-        private bool Update(ref SortedDictionary<TimeOnly, AllStatus> history, TimeOnly time, StatusIncreaseDecrease stat, bool isStandBy)
+        private static bool Update(ref SortedDictionary<TimeOnly, AllStatus> history, TimeOnly time, StatusIncreaseDecrease stat, bool isStandBy)
         {
             var status = history.Keys.Count != 0 ? history.Last().Value : new AllStatus();
             switch (stat.Value)
@@ -340,7 +340,7 @@ namespace mitama.Pages.RegionConsole
                     status.WindDefense += windDefense.Value;
                     isStandBy = false;
                     break;
-                case StandByPhase standBy:
+                case StandByPhase:
                     if (!isStandBy)
                     {
                         status.Attack = status.Attack > 0 ? status.Attack : 0;
