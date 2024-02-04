@@ -195,7 +195,7 @@ public sealed partial class HistoriaViewer : Page
 internal record struct OrderLog(Order Order, string Time);
 internal record struct UnitChangeLog(string Name, TimeOnly Time)
 {
-    public string Display => $@"{Time} => {Name}";
+    public readonly string Display => $@"{Time} => {Name}";
 }
 
 internal record UnitChanges(List<UnitChangePoint> Data);

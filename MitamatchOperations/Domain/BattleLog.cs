@@ -292,7 +292,9 @@ public partial record BattleLog(List<BattleLogItem> Data)
                     break;
             }
         }
-        return res;
+        return res
+            .DistinctBy(item => $@"{item.Time}{item.Name}")
+            .ToList();
     }
 
     [GeneratedRegex(@"^ *スタンバイフェーズにて *(?<status>.+?) *を増加$")]

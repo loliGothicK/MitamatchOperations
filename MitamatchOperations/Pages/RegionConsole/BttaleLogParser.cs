@@ -197,6 +197,7 @@ internal partial class BattleLogParser
 
     [GeneratedRegex(@"^.*レアスキル「(?<skill>.+?)」*を発動 *$")]
     private static partial Regex RareSkillRegex();
+
     [GeneratedRegex(@"\.|!|！|\?|？|\s+|")]
     private static partial Regex ToRemoveRegex();
 }
