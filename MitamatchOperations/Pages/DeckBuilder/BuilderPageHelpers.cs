@@ -136,6 +136,7 @@ internal static class BuilderPageHelpers
             SupportUp => SupportType.SupportUp,
             RecoveryUp => SupportType.RecoveryUp,
             MpCostDown => SupportType.MpCostDown,
+            RangeUp => SupportType.RangeUp,
             _ => throw new System.NotImplementedException(),
         };
     }
@@ -169,6 +170,7 @@ internal static class BuilderPageHelpers
             SupportType.SupportUp => "支援UP",
             SupportType.RecoveryUp => "回復UP",
             SupportType.MpCostDown => "MP軽減",
+            SupportType.RangeUp => "効果範囲+",
             _ => "その他",
         };
     }

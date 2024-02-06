@@ -58,7 +58,6 @@ namespace mitama.Pages.DeckBuilder
         {
             string[] searchOptions = [
                 "???",
-                "レジェンダリー",
                 "ATKアップ",
                 "ATKダウン",
                 "Sp.ATKアップ",
@@ -67,6 +66,10 @@ namespace mitama.Pages.DeckBuilder
                 "DEFダウン",
                 "Sp.DEFアップ",
                 "Sp.DEFダウン",
+                "トライパワーアップ",
+                "トライパワーダウン",
+                "トライガードアップ",
+                "トライガードダウン",
                 "火属性攻撃力アップ",
                 "火属性攻撃力ダウン",
                 "水属性攻撃力アップ",
@@ -111,9 +114,48 @@ namespace mitama.Pages.DeckBuilder
             foreach (var option in searchOptions)
             {
                 var checkBox = new CheckBox { Content = option, IsChecked = false };
-                checkBox.Checked += SearchOption_Checked;
-                checkBox.Unchecked += SearchOption_Unchecked;
-                SearchOptions.Children.Add(checkBox);
+                checkBox.Checked += SkillOption_Checked;
+                checkBox.Unchecked += SkillOption_Unchecked;
+                SkillSearchOptions.Children.Add(checkBox);
+            }
+
+            searchOptions = [
+                "???",
+                "獲得マッチPtUP/通常単体",
+                "獲得マッチPtUP/特殊単体",
+                "ダメージUP",
+                "パワーUP",
+                "パワーDOWN",
+                "ガードUP",
+                "ガードDOWN",
+                "Sp.パワーUP",
+                "Sp.パワーDOWN",
+                "Sp.ガードUP",
+                "Sp.ガードDOWN",
+                "火パワーUP",
+                "水パワーUP",
+                "風パワーUP",
+                "火パワーDOWN",
+                "水パワーDOWN",
+                "風パワーDOWN",
+                "火ガードUP",
+                "水ガードUP",
+                "風ガードUP",
+                "火ガードDOWN",
+                "水ガードDOWN",
+                "風ガードDOWN",
+                "支援UP",
+                "回復UP",
+                "MP消費DOWN",
+                "効果範囲+",
+            ];
+
+            foreach (var option in searchOptions)
+            {
+                var checkBox = new CheckBox { Content = option, IsChecked = false };
+                checkBox.Checked += SupportOption_Checked;
+                checkBox.Unchecked += SupportOption_Unchecked;
+                SupportSearchOptions.Children.Add(checkBox);
             }
         }
 
@@ -126,12 +168,12 @@ namespace mitama.Pages.DeckBuilder
 
         private void Memeria_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
         {
-            try
+            if (e.Items.First() is Memoria)
             {
                 selectedMemorias = e.Items.Select(v => (Memoria)v).ToList();
                 e.Data.RequestedOperation = DataPackageOperation.Move;
             }
-            catch
+            else
             {
                 selectedMemorias = e.Items.Select(v => ((MemoriaWithConcentration)v).Memoria).ToList();
                 e.Data.RequestedOperation = DataPackageOperation.Move;
@@ -338,7 +380,7 @@ namespace mitama.Pages.DeckBuilder
                         FilterType.SpecialSingle,
                         FilterType.SpecialRange,
                     ];
-                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSearchOption(f)))
+                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSkillOption(f) && !IsSupportOption(f)))
                     {
                         _currentFilters.Add(type);
                     }
@@ -356,7 +398,7 @@ namespace mitama.Pages.DeckBuilder
                         FilterType.Interference,
                         FilterType.Recovery
                     ];
-                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSearchOption(f)))
+                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSkillOption(f) && !IsSupportOption(f)))
                     {
                         _currentFilters.Add(type);
                     }
@@ -844,13 +886,13 @@ namespace mitama.Pages.DeckBuilder
                 FilterType.Interference,
                 FilterType.Recovery
             ];
-            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSearchOption(f)))
+            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSkillOption(f) && !IsSupportOption(f)))
             {
                 _currentFilters.Add(type);
             }
         }
 
-        private void SearchOption_Checked(object sender, RoutedEventArgs e)
+        private void SkillOption_Checked(object sender, RoutedEventArgs e)
         {
             if (sender is not CheckBox box) return;
             var prevCount = _currentFilters.Count;
@@ -899,6 +941,34 @@ namespace mitama.Pages.DeckBuilder
                 case "Sp.DEFダウン":
                     {
                         _currentFilters.Add(FilterType.SDd);
+                        break;
+                    }
+                case "トライパワーアップ":
+                    {
+                        _currentFilters.Add(FilterType.WaPu);
+                        _currentFilters.Add(FilterType.WiPu);
+                        _currentFilters.Add(FilterType.FPu);
+                        break;
+                    }
+                case "トライパワーダウン":
+                    {
+                        _currentFilters.Add(FilterType.WaPd);
+                        _currentFilters.Add(FilterType.WiPd);
+                        _currentFilters.Add(FilterType.FPd);
+                        break;
+                    }
+                case "トライガードアップ":
+                    {
+                        _currentFilters.Add(FilterType.WaGu);
+                        _currentFilters.Add(FilterType.WiGu);
+                        _currentFilters.Add(FilterType.FGu);
+                        break;
+                    }
+                case "トライガードダウン":
+                    {
+                        _currentFilters.Add(FilterType.WaGd);
+                        _currentFilters.Add(FilterType.WiGd);
+                        _currentFilters.Add(FilterType.FGd);
                         break;
                     }
                 case "火属性攻撃力アップ":
@@ -1109,18 +1179,167 @@ namespace mitama.Pages.DeckBuilder
             Sort(SortOption.SelectedIndex);
         }
 
-        private void SearchOption_Unchecked(object sender, RoutedEventArgs e)
+        private void SupportOption_Checked(object sender, RoutedEventArgs e)
+        {
+            if (sender is not CheckBox box) return;
+            var prevCount = _currentFilters.Count;
+            switch (box.Content)
+            {
+                case "獲得マッチPtUP/通常単体":
+                    {
+                        _currentFilters.Add(FilterType.NormalMatchPtUp);
+                        break;
+                    }
+                case "獲得マッチPtUP/特殊単体":
+                    {
+                        _currentFilters.Add(FilterType.SpecialMatchPtUp);
+                        break;
+                    }
+                case "ダメージUP":
+                    {
+                        _currentFilters.Add(FilterType.DamageUp);
+                        break;
+                    }
+                case "パワーUP":
+                    {
+                        _currentFilters.Add(FilterType.PowerUp);
+                        break;
+                    }
+                case "パワーDOWN":
+                    {
+                        _currentFilters.Add(FilterType.PowerDown);
+                        break;
+                    }
+                case "ガードUP":
+                    {
+                        _currentFilters.Add(FilterType.GuardUp);
+                        break;
+                    }
+                case "ガードDOWN":
+                    {
+                        _currentFilters.Add(FilterType.GuardDown);
+                        break;
+                    }
+                case "Sp.パワーUP":
+                    {
+                        _currentFilters.Add(FilterType.SpPowerUp);
+                        break;
+                    }
+                case "Sp.パワーDOWN":
+                    {
+                        _currentFilters.Add(FilterType.SpPowerDown);
+                        break;
+                    }
+                case "Sp.ガードUP":
+                    {
+                        _currentFilters.Add(FilterType.SpGuardUp);
+                        break;
+                    }
+                case "Sp.ガードDOWN":
+                    {
+                        _currentFilters.Add(FilterType.SpGuardDown);
+                        break;
+                    }
+                case "火パワーUP":
+                    {
+                        _currentFilters.Add(FilterType.FirePowerUp);
+                        break;
+                    }
+                case "火パワーDOWN":
+                    {
+                        _currentFilters.Add(FilterType.FirePowerDown);
+                        break;
+                    }
+                case "水パワーUP":
+                    {
+                        _currentFilters.Add(FilterType.WaterPowerUp);
+                        break;
+                    }
+                case "水パワーDOWN":
+                    {
+                        _currentFilters.Add(FilterType.WaterPowerDown);
+                        break;
+                    }
+                case "風パワーUP":
+                    {
+                        _currentFilters.Add(FilterType.WindPowerUp);
+                        break;
+                    }
+                case "風パワーDOWN":
+                    {
+                        _currentFilters.Add(FilterType.WindPowerDown);
+                        break;
+                    }
+                case "火ガードUP":
+                    {
+                        _currentFilters.Add(FilterType.FireGuardUp);
+                        break;
+                    }
+                case "火ガードDOWN":
+                    {
+                        _currentFilters.Add(FilterType.FireGuardDown);
+                        break;
+                    }
+                case "水ガードUP":
+                    {
+                        _currentFilters.Add(FilterType.WaterGuardUp);
+                        break;
+                    }
+                case "水ガードDOWN":
+                    {
+                        _currentFilters.Add(FilterType.WaterGuardDown);
+                        break;
+                    }
+                case "風ガードUP":
+                    {
+                        _currentFilters.Add(FilterType.WindGuardUp);
+                        break;
+                    }
+                case "風ガードDOWN":
+                    {
+                        _currentFilters.Add(FilterType.WindGuardDown);
+                        break;
+                    }
+                case "支援UP":
+                    {
+                        _currentFilters.Add(FilterType.SupportUp);
+                        break;
+                    }
+                case "回復UP":
+                    {
+                        _currentFilters.Add(FilterType.RecoveryUp);
+                        break;
+                    }
+                case "MP消費DOWN":
+                    {
+                        _currentFilters.Add(FilterType.MpCostDown);
+                        break;
+                    }
+                case "効果範囲+":
+                    {
+                        _currentFilters.Add(FilterType.RangeUp);
+                        break;
+                    }
+                default:
+                    {
+                        throw new UnreachableException("Unreachable");
+                    }
+            }
+            if (prevCount == _currentFilters.Count) return;
+            foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
+            {
+                Pool.Remove(memoria);
+            }
+            Sort(SortOption.SelectedIndex);
+        }
+
+        private void SkillOption_Unchecked(object sender, RoutedEventArgs e)
         {
             if (sender is not CheckBox box) return;
             var prevCount = _currentFilters.Count;
 
             switch (box.Content)
             {
-                case "レジェンダリー":
-                    {
-                        _currentFilters.Remove(FilterType.Legendary);
-                        break;
-                    }
                 case "ATKアップ":
                     {
                         _currentFilters.Remove(FilterType.Au);
@@ -1159,6 +1378,34 @@ namespace mitama.Pages.DeckBuilder
                 case "Sp.DEFダウン":
                     {
                         _currentFilters.Remove(FilterType.SDd);
+                        break;
+                    }
+                case "トライパワーアップ":
+                    {
+                        _currentFilters.Remove(FilterType.WaPu);
+                        _currentFilters.Remove(FilterType.WiPu);
+                        _currentFilters.Remove(FilterType.FPu);
+                        break;
+                    }
+                case "トライパワーダウン":
+                    {
+                        _currentFilters.Remove(FilterType.WaPd);
+                        _currentFilters.Remove(FilterType.WiPd);
+                        _currentFilters.Remove(FilterType.FPd);
+                        break;
+                    }
+                case "トライガードアップ":
+                    {
+                        _currentFilters.Remove(FilterType.WaGu);
+                        _currentFilters.Remove(FilterType.WiGu);
+                        _currentFilters.Remove(FilterType.FGu);
+                        break;
+                    }
+                case "トライガードダウン":
+                    {
+                        _currentFilters.Remove(FilterType.WaGd);
+                        _currentFilters.Remove(FilterType.WiGd);
+                        _currentFilters.Remove(FilterType.FGd);
                         break;
                     }
                 case "火属性攻撃力アップ":
@@ -1372,6 +1619,166 @@ namespace mitama.Pages.DeckBuilder
             }
             Sort(SortOption.SelectedIndex);
         }
+
+        private void SupportOption_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (sender is not CheckBox box) return;
+            var prevCount = _currentFilters.Count;
+
+            switch (box.Content)
+            {
+                case "獲得マッチPtUP/通常単体":
+                    {
+                        _currentFilters.Remove(FilterType.NormalMatchPtUp);
+                        break;
+                    }
+                case "獲得マッチPtUP/特殊単体":
+                    {
+                        _currentFilters.Remove(FilterType.SpecialMatchPtUp);
+                        break;
+                    }
+                case "ダメージUP":
+                    {
+                        _currentFilters.Remove(FilterType.DamageUp);
+                        break;
+                    }
+                case "パワーUP":
+                    {
+                        _currentFilters.Remove(FilterType.PowerUp);
+                        break;
+                    }
+                case "パワーDOWN":
+                    {
+                        _currentFilters.Remove(FilterType.PowerDown);
+                        break;
+                    }
+                case "ガードUP":
+                    {
+                        _currentFilters.Remove(FilterType.GuardUp);
+                        break;
+                    }
+                case "ガードDOWN":
+                    {
+                        _currentFilters.Remove(FilterType.GuardDown);
+                        break;
+                    }
+                case "Sp.パワーUP":
+                    {
+                        _currentFilters.Remove(FilterType.SpPowerUp);
+                        break;
+                    }
+                case "Sp.パワーDOWN":
+                    {
+                        _currentFilters.Remove(FilterType.SpPowerDown);
+                        break;
+                    }
+                case "Sp.ガードUP":
+                    {
+                        _currentFilters.Remove(FilterType.SpGuardUp);
+                        break;
+                    }
+                case "Sp.ガードDOWN":
+                    {
+                        _currentFilters.Remove(FilterType.SpGuardDown);
+                        break;
+                    }
+                case "火パワーUP":
+                    {
+                        _currentFilters.Remove(FilterType.FirePowerUp);
+                        break;
+                    }
+                case "火パワーDOWN":
+                    {
+                        _currentFilters.Remove(FilterType.FirePowerDown);
+                        break;
+                    }
+                case "水パワーUP":
+                    {
+                        _currentFilters.Remove(FilterType.WaterPowerUp);
+                        break;
+                    }
+                case "水パワーDOWN":
+                    {
+                        _currentFilters.Remove(FilterType.WaterPowerDown);
+                        break;
+                    }
+                case "風パワーUP":
+                    {
+                        _currentFilters.Remove(FilterType.WindPowerUp);
+                        break;
+                    }
+                case "風パワーDOWN":
+                    {
+                        _currentFilters.Remove(FilterType.WindPowerDown);
+                        break;
+                    }
+                case "火ガードUP":
+                    {
+                        _currentFilters.Remove(FilterType.FireGuardUp);
+                        break;
+                    }
+                case "火ガードDOWN":
+                    {
+                        _currentFilters.Remove(FilterType.FireGuardDown);
+                        break;
+                    }
+                case "水ガードUP":
+                    {
+                        _currentFilters.Remove(FilterType.WaterGuardUp);
+                        break;
+                    }
+                case "水ガードDOWN":
+                    {
+                        _currentFilters.Remove(FilterType.WaterGuardDown);
+                        break;
+                    }
+                case "風ガードUP":
+                    {
+                        _currentFilters.Remove(FilterType.WindGuardUp);
+                        break;
+                    }
+                case "風ガードDOWN":
+                    {
+                        _currentFilters.Remove(FilterType.WindGuardDown);
+                        break;
+                    }
+                case "支援UP":
+                    {
+                        _currentFilters.Remove(FilterType.SupportUp);
+                        break;
+                    }
+                case "回復UP":
+                    {
+                        _currentFilters.Remove(FilterType.RecoveryUp);
+                        break;
+                    }
+                case "MP消費DOWN":
+                    {
+                        _currentFilters.Remove(FilterType.MpCostDown);
+                        break;
+                    }
+                case "効果範囲+":
+                    {
+                        _currentFilters.Remove(FilterType.RangeUp);
+                        break;
+                    }
+                default:
+                    {
+                        throw new UnreachableException("Unreachable");
+                    }
+            }
+            if (prevCount == _currentFilters.Count) return;
+            foreach (var memoria in Memoria
+                    .List
+                    .Where(memoria => !Pool.Contains(memoria))
+                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Name))
+                    .Where(ApplyFilter))
+            {
+                Pool.Add(memoria);
+            }
+            Sort(SortOption.SelectedIndex);
+        }
+
         private void InitFilters()
         {
             Filters.Add(FilterType.Legendary, memoria => memoria.IsLegendary);
@@ -1759,11 +2166,34 @@ namespace mitama.Pages.DeckBuilder
             // カウンター
             Filters.Add(FilterType.Counter, memoria => memoria.Skill.Effects.Any(eff => eff is Counter));
 
-            // push all FilterTypes to _currentFilters
-            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsSearchOption(f)))
-            {
-                _currentFilters.Add(type);
-            }
+            // 補助検索オプション
+            Filters.Add(FilterType.NormalMatchPtUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is NormalMatchPtUp));
+            Filters.Add(FilterType.SpecialMatchPtUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is SpecialMatchPtUp));
+            Filters.Add(FilterType.DamageUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is DamageUp));
+            Filters.Add(FilterType.PowerUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is PowerUp(Domain.Type.Normal)));
+            Filters.Add(FilterType.PowerDown, memoria => memoria.SupportSkill.Effects.Any(eff => eff is PowerDown(Domain.Type.Normal)));
+            Filters.Add(FilterType.GuardUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is GuardUp(Domain.Type.Normal)));
+            Filters.Add(FilterType.GuardDown, memoria => memoria.SupportSkill.Effects.Any(eff => eff is GuardDown(Domain.Type.Normal)));
+            Filters.Add(FilterType.SpPowerUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is PowerUp(Domain.Type.Special)));
+            Filters.Add(FilterType.SpPowerDown, memoria => memoria.SupportSkill.Effects.Any(eff => eff is PowerDown(Domain.Type.Special)));
+            Filters.Add(FilterType.SpGuardUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is GuardUp(Domain.Type.Special)));
+            Filters.Add(FilterType.SpGuardDown, memoria => memoria.SupportSkill.Effects.Any(eff => eff is GuardDown(Domain.Type.Special)));
+            Filters.Add(FilterType.FirePowerUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is ElementPowerUp(Element.Fire)));
+            Filters.Add(FilterType.WaterPowerUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is ElementPowerUp(Element.Water)));
+            Filters.Add(FilterType.WindPowerUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is ElementPowerUp(Element.Wind)));
+            Filters.Add(FilterType.FirePowerDown, memoria => memoria.SupportSkill.Effects.Any(eff => eff is ElementPowerDown(Element.Fire)));
+            Filters.Add(FilterType.WaterPowerDown, memoria => memoria.SupportSkill.Effects.Any(eff => eff is ElementPowerDown(Element.Water)));
+            Filters.Add(FilterType.WindPowerDown, memoria => memoria.SupportSkill.Effects.Any(eff => eff is ElementPowerDown(Element.Wind)));
+            Filters.Add(FilterType.FireGuardUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is ElementGuardUp(Element.Fire)));
+            Filters.Add(FilterType.WaterGuardUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is ElementGuardUp(Element.Water)));
+            Filters.Add(FilterType.WindGuardUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is ElementGuardUp(Element.Wind)));
+            Filters.Add(FilterType.FireGuardDown, memoria => memoria.SupportSkill.Effects.Any(eff => eff is ElementGuardDown(Element.Fire)));
+            Filters.Add(FilterType.WaterGuardDown, memoria => memoria.SupportSkill.Effects.Any(eff => eff is ElementGuardDown(Element.Water)));
+            Filters.Add(FilterType.WindGuardDown, memoria => memoria.SupportSkill.Effects.Any(eff => eff is ElementGuardDown(Element.Wind)));
+            Filters.Add(FilterType.SupportUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is SupportUp));
+            Filters.Add(FilterType.RecoveryUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is RecoveryUp));
+            Filters.Add(FilterType.MpCostDown, memoria => memoria.SupportSkill.Effects.Any(eff => eff is MpCostDown));
+            Filters.Add(FilterType.RangeUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is RangeUp));
         }
 
         bool ApplyFilter(Memoria memoria)
@@ -1772,8 +2202,9 @@ namespace mitama.Pages.DeckBuilder
             var p1 = _currentFilters.Where(IsElementFilter).Any(key => Filters[key](memoria));
             var p2 = _currentFilters.Where(IsRangeFilter).Any(key => Filters[key](memoria));
             var p3 = _currentFilters.Where(IsLevelFilter).Any(key => Filters[key](memoria));
-            var p4 = _currentFilters.Where(IsSearchOption).All(key => Filters[key](memoria));
-            return p0 && p1 && p2 && p3 && p4;
+            var p4 = _currentFilters.Where(IsSkillOption).All(key => Filters[key](memoria));
+            var p5 = _currentFilters.Where(IsSupportOption).All(key => Filters[key](memoria));
+            return p0 && p1 && p2 && p3 && p4 && p5;
         }
 
         bool IsKindFilter(FilterType filter)
@@ -1790,6 +2221,7 @@ namespace mitama.Pages.DeckBuilder
 
             return kindFilters.Contains(filter);
         }
+
         bool IsElementFilter(FilterType filter)
         {
             FilterType[] elementFilters = [
@@ -1802,6 +2234,7 @@ namespace mitama.Pages.DeckBuilder
 
             return elementFilters.Contains(filter);
         }
+
         bool IsRangeFilter(FilterType filter)
         {
             FilterType[] rangeFilters = [
@@ -1814,6 +2247,7 @@ namespace mitama.Pages.DeckBuilder
 
             return rangeFilters.Contains(filter);
         }
+
         bool IsLevelFilter(FilterType filter)
         {
             FilterType[] LevelFilters = [
@@ -1831,10 +2265,10 @@ namespace mitama.Pages.DeckBuilder
 
             return LevelFilters.Contains(filter);
         }
-        bool IsSearchOption(FilterType filter)
+
+        bool IsSkillOption(FilterType filter)
         {
             FilterType[] effectFilters = [
-                FilterType.Legendary,
                 FilterType.Au,
                 FilterType.Ad,
                 FilterType.SAu,
@@ -1886,6 +2320,41 @@ namespace mitama.Pages.DeckBuilder
 
             return effectFilters.Contains(filter);
         }
+
+        bool IsSupportOption(FilterType type)
+        {
+            FilterType[] supportFilters = [
+                FilterType.NormalMatchPtUp,
+                FilterType.SpecialMatchPtUp,
+                FilterType.DamageUp,
+                FilterType.PowerUp,
+                FilterType.PowerDown,
+                FilterType.GuardUp,
+                FilterType.GuardDown,
+                FilterType.SpPowerUp,
+                FilterType.SpPowerDown,
+                FilterType.SpGuardUp,
+                FilterType.SpGuardDown,
+                FilterType.FirePowerUp,
+                FilterType.WaterPowerUp,
+                FilterType.WindPowerUp,
+                FilterType.FirePowerDown,
+                FilterType.WaterPowerDown,
+                FilterType.WindPowerDown,
+                FilterType.FireGuardUp,
+                FilterType.WaterGuardUp,
+                FilterType.WindGuardUp,
+                FilterType.FireGuardDown,
+                FilterType.WaterGuardDown,
+                FilterType.WindGuardDown,
+                FilterType.SupportUp,
+                FilterType.RecoveryUp,
+                FilterType.MpCostDown,
+                FilterType.RangeUp,
+            ];
+
+            return supportFilters.Contains(type);
+        } 
 
         private void Sort(int option)
         {
@@ -2200,6 +2669,34 @@ namespace mitama.Pages.DeckBuilder
         Charge,
         Recover,
         Counter,
+        // Support Effects
+        NormalMatchPtUp,
+        SpecialMatchPtUp,
+        DamageUp,
+        PowerUp,
+        PowerDown,
+        GuardUp,
+        GuardDown,
+        SpPowerUp,
+        SpPowerDown,
+        SpGuardUp,
+        SpGuardDown,
+        FirePowerUp,
+        WaterPowerUp,
+        WindPowerUp,
+        FirePowerDown,
+        WaterPowerDown,
+        WindPowerDown,
+        FireGuardUp,
+        WaterGuardUp,
+        WindGuardUp,
+        FireGuardDown,
+        WaterGuardDown,
+        WindGuardDown,
+        SupportUp,
+        RecoveryUp,
+        MpCostDown,
+        RangeUp,
     }
 
     public enum SkillType
@@ -2264,6 +2761,7 @@ namespace mitama.Pages.DeckBuilder
         SupportUp,
         RecoveryUp,
         MpCostDown,
+        RangeUp,
     }
 
     public enum KindType

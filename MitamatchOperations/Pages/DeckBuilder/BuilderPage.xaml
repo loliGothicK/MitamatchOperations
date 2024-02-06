@@ -405,10 +405,17 @@
                                 </Flyout>
                             </AppBarButton.Flyout>
                         </AppBarButton>
-                        <AppBarButton Icon="Zoom" Label="Search">
+                        <AppBarButton Icon="Zoom" Label="Skill">
                             <AppBarButton.Flyout>
                                 <Flyout>
-                                    <StackPanel x:Name="SearchOptions" />
+                                    <StackPanel x:Name="SkillSearchOptions" />
+                                </Flyout>
+                            </AppBarButton.Flyout>
+                        </AppBarButton>
+                        <AppBarButton Icon="Zoom" Label="Support">
+                            <AppBarButton.Flyout>
+                                <Flyout>
+                                    <StackPanel x:Name="SupportSearchOptions" />
                                 </Flyout>
                             </AppBarButton.Flyout>
                         </AppBarButton>
