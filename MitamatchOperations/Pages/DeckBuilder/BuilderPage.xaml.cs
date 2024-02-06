@@ -2481,6 +2481,20 @@ namespace mitama.Pages.DeckBuilder
             {
                 Deck.Add(memoria);
             }
+            Pool.Clear();
+            foreach (var memoria in Memoria
+                .List
+                .Where((unit.IsFront ? Costume.DummyVanguard : Costume.DummyRearguard).CanBeEquipped)
+                .Where(memoria => !Pool.Contains(memoria))
+                .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Name)))
+            {
+                Pool.Add(memoria);
+            }
+            foreach (var memoria in Deck.Concat(LegendaryDeck))
+            {
+                Pool.Remove(memoria);
+            }
+            Sort(SortOption.SelectedIndex);
         }
 
         private void Concentration_SelectionChanged(object sender, SelectionChangedEventArgs e)
