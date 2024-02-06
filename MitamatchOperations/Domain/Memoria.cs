@@ -51,6 +51,7 @@ public enum Type
 
 public enum Level
 {
+    NoLevel,
     One,
     Two,
     Three,
@@ -185,6 +186,8 @@ public record RecoveryUp : SupportEffect;
 
 public record MpCostDown : SupportEffect;
 
+public record RangeUp(int Plus) : SupportEffect;
+
 public record SupportSkill(
     string Name,
     string Description,
@@ -300,6 +303,306 @@ public record Memoria(
 
     public static readonly Memoria[] List =
     [
+        new Memoria(
+            1305,
+            "ultimatememoria変幻自在のtrickster",
+            "変幻自在のtrickster",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Water,
+            [
+                new BasicStatus(3449, 5258, 3440, 4909),
+                new BasicStatus(3659, 5584, 3650, 5614),
+                new BasicStatus(3869, 6409, 3860, 5918),
+                new BasicStatus(4079, 6735, 4070, 6723),
+                new BasicStatus(4290, 7761, 4281, 7028),
+            ],
+            27,
+            new Skill(
+                "Sp.カウンタートライガードバーストD Ⅳ+",
+                "敵2体に特殊特大ダメージを与え、敵のSp.DEFと火属性防御力・水属性防御力・風属性防御力をダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
+                Level.Four,
+                Range.D
+            ),
+            new SupportSkill(
+                "コ:効果範囲+1",
+                "コマンド実行時、一定確率で効果対象範囲が+1される。",
+                Trigger.Command,
+                [new RangeUp(1)],
+                Level.NoLevel
+            )
+        ),
+        new Memoria(
+            1304,
+            "ultimatememoria変幻自在のtrickster",
+            "変幻自在のtrickster",
+            new Rearguard(RearguardKind.Interference),
+            Element.Water,
+            [
+                new BasicStatus(4916, 5258, 3440, 3442),
+                new BasicStatus(5421, 5584, 3650, 3652),
+                new BasicStatus(5725, 6209, 3860, 3862),
+                new BasicStatus(6330, 6535, 4070, 4072),
+                new BasicStatus(6635, 7361, 4281, 4283),
+            ],
+            27,
+            new Skill(
+                "Sp.カウンタートライパワーフォールE Ⅴ",
+                "敵2～3体のSp.ATKと火属性攻撃力・水属性攻撃力・風属性攻撃力を特大ダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
+                Level.Five,
+                Range.E
+            ),
+            new SupportSkill(
+                "コ:効果範囲+1",
+                "コマンド実行時、一定確率で効果対象範囲が+1される。",
+                Trigger.Command,
+                [new RangeUp(1)],
+                Level.NoLevel
+            )
+        ),
+        new Memoria(
+            1303,
+            "ultimatememoria戦場の一番星",
+            "戦場の一番星",
+            new Rearguard(RearguardKind.Support),
+            Element.Water,
+            [
+                new BasicStatus(5098, 5095, 3463, 3453),
+                new BasicStatus(5613, 5610, 3673, 3663),
+                new BasicStatus(6178, 6175, 3883, 3873),
+                new BasicStatus(6743, 6740, 4093, 4083),
+                new BasicStatus(7409, 7406, 4304, 4294),
+            ],
+            27,
+            new Skill(
+                "WカウンターパワーアシストE Ⅴ",
+                "味方2～3体のATKとSp.ATKを特大アップさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new SpAtk(), Amount.Medium)],
+                Level.Five,
+                Range.E
+            ),
+            new SupportSkill(
+                "コ:効果範囲+1",
+                "コマンド実行時、一定確率で効果対象範囲が+1される。",
+                Trigger.Command,
+                [new RangeUp(1)],
+                Level.NoLevel
+            )
+        ),
+        new Memoria(
+            1302,
+            "ultimatememoria戦場の一番星",
+            "戦場の一番星",
+            new Vanguard(VanguardKind.SpecialSingle),
+            Element.Water,
+            [
+                new BasicStatus(3468, 5258, 3463, 4920),
+                new BasicStatus(3678, 5584, 3673, 5625),
+                new BasicStatus(3888, 6409, 3883, 5929),
+                new BasicStatus(4098, 6735, 4093, 6734),
+                new BasicStatus(4309, 7761, 4304, 7039),
+            ],
+            27,
+            new Skill(
+                "Sp.カウンタートライパワースマッシュA Ⅴ+",
+                "敵1体に特殊超特大ダメージを与え、自身のSp.ATKと火属性攻撃力・水属性攻撃力・風属性攻撃力をアップさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
+                Level.Five,
+                Range.A
+            ),
+            new SupportSkill(
+                "コ:効果範囲+1",
+                "コマンド実行時、一定確率で効果対象範囲が+1される。",
+                Trigger.Command,
+                [new RangeUp(1)],
+                Level.NoLevel
+            )
+        ),
+        new Memoria(
+            1301,
+            "ultimatememoria閑雅なる氷帝",
+            "閑雅なる氷帝",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Fire,
+            [
+                new BasicStatus(3463, 3443, 4930, 5264),
+                new BasicStatus(3673, 3653, 5635, 5590),
+                new BasicStatus(3883, 3863, 5939, 6415),
+                new BasicStatus(4093, 4073, 6744, 6741),
+                new BasicStatus(4304, 4284, 7049, 7767),
+            ],
+            27,
+            new Skill(
+                "Sp.カウンタートライガードヒールE Ⅴ",
+                "味方2～3体のHPを特大回復し、Sp.DEFと火属性防御力・水属性防御力・風属性防御力を小アップする。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
+                Level.Five,
+                Range.E
+            ),
+            new SupportSkill(
+                "コ:効果範囲+1",
+                "コマンド実行時、一定確率で効果対象範囲が+1される。",
+                Trigger.Command,
+                [new RangeUp(1)],
+                Level.NoLevel
+            )
+        ),
+        new Memoria(
+            1300,
+            "ultimatememoria閑雅なる氷帝",
+            "閑雅なる氷帝",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new BasicStatus(3463, 5236, 3463, 4938),
+                new BasicStatus(3673, 5562, 3673, 5643),
+                new BasicStatus(3883, 6387, 3883, 5947),
+                new BasicStatus(4093, 6713, 4093, 6752),
+                new BasicStatus(4304, 7739, 4304, 7057),
+            ],
+            27,
+            new Skill(
+                "Sp.カウンタートライパワースマッシュD Ⅳ+",
+                "敵2体に特殊特大ダメージを与え、自身のSp.ATKと火属性攻撃力・水属性攻撃力・風属性攻撃力をアップさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
+                Level.Four,
+                Range.D
+            ),
+            new SupportSkill(
+                "コ:効果範囲+1",
+                "コマンド実行時、一定確率で効果対象範囲が+1される。",
+                Trigger.Command,
+                [new RangeUp(1)],
+                Level.NoLevel
+            )
+        ),
+        new Memoria(
+            1299,
+            "ultimatememoria日輪背負う天使",
+            "日輪背負う天使",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            [
+                new BasicStatus(5243, 4908, 3444, 3473),
+                new BasicStatus(5569, 5613, 3654, 3683),
+                new BasicStatus(6394, 5917, 3864, 3893),
+                new BasicStatus(6720, 6722, 4074, 4103),
+                new BasicStatus(7746, 7027, 4285, 4314),
+            ],
+            27,
+            new Skill(
+                "カウンタートライパワーフォールE Ⅴ",
+                "敵2～3体のATKと火属性攻撃力・水属性攻撃力・風属性攻撃力を特大ダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium), new StatusDown(new ElementAttack(Element.Wind), Amount.Medium)],
+                Level.Five,
+                Range.E
+            ),
+            new SupportSkill(
+                "コ:効果範囲+1",
+                "コマンド実行時、一定確率で効果対象範囲が+1される。",
+                Trigger.Command,
+                [new RangeUp(1)],
+                Level.NoLevel
+            )
+        ),
+        new Memoria(
+            1298,
+            "ultimatememoria日輪背負う天使",
+            "日輪背負う天使",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new BasicStatus(5243, 3441, 4911, 3473),
+                new BasicStatus(5569, 3651, 5616, 3683),
+                new BasicStatus(6394, 3861, 5920, 3893),
+                new BasicStatus(6720, 4071, 6725, 4103),
+                new BasicStatus(7746, 4282, 7030, 4314),
+            ],
+            27,
+            new Skill(
+                "カウンタートライガードブレイクD Ⅳ+",
+                "敵2体に通常特大ダメージを与え、敵のDEFと火属性防御力・水属性防御力・風属性防御力をダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
+                Level.Four,
+                Range.D
+            ),
+            new SupportSkill(
+                "コ:効果範囲+1",
+                "コマンド実行時、一定確率で効果対象範囲が+1される。",
+                Trigger.Command,
+                [new RangeUp(1)],
+                Level.NoLevel
+            )
+        ),
+        new Memoria(
+            1297,
+            "ultimatememoria至宝の煌き",
+            "至宝の煌き",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            [
+                new BasicStatus(5263, 3476, 4910, 3440),
+                new BasicStatus(5589, 3686, 5615, 3650),
+                new BasicStatus(6414, 3896, 5919, 3860),
+                new BasicStatus(6740, 4106, 6724, 4070),
+                new BasicStatus(7766, 4317, 7029, 4281),
+            ],
+            27,
+            new Skill(
+                "カウンタートライパワーストライクD Ⅳ+",
+                "敵2体に通常特大ダメージを与え、自身のATKと火属性攻撃力・水属性攻撃力・風属性攻撃力をアップさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
+                Level.Four,
+                Range.D
+            ),
+            new SupportSkill(
+                "コ:効果範囲+1",
+                "コマンド実行時、一定確率で効果対象範囲が+1される。",
+                Trigger.Command,
+                [new RangeUp(1)],
+                Level.NoLevel
+            )
+        ),
+        new Memoria(
+            1296,
+            "ultimatememoria至宝の煌き",
+            "至宝の煌き",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Water,
+            [
+                new BasicStatus(3470, 3476, 5236, 4907),
+                new BasicStatus(3680, 3686, 5562, 5412),
+                new BasicStatus(3890, 3896, 6187, 5716),
+                new BasicStatus(4100, 4106, 6513, 6321),
+                new BasicStatus(4311, 4317, 7339, 6626),
+            ],
+            27,
+            new Skill(
+                "カウンタートライガードヒールE Ⅴ",
+                "味方2～3体のHPを特大回復し、DEFと火属性防御力・水属性防御力・風属性防御力を小アップする。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
+                Level.Five,
+                Range.E
+            ),
+            new SupportSkill(
+                "コ:効果範囲+1",
+                "コマンド実行時、一定確率で効果対象範囲が+1される。",
+                Trigger.Command,
+                [new RangeUp(1)],
+                Level.NoLevel
+            )
+        ),
         new Memoria(
             1295,
             "クリエイターズコラボ可憐な香に包まれて",
