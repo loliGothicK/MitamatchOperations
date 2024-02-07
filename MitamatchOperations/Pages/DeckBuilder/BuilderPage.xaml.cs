@@ -2462,9 +2462,18 @@ namespace mitama.Pages.DeckBuilder
             {
                 File.WriteAllBytes(path, new UTF8Encoding(true).GetBytes(unit.ToJson()));
             }
-            if (unit.IsFront != Switch.IsOn)
+            if (!unit.IsFront && Switch.IsOn)
             {
-                GeneralInfoBar.Title = "前衛モードで後衛編成をロードすること（またはその逆）はできません！";
+                GeneralInfoBar.Title = "前衛モードで後衛編成をロードすることはできません！";
+                GeneralInfoBar.IsOpen = true;
+                GeneralInfoBar.Severity = InfoBarSeverity.Error;
+                await Task.Delay(3000);
+                GeneralInfoBar.IsOpen = false;
+                return;
+            }
+            if (unit.IsFront && !Switch.IsOn)
+            {
+                GeneralInfoBar.Title = "後衛モードで前衛編成をロードすることはできません！";
                 GeneralInfoBar.IsOpen = true;
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
                 await Task.Delay(3000);
