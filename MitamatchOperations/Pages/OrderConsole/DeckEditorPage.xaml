@@ -244,6 +244,7 @@
                             AccessKey="Ally"
                             MinHeight="500"
                             MinWidth="500"
+                            MaxHeight="700"
                             Background="Transparent"
                             BorderBrush="{StaticResource SystemControlForegroundBaseMediumLowBrush}"
                             ItemsSource="{x:Bind _deck}"
@@ -262,22 +263,23 @@
                     <TextBlock Text="相手" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"/>
                     <Grid x:Name="DeckGrid2" CornerRadius="10" VerticalAlignment="Stretch" Margin="5">
                         <ListView
-                        x:Name="ReferOrderDeck"
-                        AccessKey="Opponent"
-                        MinHeight="500"
-                        MinWidth="500"
-                        Background="Transparent"
-                        BorderBrush="{StaticResource SystemControlForegroundBaseMediumLowBrush}"
-                        ItemsSource="{x:Bind _referDeck}"
-                        ItemTemplate="{StaticResource DeckItemTemplate}"
-                        CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="Single"
-                        DragOver="Target_DragOver"
-                        Drop="View_Drop"
-                        DragItemsStarting="Target_DragItemsStarting"
-                        DragEnter="Target_DragEnter"
-                        DragItemsCompleted="OrderDeck_OnChanged"
-                        VerticalAlignment="Stretch"
-                        HorizontalAlignment="Left"/>
+                            x:Name="ReferOrderDeck"
+                            AccessKey="Opponent"
+                            MinHeight="500"
+                            MinWidth="500"
+                            MaxHeight="700"
+                            Background="Transparent"
+                            BorderBrush="{StaticResource SystemControlForegroundBaseMediumLowBrush}"
+                            ItemsSource="{x:Bind _referDeck}"
+                            ItemTemplate="{StaticResource DeckItemTemplate}"
+                            CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="Single"
+                            DragOver="Target_DragOver"
+                            Drop="View_Drop"
+                            DragItemsStarting="Target_DragItemsStarting"
+                            DragEnter="Target_DragEnter"
+                            DragItemsCompleted="OrderDeck_OnChanged"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Left"/>
                     </Grid>
                 </StackPanel>
             </Grid>
