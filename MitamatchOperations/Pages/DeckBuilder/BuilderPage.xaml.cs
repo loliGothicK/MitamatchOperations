@@ -157,6 +157,19 @@ namespace mitama.Pages.DeckBuilder
                 checkBox.Unchecked += SupportOption_Unchecked;
                 SupportSearchOptions.Children.Add(checkBox);
             }
+
+            searchOptions = [
+                "レジェンダリー",
+                "アルティメット",
+            ];
+
+            foreach (var option in searchOptions)
+            {
+                var checkBox = new CheckBox { Content = option, IsChecked = false };
+                checkBox.Checked += OtherOption_Checked;
+                checkBox.Unchecked += OtherOption_Unchecked;
+                OtherSearchOptions.Children.Add(checkBox);
+            }
         }
 
         private void InitMembers()
@@ -380,7 +393,7 @@ namespace mitama.Pages.DeckBuilder
                         FilterType.SpecialSingle,
                         FilterType.SpecialRange,
                     ];
-                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSkillOption(f) && !IsSupportOption(f)))
+                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSkillOption(f) && !IsSupportOption(f) && !IsOtherOption(f)))
                     {
                         _currentFilters.Add(type);
                     }
@@ -398,7 +411,7 @@ namespace mitama.Pages.DeckBuilder
                         FilterType.Interference,
                         FilterType.Recovery
                     ];
-                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSkillOption(f) && !IsSupportOption(f)))
+                    foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSkillOption(f) && !IsSupportOption(f) && !IsOtherOption(f)))
                     {
                         _currentFilters.Add(type);
                     }
@@ -1333,6 +1346,36 @@ namespace mitama.Pages.DeckBuilder
             Sort(SortOption.SelectedIndex);
         }
 
+        private void OtherOption_Checked(object sender, RoutedEventArgs _)
+        {
+            if (sender is not CheckBox box) return;
+            var prevCount = _currentFilters.Count;
+
+            switch (box.Content)
+            {
+                case "レジェンダリー":
+                    {
+                        _currentFilters.Add(FilterType.Legendary);
+                        break;
+                    }
+                case "アルティメット":
+                    {
+                        _currentFilters.Add(FilterType.Ultimate);
+                        break;
+                    }
+                default:
+                    {
+                        throw new UnreachableException("Unreachable");
+                    }
+            }
+            if (prevCount == _currentFilters.Count) return;
+            foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
+            {
+                Pool.Remove(memoria);
+            }
+            Sort(SortOption.SelectedIndex);
+        }
+
         private void SkillOption_Unchecked(object sender, RoutedEventArgs e)
         {
             if (sender is not CheckBox box) return;
@@ -1779,9 +1822,42 @@ namespace mitama.Pages.DeckBuilder
             Sort(SortOption.SelectedIndex);
         }
 
+        private void OtherOption_Unchecked(object sender, RoutedEventArgs _)
+        {
+            if (sender is not CheckBox box) return;
+            var prevCount = _currentFilters.Count;
+
+            switch (box.Content)
+            {
+                case "レジェンダリー":
+                    {
+                        _currentFilters.Remove(FilterType.Legendary);
+                        break;
+                    }
+                case "アルティメット":
+                    {
+                        _currentFilters.Remove(FilterType.Ultimate);
+                        break;
+                    }
+                default:
+                    {
+                        throw new UnreachableException("Unreachable");
+                    }
+            }
+            if (prevCount == _currentFilters.Count) return;
+            foreach (var memoria in Memoria
+                    .List
+                    .Where(memoria => !Pool.Contains(memoria))
+                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Name))
+                    .Where(ApplyFilter))
+            {
+                Pool.Add(memoria);
+            }
+            Sort(SortOption.SelectedIndex);
+        }
+
         private void InitFilters()
         {
-            Filters.Add(FilterType.Legendary, memoria => memoria.IsLegendary);
             Filters.Add(FilterType.NormalSingle, memoria => memoria.Kind is Vanguard(VanguardKind.NormalSingle));
             Filters.Add(FilterType.NormalRange, memoria => memoria.Kind is Vanguard(VanguardKind.NormalRange));
             Filters.Add(FilterType.SpecialSingle, memoria => memoria.Kind is Vanguard(VanguardKind.SpecialSingle));
@@ -2194,6 +2270,10 @@ namespace mitama.Pages.DeckBuilder
             Filters.Add(FilterType.RecoveryUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is RecoveryUp));
             Filters.Add(FilterType.MpCostDown, memoria => memoria.SupportSkill.Effects.Any(eff => eff is MpCostDown));
             Filters.Add(FilterType.RangeUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is RangeUp));
+
+            // Others
+            Filters.Add(FilterType.Legendary, memoria => memoria.IsLegendary);
+            Filters.Add(FilterType.Ultimate, memoria => memoria.Link.Contains("ultimate"));
         }
 
         bool ApplyFilter(Memoria memoria)
@@ -2204,7 +2284,8 @@ namespace mitama.Pages.DeckBuilder
             var p3 = _currentFilters.Where(IsLevelFilter).Any(key => Filters[key](memoria));
             var p4 = _currentFilters.Where(IsSkillOption).All(key => Filters[key](memoria));
             var p5 = _currentFilters.Where(IsSupportOption).All(key => Filters[key](memoria));
-            return p0 && p1 && p2 && p3 && p4 && p5;
+            var p6 = _currentFilters.Where(IsOtherOption).All(key => Filters[key](memoria));
+            return p0 && p1 && p2 && p3 && p4 && p5 && p6;
         }
 
         bool IsKindFilter(FilterType filter)
@@ -2354,7 +2435,17 @@ namespace mitama.Pages.DeckBuilder
             ];
 
             return supportFilters.Contains(type);
-        } 
+        }
+
+        bool IsOtherOption(FilterType type)
+        {
+            FilterType[] otherFilters = [
+                FilterType.Legendary,
+                FilterType.Ultimate,
+            ];
+
+            return otherFilters.Contains(type);
+        }
 
         private void Sort(int option)
         {
@@ -2612,7 +2703,6 @@ namespace mitama.Pages.DeckBuilder
     public enum FilterType
     {
         // Kinds
-        Legendary,
         NormalSingle,
         NormalRange,
         SpecialSingle,
@@ -2720,6 +2810,9 @@ namespace mitama.Pages.DeckBuilder
         RecoveryUp,
         MpCostDown,
         RangeUp,
+        // Others
+        Legendary,
+        Ultimate,
     }
 
     public enum SkillType

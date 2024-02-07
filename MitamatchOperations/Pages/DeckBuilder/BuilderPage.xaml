@@ -419,6 +419,13 @@
                                 </Flyout>
                             </AppBarButton.Flyout>
                         </AppBarButton>
+                        <AppBarButton Icon="Zoom" Label="Other">
+                            <AppBarButton.Flyout>
+                                <Flyout>
+                                    <StackPanel x:Name="OtherSearchOptions" />
+                                </Flyout>
+                            </AppBarButton.Flyout>
+                        </AppBarButton>
                         <AppBarButton Icon="Sort" Label="Sort">
                             <AppBarButton.Flyout>
                                 <Flyout>
