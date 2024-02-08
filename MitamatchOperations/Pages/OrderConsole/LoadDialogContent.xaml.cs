@@ -20,7 +20,12 @@ public sealed partial class LoadDialogContent
         InitializeComponent();
         NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
 
-        foreach (var name in Util.LoadRegionNames())
+        InitComboBox();
+    }
+
+    private void InitComboBox()
+    {
+        foreach (var name in Util.LoadMemberNames(Director.ReadCache().Region))
         {
             MemberComboBox.Items.Add(name);
         }

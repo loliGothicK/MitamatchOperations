@@ -194,6 +194,7 @@
                         <TextBlock Text=" sec" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </StackPanel>
                     <CommandBar Grid.Column="1" x:Name="DeckCommandBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                        <AppBarButton Icon="AddFriend" Label="Assign" Click="Assign_OnClick"/>
                         <AppBarButton Icon="DisconnectDrive" Label="Reset" Click="ResetButton_Click" >
                         </AppBarButton>
                         <AppBarButton Icon="Save" Label="Save" AllowFocusOnInteraction="True">

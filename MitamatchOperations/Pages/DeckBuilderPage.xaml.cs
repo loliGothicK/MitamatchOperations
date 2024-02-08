@@ -26,7 +26,7 @@ namespace mitama.Pages
             {
                 EditFrame.Navigate(typeof(BuilderPage), parameter);
             }
-            ManageFrame.Navigate(typeof(BuilderPage), e);
+            ManageFrame.Navigate(typeof(MemoriaManagePage), e);
         }
     }
 }

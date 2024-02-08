@@ -16,7 +16,8 @@
                     <Grid.ContextFlyout>
                         <Flyout x:Name="OrderFlyout">
                             <StackPanel MaxWidth="500">
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Name}" Margin="0,0,0,0" />
                                     <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Effect}" Margin="0,0,0,0" />
                                     <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind TimeFmt}" Margin="0,0,0,0" />
                                 </StackPanel>

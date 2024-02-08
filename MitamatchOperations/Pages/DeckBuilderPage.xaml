@@ -17,7 +17,7 @@
                     </TabViewItem.IconSource>
                     <Frame x:Name="EditFrame" />
                 </TabViewItem>
-                <TabViewItem Header="Deck Builder" IsClosable="False">
+                <TabViewItem Header="Memoria Manager" IsClosable="False">
                     <TabViewItem.IconSource>
                         <SymbolIconSource Symbol="Manage" />
                     </TabViewItem.IconSource>
