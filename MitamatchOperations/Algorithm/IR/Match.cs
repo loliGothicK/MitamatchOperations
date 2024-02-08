@@ -87,7 +87,7 @@ internal class Match {
     {
         var size = (int)memorias.Select(memoria => (memoria.Width + memoria.Height) / 2.0).Mean();
 
-        List<List<Rect>> lines = new();
+        List<List<Rect>> lines = [];
         while (memorias.Count != 0) {
             var top = memorias.MinBy(memoria => memoria.Top)!;
             var line = new List<Rect> { top };
@@ -126,7 +126,7 @@ internal class Match {
     {
         var size = (int)memorias.Select(memoria => (memoria.Width + memoria.Height) / 2.0).Mean();
 
-        List<List<Rect>> lines = new();
+        List<List<Rect>> lines = [];
         while (memorias.Count != 0) {
             var top = memorias.MinBy(memoria => memoria.Top)!;
             var line = new List<Rect> { top };
@@ -221,6 +221,11 @@ internal class Match {
             {
                 lines[1][3].TopLeft with { Y = lines[1][3].TopLeft.Y + verticalMargin + size },
                 lines[1][3].BottomRight with { Y = lines[1][3].BottomRight.Y + verticalMargin + size }
+            }),
+            Cv2.BoundingRect(new[]
+            {
+                lines[1][4].TopLeft with { Y = lines[1][4].TopLeft.Y + verticalMargin + size },
+                lines[1][4].BottomRight with { Y = lines[1][4].BottomRight.Y + verticalMargin + size }
             })
         ]);
 
