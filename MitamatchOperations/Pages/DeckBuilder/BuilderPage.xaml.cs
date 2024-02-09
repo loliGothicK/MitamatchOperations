@@ -2719,11 +2719,15 @@ namespace mitama.Pages.DeckBuilder
                 using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                 var readJson = sr.ReadToEnd();
                 var info = MemberInfo.FromJson(readJson);
+                // IDをキーにしたメモリアの辞書を作成
+                // 覚醒/超覚醒のうちひとつしか登録されていないため
                 var idToMemoria = Memoria
                     .List
                     .ToDictionary(m => m.Id);
                 Switch.IsOn = info.Position is Front;
 
+                // メモリアのIDを読み込んで、そのIDに対応する覚醒/超覚醒メモリアのリストを取得し、
+                // 装備可能なメモリアのみを追加する
                 foreach (var memoria in info
                     .Memorias
                     .SelectMany(m => Memoria
