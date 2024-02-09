@@ -2696,9 +2696,8 @@ namespace mitama.Pages.DeckBuilder
 
         private void TargetMember_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (sender is not ComboBox) return;
-            var selected = sender.As<ComboBox>().SelectedItem as string;
-            if (selected == null) return;
+            if (sender is not ComboBox cb) return;
+            if (cb.SelectedItem is not string selected) return;
 
             OriginalPool.Clear();
             Pool.Clear();
