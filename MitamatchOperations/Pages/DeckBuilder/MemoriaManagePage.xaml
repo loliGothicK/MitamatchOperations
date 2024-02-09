@@ -3,13 +3,251 @@
     x:Class="mitama.Pages.DeckBuilder.MemoriaManagePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:mitama.Pages.DeckBuilder"
+    xmlns:domain="using:mitama.Domain"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.Resources>
+        <DataTemplate x:Name="MemoriaTemplate" x:DataType="domain:Memoria">
+            <Grid Width="100">
+                <Image Source="{x:Bind Path}" Stretch="UniformToFill"/>
+                <Border Background="LightPink"
+                            CornerRadius="30"
+                            Height="30"
+                            Width="30"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Margin="2">
+                    <Image Source="{x:Bind Kind.Icon}" />
+                </Border>
+                <Grid.ContextFlyout>
+                    <Flyout>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <StackPanel>
+                                <Button Content="{x:Bind Name}" Margin="5" FontSize="20"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                                <StackPanel Orientation="Vertical" Margin="0 0 5 0">
+                                    <TextBlock Text="ATK"/>
+                                    <Button Content="{x:Bind Status[4].Atk}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="5 0">
+                                    <TextBlock Text="DEF"/>
+                                    <Button Content="{x:Bind Status[4].Def}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="5 0">
+                                    <TextBlock Text="Sp.ATK"/>
+                                    <Button Content="{x:Bind Status[4].SpAtk}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="5 0">
+                                    <TextBlock Text="Sp.DEF"/>
+                                    <Button Content="{x:Bind Status[4].SpDef}" />
+                                </StackPanel>
+                            </StackPanel>
+                            <Button Grid.Row="2" Content="{x:Bind Skill.Name}" Margin="5"/>
+                            <Button Grid.Row="3" Content="{x:Bind SupportSkill.Name}" Margin="5"/>
+                        </Grid>
+                    </Flyout>
+                </Grid.ContextFlyout>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Name="MemoriaWithConcentrationTemplate" x:DataType="domain:MemoriaWithConcentration">
+            <Grid Width="100">
+                <Image Source="{x:Bind Memoria.Path}" Stretch="UniformToFill"/>
+                <Border Background="LightPink"
+                            CornerRadius="30"
+                            Height="30"
+                            Width="30"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Margin="2">
+                    <Image Source="{x:Bind Memoria.Kind.Icon}" />
+                </Border>
+                <Image Source="/Assets/Images/Concentration.png"
+                           Height="30"
+                           Width="30"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top"
+                           Margin="0,25,6,0" />
+                <TextBlock Text="{x:Bind LimitBreak}"
+                               FontSize="{x:Bind FontSize}"
+                               Height="30"
+                               Width="30"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Top"
+                               Margin="{x:Bind Margin}" />
+                <Grid.ContextFlyout>
+                    <Flyout>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Content="{x:Bind Memoria.Name}" Margin="5" FontSize="20"/>
+                                <ComboBox Grid.Column="1"
+                                              SelectedIndex="4"
+                                              SelectionChanged="Concentration_SelectionChanged"
+                                              AccessKey="{x:Bind Memoria.Id}"
+                                              Margin="5"
+                                              FontSize="20"
+                                              HorizontalAlignment="Right">
+                                    <ComboBoxItem Content="0" />
+                                    <ComboBoxItem Content="1" />
+                                    <ComboBoxItem Content="2" />
+                                    <ComboBoxItem Content="3" />
+                                    <ComboBoxItem Content="MAX" />
+                                </ComboBox>
+                            </Grid>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                                <StackPanel Orientation="Vertical" Margin="0 0 5 0">
+                                    <TextBlock Text="ATK"/>
+                                    <Button Content="{x:Bind Status.Atk}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="5 0">
+                                    <TextBlock Text="DEF"/>
+                                    <Button Content="{x:Bind Status.Def}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="5 0">
+                                    <TextBlock Text="Sp.ATK"/>
+                                    <Button Content="{x:Bind Status.SpAtk}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="5 0">
+                                    <TextBlock Text="Sp.DEF"/>
+                                    <Button Content="{x:Bind Status.SpDef}" />
+                                </StackPanel>
+                            </StackPanel>
+                            <Button Grid.Row="2" Content="{x:Bind Memoria.Skill.Name}" Margin="5"/>
+                            <Button Grid.Row="3" Content="{x:Bind Memoria.SupportSkill.Name}" Margin="5"/>
+                        </Grid>
+                    </Flyout>
+                </Grid.ContextFlyout>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <InfoBar x:Name="GeneralInfoBar" IsOpen="False"/>
+        <CommandBar Grid.Row="1">
+            <!-- Pick Open -->
+            <AppBarButton>
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE8E5;" />
+                </AppBarButton.Icon>
+                <AppBarButton.Flyout>
+                    <Flyout>
+                        <StackPanel>
+                            <Button x:Name="PickOpenButton" Content="画像を開く" Click="PickOpenButton_Click" />
+                        </StackPanel>
+                    </Flyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+            <!-- Recognize -->
+            <AppBarButton>
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE8E1;" />
+                </AppBarButton.Icon>
+                <AppBarButton.Flyout>
+                    <Flyout>
+                        <StackPanel>
+                            <Button x:Name="RecognizeButton" Content="認識" Click="RecognizeButton_Click" />
+                        </StackPanel>
+                    </Flyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+            <!-- Save -->
+            <AppBarButton>
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE105;" />
+                </AppBarButton.Icon>
+                <AppBarButton.Flyout>
+                    <Flyout>
+                        <StackPanel>
+                            <Button x:Name="SaveButton" Content="保存" Click="SaveButton_Click" />
+                        </StackPanel>
+                    </Flyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+        </CommandBar>
+        <Grid Grid.Row="2">
+            <StackPanel>
+                <ComboBox SelectionChanged="VerticalComboBox_SelectionChanged" Header="縦" PlaceholderText="縦のメモリア数" Width="200" SelectedIndex="2">
+                    <x:String>1</x:String>
+                    <x:String>2</x:String>
+                    <x:String>3</x:String>
+                    <x:String>4</x:String>
+                </ComboBox>
+                <ComboBox SelectionChanged="HorizontalComboBox_SelectionChanged" Header="横" PlaceholderText="横のメモリア数" Width="200" SelectedIndex="4">
+                    <x:String>5</x:String>
+                    <x:String>6</x:String>
+                    <x:String>7</x:String>
+                    <x:String>8</x:String>
+                    <x:String>9</x:String>
+                    <x:String>10</x:String>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <GridView
+                x:Name="ToAdd"
+                Grid.Column="0"
+                MinHeight="500"
+                MinWidth="500"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                ItemsSource="{x:Bind Memorias}"
+                ItemTemplate="{StaticResource MemoriaWithConcentrationTemplate}"
+                IsItemClickEnabled="True"
+                CanDragItems="True"
+                CanReorderItems="True"
+                AllowDrop="True"
+                SelectionMode="Multiple"
+                DragItemsStarting="Memeria_DragItemsStarting"
+                DragOver="MemeriaSources_DragOver"
+                Drop="Memeria_Drop"
+                BorderThickness="1"
+                BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"/>
+            <GridView
+                x:Name="MemoriaSources"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                ItemsSource="{x:Bind Pool}"
+                ItemTemplate="{StaticResource MemoriaTemplate}"
+                IsItemClickEnabled="True"
+                CanDragItems="True"
+                CanReorderItems="True"
+                AllowDrop="True"
+                SelectionMode="Multiple"
+                DragItemsStarting="Memeria_DragItemsStarting"
+                DragOver="MemeriaSources_DragOver"
+                Drop="MemeriaSources_Drop"
+                BorderThickness="1"
+                BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"/>
+        </Grid>
     </Grid>
 </Page>

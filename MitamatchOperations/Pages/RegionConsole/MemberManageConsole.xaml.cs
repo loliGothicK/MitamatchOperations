@@ -297,7 +297,7 @@ public sealed partial class MemberManageConsole
             Director.CreateDirectory($@"{Director.ProjectDir()}\{_regionName}\Members\{name}");
             Director.CreateDirectory($@"{Director.ProjectDir()}\{_regionName}\Members\{name}\Units");
             var fs = File.Create($@"{Director.ProjectDir()}\{_regionName}\Members\{name}\info.json");
-            var memberJson = new MemberInfo(DateTime.Now, DateTime.Now, name!, position!, []).ToJson();
+            var memberJson = new MemberInfo(DateTime.Now, DateTime.Now, name!, position!, [], []).ToJson();
             var save = new UTF8Encoding(true).GetBytes(memberJson);
             fs.Write(save, 0, save.Length);
             fs.Close();

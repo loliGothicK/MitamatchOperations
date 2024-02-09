@@ -63,12 +63,15 @@ public enum BackCategory
     Healer = 4
 }
 
+public record struct MemoriaIdAndConcentration(int Id, int Concenration);
+
 public record MemberInfo(
     DateTime CreatedAt,
     DateTime UpdatedAt,
     string Name,
     Position Position,
-    ushort[] OrderIndices
+    ushort[] OrderIndices,
+    MemoriaIdAndConcentration[] Memorias
 ) {
     internal string PositionInfo => Position switch {
         Front(var category) => category switch {
@@ -94,6 +97,7 @@ public record MemberInfo(
             Name = Name,
             Position = Position.GetCategory(),
             OrderIndices = OrderIndices,
+            Memorias = Memorias,
         };
         var json = JsonSerializer.Serialize(dto);
         return json;
@@ -103,13 +107,16 @@ public record MemberInfo(
         DateTime UpdatedAt,
         string Name,
         int Position,
-        ushort[] OrderIndices
-    ) {
+        ushort[] OrderIndices,
+        MemoriaIdAndConcentration[] Memorias
+    )
+    {
         public static implicit operator MemberInfo(MemberDto dto) => new(
             dto.CreatedAt,
             dto.UpdatedAt,
             dto.Name,
-            dto.Position switch {
+            dto.Position switch
+            {
                 0 => new Front(FrontCategory.Normal),
                 1 => new Front(FrontCategory.Special),
                 2 => new Back(BackCategory.Buffer),
@@ -117,7 +124,8 @@ public record MemberInfo(
                 4 => new Back(BackCategory.Healer),
                 _ => throw new ArgumentOutOfRangeException(nameof(dto.Position)),
             },
-            dto.OrderIndices
+            dto.OrderIndices,
+            dto.Memorias
         );
     }
 }

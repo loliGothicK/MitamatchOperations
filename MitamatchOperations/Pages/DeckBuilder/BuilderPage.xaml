@@ -12,55 +12,6 @@
 
     <Grid>
         <Grid.Resources>
-            <DataTemplate x:Name="MemoriaTemplate" x:DataType="domain:Memoria">
-                <Grid Width="100">
-                    <Image Source="{x:Bind Path}" Stretch="UniformToFill"/>
-                    <Border Background="LightPink"
-                            CornerRadius="30"
-                            Height="30"
-                            Width="30"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Margin="2">
-                        <Image Source="{x:Bind Kind.Icon}" />
-                    </Border>
-                    <Grid.ContextFlyout>
-                        <Flyout>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <StackPanel>
-                                    <Button Content="{x:Bind Name}" Margin="5" FontSize="20"/>
-                                </StackPanel>
-                                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-                                    <StackPanel Orientation="Vertical" Margin="0 0 5 0">
-                                        <TextBlock Text="ATK"/>
-                                        <Button Content="{x:Bind Status[4].Atk}" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Vertical" Margin="5 0">
-                                        <TextBlock Text="DEF"/>
-                                        <Button Content="{x:Bind Status[4].Def}" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Vertical" Margin="5 0">
-                                        <TextBlock Text="Sp.ATK"/>
-                                        <Button Content="{x:Bind Status[4].SpAtk}" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Vertical" Margin="5 0">
-                                        <TextBlock Text="Sp.DEF"/>
-                                        <Button Content="{x:Bind Status[4].SpDef}" />
-                                    </StackPanel>
-                                </StackPanel>
-                                <Button Grid.Row="2" Content="{x:Bind Skill.Name}" Margin="5"/>
-                                <Button Grid.Row="3" Content="{x:Bind SupportSkill.Name}" Margin="5"/>
-                            </Grid>
-                        </Flyout>
-                    </Grid.ContextFlyout>
-                </Grid>
-            </DataTemplate>
             <DataTemplate x:Name="MemoriaWithConcentrationTemplate" x:DataType="domain:MemoriaWithConcentration">
                 <Grid Width="100">
                     <Image Source="{x:Bind Memoria.Path}" Stretch="UniformToFill"/>
@@ -368,12 +319,22 @@
                 <Grid Grid.Row="1" Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <CommandBar x:Name="SourceCommandBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                    <ComboBox
+                        x:Name="TargetMemberSelect"
+                        SelectedIndex="0"
+                        Margin="50,0,0,0"
+                        ItemsSource="{x:Bind TargetMembers}"
+                        SelectionChanged="TargetMember_SelectionChanged"
+                        Header="Target"
+                        Width="200"
+                        Loaded="TargetMemberSelect_Loaded"/>
+                    <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Margin="0,0,50,0">
                         <AppBarButton x:Name="VoR" Icon="Switch" Label="後衛">
                             <AppBarButton.Flyout>
                                 <Flyout>
@@ -384,6 +345,8 @@
                                 </Flyout>
                             </AppBarButton.Flyout>
                         </AppBarButton>
+                    </CommandBar>
+                    <CommandBar Grid.Row="1" x:Name="SourceCommandBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right"  Margin="0,0,50,0">
                         <AppBarButton Icon="Filter" Label="Filter">
                             <AppBarButton.Flyout>
                                 <Flyout>
@@ -444,11 +407,11 @@
                     </CommandBar>
                     <GridView
                         x:Name="MemoriaSources"
-                        Grid.Row="1"
+                        Grid.Row="2"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
                         ItemsSource="{x:Bind Pool}"
-                        ItemTemplate="{StaticResource MemoriaTemplate}"
+                        ItemTemplate="{StaticResource MemoriaWithConcentrationTemplate}"
                         IsItemClickEnabled="True"
                         CanDragItems="True"
                         CanReorderItems="True"

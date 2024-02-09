@@ -19,6 +19,7 @@ using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 using Microsoft.UI.Text;
 using Windows.Storage;
+using static mitama.Pages.Common.ObservableCollectionExtensions;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -32,7 +33,8 @@ namespace mitama.Pages.DeckBuilder
 
         private ObservableCollection<MemoriaWithConcentration> Deck { get; set; } = [];
         private ObservableCollection<MemoriaWithConcentration> LegendaryDeck { get; set; } = [];
-        private ObservableCollection<Memoria> Pool { get; set; } = new(Memoria.List.Where(Costume.DummyRearguard.CanBeEquipped));
+        private List<MemoriaWithConcentration> OriginalPool { get; set; } = [.. Memoria.List.Select(x => new MemoriaWithConcentration(x, 4))];
+        private ObservableCollection<MemoriaWithConcentration> Pool { get; set; } = [.. Memoria.List.Select(x => new MemoriaWithConcentration(x, 4))];
         private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = [];
         private HashSet<FilterType> _currentFilters = [];
         private string region = "";
@@ -43,6 +45,7 @@ namespace mitama.Pages.DeckBuilder
         private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = [];
         private readonly string _regionName;
         private readonly ObservableCollection<SupportBreakdown> SupportBreakdowns = [];
+        private readonly ObservableCollection<string> TargetMembers = ["All"];
 
         public BuilderPage()
         {
@@ -329,20 +332,16 @@ namespace mitama.Pages.DeckBuilder
             {
                 LegendaryDeck.Add(new MemoriaWithConcentration(memoria, 4));
             }
-            foreach (var toRemove in Pool.Where(m => selectedMemorias.Select(s => s.Name).Contains(m.Name)).ToList())
-            {
-                Pool.Remove(toRemove);
-            }
+            Pool.RemoveWhere(m => selectedMemorias.Select(s => s.Name).Contains(m.Memoria.Name));
             Cleanup();
         }
 
         private void MemeriaSources_Drop(object sender, DragEventArgs e)
         {
             var dummyCostume = Switch.IsOn ? Costume.DummyVanguard : Costume.DummyRearguard;
-            foreach (var toAdd in Memoria
-                .List
-                .Where(dummyCostume.CanBeEquipped)
-                .Where(m => selectedMemorias.Select(s => s.Name).Contains(m.Name)))
+            foreach (var toAdd in OriginalPool
+                .Where(m => dummyCostume.CanBeEquipped(m.Memoria))
+                .Where(m => selectedMemorias.Select(s => s.Name).Contains(m.Memoria.Name)))
             {
                 Pool.Add(toAdd);
             }
@@ -380,7 +379,7 @@ namespace mitama.Pages.DeckBuilder
                 if (toggleSwitch.IsOn)
                 {
                     VoR.Label = "‘O‰q";
-                    Pool = new(Memoria.List.Where(Costume.DummyVanguard.CanBeEquipped));
+                    Pool = new(OriginalPool.Where(m => Costume.DummyVanguard.CanBeEquipped(m.Memoria)));
                     MemoriaSources.ItemsSource = Pool;
                     TreeNodes[0].Children.Clear();
                     TreeNodes[0].Children.Add(new() { Text = "’Êí’P‘Ì" });
@@ -401,7 +400,7 @@ namespace mitama.Pages.DeckBuilder
                 else
                 {
                     VoR.Label = "Œã‰q";
-                    Pool = new(Memoria.List.Where(Costume.DummyRearguard.CanBeEquipped));
+                    Pool = new(OriginalPool.Where(m => Costume.DummyRearguard.CanBeEquipped(m.Memoria)));
                     TreeNodes[0].Children.Clear();
                     TreeNodes[0].Children.Add(new() { Text = "Žx‰‡" });
                     TreeNodes[0].Children.Add(new() { Text = "–WŠQ" });
@@ -625,10 +624,9 @@ namespace mitama.Pages.DeckBuilder
                     }
             }
             if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in Memoria
-                .List
-                .Where(memoria => !Pool.Contains(memoria))
-                .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Name))
+            foreach (var memoria in OriginalPool
+                .Where(m => !Pool.Contains(m))
+                .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
                 .Where(ApplyFilter))
             {
                 Pool.Add(memoria);
@@ -1652,10 +1650,9 @@ namespace mitama.Pages.DeckBuilder
                     }
             }
             if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in Memoria
-                    .List
+            foreach (var memoria in OriginalPool
                     .Where(memoria => !Pool.Contains(memoria))
-                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Name))
+                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
                     .Where(ApplyFilter))
             {
                 Pool.Add(memoria);
@@ -1811,10 +1808,9 @@ namespace mitama.Pages.DeckBuilder
                     }
             }
             if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in Memoria
-                    .List
+            foreach (var memoria in OriginalPool
                     .Where(memoria => !Pool.Contains(memoria))
-                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Name))
+                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
                     .Where(ApplyFilter))
             {
                 Pool.Add(memoria);
@@ -1845,10 +1841,9 @@ namespace mitama.Pages.DeckBuilder
                     }
             }
             if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in Memoria
-                    .List
+            foreach (var memoria in OriginalPool
                     .Where(memoria => !Pool.Contains(memoria))
-                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Name))
+                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
                     .Where(ApplyFilter))
             {
                 Pool.Add(memoria);
@@ -2276,8 +2271,9 @@ namespace mitama.Pages.DeckBuilder
             Filters.Add(FilterType.Ultimate, memoria => memoria.Link.Contains("ultimate"));
         }
 
-        bool ApplyFilter(Memoria memoria)
+        bool ApplyFilter(MemoriaWithConcentration memoriaWith)
         {
+            var memoria = memoriaWith.Memoria;
             var p0 = _currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria));
             var p1 = _currentFilters.Where(IsElementFilter).Any(key => Filters[key](memoria));
             var p2 = _currentFilters.Where(IsRangeFilter).Any(key => Filters[key](memoria));
@@ -2452,25 +2448,25 @@ namespace mitama.Pages.DeckBuilder
             switch (option)
             {
                 case 0:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Id.CompareTo(a.Id));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Id.CompareTo(a.Memoria.Id));
                     break;
                 case 1:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status[4].Atk.CompareTo(a.Status[4].Atk));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Status[4].Atk.CompareTo(a.Memoria.Status[4].Atk));
                     break;
                 case 2:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status[4].SpAtk.CompareTo(a.Status[4].SpAtk));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Status[4].SpAtk.CompareTo(a.Memoria.Status[4].SpAtk));
                     break;
                 case 3:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status[4].Def.CompareTo(a.Status[4].Def));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Status[4].Def.CompareTo(a.Memoria.Status[4].Def));
                     break;
                 case 4:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status[4].SpDef.CompareTo(a.Status[4].SpDef));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Status[4].SpDef.CompareTo(a.Memoria.Status[4].SpDef));
                     break;
                 case 5:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status[4].ASA.CompareTo(a.Status[4].ASA));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Status[4].ASA.CompareTo(a.Memoria.Status[4].ASA));
                     break;
                 case 6:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status[4].DSD.CompareTo(a.Status[4].DSD));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Status[4].DSD.CompareTo(a.Memoria.Status[4].DSD));
                     break;
             }
         }
@@ -2582,11 +2578,10 @@ namespace mitama.Pages.DeckBuilder
                 Deck.Add(memoria);
             }
             Pool.Clear();
-            foreach (var memoria in Memoria
-                .List
-                .Where((unit.IsFront ? Costume.DummyVanguard : Costume.DummyRearguard).CanBeEquipped)
+            foreach (var memoria in OriginalPool
+                .Where(m => (unit.IsFront ? Costume.DummyVanguard : Costume.DummyRearguard).CanBeEquipped(m))
                 .Where(memoria => !Pool.Contains(memoria))
-                .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Name)))
+                .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name)))
             {
                 Pool.Add(memoria);
             }
@@ -2697,6 +2692,61 @@ namespace mitama.Pages.DeckBuilder
                 .Build();
 
             await dialog.ShowAsync();
+        }
+
+        private void TargetMember_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is not ComboBox) return;
+            var selected = sender.As<ComboBox>().SelectedItem as string;
+            if (selected == null) return;
+
+            OriginalPool.Clear();
+            Pool.Clear();
+            Deck.Clear();
+            LegendaryDeck.Clear();
+
+            if (selected == "All")
+            {
+                foreach (var memoria in Memoria.List.Select(m => new MemoriaWithConcentration(m, 4)))
+                {
+                    OriginalPool.Add(memoria);
+                    Pool.Add(memoria);
+                }
+                return;
+            }
+            else
+            {
+                var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Region}\Members\{selected}\info.json";
+                using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+                var readJson = sr.ReadToEnd();
+                var info = MemberInfo.FromJson(readJson);
+                var idToMemoria = Memoria
+                    .List
+                    .ToDictionary(m => m.Id);
+                Switch.IsOn = info.Position is Front;
+
+                foreach (var memoria in info
+                    .Memorias
+                    .SelectMany(m => Memoria
+                        .List
+                        .Where(s => s.Name == idToMemoria[m.Id].Name)
+                        .Select(s => new MemoriaWithConcentration(s, m.Concenration)))
+                    .Where(m => (info.Position is Front ? Costume.DummyVanguard : Costume.DummyRearguard).CanBeEquipped(m.Memoria)))
+                {
+                    OriginalPool.Add(memoria);
+                    Pool.Add(memoria);
+                }
+                return;
+            }
+        }
+
+        private void TargetMemberSelect_Loaded(object sender, RoutedEventArgs e)
+        {
+            var items = new List<string> { "All" };
+            items.AddRange(Directory
+                .GetDirectories($@"{Director.ProjectDir()}\{Director.ReadCache().Region}\Members")
+                .Select(d => new DirectoryInfo(d).Name));
+            TargetMemberSelect.ItemsSource = items;
         }
     }
 
