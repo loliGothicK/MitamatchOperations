@@ -13,47 +13,12 @@
         <DataTemplate x:Name="MemoriaTemplate" x:DataType="domain:Memoria">
             <Grid Width="100">
                 <Image Source="{x:Bind Path}" Stretch="UniformToFill"/>
-                <Border Background="LightPink"
-                            CornerRadius="30"
-                            Height="30"
-                            Width="30"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Margin="2">
-                    <Image Source="{x:Bind Kind.Icon}" />
-                </Border>
                 <Grid.ContextFlyout>
                     <Flyout>
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
                             <StackPanel>
                                 <Button Content="{x:Bind Name}" Margin="5" FontSize="20"/>
                             </StackPanel>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-                                <StackPanel Orientation="Vertical" Margin="0 0 5 0">
-                                    <TextBlock Text="ATK"/>
-                                    <Button Content="{x:Bind Status[4].Atk}" />
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Margin="5 0">
-                                    <TextBlock Text="DEF"/>
-                                    <Button Content="{x:Bind Status[4].Def}" />
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Margin="5 0">
-                                    <TextBlock Text="Sp.ATK"/>
-                                    <Button Content="{x:Bind Status[4].SpAtk}" />
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Margin="5 0">
-                                    <TextBlock Text="Sp.DEF"/>
-                                    <Button Content="{x:Bind Status[4].SpDef}" />
-                                </StackPanel>
-                            </StackPanel>
-                            <Button Grid.Row="2" Content="{x:Bind Skill.Name}" Margin="5"/>
-                            <Button Grid.Row="3" Content="{x:Bind SupportSkill.Name}" Margin="5"/>
                         </Grid>
                     </Flyout>
                 </Grid.ContextFlyout>
@@ -62,15 +27,6 @@
         <DataTemplate x:Name="MemoriaWithConcentrationTemplate" x:DataType="domain:MemoriaWithConcentration">
             <Grid Width="100">
                 <Image Source="{x:Bind Memoria.Path}" Stretch="UniformToFill"/>
-                <Border Background="LightPink"
-                            CornerRadius="30"
-                            Height="30"
-                            Width="30"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Margin="2">
-                    <Image Source="{x:Bind Memoria.Kind.Icon}" />
-                </Border>
                 <Image Source="/Assets/Images/Concentration.png"
                            Height="30"
                            Width="30"
@@ -87,12 +43,6 @@
                 <Grid.ContextFlyout>
                     <Flyout>
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -113,26 +63,6 @@
                                     <ComboBoxItem Content="MAX" />
                                 </ComboBox>
                             </Grid>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-                                <StackPanel Orientation="Vertical" Margin="0 0 5 0">
-                                    <TextBlock Text="ATK"/>
-                                    <Button Content="{x:Bind Status.Atk}" />
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Margin="5 0">
-                                    <TextBlock Text="DEF"/>
-                                    <Button Content="{x:Bind Status.Def}" />
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Margin="5 0">
-                                    <TextBlock Text="Sp.ATK"/>
-                                    <Button Content="{x:Bind Status.SpAtk}" />
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Margin="5 0">
-                                    <TextBlock Text="Sp.DEF"/>
-                                    <Button Content="{x:Bind Status.SpDef}" />
-                                </StackPanel>
-                            </StackPanel>
-                            <Button Grid.Row="2" Content="{x:Bind Memoria.Skill.Name}" Margin="5"/>
-                            <Button Grid.Row="3" Content="{x:Bind Memoria.SupportSkill.Name}" Margin="5"/>
                         </Grid>
                     </Flyout>
                 </Grid.ContextFlyout>

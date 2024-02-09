@@ -10,7 +10,6 @@ using Microsoft.UI.Xaml.Controls;
 using mitama.Algorithm.IR;
 using mitama.Domain;
 using mitama.Pages.Common;
-using Tensorflow;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage.Pickers;
 using WinRT;
