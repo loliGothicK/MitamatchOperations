@@ -2451,22 +2451,22 @@ namespace mitama.Pages.DeckBuilder
                     BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Id.CompareTo(a.Memoria.Id));
                     break;
                 case 1:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Status[4].Atk.CompareTo(a.Memoria.Status[4].Atk));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.Atk.CompareTo(a.Status.Atk));
                     break;
                 case 2:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Status[4].SpAtk.CompareTo(a.Memoria.Status[4].SpAtk));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.SpAtk.CompareTo(a.Status.SpAtk));
                     break;
                 case 3:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Status[4].Def.CompareTo(a.Memoria.Status[4].Def));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.Def.CompareTo(a.Status.Def));
                     break;
                 case 4:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Status[4].SpDef.CompareTo(a.Memoria.Status[4].SpDef));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.SpDef.CompareTo(a.Status.SpDef));
                     break;
                 case 5:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Status[4].ASA.CompareTo(a.Memoria.Status[4].ASA));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.ASA.CompareTo(a.Status.ASA));
                     break;
                 case 6:
-                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Memoria.Status[4].DSD.CompareTo(a.Memoria.Status[4].DSD));
+                    BuilderPageHelpers.Sort(Pool, (a, b) => b.Status.DSD.CompareTo(a.Status.DSD));
                     break;
             }
         }
