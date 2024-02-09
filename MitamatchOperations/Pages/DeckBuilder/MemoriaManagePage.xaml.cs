@@ -123,14 +123,16 @@ public sealed partial class MemoriaManagePage : Page
     {
         foreach (var toAdd in Memoria
             .List
-            .Where(m => selectedMemorias.Select(s => s.Name).Contains(m.Name)))
+            .Where(m => selectedMemorias.Select(s => s.Name).Contains(m.Name))
+            .DistinctBy(m => m.Name))
         {
             Pool.Add(toAdd);
         }
-        foreach (var toRemove in Memorias.Where(m => selectedMemorias.Contains(m.Memoria)))
+        foreach (var toRemove in Memorias.ToList().Where(m => selectedMemorias.Contains(m.Memoria)))
         {
             Memorias.Remove(toRemove);
         }
+        BuilderPageHelpers.Sort(Pool, (a, b) => b.Id.CompareTo(a.Id));
     }
 
     private void Memeria_Drop(object sender, DragEventArgs e)
