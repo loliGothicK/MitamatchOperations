@@ -304,6 +304,216 @@ public record Memoria(
     public static readonly Memoria[] List =
     [
         new Memoria(
+            1322,
+            "クリエイターズコラボ小さな幸せを冠して",
+            "小さな幸せを冠して",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Wind,
+            [
+                new BasicStatus(2304, 1964, 2288, 1963),
+                new BasicStatus(2493, 2124, 3327, 2123),
+                new BasicStatus(3831, 2285, 3515, 2284),
+                new BasicStatus(4019, 2445, 5453, 2444),
+                new BasicStatus(7058, 2606, 5642, 2605),
+            ],
+            22,
+            new Skill(
+                "風：ウィンドパワーストライクD Ⅲ+",
+                "敵2体に通常大ダメージを与え、自身のATKと風属性攻撃力をアップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
+                Level.Three,
+                Range.D
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/副攻:風パワーUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身の風属性攻撃力を特大アップさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new ElementPowerUp(Element.Wind)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1321,
+            "クリエイターズコラボ小さな幸せを冠して",
+            "小さな幸せを冠して",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Wind,
+            [
+                new BasicStatus(1964, 2304, 1948, 2303),
+                new BasicStatus(2124, 2493, 2108, 3342),
+                new BasicStatus(2285, 3831, 2269, 3530),
+                new BasicStatus(2445, 4019, 2429, 5468),
+                new BasicStatus(2606, 7058, 2590, 5657),
+            ],
+            22,
+            new Skill(
+                "Sp.ウィンドガードバーストB Ⅳ+",
+                "敵1～2体に特殊特大ダメージを与え、敵のSp.DEFと風属性防御力をダウンさせる。",
+                [],
+                [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Wind), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/Sp.ガードDOWN Ⅳ",
+                "攻撃時、一定確率で敵のSp.DEFを超特大ダウンさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new GuardDown(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1320,
+            "クリエイターズコラボ小さな幸せを冠して",
+            "小さな幸せを冠して",
+            new Rearguard(RearguardKind.Interference),
+            Element.Wind,
+            [
+                new BasicStatus(2304, 2304, 1948, 1963),
+                new BasicStatus(2918, 2918, 2108, 2123),
+                new BasicStatus(3681, 3681, 2269, 2284),
+                new BasicStatus(4744, 4744, 2429, 2444),
+                new BasicStatus(6358, 6358, 2590, 2605),
+            ],
+            22,
+            new Skill(
+                "WカウンターパワーフォールE Ⅳ",
+                "敵2～3体のATKとSp.ATKを大ダウンさせる。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new SpAtk(), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:WパワーDOWN Ⅳ",
+                "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを超特大ダウンさせる。",
+                Trigger.Support,
+                [new PowerDown(Type.Normal), new PowerDown(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1319,
+            "クリエイターズコラボ小さな幸せを冠して",
+            "小さな幸せを冠して",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Wind,
+            [
+                new BasicStatus(1964, 1964, 2288, 2303),
+                new BasicStatus(2124, 2124, 3327, 2492),
+                new BasicStatus(2285, 2285, 3515, 3830),
+                new BasicStatus(2445, 2445, 5453, 4018),
+                new BasicStatus(2606, 2606, 5642, 7057),
+            ],
+            22,
+            new Skill(
+                "Sp.ウィンドガードヒールE Ⅳ",
+                "味方2～3体のHPを大回復する。さらに味方のSp.DEFと風属性防御力を小アップする。",
+                [],
+                [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Wind), Amount.Small)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "回:回復UP/副援:支援UP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
+                Trigger.Support,
+                [new RecoveryUp(), new SupportUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1318,
+            "クリエイターズコラボあなたのカメリア",
+            "あなたのカメリア",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new BasicStatus(1963, 2309, 1962, 2286),
+                new BasicStatus(2123, 2498, 2122, 3325),
+                new BasicStatus(2284, 3836, 2283, 3513),
+                new BasicStatus(2444, 4024, 2443, 5451),
+                new BasicStatus(2605, 7063, 2604, 5640),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアパワースマッシュB Ⅳ+",
+                "敵1～2体に特殊特大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/Sp.パワーUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを超特大アップさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1317,
+            "クリエイターズコラボあなたのカメリア",
+            "あなたのカメリア",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new BasicStatus(2303, 1969, 2302, 1946),
+                new BasicStatus(2492, 2129, 3341, 2106),
+                new BasicStatus(3830, 2290, 3529, 2267),
+                new BasicStatus(4018, 2450, 5467, 2427),
+                new BasicStatus(7057, 2611, 5656, 2588),
+            ],
+            22,
+            new Skill(
+                "ファイアパワーアシストE Ⅳ",
+                "味方2～3体のATKと火属性攻撃力を大アップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:支援UP/副援:火パワーUP Ⅳ",
+                "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力を特大アップさせる。さらに、支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new ElementPowerUp(Element.Fire)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1316,
+            "クリエイターズコラボあなたのカメリア",
+            "あなたのカメリア",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            [
+                new BasicStatus(1963, 2309, 1962, 2286),
+                new BasicStatus(2123, 2498, 2122, 3325),
+                new BasicStatus(2284, 3836, 2283, 3513),
+                new BasicStatus(2444, 4024, 2443, 5451),
+                new BasicStatus(2605, 7063, 2604, 5640),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアパワーフォールE Ⅳ",
+                "敵2～3体のSp.ATKと火属性攻撃力を大ダウンさせる。",
+                [],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:支援UP/副援:火パワーDOWN Ⅳ",
+                "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力を特大ダウンさせる。さらに、支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new ElementPowerDown(Element.Fire)],
+                Level.Four
+            )
+        ),
+        new Memoria(
             1315,
             "すずめ♡あらもーど",
             "すずめ♡あらもーど",
