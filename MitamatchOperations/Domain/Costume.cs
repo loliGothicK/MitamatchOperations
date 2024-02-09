@@ -154,6 +154,31 @@ public record struct Costume(
     public static Costume[] List =>
     [
         new Costume(
+            "丹羽灯莉",
+            "ビューティフルワールドα",
+            new SpecialRangeCostume(15),
+            new RareSkill("天の秤目", "一定時間、敵1体の防御力をダウンする。"),
+            [
+                new Common([new LilySpDef(75)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyHp(200)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilySpAtk(75)]),
+                new Common([new LilyHp(200)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilySpDef(75)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilySpAtk(75)]),
+                new Common([new LilySpDef(125), new LilySpAtk(125)]),
+                new Unique([new Calibration(3)]),
+                new Common([new LilyHp(400), new LilySpAtk(150)]),
+                new Unique([new LilySpAtk(1500), new LilySpDef(1500)]),
+                new Common([new LilySpAtk(500), new LilySpDef(500)]),
+                new Unique([new LilySpAtk(1500), new LilySpDef(1500)]),
+            ],
+            new ExSkill("風属性メモリア効果増加AⅡ", "自身が使用する風属性メモリアのスキル効果3％UP水属性メモリア効果耐性AⅠ自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN")
+        ),
+        new Costume(
             "秦祀",
             "ドリーミィパレード",
             new RecoveryCostume(15),
