@@ -386,7 +386,7 @@ public sealed partial class ControlDashboardPage
                         // オーダー準備中を検知
                         case WaitStat(var image):
                             {
-                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug.png");
+                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug.png");
                                 _orderStat = new Waiting();
                                 _orderPreparePoint = DateTime.Now;
                                 break;
@@ -400,7 +400,7 @@ public sealed partial class ControlDashboardPage
                                     // オーダー準備中を検知
                                     case WaitStat(var image):
                                     {
-                                        image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug.png");
+                                        image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug.png");
                                         _orderStat = new Waiting();
                                         _orderPreparePoint = DateTime.Now;
                                         break;
@@ -487,7 +487,7 @@ public sealed partial class ControlDashboardPage
                         {
                             case ActiveStat(var image):
                                 _opOrderInfo = null;
-                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating\\True\\debug.png");
+                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating\\True\\debug.png");
                                 break;
                             default:
                                 {
@@ -496,7 +496,7 @@ public sealed partial class ControlDashboardPage
                                     {
                                         case ActiveStat(var image):
                                             _opOrderInfo = null;
-                                            image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating\\True\\debug.png");
+                                            image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating\\True\\debug.png");
                                             break;
                                         default:
                                             goto End;
