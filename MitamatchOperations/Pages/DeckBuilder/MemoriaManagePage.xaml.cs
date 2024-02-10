@@ -178,7 +178,7 @@ public sealed partial class MemoriaManagePage : Page
                 List<MemoriaIdAndConcentration> memorias
                     = info.Memorias == null
                     ? [.. Memorias.Select(m => new MemoriaIdAndConcentration(m.Memoria.Id, m.Concentration))]
-                    : [.. info.Memorias.Concat(Memorias.Select(m => new MemoriaIdAndConcentration(m.Memoria.Id, m.Concentration)))];
+                    : [.. Memorias.Select(m => new MemoriaIdAndConcentration(m.Memoria.Id, m.Concentration)).Concat(info.Memorias)];
                 var writeJson = (info with {
                     UpdatedAt = DateTime.Now,
                     Memorias = [.. memorias.DistinctBy(x => idToName[x.Id])],
