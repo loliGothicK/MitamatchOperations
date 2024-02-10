@@ -503,13 +503,13 @@ public sealed partial class MemoriaManagePage : Page
     {
         FilterType[] kindFilters = [
             FilterType.NormalSingle,
-                FilterType.NormalRange,
-                FilterType.SpecialSingle,
-                FilterType.SpecialRange,
-                FilterType.Support,
-                FilterType.Interference,
-                FilterType.Recovery,
-            ];
+            FilterType.NormalRange,
+            FilterType.SpecialSingle,
+            FilterType.SpecialRange,
+            FilterType.Support,
+            FilterType.Interference,
+            FilterType.Recovery,
+        ];
 
         return kindFilters.Contains(filter);
     }
