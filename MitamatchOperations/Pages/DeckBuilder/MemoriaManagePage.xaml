@@ -127,7 +127,7 @@
                     <x:String>3</x:String>
                     <x:String>4</x:String>
                 </ComboBox>
-                <ComboBox SelectionChanged="HorizontalComboBox_SelectionChanged" Header="横" PlaceholderText="横のメモリア数" Width="200" SelectedIndex="4">
+                <ComboBox SelectionChanged="HorizontalComboBox_SelectionChanged" Header="横" PlaceholderText="横のメモリア数" Width="200" SelectedIndex="3">
                     <x:String>5</x:String>
                     <x:String>6</x:String>
                     <x:String>7</x:String>
