@@ -36,12 +36,6 @@ internal class AutomateAssign {
         // クロノグラフ (Order Index = 17) の位置を取得
         var chronoIndex = timeTable.Select(item => item.Order.Index).ToList().IndexOf(17);
 
-        // クロノグラフでオーダーを分割
-        var beforeChrono = list.GetRange(0, chronoIndex);
-        var afterChrono = list.GetRange(chronoIndex + 1, list.Count - chronoIndex - 1);
-        var beforeInCharges = beforeChrono.Select(item => item.Pic == string.Empty ? -1 : memberToIndex[item.Pic]).ToList();
-        var afterInCharges = afterChrono.Select(item => item.Pic == string.Empty ? -1 : memberToIndex[item.Pic]).ToList();
-
         // すで割当てられている担当者と一致しているかをチェックする関数
         static bool IsAlreadyInCharge(IEnumerable<int> pics, IEnumerable<int> inChages)
         {
@@ -51,80 +45,52 @@ internal class AutomateAssign {
                 .Any(x => x.pic != inChages.ElementAt(x.index));
         };
 
-        if (inCharge.Contains(chronoIndex))
+        if (int.IsPositive(chronoIndex))
         {
-            var chrono = memberToIndex[timeTable[chronoIndex].Pic];
-            List<List<int>> beforeCandidates = [];
-            if (!beforeInCharges.Contains(-1))
-            {
-                beforeCandidates.Add([.. beforeChrono.Select(item => memberToIndex[item.Pic])]);
-            }
-            else
-            {
-                foreach (var pics in Permutation(Enumerable.Range(0, 9), beforeChrono.Count))
-                {
-                    if (pics.Contains(chrono)) continue;
-                    else if (IsAlreadyInCharge(pics, beforeInCharges)) continue;
-                    var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << x.index)) != 0);
-                    if (check)
-                    {
-                        beforeCandidates.Add([.. pics]);
-                    }
-                }
-            }
+            // クロノグラフでオーダーを分割
+            var beforeChrono = list.GetRange(0, chronoIndex);
+            var afterChrono = list.GetRange(chronoIndex + 1, list.Count - chronoIndex - 1);
+            var beforeInCharges = beforeChrono.Select(item => item.Pic == string.Empty ? -1 : memberToIndex[item.Pic]).ToList();
+            var afterInCharges = afterChrono.Select(item => item.Pic == string.Empty ? -1 : memberToIndex[item.Pic]).ToList();
 
-            List<List<int>> afterCandidates = [];
-            if (!afterInCharges.Contains(-1))
+            if (inCharge.Contains(chronoIndex))
             {
-                afterCandidates.Add([.. afterChrono.Select(item => memberToIndex[item.Pic])]);
-            }
-            else
-            {
-                foreach (var pics in Permutation(Enumerable.Range(0, 9), afterChrono.Count))
-                {
-                    if (pics.Contains(chrono)) continue;
-                    else if (IsAlreadyInCharge(pics, afterInCharges)) continue;
-                    var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << (x.index + beforeChrono.Count + 1))) != 0);
-                    if (check)
-                    {
-                        afterCandidates.Add([.. pics]);
-                    }
-                }
-            }
-
-            foreach (var before in beforeCandidates)
-            {
-                foreach (var after in afterCandidates)
-                {
-                    result.Add([.. before, chrono, .. after]);
-                }
-            }
-        }
-        else
-        {
-            for (int chrono = 0; chrono < 9; chrono++)
-            {
+                var chrono = memberToIndex[timeTable[chronoIndex].Pic];
                 List<List<int>> beforeCandidates = [];
-                foreach (var pics in Permutation(Enumerable.Range(0, 9), beforeChrono.Count))
+                if (!beforeInCharges.Contains(-1))
                 {
-                    if (pics.Contains(chrono)) continue;
-                    else if (IsAlreadyInCharge(pics, beforeInCharges)) continue;
-                    var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << x.index)) != 0);
-                    if (check)
+                    beforeCandidates.Add([.. beforeChrono.Select(item => memberToIndex[item.Pic])]);
+                }
+                else
+                {
+                    foreach (var pics in Permutation(Enumerable.Range(0, 9), beforeChrono.Count))
                     {
-                        beforeCandidates.Add([.. pics]);
+                        if (pics.Contains(chrono)) continue;
+                        else if (IsAlreadyInCharge(pics, beforeInCharges)) continue;
+                        var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << x.index)) != 0);
+                        if (check)
+                        {
+                            beforeCandidates.Add([.. pics]);
+                        }
                     }
                 }
 
                 List<List<int>> afterCandidates = [];
-                foreach (var pics in Permutation(Enumerable.Range(0, 9), afterChrono.Count))
+                if (!afterInCharges.Contains(-1))
                 {
-                    if (pics.Contains(chrono)) continue;
-                    else if (IsAlreadyInCharge(pics, afterInCharges)) continue;
-                    var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << (x.index + beforeChrono.Count + 1))) != 0);
-                    if (check)
+                    afterCandidates.Add([.. afterChrono.Select(item => memberToIndex[item.Pic])]);
+                }
+                else
+                {
+                    foreach (var pics in Permutation(Enumerable.Range(0, 9), afterChrono.Count))
                     {
-                        afterCandidates.Add([.. pics]);
+                        if (pics.Contains(chrono)) continue;
+                        else if (IsAlreadyInCharge(pics, afterInCharges)) continue;
+                        var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << (x.index + beforeChrono.Count + 1))) != 0);
+                        if (check)
+                        {
+                            afterCandidates.Add([.. pics]);
+                        }
                     }
                 }
 
@@ -134,6 +100,56 @@ internal class AutomateAssign {
                     {
                         result.Add([.. before, chrono, .. after]);
                     }
+                }
+            }
+            else
+            {
+                for (int chrono = 0; chrono < 9; chrono++)
+                {
+                    List<List<int>> beforeCandidates = [];
+                    foreach (var pics in Permutation(Enumerable.Range(0, 9), beforeChrono.Count))
+                    {
+                        if (pics.Contains(chrono)) continue;
+                        else if (IsAlreadyInCharge(pics, beforeInCharges)) continue;
+                        var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << x.index)) != 0);
+                        if (check)
+                        {
+                            beforeCandidates.Add([.. pics]);
+                        }
+                    }
+
+                    List<List<int>> afterCandidates = [];
+                    foreach (var pics in Permutation(Enumerable.Range(0, 9), afterChrono.Count))
+                    {
+                        if (pics.Contains(chrono)) continue;
+                        else if (IsAlreadyInCharge(pics, afterInCharges)) continue;
+                        var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << (x.index + beforeChrono.Count + 1))) != 0);
+                        if (check)
+                        {
+                            afterCandidates.Add([.. pics]);
+                        }
+                    }
+
+                    foreach (var before in beforeCandidates)
+                    {
+                        foreach (var after in afterCandidates)
+                        {
+                            result.Add([.. before, chrono, .. after]);
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            var inCharges = list.Select(item => item.Pic == string.Empty ? -1 : memberToIndex[item.Pic]).ToList();
+            foreach (var pics in Permutation(Enumerable.Range(0, 9), list.Count))
+            {
+                if (IsAlreadyInCharge(pics, inCharges)) continue;
+                var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << x.index)) != 0);
+                if (check)
+                {
+                    result.Add([.. pics]);
                 }
             }
         }
