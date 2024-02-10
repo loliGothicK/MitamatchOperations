@@ -30,9 +30,12 @@ public sealed partial class MemoriaManagePage : Page
     private readonly ObservableCollection<MemoriaWithConcentration> Memorias = [];
     private readonly ObservableCollection<Memoria> Pool = [.. Memoria.List.DistinctBy(x => x.Name)];
     private List<Memoria> selectedMemorias = [];
+    private readonly HashSet<FilterType> currentFilters = [.. Enum.GetValues(typeof(FilterType)).Cast<FilterType>()];
+    private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = [];
 
     public MemoriaManagePage()
     {
+        InitFilters();
         InitializeComponent();
     }
 
@@ -192,5 +195,270 @@ public sealed partial class MemoriaManagePage : Page
             .Build();
 
         await dialog.ShowAsync();
+    }
+
+    private void Filter_Checked(object sender, RoutedEventArgs e)
+    {
+        if (sender is not CheckBox checkBox) return;
+        var prevCount = currentFilters.Count;
+        var filter = checkBox.Content.ToString();
+        switch (filter)
+        {
+            case "‰Î":
+                {
+                    currentFilters.Add(FilterType.Fire);
+                    break;
+                }
+            case "…":
+                {
+                    currentFilters.Add(FilterType.Water);
+                    break;
+                }
+            case "•—":
+                {
+                    currentFilters.Add(FilterType.Wind);
+                    break;
+                }
+            case "Œõ":
+                {
+                    currentFilters.Add(FilterType.Light);
+                    break;
+                }
+            case "ˆÅ":
+                {
+                    currentFilters.Add(FilterType.Dark);
+                    break;
+                }
+            case "’Êí’P‘Ì":
+                {
+                    currentFilters.Add(FilterType.NormalSingle);
+                    break;
+                }
+            case "’Êí”ÍˆÍ":
+                {
+                    currentFilters.Add(FilterType.NormalRange);
+                    break;
+                }
+            case "“ÁŽê’P‘Ì":
+                {
+                    currentFilters.Add(FilterType.SpecialSingle);
+                    break;
+                }
+            case "“ÁŽê”ÍˆÍ":
+                {
+                    currentFilters.Add(FilterType.SpecialRange);
+                    break;
+                }
+            case "Žx‰‡":
+                {
+                    currentFilters.Add(FilterType.Support);
+                    break;
+                }
+            case "–WŠQ":
+                {
+                    currentFilters.Add(FilterType.Interference);
+                    break;
+                }
+            case "‰ñ•œ":
+                {
+                    currentFilters.Add(FilterType.Recovery);
+                    break;
+                }
+            default:
+                {
+                    throw new NotImplementedException();
+                }
+        }
+
+        if (prevCount == currentFilters.Count) return;
+        foreach (var memoria in Pool
+                .Where(memoria => !Pool.Contains(memoria))
+                .Where(memoria => !Memorias.Select(m => m.Memoria.Name).Contains(memoria.Name))
+                .Where(ApplyFilter))
+        {
+            Pool.Add(memoria);
+        }
+        BuilderPageHelpers.Sort(Pool, (a, b) => b.Id.CompareTo(a.Id));
+    }
+
+    private void Filter_Unchecked(object sender, RoutedEventArgs e)
+    {
+        if (sender is not CheckBox checkBox) return;
+        var prevCount = currentFilters.Count;
+        var filter = checkBox.Content.ToString();
+
+        switch (filter)
+        {
+            case "‰Î":
+                {
+                    currentFilters.Remove(FilterType.Fire);
+                    break;
+                }
+            case "…":
+                {
+                    currentFilters.Remove(FilterType.Water);
+                    break;
+                }
+            case "•—":
+                {
+                    currentFilters.Remove(FilterType.Wind);
+                    break;
+                }
+            case "Œõ":
+                {
+                    currentFilters.Remove(FilterType.Light);
+                    break;
+                }
+            case "ˆÅ":
+                {
+                    currentFilters.Remove(FilterType.Dark);
+                    break;
+                }
+            case "’Êí’P‘Ì":
+                {
+                    currentFilters.Remove(FilterType.NormalSingle);
+                    break;
+                }
+            case "’Êí”ÍˆÍ":
+                {
+                    currentFilters.Remove(FilterType.NormalRange);
+                    break;
+                }
+            case "“ÁŽê’P‘Ì":
+                {
+                    currentFilters.Remove(FilterType.SpecialSingle);
+                    break;
+                }
+            case "“ÁŽê”ÍˆÍ":
+                {
+                    currentFilters.Remove(FilterType.SpecialRange);
+                    break;
+                }
+            case "Žx‰‡":
+                {
+                    currentFilters.Remove(FilterType.Support);
+                    break;
+                }
+            case "–WŠQ":
+                {
+                    currentFilters.Remove(FilterType.Interference);
+                    break;
+                }
+            case "‰ñ•œ":
+                {
+                    currentFilters.Remove(FilterType.Recovery);
+                    break;
+                }
+            default:
+                {
+                    throw new NotImplementedException();
+                }
+        }
+        if (prevCount == currentFilters.Count) return;
+        foreach (var memoria in Pool
+            .ToList()
+            .Where(memoria => !ApplyFilter(memoria)))
+        {
+            Pool.Remove(memoria);
+        }
+        BuilderPageHelpers.Sort(Pool, (a, b) => b.Id.CompareTo(a.Id));
+    }
+
+    private void InitFilters()
+    {
+        Filters.Add(FilterType.NormalSingle, memoria => Memoria
+            .List
+            .Where(x => x.Name == memoria.Name)
+            .Any(x => x.Kind is Vanguard(VanguardKind.NormalSingle))
+        );
+        Filters.Add(FilterType.NormalRange, memoria => Memoria
+            .List
+            .Where(x => x.Name == memoria.Name)
+            .Any(x => x.Kind is Vanguard(VanguardKind.NormalRange))
+        );
+        Filters.Add(FilterType.SpecialSingle, memoria => Memoria
+            .List
+            .Where(x => x.Name == memoria.Name)
+            .Any(x => x.Kind is Vanguard(VanguardKind.SpecialSingle))
+        );
+        Filters.Add(FilterType.SpecialRange, memoria => Memoria
+            .List
+            .Where(x => x.Name == memoria.Name)
+            .Any(x => x.Kind is Vanguard(VanguardKind.SpecialRange))
+        );
+        Filters.Add(FilterType.Support, memoria => Memoria
+            .List
+            .Where(x => x.Name == memoria.Name)
+            .Any(x => x.Kind is Rearguard(RearguardKind.Support))
+        );
+        Filters.Add(FilterType.Interference, memoria => Memoria
+            .List
+            .Where(x => x.Name == memoria.Name)
+            .Any(x => x.Kind is Rearguard(RearguardKind.Interference))
+        );
+        Filters.Add(FilterType.Recovery, memoria => Memoria
+            .List
+            .Where(x => x.Name == memoria.Name)
+            .Any(x => x.Kind is Rearguard(RearguardKind.Recovery))
+        );
+
+        Filters.Add(FilterType.Fire, memoria => memoria.Element is Element.Fire);
+        Filters.Add(FilterType.Water, memoria => memoria.Element is Element.Water);
+        Filters.Add(FilterType.Wind, memoria => memoria.Element is Element.Wind);
+        Filters.Add(FilterType.Light, memoria => memoria.Element is Element.Light);
+        Filters.Add(FilterType.Dark, memoria => memoria.Element is Element.Dark);
+    }
+
+    bool ApplyFilter(Memoria memoria)
+    {
+        var p0 = currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria));
+        var p1 = currentFilters.Where(IsElementFilter).Any(key => Filters[key](memoria));
+        return p0 && p1;
+    }
+
+    bool IsKindFilter(FilterType filter)
+    {
+        FilterType[] kindFilters = [
+            FilterType.NormalSingle,
+                FilterType.NormalRange,
+                FilterType.SpecialSingle,
+                FilterType.SpecialRange,
+                FilterType.Support,
+                FilterType.Interference,
+                FilterType.Recovery,
+            ];
+
+        return kindFilters.Contains(filter);
+    }
+
+    bool IsElementFilter(FilterType filter)
+    {
+        FilterType[] elementFilters = [
+            FilterType.Fire,
+                FilterType.Water,
+                FilterType.Wind,
+                FilterType.Light,
+                FilterType.Dark,
+            ];
+
+        return elementFilters.Contains(filter);
+    }
+
+    public enum FilterType
+    {
+        // Kinds
+        NormalSingle,
+        NormalRange,
+        SpecialSingle,
+        SpecialRange,
+        Support,
+        Interference,
+        Recovery,
+        // Elements
+        Fire,
+        Water,
+        Wind,
+        Light,
+        Dark,
     }
 }

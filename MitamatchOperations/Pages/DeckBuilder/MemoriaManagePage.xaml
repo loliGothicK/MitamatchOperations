@@ -136,6 +136,36 @@
                     <x:String>10</x:String>
                 </ComboBox>
             </StackPanel>
+            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Margin="0,0,50,0">
+                <AppBarButton Icon="Filter" Label="属性">
+                    <AppBarButton.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <CheckBox Content="火" IsChecked="True" Checked="Filter_Checked" Unchecked="Filter_Unchecked" />
+                                <CheckBox Content="水" IsChecked="True" Checked="Filter_Checked" Unchecked="Filter_Unchecked" />
+                                <CheckBox Content="風" IsChecked="True" Checked="Filter_Checked" Unchecked="Filter_Unchecked" />
+                                <CheckBox Content="光" IsChecked="True" Checked="Filter_Checked" Unchecked="Filter_Unchecked" />
+                                <CheckBox Content="闇" IsChecked="True" Checked="Filter_Checked" Unchecked="Filter_Unchecked" />
+                            </StackPanel>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+                <AppBarButton Icon="Filter" Label="役割">
+                    <AppBarButton.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <CheckBox Content="通常単体" IsChecked="True" Checked="Filter_Checked" Unchecked="Filter_Unchecked" />
+                                <CheckBox Content="通常範囲" IsChecked="True" Checked="Filter_Checked" Unchecked="Filter_Unchecked" />
+                                <CheckBox Content="特殊単体" IsChecked="True" Checked="Filter_Checked" Unchecked="Filter_Unchecked" />
+                                <CheckBox Content="特殊範囲" IsChecked="True" Checked="Filter_Checked" Unchecked="Filter_Unchecked" />
+                                <CheckBox Content="支援" IsChecked="True" Checked="Filter_Checked" Unchecked="Filter_Unchecked" />
+                                <CheckBox Content="妨害" IsChecked="True" Checked="Filter_Checked" Unchecked="Filter_Unchecked" />
+                                <CheckBox Content="回復" IsChecked="True" Checked="Filter_Checked" Unchecked="Filter_Unchecked" />
+                            </StackPanel>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </CommandBar>
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
