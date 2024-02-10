@@ -30,7 +30,7 @@ public sealed partial class MemoriaManagePage : Page
     private readonly ObservableCollection<MemoriaWithConcentration> Memorias = [];
     private readonly ObservableCollection<Memoria> Pool = [.. Memoria.List.DistinctBy(x => x.Name)];
     private List<Memoria> selectedMemorias = [];
-    private readonly HashSet<FilterType> currentFilters = [.. Enum.GetValues(typeof(FilterType)).Cast<FilterType>()];
+    private readonly HashSet<FilterType> currentFilters = [.. Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(x => !IsOthreFiler(x))];
     private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = [];
 
     public MemoriaManagePage()
@@ -190,6 +190,12 @@ public sealed partial class MemoriaManagePage : Page
                 sr.Close();
                 using var fs = Director.CreateFile(path);
                 fs.Write(save, 0, save.Length);
+                foreach (var memoria in Memorias)
+                {
+                    Pool.Add(memoria.Memoria);
+                }
+                Memorias.Clear();
+                BuilderPageHelpers.Sort(Pool, (a, b) => b.Id.CompareTo(a.Id));
                 return Task.CompletedTask;
             }))
             .Build();
@@ -271,7 +277,10 @@ public sealed partial class MemoriaManagePage : Page
         }
 
         if (prevCount == currentFilters.Count) return;
-        foreach (var memoria in Pool
+
+        foreach (var memoria in Memoria
+                .List
+                .DistinctBy(x => x.Name)
                 .Where(memoria => !Pool.Contains(memoria))
                 .Where(memoria => !Memorias.Select(m => m.Memoria.Name).Contains(memoria.Name))
                 .Where(ApplyFilter))
@@ -364,6 +373,76 @@ public sealed partial class MemoriaManagePage : Page
         BuilderPageHelpers.Sort(Pool, (a, b) => b.Id.CompareTo(a.Id));
     }
 
+    private void Search_Checked(object sender, RoutedEventArgs e)
+    {
+        if (sender is not CheckBox checkBox) return;
+        var prevCount = currentFilters.Count;
+        var filter = checkBox.Content.ToString();
+
+        switch (filter)
+        {
+            case "レジェンダリー":
+                {
+                    currentFilters.Add(FilterType.Legendary);
+                    break;
+                }
+            case "アルティメット":
+                {
+                    currentFilters.Add(FilterType.Ultimate);
+                    break;
+                }
+            default:
+                {
+                    throw new NotImplementedException();
+                }
+        }
+        if (prevCount == currentFilters.Count) return;
+        foreach (var memoria in Pool
+            .ToList()
+            .Where(memoria => !ApplyFilter(memoria)))
+        {
+            Pool.Remove(memoria);
+        }
+        BuilderPageHelpers.Sort(Pool, (a, b) => b.Id.CompareTo(a.Id));
+    }
+
+    private void Search_Unchecked(object sender, RoutedEventArgs e)
+    {
+        if (sender is not CheckBox checkBox) return;
+        var prevCount = currentFilters.Count;
+        var filter = checkBox.Content.ToString();
+        switch (filter)
+        {
+            case "レジェンダリー":
+                {
+                    currentFilters.Remove(FilterType.Legendary);
+                    break;
+                }
+            case "アルティメット":
+                {
+                    currentFilters.Remove(FilterType.Ultimate);
+                    break;
+                }
+            default:
+                {
+                    throw new NotImplementedException();
+                }
+        }
+
+        if (prevCount == currentFilters.Count) return;
+
+        foreach (var memoria in Memoria
+                .List
+                .DistinctBy(x => x.Name)
+                .Where(memoria => !Pool.Contains(memoria))
+                .Where(memoria => !Memorias.Select(m => m.Memoria.Name).Contains(memoria.Name))
+                .Where(ApplyFilter))
+        {
+            Pool.Add(memoria);
+        }
+        BuilderPageHelpers.Sort(Pool, (a, b) => b.Id.CompareTo(a.Id));
+    }
+
     private void InitFilters()
     {
         Filters.Add(FilterType.NormalSingle, memoria => Memoria
@@ -407,16 +486,20 @@ public sealed partial class MemoriaManagePage : Page
         Filters.Add(FilterType.Wind, memoria => memoria.Element is Element.Wind);
         Filters.Add(FilterType.Light, memoria => memoria.Element is Element.Light);
         Filters.Add(FilterType.Dark, memoria => memoria.Element is Element.Dark);
+
+        Filters.Add(FilterType.Legendary, memoria => memoria.IsLegendary);
+        Filters.Add(FilterType.Ultimate, memoria => memoria.Link.Contains("ultimate"));
     }
 
     bool ApplyFilter(Memoria memoria)
     {
         var p0 = currentFilters.Where(IsKindFilter).Any(key => Filters[key](memoria));
         var p1 = currentFilters.Where(IsElementFilter).Any(key => Filters[key](memoria));
-        return p0 && p1;
+        var p2 = currentFilters.Where(IsOthreFiler).All(key => Filters[key](memoria));
+        return p0 && p1 && p2;
     }
 
-    bool IsKindFilter(FilterType filter)
+    private static bool IsKindFilter(FilterType filter)
     {
         FilterType[] kindFilters = [
             FilterType.NormalSingle,
@@ -431,17 +514,27 @@ public sealed partial class MemoriaManagePage : Page
         return kindFilters.Contains(filter);
     }
 
-    bool IsElementFilter(FilterType filter)
+    private static bool IsElementFilter(FilterType filter)
     {
         FilterType[] elementFilters = [
             FilterType.Fire,
-                FilterType.Water,
-                FilterType.Wind,
-                FilterType.Light,
-                FilterType.Dark,
-            ];
+            FilterType.Water,
+            FilterType.Wind,
+            FilterType.Light,
+            FilterType.Dark,
+        ];
 
         return elementFilters.Contains(filter);
+    }
+
+    private static bool IsOthreFiler(FilterType filter)
+    {
+        FilterType[] otherFilters = [
+            FilterType.Legendary,
+            FilterType.Ultimate,
+        ];
+
+        return otherFilters.Contains(filter);
     }
 
     public enum FilterType
@@ -460,5 +553,8 @@ public sealed partial class MemoriaManagePage : Page
         Wind,
         Light,
         Dark,
+        // Others
+        Legendary,
+        Ultimate,
     }
 }

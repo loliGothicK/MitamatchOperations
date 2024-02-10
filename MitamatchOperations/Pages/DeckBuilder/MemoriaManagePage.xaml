@@ -165,6 +165,16 @@
                         </Flyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
+                <AppBarButton Icon="Zoom" Label="その他">
+                    <AppBarButton.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <CheckBox Content="レジェンダリー" IsChecked="False" Checked="Search_Checked" Unchecked="Search_Unchecked" />
+                                <CheckBox Content="アルティメット" IsChecked="False" Checked="Search_Checked" Unchecked="Search_Unchecked" />
+                            </StackPanel>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
             </CommandBar>
         </Grid>
         <Grid Grid.Row="3">
