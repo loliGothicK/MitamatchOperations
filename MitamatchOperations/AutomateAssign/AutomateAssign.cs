@@ -25,6 +25,7 @@ internal class AutomateAssign {
         var memberToIndex = memberInfo
             .Select((item, index) => (item, index))
             .ToDictionary(x => x.item.Name, x => x.index);
+        // 担当者のオーダー所持状況をビットフラグで表現
         var intoFlags = memberInfo
             .Select((item, index) => (item, index))
             .ToDictionary(
@@ -45,7 +46,7 @@ internal class AutomateAssign {
                 .Any(x => x.pic != inChages.ElementAt(x.index));
         };
 
-        if (int.IsPositive(chronoIndex))
+        if (int.IsPositive(chronoIndex)) // クロノグラフが存在する場合
         {
             // クロノグラフでオーダーを分割
             var beforeChrono = list.GetRange(0, chronoIndex);
@@ -102,7 +103,7 @@ internal class AutomateAssign {
                     }
                 }
             }
-            else
+            else // クロノグラフが割り当てられていない場合
             {
                 for (int chrono = 0; chrono < 9; chrono++)
                 {
