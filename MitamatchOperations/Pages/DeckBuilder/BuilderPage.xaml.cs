@@ -2719,6 +2719,13 @@ namespace mitama.Pages.DeckBuilder
                 using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                 var readJson = sr.ReadToEnd();
                 var info = MemberInfo.FromJson(readJson);
+                if (info.Memorias is null)
+                {
+                    GeneralInfoBar.Title = "メモリアが登録されていません";
+                    GeneralInfoBar.IsOpen = true;
+                    GeneralInfoBar.Severity = InfoBarSeverity.Error;
+                    return;
+                }
                 // IDをキーにしたメモリアの辞書を作成
                 // 覚醒/超覚醒のうちひとつしか登録されていないため
                 var idToMemoria = Memoria
