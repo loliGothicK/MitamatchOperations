@@ -770,7 +770,20 @@ public sealed partial class DeckEditorPage
                             var newDialog = new DialogBuilder(XamlRoot)
                                 .WithTitle(@$"{candidates.Count} 通りの候補が見つかりました")
                                 .WithBody(new AutoAssignmentDialogContent([.. _deck], candidates, hook))
-                                .WithPrimary("実行", new Defer(async delegate{
+                                .WithPrimary("実行", new Defer(async delegate {
+                                    foreach (var (pic, index) in candidates[selected].Select((x, i) => (x, i)))
+                                    {
+                                        _deck[index] = _deck[index] with { Pic = pic };
+                                    }
+                                    GeneralInfoBar.IsOpen = true;
+                                    GeneralInfoBar.Title = "Successfully assigned!";
+                                    GeneralInfoBar.Severity = InfoBarSeverity.Success;
+                                    await Task.Delay(2000);
+                                    GeneralInfoBar.IsOpen = false;
+                                }))
+                                .WithSecondary("ランダム",new Defer(async delegate {
+                                    Random engine = new();
+                                    selected = engine.Next(candidates.Count);
                                     foreach (var (pic, index) in candidates[selected].Select((x, i) => (x, i)))
                                     {
                                         _deck[index] = _deck[index] with { Pic = pic };

@@ -31,7 +31,7 @@ public sealed partial class AutoAssignmentDialogContent : Page
 
     private void NumberBoxSpinButtonPlacementExample_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
     {
-        if ((int)sender.Value == 1) return;
+        if (CandidateListView is null) return;
 
         CandidateListView.ItemsSource = Timeline.Zip(Candidates[(int)sender.Value - 1])
             .Select(zipped => $@"{zipped.First.Order.Name} => {zipped.Second}");

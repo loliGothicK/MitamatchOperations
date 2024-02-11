@@ -17,6 +17,7 @@ internal record struct DialogBuilder(
     string PrimaryButtonText = null,
     ICommand PrimaryButtonCommand = null,
     string SecondaryButtonText = null,
+    ICommand SecondaryButtonCommand = null,
     string CloseButtonText = null
 ) {
     internal readonly ContentDialog Build()
@@ -28,6 +29,7 @@ internal record struct DialogBuilder(
             PrimaryButtonText = PrimaryButtonText,
             PrimaryButtonCommand = PrimaryButtonCommand,
             SecondaryButtonText = SecondaryButtonText,
+            SecondaryButtonCommand = SecondaryButtonCommand,
             CloseButtonText = CloseButtonText,
             DefaultButton = ContentDialogButton.Primary,
             Content = Body
@@ -38,5 +40,6 @@ internal record struct DialogBuilder(
     internal readonly DialogBuilder WithPrimary(string primary) => this with { PrimaryButtonText = primary };
     internal readonly DialogBuilder WithPrimary(string primary, ICommand command) => this with { PrimaryButtonText = primary, PrimaryButtonCommand = command };
     internal readonly DialogBuilder WithSecondary(string secondary) => this with { SecondaryButtonText = secondary };
+    internal readonly DialogBuilder WithSecondary(string secondary, ICommand command) => this with { SecondaryButtonText = secondary, SecondaryButtonCommand = command };
     internal readonly DialogBuilder WithCancel(string cancel) => this with { CloseButtonText = cancel };
 }
