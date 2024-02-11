@@ -68,7 +68,10 @@ internal class AutomateAssign {
                     {
                         if (pics.Contains(chrono)) continue;
                         else if (IsAlreadyInCharge(pics, beforeInCharges)) continue;
-                        var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << x.index)) != 0);
+                        var check = pics
+                            .Select((pic, index) => (pic, index))
+                            .Where(x => beforeInCharges.ElementAt(x.index) == -1)
+                            .All(x => (intoFlags[x.pic] & (1 << x.index)) != 0);
                         if (check)
                         {
                             beforeCandidates.Add([.. pics]);
@@ -87,7 +90,10 @@ internal class AutomateAssign {
                     {
                         if (pics.Contains(chrono)) continue;
                         else if (IsAlreadyInCharge(pics, afterInCharges)) continue;
-                        var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << (x.index + beforeChrono.Count + 1))) != 0);
+                        var check = pics
+                            .Select((pic, index) => (pic, index))
+                            .Where(x => afterInCharges.ElementAt(x.index) == -1)
+                            .All(x => (intoFlags[x.pic] & (1 << (x.index + beforeChrono.Count + 1))) != 0);
                         if (check)
                         {
                             afterCandidates.Add([.. pics]);
@@ -112,7 +118,10 @@ internal class AutomateAssign {
                     {
                         if (pics.Contains(chrono)) continue;
                         else if (IsAlreadyInCharge(pics, beforeInCharges)) continue;
-                        var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << x.index)) != 0);
+                        var check = pics
+                            .Select((pic, index) => (pic, index))
+                            .Where(x => beforeInCharges.ElementAt(x.index) == -1)
+                            .All(x => (intoFlags[x.pic] & (1 << x.index)) != 0);
                         if (check)
                         {
                             beforeCandidates.Add([.. pics]);
@@ -124,7 +133,10 @@ internal class AutomateAssign {
                     {
                         if (pics.Contains(chrono)) continue;
                         else if (IsAlreadyInCharge(pics, afterInCharges)) continue;
-                        var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << (x.index + beforeChrono.Count + 1))) != 0);
+                        var check = pics
+                            .Select((pic, index) => (pic, index))
+                            .Where(x => afterInCharges.ElementAt(x.index) == -1)
+                            .All(x => (intoFlags[x.pic] & (1 << (x.index + beforeChrono.Count + 1))) != 0);
                         if (check)
                         {
                             afterCandidates.Add([.. pics]);
@@ -147,7 +159,10 @@ internal class AutomateAssign {
             foreach (var pics in Permutation(Enumerable.Range(0, 9), list.Count))
             {
                 if (IsAlreadyInCharge(pics, inCharges)) continue;
-                var check = pics.Select((pic, index) => (pic, index)).All(x => (intoFlags[x.pic] & (1 << x.index)) != 0);
+                var check = pics
+                    .Select((pic, index) => (pic, index))
+                    .Where(x => inCharges.ElementAt(x.index) == -1)
+                    .All(x => (intoFlags[x.pic] & (1 << x.index)) != 0);
                 if (check)
                 {
                     result.Add([.. pics]);
