@@ -125,11 +125,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup Label="MLOrderModel">
-    <None Include="MLOrderModel.mlnet">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\OrderConsole\AutoAssignmentDialogContent.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +134,11 @@
     <Page Update="Pages\DeckBuilder\MemoriaManagePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup Label="MLOrderModel">
+    <None Include="MLOrderModel.mlnet">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <!-- 
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution 
