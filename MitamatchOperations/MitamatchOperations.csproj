@@ -34,6 +34,7 @@
     <None Remove="Pages\LibraryPage.xaml" />
     <None Remove="Pages\Library\CharmLibraryPage.xaml" />
     <None Remove="Pages\Library\CostumeLibraryPage.xaml" />
+    <None Remove="Pages\OrderConsole\AutoAssignmentDialogContent.xaml" />
     <None Remove="Pages\RegionConsole\BasicStatusGraphDialog.xaml" />
     <None Remove="Pages\RegionConsole\ElementalGraphDialog.xaml" />
     <None Remove="Pages\RegionConsole\HistoriaViewer.xaml" />
@@ -128,6 +129,11 @@
     <None Include="MLOrderModel.mlnet">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\OrderConsole\AutoAssignmentDialogContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\DeckBuilder\MemoriaManagePage.xaml">

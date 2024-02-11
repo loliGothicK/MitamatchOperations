@@ -19,6 +19,7 @@ using mitama.Pages.Common;
 using WinRT;
 using Microsoft.UI.Xaml.Navigation;
 using mitama.AutomateAssign;
+using System.Windows.Interop;
 
 namespace mitama.Pages.OrderConsole;
 
@@ -759,13 +760,30 @@ public sealed partial class DeckEditorPage
                             GeneralInfoBar.IsOpen = false;
                             break;
                         }
-                    case Success:
+                    case Success(var candidates):
                         {
-                            GeneralInfoBar.IsOpen = true;
-                            GeneralInfoBar.Title = "Successfully assigned";
-                            GeneralInfoBar.Severity = InfoBarSeverity.Success;
-                            await Task.Delay(2000);
-                            GeneralInfoBar.IsOpen = false;
+                            int selected = 0;
+                            void hook(int index)
+                            {
+                                selected = index;
+                            }
+                            var newDialog = new DialogBuilder(XamlRoot)
+                                .WithTitle(@$"{candidates.Count} 通りの候補が見つかりました")
+                                .WithBody(new AutoAssignmentDialogContent([.. _deck], candidates, hook))
+                                .WithPrimary("実行", new Defer(async delegate{
+                                    foreach (var (pic, index) in candidates[selected].Select((x, i) => (x, i)))
+                                    {
+                                        _deck[index] = _deck[index] with { Pic = pic };
+                                    }
+                                    GeneralInfoBar.IsOpen = true;
+                                    GeneralInfoBar.Title = "Successfully assigned!";
+                                    GeneralInfoBar.Severity = InfoBarSeverity.Success;
+                                    await Task.Delay(2000);
+                                    GeneralInfoBar.IsOpen = false;
+                                }))
+                                .WithCancel("やっぱりやめる")
+                                .Build();
+                            dialog.Closed += async (_s, _a) => await newDialog.ShowAsync();
                             break;
                         }
                 }
@@ -853,7 +871,7 @@ internal record struct DeckJsonProxy(int Index, int Delay, int Start, int End, s
         => new(Order.List[item.Index], item.Delay, item.Start, item.End, item.Pic, item.Conditional);
 }
 
-internal record TimeTableItem(Order Order, int Delay, int Start, int End, string Pic = "", bool Conditional = false)
+public record TimeTableItem(Order Order, int Delay, int Start, int End, string Pic = "", bool Conditional = false)
 {
     private static string TimeFormat(int time)
     {

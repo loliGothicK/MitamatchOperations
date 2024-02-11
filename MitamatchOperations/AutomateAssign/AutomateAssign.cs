@@ -8,12 +8,11 @@ using mitama.Pages.Common;
 namespace mitama.AutomateAssign;
 
 internal abstract record AutomateAssignResult {
-    public static Success Success => new();
+    public static Success Success(List<List<string>> candidates) => new(candidates);
     public static Failure Failure(string msg) => new(msg);
 }
-internal record Success : AutomateAssignResult;
+internal record Success(List<List<string>> Candidates) : AutomateAssignResult;
 internal record Failure(string Msg) : AutomateAssignResult;
-
 
 internal class AutomateAssign {
     internal static AutomateAssignResult ExecAutoAssign(string region, ref ObservableCollection<TimeTableItem> timeTable) {
@@ -172,13 +171,11 @@ internal class AutomateAssign {
 
         if (result.Count == 0) return AutomateAssignResult.Failure("割当てが不可能です。");
 
-        Random engine = new();
-        var picked = engine.Next(result.Count);
-        foreach (var (pic, index) in result[picked].Select((x, i) => (x, i)))
-        {
-            timeTable[index] = timeTable[index] with { Pic = memberInfo[pic].Name };
-        }
-        return AutomateAssignResult.Success;
+        return AutomateAssignResult.Success(
+            result
+                .Select(pics => pics.Select(pic => memberInfo[pic].Name).ToList())
+                .ToList()
+        );
     }
 
     private static IEnumerable<T[]> Permutation<T>(IEnumerable<T> items, int k)
