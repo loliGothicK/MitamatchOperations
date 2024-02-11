@@ -661,7 +661,8 @@ public record Memoria(
                 Trigger.Attack,
                 [new DamageUp(), new GuardDown(Type.Normal)],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1310,
@@ -691,7 +692,8 @@ public record Memoria(
                 Trigger.Support,
                 [new SupportUp(), new PowerUp(Type.Normal)],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1309,
@@ -721,7 +723,8 @@ public record Memoria(
                 Trigger.Support,
                 [new RecoveryUp(), new ElementGuardUp(Element.Water)],
                 Level.Four
-            )
+            ),
+            true
         ),
         new Memoria(
             1308,
