@@ -71,7 +71,8 @@ public record MemberInfo(
     string Name,
     Position Position,
     ushort[] OrderIndices,
-    MemoriaIdAndConcentration[] Memorias
+    MemoriaIdAndConcentration[] Memorias,
+    int[] CostumeIndices
 ) {
     internal string PositionInfo => Position switch {
         Front(var category) => category switch {
@@ -108,7 +109,8 @@ public record MemberInfo(
         string Name,
         int Position,
         ushort[] OrderIndices,
-        MemoriaIdAndConcentration[] Memorias
+        MemoriaIdAndConcentration[] Memorias,
+        int[] CostumeIndices
     )
     {
         public static implicit operator MemberInfo(MemberDto dto) => new(
@@ -125,7 +127,8 @@ public record MemberInfo(
                 _ => throw new ArgumentOutOfRangeException(nameof(dto.Position)),
             },
             dto.OrderIndices,
-            dto.Memorias
+            dto.Memorias,
+            dto.CostumeIndices
         );
     }
 }

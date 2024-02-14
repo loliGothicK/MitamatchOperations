@@ -34,6 +34,7 @@
     <None Remove="Pages\LibraryPage.xaml" />
     <None Remove="Pages\Library\CharmLibraryPage.xaml" />
     <None Remove="Pages\Library\CostumeLibraryPage.xaml" />
+    <None Remove="Pages\Library\CostumeManagePage.xaml" />
     <None Remove="Pages\OrderConsole\AutoAssignmentDialogContent.xaml" />
     <None Remove="Pages\RegionConsole\BasicStatusGraphDialog.xaml" />
     <None Remove="Pages\RegionConsole\ElementalGraphDialog.xaml" />
@@ -82,6 +83,10 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Pages\Library\CostumeManagePage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Pages\RegionConsole\BasicStatusGraphDialog.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
