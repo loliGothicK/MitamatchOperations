@@ -10,16 +10,33 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <DataTemplate x:Name="CostumeTemplate" x:DataType="domain:Costume">
+        <DataTemplate x:Name="CostumeTemplate" x:DataType="domain:CostumeWithEx">
             <Grid Width="100">
-                <Image Source="{x:Bind Path}" Stretch="UniformToFill"/>
+                <Image Source="{x:Bind Costume.Path}" Stretch="UniformToFill"/>
+                <Image Source="{Binding Icon}"
+                       Height="30"
+                       Width="30"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       Visibility="{x:Bind Visibility}"/>
                 <Grid.ContextFlyout>
                     <Flyout>
                         <Grid>
                             <StackPanel>
-                                <Button Content="{x:Bind DisplayName}" Margin="5" FontSize="20"/>
-                                <Button Content="{x:Bind RareSkill.Description}" Margin="5" FontSize="10"/>
-                                <Button Content="{x:Bind DisplayExSkill}" Margin="5" FontSize="10"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="{x:Bind Costume.DisplayName}" Margin="5" FontSize="20"/>
+                                    <ComboBox x:Name="ExComboBox"
+                                              FontSize="20"
+                                              SelectionChanged="ExComboBox_SelectionChanged"
+                                              Width="100"
+                                              AccessKey="{x:Bind Costume.Index}"
+                                              SelectedIndex="0">
+                                        <x:String>EXあり</x:String>
+                                        <x:String>EXなし</x:String>
+                                    </ComboBox>
+                                </StackPanel>
+                                <Button Content="{x:Bind Costume.RareSkill.Description}" Margin="5" FontSize="10"/>
+                                <Button Content="{x:Bind Costume.DisplayExSkill}" Margin="5" FontSize="10"/>
                             </StackPanel>
                         </Grid>
                     </Flyout>
@@ -95,6 +112,13 @@
                 </ComboBox>
             </StackPanel>
             <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Margin="0,0,50,0">
+                <AppBarButton Icon="Share" Label="Share" AllowFocusOnInteraction="True">
+                    <AppBarButton.Flyout>
+                        <Flyout>
+                            <Button Content="CSVをコピー" Click="CsvButton_Click"/>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
                 <AppBarButton Icon="Filter" Label="役割">
                     <AppBarButton.Flyout>
                         <Flyout>

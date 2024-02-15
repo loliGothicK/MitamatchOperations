@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using DynamicData.Kernel;
+using Microsoft.UI.Xaml;
 
 namespace mitama.Domain;
 
@@ -77,6 +78,21 @@ public record struct LilyStatus(int Hp, int Atk, int Def, int SpAtk, int SpDef)
     public static LilyStatus operator *(LilyStatus a, int b) => new(a.Hp * b, a.Atk * b, a.Def * b, a.SpAtk * b, a.SpDef * b);
     public static LilyStatus operator /(LilyStatus a, int b) => new(a.Hp / b, a.Atk / b, a.Def / b, a.SpAtk / b, a.SpDef / b);
     public static LilyStatus operator %(LilyStatus a, int b) => new(a.Hp % b, a.Atk % b, a.Def % b, a.SpAtk % b, a.SpDef % b);
+}
+
+public record CostumeWithEx(Costume Costume, ExInfo Ex, string Icon = $"/Assets/Images/lily_true.png")
+{
+    public static implicit operator CostumeWithEx(Costume v)
+    {
+        return new CostumeWithEx(v, v.ExSkill.HasValue ? ExInfo.Active : ExInfo.None);
+    }
+
+    public static implicit operator Costume(CostumeWithEx v)
+    {
+        return v.Costume;
+    }
+
+    public Visibility Visibility = Costume.ExSkill.HasValue ? Visibility.Visible : Visibility.Collapsed;
 }
 
 public record struct Costume(

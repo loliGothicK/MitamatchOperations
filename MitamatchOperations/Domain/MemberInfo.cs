@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json;
+using DynamicData.Kernel;
 
 namespace mitama.Domain;
 
@@ -65,6 +66,14 @@ public enum BackCategory
 
 public record struct MemoriaIdAndConcentration(int Id, int Concenration);
 
+public enum ExInfo
+{
+    None,
+    Active,
+    Inactive,
+}
+public record struct CostumeIndexAndEx(int Index, ExInfo Ex);
+
 public record MemberInfo(
     DateTime CreatedAt,
     DateTime UpdatedAt,
@@ -72,7 +81,7 @@ public record MemberInfo(
     Position Position,
     ushort[] OrderIndices,
     MemoriaIdAndConcentration[] Memorias,
-    int[] CostumeIndices
+    CostumeIndexAndEx[] Costumes
 ) {
     internal string PositionInfo => Position switch {
         Front(var category) => category switch {
@@ -99,6 +108,7 @@ public record MemberInfo(
             Position = Position.GetCategory(),
             OrderIndices = OrderIndices,
             Memorias = Memorias,
+            Costumes = Costumes
         };
         var json = JsonSerializer.Serialize(dto);
         return json;
@@ -110,7 +120,7 @@ public record MemberInfo(
         int Position,
         ushort[] OrderIndices,
         MemoriaIdAndConcentration[] Memorias,
-        int[] CostumeIndices
+        CostumeIndexAndEx[] Costumes
     )
     {
         public static implicit operator MemberInfo(MemberDto dto) => new(
@@ -128,7 +138,7 @@ public record MemberInfo(
             },
             dto.OrderIndices,
             dto.Memorias,
-            dto.CostumeIndices
+            dto.Costumes
         );
     }
 }

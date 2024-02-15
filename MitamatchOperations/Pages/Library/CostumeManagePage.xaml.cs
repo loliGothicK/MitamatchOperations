@@ -12,6 +12,7 @@ using mitama.Domain;
 using mitama.Pages.Common;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage.Pickers;
+using WinRT;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -25,12 +26,12 @@ public sealed partial class CostumeManagePage : Page
 {
     private string imgPath;
     private int verticalCount = 3;
-    private int horizontalCount = 8;
-    private readonly ObservableCollection<Costume> Costumes = [];
-    private readonly ObservableCollection<Costume> Pool = [.. Costume.List];
-    private List<Costume> selectedCostumes = [];
+    private int horizontalCount = 7;
+    private readonly ObservableCollection<CostumeWithEx> Costumes = [];
+    private readonly ObservableCollection<CostumeWithEx> Pool = [.. Costume.List];
+    private List<CostumeWithEx> selectedCostumes = [];
     private readonly HashSet<FilterType> currentFilters = [.. Enum.GetValues(typeof(FilterType)).Cast<FilterType>()];
-    private readonly Dictionary<FilterType, Func<Costume, bool>> Filters = [];
+    private readonly Dictionary<FilterType, Func<CostumeWithEx, bool>> Filters = [];
 
     public CostumeManagePage()
     {
@@ -89,7 +90,7 @@ public sealed partial class CostumeManagePage : Page
 
     private void Memeria_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
     {
-        selectedCostumes = e.Items.Select(v => (Costume)v).ToList();
+        selectedCostumes = e.Items.Select(v => (CostumeWithEx)v).ToList();
         e.Data.RequestedOperation = DataPackageOperation.Move;
     }
 
@@ -102,7 +103,7 @@ public sealed partial class CostumeManagePage : Page
     {
         foreach (var toAdd in Costume
             .List
-            .Where(m => selectedCostumes.Select(s => s.Name).Contains(m.Name)))
+            .Where(m => selectedCostumes.Select(s => s.Costume.Name).Contains(m.Name)))
         {
             Pool.Add(toAdd);
         }
@@ -110,14 +111,14 @@ public sealed partial class CostumeManagePage : Page
         {
             Costumes.Remove(toRemove);
         }
-        BuilderPageHelpers.Sort(Pool, (a, b) => b.Index.CompareTo(a.Index));
+        BuilderPageHelpers.Sort(Pool, (a, b) => b.Costume.Index.CompareTo(a.Costume.Index));
     }
 
     private void Memeria_Drop(object sender, DragEventArgs e)
     {
         foreach (var toRemove in Costume
             .List
-            .Where(m => selectedCostumes.Select(s => s.Name).Contains(m.Name)))
+            .Where(m => selectedCostumes.Select(s => s.Costume.Name).Contains(m.Name)))
         {
             Pool.Remove(toRemove);
         }
@@ -153,13 +154,13 @@ public sealed partial class CostumeManagePage : Page
                 var idToName = Memoria
                     .List
                     .ToDictionary(m => m.Id, m => m.Name);
-                List<int> costumes
-                    = info.CostumeIndices == null
-                    ? [.. Costumes.Select(m => m.Index)]
-                    : [.. Costumes.Select(m => m.Index).Concat(info.CostumeIndices)];
+                List<CostumeIndexAndEx> costumes
+                    = info.Costumes == null
+                    ? [.. Costumes.Select(m => new CostumeIndexAndEx(m.Costume.Index, m.Ex))]
+                    : [.. Costumes.Select(m => new CostumeIndexAndEx(m.Costume.Index, m.Ex)).Concat(info.Costumes)];
                 var writeJson = (info with {
                     UpdatedAt = DateTime.Now,
-                    CostumeIndices = [.. costumes],
+                    Costumes = [.. costumes],
                 }).ToJson();
                 var save = new UTF8Encoding(true).GetBytes(writeJson);
                 sr.Close();
@@ -170,7 +171,7 @@ public sealed partial class CostumeManagePage : Page
                     Pool.Add(costume);
                 }
                 Costumes.Clear();
-                BuilderPageHelpers.Sort(Pool, (a, b) => b.Index.CompareTo(a.Index));
+                BuilderPageHelpers.Sort(Pool, (a, b) => b.Costume.Index.CompareTo(a.Costume.Index));
                 return Task.CompletedTask;
             }))
             .Build();
@@ -232,12 +233,12 @@ public sealed partial class CostumeManagePage : Page
                 .List
                 .DistinctBy(x => x.Name)
                 .Where(costume => !Pool.Contains(costume))
-                .Where(costume => !Costumes.Select(m => m.Index).Contains(costume.Index))
+                .Where(costume => !Costumes.Select(m => m.Costume.Index).Contains(costume.Index))
                 .Where(ApplyFilter))
         {
             Pool.Add(costume);
         }
-        BuilderPageHelpers.Sort(Pool, (a, b) => b.Index.CompareTo(a.Index));
+        BuilderPageHelpers.Sort(Pool, (a, b) => b.Costume.Index.CompareTo(a.Costume.Index));
     }
 
     private void Filter_Unchecked(object sender, RoutedEventArgs e)
@@ -295,19 +296,19 @@ public sealed partial class CostumeManagePage : Page
         {
             Pool.Remove(memoria);
         }
-        BuilderPageHelpers.Sort(Pool, (a, b) => b.Index.CompareTo(a.Index));
+        BuilderPageHelpers.Sort(Pool, (a, b) => b.Costume.Index.CompareTo(a.Costume.Index));
     }
 
 
     private void InitFilters()
     {
-        Filters.Add(FilterType.NormalSingle, costume => costume.Type is NormalSingleCostume);
-        Filters.Add(FilterType.NormalRange, costume => costume.Type is NormalRangeCostume);
-        Filters.Add(FilterType.SpecialSingle, costume => costume.Type is SpecialSingleCostume);
-        Filters.Add(FilterType.SpecialRange, costume => costume.Type is SpecialRangeCostume);
-        Filters.Add(FilterType.Support, costume => costume.Type is AssistCostume);
-        Filters.Add(FilterType.Interference, costume => costume.Type is InterferenceCostume);
-        Filters.Add(FilterType.Recovery, costume => costume.Type is RecoveryCostume);
+        Filters.Add(FilterType.NormalSingle, costume => costume.Costume.Type is NormalSingleCostume);
+        Filters.Add(FilterType.NormalRange, costume => costume.Costume.Type is NormalRangeCostume);
+        Filters.Add(FilterType.SpecialSingle, costume => costume.Costume.Type is SpecialSingleCostume);
+        Filters.Add(FilterType.SpecialRange, costume => costume.Costume.Type is SpecialRangeCostume);
+        Filters.Add(FilterType.Support, costume => costume.Costume.Type is AssistCostume);
+        Filters.Add(FilterType.Interference, costume => costume.Costume.Type is InterferenceCostume);
+        Filters.Add(FilterType.Recovery, costume => costume.Costume.Type is RecoveryCostume);
     }
 
     bool ApplyFilter(Costume costume)
@@ -341,5 +342,84 @@ public sealed partial class CostumeManagePage : Page
         Support,
         Interference,
         Recovery,
+    }
+
+    private async void CsvButton_Click(object _, RoutedEventArgs e)
+    {
+        var comboBox = new ComboBox();
+        foreach (var member in Util.LoadMemberNames(Director.ReadCache().Region))
+        {
+            comboBox.Items.Add(member);
+        }
+        comboBox.SelectedIndex = 0;
+        string selected = string.Empty;
+        comboBox.SelectionChanged += (_, args) =>
+        {
+            selected = comboBox.Items[comboBox.SelectedIndex].ToString();
+        };
+
+        var dialog = new DialogBuilder(XamlRoot)
+            .WithBody(comboBox)
+            .WithPrimary("コピー", new Defer(async delegate
+            {
+                var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Region}\Members\{selected}\info.json";
+                if (selected == string.Empty) return;
+                using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
+                var readJson = sr.ReadToEnd();
+                var info = MemberInfo.FromJson(readJson);
+                var indexToCostume = Costume
+                    .List
+                    .ToDictionary(m => m.Index);
+                List<CostumeIndexAndEx> costumes
+                    = info.Costumes == null
+                    ? []
+                    : [.. Costumes
+                            .Select(m => new CostumeIndexAndEx(m.Costume.Index, m.Ex))
+                            .Concat(info.Costumes)
+                      ];
+                // copy CSV to clipboard
+                var csv = new StringBuilder();
+                foreach (var costume in costumes)
+                {
+                    var ex = costume.Ex switch
+                    {
+                        ExInfo.Active => @"あり",
+                        ExInfo.Inactive => @"なし",
+                        ExInfo.None => string.Empty,
+                    };
+                    csv.AppendLine($"{indexToCostume[costume.Index].Lily},{indexToCostume[costume.Index].Name},{ex}");
+                }
+                System.Windows.Clipboard.SetText(csv.ToString());
+                GeneralInfoBar.Title = "クリップボードにCSVをコピーしました";
+                GeneralInfoBar.Severity = InfoBarSeverity.Success;
+                GeneralInfoBar.IsOpen = true;
+                await Task.Delay(3000);
+                GeneralInfoBar.IsOpen = false;
+            }))
+            .Build();
+
+        await dialog.ShowAsync();
+    }
+
+    private void ExComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var comboBox = sender.As<ComboBox>();
+        if (comboBox.AccessKey == string.Empty) return;
+        var index = int.Parse(comboBox.AccessKey);
+        foreach (var item in Costumes.ToList())
+        {
+            if (item.Costume.Index == index)
+            {
+                var newItem = item with {
+                    Ex = comboBox.SelectedIndex == 0 ? ExInfo.Active : ExInfo.Inactive,
+                    Icon = comboBox.SelectedIndex == 0
+                        ? $"/Assets/Images/lily_true.png"
+                        : $"/Assets/Images/lily_false.png",
+                };
+                var idx = Costumes.IndexOf(item);
+                Costumes[idx] = newItem;
+            }
+        }
+
     }
 }
