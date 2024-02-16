@@ -94,6 +94,12 @@
                                 <ToolTip Content="{x:Bind Name}" PlacementRect="0,0,400,266"/>
                             </ToolTipService.ToolTip>
                         </Image>
+                        <!--Flyout-->
+                        <Grid.ContextFlyout>
+                            <Flyout>
+                                <StackPanel AccessKey="{x:Bind Index}" Loaded="HasCostume_Loaded"/>
+                            </Flyout>
+                        </Grid.ContextFlyout>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>

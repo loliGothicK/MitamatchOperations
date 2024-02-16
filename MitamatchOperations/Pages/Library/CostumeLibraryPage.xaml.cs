@@ -5,6 +5,7 @@ using mitama.Domain;
 using System;
 using Microsoft.UI.Xaml;
 using System.Linq;
+using mitama.Pages.Common;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -17,6 +18,8 @@ namespace mitama.Pages.Library
     public sealed partial class CostumeLibraryPage : Page
     {
         private readonly ObservableCollection<Costume> _costumes = new(Costume.List);
+        private readonly MemberInfo[] Info = Util.LoadMembersInfo(Director.ReadCache().Region);
+
         public CostumeLibraryPage()
         {
             InitializeComponent();
@@ -152,6 +155,23 @@ namespace mitama.Pages.Library
             {
                 _costumes.Add(costume);
             }
+        }
+
+        private void HasCostume_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (sender is not StackPanel stackPanel)
+            {
+                return;
+            }
+            var index = int.Parse(stackPanel.AccessKey);
+            var hasCostume = Info.Where(info => info.Costumes != null && info.Costumes.Any(costume => costume.Index == index)).Select(info => info.Name);
+            stackPanel.Children.Add(new TextBlock
+            {
+                Text = string.Join(", ", hasCostume),
+                FontSize = 12,
+                Margin = new Thickness(0, 0, 0, 0),
+                TextWrapping = TextWrapping.WrapWholeWords,
+            });
         }
     }
 
