@@ -199,9 +199,9 @@ namespace mitama.Pages.Library
         protected override DataTemplate SelectTemplateCore(object item)
         {
             return item is RareSkill ? RareSkill!
-                : item is Lily ? Lily!
-                : item is Position ? Position!
-                : Other;
+                 : item is Lily ? Lily!
+                 : item is Position ? Position!
+                 : Other;
         }
     }
 
