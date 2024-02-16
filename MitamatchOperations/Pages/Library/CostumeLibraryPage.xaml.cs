@@ -164,10 +164,21 @@ namespace mitama.Pages.Library
                 return;
             }
             var index = int.Parse(stackPanel.AccessKey);
-            var hasCostume = Info.Where(info => info.Costumes != null && info.Costumes.Any(costume => costume.Index == index)).Select(info => info.Name);
+            var hasCostume = Info
+                .Where(info => info.Costumes != null && info.Costumes.Any(costume => costume.Index == index))
+                .Select(info => {
+                    var Ex = info.Costumes.First(item => item.Index == index).Ex;
+                    return (info.Name, Ex switch
+                    {
+                        ExInfo.None => string.Empty,
+                        ExInfo.Active => @"(EX‚ ‚è)",
+                        ExInfo.Inactive => @"(EX‚È‚µ)",
+                        _ => throw new NotImplementedException(),
+                    });
+                });
             stackPanel.Children.Add(new TextBlock
             {
-                Text = string.Join(", ", hasCostume),
+                Text = string.Join(", ", hasCostume.Select(item => $"{item.Name} {item.Item2}")),
                 FontSize = 12,
                 Margin = new Thickness(0, 0, 0, 0),
                 TextWrapping = TextWrapping.WrapWholeWords,
