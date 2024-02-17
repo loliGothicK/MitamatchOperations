@@ -125,11 +125,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup Label="MLActivatingModel">
-    <None Include="MLActivatingModel.mlnet">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\OrderConsole\AutoAssignmentDialogContent.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -142,6 +137,11 @@
   </ItemGroup>
   <ItemGroup Label="MLOrderModel">
     <None Include="MLOrderModel.mlnet">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="MLActivatingModel">
+    <None Include="MLActivatingModel.mlnet">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -33,7 +33,6 @@ namespace mitama.Pages;
 internal enum WindowPicker
 {
     Main,
-    Sub,
 }
 
 /// <summary>
@@ -183,24 +182,8 @@ public sealed partial class ControlDashboardPage
                         }
                         break;
                     }
-                    case FailureResult when _useSub:
+                    case FailureResult:
                     {
-                        _subCaptureEvent.Wait();
-                        switch (await Analyze(await _subCapture!.TryCaptureOrderInfo(_allyOrderInfoPos[WindowPicker.Sub].Item1, _allyOrderInfoPos[WindowPicker.Sub].Item2)))
-                        {
-                            case SuccessResult(var user, var order):
-                            {
-                                if (_reminds.Count == 0) break;
-                                var ordered = Order.List.MinBy(o => Algo.LevenshteinRate(o.Name, order));
-                                if (_deck.Select(e => e.Order.Index).ToArray().Contains(ordered.Index)
-                                    && !_results.Select(r => r.Order.Index).ToArray().Contains(ordered.Index))
-                                {
-                                    Update(user, ordered);
-                                }
-
-                                break;
-                            }
-                        }
                         break;
                     }
                 }
@@ -380,6 +363,7 @@ public sealed partial class ControlDashboardPage
             // 相手オーダー準備中でも発動中でもない
             case None:
                 {
+                    OpponentInfoBar.IsOpen = false;
                     _captureEvent.Wait();
                     switch (_capture!.CaptureOpponentsOrder())
                     {
@@ -392,22 +376,7 @@ public sealed partial class ControlDashboardPage
                                 break;
                             }
                         default:
-                            {
-                                if (!_useSub) break;
-                                _subCaptureEvent.Wait();
-                                switch (_subCapture!.CaptureOpponentsOrder(_opOrderIconPos[WindowPicker.Sub].Item1, _opOrderIconPos[WindowPicker.Sub].Item2))
-                                {
-                                    // オーダー準備中を検知
-                                    case WaitStat(var image):
-                                    {
-                                        image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug.png");
-                                        _orderStat = new Waiting();
-                                        _orderPreparePoint = DateTime.Now;
-                                        break;
-                                    }
-                                }
-                                break;
-                            }
+                            break;
                     }
                     break;
                 }
@@ -418,108 +387,44 @@ public sealed partial class ControlDashboardPage
                     var waitingFor = _opOrderInfo != null ? $"for {_opOrderInfo?.Item1.Name}..." : "...";
                     OpponentInfoBar.Title = $@"Waiting {waitingFor}";
 
-                    if (_opOrderInfo != null)
-                    {
-                        _captureEvent.Wait();
+                    _captureEvent.Wait();
 
-                        switch (_capture!.IsActivating())
-                        {
-                            case ActiveStat:
+                    switch (_capture!.IsActivating())
+                    {
+                        case ActiveStat:
+                            {
+                                if (_opOrderInfo?.Item1.ActiveTime == 0)
                                 {
-                                    if (_opOrderInfo?.Item1.ActiveTime == 0)
+                                    _opOrderInfo = null;
+                                    _orderStat = new None();
+                                }
+                                else
+                                {
+                                    if (_opOrderInfo != null)
                                     {
+                                        _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
                                         _opOrderInfo = null;
-                                        _orderStat = new None();
                                     }
                                     else
                                     {
-                                        if (_opOrderInfo != null)
+                                        var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
+                                        int[] ints = [5, 15, 20, 30];
+                                        _orderStat = ints.MinBy(t => Math.Abs(prepareTime - t)) switch
                                         {
-                                            _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
-                                        }
-                                        else
-                                        {
-                                            var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
-                                            int[] ints = [5, 15, 20, 30];
-                                            _orderStat = ints.MinBy(t => Math.Abs(prepareTime - t)) switch
-                                            {
-                                                5 => new Active(null, DateTime.Now, 120 - 1),
-                                                15 => new Active(null, DateTime.Now, 60 - 1),
-                                                20 => new Active(null, DateTime.Now, 80 - 1),
-                                                30 => new Active(null, DateTime.Now, 120 - 1),
-                                                _ => throw new UnreachableException(),
-                                            };
-                                            _opOrderInfo = null;
-                                        }
+                                            10 => new Active(null, DateTime.Now, 120 - 1),
+                                            15 => new Active(null, DateTime.Now, 60 - 1),
+                                            20 => new Active(null, DateTime.Now, 100 - 1),
+                                            30 => new Active(null, DateTime.Now, 120 - 1),
+                                            _ => throw new UnreachableException(),
+                                        };
+                                        _opOrderInfo = null;
                                     }
-                                    goto End;
                                 }
-                            default:
-                                {
-                                    if (!_useSub) break;
-                                    _subCaptureEvent.Wait();
-                                    switch (_subCapture!.IsActivating(_opOrderActivatePos[WindowPicker.Sub].Item1, _opOrderActivatePos[WindowPicker.Sub].Item2))
-                                    {
-                                        case ActiveStat:
-                                        {
-                                            if (_opOrderInfo?.Item1.ActiveTime == 0)
-                                            {
-                                                _opOrderInfo = null;
-                                                _orderStat = new None();
-                                            }
-                                            else
-                                            {
-                                                _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
-                                            }
-                                            goto End;
-                                        }
-                                    }
-                                    break;
-                                }
-                        }
-                    }
-
-                    _captureEvent.Wait();
-
-                    if (_orderStat is not Active)
-                    {
-                        switch (_capture!.IsActivating())
-                        {
-                            case ActiveStat(var image):
-                                _opOrderInfo = null;
-                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating\\True\\debug.png");
                                 break;
-                            default:
-                                {
-                                    if (!_useSub) break;
-                                    switch (_subCapture!.IsActivating(_opOrderActivatePos[WindowPicker.Sub].Item1, _opOrderActivatePos[WindowPicker.Sub].Item2))
-                                    {
-                                        case ActiveStat(var image):
-                                            _opOrderInfo = null;
-                                            image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating\\True\\debug.png");
-                                            break;
-                                        default:
-                                            goto End;
-                                    }
-                                    goto End;
-                                }
-                        }
-
-                        if (_opOrderInfo is ({ ActiveTime: > 0 }, _))
-                        {
-                            _orderStat = new Active(
-                                _opOrderInfo?.Item1.Name,
-                                DateTime.Now,
-                                _opOrderInfo?.Item1.ActiveTime ?? 0
-                            );
-                            _opOrderInfo = null;
-                        }
-                        _orderStat = new None();
-                        _opOrderInfo = null;
-                        OpponentInfoBar.IsOpen = false;
+                            }
+                        default:
+                            break;
                     }
-
-                    End:
                     break;
                 }
             default:
