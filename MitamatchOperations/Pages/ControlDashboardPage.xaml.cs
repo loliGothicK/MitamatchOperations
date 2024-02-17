@@ -92,6 +92,8 @@ public sealed partial class ControlDashboardPage
     private OpOrderStatus _orderStat = new None();
     private DateTime _orderPreparePoint = DateTime.Now;
     private (Order, int)? _opOrderInfo;
+    // for Debug
+    private int _debugCounter = 0;
 
     public bool IsCtrlKeyPressed { get; set; }
 
@@ -305,6 +307,28 @@ public sealed partial class ControlDashboardPage
                         _opOrderInfo = null;
                         OpponentInfoBar.IsOpen = false;
                     }
+                    _captureEvent.Wait();
+                    switch (_capture!.CaptureOpponentsOrder())
+                    {
+                        // オーダー準備中を検知
+                        case WaitStat(var image):
+                            {
+                                image.Save($"C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug{_debugCounter++}.png");
+                                _orderStat = new Waiting();
+                                _orderPreparePoint = DateTime.Now;
+                                OpponentInfoBar.IsOpen = true;
+                                var waitingFor = _opOrderInfo != null ? $"for {_opOrderInfo?.Item1.Name}..." : "...";
+                                OpponentInfoBar.Title = $@"Waiting {waitingFor}";
+                                break;
+                            }
+                        case ActiveStat(var image):
+                            {
+                                image.Save($"C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\active\\debug{_debugCounter++}.png");
+                                break;
+                            }
+                        default:
+                            break;
+                    }
                     break;
                 }
             // 相手オーダー準備中でも発動中でもない
@@ -317,7 +341,7 @@ public sealed partial class ControlDashboardPage
                         // オーダー準備中を検知
                         case WaitStat(var image):
                             {
-                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug.png");
+                                image.Save($"C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug{_debugCounter++}.png");
                                 _orderStat = new Waiting();
                                 _orderPreparePoint = DateTime.Now;
                                 break;
@@ -335,12 +359,27 @@ public sealed partial class ControlDashboardPage
                     OpponentInfoBar.Title = $@"Waiting {waitingFor}";
 
                     _captureEvent.Wait();
-
+                    switch (_capture!.CaptureOpponentsOrder())
+                    {
+                        case ActiveStat(var image):
+                            {
+                                _orderStat = new None();
+                                image.Save($"C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\active\\debug{_debugCounter++}.png");
+                                break;
+                            }
+                        case Nothing:
+                            {
+                                _orderStat = new None();
+                                break;
+                            }
+                        default:
+                            break;
+                    }
                     switch (_capture!.IsActivating())
                     {
                         case ActiveStat(var image):
                             {
-                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating\\True\\debug.png");
+                                image.Save($"C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating\\True\\debug{_debugCounter++}.png");
                                 if (_opOrderInfo?.Item1.ActiveTime == 0)
                                 {
                                     _opOrderInfo = null;
@@ -359,7 +398,7 @@ public sealed partial class ControlDashboardPage
                                         int[] ints = [5, 15, 20, 30];
                                         _orderStat = ints.MinBy(t => Math.Abs(prepareTime - t)) switch
                                         {
-                                            10 => new Active(null, DateTime.Now, 120 - 1),
+                                            5 => new Active(null, DateTime.Now, 120 - 1),
                                             15 => new Active(null, DateTime.Now, 60 - 1),
                                             20 => new Active(null, DateTime.Now, 100 - 1),
                                             30 => new Active(null, DateTime.Now, 120 - 1),
