@@ -178,10 +178,9 @@ namespace mitama.Pages.Library
                 });
             stackPanel.Children.Add(new TextBlock
             {
-                Text = string.Join(", ", hasCostume.Select(item => $"{item.Name} {item.Item2}")),
+                Text = string.Join("\n", hasCostume.Select(item => $"{item.Name} {item.Item2}")),
                 FontSize = 12,
                 Margin = new Thickness(0, 0, 0, 0),
-                TextWrapping = TextWrapping.WrapWholeWords,
             });
         }
     }
