@@ -92,7 +92,6 @@ public sealed partial class ControlDashboardPage
     private OpOrderStatus _orderStat = new None();
     private DateTime _orderPreparePoint = DateTime.Now;
     private (Order, int)? _opOrderInfo;
-    private bool _useSub;
 
     public bool IsCtrlKeyPressed { get; set; }
 
@@ -130,15 +129,6 @@ public sealed partial class ControlDashboardPage
                     await _capture!.SnapShot();
                     _captureEvent.Signal();
                 });
-                if (_useSub)
-                {
-                    Task.Run(async () =>
-                    {
-                        _subCaptureEvent.Reset(1);
-                        await _subCapture!.SnapShot();
-                        _subCaptureEvent.Signal();
-                    });
-                }
             });
 
         // 相手のオーダー情報を読取る
@@ -221,7 +211,7 @@ public sealed partial class ControlDashboardPage
 
         Timer.Value.Tick += async delegate
         {
-            if (_capture != null && (!_useSub || _subCapture != null))
+            if (_capture != null)
             {
                 foreach (var scheduler in _schedulers)
                 {
@@ -258,49 +248,6 @@ public sealed partial class ControlDashboardPage
                         InitBar.Content = new DropDownButton
                         {
                             Content = "または画面を選択する",
-                            Flyout = menu,
-                        };
-                    }
-                }
-            }
-            else if (SubCaptureSelectBar.AccessKey != "SELECTED" && _useSub)
-            {
-                try
-                {
-                    _subCapture = new WindowCapture(Search.WindowHandleFromCaption("ちっちゃい娘FC - Discord"));
-                    SubCaptureSelectBar.AccessKey = "SELECTED";
-                }
-                catch
-                {
-                    if (SubCaptureSelectBar.AccessKey != "SELECTED")
-                    {
-                        if (SubCaptureSelectBar.AccessKey == "NOT_SELECTED") return;
-                        SubCaptureSelectBar.IsOpen = true;
-                        SubCaptureSelectBar.AccessKey = "NOT_SELECTED";
-                        SubCaptureSelectBar.Severity = InfoBarSeverity.Warning;
-                        SubCaptureSelectBar.Title = "たいちょーの画面を選択してください";
-
-                        var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
-                        foreach (var (caption, handle) in Search.GetWindowList())
-                        {
-                            if (caption == string.Empty) continue;
-                            var item = new MenuFlyoutItem
-                            {
-                                Text = caption,
-                                Command = new Defer(async delegate
-                                {
-                                    _subCapture = new WindowCapture(handle);
-                                    SubCaptureSelectBar.AccessKey = "SELECTED";
-                                    await _subCapture!.SnapShot();
-                                    SubCaptureSelectBar.IsOpen = false;
-                                }),
-                            };
-                            menu.Items.Add(item);
-                        }
-
-                        SubCaptureSelectBar.Content = new DropDownButton
-                        {
-                            Content = "画面を選択する",
                             Flyout = menu,
                         };
                     }
@@ -391,8 +338,9 @@ public sealed partial class ControlDashboardPage
 
                     switch (_capture!.IsActivating())
                     {
-                        case ActiveStat:
+                        case ActiveStat(var image):
                             {
+                                image.Save("C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating\\True\\debug.png");
                                 if (_opOrderInfo?.Item1.ActiveTime == 0)
                                 {
                                     _opOrderInfo = null;
@@ -663,12 +611,6 @@ public sealed partial class ControlDashboardPage
         LoadButton.IsEnabled = true;
     }
     
-    private void AddScreen_OnClick(object sender, RoutedEventArgs e)
-    {
-        if (sender is not ToggleButton toggle) return;
-        _useSub = toggle.IsChecked == true;
-    }
-
     private void CounterButton_OnClick(object sender, RoutedEventArgs e)
     {
         var newWindow = new Window();

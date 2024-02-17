@@ -98,16 +98,6 @@
                 </AppBarButton.Flyout>
             </AppBarButton>
             <AppBarButton Icon="Sync" Label="Counter" Click="CounterButton_OnClick"/>
-            <AppBarButton Label="Load">
-                <AppBarButton.Icon>
-                    <FontIcon Glyph="&#xE836;" />
-                </AppBarButton.Icon>
-                <AppBarButton.Flyout>
-                    <Flyout>
-                        <ToggleButton Content="Use sub" Click="AddScreen_OnClick" />
-                    </Flyout>
-                </AppBarButton.Flyout>
-            </AppBarButton>
             <AppBarButton
                 Icon="Forward"
                 Click="ManualTriggerButton_OnClick"
