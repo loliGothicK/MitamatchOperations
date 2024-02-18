@@ -25,10 +25,8 @@ using Windows.System;
 using mitama.Domain.OrderKinds;
 using mitama.Pages.ControlDashboard;
 using SimdLinq;
-using MitamatchOperations;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MitamatchOperations.Lib;
-using Windows.ApplicationModel;
 
 namespace mitama.Pages;
 
@@ -92,6 +90,7 @@ public sealed partial class ControlDashboardPage
     private OpOrderStatus _orderStat = new None();
     private DateTime _orderPreparePoint = DateTime.Now;
     private (Order, int)? _opOrderInfo;
+    private readonly LimitedContainer<FailSafe> failSafe = new(3);
     // for Debug
     private int _debugCounter = 0;
 
@@ -211,7 +210,7 @@ public sealed partial class ControlDashboardPage
                 }
             });
 
-        Timer.Value.Tick += async delegate
+        Timer.Value.Tick += delegate
         {
             if (_capture != null)
             {
@@ -234,19 +233,20 @@ public sealed partial class ControlDashboardPage
                     case Err<IntPtr, string>:
                         {
                             if (InitBar.AccessKey != "ERROR")
-                                {
+                            {
                                 InitBar.IsOpen = true;
                                 InitBar.AccessKey = "ERROR";
                                 InitBar.Severity = InfoBarSeverity.Error;
                                 InitBar.Title = "ラスバレのウィンドウが見つかりませんでした、起動して最前面の状態にしてください";
                                 var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
                                 foreach (var (caption, handle) in Search.GetWindowList())
-                                    {
+                                {
                                     if (caption == string.Empty) continue;
                                     var item = new MenuFlyoutItem
                                     {
                                         Text = caption,
-                                        Command = new Defer(delegate {
+                                        Command = new Defer(delegate
+                                        {
                                             _capture = Init(handle);
                                             return Task.CompletedTask;
                                         })
@@ -308,8 +308,8 @@ public sealed partial class ControlDashboardPage
                     OpponentInfoBar.IsOpen = true;
                     var spend = (DateTime.Now - point).Seconds + (DateTime.Now - point).Minutes * 60;
                     OpponentInfoBar.Title = $"相手オーダー: {name} => 残り {span - spend} 秒";
-                    // オーダーが終わる3秒前には表示をやめる
-                    if (span - spend < 3)
+                    // オーダーが終わる1秒前には表示をやめる
+                    if (span - spend < 1)
                     {
                         // 次のオーダー検知にむけて初期化
                         _orderStat = new None();
@@ -323,11 +323,15 @@ public sealed partial class ControlDashboardPage
                         case WaitStat(var image):
                             {
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\wait\\debug{_debugCounter++}.png");
-                                _orderStat = new Waiting();
-                                _orderPreparePoint = DateTime.Now;
-                                OpponentInfoBar.IsOpen = true;
-                                var waitingFor = _opOrderInfo != null ? $"for {_opOrderInfo?.Item1.Name}..." : "...";
-                                OpponentInfoBar.Title = $@"Waiting {waitingFor}";
+                                failSafe.Add(new Waiting_());
+                                if (failSafe.Length == 3 && failSafe.GetItems().All(stat => stat is Waiting_))
+                                {
+                                    _orderStat = new Waiting();
+                                    _orderPreparePoint = DateTime.Now;
+                                    OpponentInfoBar.IsOpen = true;
+                                    var waitingFor = _opOrderInfo != null ? $"for {_opOrderInfo?.Item1.Name}..." : "...";
+                                    OpponentInfoBar.Title = $@"Waiting {waitingFor}";
+                                }
                                 break;
                             }
                         case ActiveStat(var image):
@@ -351,8 +355,18 @@ public sealed partial class ControlDashboardPage
                         case WaitStat(var image):
                             {
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\wait\\debug{_debugCounter++}.png");
-                                _orderStat = new Waiting();
-                                _orderPreparePoint = DateTime.Now;
+                                if (failSafe.GetItems().All(stat => stat is Waiting_))
+                                {
+                                    _orderStat = new Waiting();
+                                }
+                                else
+                                {
+                                    if (failSafe.GetItems().Last() is not Waiting_)
+                                    {
+                                        _orderPreparePoint = DateTime.Now;
+                                    }
+                                    failSafe.Add(new Waiting_());
+                                }
                                 break;
                             }
                         default:
@@ -372,10 +386,12 @@ public sealed partial class ControlDashboardPage
                     {
                         case ActiveStat(var image):
                             {
-                                // Wait中に Activating を経由せずに発動状態の場合
-                                // 発動時点を取れていないので失敗、None に戻す
-                                _orderStat = new None();
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\active\\debug{_debugCounter++}.png");
+                                failSafe.Add(new Active_());
+                                if (failSafe.Length == 3 && failSafe.GetItems().All(stat => stat is Active_))
+                                {
+                                    _orderStat = new None();
+                                }
                                 break;
                             }
                         case Nothing:
@@ -693,3 +709,9 @@ internal abstract record OpOrderStatus;
 internal record Waiting : OpOrderStatus;
 internal record Active(string Name, DateTime Point, int Span): OpOrderStatus;
 internal record None : OpOrderStatus;
+
+internal abstract record FailSafe;
+internal record Waiting_ : FailSafe;
+internal record Active_ : FailSafe;
+internal record None_ : FailSafe;
+
