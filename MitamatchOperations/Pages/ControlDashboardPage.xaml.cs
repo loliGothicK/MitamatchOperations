@@ -28,6 +28,7 @@ using SimdLinq;
 using MitamatchOperations;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MitamatchOperations.Lib;
+using Windows.ApplicationModel;
 
 namespace mitama.Pages;
 
@@ -221,45 +222,52 @@ public sealed partial class ControlDashboardPage
             }
             else if (InitBar.AccessKey != "SUCCESS")
             {
-                try
+                switch (Search.WindowHandleFromCaption("Assaultlily"))
                 {
-                    await Init(Search.WindowHandleFromCaption("Assaultlily"), out _capture);
-                }
-                catch
-                {
-                    if (InitBar.AccessKey != "ERROR")
-                    {
-                        InitBar.IsOpen = true;
-                        InitBar.AccessKey = "ERROR";
-                        InitBar.Severity = InfoBarSeverity.Error;
-                        InitBar.Title = "ラスバレのウィンドウが見つかりませんでした、起動して最前面の状態にしてください";
-
-                        var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
-                        foreach (var (caption, handle) in Search.GetWindowList())
+                    case Ok<IntPtr, string>(var handle):
                         {
-                            if (caption == string.Empty) continue;
-                            var item = new MenuFlyoutItem
-                            {
-                                Text = caption,
-                                Command = new Defer(async delegate { await Init(handle, out _capture); }),
-                            };
-                            menu.Items.Add(item);
+                            _capture = Init(handle);
+                            InitBar.AccessKey = "SUCCESS";
+                            InitBar.IsOpen = false;
+                            break;
                         }
-
-                        InitBar.Content = new DropDownButton
+                    case Err<IntPtr, string>:
                         {
-                            Content = "または画面を選択する",
-                            Flyout = menu,
-                        };
-                    }
+                            if (InitBar.AccessKey != "ERROR")
+                                {
+                                InitBar.IsOpen = true;
+                                InitBar.AccessKey = "ERROR";
+                                InitBar.Severity = InfoBarSeverity.Error;
+                                InitBar.Title = "ラスバレのウィンドウが見つかりませんでした、起動して最前面の状態にしてください";
+                                var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
+                                foreach (var (caption, handle) in Search.GetWindowList())
+                                    {
+                                    if (caption == string.Empty) continue;
+                                    var item = new MenuFlyoutItem
+                                    {
+                                        Text = caption,
+                                        Command = new Defer(delegate {
+                                            _capture = Init(handle);
+                                            return Task.CompletedTask;
+                                        })
+                                    };
+                                    menu.Items.Add(item);
+                                }
+                                InitBar.Content = new DropDownButton
+                                {
+                                    Content = "または画面を選択する",
+                                    Flyout = menu
+                                };
+                            }
+                            break;
+                        }
                 }
             }
         };
     }
 
-    private Task Init(IntPtr handle, out WindowCapture cap)
+    private WindowCapture Init(IntPtr handle)
     {
-        cap = new WindowCapture(handle);
         InitBar.AccessKey = "SUCCESS";
         InitBar.IsOpen = false;
         InitBar.Content = null;
@@ -270,20 +278,22 @@ public sealed partial class ControlDashboardPage
         _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(120));
         _schedulers[0].AdvanceBy(TimeSpan.FromMilliseconds(160));
 
-        // カタログデータをあらかじめメモリリージョンにのせておくために一度 Predict を呼ぶ
-        var sampleData1 = new MLOrderModel.ModelInput
-        {
-            ImageSource = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\Assets\dataset\wait_or_active\active\active01.png"),
-        };
-        var sampleData2 = new MLActivatingModel.ModelInput
-        {
-            ImageSource = File.ReadAllBytes(@"C:\Users\lolig\source\repos\MitamatchOperations\MitamatchOperations\Assets\dataset\is_activating\False\False01.png"),
-        };
+        string[] paths = [
+            "wait_or_active\\wait",
+            "wait_or_active\\active",
+            "is_activating\\True",
+            "is_activating\\False"
+        ];
 
-        _ = MLOrderModel.Predict(sampleData1);
-        _ = MLActivatingModel.Predict(sampleData2);
+        foreach (var path in paths)
+        {
+            if (!Directory.Exists(@$"{Director.MitamatchDir()}\Debug\dataset\{path}"))
+            {
+                Director.CreateDirectory(@$"{Director.MitamatchDir()}\Debug\dataset\{path}");
+            }
+        }
 
-        return Task.CompletedTask;
+        return new WindowCapture(handle);
     }
 
     private Task OrderScan()
@@ -312,7 +322,7 @@ public sealed partial class ControlDashboardPage
                         // オーダー準備中を検知
                         case WaitStat(var image):
                             {
-                                image.Save($"C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug{_debugCounter++}.png");
+                                image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\wait\\debug{_debugCounter++}.png");
                                 _orderStat = new Waiting();
                                 _orderPreparePoint = DateTime.Now;
                                 OpponentInfoBar.IsOpen = true;
@@ -322,7 +332,7 @@ public sealed partial class ControlDashboardPage
                             }
                         case ActiveStat(var image):
                             {
-                                image.Save($"C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\active\\debug{_debugCounter++}.png");
+                                image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\active\\debug{_debugCounter++}.png");
                                 break;
                             }
                         default:
@@ -340,7 +350,7 @@ public sealed partial class ControlDashboardPage
                         // オーダー準備中を検知
                         case WaitStat(var image):
                             {
-                                image.Save($"C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\wait\\debug{_debugCounter++}.png");
+                                image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\wait\\debug{_debugCounter++}.png");
                                 _orderStat = new Waiting();
                                 _orderPreparePoint = DateTime.Now;
                                 break;
@@ -362,13 +372,16 @@ public sealed partial class ControlDashboardPage
                     {
                         case ActiveStat(var image):
                             {
+                                // Wait中に Activating を経由せずに発動状態の場合
+                                // 発動時点を取れていないので失敗、None に戻す
                                 _orderStat = new None();
-                                image.Save($"C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\wait_or_active\\active\\debug{_debugCounter++}.png");
+                                image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\active\\debug{_debugCounter++}.png");
                                 break;
                             }
                         case Nothing:
                             {
-                                _orderStat = new None();
+                                // MP回復中でオーダーアイコンが見えていない可能性がある
+                                // もしくは、フェイズ遷移中である可能性がある
                                 break;
                             }
                         default:
@@ -378,7 +391,7 @@ public sealed partial class ControlDashboardPage
                     {
                         case ActiveStat(var image):
                             {
-                                image.Save($"C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating\\True\\debug{_debugCounter++}.png");
+                                image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\is_activating\\True\\debug{_debugCounter++}.png");
                                 if (_opOrderInfo?.Item1.ActiveTime == 0)
                                 {
                                     _opOrderInfo = null;
@@ -406,6 +419,11 @@ public sealed partial class ControlDashboardPage
                                         _opOrderInfo = null;
                                     }
                                 }
+                                break;
+                            }
+                        case Nothing(var image):
+                            {
+                                image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\is_activating\\False\\debug{_debugCounter++}.png");
                                 break;
                             }
                         default:

@@ -17,7 +17,7 @@ internal abstract record OrderStat;
 
 internal record WaitStat(Bitmap Image) : OrderStat;
 internal record  ActiveStat(Bitmap Image) : OrderStat;
-internal record Nothing : OrderStat;
+internal record Nothing(Bitmap Image) : OrderStat;
 
 
 public partial class WindowCapture
@@ -148,7 +148,7 @@ public partial class WindowCapture
         var result = MLOrderModel.Predict(sampleData);
 
         return circles.Length == 0
-            ? new Nothing()
+            ? new Nothing(bitmap)
             : result.PredictedLabel == "wait"
                 ? new WaitStat(bitmap)
                 : new ActiveStat(bitmap);
@@ -170,7 +170,7 @@ public partial class WindowCapture
 
         var result = MLActivatingModel.Predict(sampleData);
 
-        return result.PredictedLabel == "True" ? new ActiveStat(bitmap) : new Nothing();
+        return result.PredictedLabel == "True" ? new ActiveStat(bitmap) : new Nothing(bitmap);
     }
 
     public bool IsStack()

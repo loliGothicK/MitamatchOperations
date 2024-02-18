@@ -6,6 +6,7 @@ namespace mitama.Pages.Capture;
 using System;
 using System.Diagnostics;
 using System.Text;
+using MitamatchOperations.Lib;
 
 public partial class Interop {
     /// <summary>
@@ -57,7 +58,7 @@ public partial class Interop {
 }
 
 public class Search {
-    public static IntPtr WindowHandleFromCaption(string target) {
+    public static Result<IntPtr, string> WindowHandleFromCaption(string target) {
         nint result = -1;
         // ウィンドウの列挙を開始
         EnumWindows((hWnd, _) => {
@@ -69,7 +70,9 @@ public class Search {
             return true;
         }, IntPtr.Zero);
 
-        return result > 0 ? result : throw new KeyNotFoundException("Assaultlily Not Found");
+        return result > 0
+            ? new Ok<IntPtr, string>(result)
+            : new Err<IntPtr, string>("Assaultlily Not Found");
     }
 
     public static List<(string, IntPtr)> GetWindowList() {

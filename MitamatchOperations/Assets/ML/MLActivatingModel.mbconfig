@@ -3,7 +3,7 @@
   "DataSource": {
     "Type": "Folder",
     "Version": 1,
-    "FolderPath": "C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\dataset\\is_activating"
+    "FolderPath": "C:\\Users\\lolig\\source\\repos\\DataSet\\is_activating"
   },
   "Environment": {
     "Type": "LocalCPU",
