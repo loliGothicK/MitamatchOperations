@@ -19,7 +19,7 @@ using mitama.Pages.Common;
 using WinRT;
 using Microsoft.UI.Xaml.Navigation;
 using mitama.AutomateAssign;
-using System.Windows.Interop;
+using MitamatchOperations.Lib;
 
 namespace mitama.Pages.OrderConsole;
 

@@ -14,6 +14,7 @@ using System.Text.Json;
 using Microsoft.UI.Text;
 using System;
 using mitama.Pages.Main;
+using MitamatchOperations.Lib;
 
 namespace mitama.Pages.RegionConsole;
 
@@ -211,38 +212,35 @@ public sealed partial class MemberManageConsole
 
         Remarks.Document.GetText(TextGetOptions.UseCrlf, out var remarks);
 
-        var text = $"""
-            # {opponent}({kousei})
+        var text = new Indoc($"""
+        # {opponent}({kousei})
 
-            ## Rare Skills
+        ## Rare Skills
 
-            ```
-            - {chara1}:{skill1} ÅÀ {personnel1}
-            - {chara2}:{skill2} ÅÀ {personnel2}
-            ```
+        - {chara1}:{skill1} ÅÀ {personnel1}
+        - {chara2}:{skill2} ÅÀ {personnel2}
 
-            ## Neun Welt
+        ## Neun Welt
 
-            ```
-            - {tatic1}/{tatic2}
-            ```
+        ```
+        - {tatic1} / {tatic2}
+        ```
 
-            ## Timeline
+        ## Timeline
+        
+        {order}
 
-            ```
-            {order}
-            ```
-        """;
+        """).Text;
         if (remarks != "")
         {
-            text += $"""
+            text += new Indoc($"""
 
                 ## Remarks
 
                 ```
                 {remarks}
                 ```
-            """;
+            """).Text;
         }
         System.Windows.Clipboard.SetText(text);
     }

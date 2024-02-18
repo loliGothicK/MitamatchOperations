@@ -27,6 +27,7 @@ using mitama.Pages.ControlDashboard;
 using SimdLinq;
 using MitamatchOperations;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using MitamatchOperations.Lib;
 
 namespace mitama.Pages;
 
@@ -42,11 +43,9 @@ public sealed partial class ControlDashboardPage
 {
     // ウィンドウキャプチャのためのリソースを司る
     private WindowCapture _capture;
-    private WindowCapture _subCapture;
 
     // ウィンドウキャプチャのためのラッチ
     private readonly CountdownEvent _captureEvent = new(1);
-    private readonly CountdownEvent _subCaptureEvent = new(1);
     // サブスクライバーのスケジューラ
     private readonly HistoricalScheduler[] _schedulers = [new(), new(), new(), new(), new()];
     

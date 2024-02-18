@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace mitama;
+namespace MitamatchOperations.Lib;
 
 internal record Defer(Func<Task> Action) : IDisposable, ICommand
 {

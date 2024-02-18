@@ -13,6 +13,7 @@ using mitama.Domain;
 using mitama.Domain.OrderKinds;
 using WinRT;
 using mitama.Pages.Common;
+using MitamatchOperations.Lib;
 
 namespace mitama.Pages.OrderConsole;
 

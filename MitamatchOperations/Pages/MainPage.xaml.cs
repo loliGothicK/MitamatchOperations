@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Navigation;
-using mitama.Domain;
 using mitama.Pages.Common;
 using mitama.Pages.Main;
-using MitamatchOperations.Pages;
-using WinRT;
+using MitamatchOperations.Lib;
 
 namespace mitama.Pages;
 /// <summary>

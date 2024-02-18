@@ -135,13 +135,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup Label="MLActivatingModel">
-    <None Include="MLActivatingModel.mlnet">
+  <ItemGroup>
+    <None Update="ML\MLActivatingModel.mlnet">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup Label="MLOrderModel">
-    <None Include="MLOrderModel.mlnet">
+    <None Update="ML\MLOrderModel.mlnet">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
