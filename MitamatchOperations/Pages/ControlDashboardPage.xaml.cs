@@ -281,6 +281,7 @@ public sealed partial class ControlDashboardPage
         string[] paths = [
             "wait_or_active\\wait",
             "wait_or_active\\active",
+            "wait_or_active\\nothing",
             "is_activating\\True",
             "is_activating\\False"
         ];
@@ -339,6 +340,11 @@ public sealed partial class ControlDashboardPage
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\active\\debug{_debugCounter++}.png");
                                 break;
                             }
+                        case Nothing(var image):
+                            {
+                                image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\nothing\\debug{_debugCounter++}.png");
+                                break;
+                            }
                         default:
                             break;
                     }
@@ -394,8 +400,9 @@ public sealed partial class ControlDashboardPage
                                 }
                                 break;
                             }
-                        case Nothing:
+                        case Nothing(var image):
                             {
+                                image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\nothing\\debug{_debugCounter++}.png");
                                 // MP回復中でオーダーアイコンが見えていない可能性がある
                                 // もしくは、フェイズ遷移中である可能性がある
                                 break;

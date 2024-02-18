@@ -3,11 +3,10 @@ using Microsoft.ML;
 using Microsoft.ML.Data;
 using System;
 using System.Linq;
-using System.IO;
 using System.Collections.Generic;
-using Windows.Storage;
 using Windows.ApplicationModel;
 using System.Threading.Tasks;
+
 namespace MitamatchOperations
 {
     public partial class MLActivatingModel
