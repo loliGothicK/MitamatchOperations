@@ -3,14 +3,16 @@ using Microsoft.ML;
 using Microsoft.ML.Data;
 using System;
 using System.Linq;
-using System.IO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.ApplicationModel;
+
 namespace MitamatchOperations
 {
-    public partial class MLActivatingModel
+    public partial class MLOrderModel
     {
         /// <summary>
-        /// model input class for MLActivatingModel.
+        /// model input class for MLOrderModel.
         /// </summary>
         #region model input class
         public class ModelInput
@@ -28,7 +30,7 @@ namespace MitamatchOperations
         #endregion
 
         /// <summary>
-        /// model output class for MLActivatingModel.
+        /// model output class for MLOrderModel.
         /// </summary>
         #region model output class
         public class ModelOutput
@@ -49,15 +51,13 @@ namespace MitamatchOperations
 
         #endregion
 
-        private const string MLNetModelPath = "C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MLActivatingModel.mlnet";
-
         public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(() => CreatePredictEngine(), true);
-
 
         private static PredictionEngine<ModelInput, ModelOutput> CreatePredictEngine()
         {
+            var modelPath = Task.Run(async () => await Package.Current.InstalledLocation.GetFileAsync(@"Assets\ML\MLOrderModel.mlnet")).Result;
             var mlContext = new MLContext();
-            ITransformer mlModel = mlContext.Model.Load(MLNetModelPath, out var _);
+            ITransformer mlModel = mlContext.Model.Load(modelPath.Path, out var _);
             return mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
         }
 

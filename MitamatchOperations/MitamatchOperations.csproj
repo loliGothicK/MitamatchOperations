@@ -136,10 +136,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Update="ML\MLActivatingModel.mlnet">
+    <None Update="Assets\ML\MLActivatingModel.mlnet">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ML\MLOrderModel.mlnet">
+    <None Update="Assets\ML\MLOrderModel.mlnet">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
