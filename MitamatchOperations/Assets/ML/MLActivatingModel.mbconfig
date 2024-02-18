@@ -18,7 +18,7 @@
         "Type": "Trial",
         "TrainerName": "ImageClassificationMulti",
         "Score": 0.0,
-        "RuntimeInSeconds": 14.908,
+        "RuntimeInSeconds": 15.078,
         "Parameter": {
           "_SCHEMA_": "e0 * e1 * e2",
           "e0": {
@@ -48,7 +48,7 @@
     },
     "Schema": "e0 * e1 * e2",
     "MetricName": "MicroAccuracy",
-    "ModelFilePath": "C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\MLActivatingModel.mlnet"
+    "ModelFilePath": "C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\ML\\MLActivatingModel.mlnet"
   },
   "Type": "TrainingConfig",
   "Version": 4,
