@@ -95,7 +95,6 @@ public sealed partial class ControlDashboardPage
     private readonly string _project = Director.ReadCache().Region;
     private bool _picFlag = true;
     private OpOrderStatus _orderStat = new None();
-    private DateTime _orderPreparePoint = DateTime.Now;
     private Order? _opOrderInfo;
     private readonly LimitedContainer<FailSafe> failSafe = new(3);
     // for Debug
