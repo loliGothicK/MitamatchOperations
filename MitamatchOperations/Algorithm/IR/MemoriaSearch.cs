@@ -49,7 +49,8 @@ internal class MemoriaSearch
         foreach (var rect in rects) Cv2.Rectangle(target, rect, Scalar.Aquamarine, 5);
 
         {
-            var templates = await Task.WhenAll(Memoria.List.Select(async memoria => {
+            var templates = await Task.WhenAll(Memoria.List.DistinctBy(m => m.Name).Select(async memoria => 
+            {
                 try
                 {
                     var file = await StorageFile.GetFileFromApplicationUriAsync(memoria.Uri);

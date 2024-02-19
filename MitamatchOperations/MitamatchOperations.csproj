@@ -25,9 +25,6 @@
     <UseRidGraph>true</UseRidGraph>
   </PropertyGroup>
   <ItemGroup>
-    <Content Remove="Assets\ML\MLOrderClassificationModel.mbconfig" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Assets\BadgeLogo.scale-100.png" />
     <None Remove="Assets\BadgeLogo.scale-125.png" />
     <None Remove="Assets\BadgeLogo.scale-150.png" />

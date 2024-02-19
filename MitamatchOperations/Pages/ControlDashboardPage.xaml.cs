@@ -27,6 +27,12 @@ using mitama.Pages.ControlDashboard;
 using SimdLinq;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MitamatchOperations.Lib;
+using MitamatchOperations;
+using OpenCvSharp.Extensions;
+using OpenCvSharp;
+using System.Drawing;
+using Windows.Storage;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace mitama.Pages;
 
@@ -78,6 +84,9 @@ public sealed partial class ControlDashboardPage
         // メインPC
         [WindowPicker.Main] = ((260, 120), (500, 120)),
     };
+    // for Template Matching
+    private AKAZE akaze = AKAZE.Create();
+    private (Order Order, Mat Discripters)[] Templates = [];
 
     // なんやかんやで使う状態変数
     private int _cursor = 4;
@@ -89,7 +98,7 @@ public sealed partial class ControlDashboardPage
     private bool _picFlag = true;
     private OpOrderStatus _orderStat = new None();
     private DateTime _orderPreparePoint = DateTime.Now;
-    private (Order, int)? _opOrderInfo;
+    private Order? _opOrderInfo;
     private readonly LimitedContainer<FailSafe> failSafe = new(3);
     // for Debug
     private int _debugCounter = 0;
@@ -117,6 +126,23 @@ public sealed partial class ControlDashboardPage
 
     public ControlDashboardPage()
     {
+        Task.Run(async () => {
+            Templates = await Task.WhenAll(Order.List.Where(o => o.ActiveTime != 0).Select(async order =>
+            {
+                try
+                {
+                    var file = await StorageFile.GetFileFromApplicationUriAsync(order.Uri);
+                    var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
+                    var descriptors = new Mat();
+                    akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
+                    return (order, descriptors);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"「{order.Name}」が見つかりません:\n{ex}");
+                }
+            }));
+        });
         InitializeComponent();
 
         // 全体のウィンドウキャプチャ
@@ -148,9 +174,9 @@ public sealed partial class ControlDashboardPage
                 if (info.Length <= 0) return;
                 // 読取れたため、オーダー情報をストアする
                 var res = info.MinBy(item => item.Item2);
-                if (_opOrderInfo == null || res.Item2 < _opOrderInfo?.Item2)
+                if (_opOrderInfo == null)
                 {
-                    _opOrderInfo = ((Order, int)?)res;
+                    _opOrderInfo = res.order;
                 }
             });
 
@@ -285,12 +311,49 @@ public sealed partial class ControlDashboardPage
             "is_activating\\True",
             "is_activating\\False"
         ];
+        string[] orders = [
+            "雪獄の息吹",
+            "裂空の神秘",
+            "煌炎の神秘",
+            "溟海の勇猛",
+            "霊鳥の勇猛",
+            "劫火の勇猛",
+            "天翼の御盾",
+            "水神の御盾",
+            "朱雀の御盾",
+            "覚醒の大天光",
+            "大天光の覚醒妨害",
+            "支えの祝福",
+            "妨げの祝福",
+            "支えの反動",
+            "妨げの反動",
+            "魔縮領域",
+            "暗黒業火",
+            "黒碑水鏡",
+            "黒貂威風",
+            "光背火翼",
+            "天光銀波",
+            "光華廻風",
+        ];
+
+        // デバッグ用のディレクトリを削除
+        if (Directory.Exists(@$"{Director.MitamatchDir()}\Debug\dataset"))
+        {
+            Directory.Delete(@$"{Director.MitamatchDir()}\Debug\dataset", true);
+        }
 
         foreach (var path in paths)
         {
             if (!Directory.Exists(@$"{Director.MitamatchDir()}\Debug\dataset\{path}"))
             {
                 Director.CreateDirectory(@$"{Director.MitamatchDir()}\Debug\dataset\{path}");
+            }
+        }
+        foreach (var path in orders)
+        {
+            if (!Directory.Exists(@$"{Director.MitamatchDir()}\Debug\dataset\order_classification\{path}"))
+            {
+                Director.CreateDirectory(@$"{Director.MitamatchDir()}\Debug\dataset\order_classification\{path}");
             }
         }
 
@@ -304,8 +367,8 @@ public sealed partial class ControlDashboardPage
             // 相手オーダー発動中
             case Active(var name, var point, var span):
                 {
-                    name = _opOrderInfo?.Item1.Name ?? name ?? "不明";
-                    span = _opOrderInfo?.Item1.ActiveTime - 1 ?? span;
+                    name = _opOrderInfo?.Name ?? name ?? "不明";
+                    span = _opOrderInfo?.ActiveTime - 1 ?? span;
                     OpponentInfoBar.IsOpen = true;
                     var spend = (DateTime.Now - point).Seconds + (DateTime.Now - point).Minutes * 60;
                     OpponentInfoBar.Title = $"相手オーダー: {name} => 残り {span - spend} 秒";
@@ -330,7 +393,7 @@ public sealed partial class ControlDashboardPage
                                     _orderStat = new Waiting();
                                     _orderPreparePoint = DateTime.Now;
                                     OpponentInfoBar.IsOpen = true;
-                                    var waitingFor = _opOrderInfo != null ? $"for {_opOrderInfo?.Item1.Name}..." : "...";
+                                    var waitingFor = _opOrderInfo != null ? $"for {_opOrderInfo?.Name}..." : "...";
                                     OpponentInfoBar.Title = $@"Waiting {waitingFor}";
                                 }
                                 break;
@@ -338,6 +401,12 @@ public sealed partial class ControlDashboardPage
                         case ActiveStat(var image):
                             {
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\active\\debug{_debugCounter++}.png");
+                                if (_opOrderInfo is null)
+                                {
+                                    var result = PredictOrder(image);
+                                    image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\order_classification\\{result.Name}\\debug{_debugCounter++}.png");
+                                    _opOrderInfo = result;
+                                }
                                 break;
                             }
                         case Nothing(var image):
@@ -384,7 +453,7 @@ public sealed partial class ControlDashboardPage
             case Waiting:
                 {
                     OpponentInfoBar.IsOpen = true;
-                    var waitingFor = _opOrderInfo != null ? $"for {_opOrderInfo?.Item1.Name}..." : "...";
+                    var waitingFor = _opOrderInfo != null ? $"for {_opOrderInfo?.Name}..." : "...";
                     OpponentInfoBar.Title = $@"Waiting {waitingFor}";
 
                     _captureEvent.Wait();
@@ -415,7 +484,7 @@ public sealed partial class ControlDashboardPage
                         case ActiveStat(var image):
                             {
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\is_activating\\True\\debug{_debugCounter++}.png");
-                                if (_opOrderInfo?.Item1.ActiveTime == 0)
+                                if (_opOrderInfo?.ActiveTime == 0)
                                 {
                                     _opOrderInfo = null;
                                     _orderStat = new None();
@@ -424,7 +493,7 @@ public sealed partial class ControlDashboardPage
                                 {
                                     if (_opOrderInfo != null)
                                     {
-                                        _orderStat = new Active(_opOrderInfo?.Item1.Name, DateTime.Now, _opOrderInfo?.Item1.ActiveTime - 1 ?? 0);
+                                        _orderStat = new Active(_opOrderInfo?.Name, DateTime.Now, _opOrderInfo?.ActiveTime - 1 ?? 0);
                                         _opOrderInfo = null;
                                     }
                                     else
@@ -692,7 +761,7 @@ public sealed partial class ControlDashboardPage
     
     private void CounterButton_OnClick(object sender, RoutedEventArgs e)
     {
-        var newWindow = new Window();
+        var newWindow = new System.Windows.Window();
 
         var counterView = new CounterView();
         newWindow.Content = counterView;
@@ -703,6 +772,20 @@ public sealed partial class ControlDashboardPage
 
     [GeneratedRegex(@"(.+)がオーダー(.+)を準備")]
     private static partial Regex MyRegex();
+
+    private Order PredictOrder(Bitmap image)
+    {
+        var descriptors = new Mat();
+        akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
+
+        return Templates.MinBy(template => {
+            var (_, train) = template;
+            var matcher = new BFMatcher(NormTypes.Hamming);
+            var matches = matcher.Match(descriptors, train);
+            var sum = matches.Sum(x => x.Distance);
+            return sum / matches.Length;
+        }).Order;
+    }
 }
 
 internal record ResultItem(string Pic, Order Order, int Deviation, DateTime ActivatedAt)
