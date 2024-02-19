@@ -358,20 +358,21 @@ public sealed partial class ControlDashboardPage
         switch (_orderStat)
         {
             // 相手オーダー発動中
-            case Active(var name, var point, var span):
+            case Active(var order, var point):
                 {
-                    name = _opOrderInfo?.Name ?? name ?? "不明";
-                    span = _opOrderInfo?.ActiveTime - 1 ?? span;
-                    OpponentInfoBar.IsOpen = true;
-                    var spend = (DateTime.Now - point).Seconds + (DateTime.Now - point).Minutes * 60;
-                    OpponentInfoBar.Title = $"相手オーダー: {name} => 残り {span - spend} 秒";
-                    // オーダーが終わる1秒前には表示をやめる
-                    if (span - spend < 1)
+                    if (order is not null)
                     {
-                        // 次のオーダー検知にむけて初期化
-                        _orderStat = new None();
-                        _opOrderInfo = null;
-                        OpponentInfoBar.IsOpen = false;
+                        var spend = (DateTime.Now - point).Seconds + (DateTime.Now - point).Minutes * 60;
+                        OpponentInfoBar.IsOpen = true;
+                        OpponentInfoBar.Title = $"相手オーダー: {order.Value.Name} => 残り {order.Value.ActiveTime - spend - 3} 秒";
+                        // オーダーが終わる1秒前には表示をやめる
+                        if (order.Value.ActiveTime - spend < 1)
+                        {
+                            // 次のオーダー検知にむけて初期化
+                            _orderStat = new None();
+                            _opOrderInfo = null;
+                            OpponentInfoBar.IsOpen = false;
+                        }
                     }
                     _captureEvent.Wait();
                     switch (_capture!.CaptureOpponentsOrder())
@@ -399,6 +400,7 @@ public sealed partial class ControlDashboardPage
                                     var result = PredictOrder(image);
                                     image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\order_classification\\{result.Name}\\debug{_debugCounter++}.png");
                                     _opOrderInfo = result;
+                                    _orderStat = (Active)_orderStat with { Order = result };
                                 }
                                 break;
                             }
@@ -486,21 +488,14 @@ public sealed partial class ControlDashboardPage
                                 {
                                     if (_opOrderInfo != null)
                                     {
-                                        _orderStat = new Active(_opOrderInfo?.Name, DateTime.Now, _opOrderInfo?.ActiveTime - 1 ?? 0);
+                                        _orderStat = new Active(_opOrderInfo, DateTime.Now);
                                         _opOrderInfo = null;
                                     }
                                     else
                                     {
                                         var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
                                         int[] ints = [5, 15, 20, 30];
-                                        _orderStat = ints.MinBy(t => Math.Abs(prepareTime - t)) switch
-                                        {
-                                            5 => new Active(null, DateTime.Now, 120 - 1),
-                                            15 => new Active(null, DateTime.Now, 60 - 1),
-                                            20 => new Active(null, DateTime.Now, 100 - 1),
-                                            30 => new Active(null, DateTime.Now, 120 - 1),
-                                            _ => throw new UnreachableException(),
-                                        };
+                                        _orderStat = new Active(null, DateTime.Now);
                                         _opOrderInfo = null;
                                     }
                                 }
@@ -790,7 +785,7 @@ internal record ResultItem(string Pic, Order Order, int Deviation, DateTime Acti
 
 internal abstract record OpOrderStatus;
 internal record Waiting : OpOrderStatus;
-internal record Active(string Name, DateTime Point, int Span): OpOrderStatus;
+internal record Active(Order? Order, DateTime Point): OpOrderStatus;
 internal record None : OpOrderStatus;
 
 internal abstract record FailSafe;
