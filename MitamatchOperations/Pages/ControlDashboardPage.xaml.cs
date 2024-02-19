@@ -110,6 +110,7 @@ public sealed partial class ControlDashboardPage
     {
         Task.Run(async () =>
         {
+            // テンプレートマッチングのための準備
             Templates = await Task.WhenAll(Order
                 .List
                 .Where(order => order.HasTemplate)
@@ -122,11 +123,12 @@ public sealed partial class ControlDashboardPage
                     return (order, descriptors);
                 }));
         });
+
+        // 画面の初期化
         InitializeComponent();
 
         // 全体のウィンドウキャプチャ
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[0])
-            // ReSharper disable once AsyncVoidLambda
             .Subscribe(delegate
             {
                 Task.Run(async () =>
@@ -139,7 +141,6 @@ public sealed partial class ControlDashboardPage
 
         // 相手のオーダー情報を読取る
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[1])
-            // ReSharper disable once AsyncVoidLambda
             .Subscribe(async delegate
             {
                 _captureEvent.Wait();
@@ -158,7 +159,6 @@ public sealed partial class ControlDashboardPage
 
         // 味方のオーダー情報を読取る
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[2])
-            // ReSharper disable once AsyncVoidLambda
             .Subscribe(async delegate
             {
                 _captureEvent.Wait();
@@ -184,7 +184,6 @@ public sealed partial class ControlDashboardPage
 
         // 相手のオーダーの 準備/発動/終了 をスキャンする
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[3])
-            // ReSharper disable once AsyncVoidLambda
             .Subscribe(async delegate { await OrderScan(); });
 
         // 味方オーダーの発動前通知を出す
