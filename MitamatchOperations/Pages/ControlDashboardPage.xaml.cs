@@ -383,7 +383,6 @@ public sealed partial class ControlDashboardPage
                                 if (failSafe.Length == 3 && failSafe.GetItems().All(stat => stat is Waiting_))
                                 {
                                     _orderStat = new Waiting();
-                                    _orderPreparePoint = DateTime.Now;
                                     OpponentInfoBar.IsOpen = true;
                                     var waitingFor = _opOrderInfo != null ? $"for {_opOrderInfo?.Name}..." : "...";
                                     OpponentInfoBar.Title = $@"Waiting {waitingFor}";
@@ -429,10 +428,6 @@ public sealed partial class ControlDashboardPage
                                 }
                                 else
                                 {
-                                    if (failSafe.GetItems().Last() is not Waiting_)
-                                    {
-                                        _orderPreparePoint = DateTime.Now;
-                                    }
                                     failSafe.Add(new Waiting_());
                                 }
                                 break;
