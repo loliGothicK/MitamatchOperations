@@ -27,7 +27,6 @@ using mitama.Pages.ControlDashboard;
 using SimdLinq;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MitamatchOperations.Lib;
-using MitamatchOperations;
 using OpenCvSharp.Extensions;
 using OpenCvSharp;
 using System.Drawing;
@@ -126,22 +125,19 @@ public sealed partial class ControlDashboardPage
 
     public ControlDashboardPage()
     {
-        Task.Run(async () => {
-            Templates = await Task.WhenAll(Order.List.Where(o => o.ActiveTime != 0).Select(async order =>
-            {
-                try
+        Task.Run(async () =>
+        {
+            Templates = await Task.WhenAll(Order
+                .List
+                .Where(order => order.HasTemplate)
+                .Select(async order =>
                 {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(order.Uri);
+                    var file = await StorageFile.GetFileFromApplicationUriAsync(order.TemplateUri);
                     var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
                     var descriptors = new Mat();
                     akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
                     return (order, descriptors);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"「{order.Name}」が見つかりません:\n{ex}");
-                }
-            }));
+                }));
         });
         InitializeComponent();
 
@@ -174,10 +170,7 @@ public sealed partial class ControlDashboardPage
                 if (info.Length <= 0) return;
                 // 読取れたため、オーダー情報をストアする
                 var res = info.MinBy(item => item.Item2);
-                if (_opOrderInfo == null)
-                {
-                    _opOrderInfo = res.order;
-                }
+                _opOrderInfo = res.order;
             });
 
         // 味方のオーダー情報を読取る

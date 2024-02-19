@@ -10,6 +10,7 @@ using OpenCvSharp.Extensions;
 using OpenCvSharp;
 using MitamatchOperations;
 using Size = OpenCvSharp.Size;
+using System.Security.Cryptography;
 
 namespace mitama.Pages.Capture;
 
@@ -139,17 +140,18 @@ public partial class WindowCapture
             50
         );
 
-        var sampleData = new MLOrderModel.ModelInput()
+        if (circles.Length == 0)
         {
-            ImageSource = bitmap.ToMat().ToBytes(),
-        };
+            return new Nothing(bitmap);
+        }
 
         // Load model and predict output
-        var result = MLOrderModel.Predict(sampleData);
+        var result = MLOrderModel.Predict(new()
+        {
+            ImageSource = bitmap.ToMat().ToBytes(),
+        });
 
-        return circles.Length == 0
-            ? new Nothing(bitmap)
-            : result.PredictedLabel == "wait"
+        return result.PredictedLabel == "wait"
                 ? new WaitStat(bitmap)
                 : new ActiveStat(bitmap);
     }
