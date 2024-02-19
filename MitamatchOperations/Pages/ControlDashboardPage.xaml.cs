@@ -67,21 +67,6 @@ public sealed partial class ControlDashboardPage
         return timer;
     });
 
-    private readonly Dictionary<WindowPicker, ((int, int), (int, int))> _opOrderIconPos = new()
-    {
-        // ƒƒCƒ“PC
-        [WindowPicker.Main] = ((1800, 620), (120, 120)),
-    };
-    private readonly Dictionary<WindowPicker, ((int, int), (int, int))> _opOrderActivatePos = new()
-    {
-        // ƒƒCƒ“PC
-        [WindowPicker.Main] = ((260, 120), (500, 120)),
-    };
-    private readonly Dictionary<WindowPicker, ((int, int), (int, int))> _allyOrderInfoPos = new()
-    {
-        // ƒƒCƒ“PC
-        [WindowPicker.Main] = ((260, 120), (500, 120)),
-    };
     // for Template Matching
     private readonly AKAZE akaze = AKAZE.Create();
     private (Order Order, Mat Discripters)[] Templates = [];
