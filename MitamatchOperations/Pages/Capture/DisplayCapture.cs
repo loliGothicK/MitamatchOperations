@@ -164,12 +164,10 @@ public partial class WindowCapture
     {
         var bitmap = GetRect(topLeft ?? (1300, 230), size ?? (500, 500));
 
-        var sampleData = new MLActivatingModel.ModelInput()
+        var result = MLActivatingModel.Predict(new()
         {
             ImageSource = bitmap.ToMat().ToBytes(),
-        };
-
-        var result = MLActivatingModel.Predict(sampleData);
+        });
 
         return result.PredictedLabel == "True" ? new ActiveStat(bitmap) : new Nothing(bitmap);
     }
