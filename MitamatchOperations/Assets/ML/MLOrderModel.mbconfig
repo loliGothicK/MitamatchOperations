@@ -3,7 +3,7 @@
   "DataSource": {
     "Type": "Folder",
     "Version": 1,
-    "FolderPath": "C:\\Users\\lolig\\source\\repos\\DataSet\\wait_or_active"
+    "FolderPath": "C:\\Users\\lolig\\source\\repos\\MitamatchOperations\\MitamatchOperations\\Assets\\ML\\DataSet\\wait_or_active"
   },
   "Environment": {
     "Type": "LocalCPU",
@@ -17,8 +17,8 @@
         "Version": 1,
         "Type": "Trial",
         "TrainerName": "ImageClassificationMulti",
-        "Score": 1.0,
-        "RuntimeInSeconds": 37.361,
+        "Score": 0.92307692307692313,
+        "RuntimeInSeconds": 57.973,
         "Parameter": {
           "_SCHEMA_": "e0 * e1 * e2",
           "e0": {

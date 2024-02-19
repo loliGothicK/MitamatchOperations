@@ -10,7 +10,6 @@ using OpenCvSharp.Extensions;
 using OpenCvSharp;
 using MitamatchOperations;
 using Size = OpenCvSharp.Size;
-using System.Security.Cryptography;
 
 namespace mitama.Pages.Capture;
 

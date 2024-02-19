@@ -31,6 +31,7 @@ using OpenCvSharp;
 using System.Drawing;
 using Windows.Storage;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
 
 namespace mitama.Pages;
 
@@ -211,7 +212,7 @@ public sealed partial class ControlDashboardPage
                 }
             });
 
-        Timer.Value.Tick += delegate
+        Timer.Value.Tick += async delegate
         {
             if (_capture != null)
             {
@@ -226,7 +227,7 @@ public sealed partial class ControlDashboardPage
                 {
                     case Ok<IntPtr, string>(var handle):
                         {
-                            _capture = Init(handle);
+                            _capture = await Init(handle);
                             InitBar.AccessKey = "SUCCESS";
                             InitBar.IsOpen = false;
                             break;
@@ -246,10 +247,9 @@ public sealed partial class ControlDashboardPage
                                     var item = new MenuFlyoutItem
                                     {
                                         Text = caption,
-                                        Command = new Defer(delegate
+                                        Command = new Defer(async delegate
                                         {
-                                            _capture = Init(handle);
-                                            return Task.CompletedTask;
+                                            _capture = await Init(handle);
                                         })
                                     };
                                     menu.Items.Add(item);
@@ -267,11 +267,20 @@ public sealed partial class ControlDashboardPage
         };
     }
 
-    private WindowCapture Init(IntPtr handle)
+    private async Task<WindowCapture> Init(IntPtr handle)
     {
         InitBar.AccessKey = "SUCCESS";
         InitBar.IsOpen = false;
         InitBar.Content = null;
+
+        _ = MitamatchOperations.MLOrderModel.Predict(new()
+        {
+            ImageSource = File.ReadAllBytes((await Package.Current.InstalledLocation.GetFileAsync(@"Assets\ML\DataSet\wait_or_active\active\0001.png")).Path)
+        });
+        _ = MitamatchOperations.MLActivatingModel.Predict(new()
+        {
+            ImageSource = File.ReadAllBytes((await Package.Current.InstalledLocation.GetFileAsync(@"Assets\ML\DataSet\is_activating\True\0001.png")).Path)
+        });
 
         // IOのタイミングをずらすために 40 ms ずつずらす
         _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(40));
