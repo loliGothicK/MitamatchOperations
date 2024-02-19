@@ -19,7 +19,6 @@ internal record WaitStat(Bitmap Image) : OrderStat;
 internal record  ActiveStat(Bitmap Image) : OrderStat;
 internal record Nothing(Bitmap Image) : OrderStat;
 
-
 public partial class WindowCapture
 {
     private readonly MemoryStream _bufferStream;
