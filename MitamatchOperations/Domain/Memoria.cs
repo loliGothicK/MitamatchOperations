@@ -304,6 +304,966 @@ public record Memoria(
     public static readonly Memoria[] List =
     [
         new Memoria(
+            1354,
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new BasicStatus(2293, 1977, 2282, 1967),
+                new BasicStatus(2482, 2137, 3321, 2127),
+                new BasicStatus(3820, 2298, 3509, 2288),
+                new BasicStatus(4008, 2458, 5447, 2448),
+                new BasicStatus(7047, 2619, 5636, 2609),
+            ],
+            22,
+            new Skill(
+                "マイトストライクB Ⅳ+",
+                "敵1～2体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:マイトUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身のATKとDEFを超特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Normal), new GuardUp(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1353,
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new BasicStatus(1953, 2317, 1942, 2307),
+                new BasicStatus(2113, 2506, 2102, 3346),
+                new BasicStatus(2274, 3844, 2263, 3534),
+                new BasicStatus(2434, 4032, 2423, 5472),
+                new BasicStatus(2595, 7071, 2584, 5661),
+            ],
+            22,
+            new Skill(
+                "Sp.マイトバーストB Ⅳ+",
+                "敵1～2体に特殊特大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
+                [],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:Sp.マイトDOWN Ⅳ",
+                "攻撃時、一定確率で敵のSp.ATKとSp.DEFを超特大ダウンさせる。",
+                Trigger.Attack,
+                [new PowerDown(Type.Special), new GuardDown(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1352,
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new BasicStatus(1953, 2317, 1942, 2307),
+                new BasicStatus(2113, 2506, 2102, 3346),
+                new BasicStatus(2274, 3844, 2263, 3534),
+                new BasicStatus(2434, 4032, 2423, 5472),
+                new BasicStatus(2595, 7071, 2584, 5661),
+            ],
+            22,
+            new Skill(
+                "Sp.マイトアシストE Ⅳ",
+                "味方2～3体のSp.ATKとSp.DEFを大アップさせる。",
+                [],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:Sp.マイトUP Ⅳ",
+                "支援/妨害時、一定確率で味方前衛1体のSp.ATKとSp.DEFを超特大アップさせる。",
+                Trigger.Support,
+                [new PowerUp(Type.Special), new GuardUp(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1351,
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            [
+                new BasicStatus(2293, 1977, 2282, 1967),
+                new BasicStatus(2482, 2137, 3321, 2127),
+                new BasicStatus(3820, 2298, 3509, 2288),
+                new BasicStatus(4008, 2458, 5447, 2448),
+                new BasicStatus(7047, 2619, 5636, 2609),
+            ],
+            22,
+            new Skill(
+                "マイトフォールE Ⅳ",
+                "敵2～3体のATKとDEFを大ダウンさせる。",
+                [],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:マイトDOWN Ⅳ",
+                "支援/妨害時、一定確率で敵前衛1体のATKとDEFを超特大ダウンさせる。",
+                Trigger.Support,
+                [new PowerDown(Type.Normal), new GuardDown(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1350,
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Fire,
+            [
+                new BasicStatus(1953, 1977, 2282, 2307),
+                new BasicStatus(2113, 2137, 2471, 3346),
+                new BasicStatus(2274, 2298, 3809, 3534),
+                new BasicStatus(2434, 2458, 3997, 5472),
+                new BasicStatus(2595, 2619, 7036, 5661),
+            ],
+            22,
+            new Skill(
+                "ガードヒールE Ⅳ",
+                "味方2～3体のHPを大回復する。さらに味方のDEFを小アップする。",
+                [],
+                [new StatusUp(new Def(), Amount.Small)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "回:ガードUP/副援:火ガードUP Ⅳ",
+                "HP回復時、一定確率で味方前衛1体のDEFを超特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の火属性防御力を特大アップさせる。",
+                Trigger.Support,
+                [new GuardUp(Type.Normal), new ElementGuardUp(Element.Fire)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1349,
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new BasicStatus(2312, 1958, 2290, 1963),
+                new BasicStatus(2501, 2118, 3329, 2123),
+                new BasicStatus(3839, 2279, 3517, 2284),
+                new BasicStatus(4027, 2439, 5455, 2444),
+                new BasicStatus(7066, 2600, 5644, 2605),
+            ],
+            22,
+            new Skill(
+                "マイトブレイクB Ⅳ+",
+                "敵1～2体に通常特大ダメージを与え、敵のATKとDEFをダウンさせる。",
+                [],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:マイトDOWN Ⅳ",
+                "攻撃時、一定確率で敵のATKとDEFを超特大ダウンさせる。",
+                Trigger.Attack,
+                [new PowerDown(Type.Normal), new GuardDown(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1348,
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new BasicStatus(1972, 2298, 1950, 2303),
+                new BasicStatus(2132, 2487, 2110, 3342),
+                new BasicStatus(2293, 3825, 2271, 3530),
+                new BasicStatus(2453, 4013, 2431, 5468),
+                new BasicStatus(2614, 7052, 2592, 5657),
+            ],
+            22,
+            new Skill(
+                "Sp.マイトバーストB Ⅳ+",
+                "敵1～2体に特殊特大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
+                [],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:Sp.マイトDOWN Ⅳ",
+                "攻撃時、一定確率で敵のSp.ATKとSp.DEFを超特大ダウンさせる。",
+                Trigger.Attack,
+                [new PowerDown(Type.Special), new GuardDown(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1347,
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new BasicStatus(1972, 2298, 1950, 2303),
+                new BasicStatus(2132, 2487, 2110, 3342),
+                new BasicStatus(2293, 3825, 2271, 3530),
+                new BasicStatus(2453, 4013, 2431, 5468),
+                new BasicStatus(2614, 7052, 2592, 5657),
+            ],
+            22,
+            new Skill(
+                "Sp.マイトアシストE Ⅳ",
+                "味方2～3体のSp.ATKとSp.DEFを大アップさせる。",
+                [],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:Sp.マイトUP Ⅳ",
+                "支援/妨害時、一定確率で味方前衛1体のSp.ATKとSp.DEFを超特大アップさせる。",
+                Trigger.Support,
+                [new PowerUp(Type.Special), new GuardUp(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1346,
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            [
+                new BasicStatus(1972, 2298, 1950, 2303),
+                new BasicStatus(2132, 2487, 2110, 3342),
+                new BasicStatus(2293, 3825, 2271, 3530),
+                new BasicStatus(2453, 4013, 2431, 5468),
+                new BasicStatus(2614, 7052, 2592, 5657),
+            ],
+            22,
+            new Skill(
+                "Sp.マイトフォールE Ⅳ",
+                "敵2～3体のSp.ATKとSp.DEFを大ダウンさせる。",
+                [],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new SpDef(), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:Sp.マイトDOWN Ⅳ",
+                "支援/妨害時、一定確率で敵前衛1体のSp.ATKとSp.DEFを超特大ダウンさせる。",
+                Trigger.Support,
+                [new PowerDown(Type.Special), new GuardDown(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1345,
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Fire,
+            [
+                new BasicStatus(1972, 1958, 2290, 2303),
+                new BasicStatus(2132, 2118, 3329, 2492),
+                new BasicStatus(2293, 2279, 3517, 3830),
+                new BasicStatus(2453, 2439, 5455, 4018),
+                new BasicStatus(2614, 2600, 5644, 7057),
+            ],
+            22,
+            new Skill(
+                "Sp.ガードヒールE Ⅳ",
+                "味方2～3体のHPを大回復する。さらに味方のSp.DEFを小アップする。",
+                [],
+                [new StatusUp(new SpDef(), Amount.Small)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "回:Sp.ガードUP/副援:火ガードUP Ⅳ",
+                "HP回復時、一定確率で味方前衛1体のSp.DEFを超特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の火属性防御力を特大アップさせる。",
+                Trigger.Support,
+                [new GuardUp(Type.Special), new ElementGuardUp(Element.Fire)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1344,
+            "ラスバレライブ記念メモリア～一柳隊～",
+            "ラスバレライブ記念メモリア～一柳隊～",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new BasicStatus(2302, 1937, 2288, 1977),
+                new BasicStatus(2491, 2097, 3327, 2137),
+                new BasicStatus(3829, 2258, 3515, 2298),
+                new BasicStatus(4017, 2418, 5453, 2458),
+                new BasicStatus(7056, 2579, 5642, 2619),
+            ],
+            22,
+            new Skill(
+                "マイトストライクB Ⅳ+",
+                "敵1～2体に通常特大ダメージを与え、自身のATKとDEFをアップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:マイトUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身のATKとDEFを超特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Normal), new GuardUp(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1343,
+            "ラスバレライブ記念メモリア～一柳隊～",
+            "ラスバレライブ記念メモリア～一柳隊～",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new BasicStatus(1962, 2277, 1948, 2317),
+                new BasicStatus(2122, 2466, 2108, 3356),
+                new BasicStatus(2283, 3804, 2269, 3544),
+                new BasicStatus(2443, 3992, 2429, 5482),
+                new BasicStatus(2604, 7031, 2590, 5671),
+            ],
+            22,
+            new Skill(
+                "Sp.マイトスマッシュB Ⅳ+",
+                "敵1～2体に特殊特大ダメージを与え、自身のSp.ATKとSp.DEFをアップさせる。",
+                [],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new SpDef(), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:Sp.マイトUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKとSp.DEFを超特大アップさせる。",
+                Trigger.Attack,
+                [new PowerUp(Type.Special), new GuardUp(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1342,
+            "ラスバレライブ記念メモリア～一柳隊～",
+            "ラスバレライブ記念メモリア～一柳隊～",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new BasicStatus(2302, 1937, 2288, 1977),
+                new BasicStatus(2491, 2097, 3327, 2137),
+                new BasicStatus(3829, 2258, 3515, 2298),
+                new BasicStatus(4017, 2418, 5453, 2458),
+                new BasicStatus(7056, 2579, 5642, 2619),
+            ],
+            22,
+            new Skill(
+                "マイトアシストE Ⅳ",
+                "味方2～3体のATKとDEFを大アップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new Def(), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:マイトUP Ⅳ",
+                "支援/妨害時、一定確率で味方前衛1体のATKとDEFを超特大アップさせる。",
+                Trigger.Support,
+                [new PowerUp(Type.Normal), new GuardUp(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1341,
+            "ラスバレライブ記念メモリア～一柳隊～",
+            "ラスバレライブ記念メモリア～一柳隊～",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            [
+                new BasicStatus(2302, 1937, 2288, 1977),
+                new BasicStatus(2491, 2097, 3327, 2137),
+                new BasicStatus(3829, 2258, 3515, 2298),
+                new BasicStatus(4017, 2418, 5453, 2458),
+                new BasicStatus(7056, 2579, 5642, 2619),
+            ],
+            22,
+            new Skill(
+                "マイトフォールE Ⅳ",
+                "敵2～3体のATKとDEFを大ダウンさせる。",
+                [],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new Def(), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:マイトDOWN Ⅳ",
+                "支援/妨害時、一定確率で敵前衛1体のATKとDEFを超特大ダウンさせる。",
+                Trigger.Support,
+                [new PowerDown(Type.Normal), new GuardDown(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1340,
+            "ラスバレライブ記念メモリア～一柳隊～",
+            "ラスバレライブ記念メモリア～一柳隊～",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Fire,
+            [
+                new BasicStatus(1962, 1937, 2288, 2317),
+                new BasicStatus(2122, 2097, 2477, 3356),
+                new BasicStatus(2283, 2258, 3815, 3544),
+                new BasicStatus(2443, 2418, 4003, 5482),
+                new BasicStatus(2604, 2579, 7042, 5671),
+            ],
+            22,
+            new Skill(
+                "ガードヒールE Ⅳ",
+                "味方2～3体のHPを大回復する。さらに味方のDEFを小アップする。",
+                [],
+                [new StatusUp(new Def(), Amount.Small)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "回:ガードUP/副援:火ガードUP Ⅳ",
+                "HP回復時、一定確率で味方前衛1体のDEFを超特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の火属性防御力を特大アップさせる。",
+                Trigger.Support,
+                [new GuardUp(Type.Normal), new ElementGuardUp(Element.Fire)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1339,
+            "クリエイターズコラボ屋台で一杯",
+            "屋台で一杯",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Wind,
+            [
+                new BasicStatus(1950, 2297, 1954, 2298),
+                new BasicStatus(2110, 2486, 2114, 3337),
+                new BasicStatus(2271, 3824, 2275, 3525),
+                new BasicStatus(2431, 4012, 2435, 5463),
+                new BasicStatus(2592, 7051, 2596, 5652),
+            ],
+            22,
+            new Skill(
+                "風：Sp.ウィンドパワースマッシュD Ⅲ+",
+                "敵2体に特殊大ダメージを与え、自身のSp.ATKと風属性攻撃力をアップさせる。さらに味方がオーダースキル「風属性効果増加」を発動中は効果がアップする。※...",
+                [new ElementStimulation(Element.Fire)],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
+                Level.Three,
+                Range.D
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/Sp.パワーUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを超特大アップさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1338,
+            "クリエイターズコラボ屋台で一杯",
+            "屋台で一杯",
+            new Rearguard(RearguardKind.Support),
+            Element.Wind,
+            [
+                new BasicStatus(2290, 1957, 2294, 1958),
+                new BasicStatus(2479, 2117, 3333, 2118),
+                new BasicStatus(3817, 2278, 3521, 2279),
+                new BasicStatus(4005, 2438, 5459, 2439),
+                new BasicStatus(7044, 2599, 5648, 2600),
+            ],
+            22,
+            new Skill(
+                "ウィンドパワーアシストE Ⅳ",
+                "味方2～3体のATKと風属性攻撃力を大アップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Wind), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:支援UP/副援:風パワーUP Ⅳ",
+                "支援/妨害時、一定確率で味方前衛1体の風属性攻撃力を特大アップさせる。さらに、支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new ElementPowerUp(Element.Wind)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1337,
+            "クリエイターズコラボ屋台で一杯",
+            "屋台で一杯",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Wind,
+            [
+                new BasicStatus(1950, 1957, 2294, 2298),
+                new BasicStatus(2110, 2117, 2908, 2912),
+                new BasicStatus(2271, 2278, 3671, 3675),
+                new BasicStatus(2431, 2438, 4734, 4738),
+                new BasicStatus(2592, 2599, 6348, 6352),
+            ],
+            22,
+            new Skill(
+                "WカウンターガードヒールE Ⅳ",
+                "味方2～3体のHPを大回復し、DEFとSp.DEFを小アップする。さらに劣勢時は効果が1.5倍になる。",
+                [new Counter()],
+                [new StatusUp(new Def(), Amount.Small), new StatusUp(new SpDef(), Amount.Small)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "回:回復UP/副援:支援UP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。",
+                Trigger.Support,
+                [new RecoveryUp(), new SupportUp()],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1336,
+            "クリエイターズコラボ丸底鍋の既視感",
+            "丸底鍋の既視感",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Water,
+            [
+                new BasicStatus(2316, 1959, 2307, 1957),
+                new BasicStatus(2505, 2119, 3346, 2117),
+                new BasicStatus(3843, 2280, 3534, 2278),
+                new BasicStatus(4031, 2440, 5472, 2438),
+                new BasicStatus(7070, 2601, 5661, 2599),
+            ],
+            22,
+            new Skill(
+                "ウォーターパワーストライクD Ⅲ+",
+                "敵2体に通常大ダメージを与え、自身のATKと水属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Three,
+                Range.D
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/副攻:水パワーUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身の水属性攻撃力を特大アップさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new ElementPowerUp(Element.Water)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1335,
+            "クリエイターズコラボ丸底鍋の既視感",
+            "丸底鍋の既視感",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Water,
+            [
+                new BasicStatus(1976, 2299, 1967, 2297),
+                new BasicStatus(2136, 2488, 2127, 3336),
+                new BasicStatus(2297, 3826, 2288, 3524),
+                new BasicStatus(2457, 4014, 2448, 5462),
+                new BasicStatus(2618, 7053, 2609, 5651),
+            ],
+            22,
+            new Skill(
+                "Sp.ウォーターガードバーストB Ⅳ+",
+                "敵1～2体に特殊特大ダメージを与え、敵のSp.DEFと水属性防御力をダウンさせる。",
+                [],
+                [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/Sp.ガードDOWN Ⅳ",
+                "攻撃時、一定確率で敵のSp.DEFを超特大ダウンさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new GuardDown(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1334,
+            "クリエイターズコラボ丸底鍋の既視感",
+            "丸底鍋の既視感",
+            new Rearguard(RearguardKind.Interference),
+            Element.Water,
+            [
+                new BasicStatus(1976, 2299, 1967, 2297),
+                new BasicStatus(2136, 2488, 2127, 3336),
+                new BasicStatus(2297, 3826, 2288, 3524),
+                new BasicStatus(2457, 4014, 2448, 5462),
+                new BasicStatus(2618, 7053, 2609, 5651),
+            ],
+            22,
+            new Skill(
+                "Sp.ウォーターパワーフォールE Ⅳ",
+                "敵2～3体のSp.ATKと水属性攻撃力を大ダウンさせる。",
+                [],
+                [new StatusDown(new SpAtk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Water), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:支援UP/副援:水パワーDOWN Ⅳ",
+                "支援/妨害時、一定確率で敵前衛1体の水属性攻撃力を特大ダウンさせる。さらに、支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new ElementPowerDown(Element.Water)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1333,
+            "クリエイターズコラボ丸底鍋の既視感",
+            "丸底鍋の既視感",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Water,
+            [
+                new BasicStatus(1976, 1959, 2307, 2297),
+                new BasicStatus(2136, 2119, 3346, 2486),
+                new BasicStatus(2297, 2280, 3534, 3824),
+                new BasicStatus(2457, 2440, 5472, 4012),
+                new BasicStatus(2618, 2601, 5661, 7051),
+            ],
+            22,
+            new Skill(
+                "Sp.ウォーターガードヒールE Ⅳ",
+                "味方2～3体のHPを大回復する。さらに味方のSp.DEFと水属性防御力を小アップする。",
+                [],
+                [new StatusUp(new SpDef(), Amount.Small), new StatusUp(new ElementGuard(Element.Water), Amount.Small)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "回:回復UP/副援:水ガードUP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の水属性防御力を特大アップさせる。",
+                Trigger.Support,
+                [new RecoveryUp(), new ElementGuardUp(Element.Water)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1332,
+            "クリエイターズコラボ色とりどりの遊蝶花",
+            "色とりどりの遊蝶花",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new BasicStatus(2295, 1969, 2313, 1973),
+                new BasicStatus(2484, 2129, 3352, 2133),
+                new BasicStatus(3822, 2290, 3540, 2294),
+                new BasicStatus(4010, 2450, 5478, 2454),
+                new BasicStatus(7049, 2611, 5667, 2615),
+            ],
+            22,
+            new Skill(
+                "ファイアガードブレイクB Ⅳ+",
+                "敵1～2体に通常特大ダメージを与え、敵のDEFと火属性防御力をダウンさせる。",
+                [],
+                [new StatusDown(new Def(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/ガードDOWN Ⅳ",
+                "攻撃時、一定確率で敵のDEFを超特大ダウンさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new GuardDown(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1331,
+            "クリエイターズコラボ色とりどりの遊蝶花",
+            "色とりどりの遊蝶花",
+            new Vanguard(VanguardKind.SpecialSingle),
+            Element.Fire,
+            [
+                new BasicStatus(1955, 2309, 1973, 2313),
+                new BasicStatus(2115, 2498, 2133, 3352),
+                new BasicStatus(2276, 3836, 2294, 3540),
+                new BasicStatus(2436, 4024, 2454, 5478),
+                new BasicStatus(2597, 7063, 2615, 5667),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアパワースマッシュA Ⅴ+",
+                "敵1体に特殊超特大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Five,
+                Range.A
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/Sp.パワーUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身のSp.ATKを超特大アップさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Special)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1330,
+            "クリエイターズコラボ色とりどりの遊蝶花",
+            "色とりどりの遊蝶花",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new BasicStatus(1955, 2309, 1973, 2313),
+                new BasicStatus(2115, 2498, 2133, 3352),
+                new BasicStatus(2276, 3836, 2294, 3540),
+                new BasicStatus(2436, 4024, 2454, 5478),
+                new BasicStatus(2597, 7063, 2615, 5667),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアパワースマッシュB Ⅳ+",
+                "敵1～2体に特殊特大ダメージを与え、自身のSp.ATKと火属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/副攻:火パワーUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身の火属性攻撃力を特大アップさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new ElementPowerUp(Element.Fire)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1329,
+            "クリエイターズコラボ色とりどりの遊蝶花",
+            "色とりどりの遊蝶花",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new BasicStatus(1955, 2309, 1973, 2313),
+                new BasicStatus(2115, 2498, 2133, 3352),
+                new BasicStatus(2276, 3836, 2294, 3540),
+                new BasicStatus(2436, 4024, 2454, 5478),
+                new BasicStatus(2597, 7063, 2615, 5667),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアパワーアシストE Ⅳ",
+                "味方2～3体のSp.ATKと火属性攻撃力を大アップさせる。",
+                [],
+                [new StatusUp(new SpAtk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:支援UP/副援:火パワーUP Ⅳ",
+                "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力を特大アップさせる。さらに、支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new ElementPowerUp(Element.Fire)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1328,
+            "クリエイターズコラボ色とりどりの遊蝶花",
+            "色とりどりの遊蝶花",
+            new Rearguard(RearguardKind.Recovery),
+            Element.Fire,
+            [
+                new BasicStatus(1955, 1969, 2313, 2313),
+                new BasicStatus(2115, 2129, 2502, 3352),
+                new BasicStatus(2276, 2290, 3840, 3540),
+                new BasicStatus(2436, 2450, 4028, 5478),
+                new BasicStatus(2597, 2611, 7067, 5667),
+            ],
+            22,
+            new Skill(
+                "ファイアガードヒールC Ⅴ",
+                "味方1～3体のHPを特大回復する。さらに味方のDEFと火属性防御力を小アップする。",
+                [],
+                [new StatusUp(new Def(), Amount.Small), new StatusUp(new ElementGuard(Element.Fire), Amount.Small)],
+                Level.Five,
+                Range.C
+            ),
+            new SupportSkill(
+                "回:回復UP/副援:火ガードUP Ⅳ",
+                "HP回復時、一定確率でHPの回復量を超特大アップさせる。さらに、支援/妨害時、一定確率で味方前衛1体の火属性防御力を特大アップさせる。",
+                Trigger.Support,
+                [new RecoveryUp(), new ElementGuardUp(Element.Fire)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1327,
+            "クリエイターズコラボ芽吹く心",
+            "芽吹く心",
+            new Vanguard(VanguardKind.NormalSingle),
+            Element.Fire,
+            [
+                new BasicStatus(2314, 1974, 2277, 1967),
+                new BasicStatus(2503, 2134, 3316, 2127),
+                new BasicStatus(3841, 2295, 3504, 2288),
+                new BasicStatus(4029, 2455, 5442, 2448),
+                new BasicStatus(7068, 2616, 5631, 2609),
+            ],
+            22,
+            new Skill(
+                "ファイアパワーストライクA Ⅴ+",
+                "敵1体に通常超特大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Five,
+                Range.A
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/パワーUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身のATKを超特大アップさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1326,
+            "クリエイターズコラボ芽吹く心",
+            "芽吹く心",
+            new Vanguard(VanguardKind.NormalRange),
+            Element.Fire,
+            [
+                new BasicStatus(2314, 1974, 2277, 1967),
+                new BasicStatus(2503, 2134, 3316, 2127),
+                new BasicStatus(3841, 2295, 3504, 2288),
+                new BasicStatus(4029, 2455, 5442, 2448),
+                new BasicStatus(7068, 2616, 5631, 2609),
+            ],
+            22,
+            new Skill(
+                "ファイアパワーストライクB Ⅳ+",
+                "敵1～2体に通常特大ダメージを与え、自身のATKと火属性攻撃力をアップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/パワーUP Ⅳ",
+                "前衛から攻撃時、一定確率で自身のATKを超特大アップさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new PowerUp(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1325,
+            "クリエイターズコラボ芽吹く心",
+            "芽吹く心",
+            new Vanguard(VanguardKind.SpecialRange),
+            Element.Fire,
+            [
+                new BasicStatus(1974, 2314, 1937, 2307),
+                new BasicStatus(2134, 2503, 2097, 3346),
+                new BasicStatus(2295, 3841, 2258, 3534),
+                new BasicStatus(2455, 4029, 2418, 5472),
+                new BasicStatus(2616, 7068, 2579, 5661),
+            ],
+            22,
+            new Skill(
+                "Sp.ファイアガードバーストB Ⅳ+",
+                "敵1～2体に特殊特大ダメージを与え、敵のSp.DEFと火属性防御力をダウンさせる。",
+                [],
+                [new StatusDown(new SpDef(), Amount.Medium), new StatusDown(new ElementGuard(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.B
+            ),
+            new SupportSkill(
+                "攻:ダメージUP/副攻:火ガードDOWN Ⅳ",
+                "攻撃時、一定確率で敵の火属性防御力を特大ダウンさせる。さらに、攻撃ダメージを超特大アップさせる。",
+                Trigger.Attack,
+                [new DamageUp(), new ElementGuardDown(Element.Fire)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1324,
+            "クリエイターズコラボ芽吹く心",
+            "芽吹く心",
+            new Rearguard(RearguardKind.Support),
+            Element.Fire,
+            [
+                new BasicStatus(2314, 1974, 2277, 1967),
+                new BasicStatus(2503, 2134, 3316, 2127),
+                new BasicStatus(3841, 2295, 3504, 2288),
+                new BasicStatus(4029, 2455, 5442, 2448),
+                new BasicStatus(7068, 2616, 5631, 2609),
+            ],
+            22,
+            new Skill(
+                "ファイアパワーアシストE Ⅳ",
+                "味方2～3体のATKと火属性攻撃力を大アップさせる。",
+                [],
+                [new StatusUp(new Atk(), Amount.Medium), new StatusUp(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:支援UP/パワーUP Ⅳ",
+                "支援/妨害時、一定確率で味方前衛1体のATKを超特大アップさせる。さらに、支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new PowerUp(Type.Normal)],
+                Level.Four
+            )
+        ),
+        new Memoria(
+            1323,
+            "クリエイターズコラボ芽吹く心",
+            "芽吹く心",
+            new Rearguard(RearguardKind.Interference),
+            Element.Fire,
+            [
+                new BasicStatus(2314, 1974, 2277, 1967),
+                new BasicStatus(2503, 2134, 3316, 2127),
+                new BasicStatus(3841, 2295, 3504, 2288),
+                new BasicStatus(4029, 2455, 5442, 2448),
+                new BasicStatus(7068, 2616, 5631, 2609),
+            ],
+            22,
+            new Skill(
+                "ファイアパワーフォールE Ⅳ",
+                "敵2～3体のATKと火属性攻撃力を大ダウンさせる。",
+                [],
+                [new StatusDown(new Atk(), Amount.Medium), new StatusDown(new ElementAttack(Element.Fire), Amount.Medium)],
+                Level.Four,
+                Range.E
+            ),
+            new SupportSkill(
+                "援:支援UP/副援:火パワーDOWN Ⅳ",
+                "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力を特大ダウンさせる。さらに、支援/妨害効果を超特大アップさせる。",
+                Trigger.Support,
+                [new SupportUp(), new ElementPowerDown(Element.Fire)],
+                Level.Four
+            )
+        ),
+        new Memoria(
             1322,
             "クリエイターズコラボ小さな幸せを冠して",
             "小さな幸せを冠して",

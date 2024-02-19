@@ -84,7 +84,7 @@ public sealed partial class ControlDashboardPage
         [WindowPicker.Main] = ((260, 120), (500, 120)),
     };
     // for Template Matching
-    private AKAZE akaze = AKAZE.Create();
+    private readonly AKAZE akaze = AKAZE.Create();
     private (Order Order, Mat Discripters)[] Templates = [];
 
     // Ç»ÇÒÇ‚Ç©ÇÒÇ‚Ç≈égÇ§èÛë‘ïœêî
@@ -481,23 +481,13 @@ public sealed partial class ControlDashboardPage
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\is_activating\\True\\debug{_debugCounter++}.png");
                                 if (_opOrderInfo?.ActiveTime == 0)
                                 {
-                                    _opOrderInfo = null;
                                     _orderStat = new None();
+                                    _opOrderInfo = null;
                                 }
                                 else
                                 {
-                                    if (_opOrderInfo != null)
-                                    {
-                                        _orderStat = new Active(_opOrderInfo, DateTime.Now);
-                                        _opOrderInfo = null;
-                                    }
-                                    else
-                                    {
-                                        var prepareTime = (DateTime.Now - _orderPreparePoint).Seconds;
-                                        int[] ints = [5, 15, 20, 30];
-                                        _orderStat = new Active(null, DateTime.Now);
-                                        _opOrderInfo = null;
-                                    }
+                                    _orderStat = new Active(_opOrderInfo, DateTime.Now);
+                                    _opOrderInfo = null;
                                 }
                                 break;
                             }
