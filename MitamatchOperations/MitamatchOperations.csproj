@@ -24,7 +24,7 @@
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <Title>MitamatchOperations</Title>
     <UseRidGraph>true</UseRidGraph>
-    <DefaultLanguage>en</DefaultLanguage>
+    <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\BadgeLogo.scale-100.png" />
