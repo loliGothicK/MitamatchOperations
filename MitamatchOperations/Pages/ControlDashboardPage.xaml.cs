@@ -77,6 +77,7 @@ public sealed partial class ControlDashboardPage
     private List<TimeTableItem> _deck = [];
     private DateTime _nextTimePoint;
     private DateTime? _firstTimePoint;
+    private DateTime? _preparePoint = null;
     private readonly string _user = Director.ReadCache().User;
     private readonly string _project = Director.ReadCache().Region;
     private bool _picFlag = true;
@@ -417,6 +418,7 @@ public sealed partial class ControlDashboardPage
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\wait\\debug{_debugCounter++}.png");
                                 if (failSafe.GetItems().All(stat => stat is Waiting_))
                                 {
+                                    _preparePoint = DateTime.Now - TimeSpan.FromSeconds(3);
                                     _orderStat = new Waiting();
                                 }
                                 else
@@ -450,15 +452,16 @@ public sealed partial class ControlDashboardPage
                                 }
                                 break;
                             }
-                        case Nothing(var image):
+                        default:
                             {
-                                image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\nothing\\debug{_debugCounter++}.png");
-                                // MP回復中でオーダーアイコンが見えていない可能性がある
-                                // もしくは、フェイズ遷移中である可能性がある
+                                if (_preparePoint is not null 
+                                    && _opOrderInfo is not null
+                                    && (_preparePoint - DateTime.Now) > TimeSpan.FromSeconds(_opOrderInfo.Value.PrepareTime))
+                                {
+                                    _orderStat = new Active(_opOrderInfo, DateTime.Now);
+                                }
                                 break;
                             }
-                        default:
-                            break;
                     }
                     switch (_capture!.IsActivating())
                     {
