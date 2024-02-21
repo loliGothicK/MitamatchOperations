@@ -456,7 +456,7 @@ public sealed partial class ControlDashboardPage
                             {
                                 if (_preparePoint is not null 
                                     && _opOrderInfo is not null
-                                    && (_preparePoint - DateTime.Now) > TimeSpan.FromSeconds(_opOrderInfo.Value.PrepareTime))
+                                    && (DateTime.Now - _preparePoint.Value) > TimeSpan.FromSeconds(_opOrderInfo.Value.PrepareTime))
                                 {
                                     _orderStat = new Active(_opOrderInfo, DateTime.Now);
                                 }
