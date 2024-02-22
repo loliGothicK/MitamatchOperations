@@ -899,7 +899,7 @@ namespace mitama.Domain
                 120,
                 true,
                 Kinds.Elemental.Dark,
-                true
+                false
             ),
             new Order(
                 90,
