@@ -114,7 +114,7 @@ public sealed partial class DeckEditorPage
             var prev = _deck.Last();
             var prepareTime = prev.Order.Index switch
             {
-                52 => 5, // レギオンマッチスキル準備時間短縮Lv.3
+                117 => 5, // レギオンマッチスキル準備時間短縮Lv.3
                 _ => ordered.PrepareTime
             };
             _deck.Add(new TimeTableItem(ordered, Margin, prev.End - Margin,
@@ -139,7 +139,7 @@ public sealed partial class DeckEditorPage
         {
             var prepareTime = previous.Order.Index switch
             {
-                52 => 5, // レギオンマッチスキル準備時間短縮Lv.3
+                117 => 5, // レギオンマッチスキル準備時間短縮Lv.3
                 _ => item.Order.PrepareTime
             };
             previous = item with
@@ -166,7 +166,7 @@ public sealed partial class DeckEditorPage
         {
             var prepareTime = previous.Order.Index switch
             {
-                52 => 5, // レギオンマッチスキル準備時間短縮Lv.3
+                117 => 5, // レギオンマッチスキル準備時間短縮Lv.3
                 _ => item.Order.PrepareTime
             };
             previous = item with
