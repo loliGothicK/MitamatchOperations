@@ -771,4 +771,3 @@ internal abstract record FailSafe;
 internal record Waiting_ : FailSafe;
 internal record Active_ : FailSafe;
 internal record None_ : FailSafe;
-
