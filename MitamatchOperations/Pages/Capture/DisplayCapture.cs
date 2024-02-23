@@ -10,7 +10,6 @@ using OpenCvSharp.Extensions;
 using OpenCvSharp;
 using MitamatchOperations;
 using Size = OpenCvSharp.Size;
-using System.Security.Cryptography;
 
 namespace mitama.Pages.Capture;
 
@@ -19,7 +18,6 @@ internal abstract record OrderStat;
 internal record WaitStat(Bitmap Image) : OrderStat;
 internal record  ActiveStat(Bitmap Image) : OrderStat;
 internal record Nothing(Bitmap Image) : OrderStat;
-
 
 public partial class WindowCapture
 {
@@ -165,12 +163,10 @@ public partial class WindowCapture
     {
         var bitmap = GetRect(topLeft ?? (1300, 230), size ?? (500, 500));
 
-        var sampleData = new MLActivatingModel.ModelInput()
+        var result = MLActivatingModel.Predict(new()
         {
             ImageSource = bitmap.ToMat().ToBytes(),
-        };
-
-        var result = MLActivatingModel.Predict(sampleData);
+        });
 
         return result.PredictedLabel == "True" ? new ActiveStat(bitmap) : new Nothing(bitmap);
     }

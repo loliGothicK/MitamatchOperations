@@ -31,6 +31,7 @@ using OpenCvSharp;
 using System.Drawing;
 using Windows.Storage;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
 
 namespace mitama.Pages;
 
@@ -76,11 +77,13 @@ public sealed partial class ControlDashboardPage
     private List<TimeTableItem> _deck = [];
     private DateTime _nextTimePoint;
     private DateTime? _firstTimePoint;
+    private DateTime? _preparePoint = null;
     private readonly string _user = Director.ReadCache().User;
     private readonly string _project = Director.ReadCache().Region;
     private bool _picFlag = true;
     private OpOrderStatus _orderStat = new None();
-    private Order? _opOrderInfo;
+    private Order? _ocrResult;
+    private Order? _predictResult;
     private readonly LimitedContainer<FailSafe> failSafe = new(3);
     // for Debug
     private int _debugCounter = 0;
@@ -154,7 +157,7 @@ public sealed partial class ControlDashboardPage
                 if (info.Length <= 0) return;
                 // 読取れたため、オーダー情報をストアする
                 var res = info.MinBy(item => item.Item2);
-                _opOrderInfo = res.order;
+                _ocrResult = res.order;
             });
 
         // 味方のオーダー情報を読取る
@@ -211,7 +214,7 @@ public sealed partial class ControlDashboardPage
                 }
             });
 
-        Timer.Value.Tick += delegate
+        Timer.Value.Tick += async delegate
         {
             if (_capture != null)
             {
@@ -226,7 +229,7 @@ public sealed partial class ControlDashboardPage
                 {
                     case Ok<IntPtr, string>(var handle):
                         {
-                            _capture = Init(handle);
+                            _capture = await Init(handle);
                             InitBar.AccessKey = "SUCCESS";
                             InitBar.IsOpen = false;
                             break;
@@ -246,10 +249,9 @@ public sealed partial class ControlDashboardPage
                                     var item = new MenuFlyoutItem
                                     {
                                         Text = caption,
-                                        Command = new Defer(delegate
+                                        Command = new Defer(async delegate
                                         {
-                                            _capture = Init(handle);
-                                            return Task.CompletedTask;
+                                            _capture = await Init(handle);
                                         })
                                     };
                                     menu.Items.Add(item);
@@ -267,11 +269,20 @@ public sealed partial class ControlDashboardPage
         };
     }
 
-    private WindowCapture Init(IntPtr handle)
+    private async Task<WindowCapture> Init(IntPtr handle)
     {
         InitBar.AccessKey = "SUCCESS";
         InitBar.IsOpen = false;
         InitBar.Content = null;
+
+        _ = MitamatchOperations.MLOrderModel.Predict(new()
+        {
+            ImageSource = File.ReadAllBytes((await Package.Current.InstalledLocation.GetFileAsync(@"Assets\ML\DataSet\wait_or_active\active\0001.png")).Path)
+        });
+        _ = MitamatchOperations.MLActivatingModel.Predict(new()
+        {
+            ImageSource = File.ReadAllBytes((await Package.Current.InstalledLocation.GetFileAsync(@"Assets\ML\DataSet\is_activating\True\0001.png")).Path)
+        });
 
         // IOのタイミングをずらすために 40 ms ずつずらす
         _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(40));
@@ -352,7 +363,8 @@ public sealed partial class ControlDashboardPage
                         {
                             // 次のオーダー検知にむけて初期化
                             _orderStat = new None();
-                            _opOrderInfo = null;
+                            _ocrResult = null;
+                            _predictResult = null;
                             OpponentInfoBar.IsOpen = false;
                         }
                     }
@@ -368,7 +380,9 @@ public sealed partial class ControlDashboardPage
                                 {
                                     _orderStat = new Waiting();
                                     OpponentInfoBar.IsOpen = true;
-                                    var waitingFor = _opOrderInfo != null ? $"for {_opOrderInfo?.Name}..." : "...";
+                                    var waitingFor = (_ocrResult is not null || _predictResult is not null)
+                                        ? $"for {_predictResult?.Name ?? _ocrResult?.Name}..."
+                                        : "...";
                                     OpponentInfoBar.Title = $@"Waiting {waitingFor}";
                                 }
                                 break;
@@ -376,11 +390,11 @@ public sealed partial class ControlDashboardPage
                         case ActiveStat(var image):
                             {
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\active\\debug{_debugCounter++}.png");
-                                if (_opOrderInfo is null)
+                                if (_ocrResult is null)
                                 {
                                     var result = PredictOrder(image);
                                     image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\order_classification\\{result.Name}\\debug{_debugCounter++}.png");
-                                    _opOrderInfo = result;
+                                    _predictResult = result;
                                     _orderStat = (Active)_orderStat with { Order = result };
                                 }
                                 break;
@@ -408,6 +422,7 @@ public sealed partial class ControlDashboardPage
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\wait\\debug{_debugCounter++}.png");
                                 if (failSafe.GetItems().All(stat => stat is Waiting_))
                                 {
+                                    _preparePoint = DateTime.Now - TimeSpan.FromSeconds(3);
                                     _orderStat = new Waiting();
                                 }
                                 else
@@ -425,7 +440,9 @@ public sealed partial class ControlDashboardPage
             case Waiting:
                 {
                     OpponentInfoBar.IsOpen = true;
-                    var waitingFor = _opOrderInfo != null ? $"for {_opOrderInfo?.Name}..." : "...";
+                    var waitingFor = (_ocrResult is not null || _predictResult is not null)
+                        ? $"for {_predictResult?.Name ?? _ocrResult?.Name}..."
+                        : "...";
                     OpponentInfoBar.Title = $@"Waiting {waitingFor}";
 
                     _captureEvent.Wait();
@@ -441,30 +458,33 @@ public sealed partial class ControlDashboardPage
                                 }
                                 break;
                             }
-                        case Nothing(var image):
+                        default:
                             {
-                                image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\nothing\\debug{_debugCounter++}.png");
-                                // MP回復中でオーダーアイコンが見えていない可能性がある
-                                // もしくは、フェイズ遷移中である可能性がある
+                                if (_preparePoint is not null 
+                                    && _ocrResult is not null
+                                    && (DateTime.Now - _preparePoint.Value) > TimeSpan.FromSeconds(_ocrResult.Value.PrepareTime))
+                                {
+                                    _orderStat = new Active(_ocrResult, DateTime.Now);
+                                }
                                 break;
                             }
-                        default:
-                            break;
                     }
                     switch (_capture!.IsActivating())
                     {
                         case ActiveStat(var image):
                             {
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\is_activating\\True\\debug{_debugCounter++}.png");
-                                if (_opOrderInfo?.ActiveTime == 0)
+                                if (_ocrResult?.ActiveTime == 0)
                                 {
                                     _orderStat = new None();
-                                    _opOrderInfo = null;
+                                    _ocrResult = null;
+                                    _predictResult = null;
                                 }
                                 else
                                 {
-                                    _orderStat = new Active(_opOrderInfo, DateTime.Now);
-                                    _opOrderInfo = null;
+                                    _orderStat = new Active(_ocrResult, DateTime.Now);
+                                    _ocrResult = null;
+                                    _predictResult = null;
                                 }
                                 break;
                             }
@@ -759,4 +779,3 @@ internal abstract record FailSafe;
 internal record Waiting_ : FailSafe;
 internal record Active_ : FailSafe;
 internal record None_ : FailSafe;
-

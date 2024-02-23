@@ -79,7 +79,7 @@ public record MemberInfo(
     DateTime UpdatedAt,
     string Name,
     Position Position,
-    ushort[] OrderIndices,
+    int[] OrderIndices,
     MemoriaIdAndConcentration[] Memorias,
     CostumeIndexAndEx[] Costumes
 ) {
@@ -118,7 +118,7 @@ public record MemberInfo(
         DateTime UpdatedAt,
         string Name,
         int Position,
-        ushort[] OrderIndices,
+        int[] OrderIndices,
         MemoriaIdAndConcentration[] Memorias,
         CostumeIndexAndEx[] Costumes
     )

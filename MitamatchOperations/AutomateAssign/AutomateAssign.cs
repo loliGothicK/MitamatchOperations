@@ -34,7 +34,7 @@ internal class AutomateAssign {
                     .Sum()
             );
         // クロノグラフ (Order Index = 17) の位置を取得
-        var chronoIndex = timeTable.Select(item => item.Order.Index).ToList().IndexOf(17);
+        var chronoIndex = timeTable.Select(item => item.Order.Index).ToList().IndexOf(49);
 
         // すで割当てられている担当者と一致しているかをチェックする関数
         static bool IsAlreadyInCharge(IEnumerable<int> pics, IEnumerable<int> inChages)

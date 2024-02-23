@@ -65,12 +65,12 @@ public sealed partial class HistoriaViewer : Page
         AllyOrders.Clear();
         foreach (var x in summary.AllyOrders)
         {
-            AllyOrders.Add(new OrderLog(Order.List[x.Index], $"{x.Time.Minute:D2}:{x.Time.Second:D2}"));
+            AllyOrders.Add(new OrderLog(Order.Of(x.Index), $"{x.Time.Minute:D2}:{x.Time.Second:D2}"));
         }
         OpponentOrders.Clear();
         foreach (var x in summary.OpponentOrders)
         {
-            OpponentOrders.Add(new OrderLog(Order.List[x.Index], $"{x.Time.Minute:D2}:{x.Time.Second:D2}"));
+            OpponentOrders.Add(new OrderLog(Order.Of(x.Index), $"{x.Time.Minute:D2}:{x.Time.Second:D2}"));
         }
         unitChanges.Clear();
         path = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\unitChanges.json";

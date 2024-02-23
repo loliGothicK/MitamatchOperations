@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
@@ -20,6 +19,7 @@ using Windows.UI;
 using Microsoft.UI.Text;
 using Windows.Storage;
 using static mitama.Pages.Common.ObservableCollectionExtensions;
+using mitama.Models;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -28,6 +28,9 @@ namespace mitama.Pages.DeckBuilder
     /// </summary>
     public sealed partial class BuilderPage : Page
     {
+        // CheckBoxView
+        private CheckBoxView FilterOptionView { get; set; }
+        private CheckBoxView SkillSearchOptionView { get; set; }
         // Temporarily store the selected Memoria
         private List<Memoria> selectedMemorias = [];
 
@@ -35,7 +38,6 @@ namespace mitama.Pages.DeckBuilder
         private ObservableCollection<MemoriaWithConcentration> LegendaryDeck { get; set; } = [];
         private List<MemoriaWithConcentration> OriginalPool { get; set; } = [.. Memoria.List.Select(x => new MemoriaWithConcentration(x, 4))];
         private ObservableCollection<MemoriaWithConcentration> Pool { get; set; } = [.. Memoria.List.Select(x => new MemoriaWithConcentration(x, 4))];
-        private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = [];
         private HashSet<FilterType> _currentFilters = [];
         private string region = "";
         private MemberInfo[] members = [];
@@ -59,120 +61,110 @@ namespace mitama.Pages.DeckBuilder
 
         private void InitSearchOptions()
         {
-            string[] searchOptions = [
-                "???",
-                "ATKアップ",
-                "ATKダウン",
-                "Sp.ATKアップ",
-                "Sp.ATKダウン",
-                "DEFアップ",
-                "DEFダウン",
-                "Sp.DEFアップ",
-                "Sp.DEFダウン",
-                "トライパワーアップ",
-                "トライパワーダウン",
-                "トライガードアップ",
-                "トライガードダウン",
-                "火属性攻撃力アップ",
-                "火属性攻撃力ダウン",
-                "水属性攻撃力アップ",
-                "水属性攻撃力ダウン",
-                "風属性攻撃力アップ",
-                "風属性攻撃力ダウン",
-                "光属性攻撃力アップ",
-                "光属性攻撃力ダウン",
-                "闇属性攻撃力アップ",
-                "闇属性攻撃力ダウン",
-                "火属性防御力アップ",
-                "火属性防御力ダウン",
-                "水属性防御力アップ",
-                "水属性防御力ダウン",
-                "風属性防御力アップ",
-                "風属性防御力ダウン",
-                "光属性防御力アップ",
-                "光属性防御力ダウン",
-                "闇属性防御力アップ",
-                "闇属性防御力ダウン",
-                "HPアップ",
-                "火効果アップ",
-                "水効果アップ",
-                "風効果アップ",
-                "光効果アップ",
-                "闇効果アップ",
-                "火強",
-                "水強",
-                "風強",
-                "火弱",
-                "水弱",
-                "風弱",
-                "火拡",
-                "水拡",
-                "風拡",
-                "ヒール",
-                "チャージ",
-                "リカバー",
-                "カウンター",
-            ];
-
-            foreach (var option in searchOptions)
+            SkillSearchOptionView = new(new Dictionary<string, Dictionary<string, string[]>>
             {
-                var checkBox = new CheckBox { Content = option, IsChecked = false };
-                checkBox.Checked += SkillOption_Checked;
-                checkBox.Unchecked += SkillOption_Unchecked;
-                SkillSearchOptions.Children.Add(checkBox);
-            }
-
-            searchOptions = [
-                "???",
-                "獲得マッチPtUP/通常単体",
-                "獲得マッチPtUP/特殊単体",
-                "ダメージUP",
-                "パワーUP",
-                "パワーDOWN",
-                "ガードUP",
-                "ガードDOWN",
-                "Sp.パワーUP",
-                "Sp.パワーDOWN",
-                "Sp.ガードUP",
-                "Sp.ガードDOWN",
-                "火パワーUP",
-                "水パワーUP",
-                "風パワーUP",
-                "火パワーDOWN",
-                "水パワーDOWN",
-                "風パワーDOWN",
-                "火ガードUP",
-                "水ガードUP",
-                "風ガードUP",
-                "火ガードDOWN",
-                "水ガードDOWN",
-                "風ガードDOWN",
-                "支援UP",
-                "回復UP",
-                "MP消費DOWN",
-                "効果範囲+",
-            ];
-
-            foreach (var option in searchOptions)
-            {
-                var checkBox = new CheckBox { Content = option, IsChecked = false };
-                checkBox.Checked += SupportOption_Checked;
-                checkBox.Unchecked += SupportOption_Unchecked;
-                SupportSearchOptions.Children.Add(checkBox);
-            }
-
-            searchOptions = [
-                "レジェンダリー",
-                "アルティメット",
-            ];
-
-            foreach (var option in searchOptions)
-            {
-                var checkBox = new CheckBox { Content = option, IsChecked = false };
-                checkBox.Checked += OtherOption_Checked;
-                checkBox.Unchecked += OtherOption_Unchecked;
-                OtherSearchOptions.Children.Add(checkBox);
-            }
+                ["レギオンマッチスキル"] = new()
+                {
+                    ["基礎バフ"] = [
+                        "ATKアップ",
+                        "ATKダウン",
+                        "Sp.ATKアップ",
+                        "Sp.ATKダウン",
+                        "DEFアップ",
+                        "DEFダウン",
+                        "Sp.DEFアップ",
+                        "Sp.DEFダウン",
+                    ],
+                    ["属性"] = [
+                        "火属性攻撃力アップ",
+                        "火属性攻撃力ダウン",
+                        "水属性攻撃力アップ",
+                        "水属性攻撃力ダウン",
+                        "風属性攻撃力アップ",
+                        "風属性攻撃力ダウン",
+                        "光属性攻撃力アップ",
+                        "光属性攻撃力ダウン",
+                        "闇属性攻撃力アップ",
+                        "闇属性攻撃力ダウン",
+                        "火属性防御力アップ",
+                        "火属性防御力ダウン",
+                        "水属性防御力アップ",
+                        "水属性防御力ダウン",
+                        "風属性防御力アップ",
+                        "風属性防御力ダウン",
+                        "光属性防御力アップ",
+                        "光属性防御力ダウン",
+                        "闇属性防御力アップ",
+                        "闇属性防御力ダウン",
+                    ],
+                    ["属性系"] = [
+                        "火効果アップ",
+                        "水効果アップ",
+                        "風効果アップ",
+                        "光効果アップ",
+                        "闇効果アップ",
+                        "火強",
+                        "水強",
+                        "風強",
+                        "火弱",
+                        "水弱",
+                        "風弱",
+                        "火拡",
+                        "水拡",
+                        "風拡",
+                    ],
+                    ["その他"] = [
+                        "HPアップ",
+                        "ヒール",
+                        "チャージ",
+                        "リカバー",
+                        "カウンター",
+                    ]
+                },
+                ["レギオンマッチ補助スキル"] = new()
+                {
+                    ["基礎ステ系"] = [
+                        "パワーUP",
+                        "パワーDOWN",
+                        "ガードUP",
+                        "ガードDOWN",
+                        "Sp.パワーUP",
+                        "Sp.パワーDOWN",
+                        "Sp.ガードUP",
+                        "Sp.ガードDOWN",
+                    ],
+                    ["属性系"] = [
+                        "火パワーUP",
+                        "水パワーUP",
+                        "風パワーUP",
+                        "火パワーDOWN",
+                        "水パワーDOWN",
+                        "風パワーDOWN",
+                        "火ガードUP",
+                        "水ガードUP",
+                        "風ガードUP",
+                        "火ガードDOWN",
+                        "水ガードDOWN",
+                        "風ガードDOWN",
+                    ],
+                    ["その他"] = [
+                        "ダメージUP",
+                        "支援UP",
+                        "回復UP",
+                        "効果範囲+",
+                        "獲得マッチPtUP/通常単体",
+                        "獲得マッチPtUP/特殊単体",
+                        "MP消費DOWN",
+                    ],
+                },
+                ["その他"] = new()
+                {
+                    ["ラベル"] = [
+                        "レジェンダリー",
+                        "アルティメット",
+                    ]
+                },
+            });
         }
 
         private void InitMembers()
@@ -381,11 +373,13 @@ namespace mitama.Pages.DeckBuilder
                     VoR.Label = "前衛";
                     Pool = new(OriginalPool.Where(m => Costume.DummyVanguard.CanBeEquipped(m.Memoria)));
                     MemoriaSources.ItemsSource = Pool;
-                    TreeNodes[0].Children.Clear();
-                    TreeNodes[0].Children.Add(new() { Text = "通常単体" });
-                    TreeNodes[0].Children.Add(new() { Text = "通常範囲" });
-                    TreeNodes[0].Children.Add(new() { Text = "特殊単体" });
-                    TreeNodes[0].Children.Add(new() { Text = "特殊範囲" });
+                    FilterOptionView = new(new Dictionary<string, string[]>
+                    {
+                        ["種類"] = ["通常単体", "通常範囲", "特殊単体", "特殊範囲"],
+                        ["属性"] = ["火", "水", "風", "光", "闇"],
+                        ["範囲"] = ["A", "B", "C", "D", "E"],
+                        ["効果量"] = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅲ+", "Ⅳ", "Ⅳ+", "Ⅴ", "Ⅴ+", "LG", "LG+"],
+                    });
                     _currentFilters = [
                         FilterType.NormalSingle,
                         FilterType.NormalRange,
@@ -401,10 +395,13 @@ namespace mitama.Pages.DeckBuilder
                 {
                     VoR.Label = "後衛";
                     Pool = new(OriginalPool.Where(m => Costume.DummyRearguard.CanBeEquipped(m.Memoria)));
-                    TreeNodes[0].Children.Clear();
-                    TreeNodes[0].Children.Add(new() { Text = "支援" });
-                    TreeNodes[0].Children.Add(new() { Text = "妨害" });
-                    TreeNodes[0].Children.Add(new() { Text = "回復" });
+                    FilterOptionView = new(new Dictionary<string, string[]>
+                    {
+                        ["種類"] = ["支援", "妨害", "回復"],
+                        ["属性"] = ["火", "水", "風", "光", "闇"],
+                        ["範囲"] = ["A", "B", "C", "D", "E"],
+                        ["効果量"] = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅲ+", "Ⅳ", "Ⅳ+", "Ⅴ", "Ⅴ+", "LG", "LG+"],
+                    });
                     _currentFilters = [
                         FilterType.Support,
                         FilterType.Interference,
@@ -416,1437 +413,1023 @@ namespace mitama.Pages.DeckBuilder
                     }
                     MemoriaSources.ItemsSource = Pool;
                 }
+                FilterView.ItemsSource = FilterOptionView.Items;
+                FilterView.CheckedItems = FilterOptionView.CheckedItems;
             }
         }
 
-        private void FilterOption_Checked(object sender, RoutedEventArgs e)
+        private void FilterView_NodeChecked(object _, Syncfusion.UI.Xaml.TreeView.NodeCheckedEventArgs e)
         {
-            if (sender is not CheckBox box) return;
-            var prevCount = _currentFilters.Count;
-
-            switch (box.Content)
+            switch (e.Node.Content.As<CheckBoxModel>().State)
             {
                 case "種類":
                     {
-                        foreach (var node in TreeNodes[0].Children)
+                        if ((bool)e.Node.IsChecked)
                         {
-                            node.IsChecked = true;
+                            FilterType[] types = Switch.IsOn
+                                ? [FilterType.NormalSingle, FilterType.NormalRange, FilterType.SpecialSingle, FilterType.SpecialRange]
+                                : [FilterType.Support, FilterType.Interference, FilterType.Recovery];
+                            foreach (var type in types)
+                            {
+                                _currentFilters.Add(type);
+                            }
                         }
-                        if (Switch.IsOn)
+                        else
+                        {
+                            _currentFilters.RemoveWhere(IsKindFilter);
+                        }
+                        break;
+                    }
+                case "属性":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsElementFilter))
+                            {
+                                _currentFilters.Add(type);
+                            }
+                        }
+                        else
+                        {
+                            _currentFilters.RemoveWhere(IsElementFilter);
+                        }
+                        break;
+                    }
+                case "範囲":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsRangeFilter))
+                            {
+                                _currentFilters.Add(type);
+                            }
+                        }
+                        else
+                        {
+                            _currentFilters.RemoveWhere(IsRangeFilter);
+                        }
+                        break;
+                    }
+                case "効果量":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsLevelFilter))
+                            {
+                                _currentFilters.Add(type);
+                            }
+                        }
+                        else
+                        {
+                            _currentFilters.RemoveWhere(IsLevelFilter);
+                        }
+                        break;
+                    }
+                case "通常単体":
+                    {
+                        if ((bool)e.Node.IsChecked)
                         {
                             _currentFilters.Add(FilterType.NormalSingle);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.NormalSingle);
+                        }
+                        break;
+                    }
+                case "通常範囲":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
                             _currentFilters.Add(FilterType.NormalRange);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.NormalRange);
+                        }
+                        break;
+                    }
+                case "特殊単体":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
                             _currentFilters.Add(FilterType.SpecialSingle);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.SpecialSingle);
+                        }
+                        break;
+                    }
+                case "特殊範囲":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
                             _currentFilters.Add(FilterType.SpecialRange);
                         }
                         else
                         {
-                            _currentFilters.Add(FilterType.Support);
-                            _currentFilters.Add(FilterType.Interference);
-                            _currentFilters.Add(FilterType.Recovery);
+                            _currentFilters.Remove(FilterType.SpecialRange);
                         }
-                        break;
-                    }
-                case "通常単体":
-                    {
-                        _currentFilters.Add(FilterType.NormalSingle);
-                        break;
-                    }
-                case "通常範囲":
-                    {
-                        _currentFilters.Add(FilterType.NormalRange);
-                        break;
-                    }
-                case "特殊単体":
-                    {
-                        _currentFilters.Add(FilterType.SpecialSingle);
-                        break;
-                    }
-                case "特殊範囲":
-                    {
-                        _currentFilters.Add(FilterType.SpecialRange);
                         break;
                     }
                 case "支援":
                     {
-                        _currentFilters.Add(FilterType.Support);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Support);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Support);
+                        }
                         break;
                     }
                 case "妨害":
                     {
-                        _currentFilters.Add(FilterType.Interference);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Interference);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Interference);
+                        }
                         break;
                     }
                 case "回復":
                     {
-                        _currentFilters.Add(FilterType.Recovery);
-                        break;
-                    }
-                case "属性":
-                    {
-                        foreach (var node in TreeNodes[1].Children)
+                        if ((bool)e.Node.IsChecked)
                         {
-                            node.IsChecked = true;
+                            _currentFilters.Add(FilterType.Recovery);
                         }
-                        foreach (var filter in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsElementFilter))
+                        else
                         {
-                            _currentFilters.Add(filter);
+                            _currentFilters.Remove(FilterType.Recovery);
                         }
                         break;
                     }
-                case "火":
-                    {
-                        _currentFilters.Add(FilterType.Fire);
-                        break;
-                    }
-                case "水":
-                    {
-                        _currentFilters.Add(FilterType.Water);
-                        break;
-                    }
-                case "風":
-                    {
-                        _currentFilters.Add(FilterType.Wind);
-                        break;
-                    }
-                case "光":
-                    {
-                        _currentFilters.Add(FilterType.Light);
-                        break;
-                    }
-                case "闇":
-                    {
-                        _currentFilters.Add(FilterType.Dark);
-                        break;
-                    }
-                case "範囲":
-                    {
-                        foreach (var node in TreeNodes[2].Children)
-                        {
-                            node.IsChecked = true;
-                        }
-                        foreach (var filter in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsRangeFilter))
-                        {
-                            _currentFilters.Add(filter);
-                        }
-                        break;
-                    }
-                case "A":
-                    {
-                        _currentFilters.Add(FilterType.A);
-                        break;
-                    }
-                case "B":
-                    {
-                        _currentFilters.Add(FilterType.B);
-                        break;
-                    }
-                case "C":
-                    {
-                        _currentFilters.Add(FilterType.C);
-                        break;
-                    }
-                case "D":
-                    {
-                        _currentFilters.Add(FilterType.D);
-                        break;
-                    }
-                case "E":
-                    {
-                        _currentFilters.Add(FilterType.E);
-                        break;
-                    }
-                case "効果量":
-                    {
-                        foreach (var node in TreeNodes[3].Children)
-                        {
-                            node.IsChecked = true;
-                        }
-                        foreach (var filter in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsLevelFilter))
-                        {
-                            _currentFilters.Add(filter);
-                        }
-                        break;
-                    }
-                case "Ⅰ":
-                    {
-                        _currentFilters.Add(FilterType.One);
-                        break;
-                    }
-                case "Ⅱ":
-                    {
-                        _currentFilters.Add(FilterType.Two);
-                        break;
-                    }
-                case "Ⅲ":
-                    {
-                        _currentFilters.Add(FilterType.Three);
-                        break;
-                    }
-                case "Ⅲ+":
-                    {
-                        _currentFilters.Add(FilterType.ThreePlus);
-                        break;
-                    }
-                case "Ⅳ":
-                    {
-                        _currentFilters.Add(FilterType.Four);
-                        break;
-                    }
-                case "Ⅳ+":
-                    {
-                        _currentFilters.Add(FilterType.FourPlus);
-                        break;
-                    }
-                case "Ⅴ":
-                    {
-                        _currentFilters.Add(FilterType.Five);
-                        break;
-                    }
-                case "Ⅴ+":
-                    {
-                        _currentFilters.Add(FilterType.FivePlus);
-                        break;
-                    }
-                case "LG":
-                    {
-                        _currentFilters.Add(FilterType.Lg);
-                        break;
-                    }
-                case "LG+":
-                    {
-                        _currentFilters.Add(FilterType.LgPlus);
-                        break;
-                    }
-                default:
-                    {
-                        throw new UnreachableException("Unreachable");
-                    }
+                default: break;
             }
-            if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in OriginalPool
-                .Where(m => !Pool.Contains(m))
-                .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
-                .Where(ApplyFilter))
+            if ((bool)e.Node.IsChecked)
             {
-                Pool.Add(memoria);
-            }
-            if (SortOption == null)
-            {
-                Sort(0);
+                foreach (var memoria in OriginalPool
+                        .Where(memoria => !Pool.Contains(memoria))
+                        .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
+                        .Where(ApplyFilter))
+                {
+                    Pool.Add(memoria);
+                }
             }
             else
             {
-                Sort(SortOption.SelectedIndex);
-            }
-        }
-
-        private void FilterOption_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (sender is not CheckBox box) return;
-            var prevCount = _currentFilters.Count;
-
-            switch (box.Content)
-            {
-                case "種類":
-                    {
-                        _currentFilters.RemoveWhere(IsKindFilter);
-                        break;
-                    }
-                case "通常単体":
-                    {
-                        _currentFilters.Remove(FilterType.NormalSingle);
-                        break;
-                    }
-                case "通常範囲":
-                    {
-                        _currentFilters.Remove(FilterType.NormalRange);
-                        break;
-                    }
-                case "特殊単体":
-                    {
-                        _currentFilters.Remove(FilterType.SpecialSingle);
-                        break;
-                    }
-                case "特殊範囲":
-                    {
-                        _currentFilters.Remove(FilterType.SpecialRange);
-                        break;
-                    }
-                case "支援":
-                    {
-                        _currentFilters.Remove(FilterType.Support);
-                        break;
-                    }
-                case "妨害":
-                    {
-                        _currentFilters.Remove(FilterType.Interference);
-                        break;
-                    }
-                case "回復":
-                    {
-                        _currentFilters.Remove(FilterType.Recovery);
-                        break;
-                    }
-                case "属性":
-                    {
-                        foreach (var node in TreeNodes[1].Children)
-                        {
-                            if (!node.IsChecked) return;
-                            node.IsChecked = false;
-                        }
-                        _currentFilters.RemoveWhere(IsElementFilter);
-                        Pool.Clear();
-                        break;
-                    }
-                case "火":
-                    {
-                        _currentFilters.Remove(FilterType.Fire);
-                        break;
-                    }
-                case "水":
-                    {
-                        _currentFilters.Remove(FilterType.Water);
-                        break;
-                    }
-                case "風":
-                    {
-                        _currentFilters.Remove(FilterType.Wind);
-                        break;
-                    }
-                case "光":
-                    {
-                        _currentFilters.Remove(FilterType.Light);
-                        break;
-                    }
-                case "闇":
-                    {
-                        _currentFilters.Remove(FilterType.Dark);
-                        break;
-                    }
-                case "範囲":
-                    {
-                        foreach (var node in TreeNodes[2].Children)
-                        {
-                            if (!node.IsChecked) return;
-                            node.IsChecked = false;
-                        }
-                        _currentFilters.RemoveWhere(IsRangeFilter);
-                        Pool.Clear();
-                        break;
-                    }
-                case "A":
-                    {
-                        _currentFilters.Remove(FilterType.A);
-                        break;
-                    }
-                case "B":
-                    {
-                        _currentFilters.Remove(FilterType.B);
-                        break;
-                    }
-                case "C":
-                    {
-                        _currentFilters.Remove(FilterType.C);
-                        break;
-                    }
-                case "D":
-                    {
-                        _currentFilters.Remove(FilterType.D);
-                        break;
-                    }
-                case "E":
-                    {
-                        _currentFilters.Remove(FilterType.E);
-                        break;
-                    }
-                case "効果量":
-                    {
-                        foreach (var node in TreeNodes[3].Children)
-                        {
-                            if (!node.IsChecked) return;
-                            node.IsChecked = false;
-                        }
-                        _currentFilters.RemoveWhere(IsLevelFilter);
-                        Pool.Clear();
-                        break;
-                    }
-                case "Ⅰ":
-                    {
-                        _currentFilters.Remove(FilterType.One);
-                        break;
-                    }
-                case "Ⅱ":
-                    {
-                        _currentFilters.Remove(FilterType.Two);
-                        break;
-                    }
-                case "Ⅲ":
-                    {
-                        _currentFilters.Remove(FilterType.Three);
-                        break;
-                    }
-                case "Ⅲ+":
-                    {
-                        _currentFilters.Remove(FilterType.ThreePlus);
-                        break;
-                    }
-                case "Ⅳ":
-                    {
-                        _currentFilters.Remove(FilterType.Four);
-                        break;
-                    }
-                case "Ⅳ+":
-                    {
-                        _currentFilters.Remove(FilterType.FourPlus);
-                        break;
-                    }
-                case "Ⅴ":
-                    {
-                        _currentFilters.Remove(FilterType.Five);
-                        break;
-                    }
-                case "Ⅴ+":
-                    {
-                        _currentFilters.Remove(FilterType.FivePlus);
-                        break;
-                    }
-                case "LG":
-                    {
-                        _currentFilters.Remove(FilterType.Lg);
-                        break;
-                    }
-                case "LG+":
-                    {
-                        _currentFilters.Remove(FilterType.LgPlus);
-                        break;
-                    }
-                default:
-                    {
-                        throw new UnreachableException("Unreachable");
-                    }
-            }
-            if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
-            {
-                Pool.Remove(memoria);
+                foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
+                {
+                    Pool.Remove(memoria);
+                }
             }
             Sort(SortOption.SelectedIndex);
         }
 
         private void InitFilterOptions()
         {
-            TreeNodes =
-            [
-                new()
-                {
-                    Text = "種類",
-                    Children =
-                    [
-                        new() { Text = "支援" },
-                        new() { Text = "妨害" },
-                        new() { Text = "回復" },
-                    ]
-                },
-                new()
-                {
-                    Text = "属性",
-                    Children =
-                    [
-                        new() { Text = "火" },
-                        new() { Text = "水" },
-                        new() { Text = "風" },
-                        new() { Text = "光" },
-                        new() { Text = "闇" }
-                    ]
-                },
-                new()
-                {
-                    Text = "範囲",
-                    Children =
-                    [
-                        new() { Text = "A" },
-                        new() { Text = "B" },
-                        new() { Text = "C" },
-                        new() { Text = "D" },
-                        new() { Text = "E" }
-                    ]
-                },
-                new()
-                {
-                    Text = "効果量",
-                    Children =
-                    [
-                        new() { Text = "Ⅰ" },
-                        new() { Text = "Ⅱ" },
-                        new() { Text = "Ⅲ" },
-                        new() { Text = "Ⅲ+" },
-                        new() { Text = "Ⅳ" },
-                        new() { Text = "Ⅳ+" },
-                        new() { Text = "Ⅴ" },
-                        new() { Text = "Ⅴ+" },
-                        new() { Text = "LG" },
-                        new() { Text = "LG+" }
-                    ]
-                },
-            ];
-
-            FilterOptions.ItemsSource = TreeNodes;
+            FilterOptionView = new(new Dictionary<string, string[]>
+            {
+                ["種類"] = ["支援", "妨害", "回復"],
+                ["属性"] = ["火", "水", "風", "光", "闇"],
+                ["範囲"] = ["A", "B", "C", "D", "E"],
+                ["効果量"] = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅲ+", "Ⅳ", "Ⅳ+", "Ⅴ", "Ⅴ+", "LG", "LG+"],
+            });
             _currentFilters = [
                 FilterType.Support,
                 FilterType.Interference,
                 FilterType.Recovery
             ];
-            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSkillOption(f) && !IsSupportOption(f)))
+            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSkillOption(f) && !IsSupportOption(f) && !IsOtherOption(f)))
             {
                 _currentFilters.Add(type);
             }
         }
 
-        private void SkillOption_Checked(object sender, RoutedEventArgs e)
+        private void SkillSearchView_NodeChecked(object _, Syncfusion.UI.Xaml.TreeView.NodeCheckedEventArgs e)
         {
-            if (sender is not CheckBox box) return;
-            var prevCount = _currentFilters.Count;
-            switch (box.Content)
+            if (e.Node.HasChildNodes) return;
+
+            switch (e.Node.Content.As<CheckBoxModel>().State)
             {
-                case "レジェンダリー":
-                    {
-                        _currentFilters.Add(FilterType.Legendary);
-                        break;
-                    }
                 case "ATKアップ":
                     {
-                        _currentFilters.Add(FilterType.Au);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Au);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Au);
+                        }
                         break;
                     }
                 case "ATKダウン":
                     {
-                        _currentFilters.Add(FilterType.Ad);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Ad);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Ad);
+                        }
                         break;
                     }
                 case "Sp.ATKアップ":
                     {
-                        _currentFilters.Add(FilterType.SAu);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.SAu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.SAu);
+                        }
                         break;
                     }
                 case "Sp.ATKダウン":
                     {
-                        _currentFilters.Add(FilterType.SAd);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.SAd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.SAd);
+                        }
                         break;
                     }
                 case "DEFアップ":
                     {
-                        _currentFilters.Add(FilterType.Du);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Du);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Du);
+                        }
                         break;
                     }
                 case "DEFダウン":
                     {
-                        _currentFilters.Add(FilterType.Dd);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Dd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Dd);
+                        }
                         break;
                     }
                 case "Sp.DEFアップ":
                     {
-                        _currentFilters.Add(FilterType.SDu);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.SDu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.SDu);
+                        }
                         break;
                     }
                 case "Sp.DEFダウン":
                     {
-                        _currentFilters.Add(FilterType.SDd);
-                        break;
-                    }
-                case "トライパワーアップ":
-                    {
-                        _currentFilters.Add(FilterType.WaPu);
-                        _currentFilters.Add(FilterType.WiPu);
-                        _currentFilters.Add(FilterType.FPu);
-                        break;
-                    }
-                case "トライパワーダウン":
-                    {
-                        _currentFilters.Add(FilterType.WaPd);
-                        _currentFilters.Add(FilterType.WiPd);
-                        _currentFilters.Add(FilterType.FPd);
-                        break;
-                    }
-                case "トライガードアップ":
-                    {
-                        _currentFilters.Add(FilterType.WaGu);
-                        _currentFilters.Add(FilterType.WiGu);
-                        _currentFilters.Add(FilterType.FGu);
-                        break;
-                    }
-                case "トライガードダウン":
-                    {
-                        _currentFilters.Add(FilterType.WaGd);
-                        _currentFilters.Add(FilterType.WiGd);
-                        _currentFilters.Add(FilterType.FGd);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.SDd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.SDd);
+                        }
                         break;
                     }
                 case "火属性攻撃力アップ":
                     {
-                        _currentFilters.Add(FilterType.FPu);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FPu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FPu);
+                        }
                         break;
                     }
                 case "火属性攻撃力ダウン":
                     {
-                        _currentFilters.Add(FilterType.FPd);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FPd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FPd);
+                        }
                         break;
                     }
                 case "水属性攻撃力アップ":
                     {
-                        _currentFilters.Add(FilterType.WaPu);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WaPu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WaPu);
+                        }
                         break;
                     }
                 case "水属性攻撃力ダウン":
                     {
-                        _currentFilters.Add(FilterType.WaPd);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WaPd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WaPd);
+                        }
                         break;
                     }
                 case "風属性攻撃力アップ":
                     {
-                        _currentFilters.Add(FilterType.WiPu);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WiPu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WiPu);
+                        }
                         break;
                     }
                 case "風属性攻撃力ダウン":
                     {
-                        _currentFilters.Add(FilterType.WiPd);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WiPd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WiPd);
+                        }
                         break;
                     }
                 case "光属性攻撃力アップ":
                     {
-                        _currentFilters.Add(FilterType.LPu);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.LPu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.LPu);
+                        }
                         break;
                     }
                 case "光属性攻撃力ダウン":
                     {
-                        _currentFilters.Add(FilterType.LPd);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.LPd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.LPd);
+                        }
                         break;
                     }
                 case "闇属性攻撃力アップ":
                     {
-                        _currentFilters.Add(FilterType.DPu);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.DPu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.DPu);
+                        }
                         break;
                     }
                 case "闇属性攻撃力ダウン":
                     {
-                        _currentFilters.Add(FilterType.DPd);
-                        break;
-                    }
-                case "火属性防御力アップ":
-                    {
-                        _currentFilters.Add(FilterType.FGu);
-                        break;
-                    }
-                case "火属性防御力ダウン":
-                    {
-                        _currentFilters.Add(FilterType.FGd);
-                        break;
-                    }
-                case "水属性防御力アップ":
-                    {
-                        _currentFilters.Add(FilterType.WaGu);
-                        break;
-                    }
-                case "水属性防御力ダウン":
-                    {
-                        _currentFilters.Add(FilterType.WaGd);
-                        break;
-                    }
-                case "風属性防御力アップ":
-                    {
-                        _currentFilters.Add(FilterType.WiGu);
-                        break;
-                    }
-                case "風属性防御力ダウン":
-                    {
-                        _currentFilters.Add(FilterType.WiGd);
-                        break;
-                    }
-                case "光属性防御力アップ":
-                    {
-                        _currentFilters.Add(FilterType.LGu);
-                        break;
-                    }
-                case "光属性防御力ダウン":
-                    {
-                        _currentFilters.Add(FilterType.LGd);
-                        break;
-                    }
-                case "闇属性防御力アップ":
-                    {
-                        _currentFilters.Add(FilterType.DGu);
-                        break;
-                    }
-                case "闇属性防御力ダウン":
-                    {
-                        _currentFilters.Add(FilterType.DGd);
-                        break;
-                    }
-                case "HPアップ":
-                    {
-                        _currentFilters.Add(FilterType.HPu);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.DPd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.DPd);
+                        }
                         break;
                     }
                 case "火効果アップ":
                     {
-                        _currentFilters.Add(FilterType.FireStimulation);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FireStimulation);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FireStimulation);
+                        }
                         break;
                     }
                 case "水効果アップ":
                     {
-                        _currentFilters.Add(FilterType.WaterStimulation);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WaterStimulation);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WaterStimulation);
+                        }
                         break;
                     }
                 case "風効果アップ":
                     {
-                        _currentFilters.Add(FilterType.WindStimulation);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WindStimulation);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WindStimulation);
+                        }
                         break;
                     }
                 case "光効果アップ":
                     {
-                        _currentFilters.Add(FilterType.LightStimulation);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.LightStimulation);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.LightStimulation);
+                        }
                         break;
                     }
                 case "闇効果アップ":
                     {
-                        _currentFilters.Add(FilterType.DarkStimulation);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.DarkStimulation);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.DarkStimulation);
+                        }
                         break;
                     }
                 case "火強":
                     {
-                        _currentFilters.Add(FilterType.FireStrong);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FireStrong);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FireStrong);
+                        }
                         break;
                     }
                 case "水強":
                     {
-                        _currentFilters.Add(FilterType.WaterStrong);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WaterStrong);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WaterStrong);
+                        }
                         break;
                     }
                 case "風強":
                     {
-                        _currentFilters.Add(FilterType.WindStrong);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WindStrong);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WindStrong);
+                        }
                         break;
                     }
                 case "火弱":
                     {
-                        _currentFilters.Add(FilterType.FireWeak);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FireWeak);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FireWeak);
+                        }
                         break;
                     }
                 case "水弱":
                     {
-                        _currentFilters.Add(FilterType.WaterWeak);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WaterWeak);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WaterWeak);
+                        }
                         break;
                     }
                 case "風弱":
                     {
-                        _currentFilters.Add(FilterType.WindWeak);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WindWeak);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WindWeak);
+                        }
                         break;
                     }
                 case "火拡":
                     {
-                        _currentFilters.Add(FilterType.FireSpread);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FireSpread);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FireSpread);
+                        }
                         break;
                     }
                 case "水拡":
                     {
-                        _currentFilters.Add(FilterType.WaterSpread);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WaterSpread);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WaterSpread);
+                        }
                         break;
                     }
                 case "風拡":
                     {
-                        _currentFilters.Add(FilterType.WindSpread);
-                        break;
-                    }
-                case "ヒール":
-                    {
-                        _currentFilters.Add(FilterType.Heal);
-                        break;
-                    }
-                case "チャージ":
-                    {
-                        _currentFilters.Add(FilterType.Charge);
-                        break;
-                    }
-                case "リカバー":
-                    {
-                        _currentFilters.Add(FilterType.Recover);
-                        break;
-                    }
-                case "カウンター":
-                    {
-                        _currentFilters.Add(FilterType.Counter);
-                        break;
-                    }
-                default:
-                    {
-                        throw new UnreachableException("Unreachable");
-                    }
-            }
-            if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
-            {
-                Pool.Remove(memoria);
-            }
-            Sort(SortOption.SelectedIndex);
-        }
-
-        private void SupportOption_Checked(object sender, RoutedEventArgs e)
-        {
-            if (sender is not CheckBox box) return;
-            var prevCount = _currentFilters.Count;
-            switch (box.Content)
-            {
-                case "獲得マッチPtUP/通常単体":
-                    {
-                        _currentFilters.Add(FilterType.NormalMatchPtUp);
-                        break;
-                    }
-                case "獲得マッチPtUP/特殊単体":
-                    {
-                        _currentFilters.Add(FilterType.SpecialMatchPtUp);
-                        break;
-                    }
-                case "ダメージUP":
-                    {
-                        _currentFilters.Add(FilterType.DamageUp);
-                        break;
-                    }
-                case "パワーUP":
-                    {
-                        _currentFilters.Add(FilterType.PowerUp);
-                        break;
-                    }
-                case "パワーDOWN":
-                    {
-                        _currentFilters.Add(FilterType.PowerDown);
-                        break;
-                    }
-                case "ガードUP":
-                    {
-                        _currentFilters.Add(FilterType.GuardUp);
-                        break;
-                    }
-                case "ガードDOWN":
-                    {
-                        _currentFilters.Add(FilterType.GuardDown);
-                        break;
-                    }
-                case "Sp.パワーUP":
-                    {
-                        _currentFilters.Add(FilterType.SpPowerUp);
-                        break;
-                    }
-                case "Sp.パワーDOWN":
-                    {
-                        _currentFilters.Add(FilterType.SpPowerDown);
-                        break;
-                    }
-                case "Sp.ガードUP":
-                    {
-                        _currentFilters.Add(FilterType.SpGuardUp);
-                        break;
-                    }
-                case "Sp.ガードDOWN":
-                    {
-                        _currentFilters.Add(FilterType.SpGuardDown);
-                        break;
-                    }
-                case "火パワーUP":
-                    {
-                        _currentFilters.Add(FilterType.FirePowerUp);
-                        break;
-                    }
-                case "火パワーDOWN":
-                    {
-                        _currentFilters.Add(FilterType.FirePowerDown);
-                        break;
-                    }
-                case "水パワーUP":
-                    {
-                        _currentFilters.Add(FilterType.WaterPowerUp);
-                        break;
-                    }
-                case "水パワーDOWN":
-                    {
-                        _currentFilters.Add(FilterType.WaterPowerDown);
-                        break;
-                    }
-                case "風パワーUP":
-                    {
-                        _currentFilters.Add(FilterType.WindPowerUp);
-                        break;
-                    }
-                case "風パワーDOWN":
-                    {
-                        _currentFilters.Add(FilterType.WindPowerDown);
-                        break;
-                    }
-                case "火ガードUP":
-                    {
-                        _currentFilters.Add(FilterType.FireGuardUp);
-                        break;
-                    }
-                case "火ガードDOWN":
-                    {
-                        _currentFilters.Add(FilterType.FireGuardDown);
-                        break;
-                    }
-                case "水ガードUP":
-                    {
-                        _currentFilters.Add(FilterType.WaterGuardUp);
-                        break;
-                    }
-                case "水ガードDOWN":
-                    {
-                        _currentFilters.Add(FilterType.WaterGuardDown);
-                        break;
-                    }
-                case "風ガードUP":
-                    {
-                        _currentFilters.Add(FilterType.WindGuardUp);
-                        break;
-                    }
-                case "風ガードDOWN":
-                    {
-                        _currentFilters.Add(FilterType.WindGuardDown);
-                        break;
-                    }
-                case "支援UP":
-                    {
-                        _currentFilters.Add(FilterType.SupportUp);
-                        break;
-                    }
-                case "回復UP":
-                    {
-                        _currentFilters.Add(FilterType.RecoveryUp);
-                        break;
-                    }
-                case "MP消費DOWN":
-                    {
-                        _currentFilters.Add(FilterType.MpCostDown);
-                        break;
-                    }
-                case "効果範囲+":
-                    {
-                        _currentFilters.Add(FilterType.RangeUp);
-                        break;
-                    }
-                default:
-                    {
-                        throw new UnreachableException("Unreachable");
-                    }
-            }
-            if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
-            {
-                Pool.Remove(memoria);
-            }
-            Sort(SortOption.SelectedIndex);
-        }
-
-        private void OtherOption_Checked(object sender, RoutedEventArgs _)
-        {
-            if (sender is not CheckBox box) return;
-            var prevCount = _currentFilters.Count;
-
-            switch (box.Content)
-            {
-                case "レジェンダリー":
-                    {
-                        _currentFilters.Add(FilterType.Legendary);
-                        break;
-                    }
-                case "アルティメット":
-                    {
-                        _currentFilters.Add(FilterType.Ultimate);
-                        break;
-                    }
-                default:
-                    {
-                        throw new UnreachableException("Unreachable");
-                    }
-            }
-            if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
-            {
-                Pool.Remove(memoria);
-            }
-            Sort(SortOption.SelectedIndex);
-        }
-
-        private void SkillOption_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (sender is not CheckBox box) return;
-            var prevCount = _currentFilters.Count;
-
-            switch (box.Content)
-            {
-                case "ATKアップ":
-                    {
-                        _currentFilters.Remove(FilterType.Au);
-                        break;
-                    }
-                case "ATKダウン":
-                    {
-                        _currentFilters.Remove(FilterType.Ad);
-                        break;
-                    }
-                case "Sp.ATKアップ":
-                    {
-                        _currentFilters.Remove(FilterType.SAu);
-                        break;
-                    }
-                case "Sp.ATKダウン":
-                    {
-                        _currentFilters.Remove(FilterType.SAd);
-                        break;
-                    }
-                case "DEFアップ":
-                    {
-                        _currentFilters.Remove(FilterType.Du);
-                        break;
-                    }
-                case "DEFダウン":
-                    {
-                        _currentFilters.Remove(FilterType.Dd);
-                        break;
-                    }
-                case "Sp.DEFアップ":
-                    {
-                        _currentFilters.Remove(FilterType.SDu);
-                        break;
-                    }
-                case "Sp.DEFダウン":
-                    {
-                        _currentFilters.Remove(FilterType.SDd);
-                        break;
-                    }
-                case "トライパワーアップ":
-                    {
-                        _currentFilters.Remove(FilterType.WaPu);
-                        _currentFilters.Remove(FilterType.WiPu);
-                        _currentFilters.Remove(FilterType.FPu);
-                        break;
-                    }
-                case "トライパワーダウン":
-                    {
-                        _currentFilters.Remove(FilterType.WaPd);
-                        _currentFilters.Remove(FilterType.WiPd);
-                        _currentFilters.Remove(FilterType.FPd);
-                        break;
-                    }
-                case "トライガードアップ":
-                    {
-                        _currentFilters.Remove(FilterType.WaGu);
-                        _currentFilters.Remove(FilterType.WiGu);
-                        _currentFilters.Remove(FilterType.FGu);
-                        break;
-                    }
-                case "トライガードダウン":
-                    {
-                        _currentFilters.Remove(FilterType.WaGd);
-                        _currentFilters.Remove(FilterType.WiGd);
-                        _currentFilters.Remove(FilterType.FGd);
-                        break;
-                    }
-                case "火属性攻撃力アップ":
-                    {
-                        _currentFilters.Remove(FilterType.FPu);
-                        break;
-                    }
-                case "火属性攻撃力ダウン":
-                    {
-                        _currentFilters.Remove(FilterType.FPd);
-                        break;
-                    }
-                case "水属性攻撃力アップ":
-                    {
-                        _currentFilters.Remove(FilterType.WaPu);
-                        break;
-                    }
-                case "水属性攻撃力ダウン":
-                    {
-                        _currentFilters.Remove(FilterType.WaPd);
-                        break;
-                    }
-                case "風属性攻撃力アップ":
-                    {
-                        _currentFilters.Remove(FilterType.WiPu);
-                        break;
-                    }
-                case "風属性攻撃力ダウン":
-                    {
-                        _currentFilters.Remove(FilterType.WiPd);
-                        break;
-                    }
-                case "光属性攻撃力アップ":
-                    {
-                        _currentFilters.Remove(FilterType.LPu);
-                        break;
-                    }
-                case "光属性攻撃力ダウン":
-                    {
-                        _currentFilters.Remove(FilterType.LPd);
-                        break;
-                    }
-                case "闇属性攻撃力アップ":
-                    {
-                        _currentFilters.Remove(FilterType.DPu);
-                        break;
-                    }
-                case "闇属性攻撃力ダウン":
-                    {
-                        _currentFilters.Remove(FilterType.DPd);
-                        break;
-                    }
-                case "火属性防御力アップ":
-                    {
-                        _currentFilters.Remove(FilterType.FGu);
-                        break;
-                    }
-                case "火属性防御力ダウン":
-                    {
-                        _currentFilters.Remove(FilterType.FGd);
-                        break;
-                    }
-                case "水属性防御力アップ":
-                    {
-                        _currentFilters.Remove(FilterType.WaGu);
-                        break;
-                    }
-                case "水属性防御力ダウン":
-                    {
-                        _currentFilters.Remove(FilterType.WaGd);
-                        break;
-                    }
-                case "風属性防御力アップ":
-                    {
-                        _currentFilters.Remove(FilterType.WiGu);
-                        break;
-                    }
-                case "風属性防御力ダウン":
-                    {
-                        _currentFilters.Remove(FilterType.WiGd);
-                        break;
-                    }
-                case "光属性防御力アップ":
-                    {
-                        _currentFilters.Remove(FilterType.LGu);
-                        break;
-                    }
-                case "光属性防御力ダウン":
-                    {
-                        _currentFilters.Remove(FilterType.LGd);
-                        break;
-                    }
-                case "闇属性防御力アップ":
-                    {
-                        _currentFilters.Remove(FilterType.DGu);
-                        break;
-                    }
-                case "闇属性防御力ダウン":
-                    {
-                        _currentFilters.Remove(FilterType.DGd);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WindSpread);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WindSpread);
+                        }
                         break;
                     }
                 case "HPアップ":
                     {
-                        _currentFilters.Remove(FilterType.HPu);
-                        break;
-                    }
-                case "火効果アップ":
-                    {
-                        _currentFilters.Remove(FilterType.FireStimulation);
-                        break;
-                    }
-                case "水効果アップ":
-                    {
-                        _currentFilters.Remove(FilterType.WaterStimulation);
-                        break;
-                    }
-                case "風効果アップ":
-                    {
-                        _currentFilters.Remove(FilterType.WindStimulation);
-                        break;
-                    }
-                case "光効果アップ":
-                    {
-                        _currentFilters.Remove(FilterType.LightStimulation);
-                        break;
-                    }
-                case "闇効果アップ":
-                    {
-                        _currentFilters.Remove(FilterType.DarkStimulation);
-                        break;
-                    }
-                case "火強":
-                    {
-                        _currentFilters.Remove(FilterType.FireStrong);
-                        break;
-                    }
-                case "水強":
-                    {
-                        _currentFilters.Remove(FilterType.WaterStrong);
-                        break;
-                    }
-                case "風強":
-                    {
-                        _currentFilters.Remove(FilterType.WindStrong);
-                        break;
-                    }
-                case "火弱":
-                    {
-                        _currentFilters.Remove(FilterType.FireWeak);
-                        break;
-                    }
-                case "水弱":
-                    {
-                        _currentFilters.Remove(FilterType.WaterWeak);
-                        break;
-                    }
-                case "風弱":
-                    {
-                        _currentFilters.Remove(FilterType.WindWeak);
-                        break;
-                    }
-                case "火拡":
-                    {
-                        _currentFilters.Remove(FilterType.FireSpread);
-                        break;
-                    }
-                case "水拡":
-                    {
-                        _currentFilters.Remove(FilterType.WaterSpread);
-                        break;
-                    }
-                case "風拡":
-                    {
-                        _currentFilters.Remove(FilterType.WindSpread);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.HPu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.HPu);
+                        }
                         break;
                     }
                 case "ヒール":
                     {
-                        _currentFilters.Remove(FilterType.Heal);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Heal);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Heal);
+                        }
                         break;
                     }
                 case "チャージ":
                     {
-                        _currentFilters.Remove(FilterType.Charge);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Charge);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Charge);
+                        }
                         break;
                     }
                 case "リカバー":
                     {
-                        _currentFilters.Remove(FilterType.Recover);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Recover);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Recover);
+                        }
                         break;
                     }
                 case "カウンター":
                     {
-                        _currentFilters.Remove(FilterType.Counter);
-                        break;
-                    }
-                default:
-                    {
-                        throw new UnreachableException("Unreachable");
-                    }
-            }
-            if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in OriginalPool
-                    .Where(memoria => !Pool.Contains(memoria))
-                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
-                    .Where(ApplyFilter))
-            {
-                Pool.Add(memoria);
-            }
-            Sort(SortOption.SelectedIndex);
-        }
-
-        private void SupportOption_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (sender is not CheckBox box) return;
-            var prevCount = _currentFilters.Count;
-
-            switch (box.Content)
-            {
-                case "獲得マッチPtUP/通常単体":
-                    {
-                        _currentFilters.Remove(FilterType.NormalMatchPtUp);
-                        break;
-                    }
-                case "獲得マッチPtUP/特殊単体":
-                    {
-                        _currentFilters.Remove(FilterType.SpecialMatchPtUp);
-                        break;
-                    }
-                case "ダメージUP":
-                    {
-                        _currentFilters.Remove(FilterType.DamageUp);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Counter);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Counter);
+                        }
                         break;
                     }
                 case "パワーUP":
                     {
-                        _currentFilters.Remove(FilterType.PowerUp);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.PowerUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.PowerUp);
+                        }
                         break;
                     }
                 case "パワーDOWN":
                     {
-                        _currentFilters.Remove(FilterType.PowerDown);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.PowerDown);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.PowerDown);
+                        }
                         break;
                     }
                 case "ガードUP":
                     {
-                        _currentFilters.Remove(FilterType.GuardUp);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.GuardUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.GuardUp);
+                        }
                         break;
                     }
                 case "ガードDOWN":
                     {
-                        _currentFilters.Remove(FilterType.GuardDown);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.GuardDown);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.GuardDown);
+                        }
                         break;
                     }
                 case "Sp.パワーUP":
                     {
-                        _currentFilters.Remove(FilterType.SpPowerUp);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.SpPowerUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.SpPowerUp);
+                        }
                         break;
                     }
                 case "Sp.パワーDOWN":
                     {
-                        _currentFilters.Remove(FilterType.SpPowerDown);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.SpPowerDown);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.SpPowerDown);
+                        }
                         break;
                     }
                 case "Sp.ガードUP":
                     {
-                        _currentFilters.Remove(FilterType.SpGuardUp);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.SpGuardUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.SpGuardUp);
+                        }
                         break;
                     }
                 case "Sp.ガードDOWN":
                     {
-                        _currentFilters.Remove(FilterType.SpGuardDown);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.SpGuardDown);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.SpGuardDown);
+                        }
                         break;
                     }
                 case "火パワーUP":
                     {
-                        _currentFilters.Remove(FilterType.FirePowerUp);
-                        break;
-                    }
-                case "火パワーDOWN":
-                    {
-                        _currentFilters.Remove(FilterType.FirePowerDown);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FirePowerUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FirePowerUp);
+                        }
                         break;
                     }
                 case "水パワーUP":
                     {
-                        _currentFilters.Remove(FilterType.WaterPowerUp);
-                        break;
-                    }
-                case "水パワーDOWN":
-                    {
-                        _currentFilters.Remove(FilterType.WaterPowerDown);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WaterPowerUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WaterPowerUp);
+                        }
                         break;
                     }
                 case "風パワーUP":
                     {
-                        _currentFilters.Remove(FilterType.WindPowerUp);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WindPowerUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WindPowerUp);
+                        }
+                        break;
+                    }
+                case "火パワーDOWN":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FirePowerDown);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FirePowerDown);
+                        }
+                        break;
+                    }
+                case "水パワーDOWN":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WaterPowerDown);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WaterPowerDown);
+                        }
                         break;
                     }
                 case "風パワーDOWN":
                     {
-                        _currentFilters.Remove(FilterType.WindPowerDown);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WindPowerDown);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WindPowerDown);
+                        }
                         break;
                     }
                 case "火ガードUP":
                     {
-                        _currentFilters.Remove(FilterType.FireGuardUp);
-                        break;
-                    }
-                case "火ガードDOWN":
-                    {
-                        _currentFilters.Remove(FilterType.FireGuardDown);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FireGuardUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FireGuardUp);
+                        }
                         break;
                     }
                 case "水ガードUP":
                     {
-                        _currentFilters.Remove(FilterType.WaterGuardUp);
-                        break;
-                    }
-                case "水ガードDOWN":
-                    {
-                        _currentFilters.Remove(FilterType.WaterGuardDown);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WaterGuardUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WaterGuardUp);
+                        }
                         break;
                     }
                 case "風ガードUP":
                     {
-                        _currentFilters.Remove(FilterType.WindGuardUp);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WindGuardUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WindGuardUp);
+                        }
+                        break;
+                    }
+                case "火ガードDOWN":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FireGuardDown);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FireGuardDown);
+                        }
+                        break;
+                    }
+                case "水ガードDOWN":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WaterGuardDown);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WaterGuardDown);
+                        }
                         break;
                     }
                 case "風ガードDOWN":
                     {
-                        _currentFilters.Remove(FilterType.WindGuardDown);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WindGuardDown);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WindGuardDown);
+                        }
+                        break;
+                    }
+                case "ダメージUP":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.DamageUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.DamageUp);
+                        }
                         break;
                     }
                 case "支援UP":
                     {
-                        _currentFilters.Remove(FilterType.SupportUp);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.SupportUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.SupportUp);
+                        }
                         break;
                     }
                 case "回復UP":
                     {
-                        _currentFilters.Remove(FilterType.RecoveryUp);
-                        break;
-                    }
-                case "MP消費DOWN":
-                    {
-                        _currentFilters.Remove(FilterType.MpCostDown);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.RecoveryUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.RecoveryUp);
+                        }
                         break;
                     }
                 case "効果範囲+":
                     {
-                        _currentFilters.Remove(FilterType.RangeUp);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.RangeUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.RangeUp);
+                        }
                         break;
                     }
-                default:
+                case "獲得マッチPtUP/通常単体":
                     {
-                        throw new UnreachableException("Unreachable");
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.NormalMatchPtUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.NormalMatchPtUp);
+                        }
+                        break;
                     }
-            }
-            if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in OriginalPool
-                    .Where(memoria => !Pool.Contains(memoria))
-                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
-                    .Where(ApplyFilter))
-            {
-                Pool.Add(memoria);
-            }
-            Sort(SortOption.SelectedIndex);
-        }
-
-        private void OtherOption_Unchecked(object sender, RoutedEventArgs _)
-        {
-            if (sender is not CheckBox box) return;
-            var prevCount = _currentFilters.Count;
-
-            switch (box.Content)
-            {
+                case "獲得マッチPtUP/特殊単体":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.SpecialMatchPtUp);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.SpecialMatchPtUp);
+                        }
+                        break;
+                    }
+                case "MP消費DOWN":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.MpCostDown);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.MpCostDown);
+                        }
+                        break;
+                    }
                 case "レジェンダリー":
                     {
-                        _currentFilters.Remove(FilterType.Legendary);
-                        break;
+                        {
+                            if ((bool)e.Node.IsChecked)
+                            {
+                                _currentFilters.Add(FilterType.Legendary);
+                            }
+                            else
+                            {
+                                _currentFilters.Remove(FilterType.Legendary);
+                            }
+                            break;
+                        }
                     }
                 case "アルティメット":
                     {
-                        _currentFilters.Remove(FilterType.Ultimate);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Ultimate);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Ultimate);
+                        }
                         break;
                     }
-                default:
-                    {
-                        throw new UnreachableException("Unreachable");
-                    }
+                default: break;
             }
-            if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in OriginalPool
-                    .Where(memoria => !Pool.Contains(memoria))
-                    .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
-                    .Where(ApplyFilter))
+            if ((bool)e.Node.IsChecked)
             {
-                Pool.Add(memoria);
+                foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
+                {
+                    Pool.Remove(memoria);
+                }
+
+            }
+            else
+            {
+                foreach (var memoria in OriginalPool
+                        .Where(memoria => !Pool.Contains(memoria))
+                        .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
+                        .Where(ApplyFilter))
+                {
+                    Pool.Add(memoria);
+                }
             }
             Sort(SortOption.SelectedIndex);
         }
