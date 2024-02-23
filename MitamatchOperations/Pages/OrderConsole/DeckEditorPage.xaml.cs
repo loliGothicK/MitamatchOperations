@@ -31,7 +31,7 @@ public sealed partial class DeckEditorPage
     public static readonly int[] TimeSource = Enumerable.Range(0, 12).Select(t => t * 5).ToArray();
     private ObservableCollection<TimeTableItem> _deck = [];
     private readonly ObservableCollection<TimeTableItem> _referDeck = [];
-    private ObservableCollection<Order> Sources { get; set; } = [];
+    private ObservableCollection<Order> Sources = [.. Order.List.Where(o => o.Payed)];
     private new int Margin { get; set; } = 5;
     private MemberInfo[] _members = [];
     private readonly List<HoldOn> _holdOns = [];
@@ -89,7 +89,7 @@ public sealed partial class DeckEditorPage
         }
         else
         {
-            var ordered = Order.List[int.Parse(button.AccessKey)];
+            var ordered = Order.Of(int.Parse(button.AccessKey));
             Sources.Remove(ordered);
             PushOrder(ordered);
         }
@@ -365,6 +365,14 @@ public sealed partial class DeckEditorPage
 
         switch (box.Content)
         {
+            case "無課金":
+                {
+                    foreach (var item in Sources.Where(item => !item.Payed).ToArray())
+                    {
+                        Sources.Remove(item);
+                    }
+                    break;
+                }
             case "属性":
                 {
                     foreach (var item in Sources.Where(item => item.Kind is Elemental).ToArray())
@@ -428,51 +436,57 @@ public sealed partial class DeckEditorPage
 
         switch (box.Content)
         {
+            case "無課金":
+                {
+                    foreach (var item in Order.List.Where(item => !item.Payed))
+                        Sources.Add(item);
+                    break;
+                }
             case "属性":
                 {
-                    foreach (var item in Order.ElementalOrders)
+                    foreach (var item in (bool)NotPayedCheckBox.IsChecked ? Order.ElementalOrders : Order.ElementalOrders.Where(o => o.Payed))
                         Sources.Add(item);
                     break;
                 }
             case "バフ":
                 {
-                    foreach (var item in Order.BuffOrders)
+                    foreach (var item in (bool)NotPayedCheckBox.IsChecked ? Order.BuffOrders : Order.BuffOrders.Where(o => o.Payed))
                         Sources.Add(item);
                     break;
                 }
             case "デバフ":
                 {
-                    foreach (var item in Order.DeBuffOrders)
+                    foreach (var item in (bool)NotPayedCheckBox.IsChecked ? Order.DeBuffOrders : Order.DeBuffOrders.Where(o => o.Payed))
                         Sources.Add(item);
                     break;
                 }
             case "MP":
                 {
-                    foreach (var item in Order.MpOrders)
+                    foreach (var item in (bool)NotPayedCheckBox.IsChecked ? Order.MpOrders : Order.MpOrders.Where(o => o.Payed))
                         Sources.Add(item);
                     break;
                 }
             case "発動率":
                 {
-                    foreach (var item in Order.TriggerRateFluctuationOrders)
+                    foreach (var item in (bool)NotPayedCheckBox.IsChecked ? Order.TriggerRateFluctuationOrders : Order.TriggerRateFluctuationOrders.Where(o => o.Payed))
                         Sources.Add(item);
                     break;
                 }
             case "再編":
                 {
-                    foreach (var item in Order.FormationOrders)
+                    foreach (var item in (bool)NotPayedCheckBox.IsChecked ? Order.FormationOrders : Order.FormationOrders.Where(o => o.Payed))
                         Sources.Add(item);
                     break;
                 }
             case "盾":
                 {
-                    foreach (var item in Order.ShieldOrders)
+                    foreach (var item in (bool)NotPayedCheckBox.IsChecked ? Order.ShieldOrders : Order.ShieldOrders.Where(o => o.Payed))
                         Sources.Add(item);
                     break;
                 }
             case "その他":
                 {
-                    foreach (var item in Order.StackOrders.Concat(Order.OtherOrders))
+                    foreach (var item in (bool)NotPayedCheckBox.IsChecked ? Order.StackOrders.Concat(Order.OtherOrders) : Order.StackOrders.Concat(Order.OtherOrders).Where(o => o.Payed))
                         Sources.Add(item);
                     break;
                 }
@@ -481,7 +495,8 @@ public sealed partial class DeckEditorPage
                     throw new UnreachableException("Unreachable");
                 }
         }
-
+        Sources = [.. Sources.DistinctBy(o => o.Index)];
+        Sources.Sort((a, b) => b.Index.CompareTo(a.Index));
         OrderSources.ItemsSource = Sources;
     }
 
@@ -494,7 +509,8 @@ public sealed partial class DeckEditorPage
             return Task.CompletedTask;
         });
 
-        var target = _deck[_deck.IndexOf(Order.List[int.Parse(button.AccessKey)])];
+        var order = Order.Of(int.Parse(button.AccessKey));
+        var target = _deck[_deck.IndexOf(order)];
 
         foreach (var onHold in _holdOns)
         {
@@ -601,7 +617,7 @@ public sealed partial class DeckEditorPage
         var deck = DeckLoadBox.SelectedItem.As<DeckJson>();
         _deck.Clear();
         Sources.Clear();
-        Sources = new ObservableCollection<Order>(Order.List);
+        Sources = [.. Order.List.Where(o => !o.Payed)];
         foreach (var item in deck.Items.Select(item => (TimeTableItem)item))
         {
             _deck.Add(item);
@@ -881,7 +897,7 @@ internal record struct DeckJsonProxy(int Index, int Delay, int Start, int End, s
     public static implicit operator DeckJsonProxy(TimeTableItem item)
         => new(item.Order.Index, item.Delay, item.Start, item.End, item.Pic, item.Conditional);
     public static implicit operator TimeTableItem(DeckJsonProxy item)
-        => new(Order.List[item.Index], item.Delay, item.Start, item.End, item.Pic, item.Conditional);
+        => new(Order.Of(item.Index), item.Delay, item.Start, item.End, item.Pic, item.Conditional);
 }
 
 public record TimeTableItem(Order Order, int Delay, int Start, int End, string Pic = "", bool Conditional = false)

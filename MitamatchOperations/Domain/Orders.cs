@@ -96,7 +96,9 @@ namespace mitama.Domain
             _ => $"({PrepareTime} + {ActiveTime} sec)"
         };
 
-        public static Order[] List = [
+        public static Order Of(int index) => List[^(index+1)];
+
+        public readonly static Order[] List = [
             new Order(
                 157,
                 "水刃縛りの大棘蔦",

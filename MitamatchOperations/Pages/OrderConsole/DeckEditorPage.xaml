@@ -298,6 +298,7 @@
                         <AppBarButton.Flyout>
                             <Flyout>
                                 <StackPanel>
+                                    <CheckBox x:Name="NotPayedCheckBox" Content="無課金" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" IsChecked="False" />
                                     <CheckBox x:Name="ElementalCheckBox" Content="属性" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" />
                                     <CheckBox x:Name="BuffCheckBox" Content="バフ" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" />
                                     <CheckBox x:Name="DeBuffCheckBox" Content="デバフ" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" />
@@ -316,7 +317,7 @@
                     Grid.Row="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    ItemsSource="{x:Bind domain:Order.List}"
+                    ItemsSource="{x:Bind Sources}"
                     ItemTemplate="{StaticResource OrderItemTemplate}"
                     IsItemClickEnabled="True"
                     CanDragItems="True"

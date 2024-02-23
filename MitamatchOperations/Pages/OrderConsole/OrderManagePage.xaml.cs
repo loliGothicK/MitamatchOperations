@@ -115,7 +115,7 @@ public sealed partial class OrderManagerPage
         var def = e.GetDeferral();
 
         var text = await e.DataView.GetTextAsync();
-        var items = text.Split(',').Select(index => Order.List[int.Parse(index)]);
+        var items = text.Split(',').Select(index => Order.Of(int.Parse(index)));
 
         var (from, to) = sender.As<GridView>().Name switch
         {
@@ -304,8 +304,8 @@ public sealed partial class OrderManagerPage
             OrdersInPossession.Clear();
             foreach (var index in MemberInfo.FromJson(json).OrderIndices)
             {
-                Sources.Remove(Order.List[index]);
-                OrdersInPossession.Add(Order.List[index]);
+                Sources.Remove(Order.Of(index));
+                OrdersInPossession.Add(Order.Of(index));
             }
 
             Update();
