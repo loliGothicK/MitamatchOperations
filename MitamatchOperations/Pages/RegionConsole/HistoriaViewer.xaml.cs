@@ -8,8 +8,9 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using mitama.Domain;
 using mitama.Pages.Common;
-using MitamatchOperations.Pages.RegionConsole;
 using MitamatchOperations.Lib;
+using mitama.Models;
+using WinRT;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -27,6 +28,7 @@ public sealed partial class HistoriaViewer : Page
     private readonly ObservableCollection<Player> AllyMembers = [];
     private readonly ObservableCollection<Player> OpponentMembers = [];
     private readonly ObservableCollection<UnitChangeLog> unitChanges = [];
+    private ChartViewModel chartView;
 
     public HistoriaViewer()
     {
@@ -82,6 +84,14 @@ public sealed partial class HistoriaViewer : Page
                 unitChanges.Add(new(name, time));
             }
         }
+        foreach (var player in summary.Allies)
+        {
+            PlayerSelect.Items.Add(player);
+        }
+
+        var statusPath = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\Ally\[{summary.Allies[0].Name}]\status.json";
+        var history = JsonSerializer.Deserialize<SortedDictionary<TimeOnly, AllStatus>>(File.ReadAllText(statusPath));
+        chartView = new ChartViewModel(history);
     }
 
     private void MenuFlyout_Opening(object sender, object e)
@@ -98,7 +108,6 @@ public sealed partial class HistoriaViewer : Page
             : "Opponent";
         var unitPath = $@"{logDir}\{date}\{dir}\[{playerName}]\Units";
         var files = Directory.GetFiles(unitPath);
-        var unitSubItem = new MenuFlyoutSubItem { Name = "Unit", Text = "Unit" };
         foreach (var file in files)
         {
             var text = file.Split("\\").Last().Replace(".json", string.Empty);
@@ -109,87 +118,29 @@ public sealed partial class HistoriaViewer : Page
                 .WithCancel("閉じる")
                 .Build();
 
-            unitSubItem.Items.Add(new MenuFlyoutItem
+            menu.Items.Add(new MenuFlyoutItem
             {
                 Text = text,
                 Command = new Defer(async () => await dialog.ShowAsync()),
             });
         }
-        menu.Items.Add(unitSubItem);
+    }
 
-        var statusSubItem = new MenuFlyoutSubItem { Name = "Status", Text = "Status" };
-        var statusPath = $@"{logDir}\{date}\{dir}\[{playerName}]\status.json";
+    private void PlayerSelect_SelectionChanged(object sender, SelectionChangedEventArgs _)
+    {
+        if (sender is not ComboBox comboBox) return;
+        var selected = comboBox.SelectedValue.As<Player>().Name;
+        var logDir = @$"{Director.ProjectDir()}\{Summary.Allies[0].Region}\BattleLog";
+        var statusPath = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\Ally\[{selected}]\status.json";
         var history = JsonSerializer.Deserialize<SortedDictionary<TimeOnly, AllStatus>>(File.ReadAllText(statusPath));
-        foreach (var text in new List<string> 
-        {
-            //"ATK", "Sp.ATK", "DEF", "Sp.DEF", <- 正確にデータが取れないので一旦コメントアウト
-            "Wind ATK", "Wind DEF",
-            "Fire ATK", "Fire DEF",
-            "Water ATK", "Water DEF"
-        })
-        {
-            var dialog = text switch
-            {
-                "ATK" => new DialogBuilder(XamlRoot)
-                    .WithTitle(text)
-                    .WithBody(new BasicStatusGraphDialog(text, history))
-                    .WithCancel("閉じる")
-                    .Build(),
-                "Sp.ATK" => new DialogBuilder(XamlRoot)
-                    .WithTitle(text)
-                    .WithBody(new BasicStatusGraphDialog(text, history))
-                    .WithCancel("閉じる")
-                    .Build(),
-                "DEF" => new DialogBuilder(XamlRoot)
-                     .WithTitle(text)
-                    .WithBody(new BasicStatusGraphDialog(text, history))
-                    .WithCancel("閉じる")
-                    .Build(),
-                "Sp.DEF" => new DialogBuilder(XamlRoot)
-                    .WithTitle(text)
-                    .WithBody(new BasicStatusGraphDialog(text, history))
-                    .WithCancel("閉じる")
-                    .Build(),
-                "Wind ATK" => new DialogBuilder(XamlRoot)
-                    .WithTitle(text)
-                    .WithBody(new ElementalGraphDialog(text, history))
-                    .WithCancel("閉じる")
-                    .Build(),
-                "Wind DEF" => new DialogBuilder(XamlRoot)
-                    .WithTitle(text)
-                    .WithBody(new ElementalGraphDialog(text, history))
-                    .WithCancel("閉じる")
-                    .Build(),
-                "Fire ATK" => new DialogBuilder(XamlRoot)
-                    .WithTitle(text)
-                    .WithBody(new ElementalGraphDialog(text, history))
-                    .WithCancel("閉じる")
-                    .Build(),
-                "Fire DEF" => new DialogBuilder(XamlRoot)
-                    .WithTitle(text)
-                    .WithBody(new ElementalGraphDialog(text, history))
-                    .WithCancel("閉じる")
-                    .Build(),
-                "Water ATK" => new DialogBuilder(XamlRoot)
-                    .WithTitle(text)
-                    .WithBody(new ElementalGraphDialog(text, history))
-                    .WithCancel("閉じる")
-                    .Build(),
-                "Water DEF" => new DialogBuilder(XamlRoot)
-                    .WithTitle(text)
-                    .WithBody(new ElementalGraphDialog(text, history))
-                    .WithCancel("閉じる")
-                    .Build(),
-                _ => throw new ArgumentException("Invalid target"),
-            };
+        chartView = new ChartViewModel(history);
+        Line.ItemsSource = chartView.Data;
+    }
 
-            statusSubItem.Items.Add(new MenuFlyoutItem
-            {
-                Text = text,
-                Command = new Defer(async () => await dialog.ShowAsync()),
-            });
-        }
-        menu.Items.Add(statusSubItem);
+    private void StautsSelect_SelectionChanged(object sender, SelectionChangedEventArgs _)
+    {
+        chartView.SwithcTo(Line.Label = sender.As<ComboBox>().SelectedValue.As<ComboBoxItem>().Content.As<string>());
+        Line.ItemsSource = chartView.Data;
     }
 }
 

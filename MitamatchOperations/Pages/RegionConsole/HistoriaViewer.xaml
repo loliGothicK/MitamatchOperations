@@ -7,10 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:mitama.Pages.RegionConsole"
     xmlns:domain="using:mitama.Domain"
+    xmlns:chart="using:Syncfusion.UI.Xaml.Charts"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
+        <DataTemplate x:Name="PlayerNameTemplate" x:DataType="domain:Player">
+            <TextBlock Text="{x:Bind Name}" />
+        </DataTemplate>
         <DataTemplate x:Name="OrderTemplate" x:DataType="local:OrderLog">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <ImageIcon Source="{x:Bind Order.Path}" Width="40" Height="40" Margin="0,0,5,0"/>
@@ -102,7 +106,7 @@
                         </StackPanel>
                     </Grid>
                 </PivotItem>
-                <PivotItem Header="Players">
+                <PivotItem Header="Units">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -120,6 +124,62 @@
                                       ItemsSource="{x:Bind OpponentMembers}"
                                       ItemTemplate="{StaticResource PlayerTemplate}"/>
                         </StackPanel>
+                    </Grid>
+                </PivotItem>
+                <PivotItem Header="Charts">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox x:Name="PlayerSelect"
+                                      SelectionChanged="PlayerSelect_SelectionChanged"
+                                      ItemTemplate="{StaticResource PlayerNameTemplate}" />
+                            <ComboBox x:Name="StautsSelect" SelectionChanged="StautsSelect_SelectionChanged">
+                                <ComboBoxItem Content="ATK" />
+                                <ComboBoxItem Content="DEF" />
+                                <ComboBoxItem Content="Sp.ATK" />
+                                <ComboBoxItem Content="Sp.DEF" />
+                                <ComboBoxItem Content="Water ATK" />
+                                <ComboBoxItem Content="Fire ATK" />
+                                <ComboBoxItem Content="Wind ATK" />
+                                <ComboBoxItem Content="Water DEF" />
+                                <ComboBoxItem Content="Fire DEF" />
+                                <ComboBoxItem Content="Wind DEF" />
+                            </ComboBox>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <chart:SfCartesianChart x:Name="Chart"
+                                                    Header="Status Changes">
+
+                                <chart:SfCartesianChart.Legend>
+                                    <chart:ChartLegend IconWidth="13" IconHeight="13"/>
+                                </chart:SfCartesianChart.Legend>
+
+                                <chart:SfCartesianChart.XAxes>
+                                    <chart:NumericalAxis Maximum="900" Minimum="0" Interval="60">
+                                        <chart:NumericalAxis.LabelStyle>
+                                            <chart:LabelStyle FontSize="13"/>
+                                        </chart:NumericalAxis.LabelStyle>
+                                    </chart:NumericalAxis>
+                                </chart:SfCartesianChart.XAxes>
+
+                                <chart:SfCartesianChart.YAxes>
+                                    <chart:NumericalAxis Maximum="1000000" Minimum="-1000000" Interval="100000">
+                                        <chart:NumericalAxis.LabelStyle>
+                                            <chart:LabelStyle FontSize="13"/>
+                                        </chart:NumericalAxis.LabelStyle>
+                                    </chart:NumericalAxis>
+                                </chart:SfCartesianChart.YAxes>
+
+                                <chart:LineSeries x:Name="Line"
+                                                  ItemsSource="{x:Bind chartView.Data}"
+                                                  XBindingPath="Status"
+                                                  YBindingPath="Time">
+                                </chart:LineSeries>
+                            </chart:SfCartesianChart>
+                        </Grid>
                     </Grid>
                 </PivotItem>
             </Pivot>
