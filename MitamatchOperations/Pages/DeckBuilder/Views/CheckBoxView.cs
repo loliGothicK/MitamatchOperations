@@ -28,7 +28,27 @@ public class CheckBoxView : NotificationObject
             Items.Add(category);
         }
 
-        CheckedItems = [ .. Items.SelectMany(item => item.Models) ];
+        CheckedItems = [.. Items.SelectMany(item => item.Models)];
+    }
+
+    public CheckBoxView(Dictionary<string, Dictionary<string, string[]>> config)
+    {
+        Items = [];
+
+        foreach (var (topState, inner) in config)
+        {
+            var outerCategory = new CheckBoxModel { State = topState };
+            foreach (var (innerState, labels) in inner)
+            {
+                var innerCategory = new CheckBoxModel { State = innerState };
+                foreach (var label in labels)
+                {
+                    innerCategory.Models.Add(new CheckBoxModel { State = label });
+                }
+                outerCategory.Models.Add(innerCategory);
+            }
+            Items.Add(outerCategory);
+        }
     }
 }
 

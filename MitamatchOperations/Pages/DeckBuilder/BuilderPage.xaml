@@ -377,24 +377,32 @@
                                 </Flyout>
                             </AppBarButton.Flyout>
                         </AppBarButton>
-                        <AppBarButton Icon="Zoom" Label="Skill">
+                        <AppBarButton Icon="Zoom" Label="Search">
                             <AppBarButton.Flyout>
                                 <Flyout>
-                                    <StackPanel x:Name="SkillSearchOptions" />
-                                </Flyout>
-                            </AppBarButton.Flyout>
-                        </AppBarButton>
-                        <AppBarButton Icon="Zoom" Label="Support">
-                            <AppBarButton.Flyout>
-                                <Flyout>
-                                    <StackPanel x:Name="SupportSearchOptions" />
-                                </Flyout>
-                            </AppBarButton.Flyout>
-                        </AppBarButton>
-                        <AppBarButton Icon="Zoom" Label="Other">
-                            <AppBarButton.Flyout>
-                                <Flyout>
-                                    <StackPanel x:Name="OtherSearchOptions" />
+                                    <treeView:SfTreeView x:Name="SkillSearchView"
+                                                         CheckBoxMode="None"
+                                                         CheckedItems="{x:Bind SkillSearchOptionView.CheckedItems}"
+                                                         ChildPropertyName="Models"
+                                                         ItemsSource="{x:Bind SkillSearchOptionView.Items}"
+                                                         ExpandActionTrigger="Node"
+                                                         AutoExpandMode="AllNodes"
+                                                         BorderBrush="LightGray"  
+                                                         BorderThickness="1" 
+                                                         IsAnimationEnabled="True"
+                                                         ItemTemplateDataContextType="Node"
+                                                         NodePopulationMode="Instant"
+                                                         NodeChecked="SkillSearchView_NodeChecked">
+                                        <treeView:SfTreeView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <CheckBox Content="{Binding Content.State}"
+                                                              local:NullableTreeCheckbox.IsEnabled="true"
+                                                              local:NullableTreeCheckbox.IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </treeView:SfTreeView.ItemTemplate>
+                                    </treeView:SfTreeView>
                                 </Flyout>
                             </AppBarButton.Flyout>
                         </AppBarButton>
