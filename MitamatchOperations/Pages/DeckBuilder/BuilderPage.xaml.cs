@@ -20,6 +20,7 @@ using Windows.UI;
 using Microsoft.UI.Text;
 using Windows.Storage;
 using static mitama.Pages.Common.ObservableCollectionExtensions;
+using mitama.Models;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -28,6 +29,8 @@ namespace mitama.Pages.DeckBuilder
     /// </summary>
     public sealed partial class BuilderPage : Page
     {
+        // CheckBoxView
+        private CheckBoxView FilterOptionView { get; set; }
         // Temporarily store the selected Memoria
         private List<Memoria> selectedMemorias = [];
 
@@ -35,7 +38,6 @@ namespace mitama.Pages.DeckBuilder
         private ObservableCollection<MemoriaWithConcentration> LegendaryDeck { get; set; } = [];
         private List<MemoriaWithConcentration> OriginalPool { get; set; } = [.. Memoria.List.Select(x => new MemoriaWithConcentration(x, 4))];
         private ObservableCollection<MemoriaWithConcentration> Pool { get; set; } = [.. Memoria.List.Select(x => new MemoriaWithConcentration(x, 4))];
-        private ObservableCollection<MyTreeNode> TreeNodes { get; set; } = [];
         private HashSet<FilterType> _currentFilters = [];
         private string region = "";
         private MemberInfo[] members = [];
@@ -381,11 +383,13 @@ namespace mitama.Pages.DeckBuilder
                     VoR.Label = "ëOâq";
                     Pool = new(OriginalPool.Where(m => Costume.DummyVanguard.CanBeEquipped(m.Memoria)));
                     MemoriaSources.ItemsSource = Pool;
-                    TreeNodes[0].Children.Clear();
-                    TreeNodes[0].Children.Add(new() { Text = "í èÌíPëÃ" });
-                    TreeNodes[0].Children.Add(new() { Text = "í èÌîÕàÕ" });
-                    TreeNodes[0].Children.Add(new() { Text = "ì¡éÍíPëÃ" });
-                    TreeNodes[0].Children.Add(new() { Text = "ì¡éÍîÕàÕ" });
+                    FilterOptionView = new(new()
+                    {
+                        ["éÌóﬁ"] = ["í èÌíPëÃ", "í èÌîÕàÕ", "ì¡éÍíPëÃ", "ì¡éÍîÕàÕ"],
+                        ["ëÆê´"] = ["âŒ", "êÖ", "ïó", "åı", "à≈"],
+                        ["îÕàÕ"] = ["A", "B", "C", "D", "E"],
+                        ["å¯â ó "] = ["áT", "áU", "áV", "áV+", "áW", "áW+", "áX", "áX+", "LG", "LG+"],
+                    });
                     _currentFilters = [
                         FilterType.NormalSingle,
                         FilterType.NormalRange,
@@ -401,10 +405,13 @@ namespace mitama.Pages.DeckBuilder
                 {
                     VoR.Label = "å„âq";
                     Pool = new(OriginalPool.Where(m => Costume.DummyRearguard.CanBeEquipped(m.Memoria)));
-                    TreeNodes[0].Children.Clear();
-                    TreeNodes[0].Children.Add(new() { Text = "éxâá" });
-                    TreeNodes[0].Children.Add(new() { Text = "ñWäQ" });
-                    TreeNodes[0].Children.Add(new() { Text = "âÒïú" });
+                    FilterOptionView = new(new()
+                    {
+                        ["éÌóﬁ"] = ["éxâá", "ñWäQ", "âÒïú"],
+                        ["ëÆê´"] = ["âŒ", "êÖ", "ïó", "åı", "à≈"],
+                        ["îÕàÕ"] = ["A", "B", "C", "D", "E"],
+                        ["å¯â ó "] = ["áT", "áU", "áV", "áV+", "áW", "áW+", "áX", "áX+", "LG", "LG+"],
+                    });
                     _currentFilters = [
                         FilterType.Support,
                         FilterType.Interference,
@@ -416,488 +423,199 @@ namespace mitama.Pages.DeckBuilder
                     }
                     MemoriaSources.ItemsSource = Pool;
                 }
+                FilterView.ItemsSource = FilterOptionView.Items;
+                FilterView.CheckedItems = FilterOptionView.CheckedItems;
             }
         }
 
-        private void FilterOption_Checked(object sender, RoutedEventArgs e)
+        private void FilterView_NodeChecked(object sender, Syncfusion.UI.Xaml.TreeView.NodeCheckedEventArgs e)
         {
-            if (sender is not CheckBox box) return;
-            var prevCount = _currentFilters.Count;
-
-            switch (box.Content)
+            switch (e.Node.Content.As<CheckBoxModel>().State)
             {
                 case "éÌóﬁ":
                     {
-                        foreach (var node in TreeNodes[0].Children)
+                        if ((bool)e.Node.IsChecked)
                         {
-                            node.IsChecked = true;
+                            FilterType[] types = Switch.IsOn
+                                ? [FilterType.NormalSingle, FilterType.NormalRange, FilterType.SpecialSingle, FilterType.SpecialRange]
+                                : [FilterType.Support, FilterType.Interference, FilterType.Recovery];
+                            foreach (var type in types)
+                            {
+                                _currentFilters.Add(type);
+                            }
                         }
-                        if (Switch.IsOn)
+                        else
+                        {
+                            _currentFilters.RemoveWhere(IsKindFilter);
+                        }
+                        break;
+                    }
+                case "ëÆê´":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsElementFilter))
+                            {
+                                _currentFilters.Add(type);
+                            }
+                        }
+                        else
+                        {
+                            _currentFilters.RemoveWhere(IsElementFilter);
+                        }
+                        break;
+                    }
+                case "îÕàÕ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsRangeFilter))
+                            {
+                                _currentFilters.Add(type);
+                            }
+                        }
+                        else
+                        {
+                            _currentFilters.RemoveWhere(IsRangeFilter);
+                        }
+                        break;
+                    }
+                case "å¯â ó ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsLevelFilter))
+                            {
+                                _currentFilters.Add(type);
+                            }
+                        }
+                        else
+                        {
+                            _currentFilters.RemoveWhere(IsLevelFilter);
+                        }
+                        break;
+                    }
+                case "í èÌíPëÃ":
+                    {
+                        if ((bool)e.Node.IsChecked)
                         {
                             _currentFilters.Add(FilterType.NormalSingle);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.NormalSingle);
+                        }
+                        break;
+                    }
+                case "í èÌîÕàÕ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
                             _currentFilters.Add(FilterType.NormalRange);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.NormalRange);
+                        }
+                        break;
+                    }
+                case "ì¡éÍíPëÃ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
                             _currentFilters.Add(FilterType.SpecialSingle);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.SpecialSingle);
+                        }
+                        break;
+                    }
+                case "ì¡éÍîÕàÕ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
                             _currentFilters.Add(FilterType.SpecialRange);
                         }
                         else
                         {
-                            _currentFilters.Add(FilterType.Support);
-                            _currentFilters.Add(FilterType.Interference);
-                            _currentFilters.Add(FilterType.Recovery);
+                            _currentFilters.Remove(FilterType.SpecialRange);
                         }
-                        break;
-                    }
-                case "í èÌíPëÃ":
-                    {
-                        _currentFilters.Add(FilterType.NormalSingle);
-                        break;
-                    }
-                case "í èÌîÕàÕ":
-                    {
-                        _currentFilters.Add(FilterType.NormalRange);
-                        break;
-                    }
-                case "ì¡éÍíPëÃ":
-                    {
-                        _currentFilters.Add(FilterType.SpecialSingle);
-                        break;
-                    }
-                case "ì¡éÍîÕàÕ":
-                    {
-                        _currentFilters.Add(FilterType.SpecialRange);
                         break;
                     }
                 case "éxâá":
                     {
-                        _currentFilters.Add(FilterType.Support);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Support);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Support);
+                        }
                         break;
                     }
                 case "ñWäQ":
                     {
-                        _currentFilters.Add(FilterType.Interference);
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Interference);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Interference);
+                        }
                         break;
                     }
                 case "âÒïú":
                     {
-                        _currentFilters.Add(FilterType.Recovery);
-                        break;
-                    }
-                case "ëÆê´":
-                    {
-                        foreach (var node in TreeNodes[1].Children)
+                        if ((bool)e.Node.IsChecked)
                         {
-                            node.IsChecked = true;
+                            _currentFilters.Add(FilterType.Recovery);
                         }
-                        foreach (var filter in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsElementFilter))
+                        else
                         {
-                            _currentFilters.Add(filter);
+                            _currentFilters.Remove(FilterType.Recovery);
                         }
                         break;
                     }
-                case "âŒ":
-                    {
-                        _currentFilters.Add(FilterType.Fire);
-                        break;
-                    }
-                case "êÖ":
-                    {
-                        _currentFilters.Add(FilterType.Water);
-                        break;
-                    }
-                case "ïó":
-                    {
-                        _currentFilters.Add(FilterType.Wind);
-                        break;
-                    }
-                case "åı":
-                    {
-                        _currentFilters.Add(FilterType.Light);
-                        break;
-                    }
-                case "à≈":
-                    {
-                        _currentFilters.Add(FilterType.Dark);
-                        break;
-                    }
-                case "îÕàÕ":
-                    {
-                        foreach (var node in TreeNodes[2].Children)
-                        {
-                            node.IsChecked = true;
-                        }
-                        foreach (var filter in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsRangeFilter))
-                        {
-                            _currentFilters.Add(filter);
-                        }
-                        break;
-                    }
-                case "A":
-                    {
-                        _currentFilters.Add(FilterType.A);
-                        break;
-                    }
-                case "B":
-                    {
-                        _currentFilters.Add(FilterType.B);
-                        break;
-                    }
-                case "C":
-                    {
-                        _currentFilters.Add(FilterType.C);
-                        break;
-                    }
-                case "D":
-                    {
-                        _currentFilters.Add(FilterType.D);
-                        break;
-                    }
-                case "E":
-                    {
-                        _currentFilters.Add(FilterType.E);
-                        break;
-                    }
-                case "å¯â ó ":
-                    {
-                        foreach (var node in TreeNodes[3].Children)
-                        {
-                            node.IsChecked = true;
-                        }
-                        foreach (var filter in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsLevelFilter))
-                        {
-                            _currentFilters.Add(filter);
-                        }
-                        break;
-                    }
-                case "áT":
-                    {
-                        _currentFilters.Add(FilterType.One);
-                        break;
-                    }
-                case "áU":
-                    {
-                        _currentFilters.Add(FilterType.Two);
-                        break;
-                    }
-                case "áV":
-                    {
-                        _currentFilters.Add(FilterType.Three);
-                        break;
-                    }
-                case "áV+":
-                    {
-                        _currentFilters.Add(FilterType.ThreePlus);
-                        break;
-                    }
-                case "áW":
-                    {
-                        _currentFilters.Add(FilterType.Four);
-                        break;
-                    }
-                case "áW+":
-                    {
-                        _currentFilters.Add(FilterType.FourPlus);
-                        break;
-                    }
-                case "áX":
-                    {
-                        _currentFilters.Add(FilterType.Five);
-                        break;
-                    }
-                case "áX+":
-                    {
-                        _currentFilters.Add(FilterType.FivePlus);
-                        break;
-                    }
-                case "LG":
-                    {
-                        _currentFilters.Add(FilterType.Lg);
-                        break;
-                    }
-                case "LG+":
-                    {
-                        _currentFilters.Add(FilterType.LgPlus);
-                        break;
-                    }
-                default:
-                    {
-                        throw new UnreachableException("Unreachable");
-                    }
+                default: break;
             }
-            if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in OriginalPool
-                .Where(m => !Pool.Contains(m))
-                .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
-                .Where(ApplyFilter))
+            if ((bool)e.Node.IsChecked)
             {
-                Pool.Add(memoria);
-            }
-            if (SortOption == null)
-            {
-                Sort(0);
+                foreach (var memoria in OriginalPool
+                        .Where(memoria => !Pool.Contains(memoria))
+                        .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
+                        .Where(ApplyFilter))
+                {
+                    Pool.Add(memoria);
+                }
             }
             else
             {
-                Sort(SortOption.SelectedIndex);
-            }
-        }
-
-        private void FilterOption_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (sender is not CheckBox box) return;
-            var prevCount = _currentFilters.Count;
-
-            switch (box.Content)
-            {
-                case "éÌóﬁ":
-                    {
-                        _currentFilters.RemoveWhere(IsKindFilter);
-                        break;
-                    }
-                case "í èÌíPëÃ":
-                    {
-                        _currentFilters.Remove(FilterType.NormalSingle);
-                        break;
-                    }
-                case "í èÌîÕàÕ":
-                    {
-                        _currentFilters.Remove(FilterType.NormalRange);
-                        break;
-                    }
-                case "ì¡éÍíPëÃ":
-                    {
-                        _currentFilters.Remove(FilterType.SpecialSingle);
-                        break;
-                    }
-                case "ì¡éÍîÕàÕ":
-                    {
-                        _currentFilters.Remove(FilterType.SpecialRange);
-                        break;
-                    }
-                case "éxâá":
-                    {
-                        _currentFilters.Remove(FilterType.Support);
-                        break;
-                    }
-                case "ñWäQ":
-                    {
-                        _currentFilters.Remove(FilterType.Interference);
-                        break;
-                    }
-                case "âÒïú":
-                    {
-                        _currentFilters.Remove(FilterType.Recovery);
-                        break;
-                    }
-                case "ëÆê´":
-                    {
-                        foreach (var node in TreeNodes[1].Children)
-                        {
-                            if (!node.IsChecked) return;
-                            node.IsChecked = false;
-                        }
-                        _currentFilters.RemoveWhere(IsElementFilter);
-                        Pool.Clear();
-                        break;
-                    }
-                case "âŒ":
-                    {
-                        _currentFilters.Remove(FilterType.Fire);
-                        break;
-                    }
-                case "êÖ":
-                    {
-                        _currentFilters.Remove(FilterType.Water);
-                        break;
-                    }
-                case "ïó":
-                    {
-                        _currentFilters.Remove(FilterType.Wind);
-                        break;
-                    }
-                case "åı":
-                    {
-                        _currentFilters.Remove(FilterType.Light);
-                        break;
-                    }
-                case "à≈":
-                    {
-                        _currentFilters.Remove(FilterType.Dark);
-                        break;
-                    }
-                case "îÕàÕ":
-                    {
-                        foreach (var node in TreeNodes[2].Children)
-                        {
-                            if (!node.IsChecked) return;
-                            node.IsChecked = false;
-                        }
-                        _currentFilters.RemoveWhere(IsRangeFilter);
-                        Pool.Clear();
-                        break;
-                    }
-                case "A":
-                    {
-                        _currentFilters.Remove(FilterType.A);
-                        break;
-                    }
-                case "B":
-                    {
-                        _currentFilters.Remove(FilterType.B);
-                        break;
-                    }
-                case "C":
-                    {
-                        _currentFilters.Remove(FilterType.C);
-                        break;
-                    }
-                case "D":
-                    {
-                        _currentFilters.Remove(FilterType.D);
-                        break;
-                    }
-                case "E":
-                    {
-                        _currentFilters.Remove(FilterType.E);
-                        break;
-                    }
-                case "å¯â ó ":
-                    {
-                        foreach (var node in TreeNodes[3].Children)
-                        {
-                            if (!node.IsChecked) return;
-                            node.IsChecked = false;
-                        }
-                        _currentFilters.RemoveWhere(IsLevelFilter);
-                        Pool.Clear();
-                        break;
-                    }
-                case "áT":
-                    {
-                        _currentFilters.Remove(FilterType.One);
-                        break;
-                    }
-                case "áU":
-                    {
-                        _currentFilters.Remove(FilterType.Two);
-                        break;
-                    }
-                case "áV":
-                    {
-                        _currentFilters.Remove(FilterType.Three);
-                        break;
-                    }
-                case "áV+":
-                    {
-                        _currentFilters.Remove(FilterType.ThreePlus);
-                        break;
-                    }
-                case "áW":
-                    {
-                        _currentFilters.Remove(FilterType.Four);
-                        break;
-                    }
-                case "áW+":
-                    {
-                        _currentFilters.Remove(FilterType.FourPlus);
-                        break;
-                    }
-                case "áX":
-                    {
-                        _currentFilters.Remove(FilterType.Five);
-                        break;
-                    }
-                case "áX+":
-                    {
-                        _currentFilters.Remove(FilterType.FivePlus);
-                        break;
-                    }
-                case "LG":
-                    {
-                        _currentFilters.Remove(FilterType.Lg);
-                        break;
-                    }
-                case "LG+":
-                    {
-                        _currentFilters.Remove(FilterType.LgPlus);
-                        break;
-                    }
-                default:
-                    {
-                        throw new UnreachableException("Unreachable");
-                    }
-            }
-            if (prevCount == _currentFilters.Count) return;
-            foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
-            {
-                Pool.Remove(memoria);
+                foreach (var memoria in Pool.ToList().Where(m => !ApplyFilter(m)))
+                {
+                    Pool.Remove(memoria);
+                }
             }
             Sort(SortOption.SelectedIndex);
         }
 
         private void InitFilterOptions()
         {
-            TreeNodes =
-            [
-                new()
-                {
-                    Text = "éÌóﬁ",
-                    Children =
-                    [
-                        new() { Text = "éxâá" },
-                        new() { Text = "ñWäQ" },
-                        new() { Text = "âÒïú" },
-                    ]
-                },
-                new()
-                {
-                    Text = "ëÆê´",
-                    Children =
-                    [
-                        new() { Text = "âŒ" },
-                        new() { Text = "êÖ" },
-                        new() { Text = "ïó" },
-                        new() { Text = "åı" },
-                        new() { Text = "à≈" }
-                    ]
-                },
-                new()
-                {
-                    Text = "îÕàÕ",
-                    Children =
-                    [
-                        new() { Text = "A" },
-                        new() { Text = "B" },
-                        new() { Text = "C" },
-                        new() { Text = "D" },
-                        new() { Text = "E" }
-                    ]
-                },
-                new()
-                {
-                    Text = "å¯â ó ",
-                    Children =
-                    [
-                        new() { Text = "áT" },
-                        new() { Text = "áU" },
-                        new() { Text = "áV" },
-                        new() { Text = "áV+" },
-                        new() { Text = "áW" },
-                        new() { Text = "áW+" },
-                        new() { Text = "áX" },
-                        new() { Text = "áX+" },
-                        new() { Text = "LG" },
-                        new() { Text = "LG+" }
-                    ]
-                },
-            ];
-
-            FilterOptions.ItemsSource = TreeNodes;
+            FilterOptionView = new(new()
+            {
+                ["éÌóﬁ"] = ["éxâá", "ñWäQ", "âÒïú"],
+                ["ëÆê´"] = ["âŒ", "êÖ", "ïó", "åı", "à≈"],
+                ["îÕàÕ"] = ["A", "B", "C", "D", "E"],
+                ["å¯â ó "] = ["áT", "áU", "áV", "áV+", "áW", "áW+", "áX", "áX+", "LG", "LG+"],
+            });
             _currentFilters = [
                 FilterType.Support,
                 FilterType.Interference,
                 FilterType.Recovery
             ];
-            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSkillOption(f) && !IsSupportOption(f)))
+            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(f => !IsKindFilter(f) && !IsSkillOption(f) && !IsSupportOption(f) && !IsOtherOption(f)))
             {
                 _currentFilters.Add(type);
             }

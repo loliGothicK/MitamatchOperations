@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:domain="using:mitama.Domain"
+    xmlns:treeView="using:Syncfusion.UI.Xaml.TreeView"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -350,21 +351,29 @@
                         <AppBarButton Icon="Filter" Label="Filter">
                             <AppBarButton.Flyout>
                                 <Flyout>
-                                    <TreeView Name="FilterOptions">
-                                        <TreeView.ItemTemplate>
-                                            <DataTemplate x:DataType="local:MyTreeNode">
-                                                <TreeViewItem ItemsSource="{x:Bind Children}">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <!-- Checkbox -->
-                                                        <CheckBox Content="{x:Bind Text}"
-                                                                  IsChecked="{x:Bind IsChecked, Mode=TwoWay}"
-                                                                  Checked="FilterOption_Checked"
-                                                                  Unchecked="FilterOption_Unchecked"/>
-                                                    </StackPanel>
-                                                </TreeViewItem>
+                                    <treeView:SfTreeView x:Name="FilterView"
+                                                         CheckBoxMode="Recursive"
+                                                         CheckedItems="{x:Bind FilterOptionView.CheckedItems}"
+                                                         ChildPropertyName="Models"
+                                                         ItemsSource="{x:Bind FilterOptionView.Items}"
+                                                         ExpandActionTrigger="Node"
+                                                         AutoExpandMode="AllNodes"
+                                                         BorderBrush="LightGray"  
+                                                         BorderThickness="1" 
+                                                         IsAnimationEnabled="True"
+                                                         ItemTemplateDataContextType="Node"
+                                                         NodePopulationMode="Instant"
+                                                         NodeChecked="FilterView_NodeChecked">
+                                    <treeView:SfTreeView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <CheckBox Content="{Binding Content.State}"
+                                                              local:NullableTreeCheckbox.IsEnabled="true"
+                                                              local:NullableTreeCheckbox.IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                                </Grid>
                                             </DataTemplate>
-                                        </TreeView.ItemTemplate>
-                                    </TreeView>
+                                        </treeView:SfTreeView.ItemTemplate>
+                                    </treeView:SfTreeView>
                                 </Flyout>
                             </AppBarButton.Flyout>
                         </AppBarButton>
