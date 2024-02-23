@@ -617,7 +617,7 @@ public sealed partial class DeckEditorPage
         var deck = DeckLoadBox.SelectedItem.As<DeckJson>();
         _deck.Clear();
         Sources.Clear();
-        Sources = [.. Order.List.Where(o => !o.Payed)];
+        Sources = [.. ((bool)NotPayedCheckBox.IsChecked ? Order.List : Order.List.Where(o => o.Payed))];
         foreach (var item in deck.Items.Select(item => (TimeTableItem)item))
         {
             _deck.Add(item);
@@ -892,12 +892,20 @@ internal record struct DeckJson(string Name, DateTime DateTime, DeckJsonProxy[] 
         @$"{Name} ({DateTime.Year}-{DateTime.Month}-{DateTime.Day}-{DateTime.Hour}:{DateTime.Minute})";
 };
 
-internal record struct DeckJsonProxy(int Index, int Delay, int Start, int End, string Pic, bool Conditional)
+internal record struct DeckJsonProxy(int Index, int Delay, int Start, int End, string Pic, bool Conditional, int? Version = 2)
 {
+    private readonly static Dictionary<int, int> LegacyToV2 = Order
+        .List
+        .Where(o => o.Payed)
+        .Reverse()
+        .Select((order, index) => (order, index))
+        .ToDictionary(pair => pair.index, pair => pair.order.Index);
     public static implicit operator DeckJsonProxy(TimeTableItem item)
         => new(item.Order.Index, item.Delay, item.Start, item.End, item.Pic, item.Conditional);
     public static implicit operator TimeTableItem(DeckJsonProxy item)
-        => new(Order.Of(item.Index), item.Delay, item.Start, item.End, item.Pic, item.Conditional);
+        => item.Version == 2
+        ? new(Order.Of(item.Index), item.Delay, item.Start, item.End, item.Pic, item.Conditional)
+        : new(Order.Of(LegacyToV2[item.Index]), item.Delay, item.Start, item.End, item.Pic, item.Conditional);
 }
 
 public record TimeTableItem(Order Order, int Delay, int Start, int End, string Pic = "", bool Conditional = false)

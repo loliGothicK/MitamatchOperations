@@ -76,7 +76,7 @@ namespace mitama.Domain
     public record struct OrderIndexAndTime(int Index, TimeOnly Time);
 
     public readonly record struct Order(
-        ushort Index,
+        int Index,
         string Name,
         BasicStatus Status,
         string Effect,
