@@ -111,6 +111,8 @@ public record struct Costume(
     public string DisplayName = $"{Lily}/{Name}";
     public string DisplayExSkill = ExSkill.HasValue ? $"{ExSkill.Value.Description}" : @"なし";
 
+    public static Costume Of(int id) => List[^(id + 1)];
+
     public readonly LilyStatus Status => LilySkills.Aggregate(new LilyStatus(), (stat, skill) => {
         return skill switch
         {

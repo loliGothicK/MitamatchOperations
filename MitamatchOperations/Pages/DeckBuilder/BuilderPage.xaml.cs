@@ -2323,7 +2323,7 @@ namespace mitama.Pages.DeckBuilder
                     .SelectMany(m => Memoria
                         .List
                         .Where(s => s.Name == idToMemoria[m.Id].Name)
-                        .Select(s => new MemoriaWithConcentration(s, m.Concenration)))
+                        .Select(s => new MemoriaWithConcentration(s, m.Concentration)))
                     .Where(m => (info.Position is Front ? Costume.DummyVanguard : Costume.DummyRearguard).CanBeEquipped(m.Memoria)))
                 {
                     OriginalPool.Add(memoria);

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text.Json;
-using DynamicData.Kernel;
 
 namespace mitama.Domain;
 
@@ -81,7 +80,8 @@ public record MemberInfo(
     Position Position,
     int[] OrderIndices,
     MemoriaIdAndConcentration[] Memorias,
-    CostumeIndexAndEx[] Costumes
+    CostumeIndexAndEx[] Costumes,
+    int? Version = 2
 ) {
     internal string PositionInfo => Position switch {
         Front(var category) => category switch {
@@ -121,7 +121,8 @@ public record MemberInfo(
         int Position,
         int[] OrderIndices,
         MemoriaIdAndConcentration[] Memorias,
-        CostumeIndexAndEx[] Costumes
+        CostumeIndexAndEx[] Costumes,
+        int? Version
     )
     {
         public static implicit operator MemberInfo(MemberDto dto) => new(
@@ -139,7 +140,8 @@ public record MemberInfo(
             },
             dto.OrderIndices,
             dto.Memorias,
-            dto.Costumes
+            dto.Costumes,
+            dto.Version
         );
     }
 }
