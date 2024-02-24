@@ -264,7 +264,7 @@ public partial record BattleLog(List<BattleLogItem> Data)
         var (allies, opponents) = ExtractPlayers();
         foreach (var player in allies)
         {
-            res.Add(player.Name, data.Where(datum => datum.Player== player.Name || datum.Player == "スタンバイフェーズ").Select(datum => (datum.Time, datum.Item3)).ToArray());
+            res.Add(player.Name, data.Where(datum => datum.Player == player.Name || datum.Player == "スタンバイフェーズ").Select(datum => (datum.Time, datum.Item3)).ToArray());
         }
         foreach (var player in opponents)
         {

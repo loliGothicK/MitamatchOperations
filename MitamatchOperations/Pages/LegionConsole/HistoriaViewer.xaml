@@ -133,10 +133,21 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <StackPanel Orientation="Horizontal">
+                            <ComboBox x:Name="AllyOrOpponent"
+                                      SelectionChanged="AllyOrOpponent_SelectionChanged"
+                                      SelectedIndex="0"
+                                      Margin="5">
+                                <ComboBoxItem Content="Ally" />
+                                <ComboBoxItem Content="Opponent" />
+                            </ComboBox>
                             <ComboBox x:Name="PlayerSelect"
                                       SelectionChanged="PlayerSelect_SelectionChanged"
-                                      ItemTemplate="{StaticResource PlayerNameTemplate}" />
-                            <ComboBox x:Name="StautsSelect" SelectionChanged="StautsSelect_SelectionChanged">
+                                      ItemTemplate="{StaticResource PlayerNameTemplate}" 
+                                      Margin="5"/>
+                            <ComboBox x:Name="StautsSelect"
+                                      SelectionChanged="StautsSelect_SelectionChanged"
+                                      SelectedIndex="0"
+                                      Margin="5">
                                 <ComboBoxItem Content="ATK" />
                                 <ComboBoxItem Content="DEF" />
                                 <ComboBoxItem Content="Sp.ATK" />

@@ -11,6 +11,7 @@ using mitama.Pages.Common;
 using MitamatchOperations.Lib;
 using mitama.Models;
 using WinRT;
+using System.Text.RegularExpressions;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -84,10 +85,12 @@ public sealed partial class HistoriaViewer : Page
                 unitChanges.Add(new(name, time));
             }
         }
+        PlayerSelect.Items.Clear();
         foreach (var player in summary.Allies)
         {
             PlayerSelect.Items.Add(player);
         }
+        PlayerSelect.SelectedIndex = 0;
 
         var statusPath = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\Ally\[{summary.Allies[0].Name}]\status.json";
         var history = JsonSerializer.Deserialize<SortedDictionary<TimeOnly, AllStatus>>(File.ReadAllText(statusPath));
@@ -129,8 +132,11 @@ public sealed partial class HistoriaViewer : Page
     private void PlayerSelect_SelectionChanged(object sender, SelectionChangedEventArgs _)
     {
         if (sender is not ComboBox comboBox) return;
+        if (comboBox.SelectedValue is null) return;
         var selected = comboBox.SelectedValue.As<Player>().Name;
-        var logDir = @$"{Director.ProjectDir()}\{Director.ReadCache().Legion}\BattleLog";
+        var legion = AllyOrOpponent.SelectedIndex == 0 ? Director.ReadCache().Legion : Summary.Opponents[0].Legion;
+        legion = ToRemoveRegex().Replace(legion, string.Empty);
+        var logDir = @$"{Director.ProjectDir()}\{legion}\BattleLog";
         var statusPath = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\Ally\[{selected}]\status.json";
         var history = JsonSerializer.Deserialize<SortedDictionary<TimeOnly, AllStatus>>(File.ReadAllText(statusPath));
         chartView = new ChartViewModel(history);
@@ -139,9 +145,28 @@ public sealed partial class HistoriaViewer : Page
 
     private void StautsSelect_SelectionChanged(object sender, SelectionChangedEventArgs _)
     {
+        if (chartView is null) return;
         chartView.SwithcTo(Line.Label = sender.As<ComboBox>().SelectedValue.As<ComboBoxItem>().Content.As<string>());
         Line.ItemsSource = chartView.Data;
     }
+
+    private void AllyOrOpponent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (sender is not ComboBox) return;
+        if (Summary is null || PlayerSelect is null) return;
+        if (sender.As<ComboBox>().SelectedIndex == 0)
+        {
+            PlayerSelect.ItemsSource = Summary.Allies;
+        }
+        else
+        {
+            PlayerSelect.ItemsSource = Summary.Opponents;
+        }
+    }
+
+    [GeneratedRegex(@"\.|!|ÅI|\?|ÅH|\s+|")]
+    private static partial Regex ToRemoveRegex();
+
 }
 
 internal record struct OrderLog(Order Order, string Time);
@@ -163,3 +188,4 @@ internal record Summary(
     OrderIndexAndTime[] AllyOrders,
     OrderIndexAndTime[] OpponentOrders
 );
+
