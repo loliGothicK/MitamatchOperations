@@ -1,37 +1,39 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
-using System.Text.Json;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.UI.Xaml.Input;
+using SimdLinq;
+using OpenCvSharp.Extensions;
+using OpenCvSharp;
+using Windows.ApplicationModel;
+using Windows.Storage;
+using Windows.System;
+using WinRT;
+
 using mitama.Algorithm;
 using mitama.Domain;
 using mitama.Pages.Capture;
 using mitama.Pages.Common;
 using mitama.Pages.OrderConsole;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using WinRT;
-using Microsoft.UI.Xaml.Input;
-using Windows.System;
 using mitama.Domain.OrderKinds;
 using mitama.Pages.ControlDashboard;
-using SimdLinq;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MitamatchOperations.Lib;
-using OpenCvSharp.Extensions;
-using OpenCvSharp;
-using System.Drawing;
-using Windows.Storage;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel;
 
 namespace mitama.Pages;
 
