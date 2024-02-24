@@ -97,7 +97,7 @@ public sealed partial class HistoriaViewer : Page
     private void MenuFlyout_Opening(object sender, object e)
     {
         var menu = sender as MenuFlyout;
-        if (menu.Items.Any(item => item.Name == "Unit")) return;
+        if (menu.Items.Count > 0) return;
 
         var playerName = menu.Target.AccessKey;
         var allyLegion = Director.ReadCache().Legion;
