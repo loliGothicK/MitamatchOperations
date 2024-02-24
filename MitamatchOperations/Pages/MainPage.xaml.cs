@@ -39,7 +39,7 @@ public sealed partial class MainPage
         if (exists)
         {
             Project = Director.ReadCache().Legion;
-            LogInUser.Label = User = Director.ReadCache().User ?? "不明なユーザー";
+            LogInUser.Label = Avatar.AvatarName = User = Director.ReadCache().User ?? "不明なユーザー";
         }
         else
         {
@@ -51,7 +51,7 @@ public sealed partial class MainPage
     }
 
     public void Navigate(
-        System.Type pageType,
+        Type pageType,
         object targetPageArguments = null,
         Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo navigationTransitionInfo = null)
     {
@@ -96,6 +96,7 @@ public sealed partial class MainPage
         {
             {"home", typeof(HomePage)},
             {"Legion console",typeof(LegionConsolePage)},
+            {"Legion Sheet",typeof(LegionSheetPage)},
             {"order console", typeof(OrderConsolePage)},
             {"control dashboard", typeof(ControlDashboardPage)},
             {"deck builder", typeof(DeckBuilderPage)},

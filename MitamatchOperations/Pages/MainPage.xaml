@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Core"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -58,7 +59,7 @@
                             </AppBarButton>
                         </StackPanel>
                         <AppBarButton x:Name="LogInUser" Grid.Column="1" Label="Anonymous" HorizontalAlignment="Right" Click="LogInUser_OnClick">
-                            <PersonPicture/>
+                            <syncfusion:SfAvatarView x:Name="Avatar" />
                         </AppBarButton>
                     </Grid>
                 </PivotItem>
@@ -68,6 +69,7 @@
                     <NavigationView.MenuItems>
                         <NavigationViewItem Icon="Home" Content ="ホーム" Tag="home"/>
                         <NavigationViewItem x:Name="LegionView" Icon="People" Content ="レギオン コンソール" Tag="Legion console"/>
+                        <NavigationViewItem Icon="TwoPage" Content ="レギオン シート" Tag="Legion Sheet"/>
                         <NavigationViewItem Icon="XboxOneConsole" Content ="オーダー コンソール" Tag="order console"/>
                         <NavigationViewItem Icon="Bookmarks" Content ="デッキ ビルダー" Tag="deck builder"/>
                         <NavigationViewItem Icon="PhoneBook" Content ="ライブラリ" Tag="library"/>

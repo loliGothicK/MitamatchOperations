@@ -33,17 +33,12 @@
     <None Remove="Assets\BadgeLogo.scale-200.png" />
     <None Remove="Assets\BadgeLogo.scale-400.png" />
     <None Remove="Pages\DeckBuilder\MemoriaManagePage.xaml" />
+    <None Remove="Pages\LegionSheetPage.xaml" />
     <None Remove="Pages\LibraryPage.xaml" />
     <None Remove="Pages\Library\CharmLibraryPage.xaml" />
     <None Remove="Pages\Library\CostumeLibraryPage.xaml" />
     <None Remove="Pages\Library\CostumeManagePage.xaml" />
     <None Remove="Pages\OrderConsole\AutoAssignmentDialogContent.xaml" />
-    <None Remove="Pages\LegionConsole\BasicStatusGraphDialog.xaml" />
-    <None Remove="Pages\LegionConsole\DataGrid.xaml" />
-    <None Remove="Pages\LegionConsole\ElementalGraphDialog.xaml" />
-    <None Remove="Pages\LegionConsole\HistoriaViewer.xaml" />
-    <None Remove="Pages\LegionConsole\ResultInput.xaml" />
-    <None Remove="Pages\LegionConsole\UnitViewDialog.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -95,6 +90,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\LegionSheetPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\LegionConsole\DataGrid.xaml">
