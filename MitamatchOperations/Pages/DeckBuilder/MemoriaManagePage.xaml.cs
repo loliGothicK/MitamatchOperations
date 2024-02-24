@@ -156,7 +156,7 @@ public sealed partial class MemoriaManagePage : Page
     private async void SaveButton_Click(object sender, RoutedEventArgs e)
     {
         var comboBox = new ComboBox();
-        foreach (var member in Util.LoadMemberNames(Director.ReadCache().Region))
+        foreach (var member in Util.LoadMemberNames(Director.ReadCache().Legion))
         {
             comboBox.Items.Add(member);
         }
@@ -171,7 +171,7 @@ public sealed partial class MemoriaManagePage : Page
             .WithBody(comboBox)
             .WithPrimary("’Ç‰Á", new Defer(delegate
             {
-                var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Region}\Members\{selected}\info.json";
+                var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Legion}\Members\{selected}\info.json";
                 if (selected == string.Empty) return Task.CompletedTask;
                 using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                 var readJson = sr.ReadToEnd();

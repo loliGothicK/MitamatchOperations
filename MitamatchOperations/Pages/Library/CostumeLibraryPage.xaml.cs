@@ -18,7 +18,7 @@ namespace mitama.Pages.Library
     public sealed partial class CostumeLibraryPage : Page
     {
         private readonly ObservableCollection<Costume> _costumes = new(Costume.List);
-        private readonly MemberInfo[] Info = Util.LoadMembersInfo(Director.ReadCache().Region);
+        private readonly MemberInfo[] Info = Util.LoadMembersInfo(Director.ReadCache().Legion);
 
         public CostumeLibraryPage()
         {

@@ -35,7 +35,7 @@ public sealed partial class DeckEditorPage
     private new int Margin { get; set; } = 5;
     private MemberInfo[] _members = [];
     private readonly List<HoldOn> _holdOns = [];
-    private readonly string _project = Director.ReadCache().Region;
+    private readonly string _project = Director.ReadCache().Legion;
     private Order[] _selectedOrder = [];
 
 

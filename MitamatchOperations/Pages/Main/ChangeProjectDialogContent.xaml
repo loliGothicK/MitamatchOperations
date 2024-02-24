@@ -13,9 +13,9 @@
     <StackPanel VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Orientation="Horizontal">
-        <ComboBox x:Name="RegionComboBox"
+        <ComboBox x:Name="LegionComboBox"
                   IsEditable="True"
-                  SelectionChanged="RegionComboBox_OnSelectionChanged"
-                  PlaceholderText="Select Region"/>
+                  SelectionChanged="LegionComboBox_OnSelectionChanged"
+                  PlaceholderText="Select Legion"/>
     </StackPanel>
 </Page>

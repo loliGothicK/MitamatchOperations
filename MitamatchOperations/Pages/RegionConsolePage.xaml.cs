@@ -1,15 +1,15 @@
 using Microsoft.UI.Xaml.Navigation;
-using mitama.Pages.RegionConsole;
+using mitama.Pages.LegionConsole;
 
 namespace mitama.Pages;
 
 /// <summary>
-/// Region Console Page navigated to within a Main Page.
+/// Legion Console Page navigated to within a Main Page.
 /// </summary>
-public sealed partial class RegionConsolePage
+public sealed partial class LegionConsolePage
 {
 
-    public RegionConsolePage()
+    public LegionConsolePage()
     {
         InitializeComponent();
         NavigationCacheMode = NavigationCacheMode.Enabled;

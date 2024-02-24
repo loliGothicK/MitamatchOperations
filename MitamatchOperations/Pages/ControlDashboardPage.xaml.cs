@@ -79,7 +79,7 @@ public sealed partial class ControlDashboardPage
     private DateTime? _firstTimePoint;
     private DateTime? _preparePoint = null;
     private readonly string _user = Director.ReadCache().User;
-    private readonly string _project = Director.ReadCache().Region;
+    private readonly string _project = Director.ReadCache().Legion;
     private bool _picFlag = true;
     private OpOrderStatus _orderStat = new None();
     private Order? _ocrResult;

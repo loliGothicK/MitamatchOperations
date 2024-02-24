@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using mitama.Domain;
 
-namespace mitama.Pages.RegionConsole;
+namespace mitama.Pages.LegionConsole;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.

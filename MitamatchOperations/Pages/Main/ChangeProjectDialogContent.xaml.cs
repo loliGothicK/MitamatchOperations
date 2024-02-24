@@ -15,13 +15,13 @@ public sealed partial class ChangeProjectDialogContent
     {
         _onSelectionChanged = onSelectionChanged;
         InitializeComponent();
-        foreach (var region in Util.LoadRegionNames())
+        foreach (var Legion in Util.LoadLegionNames())
         {
-            RegionComboBox.Items.Add(region);
+            LegionComboBox.Items.Add(Legion);
         }
     }
 
-    private void RegionComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void LegionComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         _onSelectionChanged(e.AddedItems[0].ToString()!);
     }

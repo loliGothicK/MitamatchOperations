@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using mitama.Pages.RegionConsole;
+using mitama.Pages.LegionConsole;
 
 namespace mitama.Domain;
 
-public record struct Player(string Region, string Name);
+public record struct Player(string Legion, string Name);
 public record struct UnitChangePoint(string Name, TimeOnly Time);
 
 public enum SourceKind

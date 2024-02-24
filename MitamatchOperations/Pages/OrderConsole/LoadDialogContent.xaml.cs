@@ -11,7 +11,7 @@ public sealed partial class LoadDialogContent
 {
     public delegate void OnChanged(string member);
 
-    private readonly Dictionary<string, List<string>> _regionToMembersMap = new();
+    private readonly Dictionary<string, List<string>> _LegionToMembersMap = new();
     private readonly OnChanged _onChangedAction;
 
     public LoadDialogContent(OnChanged onChanged)
@@ -25,7 +25,7 @@ public sealed partial class LoadDialogContent
 
     private void InitComboBox()
     {
-        foreach (var name in Util.LoadMemberNames(Director.ReadCache().Region))
+        foreach (var name in Util.LoadMemberNames(Director.ReadCache().Legion))
         {
             MemberComboBox.Items.Add(name);
         }

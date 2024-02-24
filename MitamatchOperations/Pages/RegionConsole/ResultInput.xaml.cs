@@ -14,13 +14,13 @@ using mitama.Domain;
 using mitama.Pages.Common;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using static mitama.Pages.RegionConsole.BattleLogParser;
+using static mitama.Pages.LegionConsole.BattleLogParser;
 using MitamatchOperations.Lib;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace mitama.Pages.RegionConsole
+namespace mitama.Pages.LegionConsole
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -39,9 +39,9 @@ namespace mitama.Pages.RegionConsole
 
         private void Init()
         {
-            var region = Director.ReadCache().Region;
-            AllyRegionName.Text = region;
-            var players = Util.LoadMemberNames(region);
+            var Legion = Director.ReadCache().Legion;
+            AllyLegionName.Text = Legion;
+            var players = Util.LoadMemberNames(Legion);
             List<TextBox> list =
             [
                 AllyPlayer1,
@@ -98,7 +98,7 @@ namespace mitama.Pages.RegionConsole
                 GeneralInfoBar.IsOpen = false;
                 return;
             }
-            else if (AllyRegionName.Text == string.Empty || OpponentRegionName.Text == string.Empty)
+            else if (AllyLegionName.Text == string.Empty || OpponentLegionName.Text == string.Empty)
             {
                 GeneralInfoBar.Title = "ÉåÉMÉIÉìñºÇì¸óÕÇµÇƒÇ≠ÇæÇ≥Ç¢";
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
@@ -144,7 +144,7 @@ namespace mitama.Pages.RegionConsole
             GeneralInfoBar.IsOpen = true;
 
             var hints = new Hints(
-                new RegionHint(AllyRegionName.Text, [
+                new LegionHint(AllyLegionName.Text, [
                     AllyPlayer1.Text,
                     AllyPlayer2.Text,
                     AllyPlayer3.Text,
@@ -155,7 +155,7 @@ namespace mitama.Pages.RegionConsole
                     AllyPlayer8.Text,
                     AllyPlayer9.Text,
                 ]),
-                new RegionHint(OpponentRegionName.Text, [
+                new LegionHint(OpponentLegionName.Text, [
                     OpponentPlayer1.Text,
                     OpponentPlayer2.Text,
                     OpponentPlayer3.Text,
@@ -194,7 +194,7 @@ namespace mitama.Pages.RegionConsole
                     }
                 }
             }
-            var logDir = @$"{Director.ProjectDir()}\{Director.ReadCache().Region}\BattleLog";
+            var logDir = @$"{Director.ProjectDir()}\{Director.ReadCache().Legion}\BattleLog";
             if (!Directory.Exists(logDir))
             {
                 Director.CreateDirectory(logDir);
@@ -237,8 +237,8 @@ namespace mitama.Pages.RegionConsole
 
         private async Task SaveSummary(string logDir, BattleLog battleLog)
         {
-            var AllyPoints = AllyRegionPoints.Text == string.Empty ? 0 : int.Parse(AllyRegionPoints.Text);
-            var OpponentPoints = OpponentRegionPoints.Text == string.Empty ? 0 : int.Parse(OpponentRegionPoints.Text);
+            var AllyPoints = AllyLegionPoints.Text == string.Empty ? 0 : int.Parse(AllyLegionPoints.Text);
+            var OpponentPoints = OpponentLegionPoints.Text == string.Empty ? 0 : int.Parse(OpponentLegionPoints.Text);
             var NeunWelt = NeunWeltResult.SelectedIndex == 0 ? "èüÇø" : "ïâÇØ";
             var (AllyOrders, OpponentOrders) = await battleLog.ExtractOrders();
             var (Allies, Opponents) = battleLog.ExtractPlayers();
@@ -248,7 +248,7 @@ namespace mitama.Pages.RegionConsole
             using var unitFile = File.Create(path);
             await unitFile.WriteAsync(new UTF8Encoding(true).GetBytes(JsonSerializer.Serialize(new
             {
-                Opponent = OpponentRegionName.Text,
+                Opponent = OpponentLegionName.Text,
                 Comment = comment,
                 AllyPoints,
                 OpponentPoints,

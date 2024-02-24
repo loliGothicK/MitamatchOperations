@@ -16,14 +16,14 @@ using System;
 using mitama.Pages.Main;
 using MitamatchOperations.Lib;
 
-namespace mitama.Pages.RegionConsole;
+namespace mitama.Pages.LegionConsole;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
 public sealed partial class MemberManageConsole
 {
-    private string _regionName = Director.ReadCache().Region;
+    private string _LegionName = Director.ReadCache().Legion;
     private string opponent;
     private string chara1;
     private string chara2;
@@ -45,9 +45,9 @@ public sealed partial class MemberManageConsole
 
     private void Update()
     {
-        _regionName = Director.ReadCache().Region;
+        _LegionName = Director.ReadCache().Legion;
         _members.Clear();
-        foreach (var item in from item in Util.LoadMembersInfo(_regionName)
+        foreach (var item in from item in Util.LoadMembersInfo(_LegionName)
                              orderby item.Position
                              select item)
         {
@@ -57,8 +57,8 @@ public sealed partial class MemberManageConsole
 
     private void Init()
     {
-        _regionName = Director.ReadCache().Region;
-        foreach (var item in from item in Util.LoadMembersInfo(_regionName)
+        _LegionName = Director.ReadCache().Legion;
+        foreach (var item in from item in Util.LoadMembersInfo(_LegionName)
                              orderby item.Position
                              select item)
         {
@@ -126,18 +126,18 @@ public sealed partial class MemberManageConsole
 
     private void Personnel_Loaded(object sender, RoutedEventArgs _)
     {
-        sender.As<ComboBox>().ItemsSource = Util.LoadMembersInfo(_regionName).Select(x => x.Name);
+        sender.As<ComboBox>().ItemsSource = Util.LoadMembersInfo(_LegionName).Select(x => x.Name);
     }
 
     private void Timeline_Loaded(object sender, RoutedEventArgs _)
     {
         if (sender is not ComboBox box) return;
 
-        if (!Directory.Exists(Director.DeckDir(_regionName)))
+        if (!Directory.Exists(Director.DeckDir(_LegionName)))
         {
-            Director.CreateDirectory(Director.DeckDir(_regionName));
+            Director.CreateDirectory(Director.DeckDir(_LegionName));
         }
-        var decks = Directory.GetFiles(Director.DeckDir(_regionName), "*.json").Select(path =>
+        var decks = Directory.GetFiles(Director.DeckDir(_LegionName), "*.json").Select(path =>
         {
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var json = sr.ReadToEnd();
@@ -257,7 +257,7 @@ public sealed partial class MemberManageConsole
 
         // ReSharper disable once AsyncVoidLambda
         dialog.PrimaryButtonCommand = new Defer(delegate {
-            new DirectoryInfo($@"{Director.ProjectDir()}\{_regionName}\Members\{toDelete}").Delete(true);
+            new DirectoryInfo($@"{Director.ProjectDir()}\{_LegionName}\Members\{toDelete}").Delete(true);
             Update();
             return System.Threading.Tasks.Task.CompletedTask;
         });
@@ -292,9 +292,9 @@ public sealed partial class MemberManageConsole
 
         dialog.Content = body;
         dialog.PrimaryButtonCommand = new Defer(delegate {
-            Director.CreateDirectory($@"{Director.ProjectDir()}\{_regionName}\Members\{name}");
-            Director.CreateDirectory($@"{Director.ProjectDir()}\{_regionName}\Members\{name}\Units");
-            var fs = File.Create($@"{Director.ProjectDir()}\{_regionName}\Members\{name}\info.json");
+            Director.CreateDirectory($@"{Director.ProjectDir()}\{_LegionName}\Members\{name}");
+            Director.CreateDirectory($@"{Director.ProjectDir()}\{_LegionName}\Members\{name}\Units");
+            var fs = File.Create($@"{Director.ProjectDir()}\{_LegionName}\Members\{name}\info.json");
             var memberJson = new MemberInfo(DateTime.Now, DateTime.Now, name!, position!, [], [], []).ToJson();
             var save = new UTF8Encoding(true).GetBytes(memberJson);
             fs.Write(save, 0, save.Length);

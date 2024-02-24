@@ -39,13 +39,13 @@ namespace mitama.Pages.DeckBuilder
         private List<MemoriaWithConcentration> OriginalPool { get; set; } = [.. Memoria.List.Select(x => new MemoriaWithConcentration(x, 4))];
         private ObservableCollection<MemoriaWithConcentration> Pool { get; set; } = [.. Memoria.List.Select(x => new MemoriaWithConcentration(x, 4))];
         private HashSet<FilterType> _currentFilters = [];
-        private string region = "";
+        private string Legion = "";
         private MemberInfo[] members = [];
         readonly Dictionary<KindType, int> kindPairs = [];
         readonly Dictionary<SkillType, int> skillPairs = [];
         readonly Dictionary<SupportType, SupportBreakdown> supportPairs = [];
         private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = [];
-        private readonly string _regionName;
+        private readonly string _LegionName;
         private readonly ObservableCollection<SupportBreakdown> SupportBreakdowns = [];
         private readonly ObservableCollection<string> TargetMembers = ["All"];
 
@@ -56,7 +56,7 @@ namespace mitama.Pages.DeckBuilder
             InitializeComponent();
             InitFilterOptions();
             InitSearchOptions();
-            _regionName = Director.ReadCache().Region;
+            _LegionName = Director.ReadCache().Legion;
         }
 
         private void InitSearchOptions()
@@ -170,8 +170,8 @@ namespace mitama.Pages.DeckBuilder
         private void InitMembers()
         {
             var cache = Director.ReadCache();
-            region = cache.Region;
-            members = Util.LoadMembersInfo(region);
+            Legion = cache.Legion;
+            members = Util.LoadMembersInfo(Legion);
         }
 
         private void Memeria_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
@@ -2086,8 +2086,8 @@ namespace mitama.Pages.DeckBuilder
             else
             {
                 var name = DeckName.Text;
-                new DirectoryInfo($@"{Director.ProjectDir()}\{region}\Members\{member.Name}\Units").Create();
-                var path = $@"{Director.ProjectDir()}\{region}\Members\{member.Name}\Units\{name}.json";
+                new DirectoryInfo($@"{Director.ProjectDir()}\{Legion}\Members\{member.Name}\Units").Create();
+                var path = $@"{Director.ProjectDir()}\{Legion}\Members\{member.Name}\Units\{name}.json";
                 using var unit = File.Create(path);
                 await unit.WriteAsync(new UTF8Encoding(true).GetBytes(
                     new Unit(name, member.Position is Front, [.. Deck, .. LegendaryDeck]).ToJson()));
@@ -2116,7 +2116,7 @@ namespace mitama.Pages.DeckBuilder
 
         private void LoadMemberSelect_SelectionChanged(object sender, SelectionChangedEventArgs _)
         {
-            var units = Util.LoadUnitNames(_regionName, sender.As<ComboBox>().SelectedItem.As<MemberInfo>().Name);
+            var units = Util.LoadUnitNames(_LegionName, sender.As<ComboBox>().SelectedItem.As<MemberInfo>().Name);
             DeckSelect.ItemsSource = units;
         }
 
@@ -2124,7 +2124,7 @@ namespace mitama.Pages.DeckBuilder
         {
             var name = LoadMemberSelect.SelectedItem.As<MemberInfo>().Name;
             var deck = DeckSelect.SelectedItem.As<string>();
-            var path = $@"{Director.ProjectDir()}\{region}\Members\{name}\Units\{deck}.json";
+            var path = $@"{Director.ProjectDir()}\{Legion}\Members\{name}\Units\{deck}.json";
             using var sr = new StreamReader(path);
             var json = sr.ReadToEnd();
             var (isLegacy, unit) = Unit.FromJson(json);
@@ -2298,7 +2298,7 @@ namespace mitama.Pages.DeckBuilder
             }
             else
             {
-                var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Region}\Members\{selected}\info.json";
+                var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Legion}\Members\{selected}\info.json";
                 using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                 var readJson = sr.ReadToEnd();
                 var info = MemberInfo.FromJson(readJson);
@@ -2337,7 +2337,7 @@ namespace mitama.Pages.DeckBuilder
         {
             var items = new List<string> { "All" };
             items.AddRange(Directory
-                .GetDirectories($@"{Director.ProjectDir()}\{Director.ReadCache().Region}\Members")
+                .GetDirectories($@"{Director.ProjectDir()}\{Director.ReadCache().Legion}\Members")
                 .Select(d => new DirectoryInfo(d).Name));
             TargetMemberSelect.ItemsSource = items;
         }

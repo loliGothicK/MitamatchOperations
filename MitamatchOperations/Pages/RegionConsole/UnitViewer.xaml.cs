@@ -11,33 +11,33 @@ using System.Linq;
 using System.Text;
 using System;
 
-namespace mitama.Pages.RegionConsole;
+namespace mitama.Pages.LegionConsole;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
 public sealed partial class UnitViewer
 {
-    private readonly string _regionName;
+    private readonly string _LegionName;
     private string _picked = null;
 
     public UnitViewer()
     {
         InitializeComponent();
         NavigationCacheMode = NavigationCacheMode.Enabled;
-        _regionName = Director.ReadCache().Region;
+        _LegionName = Director.ReadCache().Legion;
     }
 
     private void UnitTreeView_OnItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
     {
-        if (Util.LoadMemberNames(_regionName).Contains(args.InvokedItem.As<ExplorerItem>().Name!))
+        if (Util.LoadMemberNames(_LegionName).Contains(args.InvokedItem.As<ExplorerItem>().Name!))
         {
             return;
         }
         var path = _picked switch
         {
             _ when _picked is not null => $@"{_picked}\{args.InvokedItem.As<ExplorerItem>().Parent!}\{args.InvokedItem.As<ExplorerItem>().Name!}.json",
-            _ => @$"{Director.UnitDir(_regionName, args.InvokedItem.As<ExplorerItem>().Parent!)}\{args.InvokedItem.As<ExplorerItem>().Name!}.json",
+            _ => @$"{Director.UnitDir(_LegionName, args.InvokedItem.As<ExplorerItem>().Parent!)}\{args.InvokedItem.As<ExplorerItem>().Name!}.json",
         };
         using var sr = new StreamReader(path);
         var json = sr.ReadToEnd();
@@ -57,14 +57,14 @@ public sealed partial class UnitViewer
 
     private void Init(ref TreeView view)
     {
-        view.ItemsSource = new ObservableCollection<ExplorerItem>(Util.LoadMemberNames(_regionName).Select(name =>
+        view.ItemsSource = new ObservableCollection<ExplorerItem>(Util.LoadMemberNames(_LegionName).Select(name =>
         {
             return new ExplorerItem
             {
                 Name = name,
                 Type = ExplorerItem.ExplorerItemType.Folder,
                 Children = new ObservableCollection<ExplorerItem>(
-                    Directory.GetFiles($"{Director.UnitDir(_regionName, name)}").Select(path =>
+                    Directory.GetFiles($"{Director.UnitDir(_LegionName, name)}").Select(path =>
                     {
                         var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                         var json = sr.ReadToEnd();
@@ -108,7 +108,7 @@ public sealed partial class UnitViewer
     {
         var date = $"{Calendar.Date:yyyy-MM-dd}";
 
-        var OpponentDir = _picked = @$"{Director.LogDir(_regionName)}/{date}/Opponents";
+        var OpponentDir = _picked = @$"{Director.LogDir(_LegionName)}/{date}/Opponents";
         var opponentNames = Directory.GetDirectories(OpponentDir).Select(path => path.Split('\\').Last()).ToArray();
         unitTreeView.ItemsSource = new ObservableCollection<ExplorerItem>(opponentNames.Select(name =>
         {

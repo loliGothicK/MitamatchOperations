@@ -297,7 +297,7 @@ public sealed partial class OrderManagerPage
 
         dialog.PrimaryButtonCommand = new Defer(delegate
         {
-            var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Region}\Members\{selectedMember}\info.json";
+            var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Legion}\Members\{selectedMember}\info.json";
 
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var json = sr.ReadToEnd();
@@ -317,7 +317,7 @@ public sealed partial class OrderManagerPage
 
     private async void Save_OnClick(object sender, RoutedEventArgs e)
     {
-        var selectedRegion = Director.ReadCache().Region;
+        var selectedLegion = Director.ReadCache().Legion;
         string selectedMember = null;
 
         var dialog = Dialog.Builder(XamlRoot)
@@ -337,7 +337,7 @@ public sealed partial class OrderManagerPage
 
         dialog.PrimaryButtonCommand = new Defer(delegate
         {
-            var path = $@"{Director.ProjectDir()}\{selectedRegion}\Members\{selectedMember}\info.json";
+            var path = $@"{Director.ProjectDir()}\{selectedLegion}\Members\{selectedMember}\info.json";
             if (selectedMember == null) return Task.CompletedTask;
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var readJson = sr.ReadToEnd();

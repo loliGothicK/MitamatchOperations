@@ -23,7 +23,7 @@ public sealed partial class SaveDialogContent
 
     private void InitComboBox()
     {
-        foreach (var name in Util.LoadMemberNames(Director.ReadCache().Region))
+        foreach (var name in Util.LoadMemberNames(Director.ReadCache().Legion))
         {
             MemberComboBox.Items.Add(name);
         }

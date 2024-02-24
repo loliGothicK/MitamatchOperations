@@ -15,7 +15,7 @@ using WinRT;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace mitama.Pages.RegionConsole;
+namespace mitama.Pages.LegionConsole;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
@@ -37,20 +37,20 @@ public sealed partial class HistoriaViewer : Page
 
     private void Load_Click(object _, RoutedEventArgs _e)
     {
-        var allyRegion = Director.ReadCache().Region;
-        var logDir = @$"{Director.ProjectDir()}\{allyRegion}\BattleLog";
+        var allyLegion = Director.ReadCache().Legion;
+        var logDir = @$"{Director.ProjectDir()}\{allyLegion}\BattleLog";
         var path = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\summary.json";
         if (!File.Exists(path))
         {
             return;
         }
         
-        var summary = Summary = JsonSerializer.Deserialize<Summary>(File.ReadAllText(path));
+        var summary = Summary = JsonSerializer.Deserialize<Summary>(File.ReadAllText(path).Replace("\"Region\"", "\"Legion\""));
         var r1 = summary.AllyPoints > summary.OpponentPoints ? "Win" : "Lose";
         var r2 = summary.AllyPoints > summary.OpponentPoints ? "Lose" : "Win";
         
         Date.Text = $"{Calendar.Date:yyyy-MM-dd}";
-        Title.Text = $"{r1}: {allyRegion}（{summary.AllyPoints:#,0}） - {r2}: {summary.Opponent}（{summary.OpponentPoints:#,0}）";
+        Title.Text = $"{r1}: {allyLegion}（{summary.AllyPoints:#,0}） - {r2}: {summary.Opponent}（{summary.OpponentPoints:#,0}）";
         NeunWelt.Text = $"ノイン: {summary.NeunWelt}";
         Comment.Text = summary.Comment;
 
@@ -100,8 +100,8 @@ public sealed partial class HistoriaViewer : Page
         if (menu.Items.Any(item => item.Name == "Unit")) return;
 
         var playerName = menu.Target.AccessKey;
-        var allyRegion = Director.ReadCache().Region;
-        var logDir = @$"{Director.ProjectDir()}\{allyRegion}\BattleLog";
+        var allyLegion = Director.ReadCache().Legion;
+        var logDir = @$"{Director.ProjectDir()}\{allyLegion}\BattleLog";
         var date = $"{Calendar.Date:yyyy-MM-dd}";
         var dir = Summary.Allies.Select(p => p.Name).Contains(playerName)
             ? "Ally"
@@ -130,7 +130,7 @@ public sealed partial class HistoriaViewer : Page
     {
         if (sender is not ComboBox comboBox) return;
         var selected = comboBox.SelectedValue.As<Player>().Name;
-        var logDir = @$"{Director.ProjectDir()}\{Summary.Allies[0].Region}\BattleLog";
+        var logDir = @$"{Director.ProjectDir()}\{Summary.Allies[0].Legion}\BattleLog";
         var statusPath = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\Ally\[{selected}]\status.json";
         var history = JsonSerializer.Deserialize<SortedDictionary<TimeOnly, AllStatus>>(File.ReadAllText(statusPath));
         chartView = new ChartViewModel(history);

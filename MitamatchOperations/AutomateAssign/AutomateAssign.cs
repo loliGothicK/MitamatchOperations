@@ -15,12 +15,12 @@ internal record Success(List<List<string>> Candidates) : AutomateAssignResult;
 internal record Failure(string Msg) : AutomateAssignResult;
 
 internal class AutomateAssign {
-    internal static AutomateAssignResult ExecAutoAssign(string region, ref ObservableCollection<TimeTableItem> timeTable) {
+    internal static AutomateAssignResult ExecAutoAssign(string Legion, ref ObservableCollection<TimeTableItem> timeTable) {
         var list = timeTable.ToList();
         var inCharge = list.Where(x => x.Pic != string.Empty).Select((_, index)=> index).ToList();
         List<List<int>> result = [];
 
-        var memberInfo = Util.LoadMembersInfo(region);
+        var memberInfo = Util.LoadMembersInfo(Legion);
         var memberToIndex = memberInfo
             .Select((item, index) => (item, index))
             .ToDictionary(x => x.item.Name, x => x.index);

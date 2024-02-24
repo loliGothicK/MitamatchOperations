@@ -38,7 +38,7 @@ public sealed partial class MainPage
         var exists = File.Exists(cache);
         if (exists)
         {
-            Project = Director.ReadCache().Region;
+            Project = Director.ReadCache().Legion;
             LogInUser.Label = User = Director.ReadCache().User ?? "不明なユーザー";
         }
         else
@@ -95,7 +95,7 @@ public sealed partial class MainPage
         var mapping = new Dictionary<string, System.Type>()
         {
             {"home", typeof(HomePage)},
-            {"region console",typeof(RegionConsolePage)},
+            {"Legion console",typeof(LegionConsolePage)},
             {"order console", typeof(OrderConsolePage)},
             {"control dashboard", typeof(ControlDashboardPage)},
             {"deck builder", typeof(DeckBuilderPage)},
@@ -134,20 +134,20 @@ public sealed partial class MainPage
                 await FailureInfo(selected);
                 return;
             }
-            LoginRegion.Text = Project = selected;
+            LoginLegion.Text = Project = selected;
             Director.CacheWrite(new Cache(Project, User).ToJsonBytes());
-            Navigate(typeof(RegionConsolePage), Project);
+            Navigate(typeof(LegionConsolePage), Project);
             await LoginInfo();
         });
 
         dialog.SecondaryButtonCommand = new Defer(async delegate {
-            LoginRegion.Text = Project = selected;
+            LoginLegion.Text = Project = selected;
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}");
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Decks");
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Members");
             Director.CacheWrite(new Cache(Project, User).ToJsonBytes());
-            Navigate(typeof(RegionConsolePage), Project);
-            RegionView.IsSelected = true;
+            Navigate(typeof(LegionConsolePage), Project);
+            LegionView.IsSelected = true;
             await LoginInfo();
         });
 

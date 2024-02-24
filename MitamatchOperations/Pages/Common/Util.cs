@@ -12,7 +12,7 @@ namespace mitama.Pages.Common;
 
 internal class Util
 {
-    internal static string[] LoadRegionNames()
+    internal static string[] LoadLegionNames()
     {
         if (Exists(Director.ProjectDir())) {
             var dirs = GetDirectories(Director.ProjectDir());
@@ -165,6 +165,6 @@ internal class Director {
     internal static Cache ReadCache() {
         using var sr = new StreamReader($@"{MitamatchDir()}\Cache\cache.json", Encoding.GetEncoding("UTF-8"));
         var json = sr.ReadToEnd();
-        return JsonSerializer.Deserialize<Cache>(json);
+        return JsonSerializer.Deserialize<Cache>(json.Replace("\"Region\"", "\"Legion\""));
     }
 }

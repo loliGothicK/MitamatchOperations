@@ -2,7 +2,7 @@
 <!-- Licensed under the MIT License. See LICENSE in the project root for license information. -->
 
 <Page
-    x:Class="mitama.Pages.RegionConsole.MemberManageConsole"
+    x:Class="mitama.Pages.LegionConsole.MemberManageConsole"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"

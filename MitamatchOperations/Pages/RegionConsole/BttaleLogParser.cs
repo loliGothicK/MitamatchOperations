@@ -7,18 +7,18 @@ using DynamicData.Kernel;
 using mitama.Algorithm;
 using mitama.Domain;
 
-namespace mitama.Pages.RegionConsole;
+namespace mitama.Pages.LegionConsole;
 
 internal partial class BattleLogParser
 {
-    internal record RegionHint(string Name, List<string> Members);
+    internal record LegionHint(string Name, List<string> Members);
 
-    internal record Hints(RegionHint Ally, RegionHint Opponent);
+    internal record Hints(LegionHint Ally, LegionHint Opponent);
 
     private static Player ParsePlayer(string raw)
     {
         Regex regex = SourceRegex();
-        return new Player(regex.Match(raw).Groups["region"].Value, regex.Match(raw).Groups["player"].Value);
+        return new Player(regex.Match(raw).Groups["Legion"].Value, regex.Match(raw).Groups["player"].Value);
     }
 
     internal static Optional<Fragment> ParseFragment(string[] line)
@@ -44,14 +44,14 @@ internal partial class BattleLogParser
         {
             var rate = 
                 Algo.LevenshteinRate(player, parsedPlayer.Name)
-              + Algo.LevenshteinRate(hints.Ally.Name, parsedPlayer.Region);
+              + Algo.LevenshteinRate(hints.Ally.Name, parsedPlayer.Legion);
             return (rate, player);
         }).MinBy(item => item.rate);
         var opponentCandidate = hints.Opponent.Members.Select(player =>
         {
             var rate =
                 Algo.LevenshteinRate(player, parsedPlayer.Name)
-              + Algo.LevenshteinRate(hints.Opponent.Name, parsedPlayer.Region);
+              + Algo.LevenshteinRate(hints.Opponent.Name, parsedPlayer.Legion);
             return (rate, player);
         }).MinBy(item => item.rate);
 
@@ -70,7 +70,7 @@ internal partial class BattleLogParser
         };
     }
 
-    [GeneratedRegex(@"^\[(?<region>.+)\] *?(?<player>.*)$")]
+    [GeneratedRegex(@"^\[(?<Legion>.+)\] *?(?<player>.*)$")]
     private static partial Regex SourceRegex();
 
     internal static EventDetail ParseEvent(string content)

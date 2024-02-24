@@ -132,7 +132,7 @@ public sealed partial class CostumeManagePage : Page
     private async void SaveButton_Click(object sender, RoutedEventArgs e)
     {
         var comboBox = new ComboBox();
-        foreach (var member in Util.LoadMemberNames(Director.ReadCache().Region))
+        foreach (var member in Util.LoadMemberNames(Director.ReadCache().Legion))
         {
             comboBox.Items.Add(member);
         }
@@ -147,7 +147,7 @@ public sealed partial class CostumeManagePage : Page
             .WithBody(comboBox)
             .WithPrimary("í«â¡", new Defer(delegate
             {
-                var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Region}\Members\{selected}\info.json";
+                var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Legion}\Members\{selected}\info.json";
                 if (selected == string.Empty) return Task.CompletedTask;
                 using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                 var readJson = sr.ReadToEnd();
@@ -348,7 +348,7 @@ public sealed partial class CostumeManagePage : Page
     private async void CsvButton_Click(object _, RoutedEventArgs e)
     {
         var comboBox = new ComboBox();
-        foreach (var member in Util.LoadMemberNames(Director.ReadCache().Region))
+        foreach (var member in Util.LoadMemberNames(Director.ReadCache().Legion))
         {
             comboBox.Items.Add(member);
         }
@@ -363,7 +363,7 @@ public sealed partial class CostumeManagePage : Page
             .WithBody(comboBox)
             .WithPrimary("ÉRÉsÅ[", new Defer(async delegate
             {
-                var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Region}\Members\{selected}\info.json";
+                var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Legion}\Members\{selected}\info.json";
                 if (selected == string.Empty) return;
                 using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
                 var readJson = sr.ReadToEnd();
