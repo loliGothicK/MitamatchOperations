@@ -71,9 +71,19 @@ public sealed partial class HistoriaViewer : Page
             AllyOrders.Add(new OrderLog(Order.Of(x.Index), $"{x.Time.Minute:D2}:{x.Time.Second:D2}"));
         }
         OpponentOrders.Clear();
+        var legacyToV2 = Order
+            .List
+            .Where(o => o.Payed)
+            .Reverse()
+            .Select((order, index) => (order, index))
+            .ToDictionary(pair => pair.index, pair => pair.order.Index);
+
         foreach (var x in summary.OpponentOrders)
         {
-            OpponentOrders.Add(new OrderLog(Order.Of(x.Index), $"{x.Time.Minute:D2}:{x.Time.Second:D2}"));
+            var order = summary.Version == 2
+                ? Order.Of(x.Index)
+                : Order.Of(legacyToV2[x.Index]);
+            OpponentOrders.Add(new OrderLog(order, $"{x.Time.Minute:D2}:{x.Time.Second:D2}"));
         }
         unitChanges.Clear();
         path = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\unitChanges.json";
@@ -186,6 +196,6 @@ internal record Summary(
     Player[] Allies,
     Player[] Opponents,
     OrderIndexAndTime[] AllyOrders,
-    OrderIndexAndTime[] OpponentOrders
+    OrderIndexAndTime[] OpponentOrders,
+    int? Version = 2
 );
-

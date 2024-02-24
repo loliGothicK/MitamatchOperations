@@ -301,6 +301,8 @@ public record Memoria(
     public virtual bool Equals(Memoria other) => Id == other?.Id;
     public override int GetHashCode() => Name.GetHashCode();
 
+    public static Memoria Of(int id) => List[^(id + 1)];
+
     public static readonly Memoria[] List =
     [
         new Memoria(

@@ -9,7 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TabView x:Name="Tabs" Margin="10" IsAddTabButtonVisible="False" MinHeight="475">
-        </TabView>
+        <TabView x:Name="Tabs" Margin="10" IsAddTabButtonVisible="False" MinHeight="475"/>
     </Grid>
 </Page>

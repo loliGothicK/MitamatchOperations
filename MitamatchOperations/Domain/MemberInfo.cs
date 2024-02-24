@@ -64,7 +64,7 @@ public enum BackCategory
     Healer = 4
 }
 
-public record struct MemoriaIdAndConcentration(int Id, int Concenration);
+public record struct MemoriaIdAndConcentration(int Id, int Concentration);
 
 public enum ExInfo
 {
@@ -98,7 +98,8 @@ public record MemberInfo(
         _ => throw new ArgumentOutOfRangeException()
     };
 
-    internal static MemberInfo FromJson(string json) => JsonSerializer.Deserialize<MemberDto>(json);
+    internal static MemberInfo FromJson(string json)
+        => JsonSerializer.Deserialize<MemberDto>(json.Replace("Concenration", "Concentration"));
 
     internal string ToJson() {
         var dto = new MemberDto {
