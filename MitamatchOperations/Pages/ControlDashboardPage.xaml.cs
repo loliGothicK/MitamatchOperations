@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
@@ -12,28 +12,26 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.UI.Xaml.Input;
-using SimdLinq;
-using OpenCvSharp.Extensions;
+using mitama.Algorithm;
+using mitama.Domain;
+using mitama.Domain.OrderKinds;
+using mitama.Pages.Capture;
+using mitama.Pages.Common;
+using mitama.Pages.ControlDashboard;
+using mitama.Pages.OrderConsole;
+using MitamatchOperations.Lib;
 using OpenCvSharp;
+using OpenCvSharp.Extensions;
+using SimdLinq;
 using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.System;
 using WinRT;
-
-using mitama.Algorithm;
-using mitama.Domain;
-using mitama.Pages.Capture;
-using mitama.Pages.Common;
-using mitama.Pages.OrderConsole;
-using mitama.Domain.OrderKinds;
-using mitama.Pages.ControlDashboard;
-using MitamatchOperations.Lib;
 
 namespace mitama.Pages;
 
@@ -47,20 +45,20 @@ internal enum WindowPicker
 /// </summary>
 public sealed partial class ControlDashboardPage
 {
-    // ƒEƒBƒ“ƒhƒEƒLƒƒƒvƒ`ƒƒ‚Ì‚½‚ß‚ÌƒŠƒ\[ƒX‚ği‚é
+    // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚­ãƒ£ãƒ—ãƒãƒ£ã®ãŸã‚ã®ãƒªã‚½ãƒ¼ã‚¹ã‚’å¸ã‚‹
     private WindowCapture _capture;
 
-    // ƒEƒBƒ“ƒhƒEƒLƒƒƒvƒ`ƒƒ‚Ì‚½‚ß‚Ìƒ‰ƒbƒ`
+    // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚­ãƒ£ãƒ—ãƒãƒ£ã®ãŸã‚ã®ãƒ©ãƒƒãƒ
     private readonly CountdownEvent _captureEvent = new(1);
-    // ƒTƒuƒXƒNƒ‰ƒCƒo[‚ÌƒXƒPƒWƒ…[ƒ‰
+    // ã‚µãƒ–ã‚¹ã‚¯ãƒ©ã‚¤ãƒãƒ¼ã®ã‚¹ã‚±ã‚¸ãƒ¥ãƒ¼ãƒ©
     private readonly HistoricalScheduler[] _schedulers = [new(), new(), new(), new(), new()];
-    
-    // ƒI[ƒ_[‚Ì•\¦‚ğs‚¤‚½‚ß‚ÌƒRƒŒƒNƒVƒ‡ƒ“
+
+    // ã‚ªãƒ¼ãƒ€ãƒ¼ã®è¡¨ç¤ºã‚’è¡Œã†ãŸã‚ã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
     private readonly ObservableCollection<TimeTableItem> _reminds = [];
     private readonly ObservableHashSet<ResultItem> _results = [];
-    
-    // ƒXƒPƒWƒ…[ƒ‰‚ği‚ß‚é‚½‚ß‚Ìƒ^ƒCƒ}[
-    private static readonly Lazy<DispatcherTimer> Timer = new(() => 
+
+    // ã‚¹ã‚±ã‚¸ãƒ¥ãƒ¼ãƒ©ã‚’é€²ã‚ã‚‹ãŸã‚ã®ã‚¿ã‚¤ãƒãƒ¼
+    private static readonly Lazy<DispatcherTimer> Timer = new(() =>
     {
         var timer = new DispatcherTimer
         {
@@ -74,7 +72,7 @@ public sealed partial class ControlDashboardPage
     private readonly AKAZE akaze = AKAZE.Create();
     private (Order Order, Mat Discripters)[] Templates = [];
 
-    // ‚È‚ñ‚â‚©‚ñ‚â‚Åg‚¤ó‘Ô•Ï”
+    // ãªã‚“ã‚„ã‹ã‚“ã‚„ã§ä½¿ã†çŠ¶æ…‹å¤‰æ•°
     private int _cursor = 4;
     private List<TimeTableItem> _deck = [];
     private DateTime _nextTimePoint;
@@ -96,14 +94,14 @@ public sealed partial class ControlDashboardPage
     {
         if (e.Key == VirtualKey.Control) IsCtrlKeyPressed = true;
         else switch (IsCtrlKeyPressed)
-        {
-            case true when e.Key == VirtualKey.Q:
-                ManualTrigger();
-                break;
-            case true when e.Key == VirtualKey.C:
-                _orderStat = new None();
-                break;
-        }
+            {
+                case true when e.Key == VirtualKey.Q:
+                    ManualTrigger();
+                    break;
+                case true when e.Key == VirtualKey.C:
+                    _orderStat = new None();
+                    break;
+            }
     }
 
     private void Grid_KeyUp(object sender, KeyRoutedEventArgs e)
@@ -115,7 +113,7 @@ public sealed partial class ControlDashboardPage
     {
         Task.Run(async () =>
         {
-            // ƒeƒ“ƒvƒŒ[ƒgƒ}ƒbƒ`ƒ“ƒO‚Ì‚½‚ß‚Ì€”õ
+            // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒãƒƒãƒãƒ³ã‚°ã®ãŸã‚ã®æº–å‚™
             Templates = await Task.WhenAll(Order
                 .List
                 .Where(order => order.HasTemplate)
@@ -129,10 +127,10 @@ public sealed partial class ControlDashboardPage
                 }));
         });
 
-        // ‰æ–Ê‚Ì‰Šú‰»
+        // ç”»é¢ã®åˆæœŸåŒ–
         InitializeComponent();
 
-        // ‘S‘Ì‚ÌƒEƒBƒ“ƒhƒEƒLƒƒƒvƒ`ƒƒ
+        // å…¨ä½“ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚­ãƒ£ãƒ—ãƒãƒ£
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[0])
             .Subscribe(delegate
             {
@@ -144,12 +142,12 @@ public sealed partial class ControlDashboardPage
                 });
             });
 
-        // ‘Šè‚ÌƒI[ƒ_[î•ñ‚ğ“Çæ‚é
+        // ç›¸æ‰‹ã®ã‚ªãƒ¼ãƒ€ãƒ¼æƒ…å ±ã‚’èª­å–ã‚‹
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[1])
             .Subscribe(async delegate
             {
                 _captureEvent.Wait();
-                // ƒI[ƒ_[î•ñ‚ğ“Çæ‚é
+                // ã‚ªãƒ¼ãƒ€ãƒ¼æƒ…å ±ã‚’èª­å–ã‚‹
                 var cap = await _capture!.CaptureOrderInfo();
                 var info = Order.List
                         .Select(order => (order, Algo.LevenshteinRate(order.Name, cap)))
@@ -157,12 +155,12 @@ public sealed partial class ControlDashboardPage
                         .ToArray();
 
                 if (info.Length <= 0) return;
-                // “Çæ‚ê‚½‚½‚ßAƒI[ƒ_[î•ñ‚ğƒXƒgƒA‚·‚é
+                // èª­å–ã‚ŒãŸãŸã‚ã€ã‚ªãƒ¼ãƒ€ãƒ¼æƒ…å ±ã‚’ã‚¹ãƒˆã‚¢ã™ã‚‹
                 var res = info.MinBy(item => item.Item2);
                 _ocrResult = res.order;
             });
 
-        // –¡•û‚ÌƒI[ƒ_[î•ñ‚ğ“Çæ‚é
+        // å‘³æ–¹ã®ã‚ªãƒ¼ãƒ€ãƒ¼æƒ…å ±ã‚’èª­å–ã‚‹
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[2])
             .Subscribe(async delegate
             {
@@ -170,28 +168,28 @@ public sealed partial class ControlDashboardPage
                 switch (await Analyze(await _capture!.TryCaptureOrderInfo()))
                 {
                     case SuccessResult(var user, var order):
-                    {
-                        if (_reminds.Count == 0) break;
-                        var ordered = Order.List.MinBy(o => Algo.LevenshteinRate(o.Name, order));
-                        if (_deck.Select(e => e.Order.Index).ToArray().Contains(ordered.Index)
-                            && !_results.Select(r => r.Order.Index).ToArray().Contains(ordered.Index))
                         {
-                            Update(user, ordered);
+                            if (_reminds.Count == 0) break;
+                            var ordered = Order.List.MinBy(o => Algo.LevenshteinRate(o.Name, order));
+                            if (_deck.Select(e => e.Order.Index).ToArray().Contains(ordered.Index)
+                                && !_results.Select(r => r.Order.Index).ToArray().Contains(ordered.Index))
+                            {
+                                Update(user, ordered);
+                            }
+                            break;
                         }
-                        break;
-                    }
                     case FailureResult:
-                    {
-                        break;
-                    }
+                        {
+                            break;
+                        }
                 }
             });
 
-        // ‘Šè‚ÌƒI[ƒ_[‚Ì €”õ/”­“®/I—¹ ‚ğƒXƒLƒƒƒ“‚·‚é
+        // ç›¸æ‰‹ã®ã‚ªãƒ¼ãƒ€ãƒ¼ã® æº–å‚™/ç™ºå‹•/çµ‚äº† ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[3])
             .Subscribe(async delegate { await OrderScan(); });
 
-        // –¡•ûƒI[ƒ_[‚Ì”­“®‘O’Ê’m‚ğo‚·
+        // å‘³æ–¹ã‚ªãƒ¼ãƒ€ãƒ¼ã®ç™ºå‹•å‰é€šçŸ¥ã‚’å‡ºã™
         Observable.Interval(TimeSpan.FromMilliseconds(200), _schedulers[4])
             .Subscribe(delegate
             {
@@ -202,7 +200,7 @@ public sealed partial class ControlDashboardPage
                     var flag = InfoBar.Severity == InfoBarSeverity.Warning;
                     InfoBar.Severity = _nextTimePoint - DateTime.Now >= new TimeSpan() ? InfoBarSeverity.Warning : InfoBarSeverity.Error;
                     InfoBar.Title =
-                        $"{_reminds.First().Pic} ‚³‚ñ‚Ì {_reminds.First().Order.Name} ”­“®‚Ü‚Å‚ ‚Æ {(_nextTimePoint - DateTime.Now).Seconds} •b";
+                        $"{_reminds.First().Pic} ã•ã‚“ã® {_reminds.First().Order.Name} ç™ºå‹•ã¾ã§ã‚ã¨ {(_nextTimePoint - DateTime.Now).Seconds} ç§’";
                     if (_picFlag && _user == _reminds.First().Pic)
                     {
                         _picFlag = false;
@@ -243,7 +241,7 @@ public sealed partial class ControlDashboardPage
                                 InitBar.IsOpen = true;
                                 InitBar.AccessKey = "ERROR";
                                 InitBar.Severity = InfoBarSeverity.Error;
-                                InitBar.Title = "ƒ‰ƒXƒoƒŒ‚ÌƒEƒBƒ“ƒhƒE‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½A‹N“®‚µ‚ÄÅ‘O–Ê‚Ìó‘Ô‚É‚µ‚Ä‚­‚¾‚³‚¢";
+                                InitBar.Title = "ãƒ©ã‚¹ãƒãƒ¬ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€èµ·å‹•ã—ã¦æœ€å‰é¢ã®çŠ¶æ…‹ã«ã—ã¦ãã ã•ã„";
                                 var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
                                 foreach (var (caption, handle) in Search.GetWindowList())
                                 {
@@ -260,7 +258,7 @@ public sealed partial class ControlDashboardPage
                                 }
                                 InitBar.Content = new DropDownButton
                                 {
-                                    Content = "‚Ü‚½‚Í‰æ–Ê‚ğ‘I‘ğ‚·‚é",
+                                    Content = "ã¾ãŸã¯ç”»é¢ã‚’é¸æŠã™ã‚‹",
                                     Flyout = menu
                                 };
                             }
@@ -286,7 +284,7 @@ public sealed partial class ControlDashboardPage
             ImageSource = File.ReadAllBytes((await Package.Current.InstalledLocation.GetFileAsync(@"Assets\ML\DataSet\is_activating\True\0001.png")).Path)
         });
 
-        // IO‚Ìƒ^ƒCƒ~ƒ“ƒO‚ğ‚¸‚ç‚·‚½‚ß‚É 40 ms ‚¸‚Â‚¸‚ç‚·
+        // IOã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã‚’ãšã‚‰ã™ãŸã‚ã« 40 ms ãšã¤ãšã‚‰ã™
         _schedulers[3].AdvanceBy(TimeSpan.FromMilliseconds(40));
         _schedulers[2].AdvanceBy(TimeSpan.FromMilliseconds(80));
         _schedulers[1].AdvanceBy(TimeSpan.FromMilliseconds(120));
@@ -300,31 +298,31 @@ public sealed partial class ControlDashboardPage
             "is_activating\\False"
         ];
         string[] orders = [
-            "á–‚Ì‘§",
-            "—ô‹ó‚Ì_”é",
-            "àŠ‰Š‚Ì_”é",
-            "ŸğŠC‚Ì—E–Ò",
-            "—ì’¹‚Ì—E–Ò",
-            "…‰Î‚Ì—E–Ò",
-            "“V—ƒ‚ÌŒä‚",
-            "…_‚ÌŒä‚",
-            "é‚ÌŒä‚",
-            "ŠoÁ‚Ì‘å“VŒõ",
-            "‘å“VŒõ‚ÌŠoÁ–WŠQ",
-            "x‚¦‚Ìj•Ÿ",
-            "–W‚°‚Ìj•Ÿ",
-            "x‚¦‚Ì”½“®",
-            "–W‚°‚Ì”½“®",
-            "–‚k—Ìˆæ",
-            "ˆÃ•‹Æ‰Î",
-            "•”è…‹¾",
-            "•æ¸ˆĞ•—",
-            "Œõ”w‰Î—ƒ",
-            "“VŒõ‹â”g",
-            "Œõ‰Ø‰ô•—",
+            "é›ªç„ã®æ¯å¹",
+            "è£‚ç©ºã®ç¥ç§˜",
+            "ç…Œç‚ã®ç¥ç§˜",
+            "æºŸæµ·ã®å‹‡çŒ›",
+            "éœŠé³¥ã®å‹‡çŒ›",
+            "åŠ«ç«ã®å‹‡çŒ›",
+            "å¤©ç¿¼ã®å¾¡ç›¾",
+            "æ°´ç¥ã®å¾¡ç›¾",
+            "æœ±é›€ã®å¾¡ç›¾",
+            "è¦šé†’ã®å¤§å¤©å…‰",
+            "å¤§å¤©å…‰ã®è¦šé†’å¦¨å®³",
+            "æ”¯ãˆã®ç¥ç¦",
+            "å¦¨ã’ã®ç¥ç¦",
+            "æ”¯ãˆã®åå‹•",
+            "å¦¨ã’ã®åå‹•",
+            "é­”ç¸®é ˜åŸŸ",
+            "æš—é»’æ¥­ç«",
+            "é»’ç¢‘æ°´é¡",
+            "é»’è²‚å¨é¢¨",
+            "å…‰èƒŒç«ç¿¼",
+            "å¤©å…‰éŠ€æ³¢",
+            "å…‰è¯å»»é¢¨",
         ];
 
-        // ƒfƒoƒbƒO—p‚ÌƒfƒBƒŒƒNƒgƒŠ‚ğíœ
+        // ãƒ‡ãƒãƒƒã‚°ç”¨ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å‰Šé™¤
         if (Directory.Exists(@$"{Director.MitamatchDir()}\Debug\dataset"))
         {
             Directory.Delete(@$"{Director.MitamatchDir()}\Debug\dataset", true);
@@ -352,18 +350,18 @@ public sealed partial class ControlDashboardPage
     {
         switch (_orderStat)
         {
-            // ‘ŠèƒI[ƒ_[”­“®’†
+            // ç›¸æ‰‹ã‚ªãƒ¼ãƒ€ãƒ¼ç™ºå‹•ä¸­
             case Active(var order, var point):
                 {
                     if (order is not null)
                     {
                         var spend = (DateTime.Now - point).Seconds + (DateTime.Now - point).Minutes * 60;
                         OpponentInfoBar.IsOpen = true;
-                        OpponentInfoBar.Title = $"‘ŠèƒI[ƒ_[: {order.Value.Name} => c‚è {order.Value.ActiveTime - spend - 3} •b";
-                        // ƒI[ƒ_[‚ªI‚í‚é1•b‘O‚É‚Í•\¦‚ğ‚â‚ß‚é
+                        OpponentInfoBar.Title = $"ç›¸æ‰‹ã‚ªãƒ¼ãƒ€ãƒ¼: {order.Value.Name} => æ®‹ã‚Š {order.Value.ActiveTime - spend - 3} ç§’";
+                        // ã‚ªãƒ¼ãƒ€ãƒ¼ãŒçµ‚ã‚ã‚‹1ç§’å‰ã«ã¯è¡¨ç¤ºã‚’ã‚„ã‚ã‚‹
                         if (order.Value.ActiveTime - spend < 1)
                         {
-                            // Ÿ‚ÌƒI[ƒ_[ŒŸ’m‚É‚Ş‚¯‚Ä‰Šú‰»
+                            // æ¬¡ã®ã‚ªãƒ¼ãƒ€ãƒ¼æ¤œçŸ¥ã«ã‚€ã‘ã¦åˆæœŸåŒ–
                             _orderStat = new None();
                             _ocrResult = null;
                             _predictResult = null;
@@ -373,7 +371,7 @@ public sealed partial class ControlDashboardPage
                     _captureEvent.Wait();
                     switch (_capture!.CaptureOpponentsOrder())
                     {
-                        // ƒI[ƒ_[€”õ’†‚ğŒŸ’m
+                        // ã‚ªãƒ¼ãƒ€ãƒ¼æº–å‚™ä¸­ã‚’æ¤œçŸ¥
                         case WaitStat(var image):
                             {
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\wait\\debug{_debugCounter++}.png");
@@ -411,14 +409,14 @@ public sealed partial class ControlDashboardPage
                     }
                     break;
                 }
-            // ‘ŠèƒI[ƒ_[€”õ’†‚Å‚à”­“®’†‚Å‚à‚È‚¢
+            // ç›¸æ‰‹ã‚ªãƒ¼ãƒ€ãƒ¼æº–å‚™ä¸­ã§ã‚‚ç™ºå‹•ä¸­ã§ã‚‚ãªã„
             case None:
                 {
                     OpponentInfoBar.IsOpen = false;
                     _captureEvent.Wait();
                     switch (_capture!.CaptureOpponentsOrder())
                     {
-                        // ƒI[ƒ_[€”õ’†‚ğŒŸ’m
+                        // ã‚ªãƒ¼ãƒ€ãƒ¼æº–å‚™ä¸­ã‚’æ¤œçŸ¥
                         case WaitStat(var image):
                             {
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\wait\\debug{_debugCounter++}.png");
@@ -438,7 +436,7 @@ public sealed partial class ControlDashboardPage
                     }
                     break;
                 }
-            // ‘ŠèƒI[ƒ_[€”õ’†
+            // ç›¸æ‰‹ã‚ªãƒ¼ãƒ€ãƒ¼æº–å‚™ä¸­
             case Waiting:
                 {
                     OpponentInfoBar.IsOpen = true;
@@ -462,7 +460,7 @@ public sealed partial class ControlDashboardPage
                             }
                         default:
                             {
-                                if (_preparePoint is not null 
+                                if (_preparePoint is not null
                                     && _ocrResult is not null
                                     && (DateTime.Now - _preparePoint.Value) > TimeSpan.FromSeconds(_ocrResult.Value.PrepareTime))
                                 {
@@ -523,7 +521,7 @@ public sealed partial class ControlDashboardPage
         {
             var prepareTime = previous.Order.Index switch
             {
-                52 => 5, // ƒŒƒMƒIƒ“ƒ}ƒbƒ`ƒXƒLƒ‹€”õŠÔ’ZkLv.3
+                52 => 5, // ãƒ¬ã‚®ã‚ªãƒ³ãƒãƒƒãƒã‚¹ã‚­ãƒ«æº–å‚™æ™‚é–“çŸ­ç¸®Lv.3
                 _ => item.Order.PrepareTime
             };
             previous = item with
@@ -544,7 +542,7 @@ public sealed partial class ControlDashboardPage
     {
         var now = DateTime.Now;
 
-        // ƒ^ƒCƒ€ƒe[ƒuƒ‹ÄŒvZ
+        // ã‚¿ã‚¤ãƒ ãƒ†ãƒ¼ãƒ–ãƒ«å†è¨ˆç®—
         if (_reminds.First().Order != ordered)
         {
             var idx = _deck.IndexOf(ordered);
@@ -587,19 +585,19 @@ public sealed partial class ControlDashboardPage
             }
         }
 
-        // ·•ªŒvZ
+        // å·®åˆ†è¨ˆç®—
         _firstTimePoint ??= now;
         var totalTime = ordered.PrepareTime + ordered.ActiveTime;
         _nextTimePoint = now + new TimeSpan(0, 0, totalTime / 60, totalTime % 60);
         var span = now - _firstTimePoint;
         var deviation = span.Value.Minutes * 60 + span.Value.Seconds - (15 * 60 - _reminds.First().Start);
 
-        // ”­“®Ï‚İƒI[ƒ_[‚ğæ‚èœ‚«A
+        // ç™ºå‹•æ¸ˆã¿ã‚ªãƒ¼ãƒ€ãƒ¼ã‚’å–ã‚Šé™¤ãã€
         _reminds.Remove(ordered);
-        // Ÿ‚ÌƒI[ƒ_[‚ª‚ ‚ê‚Î’Ç‰Á‚·‚é
+        // æ¬¡ã®ã‚ªãƒ¼ãƒ€ãƒ¼ãŒã‚ã‚Œã°è¿½åŠ ã™ã‚‹
         if (_deck.Count > _cursor && _reminds.Count < 4) _reminds.Add(_deck[_cursor++]);
 
-        // ğŒ•t‚«ƒI[ƒ_[‚ª‚ ‚ê‚Îƒ`ƒFƒbƒN‚·‚é
+        // æ¡ä»¶ä»˜ãã‚ªãƒ¼ãƒ€ãƒ¼ãŒã‚ã‚Œã°ãƒã‚§ãƒƒã‚¯ã™ã‚‹
         if (_reminds.Count > 0 && _reminds.First().Conditional && deviation >= 30)
         {
             var skip = _reminds.First();
@@ -607,16 +605,16 @@ public sealed partial class ControlDashboardPage
             if (_deck.Count > _cursor) _reminds.Add(_deck[_cursor++]);
             ConditionalOrderInfo.IsOpen = true;
             ConditionalOrderInfo.Severity = InfoBarSeverity.Warning;
-            ConditionalOrderInfo.Title = $"{skip.Order.Name} ‚ÍƒXƒLƒbƒv‚µ‚Ä‚­‚¾‚³‚¢";
+            ConditionalOrderInfo.Title = $"{skip.Order.Name} ã¯ã‚¹ã‚­ãƒƒãƒ—ã—ã¦ãã ã•ã„";
         }
         else
         {
             ConditionalOrderInfo.IsOpen = false;
         }
 
-        // ”­“®Œ‹‰Ê‚É’Ç‰Á
+        // ç™ºå‹•çµæœã«è¿½åŠ 
         _results.Add(new ResultItem(user, ordered, deviation, now));
-        // ‰æ–ÊXV
+        // ç”»é¢æ›´æ–°
         RemainderBoard.ItemsSource = _reminds;
         ResultBoard.ItemsSource = _results.Distinct().OrderByDescending(r => r.ActivatedAt).ToList();
         RemainderBoard.SelectedIndex = 0;
@@ -735,7 +733,7 @@ public sealed partial class ControlDashboardPage
     {
         LoadButton.IsEnabled = true;
     }
-    
+
     private void CounterButton_OnClick(object sender, RoutedEventArgs e)
     {
         var newWindow = new System.Windows.Window();
@@ -743,11 +741,11 @@ public sealed partial class ControlDashboardPage
         var counterView = new CounterView();
         newWindow.Content = counterView;
 
-        // ƒEƒBƒ“ƒhƒE‚ğ•\¦
+        // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’è¡¨ç¤º
         newWindow.Activate();
     }
 
-    [GeneratedRegex(@"(.+)‚ªƒI[ƒ_[(.+)‚ğ€”õ")]
+    [GeneratedRegex(@"(.+)ãŒã‚ªãƒ¼ãƒ€ãƒ¼(.+)ã‚’æº–å‚™")]
     private static partial Regex MyRegex();
 
     private Order PredictOrder(Bitmap image)
@@ -755,7 +753,8 @@ public sealed partial class ControlDashboardPage
         var descriptors = new Mat();
         akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
 
-        return Templates.MinBy(template => {
+        return Templates.MinBy(template =>
+        {
             var (_, train) = template;
             var matcher = new BFMatcher(NormTypes.Hamming);
             var matches = matcher.Match(descriptors, train);
@@ -774,7 +773,7 @@ internal record ResultItem(string Pic, Order Order, int Deviation, DateTime Acti
 
 internal abstract record OpOrderStatus;
 internal record Waiting : OpOrderStatus;
-internal record Active(Order? Order, DateTime Point): OpOrderStatus;
+internal record Active(Order? Order, DateTime Point) : OpOrderStatus;
 internal record None : OpOrderStatus;
 
 internal abstract record FailSafe;

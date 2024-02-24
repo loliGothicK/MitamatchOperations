@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
 using System.Collections.Generic;
-using System;
-using mitama.Domain;
+using System.Collections.ObjectModel;
 using System.Linq;
+using mitama.Domain;
 using static Google.Apis.Bigquery.v2.Data.TableDataInsertAllRequest;
 
 namespace mitama.Models;

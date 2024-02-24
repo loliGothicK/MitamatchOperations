@@ -1,10 +1,10 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 using mitama.Models;
 using Syncfusion.UI.Xaml.Core;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace mitama.Pages.DeckBuilder;
 

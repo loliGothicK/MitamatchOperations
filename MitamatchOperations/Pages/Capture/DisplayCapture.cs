@@ -4,11 +4,11 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using MitamatchOperations;
+using OpenCvSharp;
+using OpenCvSharp.Extensions;
 using Windows.Graphics.Imaging;
 using Windows.Media.Ocr;
-using OpenCvSharp.Extensions;
-using OpenCvSharp;
-using MitamatchOperations;
 using Size = OpenCvSharp.Size;
 
 namespace mitama.Pages.Capture;
@@ -16,7 +16,7 @@ namespace mitama.Pages.Capture;
 internal abstract record OrderStat;
 
 internal record WaitStat(Bitmap Image) : OrderStat;
-internal record  ActiveStat(Bitmap Image) : OrderStat;
+internal record ActiveStat(Bitmap Image) : OrderStat;
 internal record Nothing(Bitmap Image) : OrderStat;
 
 public partial class WindowCapture

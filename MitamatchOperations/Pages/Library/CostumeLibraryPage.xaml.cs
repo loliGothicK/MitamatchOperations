@@ -1,10 +1,10 @@
+ï»¿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using CommunityToolkit.WinUI.Controls;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using mitama.Domain;
-using System;
-using Microsoft.UI.Xaml;
-using System.Linq;
 using mitama.Pages.Common;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -53,13 +53,13 @@ namespace mitama.Pages.Library
                 args.DisplayText = name;
                 foreach (var costume in _costumes.ToList().Where(costume => name switch
                 {
-                    "’Êí’P‘Ì" => costume.Type is not NormalSingleCostume,
-                    "’Êí”ÍˆÍ" => costume.Type is not NormalRangeCostume,
-                    "“ÁŽê’P‘Ì" => costume.Type is not SpecialSingleCostume,
-                    "“ÁŽê”ÍˆÍ" => costume.Type is not SpecialRangeCostume,
-                    "Žx‰‡" => costume.Type is not AssistCostume,
-                    "–WŠQ" => costume.Type is not InterferenceCostume,
-                    "‰ñ•œ" => costume.Type is not RecoveryCostume,
+                    "é€šå¸¸å˜ä½“" => costume.Type is not NormalSingleCostume,
+                    "é€šå¸¸ç¯„å›²" => costume.Type is not NormalRangeCostume,
+                    "ç‰¹æ®Šå˜ä½“" => costume.Type is not SpecialSingleCostume,
+                    "ç‰¹æ®Šç¯„å›²" => costume.Type is not SpecialRangeCostume,
+                    "æ”¯æ´" => costume.Type is not AssistCostume,
+                    "å¦¨å®³" => costume.Type is not InterferenceCostume,
+                    "å›žå¾©" => costume.Type is not RecoveryCostume,
                     _ => false,
                 }))
                 {
@@ -69,34 +69,34 @@ namespace mitama.Pages.Library
             else
             {
                 var other = (Other)args.SelectedItem;
-                if (other.Value == "‰Î")
+                if (other.Value == "ç«")
                 {
-                    args.DisplayText = "‰Î";
-                    foreach (var costume in _costumes.ToList().Where(costume => !costume.ExSkill.HasValue || !costume.ExSkill.Value.Description.Contains("‰Î")))
+                    args.DisplayText = "ç«";
+                    foreach (var costume in _costumes.ToList().Where(costume => !costume.ExSkill.HasValue || !costume.ExSkill.Value.Description.Contains("ç«")))
                     {
                         _costumes.Remove(costume);
                     }
                 }
-                else if (other.Value == "…")
+                else if (other.Value == "æ°´")
                 {
-                    args.DisplayText = "…";
-                    foreach (var costume in _costumes.ToList().Where(costume => !costume.ExSkill.HasValue || !costume.ExSkill.Value.Description.Contains("…")))
+                    args.DisplayText = "æ°´";
+                    foreach (var costume in _costumes.ToList().Where(costume => !costume.ExSkill.HasValue || !costume.ExSkill.Value.Description.Contains("æ°´")))
                     {
                         _costumes.Remove(costume);
                     }
                 }
-                else if (other.Value == "•—")
+                else if (other.Value == "é¢¨")
                 {
-                    args.DisplayText = "•—";
-                    foreach (var costume in _costumes.ToList().Where(costume => !costume.ExSkill.HasValue || !costume.ExSkill.Value.Description.Contains("•—")))
+                    args.DisplayText = "é¢¨";
+                    foreach (var costume in _costumes.ToList().Where(costume => !costume.ExSkill.HasValue || !costume.ExSkill.Value.Description.Contains("é¢¨")))
                     {
                         _costumes.Remove(costume);
                     }
                 }
-                else if (other.Value == "’Êí")
+                else if (other.Value == "é€šå¸¸")
                 {
-                    args.DisplayText = "’Êí";
-                    foreach (var costume in _costumes.ToList().Where(costume => 
+                    args.DisplayText = "é€šå¸¸";
+                    foreach (var costume in _costumes.ToList().Where(costume =>
                     {
                         var status = costume.Status;
                         return status.Atk < status.SpAtk;
@@ -105,10 +105,11 @@ namespace mitama.Pages.Library
                         _costumes.Remove(costume);
                     }
                 }
-                else if (other.Value == "“ÁŽê")
+                else if (other.Value == "ç‰¹æ®Š")
                 {
-                    args.DisplayText = "“ÁŽê";
-                    foreach (var costume in _costumes.ToList().Where(costume => {
+                    args.DisplayText = "ç‰¹æ®Š";
+                    foreach (var costume in _costumes.ToList().Where(costume =>
+                    {
                         var status = costume.Status;
                         return status.Atk > status.SpAtk;
                     }))
@@ -138,11 +139,12 @@ namespace mitama.Pages.Library
 
         private void OnSuggestionRequested(RichSuggestBox sender, SuggestionRequestedEventArgs args)
         {
-            sender.ItemsSource = args.Prefix switch {
+            sender.ItemsSource = args.Prefix switch
+            {
                 "@" => _costumes.Where(costume => costume.Lily.Contains(args.QueryText, StringComparison.OrdinalIgnoreCase)).Select(costume => new Lily(costume.Lily, costume.Path)).DistinctBy(lily => lily.Name),
                 "#" => _costumes.Where(costume => costume.RareSkill.Name.Contains(args.QueryText, StringComparison.OrdinalIgnoreCase)).Select(costume => costume.RareSkill).DistinctBy(RareSkill => RareSkill.Name),
-                "\\" => new Position[]{ new("’Êí’P‘Ì"), new("’Êí”ÍˆÍ"), new("“ÁŽê’P‘Ì"), new("“ÁŽê”ÍˆÍ"), new("Žx‰‡"), new("–WŠQ"), new("‰ñ•œ") },
-                "!" => new Other[]{ new("‰Î"), new("…"), new("•—"), new("15%"), new("Lv.16"), new("’Êí"), new("“ÁŽê")  },
+                "\\" => new Position[] { new("é€šå¸¸å˜ä½“"), new("é€šå¸¸ç¯„å›²"), new("ç‰¹æ®Šå˜ä½“"), new("ç‰¹æ®Šç¯„å›²"), new("æ”¯æ´"), new("å¦¨å®³"), new("å›žå¾©") },
+                "!" => new Other[] { new("ç«"), new("æ°´"), new("é¢¨"), new("15%"), new("Lv.16"), new("é€šå¸¸"), new("ç‰¹æ®Š") },
                 _ => null,
             };
         }
@@ -166,13 +168,14 @@ namespace mitama.Pages.Library
             var index = int.Parse(stackPanel.AccessKey);
             var hasCostume = Info
                 .Where(info => info.Costumes != null && info.Costumes.Any(costume => costume.Index == index))
-                .Select(info => {
+                .Select(info =>
+                {
                     var Ex = info.Costumes.First(item => item.Index == index).Ex;
                     return (info.Name, Ex switch
                     {
                         ExInfo.None => string.Empty,
-                        ExInfo.Active => @"(EX‚ ‚è)",
-                        ExInfo.Inactive => @"(EX‚È‚µ)",
+                        ExInfo.Active => @"(EXã‚ã‚Š)",
+                        ExInfo.Inactive => @"(EXãªã—)",
                         _ => throw new NotImplementedException(),
                     });
                 });

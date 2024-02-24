@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Drawing;
-using OpenCvSharp.Extensions;
-using OpenCvSharp;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using MathNet.Numerics.Statistics;
 using mitama.Domain;
+using OpenCvSharp;
+using OpenCvSharp.Extensions;
 using Windows.Storage;
 
 namespace mitama.Algorithm.IR;
@@ -49,7 +49,7 @@ internal class MemoriaSearch
         foreach (var rect in rects) Cv2.Rectangle(target, rect, Scalar.Aquamarine, 5);
 
         {
-            var templates = await Task.WhenAll(Memoria.List.DistinctBy(m => m.Name).Select(async memoria => 
+            var templates = await Task.WhenAll(Memoria.List.DistinctBy(m => m.Name).Select(async memoria =>
             {
                 try
                 {
@@ -67,12 +67,15 @@ internal class MemoriaSearch
 
             var detected = rects.AsParallel()
                 .Select(target.Clone)
-                .Select(mat => {
+                .Select(mat =>
+                {
                     var descriptors = new Mat();
                     akaze.DetectAndCompute(mat, null, out _, descriptors);
                     return descriptors;
-                }).Select(source => {
-                    return templates.MinBy(template => {
+                }).Select(source =>
+                {
+                    return templates.MinBy(template =>
+                    {
                         var (_, train) = template;
                         var matcher = new BFMatcher(NormTypes.Hamming);
                         var matches = matcher.Match(source, train);

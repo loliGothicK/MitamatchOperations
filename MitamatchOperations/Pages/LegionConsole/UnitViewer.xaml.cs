@@ -1,15 +1,15 @@
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml;
 using System.IO;
+using System.Linq;
+using System.Text;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using mitama.Domain;
 using mitama.Pages.Common;
 using WinRT;
-using System.Linq;
-using System.Text;
-using System;
 
 namespace mitama.Pages.LegionConsole;
 
@@ -88,7 +88,7 @@ public sealed partial class UnitViewer
 
     private void DeleteConfirmation_Click(object sender, RoutedEventArgs _)
     {
-        if (sender is not Button  button) return;
+        if (sender is not Button button) return;
         File.Delete(button.AccessKey);
         Init(ref UnitTreeView);
     }

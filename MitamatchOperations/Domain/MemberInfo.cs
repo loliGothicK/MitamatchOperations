@@ -8,7 +8,8 @@ public abstract record Position : IComparable<Position>
     internal abstract int GetCategory();
     public abstract string Display { get; }
 
-    public static Position FromStr(string pos) => pos switch {
+    public static Position FromStr(string pos) => pos switch
+    {
         "N.Attacker" => new Front(FrontCategory.Normal),
         "Sp.Attacker" => new Front(FrontCategory.Special),
         "Buffer" => new Back(BackCategory.Buffer),
@@ -20,12 +21,15 @@ public abstract record Position : IComparable<Position>
     public int CompareTo(Position other) => GetCategory().CompareTo(other?.GetCategory());
 }
 
-public record Front(FrontCategory Category) : Position 
+public record Front(FrontCategory Category) : Position
 {
     internal override int GetCategory() => (int)Category;
-    public override string Display {
-        get {
-            return Category switch {
+    public override string Display
+    {
+        get
+        {
+            return Category switch
+            {
                 FrontCategory.Normal => "通常前衛",
                 FrontCategory.Special => "特殊前衛",
                 _ => throw new ArgumentOutOfRangeException()
@@ -44,9 +48,12 @@ public record Back(BackCategory Category) : Position
 {
     internal override int GetCategory() => (int)Category;
 
-    public override string Display {
-        get {
-            return Category switch {
+    public override string Display
+    {
+        get
+        {
+            return Category switch
+            {
                 BackCategory.Buffer => "支援",
                 BackCategory.DeBuffer => "妨害",
                 BackCategory.Healer => "回復",
@@ -82,14 +89,18 @@ public record MemberInfo(
     MemoriaIdAndConcentration[] Memorias,
     CostumeIndexAndEx[] Costumes,
     int? Version = 2
-) {
-    internal string PositionInfo => Position switch {
-        Front(var category) => category switch {
+)
+{
+    internal string PositionInfo => Position switch
+    {
+        Front(var category) => category switch
+        {
             FrontCategory.Normal => @"通常前衛",
             FrontCategory.Special => @"特殊前衛",
             _ => throw new ArgumentOutOfRangeException()
         },
-        Back(var category) => category switch {
+        Back(var category) => category switch
+        {
             BackCategory.Buffer => @"支援",
             BackCategory.DeBuffer => @"妨害",
             BackCategory.Healer => @"回復",
@@ -101,8 +112,10 @@ public record MemberInfo(
     internal static MemberInfo FromJson(string json)
         => JsonSerializer.Deserialize<MemberDto>(json.Replace("Concenration", "Concentration"));
 
-    internal string ToJson() {
-        var dto = new MemberDto {
+    internal string ToJson()
+    {
+        var dto = new MemberDto
+        {
             CreatedAt = CreatedAt,
             UpdatedAt = UpdatedAt,
             Name = Name,

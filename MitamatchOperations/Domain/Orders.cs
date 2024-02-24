@@ -2,7 +2,7 @@
 using System.Linq;
 using mitama.Domain.OrderKinds;
 
-namespace mitama.Domain 
+namespace mitama.Domain
 {
     public abstract record Kind;
 
@@ -51,7 +51,7 @@ namespace mitama.Domain
         Special
     }
 
-    public readonly record struct BasicStatus(int Atk=0, int SpAtk=0, int Def=0, int SpDef=0)
+    public readonly record struct BasicStatus(int Atk = 0, int SpAtk = 0, int Def = 0, int SpDef = 0)
     {
         public static implicit operator BasicStatus(ValueTuple<int, int, int, int> from) => new()
         {
@@ -64,7 +64,7 @@ namespace mitama.Domain
         public int ASA => Atk + SpAtk;
         public int DSD => Def + SpDef;
 
-        public static BasicStatus operator+(BasicStatus a, BasicStatus b) => new()
+        public static BasicStatus operator +(BasicStatus a, BasicStatus b) => new()
         {
             Atk = a.Atk + b.Atk,
             SpAtk = a.SpAtk + b.SpAtk,
@@ -86,17 +86,19 @@ namespace mitama.Domain
         bool Payed,
         Kind Kind,
         bool HasTemplate
-    ) {
+    )
+    {
         public string Path => $@"/Assets/orders/{Name}.png";
         public Uri Uri => new($"ms-appx:///Assets/orders/{Name}.png");
         public Uri TemplateUri => new($"ms-appx:///Assets/OrderTemplates/{Name}.png");
 
-        public string TimeFmt => ActiveTime switch {
+        public string TimeFmt => ActiveTime switch
+        {
             0 => $"({PrepareTime} sec)",
             _ => $"({PrepareTime} + {ActiveTime} sec)"
         };
 
-        public static Order Of(int index) => List[^(index+1)];
+        public static Order Of(int index) => List[^(index + 1)];
 
         public readonly static Order[] List = [
             new Order(

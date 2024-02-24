@@ -8,14 +8,14 @@
 //
 //*********************************************************
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using MitamatchOperations;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Windows.Storage;
 using WinRT.Interop;
 

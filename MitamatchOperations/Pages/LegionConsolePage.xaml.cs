@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml.Navigation;
+﻿using Microsoft.UI.Xaml.Navigation;
 using mitama.Pages.LegionConsole;
 
 namespace mitama.Pages;

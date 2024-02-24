@@ -1,20 +1,20 @@
+ï»¿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using mitama.Domain;
-using mitama.Pages.Common;
-using System.Linq;
-using Microsoft.UI.Xaml.Navigation;
-using WinRT;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml;
-using mitama.Pages.OrderConsole;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Microsoft.UI.Text;
-using System;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
+using mitama.Domain;
+using mitama.Pages.Common;
 using mitama.Pages.Main;
+using mitama.Pages.OrderConsole;
 using MitamatchOperations.Lib;
+using WinRT;
 
 namespace mitama.Pages.LegionConsole;
 
@@ -149,7 +149,7 @@ public sealed partial class MemberManageConsole
 
     private void Tactic1_SelectionChanged(object sender, SelectionChangedEventArgs _)
     {
-        string[] v = ["’P‘Ì", "”ÍˆÍ"];
+        string[] v = ["å˜ä½“", "ç¯„å›²"];
         tatic1 = v[sender.As<ComboBox>().SelectedIndex];
         if (tatic2 is not null)
         {
@@ -163,7 +163,7 @@ public sealed partial class MemberManageConsole
 
     private void Tactic2_SelectionChanged(object sender, SelectionChangedEventArgs _)
     {
-        string[] v = ["x‰‡", "–WŠQ", "‰ñ•œ"];
+        string[] v = ["æ”¯æ´", "å¦¨å®³", "å›å¾©"];
         tatic2 = v[sender.As<ComboBox>().SelectedIndex];
         if (tatic1 is not null)
         {
@@ -198,16 +198,16 @@ public sealed partial class MemberManageConsole
         if (timeline == null) return;
 
         var kousei = "";
-        kousei += Normal.SelectedIndex == 0 ? "" : $"’Êí{Normal.SelectedIndex} ";
-        kousei += Special.SelectedIndex == 0 ? "" : $"“Áê{Special.SelectedIndex} ";
-        kousei += Both.SelectedIndex == 0 ? "" : $"—¼“{Both.SelectedIndex} ";
+        kousei += Normal.SelectedIndex == 0 ? "" : $"é€šå¸¸{Normal.SelectedIndex} ";
+        kousei += Special.SelectedIndex == 0 ? "" : $"ç‰¹æ®Š{Special.SelectedIndex} ";
+        kousei += Both.SelectedIndex == 0 ? "" : $"ä¸¡åˆ€{Both.SelectedIndex} ";
 
         var order = string.Join("\n", (new string[] {
             $"{timeline[0].Order.Name}: {timeline[0].Pic}"
         }).Concat(timeline.Skip(1).Select(x => x switch
         {
-            _ when x.Conditional => @$"{x.Order.Name}: {x.Pic}i—\”õj",
-            _ => $"«\n{x.Order.Name}: {x.Pic}",
+            _ when x.Conditional => @$"{x.Order.Name}: {x.Pic}ï¼ˆäºˆå‚™ï¼‰",
+            _ => $"â†“\n{x.Order.Name}: {x.Pic}",
         })));
 
         Remarks.Document.GetText(TextGetOptions.UseCrlf, out var remarks);
@@ -217,8 +217,8 @@ public sealed partial class MemberManageConsole
 
         ## Rare Skills
 
-        - {chara1}:{skill1} Ë {personnel1}
-        - {chara2}:{skill2} Ë {personnel2}
+        - {chara1}:{skill1} â‡’ {personnel1}
+        - {chara2}:{skill2} â‡’ {personnel2}
 
         ## Neun Welt
 
@@ -250,13 +250,14 @@ public sealed partial class MemberManageConsole
         var toDelete = sender.As<MenuFlyoutItem>().AccessKey;
         // dialog forward definition
         var dialog = new DialogBuilder(XamlRoot)
-            .WithTitle("–{“–‚É‚¨‚í‚©‚ê‚µ‚Ü‚·‚©H")
-            .WithPrimary("‚¨‚í‚©‚ê‚·‚é")
-            .WithCancel("‚â‚Á‚Ï‚è‚â‚ß‚é")
+            .WithTitle("æœ¬å½“ã«ãŠã‚ã‹ã‚Œã—ã¾ã™ã‹ï¼Ÿ")
+            .WithPrimary("ãŠã‚ã‹ã‚Œã™ã‚‹")
+            .WithCancel("ã‚„ã£ã±ã‚Šã‚„ã‚ã‚‹")
             .Build();
 
         // ReSharper disable once AsyncVoidLambda
-        dialog.PrimaryButtonCommand = new Defer(delegate {
+        dialog.PrimaryButtonCommand = new Defer(delegate
+        {
             new DirectoryInfo($@"{Director.ProjectDir()}\{_LegionName}\Members\{toDelete}").Delete(true);
             Update();
             return System.Threading.Tasks.Task.CompletedTask;
@@ -267,7 +268,7 @@ public sealed partial class MemberManageConsole
     private async void AddMember_OnClick(object sender, RoutedEventArgs e)
     {
         var dialog = new DialogBuilder(XamlRoot)
-            .WithTitle("ƒŒƒMƒIƒ“ƒƒ“ƒo‚ğ’Ç‰Á‚µ‚Ü‚·")
+            .WithTitle("ãƒ¬ã‚®ã‚ªãƒ³ãƒ¡ãƒ³ãƒã‚’è¿½åŠ ã—ã¾ã™")
             .WithPrimary("Add")
             .WithCancel("Cancel")
             .Build();
@@ -291,7 +292,8 @@ public sealed partial class MemberManageConsole
         });
 
         dialog.Content = body;
-        dialog.PrimaryButtonCommand = new Defer(delegate {
+        dialog.PrimaryButtonCommand = new Defer(delegate
+        {
             Director.CreateDirectory($@"{Director.ProjectDir()}\{_LegionName}\Members\{name}");
             Director.CreateDirectory($@"{Director.ProjectDir()}\{_LegionName}\Members\{name}\Units");
             var fs = File.Create($@"{Director.ProjectDir()}\{_LegionName}\Members\{name}\info.json");

@@ -5,7 +5,8 @@ namespace MitamatchOperations.Lib
 {
     public struct Indoc(string Doc)
     {
-        public readonly string Text {
+        public readonly string Text
+        {
             get
             {
                 var trim = Doc

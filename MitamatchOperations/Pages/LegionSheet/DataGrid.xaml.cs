@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+Ôªøusing System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.UI.Xaml.Controls;
@@ -36,7 +36,7 @@ public sealed partial class DataGrid : Page
         if (sender is not SfSegmentedControl ctrl) return;
         switch (ctrl.SelectedItem.As<SegmentedModel>().Name)
         {
-            case "ÉIÅ[É_Å[":
+            case "„Ç™„Éº„ÉÄ„Éº":
                 {
                     if (Info.Version is null)
                     {
@@ -54,10 +54,10 @@ public sealed partial class DataGrid : Page
                     }
                     break;
                 }
-            case "àﬂëï":
+            case "Ë°£Ë£Ö":
                 sfDataGrid.ItemsSource = new ObservableCollection<CostumeInfo>(Info.Costumes is null ? [] : [.. Info.Costumes.Select(raw => new CostumeInfo(raw))]);
                 break;
-            case "ÉÅÉÇÉäÉA":
+            case "„É°„É¢„É™„Ç¢":
                 sfDataGrid.ItemsSource = new ObservableCollection<MemoriaInfo>(Info.Memorias is null ? [] : [.. Info.Memorias.Select(raw => new MemoriaInfo(raw))]);
                 break;
         }

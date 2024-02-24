@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,10 +12,10 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.VisualBasic.FileIO;
 using mitama.Domain;
 using mitama.Pages.Common;
+using MitamatchOperations.Lib;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using static mitama.Pages.LegionConsole.BattleLogParser;
-using MitamatchOperations.Lib;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -81,7 +81,7 @@ namespace mitama.Pages.LegionConsole
             if (file != null)
             {
                 log = file;
-                GeneralInfoBar.Title = $"{file.Name} ‚ð“Ç‚Ýž‚Ý‚Ü‚µ‚½";
+                GeneralInfoBar.Title = $"{file.Name} ã‚’èª­ã¿è¾¼ã¿ã¾ã—ãŸ";
                 GeneralInfoBar.Severity = InfoBarSeverity.Success;
                 GeneralInfoBar.IsOpen = true;
             }
@@ -91,7 +91,7 @@ namespace mitama.Pages.LegionConsole
         {
             if (log is null)
             {
-                GeneralInfoBar.Title = "ƒƒOƒtƒ@ƒCƒ‹‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢";
+                GeneralInfoBar.Title = "ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸æŠžã—ã¦ãã ã•ã„";
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
                 GeneralInfoBar.IsOpen = true;
                 await Task.Delay(3000);
@@ -100,7 +100,7 @@ namespace mitama.Pages.LegionConsole
             }
             else if (AllyLegionName.Text == string.Empty || OpponentLegionName.Text == string.Empty)
             {
-                GeneralInfoBar.Title = "ƒŒƒMƒIƒ“–¼‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢";
+                GeneralInfoBar.Title = "ãƒ¬ã‚®ã‚ªãƒ³åã‚’å…¥åŠ›ã—ã¦ãã ã•ã„";
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
                 GeneralInfoBar.IsOpen = true;
                 await Task.Delay(3000);
@@ -128,9 +128,9 @@ namespace mitama.Pages.LegionConsole
             {
                 var flag = false;
                 var dialog = new DialogBuilder(XamlRoot)
-                    .WithTitle("‘S‚Ä‚ÌƒvƒŒƒCƒ„[‚ª“ü—Í‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ‚ª‰ðÍ‚µ‚Ü‚·‚©H")
-                    .WithPrimary("‰ðÍ", new Defer(delegate { flag = true; return Task.CompletedTask; }))
-                    .WithCancel("ƒLƒƒƒ“ƒZƒ‹")
+                    .WithTitle("å…¨ã¦ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå…¥åŠ›ã•ã‚Œã¦ã„ã¾ã›ã‚“ãŒè§£æžã—ã¾ã™ã‹ï¼Ÿ")
+                    .WithPrimary("è§£æž", new Defer(delegate { flag = true; return Task.CompletedTask; }))
+                    .WithCancel("ã‚­ãƒ£ãƒ³ã‚»ãƒ«")
                     .Build();
                 await dialog.ShowAsync();
                 while (!flag)
@@ -139,7 +139,7 @@ namespace mitama.Pages.LegionConsole
                 }
             }
 
-            GeneralInfoBar.Title = $"‰ðÍ’†...";
+            GeneralInfoBar.Title = $"è§£æžä¸­...";
             GeneralInfoBar.Severity = InfoBarSeverity.Informational;
             GeneralInfoBar.IsOpen = true;
 
@@ -199,12 +199,12 @@ namespace mitama.Pages.LegionConsole
             {
                 Director.CreateDirectory(logDir);
             }
-            var path = @$"{logDir}\{_date??DateTime.Now:yyyy-MM-dd}";
+            var path = @$"{logDir}\{_date ?? DateTime.Now:yyyy-MM-dd}";
             if (!Directory.Exists(path))
             {
                 Director.CreateDirectory(path);
             }
-            
+
             BattleLog battleLog = new([.. battleLogMap.Values]);
             await JsonSerializer.SerializeAsync(new FileStream($@"{path}/all.json", FileMode.Create), battleLog);
 
@@ -217,7 +217,7 @@ namespace mitama.Pages.LegionConsole
             await SaveSummary(logDir, battleLog);
             await SaveUnitChanges(logDir, battleLog);
 
-            GeneralInfoBar.Title = $"‰ðÍ‚ªŠ®—¹‚µ‚Ü‚µ‚½B";
+            GeneralInfoBar.Title = $"è§£æžãŒå®Œäº†ã—ã¾ã—ãŸã€‚";
             GeneralInfoBar.Severity = InfoBarSeverity.Success;
             await Task.Delay(3000);
             GeneralInfoBar.IsOpen = false;
@@ -239,7 +239,7 @@ namespace mitama.Pages.LegionConsole
         {
             var AllyPoints = AllyLegionPoints.Text == string.Empty ? 0 : int.Parse(AllyLegionPoints.Text);
             var OpponentPoints = OpponentLegionPoints.Text == string.Empty ? 0 : int.Parse(OpponentLegionPoints.Text);
-            var NeunWelt = NeunWeltResult.SelectedIndex == 0 ? "Ÿ‚¿" : "•‰‚¯";
+            var NeunWelt = NeunWeltResult.SelectedIndex == 0 ? "å‹ã¡" : "è² ã‘";
             var (AllyOrders, OpponentOrders) = await battleLog.ExtractOrders();
             var (Allies, Opponents) = battleLog.ExtractPlayers();
             Comment.TextDocument.GetText(TextGetOptions.UseCrlf, out var comment);
@@ -264,12 +264,12 @@ namespace mitama.Pages.LegionConsole
         {
             foreach (var player in players)
             {
-                var path = $@"{logDir}\{_date??DateTime.Now:yyyy-MM-dd}\{v}\[{ToRemoveRegex().Replace(player.Name, string.Empty)}]\Units";
+                var path = $@"{logDir}\{_date ?? DateTime.Now:yyyy-MM-dd}\{v}\[{ToRemoveRegex().Replace(player.Name, string.Empty)}]\Units";
                 Director.CreateDirectory(path);
                 var units = await battleLog.ExtractUnits(player.Name);
                 foreach (var (unit, index) in units.Select((unit, index) => (unit, index)))
                 {
-                    using var unitFile = File.Create($@"{path}\Unit-{index+1}.json");
+                    using var unitFile = File.Create($@"{path}\Unit-{index + 1}.json");
                     await unitFile.WriteAsync(new UTF8Encoding(true).GetBytes(unit.ToJson()));
                 }
             }

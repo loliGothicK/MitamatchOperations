@@ -7,19 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
+using mitama.AutomateAssign;
 using mitama.Domain;
 using mitama.Domain.OrderKinds;
 using mitama.Pages.Common;
-using WinRT;
-using Microsoft.UI.Xaml.Navigation;
-using mitama.AutomateAssign;
 using MitamatchOperations.Lib;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.UI;
+using WinRT;
 
 namespace mitama.Pages.OrderConsole;
 
@@ -786,7 +786,8 @@ public sealed partial class DeckEditorPage
                             var newDialog = new DialogBuilder(XamlRoot)
                                 .WithTitle(@$"{candidates.Count} 通りの候補が見つかりました")
                                 .WithBody(new AutoAssignmentDialogContent([.. _deck], candidates, hook))
-                                .WithPrimary("実行", new Defer(async delegate {
+                                .WithPrimary("実行", new Defer(async delegate
+                                {
                                     foreach (var (pic, index) in candidates[selected].Select((x, i) => (x, i)))
                                     {
                                         _deck[index] = _deck[index] with { Pic = pic };
@@ -797,7 +798,8 @@ public sealed partial class DeckEditorPage
                                     await Task.Delay(2000);
                                     GeneralInfoBar.IsOpen = false;
                                 }))
-                                .WithSecondary("ランダム",new Defer(async delegate {
+                                .WithSecondary("ランダム", new Defer(async delegate
+                                {
                                     Random engine = new();
                                     selected = engine.Next(candidates.Count);
                                     foreach (var (pic, index) in candidates[selected].Select((x, i) => (x, i)))

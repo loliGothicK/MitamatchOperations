@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -10,10 +10,10 @@ using Microsoft.UI.Xaml.Controls;
 using mitama.Algorithm.IR;
 using mitama.Domain;
 using mitama.Pages.Common;
+using MitamatchOperations.Lib;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage.Pickers;
 using WinRT;
-using MitamatchOperations.Lib;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -61,7 +61,7 @@ public sealed partial class MemoriaManagePage : Page
         var file = await openPicker.PickSingleFileAsync();
         if (file != null)
         {
-            GeneralInfoBar.Title = $"{file.Name} ‚ğ“Ç‚İ‚İ‚Ü‚µ‚½";
+            GeneralInfoBar.Title = $"{file.Name} ã‚’èª­ã¿è¾¼ã¿ã¾ã—ãŸ";
             GeneralInfoBar.IsOpen = true;
             imgPath = file.Path;
         }
@@ -70,7 +70,7 @@ public sealed partial class MemoriaManagePage : Page
     private async void RecognizeButton_Click(object sender, RoutedEventArgs e)
     {
         using var img = new System.Drawing.Bitmap(imgPath);
-        var (result, detected) = await MemoriaSearch.Recognise(img, v:verticalCount, h:horizontalCount);
+        var (result, detected) = await MemoriaSearch.Recognise(img, v: verticalCount, h: horizontalCount);
         foreach (var item in detected.Select(x => new MemoriaWithConcentration(x, 4)))
         {
             Memorias.Add(item);
@@ -117,12 +117,12 @@ public sealed partial class MemoriaManagePage : Page
             e.Data.RequestedOperation = DataPackageOperation.Move;
         }
     }
-    
+
     private void MemeriaSources_DragOver(object sender, DragEventArgs e)
     {
         e.AcceptedOperation = DataPackageOperation.Move;
     }
-    
+
     private void MemeriaSources_Drop(object sender, DragEventArgs e)
     {
         foreach (var toAdd in Memoria
@@ -169,7 +169,7 @@ public sealed partial class MemoriaManagePage : Page
 
         var dialog = new DialogBuilder(XamlRoot)
             .WithBody(comboBox)
-            .WithPrimary("’Ç‰Á", new Defer(delegate
+            .WithPrimary("è¿½åŠ ", new Defer(delegate
             {
                 var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Legion}\Members\{selected}\info.json";
                 if (selected == string.Empty) return Task.CompletedTask;
@@ -183,7 +183,8 @@ public sealed partial class MemoriaManagePage : Page
                     = info.Memorias == null
                     ? [.. Memorias.Select(m => new MemoriaIdAndConcentration(m.Memoria.Id, m.Concentration))]
                     : [.. Memorias.Select(m => new MemoriaIdAndConcentration(m.Memoria.Id, m.Concentration)).Concat(info.Memorias)];
-                var writeJson = (info with {
+                var writeJson = (info with
+                {
                     UpdatedAt = DateTime.Now,
                     Memorias = [.. memorias.DistinctBy(x => idToName[x.Id])],
                 }).ToJson();
@@ -211,62 +212,62 @@ public sealed partial class MemoriaManagePage : Page
         var filter = checkBox.Content.ToString();
         switch (filter)
         {
-            case "‰Î":
+            case "ç«":
                 {
                     currentFilters.Add(FilterType.Fire);
                     break;
                 }
-            case "…":
+            case "æ°´":
                 {
                     currentFilters.Add(FilterType.Water);
                     break;
                 }
-            case "•—":
+            case "é¢¨":
                 {
                     currentFilters.Add(FilterType.Wind);
                     break;
                 }
-            case "Œõ":
+            case "å…‰":
                 {
                     currentFilters.Add(FilterType.Light);
                     break;
                 }
-            case "ˆÅ":
+            case "é—‡":
                 {
                     currentFilters.Add(FilterType.Dark);
                     break;
                 }
-            case "’Êí’P‘Ì":
+            case "é€šå¸¸å˜ä½“":
                 {
                     currentFilters.Add(FilterType.NormalSingle);
                     break;
                 }
-            case "’Êí”ÍˆÍ":
+            case "é€šå¸¸ç¯„å›²":
                 {
                     currentFilters.Add(FilterType.NormalRange);
                     break;
                 }
-            case "“Áê’P‘Ì":
+            case "ç‰¹æ®Šå˜ä½“":
                 {
                     currentFilters.Add(FilterType.SpecialSingle);
                     break;
                 }
-            case "“Áê”ÍˆÍ":
+            case "ç‰¹æ®Šç¯„å›²":
                 {
                     currentFilters.Add(FilterType.SpecialRange);
                     break;
                 }
-            case "x‰‡":
+            case "æ”¯æ´":
                 {
                     currentFilters.Add(FilterType.Support);
                     break;
                 }
-            case "–WŠQ":
+            case "å¦¨å®³":
                 {
                     currentFilters.Add(FilterType.Interference);
                     break;
                 }
-            case "‰ñ•œ":
+            case "å›å¾©":
                 {
                     currentFilters.Add(FilterType.Recovery);
                     break;
@@ -299,62 +300,62 @@ public sealed partial class MemoriaManagePage : Page
 
         switch (filter)
         {
-            case "‰Î":
+            case "ç«":
                 {
                     currentFilters.Remove(FilterType.Fire);
                     break;
                 }
-            case "…":
+            case "æ°´":
                 {
                     currentFilters.Remove(FilterType.Water);
                     break;
                 }
-            case "•—":
+            case "é¢¨":
                 {
                     currentFilters.Remove(FilterType.Wind);
                     break;
                 }
-            case "Œõ":
+            case "å…‰":
                 {
                     currentFilters.Remove(FilterType.Light);
                     break;
                 }
-            case "ˆÅ":
+            case "é—‡":
                 {
                     currentFilters.Remove(FilterType.Dark);
                     break;
                 }
-            case "’Êí’P‘Ì":
+            case "é€šå¸¸å˜ä½“":
                 {
                     currentFilters.Remove(FilterType.NormalSingle);
                     break;
                 }
-            case "’Êí”ÍˆÍ":
+            case "é€šå¸¸ç¯„å›²":
                 {
                     currentFilters.Remove(FilterType.NormalRange);
                     break;
                 }
-            case "“Áê’P‘Ì":
+            case "ç‰¹æ®Šå˜ä½“":
                 {
                     currentFilters.Remove(FilterType.SpecialSingle);
                     break;
                 }
-            case "“Áê”ÍˆÍ":
+            case "ç‰¹æ®Šç¯„å›²":
                 {
                     currentFilters.Remove(FilterType.SpecialRange);
                     break;
                 }
-            case "x‰‡":
+            case "æ”¯æ´":
                 {
                     currentFilters.Remove(FilterType.Support);
                     break;
                 }
-            case "–WŠQ":
+            case "å¦¨å®³":
                 {
                     currentFilters.Remove(FilterType.Interference);
                     break;
                 }
-            case "‰ñ•œ":
+            case "å›å¾©":
                 {
                     currentFilters.Remove(FilterType.Recovery);
                     break;
@@ -382,12 +383,12 @@ public sealed partial class MemoriaManagePage : Page
 
         switch (filter)
         {
-            case "ƒŒƒWƒFƒ“ƒ_ƒŠ[":
+            case "ãƒ¬ã‚¸ã‚§ãƒ³ãƒ€ãƒªãƒ¼":
                 {
                     currentFilters.Add(FilterType.Legendary);
                     break;
                 }
-            case "ƒAƒ‹ƒeƒBƒƒbƒg":
+            case "ã‚¢ãƒ«ãƒ†ã‚£ãƒ¡ãƒƒãƒˆ":
                 {
                     currentFilters.Add(FilterType.Ultimate);
                     break;
@@ -414,12 +415,12 @@ public sealed partial class MemoriaManagePage : Page
         var filter = checkBox.Content.ToString();
         switch (filter)
         {
-            case "ƒŒƒWƒFƒ“ƒ_ƒŠ[":
+            case "ãƒ¬ã‚¸ã‚§ãƒ³ãƒ€ãƒªãƒ¼":
                 {
                     currentFilters.Remove(FilterType.Legendary);
                     break;
                 }
-            case "ƒAƒ‹ƒeƒBƒƒbƒg":
+            case "ã‚¢ãƒ«ãƒ†ã‚£ãƒ¡ãƒƒãƒˆ":
                 {
                     currentFilters.Remove(FilterType.Ultimate);
                     break;

@@ -1,5 +1,5 @@
-﻿using Syncfusion.UI.Xaml.Core;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using Syncfusion.UI.Xaml.Core;
 
 namespace mitama.Models;
 

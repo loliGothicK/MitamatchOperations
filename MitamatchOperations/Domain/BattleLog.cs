@@ -59,12 +59,12 @@ public record Result(string Value) : Fragment
     public override string Content => Value;
 }
 
-public record Support(string Value): Fragment
+public record Support(string Value) : Fragment
 {
     public override FragmentKind Kind => FragmentKind.Support;
     public override string Content => Value;
 }
-public record Regendary(string Value): Fragment
+public record Regendary(string Value) : Fragment
 {
     public override FragmentKind Kind => FragmentKind.Regendary;
     public override string Content => Value;
@@ -196,7 +196,7 @@ public partial record BattleLog(List<BattleLogItem> Data)
                     memorias.Add(memoria);
                 }
                 List<MemoriaWithConcentration> list = [.. memorias];
-                return new Unit($"Unit-{index+1}", vanguard > rearguard, [.. list.DistinctBy(m => m.Memoria.Name)]);
+                return new Unit($"Unit-{index + 1}", vanguard > rearguard, [.. list.DistinctBy(m => m.Memoria.Name)]);
             }).ToList());
     }
 
@@ -314,7 +314,7 @@ public record ActivateOrder(Order Order) : EventDetail;
 public record UseSkill(string Skill) : EventDetail;
 public record StandBy : EventDetail;
 public record Revival : EventDetail;
-public record NoenWelt(string Raw): EventDetail;
+public record NoenWelt(string Raw) : EventDetail;
 public record Error : EventDetail;
 
 public abstract record ResultDetail;

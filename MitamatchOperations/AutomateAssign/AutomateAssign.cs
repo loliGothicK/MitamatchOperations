@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using mitama.Pages.OrderConsole;
 using mitama.Pages.Common;
+using mitama.Pages.OrderConsole;
 
 namespace mitama.AutomateAssign;
 
-internal abstract record AutomateAssignResult {
+internal abstract record AutomateAssignResult
+{
     public static Success Success(List<List<string>> candidates) => new(candidates);
     public static Failure Failure(string msg) => new(msg);
 }
 internal record Success(List<List<string>> Candidates) : AutomateAssignResult;
 internal record Failure(string Msg) : AutomateAssignResult;
 
-internal class AutomateAssign {
-    internal static AutomateAssignResult ExecAutoAssign(string Legion, ref ObservableCollection<TimeTableItem> timeTable) {
+internal class AutomateAssign
+{
+    internal static AutomateAssignResult ExecAutoAssign(string Legion, ref ObservableCollection<TimeTableItem> timeTable)
+    {
         var list = timeTable.ToList();
-        var inCharge = list.Where(x => x.Pic != string.Empty).Select((_, index)=> index).ToList();
+        var inCharge = list.Where(x => x.Pic != string.Empty).Select((_, index) => index).ToList();
         List<List<int>> result = [];
 
         var memberInfo = Util.LoadMembersInfo(Legion);

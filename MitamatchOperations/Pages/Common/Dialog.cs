@@ -4,7 +4,8 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace mitama.Pages.Common;
 
-internal class Dialog {
+internal class Dialog
+{
     public static DialogBuilder Builder(XamlRoot root) => new(root);
 }
 
@@ -19,9 +20,11 @@ internal record struct DialogBuilder(
     string SecondaryButtonText = null,
     ICommand SecondaryButtonCommand = null,
     string CloseButtonText = null
-) {
+)
+{
     internal readonly ContentDialog Build()
-        => new() {
+        => new()
+        {
             // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
             XamlRoot = Root,
             Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,

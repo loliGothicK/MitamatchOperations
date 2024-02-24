@@ -5,15 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.DataTransfer;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using mitama.Domain;
 using mitama.Domain.OrderKinds;
-using WinRT;
 using mitama.Pages.Common;
 using MitamatchOperations.Lib;
+using Windows.ApplicationModel.DataTransfer;
+using WinRT;
 
 namespace mitama.Pages.OrderConsole;
 

@@ -1,17 +1,17 @@
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using mitama.Domain;
+using mitama.Models;
 using mitama.Pages.Common;
 using MitamatchOperations.Lib;
-using mitama.Models;
 using WinRT;
-using System.Text.RegularExpressions;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -45,14 +45,14 @@ public sealed partial class HistoriaViewer : Page
         {
             return;
         }
-        
+
         var summary = Summary = JsonSerializer.Deserialize<Summary>(File.ReadAllText(path).Replace("\"Region\"", "\"Legion\""));
         var r1 = summary.AllyPoints > summary.OpponentPoints ? "Win" : "Lose";
         var r2 = summary.AllyPoints > summary.OpponentPoints ? "Lose" : "Win";
-        
+
         Date.Text = $"{Calendar.Date:yyyy-MM-dd}";
-        Title.Text = $"{r1}: {allyLegion}Åi{summary.AllyPoints:#,0}Åj - {r2}: {summary.Opponent}Åi{summary.OpponentPoints:#,0}Åj";
-        NeunWelt.Text = $"ÉmÉCÉì: {summary.NeunWelt}";
+        Title.Text = $"{r1}: {allyLegion}Ôºà{summary.AllyPoints:#,0}Ôºâ - {r2}: {summary.Opponent}Ôºà{summary.OpponentPoints:#,0}Ôºâ";
+        NeunWelt.Text = $"„Éé„Ç§„É≥: {summary.NeunWelt}";
         Comment.Text = summary.Comment;
 
         AllyMembers.Clear();
@@ -124,11 +124,11 @@ public sealed partial class HistoriaViewer : Page
         foreach (var file in files)
         {
             var text = file.Split("\\").Last().Replace(".json", string.Empty);
-            var (_, unit)  = Unit.FromJson(File.ReadAllText(file));
+            var (_, unit) = Unit.FromJson(File.ReadAllText(file));
             var dialog = new DialogBuilder(XamlRoot)
                 .WithTitle(text)
                 .WithBody(new UnitViewDialog(unit))
-                .WithCancel("ï¬Ç∂ÇÈ")
+                .WithCancel("Èñâ„Åò„Çã")
                 .Build();
 
             menu.Items.Add(new MenuFlyoutItem
@@ -174,7 +174,7 @@ public sealed partial class HistoriaViewer : Page
         }
     }
 
-    [GeneratedRegex(@"\.|!|ÅI|\?|ÅH|\s+|")]
+    [GeneratedRegex(@"\.|!|ÔºÅ|\?|Ôºü|\s+|")]
     private static partial Regex ToRemoveRegex();
 
 }

@@ -109,7 +109,8 @@ internal static class BuilderPageHelpers
 
     public static SupportType ToSupportType(SupportEffect eff)
     {
-        return eff switch {
+        return eff switch
+        {
             NormalMatchPtUp => SupportType.NormalMatchPtUp,
             SpecialMatchPtUp => SupportType.SpecialMatchPtUp,
             DamageUp => SupportType.DamageUp,

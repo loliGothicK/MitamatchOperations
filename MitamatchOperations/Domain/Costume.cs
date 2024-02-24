@@ -57,14 +57,14 @@ public record RareSkill(string Name, string Description);
 public record ExSkill(string Name, string Description);
 
 public abstract record LilySkill;
-public record Common(LilySkill[] Skills): LilySkill;
-public record Unique(LilySkill[] Skills): LilySkill;
+public record Common(LilySkill[] Skills) : LilySkill;
+public record Unique(LilySkill[] Skills) : LilySkill;
 public record LilyHp(int Value) : LilySkill;
 public record LilyAtk(int Value) : LilySkill;
 public record LilyDef(int Value) : LilySkill;
 public record LilySpAtk(int Value) : LilySkill;
 public record LilySpDef(int Value) : LilySkill;
-public record Calibration(double Percentage): LilySkill;
+public record Calibration(double Percentage) : LilySkill;
 
 public record struct LilyStatus(int Hp, int Atk, int Def, int SpAtk, int SpDef)
 {
@@ -113,7 +113,8 @@ public record struct Costume(
 
     public static Costume Of(int id) => List[^(id + 1)];
 
-    public readonly LilyStatus Status => LilySkills.Aggregate(new LilyStatus(), (stat, skill) => {
+    public readonly LilyStatus Status => LilySkills.Aggregate(new LilyStatus(), (stat, skill) =>
+    {
         return skill switch
         {
             Common common => common.Skills.Where(x => x is not Calibration).Aggregate(stat, (stat, skill) =>

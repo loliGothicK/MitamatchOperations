@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using mitama.Domain;
@@ -32,4 +32,4 @@ public sealed partial class AddNewMemberDialogContent
 
 public abstract record NewMemberFragment;
 public record NewMemberName(string Name) : NewMemberFragment;
-public record NewMemberPosition(Position Position): NewMemberFragment;
+public record NewMemberPosition(Position Position) : NewMemberFragment;

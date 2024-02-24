@@ -141,7 +141,8 @@ public sealed partial class MainPage
             await LoginInfo();
         });
 
-        dialog.SecondaryButtonCommand = new Defer(async delegate {
+        dialog.SecondaryButtonCommand = new Defer(async delegate
+        {
             LoginLegion.Text = Project = selected;
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}");
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Decks");

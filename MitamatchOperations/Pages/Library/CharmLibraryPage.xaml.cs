@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+ï»¿using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.WinUI.Controls;
 using Microsoft.UI.Xaml;
@@ -46,7 +46,7 @@ public sealed partial class CharmLibraryPage : Page
     {
         sender.ItemsSource = args.Prefix switch
         {
-            "#" => new Element[] { new("‰Î"), new("…"), new("•—"), new("Œõ"), new("ˆÅ") },
+            "#" => new Element[] { new("ç«"), new("æ°´"), new("é¢¨"), new("å…‰"), new("é—‡") },
             _ => null,
         };
     }

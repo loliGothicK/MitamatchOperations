@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -10,10 +10,10 @@ using Microsoft.UI.Xaml.Controls;
 using mitama.Algorithm.IR;
 using mitama.Domain;
 using mitama.Pages.Common;
+using MitamatchOperations.Lib;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage.Pickers;
 using WinRT;
-using MitamatchOperations.Lib;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -61,7 +61,7 @@ public sealed partial class CostumeManagePage : Page
         var file = await openPicker.PickSingleFileAsync();
         if (file != null)
         {
-            GeneralInfoBar.Title = $"{file.Name} ‚ğ“Ç‚İ‚İ‚Ü‚µ‚½";
+            GeneralInfoBar.Title = $"{file.Name} ã‚’èª­ã¿è¾¼ã¿ã¾ã—ãŸ";
             GeneralInfoBar.IsOpen = true;
             imgPath = file.Path;
         }
@@ -70,7 +70,7 @@ public sealed partial class CostumeManagePage : Page
     private async void RecognizeButton_Click(object sender, RoutedEventArgs e)
     {
         using var img = new System.Drawing.Bitmap(imgPath);
-        var (result, detected) = await CostumeSearch.Recognise(img, v:verticalCount, h:horizontalCount);
+        var (result, detected) = await CostumeSearch.Recognise(img, v: verticalCount, h: horizontalCount);
         result.Save($@"{Director.MitamatchDir()}/result.png");
         foreach (var item in detected)
         {
@@ -99,7 +99,7 @@ public sealed partial class CostumeManagePage : Page
     {
         e.AcceptedOperation = DataPackageOperation.Move;
     }
-    
+
     private void MemeriaSources_Drop(object sender, DragEventArgs e)
     {
         foreach (var toAdd in Costume
@@ -145,7 +145,7 @@ public sealed partial class CostumeManagePage : Page
 
         var dialog = new DialogBuilder(XamlRoot)
             .WithBody(comboBox)
-            .WithPrimary("’Ç‰Á", new Defer(delegate
+            .WithPrimary("è¿½åŠ ", new Defer(delegate
             {
                 var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Legion}\Members\{selected}\info.json";
                 if (selected == string.Empty) return Task.CompletedTask;
@@ -159,7 +159,8 @@ public sealed partial class CostumeManagePage : Page
                     = info.Costumes == null
                     ? [.. Costumes.Select(m => new CostumeIndexAndEx(m.Costume.Index, m.Ex))]
                     : [.. Costumes.Select(m => new CostumeIndexAndEx(m.Costume.Index, m.Ex)).Concat(info.Costumes)];
-                var writeJson = (info with {
+                var writeJson = (info with
+                {
                     UpdatedAt = DateTime.Now,
                     Costumes = [.. costumes],
                 }).ToJson();
@@ -187,37 +188,37 @@ public sealed partial class CostumeManagePage : Page
         var filter = checkBox.Content.ToString();
         switch (filter)
         {
-            case "’Êí’P‘Ì":
+            case "é€šå¸¸å˜ä½“":
                 {
                     currentFilters.Add(FilterType.NormalSingle);
                     break;
                 }
-            case "’Êí”ÍˆÍ":
+            case "é€šå¸¸ç¯„å›²":
                 {
                     currentFilters.Add(FilterType.NormalRange);
                     break;
                 }
-            case "“Áê’P‘Ì":
+            case "ç‰¹æ®Šå˜ä½“":
                 {
                     currentFilters.Add(FilterType.SpecialSingle);
                     break;
                 }
-            case "“Áê”ÍˆÍ":
+            case "ç‰¹æ®Šç¯„å›²":
                 {
                     currentFilters.Add(FilterType.SpecialRange);
                     break;
                 }
-            case "x‰‡":
+            case "æ”¯æ´":
                 {
                     currentFilters.Add(FilterType.Support);
                     break;
                 }
-            case "–WŠQ":
+            case "å¦¨å®³":
                 {
                     currentFilters.Add(FilterType.Interference);
                     break;
                 }
-            case "‰ñ•œ":
+            case "å›å¾©":
                 {
                     currentFilters.Add(FilterType.Recovery);
                     break;
@@ -250,37 +251,37 @@ public sealed partial class CostumeManagePage : Page
 
         switch (filter)
         {
-            case "’Êí’P‘Ì":
+            case "é€šå¸¸å˜ä½“":
                 {
                     currentFilters.Remove(FilterType.NormalSingle);
                     break;
                 }
-            case "’Êí”ÍˆÍ":
+            case "é€šå¸¸ç¯„å›²":
                 {
                     currentFilters.Remove(FilterType.NormalRange);
                     break;
                 }
-            case "“Áê’P‘Ì":
+            case "ç‰¹æ®Šå˜ä½“":
                 {
                     currentFilters.Remove(FilterType.SpecialSingle);
                     break;
                 }
-            case "“Áê”ÍˆÍ":
+            case "ç‰¹æ®Šç¯„å›²":
                 {
                     currentFilters.Remove(FilterType.SpecialRange);
                     break;
                 }
-            case "x‰‡":
+            case "æ”¯æ´":
                 {
                     currentFilters.Remove(FilterType.Support);
                     break;
                 }
-            case "–WŠQ":
+            case "å¦¨å®³":
                 {
                     currentFilters.Remove(FilterType.Interference);
                     break;
                 }
-            case "‰ñ•œ":
+            case "å›å¾©":
                 {
                     currentFilters.Remove(FilterType.Recovery);
                     break;
@@ -361,7 +362,7 @@ public sealed partial class CostumeManagePage : Page
 
         var dialog = new DialogBuilder(XamlRoot)
             .WithBody(comboBox)
-            .WithPrimary("ƒRƒs[", new Defer(async delegate
+            .WithPrimary("ã‚³ãƒ”ãƒ¼", new Defer(async delegate
             {
                 var path = $@"{Director.ProjectDir()}\{Director.ReadCache().Legion}\Members\{selected}\info.json";
                 if (selected == string.Empty) return;
@@ -384,14 +385,14 @@ public sealed partial class CostumeManagePage : Page
                 {
                     var ex = costume.Ex switch
                     {
-                        ExInfo.Active => @"‚ ‚è",
-                        ExInfo.Inactive => @"‚È‚µ",
+                        ExInfo.Active => @"ã‚ã‚Š",
+                        ExInfo.Inactive => @"ãªã—",
                         ExInfo.None => string.Empty,
                     };
                     csv.AppendLine($"{indexToCostume[costume.Index].Lily},{indexToCostume[costume.Index].Name},{ex}");
                 }
                 System.Windows.Clipboard.SetText(csv.ToString());
-                GeneralInfoBar.Title = "ƒNƒŠƒbƒvƒ{[ƒh‚ÉCSV‚ğƒRƒs[‚µ‚Ü‚µ‚½";
+                GeneralInfoBar.Title = "ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«CSVã‚’ã‚³ãƒ”ãƒ¼ã—ã¾ã—ãŸ";
                 GeneralInfoBar.Severity = InfoBarSeverity.Success;
                 GeneralInfoBar.IsOpen = true;
                 await Task.Delay(3000);
@@ -411,7 +412,8 @@ public sealed partial class CostumeManagePage : Page
         {
             if (item.Costume.Index == index)
             {
-                var newItem = item with {
+                var newItem = item with
+                {
                     Ex = comboBox.SelectedIndex == 0 ? ExInfo.Active : ExInfo.Inactive,
                     Icon = comboBox.SelectedIndex == 0
                         ? $"/Assets/Images/lily_true.png"

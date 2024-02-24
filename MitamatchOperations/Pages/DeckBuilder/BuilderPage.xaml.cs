@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -6,20 +6,20 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using mitama.Domain;
-using mitama.Pages.Common;
-using Windows.ApplicationModel.DataTransfer;
-using WinRT;
-using SimdLinq;
-using mitama.Algorithm.IR;
 using Microsoft.UI.Xaml.Media;
-using Windows.UI;
-using Microsoft.UI.Text;
-using Windows.Storage;
-using static mitama.Pages.Common.ObservableCollectionExtensions;
+using mitama.Algorithm.IR;
+using mitama.Domain;
 using mitama.Models;
+using mitama.Pages.Common;
+using SimdLinq;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage;
+using Windows.UI;
+using WinRT;
+using static mitama.Pages.Common.ObservableCollectionExtensions;
 
 namespace mitama.Pages.DeckBuilder
 {
@@ -63,105 +63,105 @@ namespace mitama.Pages.DeckBuilder
         {
             SkillSearchOptionView = new(new Dictionary<string, Dictionary<string, string[]>>
             {
-                ["ƒŒƒMƒIƒ“ƒ}ƒbƒ`ƒXƒLƒ‹"] = new()
+                ["ãƒ¬ã‚®ã‚ªãƒ³ãƒãƒƒãƒã‚¹ã‚­ãƒ«"] = new()
                 {
-                    ["Šî‘bƒoƒt"] = [
-                        "ATKƒAƒbƒv",
-                        "ATKƒ_ƒEƒ“",
-                        "Sp.ATKƒAƒbƒv",
-                        "Sp.ATKƒ_ƒEƒ“",
-                        "DEFƒAƒbƒv",
-                        "DEFƒ_ƒEƒ“",
-                        "Sp.DEFƒAƒbƒv",
-                        "Sp.DEFƒ_ƒEƒ“",
+                    ["åŸºç¤ãƒãƒ•"] = [
+                        "ATKã‚¢ãƒƒãƒ—",
+                        "ATKãƒ€ã‚¦ãƒ³",
+                        "Sp.ATKã‚¢ãƒƒãƒ—",
+                        "Sp.ATKãƒ€ã‚¦ãƒ³",
+                        "DEFã‚¢ãƒƒãƒ—",
+                        "DEFãƒ€ã‚¦ãƒ³",
+                        "Sp.DEFã‚¢ãƒƒãƒ—",
+                        "Sp.DEFãƒ€ã‚¦ãƒ³",
                     ],
-                    ["‘®«"] = [
-                        "‰Î‘®«UŒ‚—ÍƒAƒbƒv",
-                        "‰Î‘®«UŒ‚—Íƒ_ƒEƒ“",
-                        "…‘®«UŒ‚—ÍƒAƒbƒv",
-                        "…‘®«UŒ‚—Íƒ_ƒEƒ“",
-                        "•—‘®«UŒ‚—ÍƒAƒbƒv",
-                        "•—‘®«UŒ‚—Íƒ_ƒEƒ“",
-                        "Œõ‘®«UŒ‚—ÍƒAƒbƒv",
-                        "Œõ‘®«UŒ‚—Íƒ_ƒEƒ“",
-                        "ˆÅ‘®«UŒ‚—ÍƒAƒbƒv",
-                        "ˆÅ‘®«UŒ‚—Íƒ_ƒEƒ“",
-                        "‰Î‘®«–hŒä—ÍƒAƒbƒv",
-                        "‰Î‘®«–hŒä—Íƒ_ƒEƒ“",
-                        "…‘®«–hŒä—ÍƒAƒbƒv",
-                        "…‘®«–hŒä—Íƒ_ƒEƒ“",
-                        "•—‘®«–hŒä—ÍƒAƒbƒv",
-                        "•—‘®«–hŒä—Íƒ_ƒEƒ“",
-                        "Œõ‘®«–hŒä—ÍƒAƒbƒv",
-                        "Œõ‘®«–hŒä—Íƒ_ƒEƒ“",
-                        "ˆÅ‘®«–hŒä—ÍƒAƒbƒv",
-                        "ˆÅ‘®«–hŒä—Íƒ_ƒEƒ“",
+                    ["å±æ€§"] = [
+                        "ç«å±æ€§æ”»æ’ƒåŠ›ã‚¢ãƒƒãƒ—",
+                        "ç«å±æ€§æ”»æ’ƒåŠ›ãƒ€ã‚¦ãƒ³",
+                        "æ°´å±æ€§æ”»æ’ƒåŠ›ã‚¢ãƒƒãƒ—",
+                        "æ°´å±æ€§æ”»æ’ƒåŠ›ãƒ€ã‚¦ãƒ³",
+                        "é¢¨å±æ€§æ”»æ’ƒåŠ›ã‚¢ãƒƒãƒ—",
+                        "é¢¨å±æ€§æ”»æ’ƒåŠ›ãƒ€ã‚¦ãƒ³",
+                        "å…‰å±æ€§æ”»æ’ƒåŠ›ã‚¢ãƒƒãƒ—",
+                        "å…‰å±æ€§æ”»æ’ƒåŠ›ãƒ€ã‚¦ãƒ³",
+                        "é—‡å±æ€§æ”»æ’ƒåŠ›ã‚¢ãƒƒãƒ—",
+                        "é—‡å±æ€§æ”»æ’ƒåŠ›ãƒ€ã‚¦ãƒ³",
+                        "ç«å±æ€§é˜²å¾¡åŠ›ã‚¢ãƒƒãƒ—",
+                        "ç«å±æ€§é˜²å¾¡åŠ›ãƒ€ã‚¦ãƒ³",
+                        "æ°´å±æ€§é˜²å¾¡åŠ›ã‚¢ãƒƒãƒ—",
+                        "æ°´å±æ€§é˜²å¾¡åŠ›ãƒ€ã‚¦ãƒ³",
+                        "é¢¨å±æ€§é˜²å¾¡åŠ›ã‚¢ãƒƒãƒ—",
+                        "é¢¨å±æ€§é˜²å¾¡åŠ›ãƒ€ã‚¦ãƒ³",
+                        "å…‰å±æ€§é˜²å¾¡åŠ›ã‚¢ãƒƒãƒ—",
+                        "å…‰å±æ€§é˜²å¾¡åŠ›ãƒ€ã‚¦ãƒ³",
+                        "é—‡å±æ€§é˜²å¾¡åŠ›ã‚¢ãƒƒãƒ—",
+                        "é—‡å±æ€§é˜²å¾¡åŠ›ãƒ€ã‚¦ãƒ³",
                     ],
-                    ["‘®«Œn"] = [
-                        "‰ÎŒø‰ÊƒAƒbƒv",
-                        "…Œø‰ÊƒAƒbƒv",
-                        "•—Œø‰ÊƒAƒbƒv",
-                        "ŒõŒø‰ÊƒAƒbƒv",
-                        "ˆÅŒø‰ÊƒAƒbƒv",
-                        "‰Î‹­",
-                        "…‹­",
-                        "•—‹­",
-                        "‰Îã",
-                        "…ã",
-                        "•—ã",
-                        "‰ÎŠg",
-                        "…Šg",
-                        "•—Šg",
+                    ["å±æ€§ç³»"] = [
+                        "ç«åŠ¹æœã‚¢ãƒƒãƒ—",
+                        "æ°´åŠ¹æœã‚¢ãƒƒãƒ—",
+                        "é¢¨åŠ¹æœã‚¢ãƒƒãƒ—",
+                        "å…‰åŠ¹æœã‚¢ãƒƒãƒ—",
+                        "é—‡åŠ¹æœã‚¢ãƒƒãƒ—",
+                        "ç«å¼·",
+                        "æ°´å¼·",
+                        "é¢¨å¼·",
+                        "ç«å¼±",
+                        "æ°´å¼±",
+                        "é¢¨å¼±",
+                        "ç«æ‹¡",
+                        "æ°´æ‹¡",
+                        "é¢¨æ‹¡",
                     ],
-                    ["‚»‚Ì‘¼"] = [
-                        "HPƒAƒbƒv",
-                        "ƒq[ƒ‹",
-                        "ƒ`ƒƒ[ƒW",
-                        "ƒŠƒJƒo[",
-                        "ƒJƒEƒ“ƒ^[",
+                    ["ãã®ä»–"] = [
+                        "HPã‚¢ãƒƒãƒ—",
+                        "ãƒ’ãƒ¼ãƒ«",
+                        "ãƒãƒ£ãƒ¼ã‚¸",
+                        "ãƒªã‚«ãƒãƒ¼",
+                        "ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼",
                     ]
                 },
-                ["ƒŒƒMƒIƒ“ƒ}ƒbƒ`•â•ƒXƒLƒ‹"] = new()
+                ["ãƒ¬ã‚®ã‚ªãƒ³ãƒãƒƒãƒè£œåŠ©ã‚¹ã‚­ãƒ«"] = new()
                 {
-                    ["Šî‘bƒXƒeŒn"] = [
-                        "ƒpƒ[UP",
-                        "ƒpƒ[DOWN",
-                        "ƒK[ƒhUP",
-                        "ƒK[ƒhDOWN",
-                        "Sp.ƒpƒ[UP",
-                        "Sp.ƒpƒ[DOWN",
-                        "Sp.ƒK[ƒhUP",
-                        "Sp.ƒK[ƒhDOWN",
+                    ["åŸºç¤ã‚¹ãƒ†ç³»"] = [
+                        "ãƒ‘ãƒ¯ãƒ¼UP",
+                        "ãƒ‘ãƒ¯ãƒ¼DOWN",
+                        "ã‚¬ãƒ¼ãƒ‰UP",
+                        "ã‚¬ãƒ¼ãƒ‰DOWN",
+                        "Sp.ãƒ‘ãƒ¯ãƒ¼UP",
+                        "Sp.ãƒ‘ãƒ¯ãƒ¼DOWN",
+                        "Sp.ã‚¬ãƒ¼ãƒ‰UP",
+                        "Sp.ã‚¬ãƒ¼ãƒ‰DOWN",
                     ],
-                    ["‘®«Œn"] = [
-                        "‰Îƒpƒ[UP",
-                        "…ƒpƒ[UP",
-                        "•—ƒpƒ[UP",
-                        "‰Îƒpƒ[DOWN",
-                        "…ƒpƒ[DOWN",
-                        "•—ƒpƒ[DOWN",
-                        "‰ÎƒK[ƒhUP",
-                        "…ƒK[ƒhUP",
-                        "•—ƒK[ƒhUP",
-                        "‰ÎƒK[ƒhDOWN",
-                        "…ƒK[ƒhDOWN",
-                        "•—ƒK[ƒhDOWN",
+                    ["å±æ€§ç³»"] = [
+                        "ç«ãƒ‘ãƒ¯ãƒ¼UP",
+                        "æ°´ãƒ‘ãƒ¯ãƒ¼UP",
+                        "é¢¨ãƒ‘ãƒ¯ãƒ¼UP",
+                        "ç«ãƒ‘ãƒ¯ãƒ¼DOWN",
+                        "æ°´ãƒ‘ãƒ¯ãƒ¼DOWN",
+                        "é¢¨ãƒ‘ãƒ¯ãƒ¼DOWN",
+                        "ç«ã‚¬ãƒ¼ãƒ‰UP",
+                        "æ°´ã‚¬ãƒ¼ãƒ‰UP",
+                        "é¢¨ã‚¬ãƒ¼ãƒ‰UP",
+                        "ç«ã‚¬ãƒ¼ãƒ‰DOWN",
+                        "æ°´ã‚¬ãƒ¼ãƒ‰DOWN",
+                        "é¢¨ã‚¬ãƒ¼ãƒ‰DOWN",
                     ],
-                    ["‚»‚Ì‘¼"] = [
-                        "ƒ_ƒ[ƒWUP",
-                        "x‰‡UP",
-                        "‰ñ•œUP",
-                        "Œø‰Ê”ÍˆÍ+",
-                        "Šl“¾ƒ}ƒbƒ`PtUP/’Êí’P‘Ì",
-                        "Šl“¾ƒ}ƒbƒ`PtUP/“Áê’P‘Ì",
-                        "MPÁ”ïDOWN",
+                    ["ãã®ä»–"] = [
+                        "ãƒ€ãƒ¡ãƒ¼ã‚¸UP",
+                        "æ”¯æ´UP",
+                        "å›å¾©UP",
+                        "åŠ¹æœç¯„å›²+",
+                        "ç²å¾—ãƒãƒƒãƒPtUP/é€šå¸¸å˜ä½“",
+                        "ç²å¾—ãƒãƒƒãƒPtUP/ç‰¹æ®Šå˜ä½“",
+                        "MPæ¶ˆè²»DOWN",
                     ],
                 },
-                ["‚»‚Ì‘¼"] = new()
+                ["ãã®ä»–"] = new()
                 {
-                    ["ƒ‰ƒxƒ‹"] = [
-                        "ƒŒƒWƒFƒ“ƒ_ƒŠ[",
-                        "ƒAƒ‹ƒeƒBƒƒbƒg",
+                    ["ãƒ©ãƒ™ãƒ«"] = [
+                        "ãƒ¬ã‚¸ã‚§ãƒ³ãƒ€ãƒªãƒ¼",
+                        "ã‚¢ãƒ«ãƒ†ã‚£ãƒ¡ãƒƒãƒˆ",
                     ]
                 },
             });
@@ -217,15 +217,15 @@ namespace mitama.Pages.DeckBuilder
                 SpDef.Content = $"SpDef: 0";
             }
 
-            Fire.Content = $"‰Î: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Fire)}";
-            Water.Content = $"…: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Water)}";
-            Wind.Content = $"•—: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Wind)}";
-            Light.Content = $"Œõ: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Light)}";
-            Dark.Content = $"ˆÅ: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Dark)}";
+            Fire.Content = $"ç«: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Fire)}";
+            Water.Content = $"æ°´: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Water)}";
+            Wind.Content = $"é¢¨: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Wind)}";
+            Light.Content = $"å…‰: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Light)}";
+            Dark.Content = $"é—‡: {Deck.Concat(LegendaryDeck).Count(m => m.Memoria.Element is Element.Dark)}";
 
             if (Deck.DistinctBy(m => m.Memoria.Name).Count() != Deck.Count)
             {
-                GeneralInfoBar.Title = "’´ŠoÁ‚Ìƒƒ‚ƒŠƒA‚ªd•¡‚µ‚Ä‚¢‚Ü‚·";
+                GeneralInfoBar.Title = "è¶…è¦šé†’ã®ãƒ¡ãƒ¢ãƒªã‚¢ãŒé‡è¤‡ã—ã¦ã„ã¾ã™";
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
                 GeneralInfoBar.IsOpen = true;
             }
@@ -362,23 +362,23 @@ namespace mitama.Pages.DeckBuilder
                 SpAtk.Content = $"SpAtk: 0";
                 Def.Content = $"Def: 0";
                 SpDef.Content = $"SpDef: 0";
-                Fire.Content = $"‰Î: 0";
-                Water.Content = $"…: 0";
-                Wind.Content = $"•—: 0";
-                Light.Content = $"Œõ: 0";
-                Dark.Content = $"ˆÅ: 0";
+                Fire.Content = $"ç«: 0";
+                Water.Content = $"æ°´: 0";
+                Wind.Content = $"é¢¨: 0";
+                Light.Content = $"å…‰: 0";
+                Dark.Content = $"é—‡: 0";
 
                 if (toggleSwitch.IsOn)
                 {
-                    VoR.Label = "‘O‰q";
+                    VoR.Label = "å‰è¡›";
                     Pool = new(OriginalPool.Where(m => Costume.DummyVanguard.CanBeEquipped(m.Memoria)));
                     MemoriaSources.ItemsSource = Pool;
                     FilterOptionView = new(new Dictionary<string, string[]>
                     {
-                        ["í—Ş"] = ["’Êí’P‘Ì", "’Êí”ÍˆÍ", "“Áê’P‘Ì", "“Áê”ÍˆÍ"],
-                        ["‘®«"] = ["‰Î", "…", "•—", "Œõ", "ˆÅ"],
-                        ["”ÍˆÍ"] = ["A", "B", "C", "D", "E"],
-                        ["Œø‰Ê—Ê"] = ["‡T", "‡U", "‡V", "‡V+", "‡W", "‡W+", "‡X", "‡X+", "LG", "LG+"],
+                        ["ç¨®é¡"] = ["é€šå¸¸å˜ä½“", "é€šå¸¸ç¯„å›²", "ç‰¹æ®Šå˜ä½“", "ç‰¹æ®Šç¯„å›²"],
+                        ["å±æ€§"] = ["ç«", "æ°´", "é¢¨", "å…‰", "é—‡"],
+                        ["ç¯„å›²"] = ["A", "B", "C", "D", "E"],
+                        ["åŠ¹æœé‡"] = ["â… ", "â…¡", "â…¢", "â…¢+", "â…£", "â…£+", "â…¤", "â…¤+", "LG", "LG+"],
                     });
                     _currentFilters = [
                         FilterType.NormalSingle,
@@ -393,14 +393,14 @@ namespace mitama.Pages.DeckBuilder
                 }
                 else
                 {
-                    VoR.Label = "Œã‰q";
+                    VoR.Label = "å¾Œè¡›";
                     Pool = new(OriginalPool.Where(m => Costume.DummyRearguard.CanBeEquipped(m.Memoria)));
                     FilterOptionView = new(new Dictionary<string, string[]>
                     {
-                        ["í—Ş"] = ["x‰‡", "–WŠQ", "‰ñ•œ"],
-                        ["‘®«"] = ["‰Î", "…", "•—", "Œõ", "ˆÅ"],
-                        ["”ÍˆÍ"] = ["A", "B", "C", "D", "E"],
-                        ["Œø‰Ê—Ê"] = ["‡T", "‡U", "‡V", "‡V+", "‡W", "‡W+", "‡X", "‡X+", "LG", "LG+"],
+                        ["ç¨®é¡"] = ["æ”¯æ´", "å¦¨å®³", "å›å¾©"],
+                        ["å±æ€§"] = ["ç«", "æ°´", "é¢¨", "å…‰", "é—‡"],
+                        ["ç¯„å›²"] = ["A", "B", "C", "D", "E"],
+                        ["åŠ¹æœé‡"] = ["â… ", "â…¡", "â…¢", "â…¢+", "â…£", "â…£+", "â…¤", "â…¤+", "LG", "LG+"],
                     });
                     _currentFilters = [
                         FilterType.Support,
@@ -422,7 +422,7 @@ namespace mitama.Pages.DeckBuilder
         {
             switch (e.Node.Content.As<CheckBoxModel>().State)
             {
-                case "í—Ş":
+                case "ç¨®é¡":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -440,7 +440,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‘®«":
+                case "å±æ€§":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -455,7 +455,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "”ÍˆÍ":
+                case "ç¯„å›²":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -470,7 +470,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Œø‰Ê—Ê":
+                case "åŠ¹æœé‡":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -485,7 +485,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "’Êí’P‘Ì":
+                case "é€šå¸¸å˜ä½“":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -497,7 +497,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "’Êí”ÍˆÍ":
+                case "é€šå¸¸ç¯„å›²":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -509,7 +509,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "“Áê’P‘Ì":
+                case "ç‰¹æ®Šå˜ä½“":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -521,7 +521,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "“Áê”ÍˆÍ":
+                case "ç‰¹æ®Šç¯„å›²":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -533,7 +533,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "x‰‡":
+                case "æ”¯æ´":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -545,7 +545,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "–WŠQ":
+                case "å¦¨å®³":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -557,7 +557,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‰ñ•œ":
+                case "å›å¾©":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -595,10 +595,10 @@ namespace mitama.Pages.DeckBuilder
         {
             FilterOptionView = new(new Dictionary<string, string[]>
             {
-                ["í—Ş"] = ["x‰‡", "–WŠQ", "‰ñ•œ"],
-                ["‘®«"] = ["‰Î", "…", "•—", "Œõ", "ˆÅ"],
-                ["”ÍˆÍ"] = ["A", "B", "C", "D", "E"],
-                ["Œø‰Ê—Ê"] = ["‡T", "‡U", "‡V", "‡V+", "‡W", "‡W+", "‡X", "‡X+", "LG", "LG+"],
+                ["ç¨®é¡"] = ["æ”¯æ´", "å¦¨å®³", "å›å¾©"],
+                ["å±æ€§"] = ["ç«", "æ°´", "é¢¨", "å…‰", "é—‡"],
+                ["ç¯„å›²"] = ["A", "B", "C", "D", "E"],
+                ["åŠ¹æœé‡"] = ["â… ", "â…¡", "â…¢", "â…¢+", "â…£", "â…£+", "â…¤", "â…¤+", "LG", "LG+"],
             });
             _currentFilters = [
                 FilterType.Support,
@@ -617,7 +617,7 @@ namespace mitama.Pages.DeckBuilder
 
             switch (e.Node.Content.As<CheckBoxModel>().State)
             {
-                case "ATKƒAƒbƒv":
+                case "ATKã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -629,7 +629,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ATKƒ_ƒEƒ“":
+                case "ATKãƒ€ã‚¦ãƒ³":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -641,7 +641,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Sp.ATKƒAƒbƒv":
+                case "Sp.ATKã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -653,7 +653,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Sp.ATKƒ_ƒEƒ“":
+                case "Sp.ATKãƒ€ã‚¦ãƒ³":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -665,7 +665,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "DEFƒAƒbƒv":
+                case "DEFã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -677,7 +677,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "DEFƒ_ƒEƒ“":
+                case "DEFãƒ€ã‚¦ãƒ³":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -689,7 +689,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Sp.DEFƒAƒbƒv":
+                case "Sp.DEFã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -701,7 +701,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Sp.DEFƒ_ƒEƒ“":
+                case "Sp.DEFãƒ€ã‚¦ãƒ³":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -713,7 +713,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‰Î‘®«UŒ‚—ÍƒAƒbƒv":
+                case "ç«å±æ€§æ”»æ’ƒåŠ›ã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -725,7 +725,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‰Î‘®«UŒ‚—Íƒ_ƒEƒ“":
+                case "ç«å±æ€§æ”»æ’ƒåŠ›ãƒ€ã‚¦ãƒ³":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -737,7 +737,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "…‘®«UŒ‚—ÍƒAƒbƒv":
+                case "æ°´å±æ€§æ”»æ’ƒåŠ›ã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -749,7 +749,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "…‘®«UŒ‚—Íƒ_ƒEƒ“":
+                case "æ°´å±æ€§æ”»æ’ƒåŠ›ãƒ€ã‚¦ãƒ³":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -761,7 +761,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "•—‘®«UŒ‚—ÍƒAƒbƒv":
+                case "é¢¨å±æ€§æ”»æ’ƒåŠ›ã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -773,7 +773,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "•—‘®«UŒ‚—Íƒ_ƒEƒ“":
+                case "é¢¨å±æ€§æ”»æ’ƒåŠ›ãƒ€ã‚¦ãƒ³":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -785,7 +785,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Œõ‘®«UŒ‚—ÍƒAƒbƒv":
+                case "å…‰å±æ€§æ”»æ’ƒåŠ›ã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -797,7 +797,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Œõ‘®«UŒ‚—Íƒ_ƒEƒ“":
+                case "å…‰å±æ€§æ”»æ’ƒåŠ›ãƒ€ã‚¦ãƒ³":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -809,7 +809,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ˆÅ‘®«UŒ‚—ÍƒAƒbƒv":
+                case "é—‡å±æ€§æ”»æ’ƒåŠ›ã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -821,7 +821,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ˆÅ‘®«UŒ‚—Íƒ_ƒEƒ“":
+                case "é—‡å±æ€§æ”»æ’ƒåŠ›ãƒ€ã‚¦ãƒ³":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -833,7 +833,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‰ÎŒø‰ÊƒAƒbƒv":
+                case "ç«åŠ¹æœã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -845,7 +845,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "…Œø‰ÊƒAƒbƒv":
+                case "æ°´åŠ¹æœã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -857,7 +857,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "•—Œø‰ÊƒAƒbƒv":
+                case "é¢¨åŠ¹æœã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -869,7 +869,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ŒõŒø‰ÊƒAƒbƒv":
+                case "å…‰åŠ¹æœã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -881,7 +881,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ˆÅŒø‰ÊƒAƒbƒv":
+                case "é—‡åŠ¹æœã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -893,7 +893,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‰Î‹­":
+                case "ç«å¼·":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -905,7 +905,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "…‹­":
+                case "æ°´å¼·":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -917,7 +917,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "•—‹­":
+                case "é¢¨å¼·":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -929,7 +929,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‰Îã":
+                case "ç«å¼±":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -941,7 +941,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "…ã":
+                case "æ°´å¼±":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -953,7 +953,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "•—ã":
+                case "é¢¨å¼±":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -965,7 +965,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‰ÎŠg":
+                case "ç«æ‹¡":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -977,7 +977,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "…Šg":
+                case "æ°´æ‹¡":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -989,7 +989,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "•—Šg":
+                case "é¢¨æ‹¡":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1001,7 +1001,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "HPƒAƒbƒv":
+                case "HPã‚¢ãƒƒãƒ—":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1013,7 +1013,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ƒq[ƒ‹":
+                case "ãƒ’ãƒ¼ãƒ«":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1025,7 +1025,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ƒ`ƒƒ[ƒW":
+                case "ãƒãƒ£ãƒ¼ã‚¸":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1037,7 +1037,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ƒŠƒJƒo[":
+                case "ãƒªã‚«ãƒãƒ¼":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1049,7 +1049,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ƒJƒEƒ“ƒ^[":
+                case "ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1061,7 +1061,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ƒpƒ[UP":
+                case "ãƒ‘ãƒ¯ãƒ¼UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1073,7 +1073,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ƒpƒ[DOWN":
+                case "ãƒ‘ãƒ¯ãƒ¼DOWN":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1085,7 +1085,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ƒK[ƒhUP":
+                case "ã‚¬ãƒ¼ãƒ‰UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1097,7 +1097,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ƒK[ƒhDOWN":
+                case "ã‚¬ãƒ¼ãƒ‰DOWN":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1109,7 +1109,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Sp.ƒpƒ[UP":
+                case "Sp.ãƒ‘ãƒ¯ãƒ¼UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1121,7 +1121,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Sp.ƒpƒ[DOWN":
+                case "Sp.ãƒ‘ãƒ¯ãƒ¼DOWN":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1133,7 +1133,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Sp.ƒK[ƒhUP":
+                case "Sp.ã‚¬ãƒ¼ãƒ‰UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1145,7 +1145,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Sp.ƒK[ƒhDOWN":
+                case "Sp.ã‚¬ãƒ¼ãƒ‰DOWN":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1157,7 +1157,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‰Îƒpƒ[UP":
+                case "ç«ãƒ‘ãƒ¯ãƒ¼UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1169,7 +1169,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "…ƒpƒ[UP":
+                case "æ°´ãƒ‘ãƒ¯ãƒ¼UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1181,7 +1181,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "•—ƒpƒ[UP":
+                case "é¢¨ãƒ‘ãƒ¯ãƒ¼UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1193,7 +1193,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‰Îƒpƒ[DOWN":
+                case "ç«ãƒ‘ãƒ¯ãƒ¼DOWN":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1205,7 +1205,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "…ƒpƒ[DOWN":
+                case "æ°´ãƒ‘ãƒ¯ãƒ¼DOWN":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1217,7 +1217,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "•—ƒpƒ[DOWN":
+                case "é¢¨ãƒ‘ãƒ¯ãƒ¼DOWN":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1229,7 +1229,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‰ÎƒK[ƒhUP":
+                case "ç«ã‚¬ãƒ¼ãƒ‰UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1241,7 +1241,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "…ƒK[ƒhUP":
+                case "æ°´ã‚¬ãƒ¼ãƒ‰UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1253,7 +1253,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "•—ƒK[ƒhUP":
+                case "é¢¨ã‚¬ãƒ¼ãƒ‰UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1265,7 +1265,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‰ÎƒK[ƒhDOWN":
+                case "ç«ã‚¬ãƒ¼ãƒ‰DOWN":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1277,7 +1277,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "…ƒK[ƒhDOWN":
+                case "æ°´ã‚¬ãƒ¼ãƒ‰DOWN":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1289,7 +1289,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "•—ƒK[ƒhDOWN":
+                case "é¢¨ã‚¬ãƒ¼ãƒ‰DOWN":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1301,7 +1301,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ƒ_ƒ[ƒWUP":
+                case "ãƒ€ãƒ¡ãƒ¼ã‚¸UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1313,7 +1313,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "x‰‡UP":
+                case "æ”¯æ´UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1325,7 +1325,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "‰ñ•œUP":
+                case "å›å¾©UP":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1337,7 +1337,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Œø‰Ê”ÍˆÍ+":
+                case "åŠ¹æœç¯„å›²+":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1349,7 +1349,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Šl“¾ƒ}ƒbƒ`PtUP/’Êí’P‘Ì":
+                case "ç²å¾—ãƒãƒƒãƒPtUP/é€šå¸¸å˜ä½“":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1361,7 +1361,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "Šl“¾ƒ}ƒbƒ`PtUP/“Áê’P‘Ì":
+                case "ç²å¾—ãƒãƒƒãƒPtUP/ç‰¹æ®Šå˜ä½“":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1373,7 +1373,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "MPÁ”ïDOWN":
+                case "MPæ¶ˆè²»DOWN":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1385,7 +1385,7 @@ namespace mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "ƒŒƒWƒFƒ“ƒ_ƒŠ[":
+                case "ãƒ¬ã‚¸ã‚§ãƒ³ãƒ€ãƒªãƒ¼":
                     {
                         {
                             if ((bool)e.Node.IsChecked)
@@ -1399,7 +1399,7 @@ namespace mitama.Pages.DeckBuilder
                             break;
                         }
                     }
-                case "ƒAƒ‹ƒeƒBƒƒbƒg":
+                case "ã‚¢ãƒ«ãƒ†ã‚£ãƒ¡ãƒƒãƒˆ":
                     {
                         if ((bool)e.Node.IsChecked)
                         {
@@ -1681,7 +1681,7 @@ namespace mitama.Pages.DeckBuilder
                         stat is StatusDown(ElementGuard(Element.Dark), _)
                     )
             );
-            // ‘®«
+            // å±æ€§
             Filters.Add(
                 FilterType.FireStimulation,
                 memoria => memoria
@@ -1727,7 +1727,7 @@ namespace mitama.Pages.DeckBuilder
                         eff is ElementStimulation(Element.Dark)
                     )
             );
-            // ‘®‹­
+            // å±å¼·
             Filters.Add(
                 FilterType.FireStrong,
                 memoria => memoria
@@ -1755,7 +1755,7 @@ namespace mitama.Pages.DeckBuilder
                         eff is ElementStrengthen(Element.Wind)
                     )
             );
-            // ‘®ã
+            // å±å¼±
             Filters.Add(
                FilterType.FireWeak,
                memoria => memoria
@@ -1783,7 +1783,7 @@ namespace mitama.Pages.DeckBuilder
                         eff is ElementWeaken(Element.Wind)
                     )
             );
-            // ‘®Šg
+            // å±æ‹¡
             Filters.Add(
                 FilterType.FireSpread,
                 memoria => memoria
@@ -1811,16 +1811,16 @@ namespace mitama.Pages.DeckBuilder
                         eff is ElementSpread(Element.Wind)
                     )
             );
-            // ƒq[ƒ‹
+            // ãƒ’ãƒ¼ãƒ«
             Filters.Add(FilterType.Heal, memoria => memoria.Skill.Effects.Any(eff => eff is Heal));
-            // ƒ`ƒƒ[ƒW
+            // ãƒãƒ£ãƒ¼ã‚¸
             Filters.Add(FilterType.Charge, memoria => memoria.Skill.Effects.Any(eff => eff is Charge));
-            // ƒŠƒJƒo[
+            // ãƒªã‚«ãƒãƒ¼
             Filters.Add(FilterType.Recover, memoria => memoria.Skill.Effects.Any(eff => eff is Recover));
-            // ƒJƒEƒ“ƒ^[
+            // ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼
             Filters.Add(FilterType.Counter, memoria => memoria.Skill.Effects.Any(eff => eff is Counter));
 
-            // •â•ŒŸõƒIƒvƒVƒ‡ƒ“
+            // è£œåŠ©æ¤œç´¢ã‚ªãƒ—ã‚·ãƒ§ãƒ³
             Filters.Add(FilterType.NormalMatchPtUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is NormalMatchPtUp));
             Filters.Add(FilterType.SpecialMatchPtUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is SpecialMatchPtUp));
             Filters.Add(FilterType.DamageUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is DamageUp));
@@ -2067,7 +2067,7 @@ namespace mitama.Pages.DeckBuilder
             var member = MemberSelect.SelectedItem.As<MemberInfo>();
             if (Deck.Count == 0)
             {
-                GeneralInfoBar.Title = "•K{˜g‚ª‚ ‚è‚Ü‚¹‚ñBÅ’á1–‡‚Ìƒƒ‚ƒŠƒA‚ğ•Ò¬‚µ‚Ä‚­‚¾‚³‚¢B";
+                GeneralInfoBar.Title = "å¿…é ˆæ ãŒã‚ã‚Šã¾ã›ã‚“ã€‚æœ€ä½1æšã®ãƒ¡ãƒ¢ãƒªã‚¢ã‚’ç·¨æˆã—ã¦ãã ã•ã„ã€‚";
                 GeneralInfoBar.IsOpen = true;
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
                 await Task.Delay(3000);
@@ -2076,7 +2076,7 @@ namespace mitama.Pages.DeckBuilder
             }
             else if (LegendaryDeck.Count > 5 || Deck.Count > 20)
             {
-                GeneralInfoBar.Title = "ƒfƒbƒL‚Í20–‡‚Ü‚Å‚Å‚·iƒŒƒWƒFƒ“ƒ_ƒŠ[‚Í5–‡‚Ü‚Å‚Å‚·jB";
+                GeneralInfoBar.Title = "ãƒ‡ãƒƒã‚­ã¯20æšã¾ã§ã§ã™ï¼ˆãƒ¬ã‚¸ã‚§ãƒ³ãƒ€ãƒªãƒ¼ã¯5æšã¾ã§ã§ã™ï¼‰ã€‚";
                 GeneralInfoBar.IsOpen = true;
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
                 await Task.Delay(3000);
@@ -2091,7 +2091,7 @@ namespace mitama.Pages.DeckBuilder
                 using var unit = File.Create(path);
                 await unit.WriteAsync(new UTF8Encoding(true).GetBytes(
                     new Unit(name, member.Position is Front, [.. Deck, .. LegendaryDeck]).ToJson()));
-                GeneralInfoBar.Title = "•Û‘¶‚µ‚Ü‚µ‚½";
+                GeneralInfoBar.Title = "ä¿å­˜ã—ã¾ã—ãŸ";
                 GeneralInfoBar.IsOpen = true;
                 GeneralInfoBar.Severity = InfoBarSeverity.Informational;
                 await Task.Delay(3000);
@@ -2107,7 +2107,7 @@ namespace mitama.Pages.DeckBuilder
             var jsonBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(json));
             // copy to clipboard
             System.Windows.Clipboard.SetText($"http://mitama.tech/deck/?json={jsonBase64}");
-            GeneralInfoBar.Title = "ƒNƒŠƒbƒvƒ{[ƒh‚ÉƒŠƒ“ƒN‚ğƒRƒs[‚µ‚Ü‚µ‚½";
+            GeneralInfoBar.Title = "ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«ãƒªãƒ³ã‚¯ã‚’ã‚³ãƒ”ãƒ¼ã—ã¾ã—ãŸ";
             GeneralInfoBar.Severity = InfoBarSeverity.Success;
             GeneralInfoBar.IsOpen = true;
             await Task.Delay(3000);
@@ -2134,7 +2134,7 @@ namespace mitama.Pages.DeckBuilder
             }
             if (!unit.IsFront && Switch.IsOn)
             {
-                GeneralInfoBar.Title = "‘O‰qƒ‚[ƒh‚ÅŒã‰q•Ò¬‚ğƒ[ƒh‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñI";
+                GeneralInfoBar.Title = "å‰è¡›ãƒ¢ãƒ¼ãƒ‰ã§å¾Œè¡›ç·¨æˆã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ã“ã¨ã¯ã§ãã¾ã›ã‚“ï¼";
                 GeneralInfoBar.IsOpen = true;
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
                 await Task.Delay(3000);
@@ -2143,7 +2143,7 @@ namespace mitama.Pages.DeckBuilder
             }
             if (unit.IsFront && !Switch.IsOn)
             {
-                GeneralInfoBar.Title = "Œã‰qƒ‚[ƒh‚Å‘O‰q•Ò¬‚ğƒ[ƒh‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñI";
+                GeneralInfoBar.Title = "å¾Œè¡›ãƒ¢ãƒ¼ãƒ‰ã§å‰è¡›ç·¨æˆã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ã“ã¨ã¯ã§ãã¾ã›ã‚“ï¼";
                 GeneralInfoBar.IsOpen = true;
                 GeneralInfoBar.Severity = InfoBarSeverity.Error;
                 await Task.Delay(3000);
@@ -2231,7 +2231,7 @@ namespace mitama.Pages.DeckBuilder
             catch (Exception ex)
             {
                 var dialog = new DialogBuilder(XamlRoot)
-                    .WithTitle("“Ç¸”s")
+                    .WithTitle("èª­è¾¼å¤±æ•—")
                     .WithPrimary("OK")
                     .WithBody(new TextBlock
                     {
@@ -2256,7 +2256,7 @@ namespace mitama.Pages.DeckBuilder
                 {
                     new TextBlock
                     {
-                        Text = "‚±‚±‚É‰æ‘œ‚ğƒhƒ‰ƒbƒO•ƒhƒƒbƒv‚µ‚Ä‚­‚¾‚³‚¢",
+                        Text = "ã“ã“ã«ç”»åƒã‚’ãƒ‰ãƒ©ãƒƒã‚°ï¼†ãƒ‰ãƒ­ãƒƒãƒ—ã—ã¦ãã ã•ã„",
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
                         FontSize = 24,
@@ -2269,8 +2269,8 @@ namespace mitama.Pages.DeckBuilder
             content.Drop += Import_Drop;
 
             var dialog = new DialogBuilder(XamlRoot)
-                .WithTitle("“Ç‚İ‚İ")
-                .WithCancel("•Â‚¶‚é")
+                .WithTitle("èª­ã¿è¾¼ã¿")
+                .WithCancel("é–‰ã˜ã‚‹")
                 .WithBody(content)
                 .Build();
 
@@ -2304,20 +2304,20 @@ namespace mitama.Pages.DeckBuilder
                 var info = MemberInfo.FromJson(readJson);
                 if (info.Memorias is null)
                 {
-                    GeneralInfoBar.Title = "ƒƒ‚ƒŠƒA‚ª“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ";
+                    GeneralInfoBar.Title = "ãƒ¡ãƒ¢ãƒªã‚¢ãŒç™»éŒ²ã•ã‚Œã¦ã„ã¾ã›ã‚“";
                     GeneralInfoBar.IsOpen = true;
                     GeneralInfoBar.Severity = InfoBarSeverity.Error;
                     return;
                 }
-                // ID‚ğƒL[‚É‚µ‚½ƒƒ‚ƒŠƒA‚Ì«‘‚ğì¬
-                // ŠoÁ/’´ŠoÁ‚Ì‚¤‚¿‚Ğ‚Æ‚Â‚µ‚©“o˜^‚³‚ê‚Ä‚¢‚È‚¢‚½‚ß
+                // IDã‚’ã‚­ãƒ¼ã«ã—ãŸãƒ¡ãƒ¢ãƒªã‚¢ã®è¾æ›¸ã‚’ä½œæˆ
+                // è¦šé†’/è¶…è¦šé†’ã®ã†ã¡ã²ã¨ã¤ã—ã‹ç™»éŒ²ã•ã‚Œã¦ã„ãªã„ãŸã‚
                 var idToMemoria = Memoria
                     .List
                     .ToDictionary(m => m.Id);
                 Switch.IsOn = info.Position is Front;
 
-                // ƒƒ‚ƒŠƒA‚ÌID‚ğ“Ç‚İ‚ñ‚ÅA‚»‚ÌID‚É‘Î‰‚·‚éŠoÁ/’´ŠoÁƒƒ‚ƒŠƒA‚ÌƒŠƒXƒg‚ğæ“¾‚µA
-                // ‘•”õ‰Â”\‚Èƒƒ‚ƒŠƒA‚Ì‚İ‚ğ’Ç‰Á‚·‚é
+                // ãƒ¡ãƒ¢ãƒªã‚¢ã®IDã‚’èª­ã¿è¾¼ã‚“ã§ã€ãã®IDã«å¯¾å¿œã™ã‚‹è¦šé†’/è¶…è¦šé†’ãƒ¡ãƒ¢ãƒªã‚¢ã®ãƒªã‚¹ãƒˆã‚’å–å¾—ã—ã€
+                // è£…å‚™å¯èƒ½ãªãƒ¡ãƒ¢ãƒªã‚¢ã®ã¿ã‚’è¿½åŠ ã™ã‚‹
                 foreach (var memoria in info
                     .Memorias
                     .SelectMany(m => Memoria

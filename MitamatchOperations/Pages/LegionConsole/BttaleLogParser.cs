@@ -42,7 +42,7 @@ internal partial class BattleLogParser
         }
         var allyCandidate = hints.Ally.Members.Select(player =>
         {
-            var rate = 
+            var rate =
                 Algo.LevenshteinRate(player, parsedPlayer.Name)
               + Algo.LevenshteinRate(hints.Ally.Name, parsedPlayer.Legion);
             return (rate, player);
