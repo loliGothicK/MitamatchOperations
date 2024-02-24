@@ -130,7 +130,7 @@ public sealed partial class HistoriaViewer : Page
     {
         if (sender is not ComboBox comboBox) return;
         var selected = comboBox.SelectedValue.As<Player>().Name;
-        var logDir = @$"{Director.ProjectDir()}\{Summary.Allies[0].Legion}\BattleLog";
+        var logDir = @$"{Director.ProjectDir()}\{Director.ReadCache().Legion}\BattleLog";
         var statusPath = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\Ally\[{selected}]\status.json";
         var history = JsonSerializer.Deserialize<SortedDictionary<TimeOnly, AllStatus>>(File.ReadAllText(statusPath));
         chartView = new ChartViewModel(history);
