@@ -441,7 +441,7 @@ public sealed partial class ControlDashboardPage
                 {
                     OpponentInfoBar.IsOpen = true;
                     var waitingFor = (_ocrResult is not null || _predictResult is not null)
-                        ? $"for {_predictResult?.Name ?? _ocrResult?.Name}..."
+                        ? $"for {_ocrResult?.Name ?? _predictResult?.Name}..."
                         : "...";
                     OpponentInfoBar.Title = $@"Waiting {waitingFor}";
 
@@ -474,7 +474,7 @@ public sealed partial class ControlDashboardPage
                         case ActiveStat(var image):
                             {
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\is_activating\\True\\debug{_debugCounter++}.png");
-                                if (_ocrResult?.ActiveTime == 0)
+                                if ((_ocrResult?.ActiveTime ?? _predictResult?.ActiveTime) == 0)
                                 {
                                     _orderStat = new None();
                                     _ocrResult = null;
@@ -482,7 +482,7 @@ public sealed partial class ControlDashboardPage
                                 }
                                 else
                                 {
-                                    _orderStat = new Active(_ocrResult, DateTime.Now);
+                                    _orderStat = new Active(_ocrResult ?? _predictResult, DateTime.Now);
                                     _ocrResult = null;
                                     _predictResult = null;
                                 }
