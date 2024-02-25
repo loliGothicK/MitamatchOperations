@@ -35,13 +35,31 @@ public sealed partial class HistoriaViewer : Page
     public HistoriaViewer()
     {
         InitializeComponent();
+        var logDir = @$"{Director.ProjectDir()}\{Director.ReadCache().Legion}\BattleLog";
+        var directories = Directory.GetDirectories(logDir);
+        // directoriesのうち最初と最後の日付を取得
+        var first = DateTime.Parse(directories.First().Split("\\").Last());
+        var last = DateTime.Parse(directories.Last().Split("\\").Last());
+        Calendar.MinDate = first;
+        Calendar.MaxDate = last;
+        // directoriesに含まれる日付以外をBlackoutDatesに追加
+        var dates = directories.Select(d => DateTime.Parse(d.Split("\\").Last())).ToArray();
+        var blackoutDates = new List<DateTime>();
+        for (var date = first; date <= last; date = date.AddDays(1))
+        {
+            if (!dates.Contains(date))
+            {
+                blackoutDates.Add(date);
+            }
+        }
+        Calendar.BlackoutDates = [.. blackoutDates];
     }
 
     private void Load_Click(object _, RoutedEventArgs _e)
     {
         var allyLegion = Director.ReadCache().Legion;
         var logDir = @$"{Director.ProjectDir()}\{allyLegion}\BattleLog";
-        var path = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\summary.json";
+        var path = $@"{logDir}\{Calendar.SelectedDate:yyyy-MM-dd}\summary.json";
         if (!File.Exists(path))
         {
             return;
@@ -51,7 +69,7 @@ public sealed partial class HistoriaViewer : Page
         var r1 = summary.AllyPoints > summary.OpponentPoints ? "Win" : "Lose";
         var r2 = summary.AllyPoints > summary.OpponentPoints ? "Lose" : "Win";
 
-        Date.Text = $"{Calendar.Date:yyyy-MM-dd}";
+        Date.Text = $"{Calendar.SelectedDate:yyyy-MM-dd}";
         Title.Text = $"{r1}: {allyLegion}（{summary.AllyPoints:#,0}） - {r2}: {summary.Opponent}（{summary.OpponentPoints:#,0}）";
         NeunWelt.Text = $"ノイン: {summary.NeunWelt}";
         Comment.Text = summary.Comment;
@@ -87,7 +105,7 @@ public sealed partial class HistoriaViewer : Page
             OpponentOrders.Add(new OrderLog(order, $"{x.Time.Minute:D2}:{x.Time.Second:D2}"));
         }
         unitChanges.Clear();
-        path = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\unitChanges.json";
+        path = $@"{logDir}\{Calendar.SelectedDate:yyyy-MM-dd}\unitChanges.json";
         if (File.Exists(path))
         {
             var unitChangesData = JsonSerializer.Deserialize<UnitChanges>(File.ReadAllText(path));
@@ -103,7 +121,7 @@ public sealed partial class HistoriaViewer : Page
         }
         PlayerSelect.SelectedIndex = 0;
 
-        var statusPath = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\Ally\[{summary.Allies[0].Name}]\status.json";
+        var statusPath = $@"{logDir}\{Calendar.SelectedDate:yyyy-MM-dd}\Ally\[{summary.Allies[0].Name}]\status.json";
         var history = JsonSerializer.Deserialize<SortedDictionary<TimeOnly, AllStatus>>(File.ReadAllText(statusPath));
         chartView = new ChartViewModel(history);
     }
@@ -116,7 +134,7 @@ public sealed partial class HistoriaViewer : Page
         var playerName = menu.Target.AccessKey;
         var allyLegion = Director.ReadCache().Legion;
         var logDir = @$"{Director.ProjectDir()}\{allyLegion}\BattleLog";
-        var date = $"{Calendar.Date:yyyy-MM-dd}";
+        var date = $"{Calendar.SelectedDate:yyyy-MM-dd}";
         var dir = Summary.Allies.Select(p => p.Name).Contains(playerName)
             ? "Ally"
             : "Opponent";
@@ -155,7 +173,7 @@ public sealed partial class HistoriaViewer : Page
         var legion = AllyOrOpponent.SelectedIndex == 0 ? Director.ReadCache().Legion : Summary.Opponents[0].Legion;
         legion = ToRemoveRegex().Replace(legion, string.Empty);
         var logDir = @$"{Director.ProjectDir()}\{legion}\BattleLog";
-        var statusPath = $@"{logDir}\{Calendar.Date:yyyy-MM-dd}\Ally\[{selected}]\status.json";
+        var statusPath = $@"{logDir}\{Calendar.SelectedDate:yyyy-MM-dd}\Ally\[{selected}]\status.json";
         var history = JsonSerializer.Deserialize<SortedDictionary<TimeOnly, AllStatus>>(File.ReadAllText(statusPath));
         chartView = new ChartViewModel(history);
         Line.ItemsSource = chartView.Data;

@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using mitama.Pages.Common;
 
 // To learn more about WinUI, the WinUI project structure,

@@ -8,6 +8,7 @@
     xmlns:local="using:mitama.Pages.LegionConsole"
     xmlns:domain="using:mitama.Domain"
     xmlns:chart="using:Syncfusion.UI.Xaml.Charts"
+    xmlns:calendar="using:Syncfusion.UI.Xaml.Calendar"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -50,7 +51,7 @@
                     <AppBarButton.Flyout>
                         <Flyout>
                             <StackPanel>
-                                <CalendarDatePicker x:Name="Calendar" PlaceholderText="Pick a date" Header="Calendar" />
+                                <calendar:SfCalendar x:Name="Calendar"/>
                                 <Button Content="Load" Click="Load_Click" Margin="2"/>
                             </StackPanel>
                         </Flyout>

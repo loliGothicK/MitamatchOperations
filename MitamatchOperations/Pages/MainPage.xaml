@@ -45,9 +45,19 @@
                      x:Name="InfoBar"
                      IsOpen="False"/>
 
-            <ribbon:SfRibbon Grid.Row="2" x:Name="AppNavBar">
+            <ribbon:SfRibbon Grid.Row="2" x:Name="Ribbon">
                 <ribbon:SfRibbon.Tabs>
-                    <ribbon:RibbonTab Header="Home" />
+                    <ribbon:RibbonTab Header="Home">
+                        <ribbon:RibbonGroup Header="Legion">
+                            <ribbon:RibbonButton x:Name="ChangeProject"
+                                                 Content="Change Project"
+                                                 AllowedSizeModes="Large">
+                                <ribbon:RibbonButton.Icon>
+                                    <SymbolIcon Symbol="People"/>
+                                </ribbon:RibbonButton.Icon>
+                            </ribbon:RibbonButton>
+                        </ribbon:RibbonGroup>
+                    </ribbon:RibbonTab>
                     <ribbon:RibbonTab Header="View" />
                 </ribbon:SfRibbon.Tabs>
             </ribbon:SfRibbon>
