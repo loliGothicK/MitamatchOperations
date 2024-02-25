@@ -60,10 +60,7 @@ public sealed partial class HistoriaViewer : Page
         var allyLegion = Director.ReadCache().Legion;
         var logDir = @$"{Director.ProjectDir()}\{allyLegion}\BattleLog";
         var path = $@"{logDir}\{Calendar.SelectedDate:yyyy-MM-dd}\summary.json";
-        if (!File.Exists(path))
-        {
-            return;
-        }
+        if (!File.Exists(path)) return;
 
         var summary = Summary = JsonSerializer.Deserialize<Summary>(File.ReadAllText(path).Replace("\"Region\"", "\"Legion\""));
         var r1 = summary.AllyPoints > summary.OpponentPoints ? "Win" : "Lose";
