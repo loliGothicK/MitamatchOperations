@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -260,7 +261,7 @@ public sealed partial class MemberManageConsole
         {
             new DirectoryInfo($@"{Director.ProjectDir()}\{_LegionName}\Members\{toDelete}").Delete(true);
             Update();
-            return System.Threading.Tasks.Task.CompletedTask;
+            return Task.CompletedTask;
         });
         await dialog.ShowAsync();
     }
@@ -302,8 +303,42 @@ public sealed partial class MemberManageConsole
             fs.Write(save, 0, save.Length);
             fs.Close();
             Update();
-            return System.Threading.Tasks.Task.CompletedTask;
+            return Task.CompletedTask;
         });
+
+        await dialog.ShowAsync();
+    }
+
+    private async void Rename_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not MenuFlyoutItem item) return;
+        var input = new TextBox
+        {
+            PlaceholderText = "新しい名前を入力してください",
+            AcceptsReturn = false,
+            TextWrapping = TextWrapping.NoWrap,
+        };
+        var dialog = new DialogBuilder(XamlRoot)
+            .WithTitle("レギオンメンバの名前を変更します")
+            .WithBody(input)
+            .WithPrimary("Rename", new Defer(delegate
+            {
+                var newName = input.Text;
+                if (newName == "" || newName == item.AccessKey) return Task.CompletedTask;
+
+                var individualDir = Director.IndividualDir(Director.ReadCache().Legion, item.AccessKey);
+                var newDir = Director.IndividualDir(Director.ReadCache().Legion, newName, create: false);
+                Directory.Move(individualDir, newDir);
+                // read json and update name
+                var json = File.ReadAllText($@"{newDir}\info.json");
+                var info = MemberInfo.FromJson(json);
+                info = info with { Name = newName, UpdatedAt = DateTime.Now };
+                var newJson = JsonSerializer.Serialize(info);
+                File.WriteAllText($@"{newDir}\info.json", newJson);
+                return Task.CompletedTask;
+            }))
+            .WithCancel("Cancel")
+            .Build();
 
         await dialog.ShowAsync();
     }

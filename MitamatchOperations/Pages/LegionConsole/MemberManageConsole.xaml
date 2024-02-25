@@ -61,6 +61,7 @@
                            Margin="12,0,0,6"/>
                 <Grid.ContextFlyout>
                     <MenuFlyout>
+                        <MenuFlyoutItem Text="Rename" Click="Rename_Click" AccessKey="{x:Bind Name}"/>
                         <MenuFlyoutItem Text="Delete" Click="Delete_Click" AccessKey="{x:Bind Name}"/>
                     </MenuFlyout>
                 </Grid.ContextFlyout>

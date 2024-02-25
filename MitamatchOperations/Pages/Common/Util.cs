@@ -152,10 +152,10 @@ internal class Director
         if (!Exists(dir)) CreateDirectory(dir);
         return dir;
     }
-    internal static string IndividualDir(string project, string member)
+    internal static string IndividualDir(string project, string member, bool create = true)
     {
         var dir = $@"{ProjectDir()}\{project}\Members\{member}";
-        if (!Exists(dir)) CreateDirectory(dir);
+        if (create && !Exists(dir)) CreateDirectory(dir);
         return dir;
     }
 

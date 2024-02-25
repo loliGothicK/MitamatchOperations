@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Navigation;
 using mitama.Pages.Common;
 using mitama.Pages.Main;
@@ -26,7 +25,6 @@ public sealed partial class MainPage
     {
         InitializeComponent();
         NavigationCacheMode = NavigationCacheMode.Enabled;
-        AppNavBar.SelectedIndex = 0;
         LoadCache();
         RootFrame.Navigate(typeof(HomePage));
     }
@@ -39,7 +37,6 @@ public sealed partial class MainPage
         if (exists)
         {
             Project = Director.ReadCache().Legion;
-            LogInUser.Label = Avatar.AvatarName = User = Director.ReadCache().User ?? "不明なユーザー";
         }
         else
         {
@@ -180,62 +177,6 @@ public sealed partial class MainPage
         Director.CacheWrite(new Cache(Project, User).ToJsonBytes());
         await Task.Delay(2000);
         InfoBar.IsOpen = false;
-    }
-
-    private async void LogInUser_OnClick(object sender, RoutedEventArgs e)
-    {
-        // placeholder
-        string loggedIn = null;
-
-        // dialog forward definition
-        var dialog = new DialogBuilder(XamlRoot)
-            .WithTitle("ログインユーザーを選択してください")
-            .WithPrimary("ログイン")
-            .WithCancel("やっぱりやめる")
-            .Build();
-        dialog.IsPrimaryButtonEnabled = false;
-
-        // dialog content forward definition
-        var body = new DropDownButton
-        {
-            Content = Project,
-        };
-
-        // dialog content flyout
-        var menu = new MenuFlyout { Placement = FlyoutPlacementMode.Bottom };
-
-        // init flyout items
-        foreach (var member in Directory.GetFiles($@"{Director.ProjectDir()}\{Project}", "*.json")
-                     .Select(path => path.Split('\\').Last().Replace(".json", string.Empty)))
-        {
-            menu.Items.Add(new MenuFlyoutItem
-            {
-                Text = member,
-                Command = new Defer(delegate
-                {
-                    // store
-                    loggedIn = member;
-                    // show selected member name for UX
-                    body.Content = member;
-                    // enable when member is selected
-                    dialog.IsPrimaryButtonEnabled = true;
-                    return Task.CompletedTask;
-                })
-            });
-        }
-
-        // inject controls
-        body.Flyout = menu;
-        dialog.Content = body;
-
-        // ReSharper disable once AsyncVoidLambda
-        dialog.PrimaryButtonCommand = new Defer(async delegate
-        {
-            LogInUser.Label = User = loggedIn!;
-            await LoginInfo();
-        });
-
-        await dialog.ShowAsync();
     }
 }
 

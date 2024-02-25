@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="using:Syncfusion.UI.Xaml.Core"
+    xmlns:ribbon="using:Syncfusion.UI.Xaml.Ribbon"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -44,26 +45,13 @@
                      x:Name="InfoBar"
                      IsOpen="False"/>
 
-            <Pivot Grid.Row="2" x:Name="AppNavBar">
-                <PivotItem Header="Home">
-                    <Grid VerticalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                            <AppBarButton Label="change project" Click="ChangeProjectButton_Click">
-                                <AppBarButton.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE748;"/>
-                                </AppBarButton.Icon>
-                            </AppBarButton>
-                        </StackPanel>
-                        <AppBarButton x:Name="LogInUser" Grid.Column="1" Label="Anonymous" HorizontalAlignment="Right" Click="LogInUser_OnClick">
-                            <syncfusion:SfAvatarView x:Name="Avatar" />
-                        </AppBarButton>
-                    </Grid>
-                </PivotItem>
-            </Pivot>
+            <ribbon:SfRibbon Grid.Row="2" x:Name="AppNavBar">
+                <ribbon:SfRibbon.Tabs>
+                    <ribbon:RibbonTab Header="Home" />
+                    <ribbon:RibbonTab Header="View" />
+                </ribbon:SfRibbon.Tabs>
+            </ribbon:SfRibbon>
+
             <Grid Grid.Row="3">
                 <NavigationView ItemInvoked="NavView_ItemInvoked" >
                     <NavigationView.MenuItems>
