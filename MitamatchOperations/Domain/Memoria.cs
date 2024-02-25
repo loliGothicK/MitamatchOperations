@@ -281,6 +281,7 @@ public record MemoriaWithConcentration(Memoria Memoria, int Concentration)
 public record Memoria(
     int Id,
     string Link,
+    string FullName,
     string Name,
     MemoriaKind Kind,
     Element Element,
@@ -307,6 +308,7 @@ public record Memoria(
     [
         new Memoria(
             1354,
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
             "ラスバレライブ記念メモリア～グラン・エプレ～",
             "ラスバレライブ記念メモリア～グラン・エプレ～",
             new Vanguard(VanguardKind.NormalRange),
@@ -339,6 +341,7 @@ public record Memoria(
             1353,
             "ラスバレライブ記念メモリア～グラン・エプレ～",
             "ラスバレライブ記念メモリア～グラン・エプレ～",
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -367,6 +370,7 @@ public record Memoria(
         ),
         new Memoria(
             1352,
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
             "ラスバレライブ記念メモリア～グラン・エプレ～",
             "ラスバレライブ記念メモリア～グラン・エプレ～",
             new Rearguard(RearguardKind.Support),
@@ -399,6 +403,7 @@ public record Memoria(
             1351,
             "ラスバレライブ記念メモリア～グラン・エプレ～",
             "ラスバレライブ記念メモリア～グラン・エプレ～",
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -427,6 +432,7 @@ public record Memoria(
         ),
         new Memoria(
             1350,
+            "ラスバレライブ記念メモリア～グラン・エプレ～",
             "ラスバレライブ記念メモリア～グラン・エプレ～",
             "ラスバレライブ記念メモリア～グラン・エプレ～",
             new Rearguard(RearguardKind.Recovery),
@@ -459,6 +465,7 @@ public record Memoria(
             1349,
             "ラスバレライブ記念メモリア～ヘルヴォル～",
             "ラスバレライブ記念メモリア～ヘルヴォル～",
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -487,6 +494,7 @@ public record Memoria(
         ),
         new Memoria(
             1348,
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
             "ラスバレライブ記念メモリア～ヘルヴォル～",
             "ラスバレライブ記念メモリア～ヘルヴォル～",
             new Vanguard(VanguardKind.SpecialRange),
@@ -519,6 +527,7 @@ public record Memoria(
             1347,
             "ラスバレライブ記念メモリア～ヘルヴォル～",
             "ラスバレライブ記念メモリア～ヘルヴォル～",
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -547,6 +556,7 @@ public record Memoria(
         ),
         new Memoria(
             1346,
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
             "ラスバレライブ記念メモリア～ヘルヴォル～",
             "ラスバレライブ記念メモリア～ヘルヴォル～",
             new Rearguard(RearguardKind.Interference),
@@ -579,6 +589,7 @@ public record Memoria(
             1345,
             "ラスバレライブ記念メモリア～ヘルヴォル～",
             "ラスバレライブ記念メモリア～ヘルヴォル～",
+            "ラスバレライブ記念メモリア～ヘルヴォル～",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -607,6 +618,7 @@ public record Memoria(
         ),
         new Memoria(
             1344,
+            "ラスバレライブ記念メモリア～一柳隊～",
             "ラスバレライブ記念メモリア～一柳隊～",
             "ラスバレライブ記念メモリア～一柳隊～",
             new Vanguard(VanguardKind.NormalRange),
@@ -639,6 +651,7 @@ public record Memoria(
             1343,
             "ラスバレライブ記念メモリア～一柳隊～",
             "ラスバレライブ記念メモリア～一柳隊～",
+            "ラスバレライブ記念メモリア～一柳隊～",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -667,6 +680,7 @@ public record Memoria(
         ),
         new Memoria(
             1342,
+            "ラスバレライブ記念メモリア～一柳隊～",
             "ラスバレライブ記念メモリア～一柳隊～",
             "ラスバレライブ記念メモリア～一柳隊～",
             new Rearguard(RearguardKind.Support),
@@ -699,6 +713,7 @@ public record Memoria(
             1341,
             "ラスバレライブ記念メモリア～一柳隊～",
             "ラスバレライブ記念メモリア～一柳隊～",
+            "ラスバレライブ記念メモリア～一柳隊～",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -727,6 +742,7 @@ public record Memoria(
         ),
         new Memoria(
             1340,
+            "ラスバレライブ記念メモリア～一柳隊～",
             "ラスバレライブ記念メモリア～一柳隊～",
             "ラスバレライブ記念メモリア～一柳隊～",
             new Rearguard(RearguardKind.Recovery),
@@ -758,6 +774,7 @@ public record Memoria(
         new Memoria(
             1339,
             "クリエイターズコラボ屋台で一杯",
+            "クリエイターズコラボ-屋台で一杯-",
             "屋台で一杯",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -788,6 +805,7 @@ public record Memoria(
         new Memoria(
             1338,
             "クリエイターズコラボ屋台で一杯",
+            "クリエイターズコラボ-屋台で一杯-",
             "屋台で一杯",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -818,6 +836,7 @@ public record Memoria(
         new Memoria(
             1337,
             "クリエイターズコラボ屋台で一杯",
+            "クリエイターズコラボ-屋台で一杯-",
             "屋台で一杯",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -848,6 +867,7 @@ public record Memoria(
         new Memoria(
             1336,
             "クリエイターズコラボ丸底鍋の既視感",
+            "クリエイターズコラボ-丸底鍋の既視感-",
             "丸底鍋の既視感",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -878,6 +898,7 @@ public record Memoria(
         new Memoria(
             1335,
             "クリエイターズコラボ丸底鍋の既視感",
+            "クリエイターズコラボ-丸底鍋の既視感-",
             "丸底鍋の既視感",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -908,6 +929,7 @@ public record Memoria(
         new Memoria(
             1334,
             "クリエイターズコラボ丸底鍋の既視感",
+            "クリエイターズコラボ-丸底鍋の既視感-",
             "丸底鍋の既視感",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -938,6 +960,7 @@ public record Memoria(
         new Memoria(
             1333,
             "クリエイターズコラボ丸底鍋の既視感",
+            "クリエイターズコラボ-丸底鍋の既視感-",
             "丸底鍋の既視感",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -968,6 +991,7 @@ public record Memoria(
         new Memoria(
             1332,
             "クリエイターズコラボ色とりどりの遊蝶花",
+            "クリエイターズコラボ-色とりどりの遊蝶花-",
             "色とりどりの遊蝶花",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -998,6 +1022,7 @@ public record Memoria(
         new Memoria(
             1331,
             "クリエイターズコラボ色とりどりの遊蝶花",
+            "クリエイターズコラボ-色とりどりの遊蝶花-",
             "色とりどりの遊蝶花",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
@@ -1028,6 +1053,7 @@ public record Memoria(
         new Memoria(
             1330,
             "クリエイターズコラボ色とりどりの遊蝶花",
+            "クリエイターズコラボ-色とりどりの遊蝶花-",
             "色とりどりの遊蝶花",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -1058,6 +1084,7 @@ public record Memoria(
         new Memoria(
             1329,
             "クリエイターズコラボ色とりどりの遊蝶花",
+            "クリエイターズコラボ-色とりどりの遊蝶花-",
             "色とりどりの遊蝶花",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -1088,6 +1115,7 @@ public record Memoria(
         new Memoria(
             1328,
             "クリエイターズコラボ色とりどりの遊蝶花",
+            "クリエイターズコラボ-色とりどりの遊蝶花-",
             "色とりどりの遊蝶花",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -1118,6 +1146,7 @@ public record Memoria(
         new Memoria(
             1327,
             "クリエイターズコラボ芽吹く心",
+            "クリエイターズコラボ-芽吹く心-",
             "芽吹く心",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -1148,6 +1177,7 @@ public record Memoria(
         new Memoria(
             1326,
             "クリエイターズコラボ芽吹く心",
+            "クリエイターズコラボ-芽吹く心-",
             "芽吹く心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -1178,6 +1208,7 @@ public record Memoria(
         new Memoria(
             1325,
             "クリエイターズコラボ芽吹く心",
+            "クリエイターズコラボ-芽吹く心-",
             "芽吹く心",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -1208,6 +1239,7 @@ public record Memoria(
         new Memoria(
             1324,
             "クリエイターズコラボ芽吹く心",
+            "クリエイターズコラボ-芽吹く心-",
             "芽吹く心",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -1238,6 +1270,7 @@ public record Memoria(
         new Memoria(
             1323,
             "クリエイターズコラボ芽吹く心",
+            "クリエイターズコラボ-芽吹く心-",
             "芽吹く心",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -1268,6 +1301,7 @@ public record Memoria(
         new Memoria(
             1322,
             "クリエイターズコラボ小さな幸せを冠して",
+            "クリエイターズコラボ-小さな幸せを冠して-",
             "小さな幸せを冠して",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -1298,6 +1332,7 @@ public record Memoria(
         new Memoria(
             1321,
             "クリエイターズコラボ小さな幸せを冠して",
+            "クリエイターズコラボ-小さな幸せを冠して-",
             "小さな幸せを冠して",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -1328,6 +1363,7 @@ public record Memoria(
         new Memoria(
             1320,
             "クリエイターズコラボ小さな幸せを冠して",
+            "クリエイターズコラボ-小さな幸せを冠して-",
             "小さな幸せを冠して",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -1358,6 +1394,7 @@ public record Memoria(
         new Memoria(
             1319,
             "クリエイターズコラボ小さな幸せを冠して",
+            "クリエイターズコラボ-小さな幸せを冠して-",
             "小さな幸せを冠して",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -1388,6 +1425,7 @@ public record Memoria(
         new Memoria(
             1318,
             "クリエイターズコラボあなたのカメリア",
+            "クリエイターズコラボ-あなたのカメリア-",
             "あなたのカメリア",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -1418,6 +1456,7 @@ public record Memoria(
         new Memoria(
             1317,
             "クリエイターズコラボあなたのカメリア",
+            "クリエイターズコラボ-あなたのカメリア-",
             "あなたのカメリア",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -1448,6 +1487,7 @@ public record Memoria(
         new Memoria(
             1316,
             "クリエイターズコラボあなたのカメリア",
+            "クリエイターズコラボ-あなたのカメリア-",
             "あなたのカメリア",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -1477,6 +1517,7 @@ public record Memoria(
         ),
         new Memoria(
             1315,
+            "すずめ♡あらもーど",
             "すずめ♡あらもーど",
             "すずめ♡あらもーど",
             new Vanguard(VanguardKind.NormalRange),
@@ -1509,6 +1550,7 @@ public record Memoria(
             1314,
             "すずめ♡あらもーど",
             "すずめ♡あらもーど",
+            "すずめ♡あらもーど",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -1537,6 +1579,7 @@ public record Memoria(
         ),
         new Memoria(
             1313,
+            "すずめ♡あらもーど",
             "すずめ♡あらもーど",
             "すずめ♡あらもーど",
             new Rearguard(RearguardKind.Support),
@@ -1569,6 +1612,7 @@ public record Memoria(
             1312,
             "すずめ♡あらもーど",
             "すずめ♡あらもーど",
+            "すずめ♡あらもーど",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -1597,6 +1641,7 @@ public record Memoria(
         ),
         new Memoria(
             1311,
+            "すうぃ～と♡にゃんだふる",
             "すうぃ～と♡にゃんだふる",
             "すうぃ～と♡にゃんだふる",
             new Vanguard(VanguardKind.NormalRange),
@@ -1630,6 +1675,7 @@ public record Memoria(
             1310,
             "すうぃ～と♡にゃんだふる",
             "すうぃ～と♡にゃんだふる",
+            "すうぃ～と♡にゃんだふる",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -1659,6 +1705,7 @@ public record Memoria(
         ),
         new Memoria(
             1309,
+            "すうぃ～と♡にゃんだふる",
             "すうぃ～と♡にゃんだふる",
             "すうぃ～と♡にゃんだふる",
             new Rearguard(RearguardKind.Recovery),
@@ -1692,6 +1739,7 @@ public record Memoria(
             1308,
             "お出迎え♡スウィートハート",
             "お出迎え♡スウィートハート",
+            "お出迎え♡スウィートハート",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -1720,6 +1768,7 @@ public record Memoria(
         ),
         new Memoria(
             1307,
+            "お出迎え♡スウィートハート",
             "お出迎え♡スウィートハート",
             "お出迎え♡スウィートハート",
             new Rearguard(RearguardKind.Interference),
@@ -1752,6 +1801,7 @@ public record Memoria(
             1306,
             "お出迎え♡スウィートハート",
             "お出迎え♡スウィートハート",
+            "お出迎え♡スウィートハート",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -1781,6 +1831,7 @@ public record Memoria(
         new Memoria(
             1305,
             "ultimatememoria変幻自在のtrickster",
+            "Ultimate Memoria -変幻自在のtrickster-",
             "変幻自在のtrickster",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -1811,6 +1862,7 @@ public record Memoria(
         new Memoria(
             1304,
             "ultimatememoria変幻自在のtrickster",
+            "Ultimate Memoria -変幻自在のtrickster-",
             "変幻自在のtrickster",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -1841,6 +1893,7 @@ public record Memoria(
         new Memoria(
             1303,
             "ultimatememoria戦場の一番星",
+            "Ultimate Memoria -戦場の一番星-",
             "戦場の一番星",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -1871,6 +1924,7 @@ public record Memoria(
         new Memoria(
             1302,
             "ultimatememoria戦場の一番星",
+            "Ultimate Memoria -戦場の一番星-",
             "戦場の一番星",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -1901,6 +1955,7 @@ public record Memoria(
         new Memoria(
             1301,
             "ultimatememoria閑雅なる氷帝",
+            "Ultimate Memoria -閑雅なる氷帝-",
             "閑雅なる氷帝",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -1931,6 +1986,7 @@ public record Memoria(
         new Memoria(
             1300,
             "ultimatememoria閑雅なる氷帝",
+            "Ultimate Memoria -閑雅なる氷帝-",
             "閑雅なる氷帝",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -1961,6 +2017,7 @@ public record Memoria(
         new Memoria(
             1299,
             "ultimatememoria日輪背負う天使",
+            "Ultimate Memoria -日輪背負う天使-",
             "日輪背負う天使",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -1991,6 +2048,7 @@ public record Memoria(
         new Memoria(
             1298,
             "ultimatememoria日輪背負う天使",
+            "Ultimate Memoria -日輪背負う天使-",
             "日輪背負う天使",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -2021,6 +2079,7 @@ public record Memoria(
         new Memoria(
             1297,
             "ultimatememoria至宝の煌き",
+            "Ultimate Memoria -至宝の煌き-",
             "至宝の煌き",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -2051,6 +2110,7 @@ public record Memoria(
         new Memoria(
             1296,
             "ultimatememoria至宝の煌き",
+            "Ultimate Memoria -至宝の煌き-",
             "至宝の煌き",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -2081,6 +2141,7 @@ public record Memoria(
         new Memoria(
             1295,
             "クリエイターズコラボ可憐な香に包まれて",
+            "クリエイターズコラボ-可憐な香に包まれて-",
             "可憐な香に包まれて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -2111,6 +2172,7 @@ public record Memoria(
         new Memoria(
             1294,
             "クリエイターズコラボ可憐な香に包まれて",
+            "クリエイターズコラボ-可憐な香に包まれて-",
             "可憐な香に包まれて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -2141,6 +2203,7 @@ public record Memoria(
         new Memoria(
             1293,
             "クリエイターズコラボ可憐な香に包まれて",
+            "クリエイターズコラボ-可憐な香に包まれて-",
             "可憐な香に包まれて",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -2171,6 +2234,7 @@ public record Memoria(
         new Memoria(
             1292,
             "クリエイターズコラボ可憐な香に包まれて",
+            "クリエイターズコラボ-可憐な香に包まれて-",
             "可憐な香に包まれて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -2201,6 +2265,7 @@ public record Memoria(
         new Memoria(
             1291,
             "クリエイターズコラボせんぱいのお花たち",
+            "クリエイターズコラボ-せんぱいのお花たち-",
             "せんぱいのお花たち",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -2231,6 +2296,7 @@ public record Memoria(
         new Memoria(
             1290,
             "クリエイターズコラボせんぱいのお花たち",
+            "クリエイターズコラボ-せんぱいのお花たち-",
             "せんぱいのお花たち",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -2261,6 +2327,7 @@ public record Memoria(
         new Memoria(
             1289,
             "クリエイターズコラボせんぱいのお花たち",
+            "クリエイターズコラボ-せんぱいのお花たち-",
             "せんぱいのお花たち",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -2292,6 +2359,7 @@ public record Memoria(
             1288,
             "出撃リリィサバイバル",
             "出撃！リリィサバイバル",
+            "出撃！リリィサバイバル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -2321,6 +2389,7 @@ public record Memoria(
         new Memoria(
             1287,
             "出撃リリィサバイバル",
+            "出撃！リリィサバイバル",
             "出撃！リリィサバイバル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -2352,6 +2421,7 @@ public record Memoria(
             1286,
             "出撃リリィサバイバル",
             "出撃！リリィサバイバル",
+            "出撃！リリィサバイバル",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -2381,6 +2451,7 @@ public record Memoria(
         new Memoria(
             1285,
             "出撃リリィサバイバル",
+            "出撃！リリィサバイバル",
             "出撃！リリィサバイバル",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -2412,6 +2483,7 @@ public record Memoria(
             1284,
             "出撃リリィサバイバル",
             "出撃！リリィサバイバル",
+            "出撃！リリィサバイバル",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -2440,6 +2512,7 @@ public record Memoria(
         ),
         new Memoria(
             1283,
+            "瞳の中のステラ",
             "瞳の中のステラ",
             "瞳の中のステラ",
             new Vanguard(VanguardKind.NormalRange),
@@ -2472,6 +2545,7 @@ public record Memoria(
             1282,
             "瞳の中のステラ",
             "瞳の中のステラ",
+            "瞳の中のステラ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -2500,6 +2574,7 @@ public record Memoria(
         ),
         new Memoria(
             1281,
+            "瞳の中のステラ",
             "瞳の中のステラ",
             "瞳の中のステラ",
             new Rearguard(RearguardKind.Support),
@@ -2532,6 +2607,7 @@ public record Memoria(
             1280,
             "瞳の中のステラ",
             "瞳の中のステラ",
+            "瞳の中のステラ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -2560,6 +2636,7 @@ public record Memoria(
         ),
         new Memoria(
             1279,
+            "優美な花に誘われて",
             "優美な花に誘われて",
             "優美な花に誘われて",
             new Rearguard(RearguardKind.Interference),
@@ -2593,6 +2670,7 @@ public record Memoria(
             1278,
             "幻惑の麗姫",
             "幻惑の麗姫",
+            "幻惑の麗姫",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -2621,6 +2699,7 @@ public record Memoria(
         ),
         new Memoria(
             1277,
+            "幻惑の麗姫",
             "幻惑の麗姫",
             "幻惑の麗姫",
             new Vanguard(VanguardKind.SpecialRange),
@@ -2653,6 +2732,7 @@ public record Memoria(
             1276,
             "幻惑の麗姫",
             "幻惑の麗姫",
+            "幻惑の麗姫",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -2681,6 +2761,7 @@ public record Memoria(
         ),
         new Memoria(
             1275,
+            "幻惑の麗姫",
             "幻惑の麗姫",
             "幻惑の麗姫",
             new Rearguard(RearguardKind.Recovery),
@@ -2713,6 +2794,7 @@ public record Memoria(
             1274,
             "メルヘンチック・ヒロイン",
             "メルヘンチック・ヒロイン",
+            "メルヘンチック・ヒロイン",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -2741,6 +2823,7 @@ public record Memoria(
         ),
         new Memoria(
             1273,
+            "メルヘンチック・ヒロイン",
             "メルヘンチック・ヒロイン",
             "メルヘンチック・ヒロイン",
             new Rearguard(RearguardKind.Support),
@@ -2773,6 +2856,7 @@ public record Memoria(
             1272,
             "メルヘンチック・ヒロイン",
             "メルヘンチック・ヒロイン",
+            "メルヘンチック・ヒロイン",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -2801,6 +2885,7 @@ public record Memoria(
         ),
         new Memoria(
             1271,
+            "アトラクティヴ・キャンドル",
             "アトラクティヴ・キャンドル",
             "アトラクティヴ・キャンドル",
             new Vanguard(VanguardKind.NormalRange),
@@ -2834,6 +2919,7 @@ public record Memoria(
             1270,
             "アトラクティヴ・キャンドル",
             "アトラクティヴ・キャンドル",
+            "アトラクティヴ・キャンドル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -2863,6 +2949,7 @@ public record Memoria(
         ),
         new Memoria(
             1269,
+            "アトラクティヴ・キャンドル",
             "アトラクティヴ・キャンドル",
             "アトラクティヴ・キャンドル",
             new Rearguard(RearguardKind.Support),
@@ -2895,6 +2982,7 @@ public record Memoria(
         new Memoria(
             1268,
             "emotionalmemoria見つめてシンパシー",
+            "Emotional Memoria -見つめてシンパシー-",
             "見つめてシンパシー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -2925,6 +3013,7 @@ public record Memoria(
         new Memoria(
             1267,
             "emotionalmemoria見つめてシンパシー",
+            "Emotional Memoria -見つめてシンパシー-",
             "見つめてシンパシー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -2955,6 +3044,7 @@ public record Memoria(
         new Memoria(
             1266,
             "emotionalmemoria見つめてシンパシー",
+            "Emotional Memoria -見つめてシンパシー-",
             "見つめてシンパシー",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -2985,6 +3075,7 @@ public record Memoria(
         new Memoria(
             1265,
             "emotionalmemoria見つめてシンパシー",
+            "Emotional Memoria -見つめてシンパシー-",
             "見つめてシンパシー",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -3015,6 +3106,7 @@ public record Memoria(
         new Memoria(
             1264,
             "emotionalmemoria見つめてシンパシー",
+            "Emotional Memoria -見つめてシンパシー-",
             "見つめてシンパシー",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -3044,6 +3136,7 @@ public record Memoria(
         ),
         new Memoria(
             1263,
+            "褪せない夜",
             "褪せない夜",
             "褪せない夜",
             new Vanguard(VanguardKind.NormalRange),
@@ -3076,6 +3169,7 @@ public record Memoria(
             1262,
             "褪せない夜",
             "褪せない夜",
+            "褪せない夜",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -3104,6 +3198,7 @@ public record Memoria(
         ),
         new Memoria(
             1261,
+            "褪せない夜",
             "褪せない夜",
             "褪せない夜",
             new Rearguard(RearguardKind.Support),
@@ -3136,6 +3231,7 @@ public record Memoria(
             1260,
             "褪せない夜",
             "褪せない夜",
+            "褪せない夜",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -3165,6 +3261,7 @@ public record Memoria(
         new Memoria(
             1259,
             "ようとちかるとらん・ラン・run♬",
+            "ようとちかるとらん・ラン・RUN♬",
             "ようとちかるとらん・ラン・RUN♬",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -3197,6 +3294,7 @@ public record Memoria(
             1258,
             "月灯りに姫と歌う",
             "月灯りに姫と歌う",
+            "月灯りに姫と歌う",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -3225,6 +3323,7 @@ public record Memoria(
         ),
         new Memoria(
             1257,
+            "月灯りに姫と歌う",
             "月灯りに姫と歌う",
             "月灯りに姫と歌う",
             new Rearguard(RearguardKind.Support),
@@ -3257,6 +3356,7 @@ public record Memoria(
             1256,
             "月灯りに姫と歌う",
             "月灯りに姫と歌う",
+            "月灯りに姫と歌う",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -3287,6 +3387,7 @@ public record Memoria(
             1255,
             "月灯りに姫と歌う",
             "月灯りに姫と歌う",
+            "月灯りに姫と歌う",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -3315,6 +3416,7 @@ public record Memoria(
         ),
         new Memoria(
             1254,
+            "婀娜やかな誘い",
             "婀娜やかな誘い",
             "婀娜やかな誘い",
             new Vanguard(VanguardKind.SpecialRange),
@@ -3348,6 +3450,7 @@ public record Memoria(
             1253,
             "3rdanniversarydream",
             "3rd Anniversary DREAM",
+            "3rd Anniversary DREAM",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -3377,6 +3480,7 @@ public record Memoria(
         new Memoria(
             1252,
             "3rdanniversarydream",
+            "3rd Anniversary DREAM",
             "3rd Anniversary DREAM",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -3408,6 +3512,7 @@ public record Memoria(
             1251,
             "3rdanniversarydream",
             "3rd Anniversary DREAM",
+            "3rd Anniversary DREAM",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -3437,6 +3542,7 @@ public record Memoria(
         new Memoria(
             1250,
             "3rdanniversarydream",
+            "3rd Anniversary DREAM",
             "3rd Anniversary DREAM",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -3468,6 +3574,7 @@ public record Memoria(
             1249,
             "3rdanniversarydream",
             "3rd Anniversary DREAM",
+            "3rd Anniversary DREAM",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -3496,6 +3603,7 @@ public record Memoria(
         ),
         new Memoria(
             1248,
+            "熱に浮かされて",
             "熱に浮かされて",
             "熱に浮かされて",
             new Vanguard(VanguardKind.NormalRange),
@@ -3528,6 +3636,7 @@ public record Memoria(
             1247,
             "熱に浮かされて",
             "熱に浮かされて",
+            "熱に浮かされて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -3556,6 +3665,7 @@ public record Memoria(
         ),
         new Memoria(
             1246,
+            "熱に浮かされて",
             "熱に浮かされて",
             "熱に浮かされて",
             new Rearguard(RearguardKind.Support),
@@ -3588,6 +3698,7 @@ public record Memoria(
             1245,
             "熱に浮かされて",
             "熱に浮かされて",
+            "熱に浮かされて",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -3616,6 +3727,7 @@ public record Memoria(
         ),
         new Memoria(
             1244,
+            "月影のロマンス",
             "月影のロマンス",
             "月影のロマンス",
             new Vanguard(VanguardKind.NormalRange),
@@ -3648,6 +3760,7 @@ public record Memoria(
             1243,
             "月影のロマンス",
             "月影のロマンス",
+            "月影のロマンス",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -3676,6 +3789,7 @@ public record Memoria(
         ),
         new Memoria(
             1242,
+            "月影のロマンス",
             "月影のロマンス",
             "月影のロマンス",
             new Rearguard(RearguardKind.Interference),
@@ -3708,6 +3822,7 @@ public record Memoria(
             1241,
             "月影のロマンス",
             "月影のロマンス",
+            "月影のロマンス",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -3736,6 +3851,7 @@ public record Memoria(
         ),
         new Memoria(
             1240,
+            "尊みエスコート",
             "尊みエスコート",
             "尊みエスコート",
             new Vanguard(VanguardKind.SpecialRange),
@@ -3769,6 +3885,7 @@ public record Memoria(
             1239,
             "尊みエスコート",
             "尊みエスコート",
+            "尊みエスコート",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -3798,6 +3915,7 @@ public record Memoria(
         ),
         new Memoria(
             1238,
+            "尊みエスコート",
             "尊みエスコート",
             "尊みエスコート",
             new Rearguard(RearguardKind.Recovery),
@@ -3831,6 +3949,7 @@ public record Memoria(
             1237,
             "夢のようなひとときを",
             "夢のようなひとときを",
+            "夢のようなひとときを",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
             [
@@ -3860,6 +3979,7 @@ public record Memoria(
         ),
         new Memoria(
             1236,
+            "夢のようなひとときを",
             "夢のようなひとときを",
             "夢のようなひとときを",
             new Vanguard(VanguardKind.NormalRange),
@@ -3893,6 +4013,7 @@ public record Memoria(
             1235,
             "夢のようなひとときを",
             "夢のようなひとときを",
+            "夢のようなひとときを",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -3923,6 +4044,7 @@ public record Memoria(
         new Memoria(
             1234,
             "クリエイターズコラボお手軽sweettime",
+            "クリエイターズコラボ-お手軽Sweet Time-",
             "お手軽Sweet Time",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -3954,6 +4076,7 @@ public record Memoria(
         new Memoria(
             1233,
             "クリエイターズコラボお手軽sweettime",
+            "クリエイターズコラボ-お手軽Sweet Time-",
             "お手軽Sweet Time",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -3985,6 +4108,7 @@ public record Memoria(
         new Memoria(
             1232,
             "クリエイターズコラボお手軽sweettime",
+            "クリエイターズコラボ-お手軽Sweet Time-",
             "お手軽Sweet Time",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -4015,6 +4139,7 @@ public record Memoria(
         new Memoria(
             1231,
             "クリエイターズコラボお手軽sweettime",
+            "クリエイターズコラボ-お手軽Sweet Time-",
             "お手軽Sweet Time",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -4045,6 +4170,7 @@ public record Memoria(
         new Memoria(
             1230,
             "クリエイターズコラボ冬のパンづくし",
+            "クリエイターズコラボ-冬のパンづくし-",
             "冬のパンづくし",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -4075,6 +4201,7 @@ public record Memoria(
         new Memoria(
             1229,
             "クリエイターズコラボ冬のパンづくし",
+            "クリエイターズコラボ-冬のパンづくし-",
             "冬のパンづくし",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -4104,6 +4231,7 @@ public record Memoria(
         ),
         new Memoria(
             1228,
+            "夜会を彩る花",
             "夜会を彩る花",
             "夜会を彩る花",
             new Vanguard(VanguardKind.SpecialRange),
@@ -4136,6 +4264,7 @@ public record Memoria(
             1227,
             "夜会を彩る花",
             "夜会を彩る花",
+            "夜会を彩る花",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -4164,6 +4293,7 @@ public record Memoria(
         ),
         new Memoria(
             1226,
+            "夜会を彩る花",
             "夜会を彩る花",
             "夜会を彩る花",
             new Rearguard(RearguardKind.Recovery),
@@ -4196,6 +4326,7 @@ public record Memoria(
             1225,
             "廃墟のワンダーランド",
             "廃墟のワンダーランド",
+            "廃墟のワンダーランド",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -4224,6 +4355,7 @@ public record Memoria(
         ),
         new Memoria(
             1224,
+            "廃墟のワンダーランド",
             "廃墟のワンダーランド",
             "廃墟のワンダーランド",
             new Vanguard(VanguardKind.NormalRange),
@@ -4256,6 +4388,7 @@ public record Memoria(
             1223,
             "決着に繋ぐ一打",
             "決着に繋ぐ一打",
+            "決着に繋ぐ一打",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -4284,6 +4417,7 @@ public record Memoria(
         ),
         new Memoria(
             1222,
+            "決着に繋ぐ一打",
             "決着に繋ぐ一打",
             "決着に繋ぐ一打",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -4316,6 +4450,7 @@ public record Memoria(
             1221,
             "決着に繋ぐ一打",
             "決着に繋ぐ一打",
+            "決着に繋ぐ一打",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -4344,6 +4479,7 @@ public record Memoria(
         ),
         new Memoria(
             1220,
+            "決着に繋ぐ一打",
             "決着に繋ぐ一打",
             "決着に繋ぐ一打",
             new Rearguard(RearguardKind.Recovery),
@@ -4375,6 +4511,7 @@ public record Memoria(
         new Memoria(
             1219,
             "クリエイターズコラボ満たされる時間",
+            "クリエイターズコラボ-満たされる時間-",
             "満たされる時間",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -4405,6 +4542,7 @@ public record Memoria(
         new Memoria(
             1218,
             "クリエイターズコラボ満たされる時間",
+            "クリエイターズコラボ-満たされる時間-",
             "満たされる時間",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -4435,6 +4573,7 @@ public record Memoria(
         new Memoria(
             1217,
             "クリエイターズコラボ満たされる時間",
+            "クリエイターズコラボ-満たされる時間-",
             "満たされる時間",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -4465,6 +4604,7 @@ public record Memoria(
         new Memoria(
             1216,
             "クリエイターズコラボ満たされる時間",
+            "クリエイターズコラボ-満たされる時間-",
             "満たされる時間",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -4495,6 +4635,7 @@ public record Memoria(
         new Memoria(
             1215,
             "クリエイターズコラボふたりだけの夜",
+            "クリエイターズコラボ-ふたりだけの夜-",
             "ふたりだけの夜",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -4525,6 +4666,7 @@ public record Memoria(
         new Memoria(
             1214,
             "クリエイターズコラボふたりだけの夜",
+            "クリエイターズコラボ-ふたりだけの夜-",
             "ふたりだけの夜",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -4554,6 +4696,7 @@ public record Memoria(
         ),
         new Memoria(
             1213,
+            "辰年ニューイヤー",
             "辰年ニューイヤー",
             "辰年ニューイヤー",
             new Vanguard(VanguardKind.NormalRange),
@@ -4586,6 +4729,7 @@ public record Memoria(
             1212,
             "辰年ニューイヤー",
             "辰年ニューイヤー",
+            "辰年ニューイヤー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -4614,6 +4758,7 @@ public record Memoria(
         ),
         new Memoria(
             1211,
+            "辰年ニューイヤー",
             "辰年ニューイヤー",
             "辰年ニューイヤー",
             new Rearguard(RearguardKind.Support),
@@ -4646,6 +4791,7 @@ public record Memoria(
             1210,
             "辰年ニューイヤー",
             "辰年ニューイヤー",
+            "辰年ニューイヤー",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -4674,6 +4820,7 @@ public record Memoria(
         ),
         new Memoria(
             1209,
+            "辰年ニューイヤー",
             "辰年ニューイヤー",
             "辰年ニューイヤー",
             new Rearguard(RearguardKind.Recovery),
@@ -4706,6 +4853,7 @@ public record Memoria(
             1208,
             "恵みもたらす食神",
             "恵みもたらす食神",
+            "恵みもたらす食神",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -4734,6 +4882,7 @@ public record Memoria(
         ),
         new Memoria(
             1207,
+            "恵みもたらす食神",
             "恵みもたらす食神",
             "恵みもたらす食神",
             new Vanguard(VanguardKind.SpecialRange),
@@ -4766,6 +4915,7 @@ public record Memoria(
             1206,
             "恵みもたらす食神",
             "恵みもたらす食神",
+            "恵みもたらす食神",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -4794,6 +4944,7 @@ public record Memoria(
         ),
         new Memoria(
             1205,
+            "恵みもたらす食神",
             "恵みもたらす食神",
             "恵みもたらす食神",
             new Rearguard(RearguardKind.Recovery),
@@ -4826,6 +4977,7 @@ public record Memoria(
             1204,
             "炎龍を宿す舞人",
             "炎龍を宿す舞人",
+            "炎龍を宿す舞人",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -4854,6 +5006,7 @@ public record Memoria(
         ),
         new Memoria(
             1203,
+            "炎龍を宿す舞人",
             "炎龍を宿す舞人",
             "炎龍を宿す舞人",
             new Rearguard(RearguardKind.Support),
@@ -4886,6 +5039,7 @@ public record Memoria(
             1202,
             "炎龍を宿す舞人",
             "炎龍を宿す舞人",
+            "炎龍を宿す舞人",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -4914,6 +5068,7 @@ public record Memoria(
         ),
         new Memoria(
             1201,
+            "龍の威纏う女帝",
             "龍の威纏う女帝",
             "龍の威纏う女帝",
             new Rearguard(RearguardKind.Recovery),
@@ -4946,6 +5101,7 @@ public record Memoria(
         new Memoria(
             1200,
             "クリエイターズコラボサンタを待ちながら",
+            "クリエイターズコラボ-サンタを待ちながら-",
             "サンタを待ちながら",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -4976,6 +5132,7 @@ public record Memoria(
         new Memoria(
             1199,
             "クリエイターズコラボサンタを待ちながら",
+            "クリエイターズコラボ-サンタを待ちながら-",
             "サンタを待ちながら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -5006,6 +5163,7 @@ public record Memoria(
         new Memoria(
             1198,
             "クリエイターズコラボサンタを待ちながら",
+            "クリエイターズコラボ-サンタを待ちながら-",
             "サンタを待ちながら",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -5036,6 +5194,7 @@ public record Memoria(
         new Memoria(
             1197,
             "クリエイターズコラボサンタを待ちながら",
+            "クリエイターズコラボ-サンタを待ちながら-",
             "サンタを待ちながら",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -5066,6 +5225,7 @@ public record Memoria(
         new Memoria(
             1196,
             "クリエイターズコラボ聖夜のデュオ",
+            "クリエイターズコラボ-聖夜のデュオ-",
             "聖夜のデュオ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -5096,6 +5256,7 @@ public record Memoria(
         new Memoria(
             1195,
             "クリエイターズコラボ聖夜のデュオ",
+            "クリエイターズコラボ-聖夜のデュオ-",
             "聖夜のデュオ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -5125,6 +5286,7 @@ public record Memoria(
         ),
         new Memoria(
             1194,
+            "約束のサンタクロース",
             "約束のサンタクロース",
             "約束のサンタクロース",
             new Vanguard(VanguardKind.NormalSingle),
@@ -5157,6 +5319,7 @@ public record Memoria(
             1193,
             "約束のサンタクロース",
             "約束のサンタクロース",
+            "約束のサンタクロース",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -5185,6 +5348,7 @@ public record Memoria(
         ),
         new Memoria(
             1192,
+            "約束のサンタクロース",
             "約束のサンタクロース",
             "約束のサンタクロース",
             new Rearguard(RearguardKind.Support),
@@ -5217,6 +5381,7 @@ public record Memoria(
             1191,
             "約束のサンタクロース",
             "約束のサンタクロース",
+            "約束のサンタクロース",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -5245,6 +5410,7 @@ public record Memoria(
         ),
         new Memoria(
             1190,
+            "聖夜のスニーキングミッション",
             "聖夜のスニーキングミッション",
             "聖夜のスニーキングミッション",
             new Vanguard(VanguardKind.NormalRange),
@@ -5277,6 +5443,7 @@ public record Memoria(
             1189,
             "聖夜のスニーキングミッション",
             "聖夜のスニーキングミッション",
+            "聖夜のスニーキングミッション",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -5305,6 +5472,7 @@ public record Memoria(
         ),
         new Memoria(
             1188,
+            "聖夜の竜星",
             "聖夜の竜星",
             "聖夜の竜星",
             new Rearguard(RearguardKind.Support),
@@ -5337,6 +5505,7 @@ public record Memoria(
         new Memoria(
             1187,
             "クリエイターズコラボ雨上がりレインボー",
+            "クリエイターズコラボ-雨上がりレインボー-",
             "雨上がりレインボー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -5367,6 +5536,7 @@ public record Memoria(
         new Memoria(
             1186,
             "クリエイターズコラボ雨上がりレインボー",
+            "クリエイターズコラボ-雨上がりレインボー-",
             "雨上がりレインボー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -5397,6 +5567,7 @@ public record Memoria(
         new Memoria(
             1185,
             "クリエイターズコラボ雨上がりレインボー",
+            "クリエイターズコラボ-雨上がりレインボー-",
             "雨上がりレインボー",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -5427,6 +5598,7 @@ public record Memoria(
         new Memoria(
             1184,
             "クリエイターズコラボ雨上がりレインボー",
+            "クリエイターズコラボ-雨上がりレインボー-",
             "雨上がりレインボー",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -5457,6 +5629,7 @@ public record Memoria(
         new Memoria(
             1183,
             "クリエイターズコラボ相合い傘越しの虹",
+            "クリエイターズコラボ-相合い傘越しの虹-",
             "相合い傘越しの虹",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -5487,6 +5660,7 @@ public record Memoria(
         new Memoria(
             1182,
             "クリエイターズコラボ相合い傘越しの虹",
+            "クリエイターズコラボ-相合い傘越しの虹-",
             "相合い傘越しの虹",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -5516,6 +5690,7 @@ public record Memoria(
         ),
         new Memoria(
             1181,
+            "新たな闘いの幕開け",
             "新たな闘いの幕開け",
             "新たな闘いの幕開け",
             new Vanguard(VanguardKind.NormalRange),
@@ -5548,6 +5723,7 @@ public record Memoria(
             1180,
             "新たな闘いの幕開け",
             "新たな闘いの幕開け",
+            "新たな闘いの幕開け",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -5576,6 +5752,7 @@ public record Memoria(
         ),
         new Memoria(
             1179,
+            "新たな闘いの幕開け",
             "新たな闘いの幕開け",
             "新たな闘いの幕開け",
             new Rearguard(RearguardKind.Support),
@@ -5608,6 +5785,7 @@ public record Memoria(
             1178,
             "新たな闘いの幕開け",
             "新たな闘いの幕開け",
+            "新たな闘いの幕開け",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -5636,6 +5814,7 @@ public record Memoria(
         ),
         new Memoria(
             1177,
+            "新たな闘いの幕開け",
             "新たな闘いの幕開け",
             "新たな闘いの幕開け",
             new Rearguard(RearguardKind.Recovery),
@@ -5667,6 +5846,7 @@ public record Memoria(
         new Memoria(
             1176,
             "クリエイターズコラボ白きホーリーナイト",
+            "クリエイターズコラボ-白きホーリーナイト-",
             "白きホーリーナイト",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -5697,6 +5877,7 @@ public record Memoria(
         new Memoria(
             1175,
             "クリエイターズコラボ白きホーリーナイト",
+            "クリエイターズコラボ-白きホーリーナイト-",
             "白きホーリーナイト",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -5727,6 +5908,7 @@ public record Memoria(
         new Memoria(
             1174,
             "クリエイターズコラボ白きホーリーナイト",
+            "クリエイターズコラボ-白きホーリーナイト-",
             "白きホーリーナイト",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -5757,6 +5939,7 @@ public record Memoria(
         new Memoria(
             1173,
             "クリエイターズコラボ白きホーリーナイト",
+            "クリエイターズコラボ-白きホーリーナイト-",
             "白きホーリーナイト",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -5787,6 +5970,7 @@ public record Memoria(
         new Memoria(
             1172,
             "クリエイターズコラボツリーを飾る指先",
+            "クリエイターズコラボ-ツリーを飾る指先-",
             "ツリーを飾る指先",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -5817,6 +6001,7 @@ public record Memoria(
         new Memoria(
             1171,
             "クリエイターズコラボツリーを飾る指先",
+            "クリエイターズコラボ-ツリーを飾る指先-",
             "ツリーを飾る指先",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -5846,6 +6031,7 @@ public record Memoria(
         ),
         new Memoria(
             1170,
+            "清廉なる赤き衝動",
             "清廉なる赤き衝動",
             "清廉なる赤き衝動",
             new Vanguard(VanguardKind.NormalRange),
@@ -5878,6 +6064,7 @@ public record Memoria(
             1169,
             "清廉なる赤き衝動",
             "清廉なる赤き衝動",
+            "清廉なる赤き衝動",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -5906,6 +6093,7 @@ public record Memoria(
         ),
         new Memoria(
             1168,
+            "悠久なるノスフェラトゥ",
             "悠久なるノスフェラトゥ",
             "悠久なるノスフェラトゥ",
             new Vanguard(VanguardKind.SpecialRange),
@@ -5938,6 +6126,7 @@ public record Memoria(
             1167,
             "悠久なるノスフェラトゥ",
             "悠久なるノスフェラトゥ",
+            "悠久なるノスフェラトゥ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -5966,6 +6155,7 @@ public record Memoria(
         ),
         new Memoria(
             1166,
+            "聖眼解放",
             "聖眼解放",
             "聖眼解放",
             new Vanguard(VanguardKind.NormalRange),
@@ -5998,6 +6188,7 @@ public record Memoria(
             1165,
             "聖眼解放",
             "聖眼解放",
+            "聖眼解放",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -6026,6 +6217,7 @@ public record Memoria(
         ),
         new Memoria(
             1164,
+            "聖眼解放",
             "聖眼解放",
             "聖眼解放",
             new Rearguard(RearguardKind.Support),
@@ -6058,6 +6250,7 @@ public record Memoria(
             1163,
             "聖眼解放",
             "聖眼解放",
+            "聖眼解放",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -6086,6 +6279,7 @@ public record Memoria(
         ),
         new Memoria(
             1162,
+            "流星のトリニティ",
             "流星のトリニティ",
             "流星のトリニティ",
             new Rearguard(RearguardKind.Interference),
@@ -6118,6 +6312,7 @@ public record Memoria(
         new Memoria(
             1161,
             "emotionalmemoria箱入り神琳",
+            "Emotional Memoria -箱入り神琳-",
             "箱入り神琳",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -6148,6 +6343,7 @@ public record Memoria(
         new Memoria(
             1160,
             "emotionalmemoria箱入り神琳",
+            "Emotional Memoria -箱入り神琳-",
             "箱入り神琳",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -6178,6 +6374,7 @@ public record Memoria(
         new Memoria(
             1159,
             "emotionalmemoria箱入り神琳",
+            "Emotional Memoria -箱入り神琳-",
             "箱入り神琳",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -6208,6 +6405,7 @@ public record Memoria(
         new Memoria(
             1158,
             "emotionalmemoria箱入り神琳",
+            "Emotional Memoria -箱入り神琳-",
             "箱入り神琳",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -6238,6 +6436,7 @@ public record Memoria(
         new Memoria(
             1157,
             "emotionalmemoria箱入り神琳",
+            "Emotional Memoria -箱入り神琳-",
             "箱入り神琳",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -6268,6 +6467,7 @@ public record Memoria(
         new Memoria(
             1156,
             "クリエイターズコラボ2人のおもてなし",
+            "クリエイターズコラボ-2人のおもてなし-",
             "2人のおもてなし",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -6298,6 +6498,7 @@ public record Memoria(
         new Memoria(
             1155,
             "クリエイターズコラボ2人のおもてなし",
+            "クリエイターズコラボ-2人のおもてなし-",
             "2人のおもてなし",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -6328,6 +6529,7 @@ public record Memoria(
         new Memoria(
             1154,
             "クリエイターズコラボ2人のおもてなし",
+            "クリエイターズコラボ-2人のおもてなし-",
             "2人のおもてなし",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -6358,6 +6560,7 @@ public record Memoria(
         new Memoria(
             1153,
             "クリエイターズコラボ2人のおもてなし",
+            "クリエイターズコラボ-2人のおもてなし-",
             "2人のおもてなし",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -6388,6 +6591,7 @@ public record Memoria(
         new Memoria(
             1152,
             "クリエイターズコラボ初雪を見上げて",
+            "クリエイターズコラボ-初雪を見上げて-",
             "初雪を見上げて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -6418,6 +6622,7 @@ public record Memoria(
         new Memoria(
             1151,
             "クリエイターズコラボ初雪を見上げて",
+            "クリエイターズコラボ-初雪を見上げて-",
             "初雪を見上げて",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -6449,6 +6654,7 @@ public record Memoria(
             1150,
             "真打ち登場やで",
             "真打ち登場やで！",
+            "真打ち登場やで！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -6479,6 +6685,7 @@ public record Memoria(
             1149,
             "真打ち登場やで",
             "真打ち登場やで！",
+            "真打ち登場やで！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -6507,6 +6714,7 @@ public record Memoria(
         ),
         new Memoria(
             1148,
+            "邪眼解放",
             "邪眼解放",
             "邪眼解放",
             new Vanguard(VanguardKind.NormalRange),
@@ -6539,6 +6747,7 @@ public record Memoria(
             1147,
             "邪眼解放",
             "邪眼解放",
+            "邪眼解放",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -6567,6 +6776,7 @@ public record Memoria(
         ),
         new Memoria(
             1146,
+            "決着の引き金、魂を重ねて",
             "決着の引き金、魂を重ねて",
             "決着の引き金、魂を重ねて",
             new Vanguard(VanguardKind.NormalRange),
@@ -6599,6 +6809,7 @@ public record Memoria(
             1145,
             "決着の引き金、魂を重ねて",
             "決着の引き金、魂を重ねて",
+            "決着の引き金、魂を重ねて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -6627,6 +6838,7 @@ public record Memoria(
         ),
         new Memoria(
             1144,
+            "決着の引き金、魂を重ねて",
             "決着の引き金、魂を重ねて",
             "決着の引き金、魂を重ねて",
             new Rearguard(RearguardKind.Interference),
@@ -6659,6 +6871,7 @@ public record Memoria(
             1143,
             "決着の引き金、魂を重ねて",
             "決着の引き金、魂を重ねて",
+            "決着の引き金、魂を重ねて",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -6687,6 +6900,7 @@ public record Memoria(
         ),
         new Memoria(
             1142,
+            "やがて運命は扉を叩く",
             "やがて運命は扉を叩く",
             "やがて運命は扉を叩く",
             new Vanguard(VanguardKind.NormalRange),
@@ -6719,6 +6933,7 @@ public record Memoria(
         new Memoria(
             1141,
             "クリエイターズコラボ秋の日に描く面影",
+            "クリエイターズコラボ-秋の日に描く面影-",
             "秋の日に描く面影",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -6749,6 +6964,7 @@ public record Memoria(
         new Memoria(
             1140,
             "クリエイターズコラボ秋の日に描く面影",
+            "クリエイターズコラボ-秋の日に描く面影-",
             "秋の日に描く面影",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -6779,6 +6995,7 @@ public record Memoria(
         new Memoria(
             1139,
             "クリエイターズコラボ秋の日に描く面影",
+            "クリエイターズコラボ-秋の日に描く面影-",
             "秋の日に描く面影",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -6809,6 +7026,7 @@ public record Memoria(
         new Memoria(
             1138,
             "クリエイターズコラボ秋の日に描く面影",
+            "クリエイターズコラボ-秋の日に描く面影-",
             "秋の日に描く面影",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -6839,6 +7057,7 @@ public record Memoria(
         new Memoria(
             1137,
             "クリエイターズコラボ小さな音楽会",
+            "クリエイターズコラボ-小さな音楽会-",
             "小さな音楽会",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -6869,6 +7088,7 @@ public record Memoria(
         new Memoria(
             1136,
             "クリエイターズコラボ小さな音楽会",
+            "クリエイターズコラボ-小さな音楽会-",
             "小さな音楽会",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -6898,6 +7118,7 @@ public record Memoria(
         ),
         new Memoria(
             1135,
+            "理が導く勝機",
             "理が導く勝機",
             "理が導く勝機",
             new Vanguard(VanguardKind.NormalRange),
@@ -6930,6 +7151,7 @@ public record Memoria(
             1134,
             "理が導く勝機",
             "理が導く勝機",
+            "理が導く勝機",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -6958,6 +7180,7 @@ public record Memoria(
         ),
         new Memoria(
             1133,
+            "理が導く勝機",
             "理が導く勝機",
             "理が導く勝機",
             new Rearguard(RearguardKind.Interference),
@@ -6990,6 +7213,7 @@ public record Memoria(
             1132,
             "理が導く勝機",
             "理が導く勝機",
+            "理が導く勝機",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -7018,6 +7242,7 @@ public record Memoria(
         ),
         new Memoria(
             1131,
+            "暮れなずむ廃址の佳人",
             "暮れなずむ廃址の佳人",
             "暮れなずむ廃址の佳人",
             new Vanguard(VanguardKind.NormalRange),
@@ -7050,6 +7275,7 @@ public record Memoria(
             1130,
             "暮れなずむ廃址の佳人",
             "暮れなずむ廃址の佳人",
+            "暮れなずむ廃址の佳人",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -7078,6 +7304,7 @@ public record Memoria(
         ),
         new Memoria(
             1129,
+            "夕映えに冴える一手",
             "夕映えに冴える一手",
             "夕映えに冴える一手",
             new Rearguard(RearguardKind.Interference),
@@ -7110,6 +7337,7 @@ public record Memoria(
             1128,
             "夕映えに冴える一手",
             "夕映えに冴える一手",
+            "夕映えに冴える一手",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -7138,6 +7366,7 @@ public record Memoria(
         ),
         new Memoria(
             1127,
+            "フラガラッハの光",
             "フラガラッハの光",
             "フラガラッハの光",
             new Rearguard(RearguardKind.Recovery),
@@ -7170,6 +7399,7 @@ public record Memoria(
         new Memoria(
             1126,
             "クリエイターズコラボかわいい狩りの秋",
+            "クリエイターズコラボ-かわいい狩りの秋-",
             "かわいい狩りの秋",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -7200,6 +7430,7 @@ public record Memoria(
         new Memoria(
             1125,
             "クリエイターズコラボかわいい狩りの秋",
+            "クリエイターズコラボ-かわいい狩りの秋-",
             "かわいい狩りの秋",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -7230,6 +7461,7 @@ public record Memoria(
         new Memoria(
             1124,
             "クリエイターズコラボかわいい狩りの秋",
+            "クリエイターズコラボ-かわいい狩りの秋-",
             "かわいい狩りの秋",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -7260,6 +7492,7 @@ public record Memoria(
         new Memoria(
             1123,
             "クリエイターズコラボかわいい狩りの秋",
+            "クリエイターズコラボ-かわいい狩りの秋-",
             "かわいい狩りの秋",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -7290,6 +7523,7 @@ public record Memoria(
         new Memoria(
             1122,
             "クリエイターズコラボ藍の心と秋の空",
+            "クリエイターズコラボ-藍の心と秋の空-",
             "藍の心と秋の空",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -7320,6 +7554,7 @@ public record Memoria(
         new Memoria(
             1121,
             "クリエイターズコラボ藍の心と秋の空",
+            "クリエイターズコラボ-藍の心と秋の空-",
             "藍の心と秋の空",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -7349,6 +7584,7 @@ public record Memoria(
         ),
         new Memoria(
             1120,
+            "神庭の花火師",
             "神庭の花火師",
             "神庭の花火師",
             new Vanguard(VanguardKind.NormalRange),
@@ -7381,6 +7617,7 @@ public record Memoria(
             1119,
             "神庭の花火師",
             "神庭の花火師",
+            "神庭の花火師",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -7409,6 +7646,7 @@ public record Memoria(
         ),
         new Memoria(
             1118,
+            "神庭の花火師",
             "神庭の花火師",
             "神庭の花火師",
             new Rearguard(RearguardKind.Support),
@@ -7441,6 +7679,7 @@ public record Memoria(
             1117,
             "神庭の花火師",
             "神庭の花火師",
+            "神庭の花火師",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -7469,6 +7708,7 @@ public record Memoria(
         ),
         new Memoria(
             1116,
+            "シネマティックに煌めいて",
             "シネマティックに煌めいて",
             "シネマティックに煌めいて",
             new Rearguard(RearguardKind.Recovery),
@@ -7501,6 +7741,7 @@ public record Memoria(
             1115,
             "シネマティックに煌めいて",
             "シネマティックに煌めいて",
+            "シネマティックに煌めいて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -7529,6 +7770,7 @@ public record Memoria(
         ),
         new Memoria(
             1114,
+            "秘め事☆プールサイド",
             "秘め事☆プールサイド",
             "秘め事☆プールサイド",
             new Vanguard(VanguardKind.SpecialRange),
@@ -7561,6 +7803,7 @@ public record Memoria(
         new Memoria(
             1113,
             "クリエイターズコラボはつらつハイタッチ",
+            "クリエイターズコラボ-はつらつハイタッチ-",
             "はつらつハイタッチ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -7591,6 +7834,7 @@ public record Memoria(
         new Memoria(
             1112,
             "クリエイターズコラボはつらつハイタッチ",
+            "クリエイターズコラボ-はつらつハイタッチ-",
             "はつらつハイタッチ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -7621,6 +7865,7 @@ public record Memoria(
         new Memoria(
             1111,
             "クリエイターズコラボはつらつハイタッチ",
+            "クリエイターズコラボ-はつらつハイタッチ-",
             "はつらつハイタッチ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -7651,6 +7896,7 @@ public record Memoria(
         new Memoria(
             1110,
             "クリエイターズコラボはつらつハイタッチ",
+            "クリエイターズコラボ-はつらつハイタッチ-",
             "はつらつハイタッチ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -7681,6 +7927,7 @@ public record Memoria(
         new Memoria(
             1109,
             "クリエイターズコラボ夢の中で隠れんぼ",
+            "クリエイターズコラボ-夢の中で隠れんぼ-",
             "夢の中で隠れんぼ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -7711,6 +7958,7 @@ public record Memoria(
         new Memoria(
             1108,
             "クリエイターズコラボ夢の中で隠れんぼ",
+            "クリエイターズコラボ-夢の中で隠れんぼ-",
             "夢の中で隠れんぼ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -7741,6 +7989,7 @@ public record Memoria(
         new Memoria(
             1107,
             "クリエイターズコラボフレフレリリィ",
+            "クリエイターズコラボ-フレフレリリィ！-",
             "フレフレリリィ！",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -7771,6 +8020,7 @@ public record Memoria(
         new Memoria(
             1106,
             "クリエイターズコラボフレフレリリィ",
+            "クリエイターズコラボ-フレフレリリィ！-",
             "フレフレリリィ！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -7801,6 +8051,7 @@ public record Memoria(
         new Memoria(
             1105,
             "クリエイターズコラボひそひそナイト",
+            "クリエイターズコラボ-ひそひそナイト-",
             "ひそひそナイト",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -7831,6 +8082,7 @@ public record Memoria(
         new Memoria(
             1104,
             "クリエイターズコラボひそひそナイト",
+            "クリエイターズコラボ-ひそひそナイト-",
             "ひそひそナイト",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -7861,6 +8113,7 @@ public record Memoria(
         new Memoria(
             1103,
             "クリエイターズコラボ新涼灯火",
+            "クリエイターズコラボ-新涼灯火-",
             "新涼灯火",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -7891,6 +8144,7 @@ public record Memoria(
         new Memoria(
             1102,
             "クリエイターズコラボ新涼灯火",
+            "クリエイターズコラボ-新涼灯火-",
             "新涼灯火",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -7921,6 +8175,7 @@ public record Memoria(
         new Memoria(
             1101,
             "クリエイターズコラボ新涼灯火",
+            "クリエイターズコラボ-新涼灯火-",
             "新涼灯火",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -7951,6 +8206,7 @@ public record Memoria(
         new Memoria(
             1100,
             "クリエイターズコラボ新涼灯火",
+            "クリエイターズコラボ-新涼灯火-",
             "新涼灯火",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -7981,6 +8237,7 @@ public record Memoria(
         new Memoria(
             1099,
             "クリエイターズコラボ秋のそうさく",
+            "クリエイターズコラボ-秋のそうさく-",
             "秋のそうさく",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -8011,6 +8268,7 @@ public record Memoria(
         new Memoria(
             1098,
             "クリエイターズコラボ秋のそうさく",
+            "クリエイターズコラボ-秋のそうさく-",
             "秋のそうさく",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -8040,6 +8298,7 @@ public record Memoria(
         ),
         new Memoria(
             1097,
+            "かけがえのない時間",
             "かけがえのない時間",
             "かけがえのない時間",
             new Vanguard(VanguardKind.NormalRange),
@@ -8072,6 +8331,7 @@ public record Memoria(
             1096,
             "かけがえのない時間",
             "かけがえのない時間",
+            "かけがえのない時間",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -8100,6 +8360,7 @@ public record Memoria(
         ),
         new Memoria(
             1095,
+            "かけがえのない時間",
             "かけがえのない時間",
             "かけがえのない時間",
             new Rearguard(RearguardKind.Support),
@@ -8132,6 +8393,7 @@ public record Memoria(
             1094,
             "かけがえのない時間",
             "かけがえのない時間",
+            "かけがえのない時間",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -8160,6 +8422,7 @@ public record Memoria(
         ),
         new Memoria(
             1093,
+            "双子メイド風スタイル",
             "双子メイド風スタイル",
             "双子メイド風スタイル",
             new Rearguard(RearguardKind.Recovery),
@@ -8192,6 +8455,7 @@ public record Memoria(
             1092,
             "双子メイド風スタイル",
             "双子メイド風スタイル",
+            "双子メイド風スタイル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -8220,6 +8484,7 @@ public record Memoria(
         ),
         new Memoria(
             1091,
+            "素敵なお茶会",
             "素敵なお茶会",
             "素敵なお茶会",
             new Vanguard(VanguardKind.NormalRange),
@@ -8252,6 +8517,7 @@ public record Memoria(
             1090,
             "素敵なお茶会",
             "素敵なお茶会",
+            "素敵なお茶会",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -8280,6 +8546,7 @@ public record Memoria(
         ),
         new Memoria(
             1089,
+            "素敵なお茶会",
             "素敵なお茶会",
             "素敵なお茶会",
             new Rearguard(RearguardKind.Support),
@@ -8312,6 +8579,7 @@ public record Memoria(
             1088,
             "素敵なお茶会",
             "素敵なお茶会",
+            "素敵なお茶会",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -8340,6 +8608,7 @@ public record Memoria(
         ),
         new Memoria(
             1087,
+            "メイドのうたたね",
             "メイドのうたたね",
             "メイドのうたたね",
             new Rearguard(RearguardKind.Interference),
@@ -8372,6 +8641,7 @@ public record Memoria(
             1086,
             "メイドのうたたね",
             "メイドのうたたね",
+            "メイドのうたたね",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -8400,6 +8670,7 @@ public record Memoria(
         ),
         new Memoria(
             1085,
+            "メイドのご奉仕",
             "メイドのご奉仕",
             "メイドのご奉仕",
             new Vanguard(VanguardKind.NormalRange),
@@ -8432,6 +8703,7 @@ public record Memoria(
             1084,
             "メイドのご奉仕",
             "メイドのご奉仕",
+            "メイドのご奉仕",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -8460,6 +8732,7 @@ public record Memoria(
         ),
         new Memoria(
             1083,
+            "海風に吹かれて",
             "海風に吹かれて",
             "海風に吹かれて",
             new Vanguard(VanguardKind.SpecialRange),
@@ -8492,6 +8765,7 @@ public record Memoria(
             1082,
             "海風に吹かれて",
             "海風に吹かれて",
+            "海風に吹かれて",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -8521,6 +8795,7 @@ public record Memoria(
         new Memoria(
             1081,
             "クリエイターズコラボ落ち葉のリース",
+            "クリエイターズコラボ-落ち葉のリース-",
             "落ち葉のリース",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -8551,6 +8826,7 @@ public record Memoria(
         new Memoria(
             1080,
             "クリエイターズコラボ落ち葉のリース",
+            "クリエイターズコラボ-落ち葉のリース-",
             "落ち葉のリース",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -8581,6 +8857,7 @@ public record Memoria(
         new Memoria(
             1079,
             "クリエイターズコラボ落ち葉のリース",
+            "クリエイターズコラボ-落ち葉のリース-",
             "落ち葉のリース",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -8611,6 +8888,7 @@ public record Memoria(
         new Memoria(
             1078,
             "クリエイターズコラボ落ち葉のリース",
+            "クリエイターズコラボ-落ち葉のリース-",
             "落ち葉のリース",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -8641,6 +8919,7 @@ public record Memoria(
         new Memoria(
             1077,
             "クリエイターズコラボ深まる秋の一幕",
+            "クリエイターズコラボ-深まる秋の一幕-",
             "深まる秋の一幕",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -8671,6 +8950,7 @@ public record Memoria(
         new Memoria(
             1076,
             "クリエイターズコラボ深まる秋の一幕",
+            "クリエイターズコラボ-深まる秋の一幕-",
             "深まる秋の一幕",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -8700,6 +8980,7 @@ public record Memoria(
         ),
         new Memoria(
             1075,
+            "雹嵐の如く",
             "雹嵐の如く",
             "雹嵐の如く",
             new Rearguard(RearguardKind.Interference),
@@ -8733,6 +9014,7 @@ public record Memoria(
             1074,
             "瓦礫の街に咲いてこそ",
             "瓦礫の街に咲いてこそ",
+            "瓦礫の街に咲いてこそ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -8761,6 +9043,7 @@ public record Memoria(
         ),
         new Memoria(
             1073,
+            "瓦礫の街に咲いてこそ",
             "瓦礫の街に咲いてこそ",
             "瓦礫の街に咲いてこそ",
             new Vanguard(VanguardKind.SpecialRange),
@@ -8793,6 +9076,7 @@ public record Memoria(
             1072,
             "瓦礫の街に咲いてこそ",
             "瓦礫の街に咲いてこそ",
+            "瓦礫の街に咲いてこそ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -8821,6 +9105,7 @@ public record Memoria(
         ),
         new Memoria(
             1071,
+            "瓦礫の街に咲いてこそ",
             "瓦礫の街に咲いてこそ",
             "瓦礫の街に咲いてこそ",
             new Rearguard(RearguardKind.Recovery),
@@ -8853,6 +9138,7 @@ public record Memoria(
             1070,
             "掲げし長針と短針",
             "掲げし長針と短針",
+            "掲げし長針と短針",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -8881,6 +9167,7 @@ public record Memoria(
         ),
         new Memoria(
             1069,
+            "掲げし長針と短針",
             "掲げし長針と短針",
             "掲げし長針と短針",
             new Rearguard(RearguardKind.Support),
@@ -8913,6 +9200,7 @@ public record Memoria(
             1068,
             "廃墟のアンティークドール",
             "廃墟のアンティークドール",
+            "廃墟のアンティークドール",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -8941,6 +9229,7 @@ public record Memoria(
         ),
         new Memoria(
             1067,
+            "廃墟のアンティークドール",
             "廃墟のアンティークドール",
             "廃墟のアンティークドール",
             new Rearguard(RearguardKind.Interference),
@@ -8972,6 +9261,7 @@ public record Memoria(
         new Memoria(
             1066,
             "クリエイターズコラボ転ばぬ先の一葉",
+            "クリエイターズコラボ-転ばぬ先の一葉-",
             "転ばぬ先の一葉",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -9002,6 +9292,7 @@ public record Memoria(
         new Memoria(
             1065,
             "クリエイターズコラボ転ばぬ先の一葉",
+            "クリエイターズコラボ-転ばぬ先の一葉-",
             "転ばぬ先の一葉",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -9032,6 +9323,7 @@ public record Memoria(
         new Memoria(
             1064,
             "クリエイターズコラボ秋空を見上げながら",
+            "クリエイターズコラボ-秋空を見上げながら-",
             "秋空を見上げながら",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -9062,6 +9354,7 @@ public record Memoria(
         new Memoria(
             1063,
             "クリエイターズコラボ秋空を見上げながら",
+            "クリエイターズコラボ-秋空を見上げながら-",
             "秋空を見上げながら",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -9092,6 +9385,7 @@ public record Memoria(
         new Memoria(
             1062,
             "クリエイターズコラボ秋空を見上げながら",
+            "クリエイターズコラボ-秋空を見上げながら-",
             "秋空を見上げながら",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -9122,6 +9416,7 @@ public record Memoria(
         new Memoria(
             1061,
             "クリエイターズコラボ秋空を見上げながら",
+            "クリエイターズコラボ-秋空を見上げながら-",
             "秋空を見上げながら",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -9151,6 +9446,7 @@ public record Memoria(
         ),
         new Memoria(
             1060,
+            "優美な魔女に魅せられて",
             "優美な魔女に魅せられて",
             "優美な魔女に魅せられて",
             new Vanguard(VanguardKind.NormalRange),
@@ -9183,6 +9479,7 @@ public record Memoria(
             1059,
             "優美な魔女に魅せられて",
             "優美な魔女に魅せられて",
+            "優美な魔女に魅せられて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -9211,6 +9508,7 @@ public record Memoria(
         ),
         new Memoria(
             1058,
+            "優美な魔女に魅せられて",
             "優美な魔女に魅せられて",
             "優美な魔女に魅せられて",
             new Rearguard(RearguardKind.Support),
@@ -9243,6 +9541,7 @@ public record Memoria(
             1057,
             "優美な魔女に魅せられて",
             "優美な魔女に魅せられて",
+            "優美な魔女に魅せられて",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -9271,6 +9570,7 @@ public record Memoria(
         ),
         new Memoria(
             1056,
+            "這い寄る妖艶",
             "這い寄る妖艶",
             "這い寄る妖艶",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -9303,6 +9603,7 @@ public record Memoria(
             1055,
             "這い寄る妖艶",
             "這い寄る妖艶",
+            "這い寄る妖艶",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -9331,6 +9632,7 @@ public record Memoria(
         ),
         new Memoria(
             1054,
+            "健気×恥じらい＝",
             "健気×恥じらい＝",
             "健気×恥じらい＝",
             new Rearguard(RearguardKind.Recovery),
@@ -9364,6 +9666,7 @@ public record Memoria(
             1053,
             "百合ヶ丘ティーパーティ2023開催",
             "百合ヶ丘ティーパーティ2023開催！",
+            "百合ヶ丘ティーパーティ2023開催！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -9394,6 +9697,7 @@ public record Memoria(
             1052,
             "百合ヶ丘ティーパーティ2023開催",
             "百合ヶ丘ティーパーティ2023開催！",
+            "百合ヶ丘ティーパーティ2023開催！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
             [
@@ -9423,6 +9727,7 @@ public record Memoria(
         new Memoria(
             1051,
             "クリエイターズコラボもみじまんじゅう",
+            "クリエイターズコラボ-もみじまんじゅう-",
             "もみじまんじゅう",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -9453,6 +9758,7 @@ public record Memoria(
         new Memoria(
             1050,
             "クリエイターズコラボもみじまんじゅう",
+            "クリエイターズコラボ-もみじまんじゅう-",
             "もみじまんじゅう",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -9483,6 +9789,7 @@ public record Memoria(
         new Memoria(
             1049,
             "クリエイターズコラボ楓の頃",
+            "クリエイターズコラボ-楓の頃-",
             "楓の頃",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -9513,6 +9820,7 @@ public record Memoria(
         new Memoria(
             1048,
             "クリエイターズコラボ楓の頃",
+            "クリエイターズコラボ-楓の頃-",
             "楓の頃",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -9542,6 +9850,7 @@ public record Memoria(
         ),
         new Memoria(
             1047,
+            "光射す守護者",
             "光射す守護者",
             "光射す守護者",
             new Vanguard(VanguardKind.NormalRange),
@@ -9574,6 +9883,7 @@ public record Memoria(
             1046,
             "光射す守護者",
             "光射す守護者",
+            "光射す守護者",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -9602,6 +9912,7 @@ public record Memoria(
         ),
         new Memoria(
             1045,
+            "緋染めの天使",
             "緋染めの天使",
             "緋染めの天使",
             new Vanguard(VanguardKind.SpecialRange),
@@ -9634,6 +9945,7 @@ public record Memoria(
             1044,
             "緋染めの天使",
             "緋染めの天使",
+            "緋染めの天使",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -9662,6 +9974,7 @@ public record Memoria(
         ),
         new Memoria(
             1043,
+            "誓いの剣閃",
             "誓いの剣閃",
             "誓いの剣閃",
             new Rearguard(RearguardKind.Interference),
@@ -9694,6 +10007,7 @@ public record Memoria(
         new Memoria(
             1042,
             "emotionalmemoriaねこさんこちら",
+            "Emotional Memoria -ねこさんこちら-",
             "ねこさんこちら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -9724,6 +10038,7 @@ public record Memoria(
         new Memoria(
             1041,
             "emotionalmemoriaねこさんこちら",
+            "Emotional Memoria -ねこさんこちら-",
             "ねこさんこちら",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -9753,6 +10068,7 @@ public record Memoria(
         ),
         new Memoria(
             1040,
+            "たつき100％",
             "たつき100％",
             "たつき100％",
             new Rearguard(RearguardKind.Recovery),
@@ -9785,6 +10101,7 @@ public record Memoria(
             1039,
             "たつき100％",
             "たつき100％",
+            "たつき100％",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -9813,6 +10130,7 @@ public record Memoria(
         ),
         new Memoria(
             1038,
+            "彼方の宵空",
             "彼方の宵空",
             "彼方の宵空",
             new Vanguard(VanguardKind.NormalRange),
@@ -9845,6 +10163,7 @@ public record Memoria(
             1037,
             "彼方の宵空",
             "彼方の宵空",
+            "彼方の宵空",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -9873,6 +10192,7 @@ public record Memoria(
         ),
         new Memoria(
             1036,
+            "荒ぶる銘花",
             "荒ぶる銘花",
             "荒ぶる銘花",
             new Vanguard(VanguardKind.SpecialRange),
@@ -9905,6 +10225,7 @@ public record Memoria(
             1035,
             "荒ぶる銘花",
             "荒ぶる銘花",
+            "荒ぶる銘花",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -9934,6 +10255,7 @@ public record Memoria(
         new Memoria(
             1034,
             "クリエイターズコラボムーンリットワルツ",
+            "クリエイターズコラボ-ムーンリットワルツ-",
             "ムーンリットワルツ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -9964,6 +10286,7 @@ public record Memoria(
         new Memoria(
             1033,
             "クリエイターズコラボムーンリットワルツ",
+            "クリエイターズコラボ-ムーンリットワルツ-",
             "ムーンリットワルツ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
@@ -9994,6 +10317,7 @@ public record Memoria(
         new Memoria(
             1032,
             "クリエイターズコラボ月を見上げて",
+            "クリエイターズコラボ-月を見上げて-",
             "月を見上げて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -10024,6 +10348,7 @@ public record Memoria(
         new Memoria(
             1031,
             "クリエイターズコラボ月を見上げて",
+            "クリエイターズコラボ-月を見上げて-",
             "月を見上げて",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -10054,6 +10379,7 @@ public record Memoria(
         new Memoria(
             1030,
             "クリエイターズコラボお月さまの秘密",
+            "クリエイターズコラボ-お月さまの秘密-",
             "お月さまの秘密",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -10084,6 +10410,7 @@ public record Memoria(
         new Memoria(
             1029,
             "クリエイターズコラボお月さまの秘密",
+            "クリエイターズコラボ-お月さまの秘密-",
             "お月さまの秘密",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -10113,6 +10440,7 @@ public record Memoria(
         ),
         new Memoria(
             1028,
+            "2人でニューゲーム",
             "2人でニューゲーム",
             "2人でニューゲーム",
             new Vanguard(VanguardKind.SpecialRange),
@@ -10145,6 +10473,7 @@ public record Memoria(
             1027,
             "2人でニューゲーム",
             "2人でニューゲーム",
+            "2人でニューゲーム",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -10173,6 +10502,7 @@ public record Memoria(
         ),
         new Memoria(
             1026,
+            "クエレブレの正義",
             "クエレブレの正義",
             "クエレブレの正義",
             new Rearguard(RearguardKind.Recovery),
@@ -10205,6 +10535,7 @@ public record Memoria(
             1025,
             "クエレブレの正義",
             "クエレブレの正義",
+            "クエレブレの正義",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -10233,6 +10564,7 @@ public record Memoria(
         ),
         new Memoria(
             1024,
+            "ワイルドバンチ",
             "ワイルドバンチ",
             "ワイルドバンチ",
             new Vanguard(VanguardKind.SpecialRange),
@@ -10265,6 +10597,7 @@ public record Memoria(
             1023,
             "ワイルドバンチ",
             "ワイルドバンチ",
+            "ワイルドバンチ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -10293,6 +10626,7 @@ public record Memoria(
         ),
         new Memoria(
             1022,
+            "追憶の星空",
             "追憶の星空",
             "追憶の星空",
             new Rearguard(RearguardKind.Interference),
@@ -10325,6 +10659,7 @@ public record Memoria(
             1021,
             "追憶の星空",
             "追憶の星空",
+            "追憶の星空",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -10353,6 +10688,7 @@ public record Memoria(
         ),
         new Memoria(
             1020,
+            "シャナの剣",
             "シャナの剣",
             "シャナの剣",
             new Vanguard(VanguardKind.NormalRange),
@@ -10385,6 +10721,7 @@ public record Memoria(
         new Memoria(
             1019,
             "クリエイターズコラボ黄色い絨毯で",
+            "クリエイターズコラボ-黄色い絨毯で-",
             "黄色い絨毯で",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -10415,6 +10752,7 @@ public record Memoria(
         new Memoria(
             1018,
             "クリエイターズコラボ黄色い絨毯で",
+            "クリエイターズコラボ-黄色い絨毯で-",
             "黄色い絨毯で",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -10445,6 +10783,7 @@ public record Memoria(
         new Memoria(
             1017,
             "クリエイターズコラボ朋友信之",
+            "クリエイターズコラボ-朋友信之-",
             "朋友信之",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -10475,6 +10814,7 @@ public record Memoria(
         new Memoria(
             1016,
             "クリエイターズコラボ朋友信之",
+            "クリエイターズコラボ-朋友信之-",
             "朋友信之",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -10505,6 +10845,7 @@ public record Memoria(
         new Memoria(
             1015,
             "クリエイターズコラボコスモスコスメ",
+            "クリエイターズコラボ-コスモスコスメ-",
             "コスモスコスメ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -10535,6 +10876,7 @@ public record Memoria(
         new Memoria(
             1014,
             "クリエイターズコラボコスモスコスメ",
+            "クリエイターズコラボ-コスモスコスメ-",
             "コスモスコスメ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -10564,6 +10906,7 @@ public record Memoria(
         ),
         new Memoria(
             1013,
+            "キラキラ★アイドル",
             "キラキラ★アイドル",
             "キラキラ★アイドル",
             new Vanguard(VanguardKind.NormalRange),
@@ -10596,6 +10939,7 @@ public record Memoria(
             1012,
             "キラキラ★アイドル",
             "キラキラ★アイドル",
+            "キラキラ★アイドル",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -10624,6 +10968,7 @@ public record Memoria(
         ),
         new Memoria(
             1011,
+            "デュエットですの♥",
             "デュエットですの♥",
             "デュエットですの♥",
             new Rearguard(RearguardKind.Support),
@@ -10656,6 +11001,7 @@ public record Memoria(
             1010,
             "デュエットですの♥",
             "デュエットですの♥",
+            "デュエットですの♥",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -10684,6 +11030,7 @@ public record Memoria(
         ),
         new Memoria(
             1009,
+            "超電磁アイドル",
             "超電磁アイドル",
             "超電磁アイドル",
             new Vanguard(VanguardKind.SpecialRange),
@@ -10716,6 +11063,7 @@ public record Memoria(
             1008,
             "超電磁アイドル",
             "超電磁アイドル",
+            "超電磁アイドル",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -10744,6 +11092,7 @@ public record Memoria(
         ),
         new Memoria(
             1007,
+            "楯の乙女と超電磁砲",
             "楯の乙女と超電磁砲",
             "楯の乙女と超電磁砲",
             new Rearguard(RearguardKind.Interference),
@@ -10776,6 +11125,7 @@ public record Memoria(
             1006,
             "楯の乙女と超電磁砲",
             "楯の乙女と超電磁砲",
+            "楯の乙女と超電磁砲",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -10805,6 +11155,7 @@ public record Memoria(
         new Memoria(
             1005,
             "さすが私ってところかしらぁ",
+            "さすが私ってところかしらぁ？",
             "さすが私ってところかしらぁ？",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -10836,6 +11187,7 @@ public record Memoria(
             1004,
             "さすが私ってところかしらぁ",
             "さすが私ってところかしらぁ？",
+            "さすが私ってところかしらぁ？",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -10864,6 +11216,7 @@ public record Memoria(
         ),
         new Memoria(
             1003,
+            "お姉様の露払い",
             "お姉様の露払い",
             "お姉様の露払い",
             new Vanguard(VanguardKind.SpecialRange),
@@ -10896,6 +11249,7 @@ public record Memoria(
             1002,
             "お姉様の露払い",
             "お姉様の露払い",
+            "お姉様の露払い",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -10925,6 +11279,7 @@ public record Memoria(
         new Memoria(
             1001,
             "これが私の、全力だぁ――",
+            "これが私の、全力だぁ――！！",
             "これが私の、全力だぁ――！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -10956,6 +11311,7 @@ public record Memoria(
             1000,
             "これが私の、全力だぁ――",
             "これが私の、全力だぁ――！！",
+            "これが私の、全力だぁ――！！",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -10984,6 +11340,7 @@ public record Memoria(
         ),
         new Memoria(
             999,
+            "プランセス",
             "プランセス",
             "プランセス",
             new Vanguard(VanguardKind.NormalRange),
@@ -11016,6 +11373,7 @@ public record Memoria(
         new Memoria(
             998,
             "クリエイターズコラボお祭りを味わって",
+            "クリエイターズコラボ-お祭りを味わって-",
             "お祭りを味わって",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -11046,6 +11404,7 @@ public record Memoria(
         new Memoria(
             997,
             "クリエイターズコラボお祭りを味わって",
+            "クリエイターズコラボ-お祭りを味わって-",
             "お祭りを味わって",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -11076,6 +11435,7 @@ public record Memoria(
         new Memoria(
             996,
             "クリエイターズコラボ瞳の中に映る花火",
+            "クリエイターズコラボ-瞳の中に映る花火-",
             "瞳の中に映る花火",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -11106,6 +11466,7 @@ public record Memoria(
         new Memoria(
             995,
             "クリエイターズコラボ瞳の中に映る花火",
+            "クリエイターズコラボ-瞳の中に映る花火-",
             "瞳の中に映る花火",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -11136,6 +11497,7 @@ public record Memoria(
         new Memoria(
             994,
             "クリエイターズコラボ射的の景品です",
+            "クリエイターズコラボ-射的の景品です！-",
             "射的の景品です！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -11166,6 +11528,7 @@ public record Memoria(
         new Memoria(
             993,
             "クリエイターズコラボ射的の景品です",
+            "クリエイターズコラボ-射的の景品です！-",
             "射的の景品です！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -11196,6 +11559,7 @@ public record Memoria(
         new Memoria(
             992,
             "クリエイターズコラボ切れた鼻緒と繋ぐ心",
+            "クリエイターズコラボ-切れた鼻緒と繋ぐ心-",
             "切れた鼻緒と繋ぐ心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -11226,6 +11590,7 @@ public record Memoria(
         new Memoria(
             991,
             "クリエイターズコラボ切れた鼻緒と繋ぐ心",
+            "クリエイターズコラボ-切れた鼻緒と繋ぐ心-",
             "切れた鼻緒と繋ぐ心",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -11255,6 +11620,7 @@ public record Memoria(
         ),
         new Memoria(
             990,
+            "明朗たる戦乙女",
             "明朗たる戦乙女",
             "明朗たる戦乙女",
             new Vanguard(VanguardKind.NormalRange),
@@ -11287,6 +11653,7 @@ public record Memoria(
             989,
             "明朗たる戦乙女",
             "明朗たる戦乙女",
+            "明朗たる戦乙女",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -11315,6 +11682,7 @@ public record Memoria(
         ),
         new Memoria(
             988,
+            "陽だまりの女神",
             "陽だまりの女神",
             "陽だまりの女神",
             new Rearguard(RearguardKind.Recovery),
@@ -11347,6 +11715,7 @@ public record Memoria(
             987,
             "陽だまりの女神",
             "陽だまりの女神",
+            "陽だまりの女神",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -11375,6 +11744,7 @@ public record Memoria(
         ),
         new Memoria(
             986,
+            "燦然たる騎士",
             "燦然たる騎士",
             "燦然たる騎士",
             new Vanguard(VanguardKind.SpecialRange),
@@ -11407,6 +11777,7 @@ public record Memoria(
         new Memoria(
             985,
             "真実の刃＆リリコレ2023開演",
+            "真実の刃＆リリコレ2023　開演！",
             "真実の刃＆リリコレ2023 開演！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
@@ -11437,6 +11808,7 @@ public record Memoria(
         new Memoria(
             984,
             "真実の刃＆リリコレ2023開演",
+            "真実の刃＆リリコレ2023　開演！",
             "真実の刃＆リリコレ2023 開演！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -11466,6 +11838,7 @@ public record Memoria(
         ),
         new Memoria(
             983,
+            "神の子は、水面に踊る",
             "神の子は、水面に踊る",
             "神の子は、水面に踊る",
             new Vanguard(VanguardKind.SpecialRange),
@@ -11499,6 +11872,7 @@ public record Memoria(
             982,
             "夏尽くしの海",
             "夏尽くしの海",
+            "夏尽くしの海",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -11527,6 +11901,7 @@ public record Memoria(
         ),
         new Memoria(
             981,
+            "夏尽くしの海",
             "夏尽くしの海",
             "夏尽くしの海",
             new Vanguard(VanguardKind.SpecialRange),
@@ -11559,6 +11934,7 @@ public record Memoria(
             980,
             "壱撃必殺",
             "壱撃必殺！！",
+            "壱撃必殺！！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
             [
@@ -11589,6 +11965,7 @@ public record Memoria(
             979,
             "壱撃必殺",
             "壱撃必殺！！",
+            "壱撃必殺！！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -11617,6 +11994,7 @@ public record Memoria(
         ),
         new Memoria(
             978,
+            "くすみんサマー",
             "くすみんサマー",
             "くすみんサマー",
             new Vanguard(VanguardKind.NormalRange),
@@ -11649,6 +12027,7 @@ public record Memoria(
             977,
             "くすみんサマー",
             "くすみんサマー",
+            "くすみんサマー",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -11678,6 +12057,7 @@ public record Memoria(
         new Memoria(
             976,
             "ultimatememoria双刃無双",
+            "Ultimate Memoria -双刃無双-",
             "双刃無双",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -11708,6 +12088,7 @@ public record Memoria(
         new Memoria(
             975,
             "ultimatememoria双刃無双",
+            "Ultimate Memoria -双刃無双-",
             "双刃無双",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
@@ -11738,6 +12119,7 @@ public record Memoria(
         new Memoria(
             974,
             "ultimatememoria無二なる二刀",
+            "Ultimate Memoria -無二なる二刀-",
             "無二なる二刀",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -11768,6 +12150,7 @@ public record Memoria(
         new Memoria(
             973,
             "ultimatememoria無二なる二刀",
+            "Ultimate Memoria -無二なる二刀-",
             "無二なる二刀",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -11798,6 +12181,7 @@ public record Memoria(
         new Memoria(
             972,
             "ultimatememoria幻奏乙女",
+            "Ultimate Memoria -幻奏乙女-",
             "幻奏乙女",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -11828,6 +12212,7 @@ public record Memoria(
         new Memoria(
             971,
             "ultimatememoria幻奏乙女",
+            "Ultimate Memoria -幻奏乙女-",
             "幻奏乙女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -11858,6 +12243,7 @@ public record Memoria(
         new Memoria(
             970,
             "ultimatememoria終曲のタクト",
+            "Ultimate Memoria -終曲のタクト-",
             "終曲のタクト",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -11888,6 +12274,7 @@ public record Memoria(
         new Memoria(
             969,
             "ultimatememoria終曲のタクト",
+            "Ultimate Memoria -終曲のタクト-",
             "終曲のタクト",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -11918,6 +12305,7 @@ public record Memoria(
         new Memoria(
             968,
             "ultimatememoriaヴィルトシュバイン",
+            "Ultimate Memoria -ヴィルトシュバイン-",
             "ヴィルトシュバイン",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -11948,6 +12336,7 @@ public record Memoria(
         new Memoria(
             967,
             "ultimatememoriaヴィルトシュバイン",
+            "Ultimate Memoria -ヴィルトシュバイン-",
             "ヴィルトシュバイン",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -11977,6 +12366,7 @@ public record Memoria(
         ),
         new Memoria(
             966,
+            "待ち望んだパーティナイト",
             "待ち望んだパーティナイト",
             "待ち望んだパーティナイト",
             new Vanguard(VanguardKind.NormalRange),
@@ -12009,6 +12399,7 @@ public record Memoria(
             965,
             "待ち望んだパーティナイト",
             "待ち望んだパーティナイト",
+            "待ち望んだパーティナイト",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -12037,6 +12428,7 @@ public record Memoria(
         ),
         new Memoria(
             964,
+            "焦がれる夜",
             "焦がれる夜",
             "焦がれる夜",
             new Rearguard(RearguardKind.Interference),
@@ -12069,6 +12461,7 @@ public record Memoria(
             963,
             "焦がれる夜",
             "焦がれる夜",
+            "焦がれる夜",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -12097,6 +12490,7 @@ public record Memoria(
         ),
         new Memoria(
             962,
+            "いたずらトゥインクル",
             "いたずらトゥインクル",
             "いたずらトゥインクル",
             new Vanguard(VanguardKind.SpecialRange),
@@ -12129,6 +12523,7 @@ public record Memoria(
             961,
             "いたずらトゥインクル",
             "いたずらトゥインクル",
+            "いたずらトゥインクル",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -12157,6 +12552,7 @@ public record Memoria(
         ),
         new Memoria(
             960,
+            "はにかみプールサイド",
             "はにかみプールサイド",
             "はにかみプールサイド",
             new Rearguard(RearguardKind.Support),
@@ -12189,6 +12585,7 @@ public record Memoria(
         new Memoria(
             959,
             "クリエイターズコラボ真夏のステージ",
+            "クリエイターズコラボ-真夏のステージ-",
             "真夏のステージ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -12219,6 +12616,7 @@ public record Memoria(
         new Memoria(
             958,
             "クリエイターズコラボ真夏のステージ",
+            "クリエイターズコラボ-真夏のステージ-",
             "真夏のステージ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -12249,6 +12647,7 @@ public record Memoria(
         new Memoria(
             957,
             "クリエイターズコラボ浮き輪でぷかぷか",
+            "クリエイターズコラボ-浮き輪でぷかぷか-",
             "浮き輪でぷかぷか",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -12279,6 +12678,7 @@ public record Memoria(
         new Memoria(
             956,
             "クリエイターズコラボ浮き輪でぷかぷか",
+            "クリエイターズコラボ-浮き輪でぷかぷか-",
             "浮き輪でぷかぷか",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -12309,6 +12709,7 @@ public record Memoria(
         new Memoria(
             955,
             "クリエイターズコラボ向日葵の咲く園",
+            "クリエイターズコラボ-向日葵の咲く園-",
             "向日葵の咲く園",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -12339,6 +12740,7 @@ public record Memoria(
         new Memoria(
             954,
             "クリエイターズコラボ向日葵の咲く園",
+            "クリエイターズコラボ-向日葵の咲く園-",
             "向日葵の咲く園",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -12369,6 +12771,7 @@ public record Memoria(
         new Memoria(
             953,
             "クリエイターズコラボ水着をお披露目",
+            "クリエイターズコラボ-水着をお披露目-",
             "水着をお披露目",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -12399,6 +12802,7 @@ public record Memoria(
         new Memoria(
             952,
             "クリエイターズコラボ水着をお披露目",
+            "クリエイターズコラボ-水着をお披露目-",
             "水着をお披露目",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -12429,6 +12833,7 @@ public record Memoria(
         new Memoria(
             951,
             "emotionalmemoria楽しいを探して",
+            "Emotional Memoria -楽しいを探して-",
             "楽しいを探して",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -12459,6 +12864,7 @@ public record Memoria(
         new Memoria(
             950,
             "emotionalmemoria楽しいを探して",
+            "Emotional Memoria -楽しいを探して-",
             "楽しいを探して",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -12490,6 +12896,7 @@ public record Memoria(
             949,
             "祝25周年リリサマ",
             "祝2.5周年 リリサマ!!",
+            "祝2.5周年 リリサマ!!",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -12520,6 +12927,7 @@ public record Memoria(
             948,
             "祝25周年リリサマ",
             "祝2.5周年 リリサマ!!",
+            "祝2.5周年 リリサマ!!",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -12548,6 +12956,7 @@ public record Memoria(
         ),
         new Memoria(
             947,
+            "惹かれる手のひら",
             "惹かれる手のひら",
             "惹かれる手のひら",
             new Rearguard(RearguardKind.Recovery),
@@ -12580,6 +12989,7 @@ public record Memoria(
             946,
             "惹かれる手のひら",
             "惹かれる手のひら",
+            "惹かれる手のひら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -12608,6 +13018,7 @@ public record Memoria(
         ),
         new Memoria(
             945,
+            "王家の夏休み",
             "王家の夏休み",
             "王家の夏休み",
             new Rearguard(RearguardKind.Interference),
@@ -12640,6 +13051,7 @@ public record Memoria(
             944,
             "王家の夏休み",
             "王家の夏休み",
+            "王家の夏休み",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -12668,6 +13080,7 @@ public record Memoria(
         ),
         new Memoria(
             943,
+            "アグレッシヴ・ヒロイン",
             "アグレッシヴ・ヒロイン",
             "アグレッシヴ・ヒロイン",
             new Vanguard(VanguardKind.SpecialRange),
@@ -12701,6 +13114,7 @@ public record Memoria(
             942,
             "夏色スライダー",
             "夏色スライダー",
+            "夏色スライダー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -12730,6 +13144,7 @@ public record Memoria(
         ),
         new Memoria(
             941,
+            "星月夜の指揮者",
             "星月夜の指揮者",
             "星月夜の指揮者",
             new Rearguard(RearguardKind.Recovery),
@@ -12762,6 +13177,7 @@ public record Memoria(
             940,
             "星月夜の指揮者",
             "星月夜の指揮者",
+            "星月夜の指揮者",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
             [
@@ -12790,6 +13206,7 @@ public record Memoria(
         ),
         new Memoria(
             939,
+            "月下に舞うプランセス",
             "月下に舞うプランセス",
             "月下に舞うプランセス",
             new Vanguard(VanguardKind.SpecialRange),
@@ -12822,6 +13239,7 @@ public record Memoria(
             938,
             "月下に舞うプランセス",
             "月下に舞うプランセス",
+            "月下に舞うプランセス",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -12850,6 +13268,7 @@ public record Memoria(
         ),
         new Memoria(
             937,
+            "蒼き月の夜",
             "蒼き月の夜",
             "蒼き月の夜",
             new Vanguard(VanguardKind.NormalRange),
@@ -12882,6 +13301,7 @@ public record Memoria(
             936,
             "蒼き月の夜",
             "蒼き月の夜",
+            "蒼き月の夜",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -12911,6 +13331,7 @@ public record Memoria(
         new Memoria(
             935,
             "クリエイターズコラボ非常事態のその後",
+            "クリエイターズコラボ-非常事態のその後-",
             "非常事態のその後",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -12941,6 +13362,7 @@ public record Memoria(
         new Memoria(
             934,
             "クリエイターズコラボ非常事態のその後",
+            "クリエイターズコラボ-非常事態のその後-",
             "非常事態のその後",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -12971,6 +13393,7 @@ public record Memoria(
         new Memoria(
             933,
             "クリエイターズコラボ冷たい舌触り",
+            "クリエイターズコラボ-冷たい舌触り-",
             "冷たい舌触り",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -13001,6 +13424,7 @@ public record Memoria(
         new Memoria(
             932,
             "クリエイターズコラボ冷たい舌触り",
+            "クリエイターズコラボ-冷たい舌触り-",
             "冷たい舌触り",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -13031,6 +13455,7 @@ public record Memoria(
         new Memoria(
             931,
             "クリエイターズコラボ灯莉の貝殻アート☆",
+            "クリエイターズコラボ-灯莉の貝殻アート☆-",
             "灯莉の貝殻アート☆",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -13061,6 +13486,7 @@ public record Memoria(
         new Memoria(
             930,
             "クリエイターズコラボ灯莉の貝殻アート☆",
+            "クリエイターズコラボ-灯莉の貝殻アート☆-",
             "灯莉の貝殻アート☆",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -13091,6 +13517,7 @@ public record Memoria(
         new Memoria(
             929,
             "クリエイターズコラボ碧い海のふたり",
+            "クリエイターズコラボ-碧い海のふたり-",
             "碧い海のふたり",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -13121,6 +13548,7 @@ public record Memoria(
         new Memoria(
             928,
             "クリエイターズコラボ碧い海のふたり",
+            "クリエイターズコラボ-碧い海のふたり-",
             "碧い海のふたり",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -13150,6 +13578,7 @@ public record Memoria(
         ),
         new Memoria(
             927,
+            "夢の果て、その先へ",
             "夢の果て、その先へ",
             "夢の果て、その先へ",
             new Vanguard(VanguardKind.SpecialRange),
@@ -13182,6 +13611,7 @@ public record Memoria(
             926,
             "夢の果て、その先へ",
             "夢の果て、その先へ",
+            "夢の果て、その先へ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -13210,6 +13640,7 @@ public record Memoria(
         ),
         new Memoria(
             925,
+            "正義の咆哮",
             "正義の咆哮",
             "正義の咆哮",
             new Vanguard(VanguardKind.NormalRange),
@@ -13242,6 +13673,7 @@ public record Memoria(
             924,
             "正義の咆哮",
             "正義の咆哮",
+            "正義の咆哮",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -13270,6 +13702,7 @@ public record Memoria(
         ),
         new Memoria(
             923,
+            "深炎のスキャルドメール",
             "深炎のスキャルドメール",
             "深炎のスキャルドメール",
             new Rearguard(RearguardKind.Interference),
@@ -13303,6 +13736,7 @@ public record Memoria(
             922,
             "七頭龍幻想の担い手",
             "七頭龍幻想の担い手",
+            "七頭龍幻想の担い手",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -13331,6 +13765,7 @@ public record Memoria(
         ),
         new Memoria(
             921,
+            "七頭龍幻想の担い手",
             "七頭龍幻想の担い手",
             "七頭龍幻想の担い手",
             new Vanguard(VanguardKind.SpecialRange),
@@ -13363,6 +13798,7 @@ public record Memoria(
             920,
             "竜のシャナ",
             "竜のシャナ",
+            "竜のシャナ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -13391,6 +13827,7 @@ public record Memoria(
         ),
         new Memoria(
             919,
+            "竜のシャナ",
             "竜のシャナ",
             "竜のシャナ",
             new Rearguard(RearguardKind.Support),
@@ -13423,6 +13860,7 @@ public record Memoria(
             918,
             "ゴージャス☆おしゃ恋花",
             "ゴージャス☆おしゃ恋花",
+            "ゴージャス☆おしゃ恋花",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -13451,6 +13889,7 @@ public record Memoria(
         ),
         new Memoria(
             917,
+            "ゴージャス☆おしゃ恋花",
             "ゴージャス☆おしゃ恋花",
             "ゴージャス☆おしゃ恋花",
             new Rearguard(RearguardKind.Support),
@@ -13483,6 +13922,7 @@ public record Memoria(
             916,
             "枕投げチャンピオン",
             "枕投げチャンピオン",
+            "枕投げチャンピオン",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -13511,6 +13951,7 @@ public record Memoria(
         ),
         new Memoria(
             915,
+            "枕投げチャンピオン",
             "枕投げチャンピオン",
             "枕投げチャンピオン",
             new Rearguard(RearguardKind.Interference),
@@ -13543,6 +13984,7 @@ public record Memoria(
             914,
             "幸せな夢を見る前に",
             "幸せな夢を見る前に",
+            "幸せな夢を見る前に",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -13571,6 +14013,7 @@ public record Memoria(
         ),
         new Memoria(
             913,
+            "幸せな夢を見る前に",
             "幸せな夢を見る前に",
             "幸せな夢を見る前に",
             new Vanguard(VanguardKind.NormalRange),
@@ -13603,6 +14046,7 @@ public record Memoria(
             912,
             "心を鋼鉄に変えて",
             "心を鋼鉄に変えて",
+            "心を鋼鉄に変えて",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -13631,6 +14075,7 @@ public record Memoria(
         ),
         new Memoria(
             911,
+            "心を鋼鉄に変えて",
             "心を鋼鉄に変えて",
             "心を鋼鉄に変えて",
             new Rearguard(RearguardKind.Support),
@@ -13663,6 +14108,7 @@ public record Memoria(
             910,
             "受け継がれし攻守の型",
             "受け継がれし攻守の型",
+            "受け継がれし攻守の型",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -13691,6 +14137,7 @@ public record Memoria(
         ),
         new Memoria(
             909,
+            "受け継がれし攻守の型",
             "受け継がれし攻守の型",
             "受け継がれし攻守の型",
             new Rearguard(RearguardKind.Interference),
@@ -13723,6 +14170,7 @@ public record Memoria(
             908,
             "煉獄の守護天使",
             "煉獄の守護天使",
+            "煉獄の守護天使",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -13751,6 +14199,7 @@ public record Memoria(
         ),
         new Memoria(
             907,
+            "煉獄の守護天使",
             "煉獄の守護天使",
             "煉獄の守護天使",
             new Vanguard(VanguardKind.SpecialRange),
@@ -13783,6 +14232,7 @@ public record Memoria(
             906,
             "祈りの声が届く時",
             "祈りの声が届く時",
+            "祈りの声が届く時",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -13811,6 +14261,7 @@ public record Memoria(
         ),
         new Memoria(
             905,
+            "祈りの声が届く時",
             "祈りの声が届く時",
             "祈りの声が届く時",
             new Rearguard(RearguardKind.Recovery),
@@ -13842,6 +14293,7 @@ public record Memoria(
         new Memoria(
             904,
             "クリエイターズコラボこれなんかどう",
+            "クリエイターズコラボ-これなんかどう？-",
             "これなんかどう？",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -13872,6 +14324,7 @@ public record Memoria(
         new Memoria(
             903,
             "クリエイターズコラボこれなんかどう",
+            "クリエイターズコラボ-これなんかどう？-",
             "これなんかどう？",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -13902,6 +14355,7 @@ public record Memoria(
         new Memoria(
             902,
             "クリエイターズコラボ日差しを見上げて",
+            "クリエイターズコラボ-日差しを見上げて-",
             "日差しを見上げて",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -13932,6 +14386,7 @@ public record Memoria(
         new Memoria(
             901,
             "クリエイターズコラボ日差しを見上げて",
+            "クリエイターズコラボ-日差しを見上げて-",
             "日差しを見上げて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -13962,6 +14417,7 @@ public record Memoria(
         new Memoria(
             900,
             "クリエイターズコラボ初夏の装い",
+            "クリエイターズコラボ-初夏の装い-",
             "初夏の装い",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -13992,6 +14448,7 @@ public record Memoria(
         new Memoria(
             899,
             "クリエイターズコラボ初夏の装い",
+            "クリエイターズコラボ-初夏の装い-",
             "初夏の装い",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -14022,6 +14479,7 @@ public record Memoria(
         new Memoria(
             898,
             "クリエイターズコラボ水族館を探検",
+            "クリエイターズコラボ-水族館を探検-",
             "水族館を探検",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -14052,6 +14510,7 @@ public record Memoria(
         new Memoria(
             897,
             "クリエイターズコラボ水族館を探検",
+            "クリエイターズコラボ-水族館を探検-",
             "水族館を探検",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -14081,6 +14540,7 @@ public record Memoria(
         ),
         new Memoria(
             896,
+            "桜花爛漫",
             "桜花爛漫",
             "桜花爛漫",
             new Rearguard(RearguardKind.Interference),
@@ -14113,6 +14573,7 @@ public record Memoria(
             895,
             "桜花爛漫",
             "桜花爛漫",
+            "桜花爛漫",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -14141,6 +14602,7 @@ public record Memoria(
         ),
         new Memoria(
             894,
+            "心の痛みを判る人",
             "心の痛みを判る人",
             "心の痛みを判る人",
             new Rearguard(RearguardKind.Support),
@@ -14173,6 +14635,7 @@ public record Memoria(
             893,
             "心の痛みを判る人",
             "心の痛みを判る人",
+            "心の痛みを判る人",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -14201,6 +14664,7 @@ public record Memoria(
         ),
         new Memoria(
             892,
+            "輝く心",
             "輝く心",
             "輝く心",
             new Vanguard(VanguardKind.NormalRange),
@@ -14233,6 +14697,7 @@ public record Memoria(
             891,
             "輝く心",
             "輝く心",
+            "輝く心",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -14261,6 +14726,7 @@ public record Memoria(
         ),
         new Memoria(
             890,
+            "勇気の拳",
             "勇気の拳",
             "勇気の拳",
             new Vanguard(VanguardKind.SpecialRange),
@@ -14293,6 +14759,7 @@ public record Memoria(
             889,
             "勇気の拳",
             "勇気の拳",
+            "勇気の拳",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -14322,6 +14789,7 @@ public record Memoria(
         new Memoria(
             888,
             "emotionalmemoria伝わる鼓動",
+            "Emotional Memoria -伝わる鼓動-",
             "伝わる鼓動",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -14352,6 +14820,7 @@ public record Memoria(
         new Memoria(
             887,
             "emotionalmemoria伝わる鼓動",
+            "Emotional Memoria -伝わる鼓動-",
             "伝わる鼓動",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -14382,6 +14851,7 @@ public record Memoria(
         new Memoria(
             886,
             "クリエイターズコラボ二度寝のいいわけ",
+            "クリエイターズコラボ-二度寝のいいわけ-",
             "二度寝のいいわけ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -14412,6 +14882,7 @@ public record Memoria(
         new Memoria(
             885,
             "クリエイターズコラボ二度寝のいいわけ",
+            "クリエイターズコラボ-二度寝のいいわけ-",
             "二度寝のいいわけ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14442,6 +14913,7 @@ public record Memoria(
         new Memoria(
             884,
             "クリエイターズコラボ雨、舌戦のあと",
+            "クリエイターズコラボ-雨、舌戦のあと-",
             "雨、舌戦のあと",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -14472,6 +14944,7 @@ public record Memoria(
         new Memoria(
             883,
             "クリエイターズコラボ雨、舌戦のあと",
+            "クリエイターズコラボ-雨、舌戦のあと-",
             "雨、舌戦のあと",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -14502,6 +14975,7 @@ public record Memoria(
         new Memoria(
             882,
             "クリエイターズコラボ雨の日は紅茶を",
+            "クリエイターズコラボ-雨の日は紅茶を-",
             "雨の日は紅茶を",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -14532,6 +15006,7 @@ public record Memoria(
         new Memoria(
             881,
             "クリエイターズコラボ雨の日は紅茶を",
+            "クリエイターズコラボ-雨の日は紅茶を-",
             "雨の日は紅茶を",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -14562,6 +15037,7 @@ public record Memoria(
         new Memoria(
             880,
             "クリエイターズコラボ紫陽花の咲く頃",
+            "クリエイターズコラボ-紫陽花の咲く頃-",
             "紫陽花の咲く頃",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -14592,6 +15068,7 @@ public record Memoria(
         new Memoria(
             879,
             "クリエイターズコラボ紫陽花の咲く頃",
+            "クリエイターズコラボ-紫陽花の咲く頃-",
             "紫陽花の咲く頃",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -14621,6 +15098,7 @@ public record Memoria(
         ),
         new Memoria(
             878,
+            "清純な心",
             "清純な心",
             "清純な心",
             new Vanguard(VanguardKind.NormalRange),
@@ -14653,6 +15131,7 @@ public record Memoria(
             877,
             "清純な心",
             "清純な心",
+            "清純な心",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -14681,6 +15160,7 @@ public record Memoria(
         ),
         new Memoria(
             876,
+            "そよ風のシュッツエンゲル",
             "そよ風のシュッツエンゲル",
             "そよ風のシュッツエンゲル",
             new Vanguard(VanguardKind.SpecialRange),
@@ -14713,6 +15193,7 @@ public record Memoria(
             875,
             "そよ風のシュッツエンゲル",
             "そよ風のシュッツエンゲル",
+            "そよ風のシュッツエンゲル",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -14741,6 +15222,7 @@ public record Memoria(
         ),
         new Memoria(
             874,
+            "神の子",
             "神の子",
             "神の子",
             new Rearguard(RearguardKind.Recovery),
@@ -14774,6 +15256,7 @@ public record Memoria(
             873,
             "交差する勇み花",
             "交差する勇み花",
+            "交差する勇み花",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -14802,6 +15285,7 @@ public record Memoria(
         ),
         new Memoria(
             872,
+            "交差する勇み花",
             "交差する勇み花",
             "交差する勇み花",
             new Rearguard(RearguardKind.Support),
@@ -14834,6 +15318,7 @@ public record Memoria(
             871,
             "情熱",
             "情熱",
+            "情熱",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -14862,6 +15347,7 @@ public record Memoria(
         ),
         new Memoria(
             870,
+            "情熱",
             "情熱",
             "情熱",
             new Rearguard(RearguardKind.Interference),
@@ -14894,6 +15380,7 @@ public record Memoria(
             869,
             "愛情の絆",
             "愛情の絆",
+            "愛情の絆",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -14922,6 +15409,7 @@ public record Memoria(
         ),
         new Memoria(
             868,
+            "愛情の絆",
             "愛情の絆",
             "愛情の絆",
             new Vanguard(VanguardKind.SpecialRange),
@@ -14954,6 +15442,7 @@ public record Memoria(
             867,
             "貴方に微笑む",
             "貴方に微笑む",
+            "貴方に微笑む",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -14982,6 +15471,7 @@ public record Memoria(
         ),
         new Memoria(
             866,
+            "貴方に微笑む",
             "貴方に微笑む",
             "貴方に微笑む",
             new Rearguard(RearguardKind.Interference),
@@ -15014,6 +15504,7 @@ public record Memoria(
             865,
             "つきしーmax",
             "つきしーMAX!!",
+            "つきしーMAX!!",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -15045,6 +15536,7 @@ public record Memoria(
             864,
             "g戦場の百合亜",
             "G戦場の百合亜",
+            "G戦場の百合亜",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -15075,6 +15567,7 @@ public record Memoria(
             863,
             "g戦場の百合亜",
             "G戦場の百合亜",
+            "G戦場の百合亜",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -15103,6 +15596,7 @@ public record Memoria(
         ),
         new Memoria(
             862,
+            "焼け焦げた土を踏んで",
             "焼け焦げた土を踏んで",
             "焼け焦げた土を踏んで",
             new Vanguard(VanguardKind.SpecialRange),
@@ -15135,6 +15629,7 @@ public record Memoria(
             861,
             "焼け焦げた土を踏んで",
             "焼け焦げた土を踏んで",
+            "焼け焦げた土を踏んで",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -15163,6 +15658,7 @@ public record Memoria(
         ),
         new Memoria(
             860,
+            "黒蝕の夢",
             "黒蝕の夢",
             "黒蝕の夢",
             new Rearguard(RearguardKind.Support),
@@ -15195,6 +15691,7 @@ public record Memoria(
             859,
             "黒蝕の夢",
             "黒蝕の夢",
+            "黒蝕の夢",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -15223,6 +15720,7 @@ public record Memoria(
         ),
         new Memoria(
             858,
+            "月光奏鳴",
             "月光奏鳴",
             "月光奏鳴",
             new Vanguard(VanguardKind.NormalRange),
@@ -15255,6 +15753,7 @@ public record Memoria(
             857,
             "月光奏鳴",
             "月光奏鳴",
+            "月光奏鳴",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -15284,6 +15783,7 @@ public record Memoria(
         new Memoria(
             856,
             "クリエイターズコラボ式場を決めましたわ",
+            "クリエイターズコラボ-式場を決めましたわ-",
             "式場を決めましたわ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -15314,6 +15814,7 @@ public record Memoria(
         new Memoria(
             855,
             "クリエイターズコラボ式場を決めましたわ",
+            "クリエイターズコラボ-式場を決めましたわ-",
             "式場を決めましたわ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -15344,6 +15845,7 @@ public record Memoria(
         new Memoria(
             854,
             "クリエイターズコラボ想像ウェディング",
+            "クリエイターズコラボ-想像ウェディング-",
             "想像ウェディング",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -15374,6 +15876,7 @@ public record Memoria(
         new Memoria(
             853,
             "クリエイターズコラボ想像ウェディング",
+            "クリエイターズコラボ-想像ウェディング-",
             "想像ウェディング",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -15404,6 +15907,7 @@ public record Memoria(
         new Memoria(
             852,
             "クリエイターズコラボウェディングベア",
+            "クリエイターズコラボ-ウェディングベア-",
             "ウェディングベア",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -15434,6 +15938,7 @@ public record Memoria(
         new Memoria(
             851,
             "クリエイターズコラボウェディングベア",
+            "クリエイターズコラボ-ウェディングベア-",
             "ウェディングベア",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -15464,6 +15969,7 @@ public record Memoria(
         new Memoria(
             850,
             "クリエイターズコラボ門出のブーケ・トス",
+            "クリエイターズコラボ-門出のブーケ・トス-",
             "門出のブーケ・トス",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -15494,6 +16000,7 @@ public record Memoria(
         new Memoria(
             849,
             "クリエイターズコラボ門出のブーケ・トス",
+            "クリエイターズコラボ-門出のブーケ・トス-",
             "門出のブーケ・トス",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -15523,6 +16030,7 @@ public record Memoria(
         ),
         new Memoria(
             848,
+            "夢見る自分を、怖れずに",
             "夢見る自分を、怖れずに",
             "夢見る自分を、怖れずに",
             new Vanguard(VanguardKind.SpecialRange),
@@ -15555,6 +16063,7 @@ public record Memoria(
             847,
             "夢見る自分を、怖れずに",
             "夢見る自分を、怖れずに",
+            "夢見る自分を、怖れずに",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -15583,6 +16092,7 @@ public record Memoria(
         ),
         new Memoria(
             846,
+            "ウエディング・マーチ",
             "ウエディング・マーチ",
             "ウエディング・マーチ",
             new Rearguard(RearguardKind.Interference),
@@ -15615,6 +16125,7 @@ public record Memoria(
             845,
             "ウエディング・マーチ",
             "ウエディング・マーチ",
+            "ウエディング・マーチ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -15643,6 +16154,7 @@ public record Memoria(
         ),
         new Memoria(
             844,
+            "エターナル・プロミス",
             "エターナル・プロミス",
             "エターナル・プロミス",
             new Vanguard(VanguardKind.NormalRange),
@@ -15675,6 +16187,7 @@ public record Memoria(
         new Memoria(
             843,
             "クリエイターズコラボピクニック日和",
+            "クリエイターズコラボ-ピクニック日和-",
             "ピクニック日和",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -15705,6 +16218,7 @@ public record Memoria(
         new Memoria(
             842,
             "クリエイターズコラボピクニック日和",
+            "クリエイターズコラボ-ピクニック日和-",
             "ピクニック日和",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -15735,6 +16249,7 @@ public record Memoria(
         new Memoria(
             841,
             "クリエイターズコラボなでなで連鎖",
+            "クリエイターズコラボ-なでなで連鎖-",
             "なでなで連鎖",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -15765,6 +16280,7 @@ public record Memoria(
         new Memoria(
             840,
             "クリエイターズコラボなでなで連鎖",
+            "クリエイターズコラボ-なでなで連鎖-",
             "なでなで連鎖",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -15795,6 +16311,7 @@ public record Memoria(
         new Memoria(
             839,
             "クリエイターズコラボ尊さの不意打ち",
+            "クリエイターズコラボ-尊さの不意打ち-",
             "尊さの不意打ち",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -15825,6 +16342,7 @@ public record Memoria(
         new Memoria(
             838,
             "クリエイターズコラボ尊さの不意打ち",
+            "クリエイターズコラボ-尊さの不意打ち-",
             "尊さの不意打ち",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -15855,6 +16373,7 @@ public record Memoria(
         new Memoria(
             837,
             "クリエイターズコラボ皐月の頃に",
+            "クリエイターズコラボ-皐月の頃に-",
             "皐月の頃に",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -15885,6 +16404,7 @@ public record Memoria(
         new Memoria(
             836,
             "クリエイターズコラボ皐月の頃に",
+            "クリエイターズコラボ-皐月の頃に-",
             "皐月の頃に",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -15914,6 +16434,7 @@ public record Memoria(
         ),
         new Memoria(
             835,
+            "言葉無く吠える",
             "言葉無く吠える",
             "言葉無く吠える",
             new Vanguard(VanguardKind.NormalRange),
@@ -15946,6 +16467,7 @@ public record Memoria(
             834,
             "言葉無く吠える",
             "言葉無く吠える",
+            "言葉無く吠える",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -15974,6 +16496,7 @@ public record Memoria(
         ),
         new Memoria(
             833,
+            "戦乙女の誇り",
             "戦乙女の誇り",
             "戦乙女の誇り",
             new Rearguard(RearguardKind.Recovery),
@@ -16006,6 +16529,7 @@ public record Memoria(
             832,
             "戦乙女の誇り",
             "戦乙女の誇り",
+            "戦乙女の誇り",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -16034,6 +16558,7 @@ public record Memoria(
         ),
         new Memoria(
             831,
+            "竜のシャナと楯の乙女",
             "竜のシャナと楯の乙女",
             "竜のシャナと楯の乙女",
             new Rearguard(RearguardKind.Recovery),
@@ -16066,6 +16591,7 @@ public record Memoria(
             830,
             "竜のシャナと楯の乙女",
             "竜のシャナと楯の乙女",
+            "竜のシャナと楯の乙女",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
             [
@@ -16094,6 +16620,7 @@ public record Memoria(
         ),
         new Memoria(
             829,
+            "パーフェクトエイム",
             "パーフェクトエイム",
             "パーフェクトエイム",
             new Vanguard(VanguardKind.NormalRange),
@@ -16126,6 +16653,7 @@ public record Memoria(
             828,
             "パーフェクトエイム",
             "パーフェクトエイム",
+            "パーフェクトエイム",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -16154,6 +16682,7 @@ public record Memoria(
         ),
         new Memoria(
             827,
+            "征くと決めたこの道を",
             "征くと決めたこの道を",
             "征くと決めたこの道を",
             new Rearguard(RearguardKind.Interference),
@@ -16186,6 +16715,7 @@ public record Memoria(
             826,
             "征くと決めたこの道を",
             "征くと決めたこの道を",
+            "征くと決めたこの道を",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -16214,6 +16744,7 @@ public record Memoria(
         ),
         new Memoria(
             825,
+            "藍だけが使える魔法",
             "藍だけが使える魔法",
             "藍だけが使える魔法",
             new Vanguard(VanguardKind.SpecialRange),
@@ -16247,6 +16778,7 @@ public record Memoria(
             824,
             "エクセレントアイドル☆紗癒",
             "エクセレントアイドル☆紗癒",
+            "エクセレントアイドル☆紗癒",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -16275,6 +16807,7 @@ public record Memoria(
         ),
         new Memoria(
             823,
+            "エクセレントアイドル☆紗癒",
             "エクセレントアイドル☆紗癒",
             "エクセレントアイドル☆紗癒",
             new Vanguard(VanguardKind.NormalRange),
@@ -16307,6 +16840,7 @@ public record Memoria(
             822,
             "ゴージャスアイドル☆楓",
             "ゴージャスアイドル☆楓",
+            "ゴージャスアイドル☆楓",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -16335,6 +16869,7 @@ public record Memoria(
         ),
         new Memoria(
             821,
+            "ゴージャスアイドル☆楓",
             "ゴージャスアイドル☆楓",
             "ゴージャスアイドル☆楓",
             new Rearguard(RearguardKind.Interference),
@@ -16367,6 +16902,7 @@ public record Memoria(
             820,
             "荒ぶる魂",
             "荒ぶる魂",
+            "荒ぶる魂",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
             [
@@ -16395,6 +16931,7 @@ public record Memoria(
         ),
         new Memoria(
             819,
+            "荒ぶる魂",
             "荒ぶる魂",
             "荒ぶる魂",
             new Rearguard(RearguardKind.Recovery),
@@ -16427,6 +16964,7 @@ public record Memoria(
             818,
             "閑かなること、幻想の如く",
             "閑かなること、幻想の如く",
+            "閑かなること、幻想の如く",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -16455,6 +16993,7 @@ public record Memoria(
         ),
         new Memoria(
             817,
+            "閑かなること、幻想の如く",
             "閑かなること、幻想の如く",
             "閑かなること、幻想の如く",
             new Rearguard(RearguardKind.Interference),
@@ -16487,6 +17026,7 @@ public record Memoria(
             816,
             "猛禽の視点",
             "猛禽の視点",
+            "猛禽の視点",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -16515,6 +17055,7 @@ public record Memoria(
         ),
         new Memoria(
             815,
+            "猛禽の視点",
             "猛禽の視点",
             "猛禽の視点",
             new Vanguard(VanguardKind.SpecialRange),
@@ -16547,6 +17088,7 @@ public record Memoria(
             814,
             "戦場に差しこむ光",
             "戦場に差しこむ光",
+            "戦場に差しこむ光",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -16575,6 +17117,7 @@ public record Memoria(
         ),
         new Memoria(
             813,
+            "戦場に差しこむ光",
             "戦場に差しこむ光",
             "戦場に差しこむ光",
             new Vanguard(VanguardKind.NormalSingle),
@@ -16606,6 +17149,7 @@ public record Memoria(
         new Memoria(
             812,
             "クリエイターズコラボウィステリアの誘い",
+            "クリエイターズコラボ-ウィステリアの誘い-",
             "ウィステリアの誘い",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -16636,6 +17180,7 @@ public record Memoria(
         new Memoria(
             811,
             "クリエイターズコラボウィステリアの誘い",
+            "クリエイターズコラボ-ウィステリアの誘い-",
             "ウィステリアの誘い",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -16666,6 +17211,7 @@ public record Memoria(
         new Memoria(
             810,
             "クリエイターズコラボ花言葉のように",
+            "クリエイターズコラボ-花言葉のように-",
             "花言葉のように",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -16696,6 +17242,7 @@ public record Memoria(
         new Memoria(
             809,
             "クリエイターズコラボ花言葉のように",
+            "クリエイターズコラボ-花言葉のように-",
             "花言葉のように",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -16726,6 +17273,7 @@ public record Memoria(
         new Memoria(
             808,
             "クリエイターズコラボ藤棚の下で",
+            "クリエイターズコラボ-藤棚の下で-",
             "藤棚の下で",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -16756,6 +17304,7 @@ public record Memoria(
         new Memoria(
             807,
             "クリエイターズコラボ藤棚の下で",
+            "クリエイターズコラボ-藤棚の下で-",
             "藤棚の下で",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -16786,6 +17335,7 @@ public record Memoria(
         new Memoria(
             806,
             "クリエイターズコラボ紫に酔い、白に想う",
+            "クリエイターズコラボ-紫に酔い、白に想う-",
             "紫に酔い、白に想う",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -16816,6 +17366,7 @@ public record Memoria(
         new Memoria(
             805,
             "クリエイターズコラボ紫に酔い、白に想う",
+            "クリエイターズコラボ-紫に酔い、白に想う-",
             "紫に酔い、白に想う",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -16847,6 +17398,7 @@ public record Memoria(
             804,
             "舞台「thegleamofdawn」開演",
             "舞台「The Gleam of Dawn」開演！",
+            "舞台「The Gleam of Dawn」開演！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -16877,6 +17429,7 @@ public record Memoria(
             803,
             "舞台「thegleamofdawn」開演",
             "舞台「The Gleam of Dawn」開演！",
+            "舞台「The Gleam of Dawn」開演！",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -16906,6 +17459,7 @@ public record Memoria(
         new Memoria(
             802,
             "猪突猛進",
+            "猪突猛進！",
             "猪突猛進！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -16938,6 +17492,7 @@ public record Memoria(
             801,
             "さみしがりうさぎ",
             "さみしがりうさぎ",
+            "さみしがりうさぎ",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -16966,6 +17521,7 @@ public record Memoria(
         ),
         new Memoria(
             800,
+            "さみしがりうさぎ",
             "さみしがりうさぎ",
             "さみしがりうさぎ",
             new Vanguard(VanguardKind.NormalRange),
@@ -16998,6 +17554,7 @@ public record Memoria(
             799,
             "バニートラップ",
             "バニートラップ",
+            "バニートラップ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -17026,6 +17583,7 @@ public record Memoria(
         ),
         new Memoria(
             798,
+            "バニートラップ",
             "バニートラップ",
             "バニートラップ",
             new Rearguard(RearguardKind.Support),
@@ -17058,6 +17616,7 @@ public record Memoria(
             797,
             "魅惑のセレクション",
             "魅惑のセレクション",
+            "魅惑のセレクション",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -17088,6 +17647,7 @@ public record Memoria(
         new Memoria(
             796,
             "クリエイターズコラボイースターハント",
+            "クリエイターズコラボ-イースターハント-",
             "イースターハント",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -17118,6 +17678,7 @@ public record Memoria(
         new Memoria(
             795,
             "クリエイターズコラボイースターハント",
+            "クリエイターズコラボ-イースターハント-",
             "イースターハント",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -17148,6 +17709,7 @@ public record Memoria(
         new Memoria(
             794,
             "クリエイターズコラボ花咲くイースター",
+            "クリエイターズコラボ-花咲くイースター-",
             "花咲くイースター",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -17178,6 +17740,7 @@ public record Memoria(
         new Memoria(
             793,
             "クリエイターズコラボ花咲くイースター",
+            "クリエイターズコラボ-花咲くイースター-",
             "花咲くイースター",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -17208,6 +17771,7 @@ public record Memoria(
         new Memoria(
             792,
             "クリエイターズコラボイースターエッグ",
+            "クリエイターズコラボ-イースターエッグ-",
             "イースターエッグ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -17238,6 +17802,7 @@ public record Memoria(
         new Memoria(
             791,
             "クリエイターズコラボイースターエッグ",
+            "クリエイターズコラボ-イースターエッグ-",
             "イースターエッグ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -17268,6 +17833,7 @@ public record Memoria(
         new Memoria(
             790,
             "クリエイターズコラボエッグロール開始",
+            "クリエイターズコラボ-エッグロール開始！-",
             "エッグロール開始！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -17298,6 +17864,7 @@ public record Memoria(
         new Memoria(
             789,
             "クリエイターズコラボエッグロール開始",
+            "クリエイターズコラボ-エッグロール開始！-",
             "エッグロール開始！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -17329,6 +17896,7 @@ public record Memoria(
             788,
             "天のアカリ目",
             "天のアカリ目！",
+            "天のアカリ目！",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -17358,6 +17926,7 @@ public record Memoria(
         new Memoria(
             787,
             "天のアカリ目",
+            "天のアカリ目！",
             "天のアカリ目！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -17389,6 +17958,7 @@ public record Memoria(
             786,
             "これが、あたしの理",
             "これが、あたしの理！",
+            "これが、あたしの理！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -17419,6 +17989,7 @@ public record Memoria(
             785,
             "これが、あたしの理",
             "これが、あたしの理！",
+            "これが、あたしの理！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -17447,6 +18018,7 @@ public record Memoria(
         ),
         new Memoria(
             784,
+            "マルチカラード・ティアーズ",
             "マルチカラード・ティアーズ",
             "マルチカラード・ティアーズ",
             new Rearguard(RearguardKind.Recovery),
@@ -17479,6 +18051,7 @@ public record Memoria(
             783,
             "尊き花を守るために",
             "尊き花を守るために",
+            "尊き花を守るために",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -17507,6 +18080,7 @@ public record Memoria(
         ),
         new Memoria(
             782,
+            "尊き花を守るために",
             "尊き花を守るために",
             "尊き花を守るために",
             new Vanguard(VanguardKind.NormalRange),
@@ -17539,6 +18113,7 @@ public record Memoria(
             781,
             "笑顔の夜明け",
             "笑顔の夜明け",
+            "笑顔の夜明け",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -17567,6 +18142,7 @@ public record Memoria(
         ),
         new Memoria(
             780,
+            "笑顔の夜明け",
             "笑顔の夜明け",
             "笑顔の夜明け",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -17599,6 +18175,7 @@ public record Memoria(
             779,
             "天使の左手、堕天使の右手",
             "天使の左手、堕天使の右手",
+            "天使の左手、堕天使の右手",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -17627,6 +18204,7 @@ public record Memoria(
         ),
         new Memoria(
             778,
+            "天使の左手、堕天使の右手",
             "天使の左手、堕天使の右手",
             "天使の左手、堕天使の右手",
             new Rearguard(RearguardKind.Support),
@@ -17658,6 +18236,7 @@ public record Memoria(
         new Memoria(
             777,
             "emotionalmemoria朝寝坊のススメ",
+            "Emotional Memoria -朝寝坊のススメ-",
             "朝寝坊のススメ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -17688,6 +18267,7 @@ public record Memoria(
         new Memoria(
             776,
             "emotionalmemoria朝寝坊のススメ",
+            "Emotional Memoria -朝寝坊のススメ-",
             "朝寝坊のススメ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -17717,6 +18297,7 @@ public record Memoria(
         ),
         new Memoria(
             775,
+            "千香瑠のエクササイズ",
             "千香瑠のエクササイズ",
             "千香瑠のエクササイズ",
             new Rearguard(RearguardKind.Recovery),
@@ -17749,6 +18330,7 @@ public record Memoria(
             774,
             "玲瓏玉の如し",
             "玲瓏玉の如し",
+            "玲瓏玉の如し",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -17777,6 +18359,7 @@ public record Memoria(
         ),
         new Memoria(
             773,
+            "ぱーふぇくとアカリズム",
             "ぱーふぇくとアカリズム",
             "ぱーふぇくとアカリズム",
             new Rearguard(RearguardKind.Support),
@@ -17809,6 +18392,7 @@ public record Memoria(
             772,
             "グラスにラムネを注いだら",
             "グラスにラムネを注いだら",
+            "グラスにラムネを注いだら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -17837,6 +18421,7 @@ public record Memoria(
         ),
         new Memoria(
             771,
+            "ツインテじゃらし",
             "ツインテじゃらし",
             "ツインテじゃらし",
             new Vanguard(VanguardKind.NormalRange),
@@ -17869,6 +18454,7 @@ public record Memoria(
             770,
             "反りし刃、誘うは棺",
             "反りし刃、誘うは棺",
+            "反りし刃、誘うは棺",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -17897,6 +18483,7 @@ public record Memoria(
         ),
         new Memoria(
             769,
+            "反りし刃、誘うは棺",
             "反りし刃、誘うは棺",
             "反りし刃、誘うは棺",
             new Rearguard(RearguardKind.Recovery),
@@ -17929,6 +18516,7 @@ public record Memoria(
             768,
             "蒼き輝き、楯たる矜持",
             "蒼き輝き、楯たる矜持",
+            "蒼き輝き、楯たる矜持",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -17957,6 +18545,7 @@ public record Memoria(
         ),
         new Memoria(
             767,
+            "蒼き輝き、楯たる矜持",
             "蒼き輝き、楯たる矜持",
             "蒼き輝き、楯たる矜持",
             new Rearguard(RearguardKind.Support),
@@ -17989,6 +18578,7 @@ public record Memoria(
             766,
             "その心、炎よりも熱く",
             "その心、炎よりも熱く",
+            "その心、炎よりも熱く",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -18017,6 +18607,7 @@ public record Memoria(
         ),
         new Memoria(
             765,
+            "その心、炎よりも熱く",
             "その心、炎よりも熱く",
             "その心、炎よりも熱く",
             new Vanguard(VanguardKind.NormalRange),
@@ -18049,6 +18640,7 @@ public record Memoria(
             764,
             "贖いの祈り",
             "贖いの祈り",
+            "贖いの祈り",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -18077,6 +18669,7 @@ public record Memoria(
         ),
         new Memoria(
             763,
+            "贖いの祈り",
             "贖いの祈り",
             "贖いの祈り",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -18108,6 +18701,7 @@ public record Memoria(
         new Memoria(
             762,
             "クリエイターズコラボ桜と貴女を",
+            "クリエイターズコラボ-桜と貴女を-",
             "桜と貴女を",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -18138,6 +18732,7 @@ public record Memoria(
         new Memoria(
             761,
             "クリエイターズコラボgogo新学期",
+            "クリエイターズコラボ-GOGO新学期！-",
             "GOGO新学期！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -18168,6 +18763,7 @@ public record Memoria(
         new Memoria(
             760,
             "クリエイターズコラボ天に舞う花びら",
+            "クリエイターズコラボ-天に舞う花びら-",
             "天に舞う花びら",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -18198,6 +18794,7 @@ public record Memoria(
         new Memoria(
             759,
             "クリエイターズコラボお花見ティータイム",
+            "クリエイターズコラボ-お花見ティータイム-",
             "お花見ティータイム",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -18228,6 +18825,7 @@ public record Memoria(
         new Memoria(
             758,
             "クリエイターズコラボ春風に吹かれて",
+            "クリエイターズコラボ-春風に吹かれて-",
             "春風に吹かれて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -18257,6 +18855,7 @@ public record Memoria(
         ),
         new Memoria(
             757,
+            "堅固なる守り",
             "堅固なる守り",
             "堅固なる守り",
             new Rearguard(RearguardKind.Support),
@@ -18290,6 +18889,7 @@ public record Memoria(
             756,
             "光咲く日々を抱いて",
             "光咲く日々を抱いて",
+            "光咲く日々を抱いて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -18318,6 +18918,7 @@ public record Memoria(
         ),
         new Memoria(
             755,
+            "光咲く日々を抱いて",
             "光咲く日々を抱いて",
             "光咲く日々を抱いて",
             new Rearguard(RearguardKind.Recovery),
@@ -18350,6 +18951,7 @@ public record Memoria(
             754,
             "泡立てチャレンジの結果",
             "泡立てチャレンジの結果",
+            "泡立てチャレンジの結果",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -18378,6 +18980,7 @@ public record Memoria(
         ),
         new Memoria(
             753,
+            "泡立てチャレンジの結果",
             "泡立てチャレンジの結果",
             "泡立てチャレンジの結果",
             new Vanguard(VanguardKind.SpecialRange),
@@ -18410,6 +19013,7 @@ public record Memoria(
             752,
             "ぎゅーっとしてあげる",
             "ぎゅーっとしてあげる",
+            "ぎゅーっとしてあげる",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -18440,6 +19044,7 @@ public record Memoria(
         new Memoria(
             751,
             "クリエイターズコラボシルト餌付け実験",
+            "クリエイターズコラボ-シルト餌付け実験-",
             "シルト餌付け実験",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -18470,6 +19075,7 @@ public record Memoria(
         new Memoria(
             750,
             "クリエイターズコラボ苺飴の味わい",
+            "クリエイターズコラボ-苺飴の味わい-",
             "苺飴の味わい",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -18500,6 +19106,7 @@ public record Memoria(
         new Memoria(
             749,
             "クリエイターズコラボ甘々苺クレープ",
+            "クリエイターズコラボ-甘々苺クレープ-",
             "甘々苺クレープ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -18530,6 +19137,7 @@ public record Memoria(
         new Memoria(
             748,
             "クリエイターズコラボ籠いっぱいの幸せ",
+            "クリエイターズコラボ-籠いっぱいの幸せ-",
             "籠いっぱいの幸せ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -18560,6 +19168,7 @@ public record Memoria(
         new Memoria(
             747,
             "クリエイターズコラボ苺色に染めて",
+            "クリエイターズコラボ-苺色に染めて-",
             "苺色に染めて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -18589,6 +19198,7 @@ public record Memoria(
         ),
         new Memoria(
             746,
+            "差し出されたお菓子",
             "差し出されたお菓子",
             "差し出されたお菓子",
             new Vanguard(VanguardKind.SpecialRange),
@@ -18621,6 +19231,7 @@ public record Memoria(
             745,
             "差し出されたお菓子",
             "差し出されたお菓子",
+            "差し出されたお菓子",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -18650,6 +19261,7 @@ public record Memoria(
         new Memoria(
             744,
             "共同戦線",
+            "共同戦線！",
             "共同戦線！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -18681,6 +19293,7 @@ public record Memoria(
             743,
             "共同戦線",
             "共同戦線！",
+            "共同戦線！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -18710,6 +19323,7 @@ public record Memoria(
         new Memoria(
             742,
             "僕と契約して、魔法少女になってよ",
+            "僕と契約して、魔法少女になってよ！",
             "僕と契約して、魔法少女になってよ！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -18741,6 +19355,7 @@ public record Memoria(
             741,
             "僕と契約して、魔法少女になってよ",
             "僕と契約して、魔法少女になってよ！",
+            "僕と契約して、魔法少女になってよ！",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -18770,6 +19385,7 @@ public record Memoria(
         new Memoria(
             740,
             "奇跡の出会い",
+            "奇跡の出会い！",
             "奇跡の出会い！",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -18801,6 +19417,7 @@ public record Memoria(
             739,
             "奇跡の出会い",
             "奇跡の出会い！",
+            "奇跡の出会い！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
             [
@@ -18829,6 +19446,7 @@ public record Memoria(
         ),
         new Memoria(
             738,
+            "頼れる先輩",
             "頼れる先輩",
             "頼れる先輩",
             new Vanguard(VanguardKind.NormalRange),
@@ -18861,6 +19479,7 @@ public record Memoria(
             737,
             "頼れる先輩",
             "頼れる先輩",
+            "頼れる先輩",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -18889,6 +19508,7 @@ public record Memoria(
         ),
         new Memoria(
             736,
+            "謎めいた魔法少女",
             "謎めいた魔法少女",
             "謎めいた魔法少女",
             new Rearguard(RearguardKind.Support),
@@ -18921,6 +19541,7 @@ public record Memoria(
             735,
             "謎めいた魔法少女",
             "謎めいた魔法少女",
+            "謎めいた魔法少女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -18950,6 +19571,7 @@ public record Memoria(
         new Memoria(
             734,
             "連携プレーの勝利",
+            "連携プレーの勝利！",
             "連携プレーの勝利！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -18981,6 +19603,7 @@ public record Memoria(
             733,
             "連携プレーの勝利",
             "連携プレーの勝利！",
+            "連携プレーの勝利！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -19009,6 +19632,7 @@ public record Memoria(
         ),
         new Memoria(
             732,
+            "氷嵐を断つ劔",
             "氷嵐を断つ劔",
             "氷嵐を断つ劔",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -19041,6 +19665,7 @@ public record Memoria(
             731,
             "氷嵐を断つ劔",
             "氷嵐を断つ劔",
+            "氷嵐を断つ劔",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -19069,6 +19694,7 @@ public record Memoria(
         ),
         new Memoria(
             730,
+            "一意専心",
             "一意専心",
             "一意専心",
             new Vanguard(VanguardKind.NormalRange),
@@ -19101,6 +19727,7 @@ public record Memoria(
             729,
             "一意専心",
             "一意専心",
+            "一意専心",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -19129,6 +19756,7 @@ public record Memoria(
         ),
         new Memoria(
             728,
+            "六花、胡蝶の如く舞う",
             "六花、胡蝶の如く舞う",
             "六花、胡蝶の如く舞う",
             new Rearguard(RearguardKind.Recovery),
@@ -19161,6 +19789,7 @@ public record Memoria(
             727,
             "六花、胡蝶の如く舞う",
             "六花、胡蝶の如く舞う",
+            "六花、胡蝶の如く舞う",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
             [
@@ -19189,6 +19818,7 @@ public record Memoria(
         ),
         new Memoria(
             726,
+            "輝ける流星",
             "輝ける流星",
             "輝ける流星",
             new Vanguard(VanguardKind.SpecialRange),
@@ -19221,6 +19851,7 @@ public record Memoria(
             725,
             "輝ける流星",
             "輝ける流星",
+            "輝ける流星",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -19250,6 +19881,7 @@ public record Memoria(
         new Memoria(
             724,
             "クリエイターズコラボとろけるハート",
+            "クリエイターズコラボ-とろけるハート-",
             "とろけるハート",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -19280,6 +19912,7 @@ public record Memoria(
         new Memoria(
             723,
             "クリエイターズコラボ甘いきらめき",
+            "クリエイターズコラボ-甘いきらめき-",
             "甘いきらめき",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -19310,6 +19943,7 @@ public record Memoria(
         new Memoria(
             722,
             "クリエイターズコラボショコラのゆうわく",
+            "クリエイターズコラボ-ショコラのゆうわく-",
             "ショコラのゆうわく",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -19340,6 +19974,7 @@ public record Memoria(
         new Memoria(
             721,
             "クリエイターズコラボいただきだゾ♪",
+            "クリエイターズコラボ-いただきだゾ♪-",
             "いただきだゾ♪",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -19369,6 +20004,7 @@ public record Memoria(
         ),
         new Memoria(
             720,
+            "あなたにお茶を",
             "あなたにお茶を",
             "あなたにお茶を",
             new Vanguard(VanguardKind.NormalRange),
@@ -19401,6 +20037,7 @@ public record Memoria(
             719,
             "あなたにお茶を",
             "あなたにお茶を",
+            "あなたにお茶を",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -19429,6 +20066,7 @@ public record Memoria(
         ),
         new Memoria(
             718,
+            "安らぎをあなたに",
             "安らぎをあなたに",
             "安らぎをあなたに",
             new Vanguard(VanguardKind.SpecialRange),
@@ -19461,6 +20099,7 @@ public record Memoria(
             717,
             "安らぎをあなたに",
             "安らぎをあなたに",
+            "安らぎをあなたに",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -19489,6 +20128,7 @@ public record Memoria(
         ),
         new Memoria(
             716,
+            "触れ合う吐息",
             "触れ合う吐息",
             "触れ合う吐息",
             new Rearguard(RearguardKind.Recovery),
@@ -19521,6 +20161,7 @@ public record Memoria(
             715,
             "触れ合う吐息",
             "触れ合う吐息",
+            "触れ合う吐息",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -19549,6 +20190,7 @@ public record Memoria(
         ),
         new Memoria(
             714,
+            "チョコを知らない君へ",
             "チョコを知らない君へ",
             "チョコを知らない君へ",
             new Rearguard(RearguardKind.Support),
@@ -19581,6 +20223,7 @@ public record Memoria(
             713,
             "チョコを知らない君へ",
             "チョコを知らない君へ",
+            "チョコを知らない君へ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -19609,6 +20252,7 @@ public record Memoria(
         ),
         new Memoria(
             712,
+            "運命のトリニティ",
             "運命のトリニティ",
             "運命のトリニティ",
             new Rearguard(RearguardKind.Support),
@@ -19641,6 +20285,7 @@ public record Memoria(
             711,
             "運命のトリニティ",
             "運命のトリニティ",
+            "運命のトリニティ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -19669,6 +20314,7 @@ public record Memoria(
         ),
         new Memoria(
             710,
+            "貴女と共にあるために",
             "貴女と共にあるために",
             "貴女と共にあるために",
             new Rearguard(RearguardKind.Recovery),
@@ -19701,6 +20347,7 @@ public record Memoria(
             709,
             "貴女と共にあるために",
             "貴女と共にあるために",
+            "貴女と共にあるために",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -19729,6 +20376,7 @@ public record Memoria(
         ),
         new Memoria(
             708,
+            "貴女の笑顔を守るために",
             "貴女の笑顔を守るために",
             "貴女の笑顔を守るために",
             new Rearguard(RearguardKind.Support),
@@ -19761,6 +20409,7 @@ public record Memoria(
             707,
             "光の盾",
             "光の盾",
+            "光の盾",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -19789,6 +20438,7 @@ public record Memoria(
         ),
         new Memoria(
             706,
+            "光の盾",
             "光の盾",
             "光の盾",
             new Rearguard(RearguardKind.Recovery),
@@ -19821,6 +20471,7 @@ public record Memoria(
             705,
             "ハルナストライク",
             "ハルナストライク！！",
+            "ハルナストライク！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -19851,6 +20502,7 @@ public record Memoria(
             704,
             "ハルナストライク",
             "ハルナストライク！！",
+            "ハルナストライク！！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -19880,6 +20532,7 @@ public record Memoria(
         new Memoria(
             703,
             "emotionalmemoria吐息の距離",
+            "Emotional Memoria -吐息の距離-",
             "吐息の距離",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -19910,6 +20563,7 @@ public record Memoria(
         new Memoria(
             702,
             "emotionalmemoria吐息の距離",
+            "Emotional Memoria -吐息の距離-",
             "吐息の距離",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -19940,6 +20594,7 @@ public record Memoria(
         new Memoria(
             701,
             "ultimatememoria縦横無尽、阻む者無し",
+            "Ultimate Memoria -縦横無尽、阻む者無し-",
             "縦横無尽、阻む者無し",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
@@ -19970,6 +20625,7 @@ public record Memoria(
         new Memoria(
             700,
             "ultimatememoria縦横無尽、阻む者無し",
+            "Ultimate Memoria -縦横無尽、阻む者無し-",
             "縦横無尽、阻む者無し",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
@@ -20000,6 +20656,7 @@ public record Memoria(
         new Memoria(
             699,
             "ultimatememoriaシリウス・ロア",
+            "Ultimate Memoria -シリウス・ロア-",
             "シリウス・ロア",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -20030,6 +20687,7 @@ public record Memoria(
         new Memoria(
             698,
             "ultimatememoriaシリウス・ロア",
+            "Ultimate Memoria -シリウス・ロア-",
             "シリウス・ロア",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -20060,6 +20718,7 @@ public record Memoria(
         new Memoria(
             697,
             "ultimatememoria蒼き月、満ちる時",
+            "Ultimate Memoria -蒼き月、満ちる時-",
             "蒼き月、満ちる時",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -20090,6 +20749,7 @@ public record Memoria(
         new Memoria(
             696,
             "ultimatememoria蒼き月、満ちる時",
+            "Ultimate Memoria -蒼き月、満ちる時-",
             "蒼き月、満ちる時",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -20120,6 +20780,7 @@ public record Memoria(
         new Memoria(
             695,
             "ultimatememoriaフェノメノ",
+            "Ultimate Memoria -フェノメノ-",
             "フェノメノ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -20150,6 +20811,7 @@ public record Memoria(
         new Memoria(
             694,
             "ultimatememoriaフェノメノ",
+            "Ultimate Memoria -フェノメノ-",
             "フェノメノ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
@@ -20180,6 +20842,7 @@ public record Memoria(
         new Memoria(
             693,
             "ultimatememoria比類なき異能",
+            "Ultimate Memoria -比類なき異能-",
             "比類なき異能",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -20210,6 +20873,7 @@ public record Memoria(
         new Memoria(
             692,
             "ultimatememoria比類なき異能",
+            "Ultimate Memoria -比類なき異能-",
             "比類なき異能",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -20239,6 +20903,7 @@ public record Memoria(
         ),
         new Memoria(
             691,
+            "ありのままのわたしで",
             "ありのままのわたしで",
             "ありのままのわたしで",
             new Vanguard(VanguardKind.SpecialRange),
@@ -20271,6 +20936,7 @@ public record Memoria(
             690,
             "ありのままのわたしで",
             "ありのままのわたしで",
+            "ありのままのわたしで",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -20299,6 +20965,7 @@ public record Memoria(
         ),
         new Memoria(
             689,
+            "いつも隣に",
             "いつも隣に",
             "いつも隣に",
             new Vanguard(VanguardKind.NormalRange),
@@ -20331,6 +20998,7 @@ public record Memoria(
             688,
             "いつも隣に",
             "いつも隣に",
+            "いつも隣に",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -20359,6 +21027,7 @@ public record Memoria(
         ),
         new Memoria(
             687,
+            "蝶の夢",
             "蝶の夢",
             "蝶の夢",
             new Rearguard(RearguardKind.Recovery),
@@ -20391,6 +21060,7 @@ public record Memoria(
             686,
             "蝶の夢",
             "蝶の夢",
+            "蝶の夢",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -20419,6 +21089,7 @@ public record Memoria(
         ),
         new Memoria(
             685,
+            "湯けむりの向こう側",
             "湯けむりの向こう側",
             "湯けむりの向こう側",
             new Rearguard(RearguardKind.Recovery),
@@ -20451,6 +21122,7 @@ public record Memoria(
             684,
             "湯けむりの向こう側",
             "湯けむりの向こう側",
+            "湯けむりの向こう側",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
             [
@@ -20479,6 +21151,7 @@ public record Memoria(
         ),
         new Memoria(
             683,
+            "宵に舞う華",
             "宵に舞う華",
             "宵に舞う華",
             new Vanguard(VanguardKind.NormalRange),
@@ -20511,6 +21184,7 @@ public record Memoria(
             682,
             "宵に舞う華",
             "宵に舞う華",
+            "宵に舞う華",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -20539,6 +21213,7 @@ public record Memoria(
         ),
         new Memoria(
             681,
+            "好いも甘いも受け止めて",
             "好いも甘いも受け止めて",
             "好いも甘いも受け止めて",
             new Rearguard(RearguardKind.Support),
@@ -20571,6 +21246,7 @@ public record Memoria(
             680,
             "好いも甘いも受け止めて",
             "好いも甘いも受け止めて",
+            "好いも甘いも受け止めて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -20600,6 +21276,7 @@ public record Memoria(
         new Memoria(
             679,
             "2周年祭り絆の彩り",
+            "2周年祭り 絆の彩り",
             "2周年祭り 絆の彩り",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -20631,6 +21308,7 @@ public record Memoria(
             678,
             "2周年祭り絆の彩り",
             "2周年祭り 絆の彩り",
+            "2周年祭り 絆の彩り",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -20659,6 +21337,7 @@ public record Memoria(
         ),
         new Memoria(
             677,
+            "ふたりのヒメゴト",
             "ふたりのヒメゴト",
             "ふたりのヒメゴト",
             new Rearguard(RearguardKind.Recovery),
@@ -20691,6 +21370,7 @@ public record Memoria(
             676,
             "変わらない絆",
             "変わらない絆",
+            "変わらない絆",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -20721,6 +21401,7 @@ public record Memoria(
             675,
             "cherishing",
             "Cherishing",
+            "Cherishing",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -20750,6 +21431,7 @@ public record Memoria(
         ),
         new Memoria(
             674,
+            "止めどない熱",
             "止めどない熱",
             "止めどない熱",
             new Vanguard(VanguardKind.SpecialRange),
@@ -20783,6 +21465,7 @@ public record Memoria(
             673,
             "戦場のコンダクター",
             "戦場のコンダクター",
+            "戦場のコンダクター",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
             [
@@ -20812,6 +21495,7 @@ public record Memoria(
         ),
         new Memoria(
             672,
+            "引導を渡して差し上げますわ",
             "引導を渡して差し上げますわ",
             "引導を渡して差し上げますわ",
             new Vanguard(VanguardKind.NormalSingle),
@@ -20844,6 +21528,7 @@ public record Memoria(
             671,
             "引導を渡して差し上げますわ",
             "引導を渡して差し上げますわ",
+            "引導を渡して差し上げますわ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -20872,6 +21557,7 @@ public record Memoria(
         ),
         new Memoria(
             670,
+            "飢えし群れ、挑む狩人",
             "飢えし群れ、挑む狩人",
             "飢えし群れ、挑む狩人",
             new Rearguard(RearguardKind.Recovery),
@@ -20904,6 +21590,7 @@ public record Memoria(
             669,
             "飢えし群れ、挑む狩人",
             "飢えし群れ、挑む狩人",
+            "飢えし群れ、挑む狩人",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -20933,6 +21620,7 @@ public record Memoria(
         new Memoria(
             668,
             "うりゃうりゃうりゃうりゃ",
+            "うりゃうりゃうりゃうりゃ！！",
             "うりゃうりゃうりゃうりゃ！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
@@ -20964,6 +21652,7 @@ public record Memoria(
             667,
             "うりゃうりゃうりゃうりゃ",
             "うりゃうりゃうりゃうりゃ！！",
+            "うりゃうりゃうりゃうりゃ！！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -20992,6 +21681,7 @@ public record Memoria(
         ),
         new Memoria(
             666,
+            "この手に劔がある限り",
             "この手に劔がある限り",
             "この手に劔がある限り",
             new Rearguard(RearguardKind.Interference),
@@ -21023,6 +21713,7 @@ public record Memoria(
         new Memoria(
             665,
             "クリエイターズコラボ今年もよろしくね",
+            "クリエイターズコラボ-今年もよろしくね-",
             "今年もよろしくね",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -21053,6 +21744,7 @@ public record Memoria(
         new Memoria(
             664,
             "クリエイターズコラボ謹賀新年です",
+            "クリエイターズコラボ-謹賀新年です！-",
             "謹賀新年です！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -21083,6 +21775,7 @@ public record Memoria(
         new Memoria(
             663,
             "クリエイターズコラボあけおめですっ♪",
+            "クリエイターズコラボ-あけおめですっ♪-",
             "あけおめですっ♪",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -21113,6 +21806,7 @@ public record Memoria(
         new Memoria(
             662,
             "クリエイターズコラボ新年を祝すわ",
+            "クリエイターズコラボ-新年を祝すわ！-",
             "新年を祝すわ！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -21143,6 +21837,7 @@ public record Memoria(
         new Memoria(
             661,
             "クリエイターズコラボことよろなのじゃ",
+            "クリエイターズコラボ-ことよろなのじゃ！-",
             "ことよろなのじゃ！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -21174,6 +21869,7 @@ public record Memoria(
             660,
             "賀正",
             "賀正！！",
+            "賀正！！",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -21204,6 +21900,7 @@ public record Memoria(
             659,
             "賀正",
             "賀正！！",
+            "賀正！！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -21232,6 +21929,7 @@ public record Memoria(
         ),
         new Memoria(
             658,
+            "思い出を抱きしめて",
             "思い出を抱きしめて",
             "思い出を抱きしめて",
             new Rearguard(RearguardKind.Support),
@@ -21264,6 +21962,7 @@ public record Memoria(
             657,
             "思い出を抱きしめて",
             "思い出を抱きしめて",
+            "思い出を抱きしめて",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
             [
@@ -21292,6 +21991,7 @@ public record Memoria(
         ),
         new Memoria(
             656,
+            "突きて返すは兎姉妹",
             "突きて返すは兎姉妹",
             "突きて返すは兎姉妹",
             new Vanguard(VanguardKind.SpecialRange),
@@ -21324,6 +22024,7 @@ public record Memoria(
             655,
             "突きて返すは兎姉妹",
             "突きて返すは兎姉妹",
+            "突きて返すは兎姉妹",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -21352,6 +22053,7 @@ public record Memoria(
         ),
         new Memoria(
             654,
+            "雪兎に会えた日",
             "雪兎に会えた日",
             "雪兎に会えた日",
             new Vanguard(VanguardKind.NormalRange),
@@ -21384,6 +22086,7 @@ public record Memoria(
             653,
             "大丈夫、みんながいるから",
             "大丈夫、みんながいるから",
+            "大丈夫、みんながいるから",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -21412,6 +22115,7 @@ public record Memoria(
         ),
         new Memoria(
             652,
+            "大丈夫、みんながいるから",
             "大丈夫、みんながいるから",
             "大丈夫、みんながいるから",
             new Vanguard(VanguardKind.NormalRange),
@@ -21444,6 +22148,7 @@ public record Memoria(
             651,
             "高らかと響き渡る歌声の中で",
             "高らかと響き渡る歌声の中で",
+            "高らかと響き渡る歌声の中で",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -21472,6 +22177,7 @@ public record Memoria(
         ),
         new Memoria(
             650,
+            "高らかと響き渡る歌声の中で",
             "高らかと響き渡る歌声の中で",
             "高らかと響き渡る歌声の中で",
             new Rearguard(RearguardKind.Recovery),
@@ -21504,6 +22210,7 @@ public record Memoria(
             649,
             "スノーフレイク",
             "スノーフレイク",
+            "スノーフレイク",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
             [
@@ -21532,6 +22239,7 @@ public record Memoria(
         ),
         new Memoria(
             648,
+            "スノーフレイク",
             "スノーフレイク",
             "スノーフレイク",
             new Rearguard(RearguardKind.Support),
@@ -21564,6 +22272,7 @@ public record Memoria(
             647,
             "胸躍る聖夜",
             "胸躍る聖夜",
+            "胸躍る聖夜",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -21592,6 +22301,7 @@ public record Memoria(
         ),
         new Memoria(
             646,
+            "胸躍る聖夜",
             "胸躍る聖夜",
             "胸躍る聖夜",
             new Vanguard(VanguardKind.NormalRange),
@@ -21624,6 +22334,7 @@ public record Memoria(
             645,
             "ここから先へ",
             "ここから先へ",
+            "ここから先へ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -21652,6 +22363,7 @@ public record Memoria(
         ),
         new Memoria(
             644,
+            "ここから先へ",
             "ここから先へ",
             "ここから先へ",
             new Rearguard(RearguardKind.Support),
@@ -21684,6 +22396,7 @@ public record Memoria(
             643,
             "無邪気な親近感",
             "無邪気な親近感",
+            "無邪気な親近感",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -21712,6 +22425,7 @@ public record Memoria(
         ),
         new Memoria(
             642,
+            "無邪気な親近感",
             "無邪気な親近感",
             "無邪気な親近感",
             new Vanguard(VanguardKind.NormalRange),
@@ -21744,6 +22458,7 @@ public record Memoria(
             641,
             "かがみもち、できました",
             "かがみもち、できました！",
+            "かがみもち、できました！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -21773,6 +22488,7 @@ public record Memoria(
         new Memoria(
             640,
             "かがみもち、できました",
+            "かがみもち、できました！",
             "かがみもち、できました！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -21804,6 +22520,7 @@ public record Memoria(
             639,
             "兎であけおめですわ",
             "兎であけおめですわ！",
+            "兎であけおめですわ！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -21834,6 +22551,7 @@ public record Memoria(
             638,
             "兎であけおめですわ",
             "兎であけおめですわ！",
+            "兎であけおめですわ！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -21862,6 +22580,7 @@ public record Memoria(
         ),
         new Memoria(
             637,
+            "新年、はっじまっるよ～♪",
             "新年、はっじまっるよ～♪",
             "新年、はっじまっるよ～♪",
             new Rearguard(RearguardKind.Recovery),
@@ -21894,6 +22613,7 @@ public record Memoria(
             636,
             "新年、はっじまっるよ～♪",
             "新年、はっじまっるよ～♪",
+            "新年、はっじまっるよ～♪",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
             [
@@ -21922,6 +22642,7 @@ public record Memoria(
         ),
         new Memoria(
             635,
+            "初春の宴に貴女を想う",
             "初春の宴に貴女を想う",
             "初春の宴に貴女を想う",
             new Vanguard(VanguardKind.SpecialRange),
@@ -21954,6 +22675,7 @@ public record Memoria(
             634,
             "約束された勝利の剣",
             "約束された勝利の剣",
+            "約束された勝利の剣",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -21982,6 +22704,7 @@ public record Memoria(
         ),
         new Memoria(
             633,
+            "約束された勝利の剣",
             "約束された勝利の剣",
             "約束された勝利の剣",
             new Rearguard(RearguardKind.Support),
@@ -22014,6 +22737,7 @@ public record Memoria(
             632,
             "射殺す百頭",
             "射殺す百頭",
+            "射殺す百頭",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -22042,6 +22766,7 @@ public record Memoria(
         ),
         new Memoria(
             631,
+            "射殺す百頭",
             "射殺す百頭",
             "射殺す百頭",
             new Rearguard(RearguardKind.Interference),
@@ -22074,6 +22799,7 @@ public record Memoria(
             630,
             "投影魔術",
             "投影魔術",
+            "投影魔術",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -22102,6 +22828,7 @@ public record Memoria(
         ),
         new Memoria(
             629,
+            "投影魔術",
             "投影魔術",
             "投影魔術",
             new Rearguard(RearguardKind.Recovery),
@@ -22134,6 +22861,7 @@ public record Memoria(
             628,
             "願いの魔法少女",
             "願いの魔法少女",
+            "願いの魔法少女",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -22162,6 +22890,7 @@ public record Memoria(
         ),
         new Memoria(
             627,
+            "願いの魔法少女",
             "願いの魔法少女",
             "願いの魔法少女",
             new Vanguard(VanguardKind.SpecialRange),
@@ -22194,6 +22923,7 @@ public record Memoria(
             626,
             "空想魔法少女",
             "空想魔法少女",
+            "空想魔法少女",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -22222,6 +22952,7 @@ public record Memoria(
         ),
         new Memoria(
             625,
+            "空想魔法少女",
             "空想魔法少女",
             "空想魔法少女",
             new Rearguard(RearguardKind.Support),
@@ -22253,6 +22984,7 @@ public record Memoria(
         new Memoria(
             624,
             "クリエイターズコラボ膝の子猫と窓の雪",
+            "クリエイターズコラボ-膝の子猫と窓の雪-",
             "膝の子猫と窓の雪",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -22283,6 +23015,7 @@ public record Memoria(
         new Memoria(
             623,
             "クリエイターズコラボかずはをよしよし",
+            "クリエイターズコラボ-かずはをよしよし-",
             "かずはをよしよし",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -22313,6 +23046,7 @@ public record Memoria(
         new Memoria(
             622,
             "クリエイターズコラボゆー姉と一緒",
+            "クリエイターズコラボ-ゆー姉と一緒！-",
             "ゆー姉と一緒！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -22343,6 +23077,7 @@ public record Memoria(
         new Memoria(
             621,
             "クリエイターズコラボあつあつの肉まん",
+            "クリエイターズコラボ-あつあつの肉まん-",
             "あつあつの肉まん",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -22373,6 +23108,7 @@ public record Memoria(
         new Memoria(
             620,
             "クリエイターズコラボどんがらがっしゃん",
+            "クリエイターズコラボ-どんがらがっしゃん-",
             "どんがらがっしゃん",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -22402,6 +23138,7 @@ public record Memoria(
         ),
         new Memoria(
             619,
+            "懐かしくて、優しい味",
             "懐かしくて、優しい味",
             "懐かしくて、優しい味",
             new Rearguard(RearguardKind.Support),
@@ -22434,6 +23171,7 @@ public record Memoria(
             618,
             "懐かしくて、優しい味",
             "懐かしくて、優しい味",
+            "懐かしくて、優しい味",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -22462,6 +23200,7 @@ public record Memoria(
         ),
         new Memoria(
             617,
+            "聞こえし者",
             "聞こえし者",
             "聞こえし者",
             new Vanguard(VanguardKind.NormalSingle),
@@ -22495,6 +23234,7 @@ public record Memoria(
             616,
             "ふーみんにインタビュー",
             "ふーみんにインタビュー",
+            "ふーみんにインタビュー",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -22523,6 +23263,7 @@ public record Memoria(
         ),
         new Memoria(
             615,
+            "ふーみんにインタビュー",
             "ふーみんにインタビュー",
             "ふーみんにインタビュー",
             new Vanguard(VanguardKind.SpecialRange),
@@ -22555,6 +23296,7 @@ public record Memoria(
             614,
             "歴戦の余裕",
             "歴戦の余裕",
+            "歴戦の余裕",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -22583,6 +23325,7 @@ public record Memoria(
         ),
         new Memoria(
             613,
+            "歴戦の余裕",
             "歴戦の余裕",
             "歴戦の余裕",
             new Rearguard(RearguardKind.Interference),
@@ -22615,6 +23358,7 @@ public record Memoria(
             612,
             "雪原に火花散る",
             "雪原に火花散る",
+            "雪原に火花散る",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -22643,6 +23387,7 @@ public record Memoria(
         ),
         new Memoria(
             611,
+            "雪原に火花散る",
             "雪原に火花散る",
             "雪原に火花散る",
             new Vanguard(VanguardKind.NormalRange),
@@ -22675,6 +23420,7 @@ public record Memoria(
             610,
             "縮地、友の元へ",
             "縮地、友の元へ",
+            "縮地、友の元へ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -22703,6 +23449,7 @@ public record Memoria(
         ),
         new Memoria(
             609,
+            "縮地、友の元へ",
             "縮地、友の元へ",
             "縮地、友の元へ",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -22735,6 +23482,7 @@ public record Memoria(
             608,
             "旋律に身を委ねて",
             "旋律に身を委ねて",
+            "旋律に身を委ねて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -22763,6 +23511,7 @@ public record Memoria(
         ),
         new Memoria(
             607,
+            "旋律に身を委ねて",
             "旋律に身を委ねて",
             "旋律に身を委ねて",
             new Rearguard(RearguardKind.Support),
@@ -22795,6 +23544,7 @@ public record Memoria(
             606,
             "神琳これは違うの",
             "神琳！？　これは違うの！",
+            "神琳！？　これは違うの！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -22825,6 +23575,7 @@ public record Memoria(
             605,
             "神琳これは違うの",
             "神琳！？　これは違うの！",
+            "神琳！？　これは違うの！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -22854,6 +23605,7 @@ public record Memoria(
         new Memoria(
             604,
             "クリエイターズコラボサンタをつかまえて",
+            "クリエイターズコラボ-サンタをつかまえて-",
             "サンタをつかまえて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -22884,6 +23636,7 @@ public record Memoria(
         new Memoria(
             603,
             "クリエイターズコラボサンタをつかまえて",
+            "クリエイターズコラボ-サンタをつかまえて-",
             "サンタをつかまえて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -22914,6 +23667,7 @@ public record Memoria(
         new Memoria(
             602,
             "クリエイターズコラボ聖夜のテラリウム",
+            "クリエイターズコラボ-聖夜のテラリウム-",
             "聖夜のテラリウム",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -22944,6 +23698,7 @@ public record Memoria(
         new Memoria(
             601,
             "クリエイターズコラボ聖夜のテラリウム",
+            "クリエイターズコラボ-聖夜のテラリウム-",
             "聖夜のテラリウム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -22974,6 +23729,7 @@ public record Memoria(
         new Memoria(
             600,
             "クリエイターズコラボ聖夜に乾杯",
+            "クリエイターズコラボ-聖夜に乾杯-",
             "聖夜に乾杯",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -23004,6 +23760,7 @@ public record Memoria(
         new Memoria(
             599,
             "クリエイターズコラボ聖夜に乾杯",
+            "クリエイターズコラボ-聖夜に乾杯-",
             "聖夜に乾杯",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -23034,6 +23791,7 @@ public record Memoria(
         new Memoria(
             598,
             "クリエイターズコラボ手作りクリスマス",
+            "クリエイターズコラボ-手作りクリスマス-",
             "手作りクリスマス",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -23064,6 +23822,7 @@ public record Memoria(
         new Memoria(
             597,
             "クリエイターズコラボ手作りクリスマス",
+            "クリエイターズコラボ-手作りクリスマス-",
             "手作りクリスマス",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -23094,6 +23853,7 @@ public record Memoria(
         new Memoria(
             596,
             "クリエイターズコラボひめひめ仕立て",
+            "クリエイターズコラボ-ひめひめ仕立て-",
             "ひめひめ仕立て",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -23124,6 +23884,7 @@ public record Memoria(
         new Memoria(
             595,
             "クリエイターズコラボひめひめ仕立て",
+            "クリエイターズコラボ-ひめひめ仕立て-",
             "ひめひめ仕立て",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
@@ -23153,6 +23914,7 @@ public record Memoria(
         ),
         new Memoria(
             594,
+            "はっぴーらっきーとっきー",
             "はっぴーらっきーとっきー",
             "はっぴーらっきーとっきー",
             new Rearguard(RearguardKind.Interference),
@@ -23185,6 +23947,7 @@ public record Memoria(
             593,
             "はっぴーらっきーとっきー",
             "はっぴーらっきーとっきー",
+            "はっぴーらっきーとっきー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -23213,6 +23976,7 @@ public record Memoria(
         ),
         new Memoria(
             592,
+            "サプライズゲーム",
             "サプライズゲーム",
             "サプライズゲーム",
             new Rearguard(RearguardKind.Recovery),
@@ -23245,6 +24009,7 @@ public record Memoria(
             591,
             "サプライズゲーム",
             "サプライズゲーム",
+            "サプライズゲーム",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
             [
@@ -23273,6 +24038,7 @@ public record Memoria(
         ),
         new Memoria(
             590,
+            "帯びる熱と急接近",
             "帯びる熱と急接近",
             "帯びる熱と急接近",
             new Vanguard(VanguardKind.SpecialRange),
@@ -23305,6 +24071,7 @@ public record Memoria(
             589,
             "帯びる熱と急接近",
             "帯びる熱と急接近",
+            "帯びる熱と急接近",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -23333,6 +24100,7 @@ public record Memoria(
         ),
         new Memoria(
             588,
+            "レンズ越しの視点",
             "レンズ越しの視点",
             "レンズ越しの視点",
             new Vanguard(VanguardKind.SpecialRange),
@@ -23365,6 +24133,7 @@ public record Memoria(
             587,
             "レンズ越しの視点",
             "レンズ越しの視点",
+            "レンズ越しの視点",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -23393,6 +24162,7 @@ public record Memoria(
         ),
         new Memoria(
             586,
+            "白に染まる世界",
             "白に染まる世界",
             "白に染まる世界",
             new Vanguard(VanguardKind.NormalSingle),
@@ -23425,6 +24195,7 @@ public record Memoria(
             585,
             "白に染まる世界",
             "白に染まる世界",
+            "白に染まる世界",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -23453,6 +24224,7 @@ public record Memoria(
         ),
         new Memoria(
             584,
+            "雪風と踊る少女",
             "雪風と踊る少女",
             "雪風と踊る少女",
             new Rearguard(RearguardKind.Recovery),
@@ -23485,6 +24257,7 @@ public record Memoria(
             583,
             "雪風と踊る少女",
             "雪風と踊る少女",
+            "雪風と踊る少女",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -23513,6 +24286,7 @@ public record Memoria(
         ),
         new Memoria(
             582,
+            "雪原の白き魔女",
             "雪原の白き魔女",
             "雪原の白き魔女",
             new Vanguard(VanguardKind.SpecialRange),
@@ -23545,6 +24319,7 @@ public record Memoria(
             581,
             "雪原の白き魔女",
             "雪原の白き魔女",
+            "雪原の白き魔女",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -23573,6 +24348,7 @@ public record Memoria(
         ),
         new Memoria(
             580,
+            "鳴り響く狂乱の連弾",
             "鳴り響く狂乱の連弾",
             "鳴り響く狂乱の連弾",
             new Vanguard(VanguardKind.NormalRange),
@@ -23605,6 +24381,7 @@ public record Memoria(
             579,
             "鳴り響く狂乱の連弾",
             "鳴り響く狂乱の連弾",
+            "鳴り響く狂乱の連弾",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -23634,6 +24411,7 @@ public record Memoria(
         new Memoria(
             578,
             "クリエイターズコラボご一緒にいかが",
+            "クリエイターズコラボ-ご一緒にいかが？-",
             "ご一緒にいかが？",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -23664,6 +24442,7 @@ public record Memoria(
         new Memoria(
             577,
             "クリエイターズコラボご一緒にいかが",
+            "クリエイターズコラボ-ご一緒にいかが？-",
             "ご一緒にいかが？",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -23694,6 +24473,7 @@ public record Memoria(
         new Memoria(
             576,
             "クリエイターズコラボいつものおやつ",
+            "クリエイターズコラボ-いつものおやつ-",
             "いつものおやつ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -23724,6 +24504,7 @@ public record Memoria(
         new Memoria(
             575,
             "クリエイターズコラボいつものおやつ",
+            "クリエイターズコラボ-いつものおやつ-",
             "いつものおやつ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -23754,6 +24535,7 @@ public record Memoria(
         new Memoria(
             574,
             "クリエイターズコラボどたばたデイズ",
+            "クリエイターズコラボ-どたばたデイズ-",
             "どたばたデイズ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -23784,6 +24566,7 @@ public record Memoria(
         new Memoria(
             573,
             "クリエイターズコラボどたばたデイズ",
+            "クリエイターズコラボ-どたばたデイズ-",
             "どたばたデイズ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -23814,6 +24597,7 @@ public record Memoria(
         new Memoria(
             572,
             "クリエイターズコラボ思い出がもう一つ",
+            "クリエイターズコラボ-思い出がもう一つ-",
             "思い出がもう一つ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
@@ -23844,6 +24628,7 @@ public record Memoria(
         new Memoria(
             571,
             "クリエイターズコラボ思い出がもう一つ",
+            "クリエイターズコラボ-思い出がもう一つ-",
             "思い出がもう一つ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -23874,6 +24659,7 @@ public record Memoria(
         new Memoria(
             570,
             "クリエイターズコラボもふもふな時間",
+            "クリエイターズコラボ-もふもふな時間-",
             "もふもふな時間",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -23904,6 +24690,7 @@ public record Memoria(
         new Memoria(
             569,
             "クリエイターズコラボもふもふな時間",
+            "クリエイターズコラボ-もふもふな時間-",
             "もふもふな時間",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -23933,6 +24720,7 @@ public record Memoria(
         ),
         new Memoria(
             568,
+            "覚醒の兆し",
             "覚醒の兆し",
             "覚醒の兆し",
             new Rearguard(RearguardKind.Support),
@@ -23965,6 +24753,7 @@ public record Memoria(
             567,
             "覚醒の兆し",
             "覚醒の兆し",
+            "覚醒の兆し",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -23993,6 +24782,7 @@ public record Memoria(
         ),
         new Memoria(
             566,
+            "騒がし乙女の凱旋",
             "騒がし乙女の凱旋",
             "騒がし乙女の凱旋",
             new Vanguard(VanguardKind.NormalRange),
@@ -24025,6 +24815,7 @@ public record Memoria(
             565,
             "騒がし乙女の凱旋",
             "騒がし乙女の凱旋",
+            "騒がし乙女の凱旋",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -24053,6 +24844,7 @@ public record Memoria(
         ),
         new Memoria(
             564,
+            "あなたとおそろい",
             "あなたとおそろい",
             "あなたとおそろい",
             new Vanguard(VanguardKind.SpecialRange),
@@ -24085,6 +24877,7 @@ public record Memoria(
             563,
             "あなたとおそろい",
             "あなたとおそろい",
+            "あなたとおそろい",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -24113,6 +24906,7 @@ public record Memoria(
         ),
         new Memoria(
             562,
+            "ワンマンアーミー",
             "ワンマンアーミー",
             "ワンマンアーミー",
             new Rearguard(RearguardKind.Support),
@@ -24146,6 +24940,7 @@ public record Memoria(
             561,
             "縄跳びトレーニング",
             "縄跳びトレーニング",
+            "縄跳びトレーニング",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -24174,6 +24969,7 @@ public record Memoria(
         ),
         new Memoria(
             560,
+            "縄跳びトレーニング",
             "縄跳びトレーニング",
             "縄跳びトレーニング",
             new Vanguard(VanguardKind.NormalRange),
@@ -24206,6 +25002,7 @@ public record Memoria(
             559,
             "暮れなずむ空",
             "暮れなずむ空",
+            "暮れなずむ空",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -24234,6 +25031,7 @@ public record Memoria(
         ),
         new Memoria(
             558,
+            "暮れなずむ空",
             "暮れなずむ空",
             "暮れなずむ空",
             new Rearguard(RearguardKind.Interference),
@@ -24266,6 +25064,7 @@ public record Memoria(
             557,
             "かめ、のち、えがお",
             "かめ、のち、えがお",
+            "かめ、のち、えがお",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -24294,6 +25093,7 @@ public record Memoria(
         ),
         new Memoria(
             556,
+            "かめ、のち、えがお",
             "かめ、のち、えがお",
             "かめ、のち、えがお",
             new Vanguard(VanguardKind.SpecialRange),
@@ -24326,6 +25126,7 @@ public record Memoria(
             555,
             "ひめひめコールお願いっ",
             "ひめひめコールお願いっ！",
+            "ひめひめコールお願いっ！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -24356,6 +25157,7 @@ public record Memoria(
             554,
             "ひめひめコールお願いっ",
             "ひめひめコールお願いっ！",
+            "ひめひめコールお願いっ！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -24384,6 +25186,7 @@ public record Memoria(
         ),
         new Memoria(
             553,
+            "カワウソづくし",
             "カワウソづくし",
             "カワウソづくし",
             new Rearguard(RearguardKind.Support),
@@ -24416,6 +25219,7 @@ public record Memoria(
             552,
             "カワウソづくし",
             "カワウソづくし",
+            "カワウソづくし",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -24445,6 +25249,7 @@ public record Memoria(
         new Memoria(
             551,
             "クリエイターズコラボ不動劔と至宝",
+            "クリエイターズコラボ-不動劔と至宝-",
             "不動劔と至宝",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -24475,6 +25280,7 @@ public record Memoria(
         new Memoria(
             550,
             "クリエイターズコラボ不動劔と至宝",
+            "クリエイターズコラボ-不動劔と至宝-",
             "不動劔と至宝",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -24505,6 +25311,7 @@ public record Memoria(
         new Memoria(
             549,
             "クリエイターズコラボねんねこぐろっぴ",
+            "クリエイターズコラボ-ねんねこぐろっぴ-",
             "ねんねこぐろっぴ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -24535,6 +25342,7 @@ public record Memoria(
         new Memoria(
             548,
             "クリエイターズコラボねんねこぐろっぴ",
+            "クリエイターズコラボ-ねんねこぐろっぴ-",
             "ねんねこぐろっぴ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -24566,6 +25374,7 @@ public record Memoria(
             547,
             "charmという兵器",
             "CHARMという兵器",
+            "CHARMという兵器",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -24595,6 +25404,7 @@ public record Memoria(
         new Memoria(
             546,
             "charmという兵器",
+            "CHARMという兵器",
             "CHARMという兵器",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -24626,6 +25436,7 @@ public record Memoria(
             545,
             "ワーオエキサイティン",
             "ワーオ！　エキサイティン！！",
+            "ワーオ！　エキサイティン！！",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -24656,6 +25467,7 @@ public record Memoria(
             544,
             "ワーオエキサイティン",
             "ワーオ！　エキサイティン！！",
+            "ワーオ！　エキサイティン！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -24684,6 +25496,7 @@ public record Memoria(
         ),
         new Memoria(
             543,
+            "束の間の休息",
             "束の間の休息",
             "束の間の休息",
             new Rearguard(RearguardKind.Recovery),
@@ -24716,6 +25529,7 @@ public record Memoria(
             542,
             "束の間の休息",
             "束の間の休息",
+            "束の間の休息",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -24745,6 +25559,7 @@ public record Memoria(
         new Memoria(
             541,
             "作戦会議です",
+            "作戦会議です！",
             "作戦会議です！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
@@ -24776,6 +25591,7 @@ public record Memoria(
             540,
             "作戦会議です",
             "作戦会議です！",
+            "作戦会議です！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
             [
@@ -24804,6 +25620,7 @@ public record Memoria(
         ),
         new Memoria(
             539,
+            "予想外の事態",
             "予想外の事態",
             "予想外の事態",
             new Vanguard(VanguardKind.NormalRange),
@@ -24836,6 +25653,7 @@ public record Memoria(
             538,
             "予想外の事態",
             "予想外の事態",
+            "予想外の事態",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -24864,6 +25682,7 @@ public record Memoria(
         ),
         new Memoria(
             537,
+            "優雅なティータイム",
             "優雅なティータイム",
             "優雅なティータイム",
             new Vanguard(VanguardKind.SpecialRange),
@@ -24896,6 +25715,7 @@ public record Memoria(
             536,
             "優雅なティータイム",
             "優雅なティータイム",
+            "優雅なティータイム",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -24924,6 +25744,7 @@ public record Memoria(
         ),
         new Memoria(
             535,
+            "西住流の誇り",
             "西住流の誇り",
             "西住流の誇り",
             new Vanguard(VanguardKind.SpecialRange),
@@ -24956,6 +25777,7 @@ public record Memoria(
             534,
             "西住流の誇り",
             "西住流の誇り",
+            "西住流の誇り",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -24985,6 +25807,7 @@ public record Memoria(
         new Memoria(
             533,
             "形勢逆転",
+            "形勢逆転！！",
             "形勢逆転！！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
@@ -25016,6 +25839,7 @@ public record Memoria(
             532,
             "形勢逆転",
             "形勢逆転！！",
+            "形勢逆転！！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -25044,6 +25868,7 @@ public record Memoria(
         ),
         new Memoria(
             531,
+            "ワイン色の思い出",
             "ワイン色の思い出",
             "ワイン色の思い出",
             new Vanguard(VanguardKind.SpecialRange),
@@ -25076,6 +25901,7 @@ public record Memoria(
             530,
             "ワイン色の思い出",
             "ワイン色の思い出",
+            "ワイン色の思い出",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -25104,6 +25930,7 @@ public record Memoria(
         ),
         new Memoria(
             529,
+            "月夜に吠える天狼",
             "月夜に吠える天狼",
             "月夜に吠える天狼",
             new Rearguard(RearguardKind.Interference),
@@ -25137,6 +25964,7 @@ public record Memoria(
             528,
             "雲間から差し込む光",
             "雲間から差し込む光",
+            "雲間から差し込む光",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -25165,6 +25993,7 @@ public record Memoria(
         ),
         new Memoria(
             527,
+            "雲間から差し込む光",
             "雲間から差し込む光",
             "雲間から差し込む光",
             new Rearguard(RearguardKind.Recovery),
@@ -25197,6 +26026,7 @@ public record Memoria(
             526,
             "好機を待つのじゃ",
             "好機を待つのじゃ",
+            "好機を待つのじゃ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -25225,6 +26055,7 @@ public record Memoria(
         ),
         new Memoria(
             525,
+            "好機を待つのじゃ",
             "好機を待つのじゃ",
             "好機を待つのじゃ",
             new Vanguard(VanguardKind.NormalRange),
@@ -25257,6 +26088,7 @@ public record Memoria(
             524,
             "ひめひめ華麗に参上",
             "ひめひめ華麗に参上！",
+            "ひめひめ華麗に参上！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -25287,6 +26119,7 @@ public record Memoria(
             523,
             "ひめひめ華麗に参上",
             "ひめひめ華麗に参上！",
+            "ひめひめ華麗に参上！",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -25316,6 +26149,7 @@ public record Memoria(
         new Memoria(
             522,
             "クリエイターズコラボ紅葉の帳",
+            "クリエイターズコラボ-紅葉の帳-",
             "紅葉の帳",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -25346,6 +26180,7 @@ public record Memoria(
         new Memoria(
             521,
             "クリエイターズコラボ紅葉の帳",
+            "クリエイターズコラボ-紅葉の帳-",
             "紅葉の帳",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -25376,6 +26211,7 @@ public record Memoria(
         new Memoria(
             520,
             "クリエイターズコラボ紅葉も頬も色づいて",
+            "クリエイターズコラボ-紅葉も頬も色づいて-",
             "紅葉も頬も色づいて",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -25406,6 +26242,7 @@ public record Memoria(
         new Memoria(
             519,
             "クリエイターズコラボ紅葉も頬も色づいて",
+            "クリエイターズコラボ-紅葉も頬も色づいて-",
             "紅葉も頬も色づいて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -25436,6 +26273,7 @@ public record Memoria(
         new Memoria(
             518,
             "クリエイターズコラボ秋月夜の彩り",
+            "クリエイターズコラボ-秋月夜の彩り-",
             "秋月夜の彩り",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -25466,6 +26304,7 @@ public record Memoria(
         new Memoria(
             517,
             "クリエイターズコラボ秋月夜の彩り",
+            "クリエイターズコラボ-秋月夜の彩り-",
             "秋月夜の彩り",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -25496,6 +26335,7 @@ public record Memoria(
         new Memoria(
             516,
             "クリエイターズコラボ秋の木漏れ日",
+            "クリエイターズコラボ-秋の木漏れ日-",
             "秋の木漏れ日",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -25526,6 +26366,7 @@ public record Memoria(
         new Memoria(
             515,
             "クリエイターズコラボ秋の木漏れ日",
+            "クリエイターズコラボ-秋の木漏れ日-",
             "秋の木漏れ日",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -25555,6 +26396,7 @@ public record Memoria(
         ),
         new Memoria(
             514,
+            "はじらいマミー",
             "はじらいマミー",
             "はじらいマミー",
             new Vanguard(VanguardKind.NormalRange),
@@ -25587,6 +26429,7 @@ public record Memoria(
             513,
             "どきどきデビル",
             "どきどきデビル",
+            "どきどきデビル",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -25615,6 +26458,7 @@ public record Memoria(
         ),
         new Memoria(
             512,
+            "どきどきデビル",
             "どきどきデビル",
             "どきどきデビル",
             new Vanguard(VanguardKind.NormalRange),
@@ -25647,6 +26491,7 @@ public record Memoria(
             511,
             "いたずらゴースト",
             "いたずらゴースト",
+            "いたずらゴースト",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -25675,6 +26520,7 @@ public record Memoria(
         ),
         new Memoria(
             510,
+            "いたずらゴースト",
             "いたずらゴースト",
             "いたずらゴースト",
             new Vanguard(VanguardKind.SpecialRange),
@@ -25707,6 +26553,7 @@ public record Memoria(
             509,
             "夜空に響く勝利の歌",
             "夜空に響く勝利の歌",
+            "夜空に響く勝利の歌",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -25735,6 +26582,7 @@ public record Memoria(
         ),
         new Memoria(
             508,
+            "夜空に響く勝利の歌",
             "夜空に響く勝利の歌",
             "夜空に響く勝利の歌",
             new Rearguard(RearguardKind.Support),
@@ -25767,6 +26615,7 @@ public record Memoria(
             507,
             "陽だまりシュッツエンゲル",
             "陽だまりシュッツエンゲル",
+            "陽だまりシュッツエンゲル",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -25795,6 +26644,7 @@ public record Memoria(
         ),
         new Memoria(
             506,
+            "陽だまりシュッツエンゲル",
             "陽だまりシュッツエンゲル",
             "陽だまりシュッツエンゲル",
             new Vanguard(VanguardKind.SpecialRange),
@@ -25826,6 +26676,7 @@ public record Memoria(
         new Memoria(
             505,
             "クリエイターズコラボくるくおーらんたん",
+            "クリエイターズコラボ-くるくおーらんたん-",
             "くるくおーらんたん",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -25856,6 +26707,7 @@ public record Memoria(
         new Memoria(
             504,
             "クリエイターズコラボくるくおーらんたん",
+            "クリエイターズコラボ-くるくおーらんたん-",
             "くるくおーらんたん",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -25886,6 +26738,7 @@ public record Memoria(
         new Memoria(
             503,
             "クリエイターズコラボこころにいたずら",
+            "クリエイターズコラボ-こころにいたずら-",
             "こころにいたずら",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -25916,6 +26769,7 @@ public record Memoria(
         new Memoria(
             502,
             "クリエイターズコラボこころにいたずら",
+            "クリエイターズコラボ-こころにいたずら-",
             "こころにいたずら",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -25946,6 +26800,7 @@ public record Memoria(
         new Memoria(
             501,
             "クリエイターズコラボearlytrick",
+            "クリエイターズコラボ-Early Trick-",
             "Early Trick",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -25976,6 +26831,7 @@ public record Memoria(
         new Memoria(
             500,
             "クリエイターズコラボearlytrick",
+            "クリエイターズコラボ-Early Trick-",
             "Early Trick",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -26006,6 +26862,7 @@ public record Memoria(
         new Memoria(
             499,
             "クリエイターズコラボジャックコーデ",
+            "クリエイターズコラボ-ジャックコーデ-",
             "ジャックコーデ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -26036,6 +26893,7 @@ public record Memoria(
         new Memoria(
             498,
             "クリエイターズコラボジャックコーデ",
+            "クリエイターズコラボ-ジャックコーデ-",
             "ジャックコーデ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -26065,6 +26923,7 @@ public record Memoria(
         ),
         new Memoria(
             497,
+            "秋空ピクニック",
             "秋空ピクニック",
             "秋空ピクニック",
             new Vanguard(VanguardKind.SpecialRange),
@@ -26097,6 +26956,7 @@ public record Memoria(
             496,
             "秋空ピクニック",
             "秋空ピクニック",
+            "秋空ピクニック",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -26125,6 +26985,7 @@ public record Memoria(
         ),
         new Memoria(
             495,
+            "ソーイングマスター姫歌",
             "ソーイングマスター姫歌",
             "ソーイングマスター姫歌",
             new Vanguard(VanguardKind.NormalSingle),
@@ -26157,6 +27018,7 @@ public record Memoria(
             494,
             "ソーイングマスター姫歌",
             "ソーイングマスター姫歌",
+            "ソーイングマスター姫歌",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -26185,6 +27047,7 @@ public record Memoria(
         ),
         new Memoria(
             493,
+            "庭園の護り人",
             "庭園の護り人",
             "庭園の護り人",
             new Vanguard(VanguardKind.SpecialRange),
@@ -26217,6 +27080,7 @@ public record Memoria(
             492,
             "庭園の護り人",
             "庭園の護り人",
+            "庭園の護り人",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -26245,6 +27109,7 @@ public record Memoria(
         ),
         new Memoria(
             491,
+            "ふたりの距離",
             "ふたりの距離",
             "ふたりの距離",
             new Vanguard(VanguardKind.NormalRange),
@@ -26277,6 +27142,7 @@ public record Memoria(
             490,
             "ふたりの距離",
             "ふたりの距離",
+            "ふたりの距離",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -26305,6 +27171,7 @@ public record Memoria(
         ),
         new Memoria(
             489,
+            "ダイスキをキャンバスに",
             "ダイスキをキャンバスに",
             "ダイスキをキャンバスに",
             new Rearguard(RearguardKind.Support),
@@ -26337,6 +27204,7 @@ public record Memoria(
             488,
             "ダイスキをキャンバスに",
             "ダイスキをキャンバスに",
+            "ダイスキをキャンバスに",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -26365,6 +27233,7 @@ public record Memoria(
         ),
         new Memoria(
             487,
+            "らんとたづさのかくれんぼ",
             "らんとたづさのかくれんぼ",
             "らんとたづさのかくれんぼ",
             new Vanguard(VanguardKind.NormalSingle),
@@ -26397,6 +27266,7 @@ public record Memoria(
             486,
             "らんとたづさのかくれんぼ",
             "らんとたづさのかくれんぼ",
+            "らんとたづさのかくれんぼ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -26425,6 +27295,7 @@ public record Memoria(
         ),
         new Memoria(
             485,
+            "藍は舞い降りた",
             "藍は舞い降りた",
             "藍は舞い降りた",
             new Vanguard(VanguardKind.SpecialRange),
@@ -26457,6 +27328,7 @@ public record Memoria(
             484,
             "藍は舞い降りた",
             "藍は舞い降りた",
+            "藍は舞い降りた",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -26485,6 +27357,7 @@ public record Memoria(
         ),
         new Memoria(
             483,
+            "静寂に佇む狩人",
             "静寂に佇む狩人",
             "静寂に佇む狩人",
             new Rearguard(RearguardKind.Interference),
@@ -26517,6 +27390,7 @@ public record Memoria(
             482,
             "静寂に佇む狩人",
             "静寂に佇む狩人",
+            "静寂に佇む狩人",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -26546,6 +27420,7 @@ public record Memoria(
         new Memoria(
             481,
             "クリエイターズコラボ好きなものを一緒に",
+            "クリエイターズコラボ-好きなものを一緒に-",
             "好きなものを一緒に",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -26576,6 +27451,7 @@ public record Memoria(
         new Memoria(
             480,
             "クリエイターズコラボ星空のどうぶつ探し",
+            "クリエイターズコラボ-星空のどうぶつ探し-",
             "星空のどうぶつ探し",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -26606,6 +27482,7 @@ public record Memoria(
         new Memoria(
             479,
             "クリエイターズコラボ二人の奏でる夜の歌",
+            "クリエイターズコラボ-二人の奏でる夜の歌-",
             "二人の奏でる夜の歌",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -26636,6 +27513,7 @@ public record Memoria(
         new Memoria(
             478,
             "クリエイターズコラボすすきの道しるべ",
+            "クリエイターズコラボ-すすきの道しるべ-",
             "すすきの道しるべ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -26665,6 +27543,7 @@ public record Memoria(
         ),
         new Memoria(
             477,
+            "息を潜めて",
             "息を潜めて",
             "息を潜めて",
             new Rearguard(RearguardKind.Support),
@@ -26697,6 +27576,7 @@ public record Memoria(
             476,
             "息を潜めて",
             "息を潜めて",
+            "息を潜めて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -26725,6 +27605,7 @@ public record Memoria(
         ),
         new Memoria(
             475,
+            "ミッドナイトスティール",
             "ミッドナイトスティール",
             "ミッドナイトスティール",
             new Vanguard(VanguardKind.NormalRange),
@@ -26757,6 +27638,7 @@ public record Memoria(
             474,
             "ミッドナイトスティール",
             "ミッドナイトスティール",
+            "ミッドナイトスティール",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -26787,6 +27669,7 @@ public record Memoria(
             473,
             "真夜中の極秘作戦",
             "真夜中の極秘作戦",
+            "真夜中の極秘作戦",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -26815,6 +27698,7 @@ public record Memoria(
         ),
         new Memoria(
             472,
+            "誠実なる守護者",
             "誠実なる守護者",
             "誠実なる守護者",
             new Vanguard(VanguardKind.NormalSingle),
@@ -26848,6 +27732,7 @@ public record Memoria(
             471,
             "一葉ののんびりタイム",
             "一葉ののんびりタイム",
+            "一葉ののんびりタイム",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -26876,6 +27761,7 @@ public record Memoria(
         ),
         new Memoria(
             470,
+            "一葉ののんびりタイム",
             "一葉ののんびりタイム",
             "一葉ののんびりタイム",
             new Vanguard(VanguardKind.NormalRange),
@@ -26907,6 +27793,7 @@ public record Memoria(
         new Memoria(
             469,
             "クリエイターズコラボペアトレ",
+            "クリエイターズコラボ-ペアトレ-",
             "ペアトレ",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
@@ -26937,6 +27824,7 @@ public record Memoria(
         new Memoria(
             468,
             "クリエイターズコラボ先輩ふぁいと☆",
+            "クリエイターズコラボ-先輩ふぁいと☆-",
             "先輩ふぁいと☆",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -26967,6 +27855,7 @@ public record Memoria(
         new Memoria(
             467,
             "クリエイターズコラボもっと優しく",
+            "クリエイターズコラボ-もっと優しく-",
             "もっと優しく",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
@@ -26997,6 +27886,7 @@ public record Memoria(
         new Memoria(
             466,
             "クリエイターズコラボりざるとちぇっく",
+            "クリエイターズコラボ-りざるとちぇっく-",
             "りざるとちぇっく",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
@@ -27026,6 +27916,7 @@ public record Memoria(
         ),
         new Memoria(
             465,
+            "親愛なるルームメイト",
             "親愛なるルームメイト",
             "親愛なるルームメイト",
             new Vanguard(VanguardKind.SpecialRange),
@@ -27058,6 +27949,7 @@ public record Memoria(
             464,
             "戦場のお色直し",
             "戦場のお色直し",
+            "戦場のお色直し",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -27086,6 +27978,7 @@ public record Memoria(
         ),
         new Memoria(
             463,
+            "戦場のお色直し",
             "戦場のお色直し",
             "戦場のお色直し",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -27118,6 +28011,7 @@ public record Memoria(
             462,
             "白鳥の姫騎士",
             "白鳥の姫騎士",
+            "白鳥の姫騎士",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -27146,6 +28040,7 @@ public record Memoria(
         ),
         new Memoria(
             461,
+            "白鳥の姫騎士",
             "白鳥の姫騎士",
             "白鳥の姫騎士",
             new Rearguard(RearguardKind.Support),
@@ -27178,6 +28073,7 @@ public record Memoria(
             460,
             "氷帝",
             "氷帝",
+            "氷帝",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -27206,6 +28102,7 @@ public record Memoria(
         ),
         new Memoria(
             459,
+            "氷帝",
             "氷帝",
             "氷帝",
             new Vanguard(VanguardKind.NormalSingle),
@@ -27238,6 +28135,7 @@ public record Memoria(
             458,
             "その瞳に映るモノ",
             "その瞳に映るモノ",
+            "その瞳に映るモノ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -27266,6 +28164,7 @@ public record Memoria(
         ),
         new Memoria(
             457,
+            "その瞳に映るモノ",
             "その瞳に映るモノ",
             "その瞳に映るモノ",
             new Rearguard(RearguardKind.Interference),
@@ -27298,6 +28197,7 @@ public record Memoria(
             456,
             "アクロバット・シューター",
             "アクロバット・シューター",
+            "アクロバット・シューター",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -27326,6 +28226,7 @@ public record Memoria(
         ),
         new Memoria(
             455,
+            "アクロバット・シューター",
             "アクロバット・シューター",
             "アクロバット・シューター",
             new Rearguard(RearguardKind.Recovery),
@@ -27358,6 +28259,7 @@ public record Memoria(
             454,
             "天からの強襲",
             "天からの強襲",
+            "天からの強襲",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -27386,6 +28288,7 @@ public record Memoria(
         ),
         new Memoria(
             453,
+            "天からの強襲",
             "天からの強襲",
             "天からの強襲",
             new Vanguard(VanguardKind.NormalRange),
@@ -27418,6 +28321,7 @@ public record Memoria(
             452,
             "ナイトガンスリンガー",
             "ナイトガンスリンガー",
+            "ナイトガンスリンガー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
             [
@@ -27448,6 +28352,7 @@ public record Memoria(
         new Memoria(
             451,
             "クリエイターズコラボ夏色日和",
+            "クリエイターズコラボ-夏色日和-",
             "夏色日和",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -27478,6 +28383,7 @@ public record Memoria(
         new Memoria(
             450,
             "クリエイターズコラボ打ち上げ花火",
+            "クリエイターズコラボ-打ち上げ花火-",
             "打ち上げ花火",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
@@ -27508,6 +28414,7 @@ public record Memoria(
         new Memoria(
             449,
             "クリエイターズコラボ涼やかな響き",
+            "クリエイターズコラボ-涼やかな響き-",
             "涼やかな響き",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -27538,6 +28445,7 @@ public record Memoria(
         new Memoria(
             448,
             "クリエイターズコラボ納涼かき氷",
+            "クリエイターズコラボ-納涼かき氷-",
             "納涼かき氷",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -27569,6 +28477,7 @@ public record Memoria(
             447,
             "飛び出せミリアム",
             "飛び出せミリアム！",
+            "飛び出せミリアム！",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
             [
@@ -27599,6 +28508,7 @@ public record Memoria(
             446,
             "飛び出せミリアム",
             "飛び出せミリアム！",
+            "飛び出せミリアム！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
             [
@@ -27627,6 +28537,7 @@ public record Memoria(
         ),
         new Memoria(
             445,
+            "ポイ越しの笑顔",
             "ポイ越しの笑顔",
             "ポイ越しの笑顔",
             new Vanguard(VanguardKind.SpecialRange),
@@ -27659,6 +28570,7 @@ public record Memoria(
             444,
             "ポイ越しの笑顔",
             "ポイ越しの笑顔",
+            "ポイ越しの笑顔",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
             [
@@ -27687,6 +28599,7 @@ public record Memoria(
         ),
         new Memoria(
             443,
+            "祭囃子と恋の音",
             "祭囃子と恋の音",
             "祭囃子と恋の音",
             new Vanguard(VanguardKind.NormalRange),
@@ -27718,6 +28631,7 @@ public record Memoria(
         new Memoria(
             442,
             "クリエイターズコラボ想いを込めた歌声",
+            "クリエイターズコラボ-想いを込めた歌声-",
             "想いを込めた歌声",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
@@ -27748,6 +28662,7 @@ public record Memoria(
         new Memoria(
             441,
             "クリエイターズコラボ花咲くハーモニー",
+            "クリエイターズコラボ-花咲くハーモニー-",
             "花咲くハーモニー",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -27778,6 +28693,7 @@ public record Memoria(
         new Memoria(
             440,
             "クリエイターズコラボ躍動の旋律",
+            "クリエイターズコラボ-躍動の旋律-",
             "躍動の旋律",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -27808,6 +28724,7 @@ public record Memoria(
         new Memoria(
             439,
             "クリエイターズコラボきらめきステージ",
+            "クリエイターズコラボ-きらめきステージ-",
             "きらめきステージ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -27837,6 +28754,7 @@ public record Memoria(
         ),
         new Memoria(
             438,
+            "夏の海とかき氷",
             "夏の海とかき氷",
             "夏の海とかき氷",
             new Vanguard(VanguardKind.NormalRange),
@@ -27869,6 +28787,7 @@ public record Memoria(
             437,
             "夏の海とかき氷",
             "夏の海とかき氷",
+            "夏の海とかき氷",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
             [
@@ -27897,6 +28816,7 @@ public record Memoria(
         ),
         new Memoria(
             436,
+            "見返り美人",
             "見返り美人",
             "見返り美人",
             new Vanguard(VanguardKind.SpecialRange),
@@ -27929,6 +28849,7 @@ public record Memoria(
             435,
             "見返り美人",
             "見返り美人",
+            "見返り美人",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
             [
@@ -27958,6 +28879,7 @@ public record Memoria(
         new Memoria(
             434,
             "diverse",
+            "Diverse",
             "Diverse",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
@@ -27989,6 +28911,7 @@ public record Memoria(
             433,
             "diverse",
             "Diverse",
+            "Diverse",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
             [
@@ -28018,6 +28941,7 @@ public record Memoria(
         new Memoria(
             432,
             "cherish",
+            "Cherish",
             "Cherish",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -28049,6 +28973,7 @@ public record Memoria(
             431,
             "cherish",
             "Cherish",
+            "Cherish",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
             [
@@ -28077,6 +29002,7 @@ public record Memoria(
         ),
         new Memoria(
             430,
+            "激戦の終わりに",
             "激戦の終わりに",
             "激戦の終わりに",
             new Vanguard(VanguardKind.SpecialRange),
@@ -28109,6 +29035,7 @@ public record Memoria(
             429,
             "極限コンビネーション",
             "極限コンビネーション",
+            "極限コンビネーション",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
             [
@@ -28137,6 +29064,7 @@ public record Memoria(
         ),
         new Memoria(
             428,
+            "極限コンビネーション",
             "極限コンビネーション",
             "極限コンビネーション",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -28169,6 +29097,7 @@ public record Memoria(
             427,
             "不屈の一太刀",
             "不屈の一太刀",
+            "不屈の一太刀",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
             [
@@ -28197,6 +29126,7 @@ public record Memoria(
         ),
         new Memoria(
             426,
+            "不屈の一太刀",
             "不屈の一太刀",
             "不屈の一太刀",
             new Rearguard(RearguardKind.Support),
@@ -28228,6 +29158,7 @@ public record Memoria(
         new Memoria(
             425,
             "クリエイターズコラボらぶらぶぴーす",
+            "クリエイターズコラボ-らぶらぶぴーす-",
             "らぶらぶぴーす",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -28258,6 +29189,7 @@ public record Memoria(
         new Memoria(
             424,
             "クリエイターズコラボひまわりとんだよ",
+            "クリエイターズコラボ-ひまわりとんだよ-",
             "ひまわりとんだよ",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -28288,6 +29220,7 @@ public record Memoria(
         new Memoria(
             423,
             "クリエイターズコラボレディーティータイム",
+            "クリエイターズコラボ-レディーティータイム-",
             "レディーティータイム",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -28318,6 +29251,7 @@ public record Memoria(
         new Memoria(
             422,
             "クリエイターズコラボ月に顔をそむけて",
+            "クリエイターズコラボ-月に顔をそむけて-",
             "月に顔をそむけて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -28347,6 +29281,7 @@ public record Memoria(
         ),
         new Memoria(
             421,
+            "バトル・デプロイメント",
             "バトル・デプロイメント",
             "バトル・デプロイメント",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -28379,6 +29314,7 @@ public record Memoria(
             420,
             "バトル・デプロイメント",
             "バトル・デプロイメント",
+            "バトル・デプロイメント",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
             [
@@ -28407,6 +29343,7 @@ public record Memoria(
         ),
         new Memoria(
             419,
+            "淀みを蹴って",
             "淀みを蹴って",
             "淀みを蹴って",
             new Vanguard(VanguardKind.SpecialRange),
@@ -28439,6 +29376,7 @@ public record Memoria(
             418,
             "淀みを蹴って",
             "淀みを蹴って",
+            "淀みを蹴って",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
             [
@@ -28467,6 +29405,7 @@ public record Memoria(
         ),
         new Memoria(
             417,
+            "アンブッシュ",
             "アンブッシュ",
             "アンブッシュ",
             new Vanguard(VanguardKind.NormalRange),
@@ -28499,6 +29438,7 @@ public record Memoria(
             416,
             "アンブッシュ",
             "アンブッシュ",
+            "アンブッシュ",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
             [
@@ -28528,6 +29468,7 @@ public record Memoria(
         new Memoria(
             415,
             "emotionalmemoria晴れときどきサンオイル",
+            "Emotional Memoria-晴れときどきサンオイル-",
             "晴れときどきサンオイル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -28558,6 +29499,7 @@ public record Memoria(
         new Memoria(
             414,
             "emotionalmemoria晴れときどきサンオイル",
+            "Emotional Memoria-晴れときどきサンオイル-",
             "晴れときどきサンオイル",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
@@ -28589,6 +29531,7 @@ public record Memoria(
             413,
             "楽しいを探しに行こう",
             "楽しいを探しに行こう！",
+            "楽しいを探しに行こう！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
             [
@@ -28619,6 +29562,7 @@ public record Memoria(
             412,
             "楽しいを探しに行こう",
             "楽しいを探しに行こう！",
+            "楽しいを探しに行こう！",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
             [
@@ -28647,6 +29591,7 @@ public record Memoria(
         ),
         new Memoria(
             411,
+            "ダイビング・アタッカー",
             "ダイビング・アタッカー",
             "ダイビング・アタッカー",
             new Rearguard(RearguardKind.Support),
@@ -28679,6 +29624,7 @@ public record Memoria(
             410,
             "ダイビング・アタッカー",
             "ダイビング・アタッカー",
+            "ダイビング・アタッカー",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
             [
@@ -28707,6 +29653,7 @@ public record Memoria(
         ),
         new Memoria(
             409,
+            "ウッドクラフトに挑戦",
             "ウッドクラフトに挑戦",
             "ウッドクラフトに挑戦",
             new Vanguard(VanguardKind.NormalRange),
@@ -28739,6 +29686,7 @@ public record Memoria(
             408,
             "炊事は任せた",
             "炊事は任せた！",
+            "炊事は任せた！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
             [
@@ -28767,6 +29715,7 @@ public record Memoria(
         ),
         new Memoria(
             407,
+            "面目躍如のサバイバル",
             "面目躍如のサバイバル",
             "面目躍如のサバイバル",
             new Rearguard(RearguardKind.Recovery),
@@ -28799,6 +29748,7 @@ public record Memoria(
             406,
             "面目躍如のサバイバル",
             "面目躍如のサバイバル",
+            "面目躍如のサバイバル",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
             [
@@ -28827,6 +29777,7 @@ public record Memoria(
         ),
         new Memoria(
             405,
+            "殲滅のシルバーバレット",
             "殲滅のシルバーバレット",
             "殲滅のシルバーバレット",
             new Rearguard(RearguardKind.Interference),
@@ -28859,6 +29810,7 @@ public record Memoria(
             404,
             "殲滅のシルバーバレット",
             "殲滅のシルバーバレット",
+            "殲滅のシルバーバレット",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
             [
@@ -28887,6 +29839,7 @@ public record Memoria(
         ),
         new Memoria(
             403,
+            "やめられない刺激",
             "やめられない刺激",
             "やめられない刺激",
             new Rearguard(RearguardKind.Interference),
@@ -28919,6 +29872,7 @@ public record Memoria(
             402,
             "やめられない刺激",
             "やめられない刺激",
+            "やめられない刺激",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
             [
@@ -28947,6 +29901,7 @@ public record Memoria(
         ),
         new Memoria(
             401,
+            "光の注ぐ夜",
             "光の注ぐ夜",
             "光の注ぐ夜",
             new Rearguard(RearguardKind.Recovery),
@@ -28979,6 +29934,7 @@ public record Memoria(
             400,
             "光の注ぐ夜",
             "光の注ぐ夜",
+            "光の注ぐ夜",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
             [
@@ -29007,6 +29963,7 @@ public record Memoria(
         ),
         new Memoria(
             399,
+            "ゼロ距離のしあわせ",
             "ゼロ距離のしあわせ",
             "ゼロ距離のしあわせ",
             new Vanguard(VanguardKind.SpecialRange),
@@ -29039,6 +29996,7 @@ public record Memoria(
             398,
             "ゼロ距離のしあわせ",
             "ゼロ距離のしあわせ",
+            "ゼロ距離のしあわせ",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
             [
@@ -29067,6 +30025,7 @@ public record Memoria(
         ),
         new Memoria(
             397,
+            "水も滴るいい乙女",
             "水も滴るいい乙女",
             "水も滴るいい乙女",
             new Vanguard(VanguardKind.NormalRange),
@@ -29099,6 +30058,7 @@ public record Memoria(
             396,
             "水も滴るいい乙女",
             "水も滴るいい乙女",
+            "水も滴るいい乙女",
             new Rearguard(RearguardKind.Support),
             Element.Light,
             [
@@ -29129,14 +30089,15 @@ public record Memoria(
             395,
             "リトル・アークメイジ",
             "リトル・アークメイジ",
+            "リトル・アークメイジ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
-                new BasicStatus(2071, 2100, 2432, 2430),
-                new BasicStatus(2229, 2258, 2618, 2766),
-                new BasicStatus(2388, 2417, 2954, 2952),
-                new BasicStatus(2546, 2575, 3140, 3438),
-                new BasicStatus(2705, 2734, 4126, 3624),
+                new BasicStatus(1173, 1174, 1382, 1368),
+                new BasicStatus(1257, 1258, 1481, 1617),
+                new BasicStatus(1341, 1342, 1729, 1715),
+                new BasicStatus(1425, 1426, 1827, 2113),
+                new BasicStatus(1509, 1510, 2726, 2212),
             ],
             18,
             new Skill(
@@ -29158,6 +30119,7 @@ public record Memoria(
         ),
         new Memoria(
             394,
+            "信じる想いを力に変えて",
             "信じる想いを力に変えて",
             "信じる想いを力に変えて",
             new Vanguard(VanguardKind.SpecialRange),
@@ -29190,6 +30152,7 @@ public record Memoria(
             393,
             "信じる想いを力に変えて",
             "信じる想いを力に変えて",
+            "信じる想いを力に変えて",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
             [
@@ -29218,6 +30181,7 @@ public record Memoria(
         ),
         new Memoria(
             392,
+            "絆のアルケミートレース",
             "絆のアルケミートレース",
             "絆のアルケミートレース",
             new Vanguard(VanguardKind.NormalRange),
@@ -29250,6 +30214,7 @@ public record Memoria(
             391,
             "絆のアルケミートレース",
             "絆のアルケミートレース",
+            "絆のアルケミートレース",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
             [
@@ -29278,6 +30243,7 @@ public record Memoria(
         ),
         new Memoria(
             390,
+            "ピュリファイ・ラプラス",
             "ピュリファイ・ラプラス",
             "ピュリファイ・ラプラス",
             new Rearguard(RearguardKind.Support),
@@ -29310,6 +30276,7 @@ public record Memoria(
             389,
             "ピュリファイ・ラプラス",
             "ピュリファイ・ラプラス",
+            "ピュリファイ・ラプラス",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
             [
@@ -29338,6 +30305,7 @@ public record Memoria(
         ),
         new Memoria(
             388,
+            "ヘイムスクリングラ・シスターズ",
             "ヘイムスクリングラ・シスターズ",
             "ヘイムスクリングラ・シスターズ",
             new Vanguard(VanguardKind.NormalRange),
@@ -29370,6 +30338,7 @@ public record Memoria(
             387,
             "ヘイムスクリングラ・シスターズ",
             "ヘイムスクリングラ・シスターズ",
+            "ヘイムスクリングラ・シスターズ",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -29398,6 +30367,7 @@ public record Memoria(
         ),
         new Memoria(
             386,
+            "黄昏の英雄たち",
             "黄昏の英雄たち",
             "黄昏の英雄たち",
             new Rearguard(RearguardKind.Interference),
@@ -29430,6 +30400,7 @@ public record Memoria(
             385,
             "黄昏の英雄たち",
             "黄昏の英雄たち",
+            "黄昏の英雄たち",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -29459,6 +30430,7 @@ public record Memoria(
         new Memoria(
             384,
             "emotionalmemoriaお姉様の水難",
+            "Emotional Memoria-お姉様の水難-",
             "お姉様の水難",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
@@ -29489,6 +30461,7 @@ public record Memoria(
         new Memoria(
             383,
             "emotionalmemoriaお姉様の水難",
+            "Emotional Memoria-お姉様の水難-",
             "お姉様の水難",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
@@ -29518,6 +30491,7 @@ public record Memoria(
         ),
         new Memoria(
             382,
+            "この勝利が小さな一歩でも",
             "この勝利が小さな一歩でも",
             "この勝利が小さな一歩でも",
             new Rearguard(RearguardKind.Recovery),
@@ -29550,6 +30524,7 @@ public record Memoria(
             381,
             "この勝利が小さな一歩でも",
             "この勝利が小さな一歩でも",
+            "この勝利が小さな一歩でも",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Light,
             [
@@ -29578,6 +30553,7 @@ public record Memoria(
         ),
         new Memoria(
             380,
+            "巨影を討つ閃光",
             "巨影を討つ閃光",
             "巨影を討つ閃光",
             new Rearguard(RearguardKind.Interference),
@@ -29610,6 +30586,7 @@ public record Memoria(
             379,
             "巨影を討つ閃光",
             "巨影を討つ閃光",
+            "巨影を討つ閃光",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
             [
@@ -29638,6 +30615,7 @@ public record Memoria(
         ),
         new Memoria(
             378,
+            "ここから先は通さない",
             "ここから先は通さない",
             "ここから先は通さない",
             new Vanguard(VanguardKind.SpecialRange),
@@ -29670,6 +30648,7 @@ public record Memoria(
             377,
             "ここから先は通さない",
             "ここから先は通さない",
+            "ここから先は通さない",
             new Rearguard(RearguardKind.Support),
             Element.Light,
             [
@@ -29698,6 +30677,7 @@ public record Memoria(
         ),
         new Memoria(
             376,
+            "猛る獅子の剣",
             "猛る獅子の剣",
             "猛る獅子の剣",
             new Vanguard(VanguardKind.NormalRange),
@@ -29731,6 +30711,7 @@ public record Memoria(
             375,
             "クローバー・クラウン",
             "クローバー・クラウン",
+            "クローバー・クラウン",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
             [
@@ -29759,6 +30740,7 @@ public record Memoria(
         ),
         new Memoria(
             374,
+            "クローバー・クラウン",
             "クローバー・クラウン",
             "クローバー・クラウン",
             new Rearguard(RearguardKind.Recovery),
@@ -29791,6 +30773,7 @@ public record Memoria(
             373,
             "華の休息",
             "華の休息",
+            "華の休息",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
             [
@@ -29819,6 +30802,7 @@ public record Memoria(
         ),
         new Memoria(
             372,
+            "華の休息",
             "華の休息",
             "華の休息",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -29851,6 +30835,7 @@ public record Memoria(
             371,
             "ビーチでバカンス",
             "ビーチでバカンス",
+            "ビーチでバカンス",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
             [
@@ -29879,6 +30864,7 @@ public record Memoria(
         ),
         new Memoria(
             370,
+            "ビーチでバカンス",
             "ビーチでバカンス",
             "ビーチでバカンス",
             new Vanguard(VanguardKind.NormalSingle),
@@ -29911,6 +30897,7 @@ public record Memoria(
             369,
             "乙女の非常事態",
             "乙女の非常事態",
+            "乙女の非常事態",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
             [
@@ -29939,6 +30926,7 @@ public record Memoria(
         ),
         new Memoria(
             368,
+            "乙女の非常事態",
             "乙女の非常事態",
             "乙女の非常事態",
             new Rearguard(RearguardKind.Support),
@@ -29971,6 +30959,7 @@ public record Memoria(
             367,
             "mvpオンステージ",
             "M.V.P.オンステージ",
+            "M.V.P.オンステージ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
             [
@@ -30001,6 +30990,7 @@ public record Memoria(
             366,
             "mvpオンステージ",
             "M.V.P.オンステージ",
+            "M.V.P.オンステージ",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
             [
@@ -30029,6 +31019,7 @@ public record Memoria(
         ),
         new Memoria(
             365,
+            "勝利のファンファーレ",
             "勝利のファンファーレ",
             "勝利のファンファーレ",
             new Vanguard(VanguardKind.NormalRange),
@@ -30061,6 +31052,7 @@ public record Memoria(
             364,
             "勝利のファンファーレ",
             "勝利のファンファーレ",
+            "勝利のファンファーレ",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
             [
@@ -30089,6 +31081,7 @@ public record Memoria(
         ),
         new Memoria(
             363,
+            "お手当マイスター",
             "お手当マイスター",
             "お手当マイスター",
             new Rearguard(RearguardKind.Interference),
@@ -30121,6 +31114,7 @@ public record Memoria(
             362,
             "お手当マイスター",
             "お手当マイスター",
+            "お手当マイスター",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
             [
@@ -30149,6 +31143,7 @@ public record Memoria(
         ),
         new Memoria(
             361,
+            "謳歌のミュージックアワー",
             "謳歌のミュージックアワー",
             "謳歌のミュージックアワー",
             new Rearguard(RearguardKind.Support),
@@ -30181,6 +31176,7 @@ public record Memoria(
             360,
             "謳歌のミュージックアワー",
             "謳歌のミュージックアワー",
+            "謳歌のミュージックアワー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
             [
@@ -30210,6 +31206,7 @@ public record Memoria(
         new Memoria(
             359,
             "メイクアップ",
+            "メイクアップ！",
             "メイクアップ！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -30241,6 +31238,7 @@ public record Memoria(
             358,
             "メイクアップ",
             "メイクアップ！",
+            "メイクアップ！",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
             [
@@ -30269,6 +31267,7 @@ public record Memoria(
         ),
         new Memoria(
             357,
+            "回遊のススメ",
             "回遊のススメ",
             "回遊のススメ",
             new Vanguard(VanguardKind.NormalRange),
@@ -30301,6 +31300,7 @@ public record Memoria(
             356,
             "回遊のススメ",
             "回遊のススメ",
+            "回遊のススメ",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
             [
@@ -30329,6 +31329,7 @@ public record Memoria(
         ),
         new Memoria(
             355,
+            "尊みの探求者",
             "尊みの探求者",
             "尊みの探求者",
             new Rearguard(RearguardKind.Interference),
@@ -30361,6 +31362,7 @@ public record Memoria(
             354,
             "尊みの探求者",
             "尊みの探求者",
+            "尊みの探求者",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
             [
@@ -30389,6 +31391,7 @@ public record Memoria(
         ),
         new Memoria(
             353,
+            "生徒会のお仕事",
             "生徒会のお仕事",
             "生徒会のお仕事",
             new Vanguard(VanguardKind.SpecialRange),
@@ -30421,6 +31424,7 @@ public record Memoria(
             352,
             "生徒会のお仕事",
             "生徒会のお仕事",
+            "生徒会のお仕事",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
             [
@@ -30449,6 +31453,7 @@ public record Memoria(
         ),
         new Memoria(
             351,
+            "美しき師弟関係",
             "美しき師弟関係",
             "美しき師弟関係",
             new Rearguard(RearguardKind.Support),
@@ -30481,6 +31486,7 @@ public record Memoria(
             350,
             "美しき師弟関係",
             "美しき師弟関係",
+            "美しき師弟関係",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
             [
@@ -30509,6 +31515,7 @@ public record Memoria(
         ),
         new Memoria(
             349,
+            "最高のルームメイト",
             "最高のルームメイト",
             "最高のルームメイト",
             new Rearguard(RearguardKind.Recovery),
@@ -30541,6 +31548,7 @@ public record Memoria(
             348,
             "最高のルームメイト",
             "最高のルームメイト",
+            "最高のルームメイト",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Light,
             [
@@ -30570,6 +31578,7 @@ public record Memoria(
         new Memoria(
             347,
             "bzのプロフェッショナル",
+            "BZのプロフェッショナル",
             "BZのプロフェッショナル",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
@@ -30601,6 +31610,7 @@ public record Memoria(
             346,
             "bzのプロフェッショナル",
             "BZのプロフェッショナル",
+            "BZのプロフェッショナル",
             new Rearguard(RearguardKind.Support),
             Element.Light,
             [
@@ -30629,6 +31639,7 @@ public record Memoria(
         ),
         new Memoria(
             345,
+            "もう一度、何度でも",
             "もう一度、何度でも",
             "もう一度、何度でも",
             new Vanguard(VanguardKind.NormalSingle),
@@ -30661,6 +31672,7 @@ public record Memoria(
             344,
             "もう一度、何度でも",
             "もう一度、何度でも",
+            "もう一度、何度でも",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
             [
@@ -30689,6 +31701,7 @@ public record Memoria(
         ),
         new Memoria(
             343,
+            "相生の水先案内人",
             "相生の水先案内人",
             "相生の水先案内人",
             new Vanguard(VanguardKind.NormalRange),
@@ -30721,6 +31734,7 @@ public record Memoria(
             342,
             "相生の水先案内人",
             "相生の水先案内人",
+            "相生の水先案内人",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
             [
@@ -30749,6 +31763,7 @@ public record Memoria(
         ),
         new Memoria(
             341,
+            "心の炎は豪雨で消えず",
             "心の炎は豪雨で消えず",
             "心の炎は豪雨で消えず",
             new Vanguard(VanguardKind.SpecialRange),
@@ -30781,6 +31796,7 @@ public record Memoria(
             340,
             "心の炎は豪雨で消えず",
             "心の炎は豪雨で消えず",
+            "心の炎は豪雨で消えず",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
             [
@@ -30809,6 +31825,7 @@ public record Memoria(
         ),
         new Memoria(
             339,
+            "昼下がりのラプソディー",
             "昼下がりのラプソディー",
             "昼下がりのラプソディー",
             new Vanguard(VanguardKind.SpecialRange),
@@ -30841,6 +31858,7 @@ public record Memoria(
             338,
             "昼下がりのラプソディー",
             "昼下がりのラプソディー",
+            "昼下がりのラプソディー",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
             [
@@ -30869,6 +31887,7 @@ public record Memoria(
         ),
         new Memoria(
             337,
+            "私ヲ蝕ム悪イ夢",
             "私ヲ蝕ム悪イ夢",
             "私ヲ蝕ム悪イ夢",
             new Rearguard(RearguardKind.Interference),
@@ -30901,6 +31920,7 @@ public record Memoria(
             336,
             "私ヲ蝕ム悪イ夢",
             "私ヲ蝕ム悪イ夢",
+            "私ヲ蝕ム悪イ夢",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
             [
@@ -30929,6 +31949,7 @@ public record Memoria(
         ),
         new Memoria(
             335,
+            "だいすきをあげる",
             "だいすきをあげる",
             "だいすきをあげる",
             new Vanguard(VanguardKind.NormalRange),
@@ -30961,6 +31982,7 @@ public record Memoria(
             334,
             "だいすきをあげる",
             "だいすきをあげる",
+            "だいすきをあげる",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
             [
@@ -30989,6 +32011,7 @@ public record Memoria(
         ),
         new Memoria(
             333,
+            "希望の光",
             "希望の光",
             "希望の光",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -31021,6 +32044,7 @@ public record Memoria(
             332,
             "希望の光",
             "希望の光",
+            "希望の光",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
             [
@@ -31049,6 +32073,7 @@ public record Memoria(
         ),
         new Memoria(
             331,
+            "思い出はカメラの中に",
             "思い出はカメラの中に",
             "思い出はカメラの中に",
             new Rearguard(RearguardKind.Support),
@@ -31081,6 +32106,7 @@ public record Memoria(
             330,
             "ブレイク・タイム",
             "ブレイク・タイム",
+            "ブレイク・タイム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
             [
@@ -31109,6 +32135,7 @@ public record Memoria(
         ),
         new Memoria(
             329,
+            "ラブリーアンドピース",
             "ラブリーアンドピース",
             "ラブリーアンドピース",
             new Rearguard(RearguardKind.Interference),
@@ -31141,6 +32168,7 @@ public record Memoria(
             328,
             "すってんあかりん",
             "すってんあかりん",
+            "すってんあかりん",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
             [
@@ -31169,6 +32197,7 @@ public record Memoria(
         ),
         new Memoria(
             327,
+            "獅子奮迅",
             "獅子奮迅",
             "獅子奮迅",
             new Rearguard(RearguardKind.Support),
@@ -31202,6 +32231,7 @@ public record Memoria(
             326,
             "せめて、この子だけは",
             "せめて、この子だけは",
+            "せめて、この子だけは",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -31230,6 +32260,7 @@ public record Memoria(
         ),
         new Memoria(
             325,
+            "せめて、この子だけは",
             "せめて、この子だけは",
             "せめて、この子だけは",
             new Rearguard(RearguardKind.Support),
@@ -31262,6 +32293,7 @@ public record Memoria(
             324,
             "紅巴式夏祭りの楽しみ方",
             "紅巴式夏祭りの楽しみ方",
+            "紅巴式夏祭りの楽しみ方",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -31290,6 +32322,7 @@ public record Memoria(
         ),
         new Memoria(
             323,
+            "紅巴式夏祭りの楽しみ方",
             "紅巴式夏祭りの楽しみ方",
             "紅巴式夏祭りの楽しみ方",
             new Rearguard(RearguardKind.Interference),
@@ -31322,6 +32355,7 @@ public record Memoria(
             322,
             "世界を越えて",
             "世界を越えて",
+            "世界を越えて",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -31350,6 +32384,7 @@ public record Memoria(
         ),
         new Memoria(
             321,
+            "世界を越えて",
             "世界を越えて",
             "世界を越えて",
             new Rearguard(RearguardKind.Recovery),
@@ -31382,6 +32417,7 @@ public record Memoria(
             320,
             "小さなシュッツエンゲル",
             "小さなシュッツエンゲル",
+            "小さなシュッツエンゲル",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -31410,6 +32446,7 @@ public record Memoria(
         ),
         new Memoria(
             319,
+            "小さなシュッツエンゲル",
             "小さなシュッツエンゲル",
             "小さなシュッツエンゲル",
             new Vanguard(VanguardKind.SpecialRange),
@@ -31442,6 +32479,7 @@ public record Memoria(
             318,
             "束ねる絆の一夜",
             "束ねる絆の一夜",
+            "束ねる絆の一夜",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
             [
@@ -31470,6 +32508,7 @@ public record Memoria(
         ),
         new Memoria(
             317,
+            "束ねる絆の一夜",
             "束ねる絆の一夜",
             "束ねる絆の一夜",
             new Rearguard(RearguardKind.Support),
@@ -31502,6 +32541,7 @@ public record Memoria(
             316,
             "救う願いの一閃",
             "救う願いの一閃",
+            "救う願いの一閃",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -31530,6 +32570,7 @@ public record Memoria(
         ),
         new Memoria(
             315,
+            "救う願いの一閃",
             "救う願いの一閃",
             "救う願いの一閃",
             new Rearguard(RearguardKind.Interference),
@@ -31562,6 +32603,7 @@ public record Memoria(
             314,
             "足踏み健康ロードの悲劇",
             "足踏み健康ロードの悲劇",
+            "足踏み健康ロードの悲劇",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
             [
@@ -31590,6 +32632,7 @@ public record Memoria(
         ),
         new Memoria(
             313,
+            "足踏み健康ロードの悲劇",
             "足踏み健康ロードの悲劇",
             "足踏み健康ロードの悲劇",
             new Rearguard(RearguardKind.Interference),
@@ -31622,6 +32665,7 @@ public record Memoria(
             312,
             "みんなを守るために",
             "みんなを守るために",
+            "みんなを守るために",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
             [
@@ -31650,6 +32694,7 @@ public record Memoria(
         ),
         new Memoria(
             311,
+            "みんなを守るために",
             "みんなを守るために",
             "みんなを守るために",
             new Vanguard(VanguardKind.NormalSingle),
@@ -31682,6 +32727,7 @@ public record Memoria(
             310,
             "狂化フルスロットル",
             "狂化フルスロットル",
+            "狂化フルスロットル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
             [
@@ -31710,6 +32756,7 @@ public record Memoria(
         ),
         new Memoria(
             309,
+            "狂化フルスロットル",
             "狂化フルスロットル",
             "狂化フルスロットル",
             new Rearguard(RearguardKind.Recovery),
@@ -31742,6 +32789,7 @@ public record Memoria(
             308,
             "友を守護する剣",
             "友を守護する剣",
+            "友を守護する剣",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
             [
@@ -31770,6 +32818,7 @@ public record Memoria(
         ),
         new Memoria(
             307,
+            "友を守護する剣",
             "友を守護する剣",
             "友を守護する剣",
             new Rearguard(RearguardKind.Interference),
@@ -31802,6 +32851,7 @@ public record Memoria(
             306,
             "不死身の刃",
             "不死身の刃",
+            "不死身の刃",
             new Rearguard(RearguardKind.Support),
             Element.Light,
             [
@@ -31830,6 +32880,7 @@ public record Memoria(
         ),
         new Memoria(
             305,
+            "不死身の刃",
             "不死身の刃",
             "不死身の刃",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -31861,6 +32912,7 @@ public record Memoria(
         new Memoria(
             304,
             "emotionalmemoria癒しの露天風呂",
+            "Emotional Memoria -癒しの露天風呂-",
             "癒しの露天風呂",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
@@ -31891,6 +32943,7 @@ public record Memoria(
         new Memoria(
             303,
             "emotionalmemoria癒しの露天風呂",
+            "Emotional Memoria -癒しの露天風呂-",
             "癒しの露天風呂",
             new Rearguard(RearguardKind.Support),
             Element.Light,
@@ -31922,6 +32975,7 @@ public record Memoria(
             302,
             "アサルトリリィふるーつ",
             "アサルトリリィ ふるーつ",
+            "アサルトリリィ ふるーつ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
             [
@@ -31952,6 +33006,7 @@ public record Memoria(
             301,
             "アサルトリリィふるーつ",
             "アサルトリリィ ふるーつ",
+            "アサルトリリィ ふるーつ",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
             [
@@ -31980,6 +33035,7 @@ public record Memoria(
         ),
         new Memoria(
             300,
+            "ストームデュオ",
             "ストームデュオ",
             "ストームデュオ",
             new Rearguard(RearguardKind.Support),
@@ -32012,6 +33068,7 @@ public record Memoria(
             299,
             "ストームデュオ",
             "ストームデュオ",
+            "ストームデュオ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Light,
             [
@@ -32040,6 +33097,7 @@ public record Memoria(
         ),
         new Memoria(
             298,
+            "アクアストライク",
             "アクアストライク",
             "アクアストライク",
             new Vanguard(VanguardKind.NormalRange),
@@ -32072,6 +33130,7 @@ public record Memoria(
             297,
             "アクアストライク",
             "アクアストライク",
+            "アクアストライク",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
             [
@@ -32100,6 +33159,7 @@ public record Memoria(
         ),
         new Memoria(
             296,
+            "雷光一閃",
             "雷光一閃",
             "雷光一閃",
             new Vanguard(VanguardKind.SpecialRange),
@@ -32132,6 +33192,7 @@ public record Memoria(
             295,
             "雷光一閃",
             "雷光一閃",
+            "雷光一閃",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
             [
@@ -32160,6 +33221,7 @@ public record Memoria(
         ),
         new Memoria(
             294,
+            "ハッピーを見つけたら☆",
             "ハッピーを見つけたら☆",
             "ハッピーを見つけたら☆",
             new Rearguard(RearguardKind.Recovery),
@@ -32192,6 +33254,7 @@ public record Memoria(
             293,
             "ハッピーを見つけたら☆",
             "ハッピーを見つけたら☆",
+            "ハッピーを見つけたら☆",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -32220,6 +33283,7 @@ public record Memoria(
         ),
         new Memoria(
             292,
+            "戦いを終えて",
             "戦いを終えて",
             "戦いを終えて",
             new Rearguard(RearguardKind.Recovery),
@@ -32252,6 +33316,7 @@ public record Memoria(
             291,
             "戦いを終えて",
             "戦いを終えて",
+            "戦いを終えて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -32280,6 +33345,7 @@ public record Memoria(
         ),
         new Memoria(
             290,
+            "通じ合うふたり",
             "通じ合うふたり",
             "通じ合うふたり",
             new Vanguard(VanguardKind.SpecialRange),
@@ -32312,6 +33378,7 @@ public record Memoria(
             289,
             "通じ合うふたり",
             "通じ合うふたり",
+            "通じ合うふたり",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -32340,6 +33407,7 @@ public record Memoria(
         ),
         new Memoria(
             288,
+            "麗しき出立",
             "麗しき出立",
             "麗しき出立",
             new Rearguard(RearguardKind.Support),
@@ -32372,6 +33440,7 @@ public record Memoria(
             287,
             "麗しき出立",
             "麗しき出立",
+            "麗しき出立",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
             [
@@ -32400,6 +33469,7 @@ public record Memoria(
         ),
         new Memoria(
             286,
+            "飛翔迎撃",
             "飛翔迎撃",
             "飛翔迎撃",
             new Vanguard(VanguardKind.SpecialRange),
@@ -32432,6 +33502,7 @@ public record Memoria(
             285,
             "飛翔迎撃",
             "飛翔迎撃",
+            "飛翔迎撃",
             new Rearguard(RearguardKind.Recovery),
             Element.Light,
             [
@@ -32460,6 +33531,7 @@ public record Memoria(
         ),
         new Memoria(
             284,
+            "不動劔の姫",
             "不動劔の姫",
             "不動剣の姫",
             new Vanguard(VanguardKind.NormalSingle),
@@ -32490,6 +33562,7 @@ public record Memoria(
         ),
         new Memoria(
             283,
+            "不動劔の姫",
             "不動劔の姫",
             "不動剣の姫",
             new Rearguard(RearguardKind.Interference),
@@ -32522,6 +33595,7 @@ public record Memoria(
             282,
             "そうさく倶楽部の活動",
             "そうさく倶楽部の活動",
+            "そうさく倶楽部の活動",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
             [
@@ -32550,6 +33624,7 @@ public record Memoria(
         ),
         new Memoria(
             281,
+            "そうさく倶楽部の活動",
             "そうさく倶楽部の活動",
             "そうさく倶楽部の活動",
             new Rearguard(RearguardKind.Interference),
@@ -32582,6 +33657,7 @@ public record Memoria(
             280,
             "愛しき人との待ち合わせ",
             "愛しき人との待ち合わせ",
+            "愛しき人との待ち合わせ",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
             [
@@ -32610,6 +33686,7 @@ public record Memoria(
         ),
         new Memoria(
             279,
+            "愛しき人との待ち合わせ",
             "愛しき人との待ち合わせ",
             "愛しき人との待ち合わせ",
             new Rearguard(RearguardKind.Recovery),
@@ -32642,6 +33719,7 @@ public record Memoria(
             278,
             "月下の傍観者",
             "月下の傍観者",
+            "月下の傍観者",
             new Rearguard(RearguardKind.Support),
             Element.Light,
             [
@@ -32670,6 +33748,7 @@ public record Memoria(
         ),
         new Memoria(
             277,
+            "月下の傍観者",
             "月下の傍観者",
             "月下の傍観者",
             new Vanguard(VanguardKind.SpecialRange),
@@ -32702,6 +33781,7 @@ public record Memoria(
             276,
             "なかよしとわいらいと",
             "なかよしとわいらいと",
+            "なかよしとわいらいと",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
             [
@@ -32730,6 +33810,7 @@ public record Memoria(
         ),
         new Memoria(
             275,
+            "なかよしとわいらいと",
             "なかよしとわいらいと",
             "なかよしとわいらいと",
             new Rearguard(RearguardKind.Interference),
@@ -32762,6 +33843,7 @@ public record Memoria(
             274,
             "水流乱撃",
             "水流乱撃",
+            "水流乱撃",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
             [
@@ -32790,6 +33872,7 @@ public record Memoria(
         ),
         new Memoria(
             273,
+            "水流乱撃",
             "水流乱撃",
             "水流乱撃",
             new Rearguard(RearguardKind.Support),
@@ -32822,6 +33905,7 @@ public record Memoria(
             272,
             "踏み込む勇気",
             "踏み込む勇気",
+            "踏み込む勇気",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -32850,6 +33934,7 @@ public record Memoria(
         ),
         new Memoria(
             271,
+            "踏み込む勇気",
             "踏み込む勇気",
             "踏み込む勇気",
             new Vanguard(VanguardKind.NormalRange),
@@ -32882,6 +33967,7 @@ public record Memoria(
             270,
             "吸血鬼のたしなみ",
             "吸血鬼のたしなみ",
+            "吸血鬼のたしなみ",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -32910,6 +33996,7 @@ public record Memoria(
         ),
         new Memoria(
             269,
+            "吸血鬼のたしなみ",
             "吸血鬼のたしなみ",
             "吸血鬼のたしなみ",
             new Vanguard(VanguardKind.SpecialRange),
@@ -32942,6 +34029,7 @@ public record Memoria(
             268,
             "校舎屋上のストラグル",
             "校舎屋上のストラグル",
+            "校舎屋上のストラグル",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -32970,6 +34058,7 @@ public record Memoria(
         ),
         new Memoria(
             267,
+            "校舎屋上のストラグル",
             "校舎屋上のストラグル",
             "校舎屋上のストラグル",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -33002,6 +34091,7 @@ public record Memoria(
             266,
             "清淑なる黒き槍",
             "清淑なる黒き槍",
+            "清淑なる黒き槍",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
             [
@@ -33030,6 +34120,7 @@ public record Memoria(
         ),
         new Memoria(
             265,
+            "清淑なる黒き槍",
             "清淑なる黒き槍",
             "清淑なる黒き槍",
             new Rearguard(RearguardKind.Support),
@@ -33062,6 +34153,7 @@ public record Memoria(
             264,
             "世界を守る剣たち",
             "世界を守る剣たち",
+            "世界を守る剣たち",
             new Rearguard(RearguardKind.Interference),
             Element.Light,
             [
@@ -33090,6 +34182,7 @@ public record Memoria(
         ),
         new Memoria(
             263,
+            "世界を守る剣たち",
             "世界を守る剣たち",
             "世界を守る剣たち",
             new Vanguard(VanguardKind.NormalRange),
@@ -33122,6 +34215,7 @@ public record Memoria(
             262,
             "悪夢との共闘",
             "悪夢との共闘",
+            "悪夢との共闘",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
             [
@@ -33150,6 +34244,7 @@ public record Memoria(
         ),
         new Memoria(
             261,
+            "悪夢との共闘",
             "悪夢との共闘",
             "悪夢との共闘",
             new Rearguard(RearguardKind.Support),
@@ -33182,6 +34277,7 @@ public record Memoria(
             260,
             "扶翼の剣",
             "扶翼の剣",
+            "扶翼の剣",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Light,
             [
@@ -33210,6 +34306,7 @@ public record Memoria(
         ),
         new Memoria(
             259,
+            "扶翼の剣",
             "扶翼の剣",
             "扶翼の剣",
             new Rearguard(RearguardKind.Interference),
@@ -33242,6 +34339,7 @@ public record Memoria(
             258,
             "灼爛の一撃",
             "灼爛の一撃",
+            "灼爛の一撃",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Light,
             [
@@ -33270,6 +34368,7 @@ public record Memoria(
         ),
         new Memoria(
             257,
+            "灼爛の一撃",
             "灼爛の一撃",
             "灼爛の一撃",
             new Rearguard(RearguardKind.Recovery),
@@ -33302,6 +34401,7 @@ public record Memoria(
             256,
             "静寂の中で",
             "静寂の中で",
+            "静寂の中で",
             new Vanguard(VanguardKind.NormalRange),
             Element.Light,
             [
@@ -33330,6 +34430,7 @@ public record Memoria(
         ),
         new Memoria(
             255,
+            "静寂の中で",
             "静寂の中で",
             "静寂の中で",
             new Rearguard(RearguardKind.Support),
@@ -33362,6 +34463,7 @@ public record Memoria(
             254,
             "キラキラアイスクリーム",
             "キラキラアイスクリーム！",
+            "キラキラアイスクリーム！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
             [
@@ -33392,6 +34494,7 @@ public record Memoria(
             253,
             "キラキラアイスクリーム",
             "キラキラアイスクリーム！",
+            "キラキラアイスクリーム！",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
             [
@@ -33420,6 +34523,7 @@ public record Memoria(
         ),
         new Memoria(
             252,
+            "迎え撃つ勇士たち",
             "迎え撃つ勇士たち",
             "迎え撃つ勇士たち",
             new Vanguard(VanguardKind.SpecialRange),
@@ -33452,6 +34556,7 @@ public record Memoria(
             251,
             "迎え撃つ勇士たち",
             "迎え撃つ勇士たち",
+            "迎え撃つ勇士たち",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
             [
@@ -33480,6 +34585,7 @@ public record Memoria(
         ),
         new Memoria(
             250,
+            "不撓不屈の心を胸に",
             "不撓不屈の心を胸に",
             "不撓不屈の心を胸に",
             new Vanguard(VanguardKind.NormalRange),
@@ -33512,6 +34618,7 @@ public record Memoria(
             249,
             "不撓不屈の心を胸に",
             "不撓不屈の心を胸に",
+            "不撓不屈の心を胸に",
             new Rearguard(RearguardKind.Interference),
             Element.Dark,
             [
@@ -33540,6 +34647,7 @@ public record Memoria(
         ),
         new Memoria(
             248,
+            "ブレイブ・ショット",
             "ブレイブ・ショット",
             "ブレイブ・ショット",
             new Rearguard(RearguardKind.Support),
@@ -33572,6 +34680,7 @@ public record Memoria(
             247,
             "ブレイブ・ショット",
             "ブレイブ・ショット",
+            "ブレイブ・ショット",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
             [
@@ -33601,6 +34710,7 @@ public record Memoria(
         new Memoria(
             246,
             "発進☆ユニコーン",
+            "発進☆ユニコーン！",
             "発進☆ユニコーン！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
@@ -33632,6 +34742,7 @@ public record Memoria(
             245,
             "発進☆ユニコーン",
             "発進☆ユニコーン！",
+            "発進☆ユニコーン！",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -33660,6 +34771,7 @@ public record Memoria(
         ),
         new Memoria(
             244,
+            "仮想訓練場の応酬",
             "仮想訓練場の応酬",
             "仮想訓練場の応酬",
             new Vanguard(VanguardKind.NormalRange),
@@ -33692,6 +34804,7 @@ public record Memoria(
             243,
             "仮想訓練場の応酬",
             "仮想訓練場の応酬",
+            "仮想訓練場の応酬",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -33720,6 +34833,7 @@ public record Memoria(
         ),
         new Memoria(
             242,
+            "優しい夕暮れ",
             "優しい夕暮れ",
             "優しい夕暮れ",
             new Vanguard(VanguardKind.NormalSingle),
@@ -33752,6 +34866,7 @@ public record Memoria(
             241,
             "優しい夕暮れ",
             "優しい夕暮れ",
+            "優しい夕暮れ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -33780,6 +34895,7 @@ public record Memoria(
         ),
         new Memoria(
             240,
+            "静かに肩を寄せて",
             "静かに肩を寄せて",
             "静かに肩を寄せて",
             new Rearguard(RearguardKind.Interference),
@@ -33812,6 +34928,7 @@ public record Memoria(
             239,
             "静かに肩を寄せて",
             "静かに肩を寄せて",
+            "静かに肩を寄せて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
             [
@@ -33840,6 +34957,7 @@ public record Memoria(
         ),
         new Memoria(
             238,
+            "レスキューキャット",
             "レスキューキャット",
             "レスキューキャット",
             new Vanguard(VanguardKind.NormalRange),
@@ -33872,6 +34990,7 @@ public record Memoria(
             237,
             "レスキューキャット",
             "レスキューキャット",
+            "レスキューキャット",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
             [
@@ -33900,6 +35019,7 @@ public record Memoria(
         ),
         new Memoria(
             236,
+            "平穏を守るための哮り",
             "平穏を守るための哮り",
             "平穏を守るための哮り",
             new Vanguard(VanguardKind.NormalRange),
@@ -33932,6 +35052,7 @@ public record Memoria(
             235,
             "平穏を守るための哮り",
             "平穏を守るための哮り",
+            "平穏を守るための哮り",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -33960,6 +35081,7 @@ public record Memoria(
         ),
         new Memoria(
             234,
+            "ハッピー＆トリート",
             "ハッピー＆トリート",
             "ハッピー＆トリート",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -33992,6 +35114,7 @@ public record Memoria(
             233,
             "ハッピー＆トリート",
             "ハッピー＆トリート",
+            "ハッピー＆トリート",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -34020,6 +35143,7 @@ public record Memoria(
         ),
         new Memoria(
             232,
+            "あなただけの守護天使",
             "あなただけの守護天使",
             "あなただけの守護天使",
             new Vanguard(VanguardKind.SpecialRange),
@@ -34052,6 +35176,7 @@ public record Memoria(
             231,
             "あなただけの守護天使",
             "あなただけの守護天使",
+            "あなただけの守護天使",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
             [
@@ -34080,6 +35205,7 @@ public record Memoria(
         ),
         new Memoria(
             230,
+            "いつでも近くに",
             "いつでも近くに",
             "いつでも近くに",
             new Vanguard(VanguardKind.NormalSingle),
@@ -34112,6 +35238,7 @@ public record Memoria(
             229,
             "いつでも近くに",
             "いつでも近くに",
+            "いつでも近くに",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
             [
@@ -34140,6 +35267,7 @@ public record Memoria(
         ),
         new Memoria(
             228,
+            "純白の想い",
             "純白の想い",
             "純白の想い",
             new Rearguard(RearguardKind.Interference),
@@ -34172,6 +35300,7 @@ public record Memoria(
             227,
             "純白の想い",
             "純白の想い",
+            "純白の想い",
             new Vanguard(VanguardKind.NormalRange),
             Element.Dark,
             [
@@ -34202,14 +35331,15 @@ public record Memoria(
             226,
             "蒼き月の御使い",
             "蒼き月の御使い",
+            "蒼き月の御使い",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
-                new BasicStatus(2102, 2462, 2102, 2433),
-                new BasicStatus(2260, 2648, 2260, 2769),
-                new BasicStatus(2419, 2984, 2419, 2955),
-                new BasicStatus(2577, 3170, 2577, 3441),
-                new BasicStatus(2736, 4156, 2736, 3627),
+                new BasicStatus(1202, 1436, 1208, 1427),
+                new BasicStatus(1290, 1539, 1296, 1680),
+                new BasicStatus(1377, 1792, 1383, 1783),
+                new BasicStatus(1465, 1895, 1471, 2186),
+                new BasicStatus(1553, 2798, 1559, 2289),
             ],
             18,
             new Skill(
@@ -34231,6 +35361,7 @@ public record Memoria(
         ),
         new Memoria(
             225,
+            "放課後のミューズ",
             "放課後のミューズ",
             "放課後のミューズ",
             new Rearguard(RearguardKind.Recovery),
@@ -34263,6 +35394,7 @@ public record Memoria(
             224,
             "放課後のミューズ",
             "放課後のミューズ",
+            "放課後のミューズ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Dark,
             [
@@ -34291,6 +35423,7 @@ public record Memoria(
         ),
         new Memoria(
             223,
+            "小春日和",
             "小春日和",
             "小春日和",
             new Vanguard(VanguardKind.NormalRange),
@@ -34323,6 +35456,7 @@ public record Memoria(
             222,
             "小春日和",
             "小春日和",
+            "小春日和",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
             [
@@ -34351,6 +35485,7 @@ public record Memoria(
         ),
         new Memoria(
             221,
+            "真夜中のクリエイター",
             "真夜中のクリエイター",
             "真夜中のクリエイター",
             new Vanguard(VanguardKind.SpecialRange),
@@ -34383,6 +35518,7 @@ public record Memoria(
             220,
             "真夜中のクリエイター",
             "真夜中のクリエイター",
+            "真夜中のクリエイター",
             new Rearguard(RearguardKind.Support),
             Element.Dark,
             [
@@ -34411,6 +35547,7 @@ public record Memoria(
         ),
         new Memoria(
             219,
+            "遠い日の足跡",
             "遠い日の足跡",
             "遠い日の足跡",
             new Rearguard(RearguardKind.Interference),
@@ -34443,6 +35580,7 @@ public record Memoria(
             218,
             "遠い日の足跡",
             "遠い日の足跡",
+            "遠い日の足跡",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Dark,
             [
@@ -34471,6 +35609,7 @@ public record Memoria(
         ),
         new Memoria(
             217,
+            "先駆けプリンセス",
             "先駆けプリンセス",
             "先駆けプリンセス",
             new Rearguard(RearguardKind.Support),
@@ -34503,6 +35642,7 @@ public record Memoria(
             216,
             "先駆けプリンセス",
             "先駆けプリンセス",
+            "先駆けプリンセス",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Dark,
             [
@@ -34531,6 +35671,7 @@ public record Memoria(
         ),
         new Memoria(
             215,
+            "寂寥の美",
             "寂寥の美",
             "寂寥の美",
             new Vanguard(VanguardKind.NormalRange),
@@ -34563,6 +35704,7 @@ public record Memoria(
             214,
             "寂寥の美",
             "寂寥の美",
+            "寂寥の美",
             new Rearguard(RearguardKind.Recovery),
             Element.Dark,
             [
@@ -34591,6 +35733,7 @@ public record Memoria(
         ),
         new Memoria(
             213,
+            "劔の妖精",
             "劔の妖精",
             "劔の妖精",
             new Vanguard(VanguardKind.SpecialRange),
@@ -34623,6 +35766,7 @@ public record Memoria(
             212,
             "セインツの宝石",
             "セインツの宝石",
+            "セインツの宝石",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -34651,6 +35795,7 @@ public record Memoria(
         ),
         new Memoria(
             211,
+            "セインツの宝石",
             "セインツの宝石",
             "セインツの宝石",
             new Rearguard(RearguardKind.Support),
@@ -34683,6 +35828,7 @@ public record Memoria(
             210,
             "暴君の花嫁",
             "暴君の花嫁",
+            "暴君の花嫁",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -34711,6 +35857,7 @@ public record Memoria(
         ),
         new Memoria(
             209,
+            "約束の蕾",
             "約束の蕾",
             "約束の蕾",
             new Rearguard(RearguardKind.Support),
@@ -34743,6 +35890,7 @@ public record Memoria(
             208,
             "約束の蕾",
             "約束の蕾",
+            "約束の蕾",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -34771,6 +35919,7 @@ public record Memoria(
         ),
         new Memoria(
             207,
+            "大切な存在",
             "大切な存在",
             "大切な存在",
             new Vanguard(VanguardKind.SpecialRange),
@@ -34803,6 +35952,7 @@ public record Memoria(
             206,
             "大切な存在",
             "大切な存在",
+            "大切な存在",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -34831,6 +35981,7 @@ public record Memoria(
         ),
         new Memoria(
             205,
+            "黄昏の研究者たち",
             "黄昏の研究者たち",
             "黄昏の研究者たち",
             new Rearguard(RearguardKind.Recovery),
@@ -34863,6 +36014,7 @@ public record Memoria(
             204,
             "黄昏の研究者たち",
             "黄昏の研究者たち",
+            "黄昏の研究者たち",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -34891,6 +36043,7 @@ public record Memoria(
         ),
         new Memoria(
             203,
+            "出逢いの約束",
             "出逢いの約束",
             "出逢いの約束",
             new Rearguard(RearguardKind.Recovery),
@@ -34923,6 +36076,7 @@ public record Memoria(
             202,
             "出逢いの約束",
             "出逢いの約束",
+            "出逢いの約束",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
             [
@@ -34951,6 +36105,7 @@ public record Memoria(
         ),
         new Memoria(
             201,
+            "暁に笑う少女",
             "暁に笑う少女",
             "暁に笑う少女",
             new Rearguard(RearguardKind.Interference),
@@ -34983,6 +36138,7 @@ public record Memoria(
             200,
             "暁に笑う少女",
             "暁に笑う少女",
+            "暁に笑う少女",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -35011,6 +36167,7 @@ public record Memoria(
         ),
         new Memoria(
             199,
+            "ハンドメイド・リリィ",
             "ハンドメイド・リリィ",
             "ハンドメイド・リリィ",
             new Rearguard(RearguardKind.Support),
@@ -35043,6 +36200,7 @@ public record Memoria(
             198,
             "ハンドメイド・リリィ",
             "ハンドメイド・リリィ",
+            "ハンドメイド・リリィ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
             [
@@ -35071,6 +36229,7 @@ public record Memoria(
         ),
         new Memoria(
             197,
+            "ハッピーバレンタインだにゃん♪",
             "ハッピーバレンタインだにゃん♪",
             "ハッピーバレンタインだにゃん♪",
             new Rearguard(RearguardKind.Recovery),
@@ -35103,6 +36262,7 @@ public record Memoria(
             196,
             "まごころをこめて",
             "まごころをこめて！",
+            "まごころをこめて！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -35131,6 +36291,7 @@ public record Memoria(
         ),
         new Memoria(
             195,
+            "ドキドキ・ショコラーデ",
             "ドキドキ・ショコラーデ",
             "ドキドキ・ショコラーデ",
             new Vanguard(VanguardKind.SpecialRange),
@@ -35163,6 +36324,7 @@ public record Memoria(
             194,
             "煌めく花々",
             "煌めく花々",
+            "煌めく花々",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -35191,6 +36353,7 @@ public record Memoria(
         ),
         new Memoria(
             193,
+            "煌めく花々",
             "煌めく花々",
             "煌めく花々",
             new Vanguard(VanguardKind.NormalRange),
@@ -35223,6 +36386,7 @@ public record Memoria(
             192,
             "一筆の心",
             "一筆の心",
+            "一筆の心",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -35251,6 +36415,7 @@ public record Memoria(
         ),
         new Memoria(
             191,
+            "一筆の心",
             "一筆の心",
             "一筆の心",
             new Rearguard(RearguardKind.Recovery),
@@ -35283,6 +36448,7 @@ public record Memoria(
             190,
             "飾らぬ想いに咲き誇る",
             "飾らぬ想いに咲き誇る",
+            "飾らぬ想いに咲き誇る",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -35311,6 +36477,7 @@ public record Memoria(
         ),
         new Memoria(
             189,
+            "飾らぬ想いに咲き誇る",
             "飾らぬ想いに咲き誇る",
             "飾らぬ想いに咲き誇る",
             new Rearguard(RearguardKind.Recovery),
@@ -35343,6 +36510,7 @@ public record Memoria(
             188,
             "ヘルヴォルのお嫁さん",
             "ヘルヴォルのお嫁さん",
+            "ヘルヴォルのお嫁さん",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -35371,6 +36539,7 @@ public record Memoria(
         ),
         new Memoria(
             187,
+            "ヘルヴォルのお嫁さん",
             "ヘルヴォルのお嫁さん",
             "ヘルヴォルのお嫁さん",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -35403,6 +36572,7 @@ public record Memoria(
             186,
             "楽しい遊園地",
             "楽しい遊園地",
+            "楽しい遊園地",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
             [
@@ -35431,6 +36601,7 @@ public record Memoria(
         ),
         new Memoria(
             185,
+            "楽しい遊園地",
             "楽しい遊園地",
             "楽しい遊園地",
             new Rearguard(RearguardKind.Support),
@@ -35463,6 +36634,7 @@ public record Memoria(
             184,
             "リフレッシュエンジン",
             "リフレッシュ！エンジン",
+            "リフレッシュ！エンジン",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
             [
@@ -35493,6 +36665,7 @@ public record Memoria(
             183,
             "リフレッシュエンジン",
             "リフレッシュ！エンジン",
+            "リフレッシュ！エンジン",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -35521,6 +36694,7 @@ public record Memoria(
         ),
         new Memoria(
             182,
+            "夜の闇を切り拓く者たち",
             "夜の闇を切り拓く者たち",
             "夜の闇を切り拓く者たち",
             new Rearguard(RearguardKind.Support),
@@ -35553,6 +36727,7 @@ public record Memoria(
             181,
             "夜の闇を切り拓く者たち",
             "夜の闇を切り拓く者たち",
+            "夜の闇を切り拓く者たち",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -35581,6 +36756,7 @@ public record Memoria(
         ),
         new Memoria(
             180,
+            "エクストリームブースト",
             "エクストリームブースト",
             "エクストリームブースト",
             new Rearguard(RearguardKind.Support),
@@ -35613,6 +36789,7 @@ public record Memoria(
             179,
             "エクストリームブースト",
             "エクストリームブースト",
+            "エクストリームブースト",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
             [
@@ -35641,6 +36818,7 @@ public record Memoria(
         ),
         new Memoria(
             178,
+            "ガーディアン・パワー",
             "ガーディアン・パワー",
             "ガーディアン・パワー",
             new Vanguard(VanguardKind.SpecialRange),
@@ -35673,6 +36851,7 @@ public record Memoria(
             177,
             "コール・ユア・ネーム",
             "コール・ユア・ネーム",
+            "コール・ユア・ネーム",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -35701,6 +36880,7 @@ public record Memoria(
         ),
         new Memoria(
             176,
+            "ジャスト・ザ・ブレイブ",
             "ジャスト・ザ・ブレイブ",
             "ジャスト・ザ・ブレイブ",
             new Vanguard(VanguardKind.NormalRange),
@@ -35732,6 +36912,7 @@ public record Memoria(
         new Memoria(
             175,
             "anniversarymemoria大切なあなたを想い",
+            "Anniversary Memoria -大切なあなたを想い-",
             "大切なあなたを想い",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
@@ -35761,6 +36942,7 @@ public record Memoria(
         ),
         new Memoria(
             174,
+            "戦火の結束",
             "戦火の結束",
             "戦火の結束",
             new Rearguard(RearguardKind.Support),
@@ -35793,6 +36975,7 @@ public record Memoria(
             173,
             "戦火の結束",
             "戦火の結束",
+            "戦火の結束",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
             [
@@ -35821,6 +37004,7 @@ public record Memoria(
         ),
         new Memoria(
             172,
+            "ラ・ピュセル",
             "ラ・ピュセル",
             "ラ・ピュセル",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -35853,6 +37037,7 @@ public record Memoria(
             171,
             "鬼神の意志を継ぐ者",
             "鬼神の意志を継ぐ者",
+            "鬼神の意志を継ぐ者",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -35881,6 +37066,7 @@ public record Memoria(
         ),
         new Memoria(
             170,
+            "台場の白き魔女",
             "台場の白き魔女",
             "台場の白き魔女",
             new Vanguard(VanguardKind.NormalRange),
@@ -35913,6 +37099,7 @@ public record Memoria(
             169,
             "狂乱の姫巫女",
             "狂乱の姫巫女",
+            "狂乱の姫巫女",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -35941,6 +37128,7 @@ public record Memoria(
         ),
         new Memoria(
             168,
+            "親愛なる仲間",
             "親愛なる仲間",
             "親愛なる仲間",
             new Vanguard(VanguardKind.SpecialRange),
@@ -35973,6 +37161,7 @@ public record Memoria(
             167,
             "親愛なる仲間",
             "親愛なる仲間",
+            "親愛なる仲間",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -36001,6 +37190,7 @@ public record Memoria(
         ),
         new Memoria(
             166,
+            "そこにある笑顔",
             "そこにある笑顔",
             "そこにある笑顔",
             new Vanguard(VanguardKind.NormalRange),
@@ -36033,6 +37223,7 @@ public record Memoria(
             165,
             "そこにある笑顔",
             "そこにある笑顔",
+            "そこにある笑顔",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -36061,6 +37252,7 @@ public record Memoria(
         ),
         new Memoria(
             164,
+            "ふたりのアーセナル",
             "ふたりのアーセナル",
             "ふたりのアーセナル",
             new Rearguard(RearguardKind.Support),
@@ -36093,6 +37285,7 @@ public record Memoria(
             163,
             "ふたりのアーセナル",
             "ふたりのアーセナル",
+            "ふたりのアーセナル",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -36121,6 +37314,7 @@ public record Memoria(
         ),
         new Memoria(
             162,
+            "パジャマパーティー",
             "パジャマパーティー",
             "パジャマパーティー",
             new Vanguard(VanguardKind.SpecialRange),
@@ -36153,6 +37347,7 @@ public record Memoria(
             161,
             "ファイア・ダッシュ",
             "ファイア・ダッシュ",
+            "ファイア・ダッシュ",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -36181,6 +37376,7 @@ public record Memoria(
         ),
         new Memoria(
             160,
+            "ファイア・ダッシュ",
             "ファイア・ダッシュ",
             "ファイア・ダッシュ",
             new Vanguard(VanguardKind.NormalRange),
@@ -36213,6 +37409,7 @@ public record Memoria(
             159,
             "ミューチュアルプロテクション",
             "ミューチュアルプロテクション",
+            "ミューチュアルプロテクション",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -36241,6 +37438,7 @@ public record Memoria(
         ),
         new Memoria(
             158,
+            "ミューチュアルプロテクション",
             "ミューチュアルプロテクション",
             "ミューチュアルプロテクション",
             new Rearguard(RearguardKind.Support),
@@ -36273,6 +37471,7 @@ public record Memoria(
             157,
             "海の世界に想いを馳せて",
             "海の世界に想いを馳せて",
+            "海の世界に想いを馳せて",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -36301,6 +37500,7 @@ public record Memoria(
         ),
         new Memoria(
             156,
+            "海の世界に想いを馳せて",
             "海の世界に想いを馳せて",
             "海の世界に想いを馳せて",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -36333,6 +37533,7 @@ public record Memoria(
             155,
             "charmを絵筆に替えて",
             "CHARMを絵筆に替えて",
+            "CHARMを絵筆に替えて",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -36362,6 +37563,7 @@ public record Memoria(
         new Memoria(
             154,
             "charmを絵筆に替えて",
+            "CHARMを絵筆に替えて",
             "CHARMを絵筆に替えて",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
@@ -36393,6 +37595,7 @@ public record Memoria(
             153,
             "ボナペティ",
             "ボナペティ！",
+            "ボナペティ！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -36423,6 +37626,7 @@ public record Memoria(
             152,
             "ボナペティ",
             "ボナペティ！",
+            "ボナペティ！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -36451,6 +37655,7 @@ public record Memoria(
         ),
         new Memoria(
             151,
+            "恋花様ダイエット大作戦",
             "恋花様ダイエット大作戦",
             "恋花様ダイエット大作戦",
             new Rearguard(RearguardKind.Interference),
@@ -36483,6 +37688,7 @@ public record Memoria(
             150,
             "恋花様ダイエット大作戦",
             "恋花様ダイエット大作戦",
+            "恋花様ダイエット大作戦",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -36511,6 +37717,7 @@ public record Memoria(
         ),
         new Memoria(
             149,
+            "復讐の炎",
             "復讐の炎",
             "復讐の炎",
             new Vanguard(VanguardKind.SpecialRange),
@@ -36543,6 +37750,7 @@ public record Memoria(
             148,
             "復讐の炎",
             "復讐の炎",
+            "復讐の炎",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -36571,6 +37779,7 @@ public record Memoria(
         ),
         new Memoria(
             147,
+            "強くなるために",
             "強くなるために",
             "強くなるために",
             new Rearguard(RearguardKind.Recovery),
@@ -36603,6 +37812,7 @@ public record Memoria(
             146,
             "強くなるために",
             "強くなるために",
+            "強くなるために",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -36631,6 +37841,7 @@ public record Memoria(
         ),
         new Memoria(
             145,
+            "大切な貴女への贈り物",
             "大切な貴女への贈り物",
             "大切な貴女への贈り物",
             new Rearguard(RearguardKind.Interference),
@@ -36663,6 +37874,7 @@ public record Memoria(
             144,
             "大切な貴女への贈り物",
             "大切な貴女への贈り物",
+            "大切な貴女への贈り物",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
             [
@@ -36691,6 +37903,7 @@ public record Memoria(
         ),
         new Memoria(
             143,
+            "罰執行のお時間です",
             "罰執行のお時間です",
             "罰執行のお時間です",
             new Rearguard(RearguardKind.Recovery),
@@ -36723,6 +37936,7 @@ public record Memoria(
             142,
             "罰執行のお時間です",
             "罰執行のお時間です",
+            "罰執行のお時間です",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -36751,6 +37965,7 @@ public record Memoria(
         ),
         new Memoria(
             141,
+            "故郷へ想い馳せながら",
             "故郷へ想い馳せながら",
             "故郷へ想い馳せながら",
             new Rearguard(RearguardKind.Support),
@@ -36783,6 +37998,7 @@ public record Memoria(
             140,
             "心弛ぶひととき",
             "心弛ぶひととき",
+            "心弛ぶひととき",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -36813,6 +38029,7 @@ public record Memoria(
             139,
             "元日の決斗",
             "元日の決斗！",
+            "元日の決斗！",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -36841,6 +38058,7 @@ public record Memoria(
         ),
         new Memoria(
             138,
+            "気高き錬金術師",
             "気高き錬金術師",
             "気高き錬金術師",
             new Vanguard(VanguardKind.NormalSingle),
@@ -36873,6 +38091,7 @@ public record Memoria(
             137,
             "ガンズ・パーティー",
             "ガンズ・パーティー",
+            "ガンズ・パーティー",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -36901,6 +38120,7 @@ public record Memoria(
         ),
         new Memoria(
             136,
+            "神獣鏡の輝き",
             "神獣鏡の輝き",
             "神獣鏡の輝き",
             new Rearguard(RearguardKind.Support),
@@ -36933,6 +38153,7 @@ public record Memoria(
             135,
             "絆の歌",
             "絆の歌",
+            "絆の歌",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
             [
@@ -36961,6 +38182,7 @@ public record Memoria(
         ),
         new Memoria(
             134,
+            "絆の歌",
             "絆の歌",
             "絆の歌",
             new Rearguard(RearguardKind.Interference),
@@ -36993,6 +38215,7 @@ public record Memoria(
             133,
             "戦いの合間に",
             "戦いの合間に",
+            "戦いの合間に",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -37021,6 +38244,7 @@ public record Memoria(
         ),
         new Memoria(
             132,
+            "輝きの海岸線",
             "輝きの海岸線",
             "輝きの海岸線",
             new Rearguard(RearguardKind.Interference),
@@ -37053,6 +38277,7 @@ public record Memoria(
             131,
             "輝きの海岸線",
             "輝きの海岸線",
+            "輝きの海岸線",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -37082,6 +38307,7 @@ public record Memoria(
         new Memoria(
             130,
             "ざっぱ～～ん",
+            "ざっぱ～～ん！",
             "ざっぱ～～ん！",
             new Rearguard(RearguardKind.Support),
             Element.Water,
@@ -37113,6 +38339,7 @@ public record Memoria(
             129,
             "ざっぱ～～ん",
             "ざっぱ～～ん！",
+            "ざっぱ～～ん！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -37141,6 +38368,7 @@ public record Memoria(
         ),
         new Memoria(
             128,
+            "白花咲く港",
             "白花咲く港",
             "白花咲く港",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -37173,6 +38401,7 @@ public record Memoria(
             127,
             "白花咲く港",
             "白花咲く港",
+            "白花咲く港",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -37202,6 +38431,7 @@ public record Memoria(
         new Memoria(
             126,
             "一柳隊、大特集",
+            "一柳隊、大特集！",
             "一柳隊、大特集！",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
@@ -37233,6 +38463,7 @@ public record Memoria(
             125,
             "一柳隊、大特集",
             "一柳隊、大特集！",
+            "一柳隊、大特集！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -37261,6 +38492,7 @@ public record Memoria(
         ),
         new Memoria(
             124,
+            "あなたに傘を",
             "あなたに傘を",
             "あなたに傘を",
             new Rearguard(RearguardKind.Interference),
@@ -37293,6 +38525,7 @@ public record Memoria(
             123,
             "あなたに傘を",
             "あなたに傘を",
+            "あなたに傘を",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -37322,6 +38555,7 @@ public record Memoria(
         new Memoria(
             122,
             "情熱の取材前夜",
+            "情熱の取材前夜！",
             "情熱の取材前夜！",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
@@ -37353,6 +38587,7 @@ public record Memoria(
             121,
             "情熱の取材前夜",
             "情熱の取材前夜！",
+            "情熱の取材前夜！",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -37381,6 +38616,7 @@ public record Memoria(
         ),
         new Memoria(
             120,
+            "姫歌を脅かす2つの新星",
             "姫歌を脅かす2つの新星",
             "姫歌を脅かす2つの新星",
             new Rearguard(RearguardKind.Recovery),
@@ -37413,6 +38649,7 @@ public record Memoria(
             119,
             "姫歌を脅かす2つの新星",
             "姫歌を脅かす2つの新星",
+            "姫歌を脅かす2つの新星",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -37441,6 +38678,7 @@ public record Memoria(
         ),
         new Memoria(
             118,
+            "ハッピー☆シューティングスター",
             "ハッピー☆シューティングスター",
             "ハッピー☆シューティングスター",
             new Vanguard(VanguardKind.NormalSingle),
@@ -37473,6 +38711,7 @@ public record Memoria(
             117,
             "ハッピー☆シューティングスター",
             "ハッピー☆シューティングスター",
+            "ハッピー☆シューティングスター",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -37501,6 +38740,7 @@ public record Memoria(
         ),
         new Memoria(
             116,
+            "プレゼントはお任せ♪",
             "プレゼントはお任せ♪",
             "プレゼントはお任せ♪",
             new Vanguard(VanguardKind.NormalRange),
@@ -37533,6 +38773,7 @@ public record Memoria(
             115,
             "プレゼントはお任せ♪",
             "プレゼントはお任せ♪",
+            "プレゼントはお任せ♪",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -37561,6 +38802,7 @@ public record Memoria(
         ),
         new Memoria(
             114,
+            "リリィのすべてを伝えるために",
             "リリィのすべてを伝えるために",
             "リリィのすべてを伝えるために",
             new Vanguard(VanguardKind.SpecialRange),
@@ -37593,6 +38835,7 @@ public record Memoria(
             113,
             "リリィのすべてを伝えるために",
             "リリィのすべてを伝えるために",
+            "リリィのすべてを伝えるために",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -37621,6 +38864,7 @@ public record Memoria(
         ),
         new Memoria(
             112,
+            "キャッチ＆リリース＆イート",
             "キャッチ＆リリース＆イート",
             "キャッチ＆リリース＆イート",
             new Rearguard(RearguardKind.Support),
@@ -37653,6 +38897,7 @@ public record Memoria(
             111,
             "キャッチ＆リリース＆イート",
             "キャッチ＆リリース＆イート",
+            "キャッチ＆リリース＆イート",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -37681,6 +38926,7 @@ public record Memoria(
         ),
         new Memoria(
             110,
+            "これまでも、これからも隣で",
             "これまでも、これからも隣で",
             "これまでも、これからも隣で",
             new Vanguard(VanguardKind.NormalRange),
@@ -37713,6 +38959,7 @@ public record Memoria(
             109,
             "これまでも、これからも隣で",
             "これまでも、これからも隣で",
+            "これまでも、これからも隣で",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -37743,6 +38990,7 @@ public record Memoria(
             108,
             "リリィになるために",
             "リリィになるために！",
+            "リリィになるために！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -37771,6 +39019,7 @@ public record Memoria(
         ),
         new Memoria(
             107,
+            "結梨の大好きな場所",
             "結梨の大好きな場所",
             "結梨の大好きな場所",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -37803,6 +39052,7 @@ public record Memoria(
             106,
             "結梨の大好きな場所",
             "結梨の大好きな場所",
+            "結梨の大好きな場所",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -37833,6 +39083,7 @@ public record Memoria(
             105,
             "みんな、ガンバレー",
             "みんな、ガンバレー！",
+            "みんな、ガンバレー！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -37861,6 +39112,7 @@ public record Memoria(
         ),
         new Memoria(
             104,
+            "冷たいラムネをどうぞ",
             "冷たいラムネをどうぞ",
             "冷たいラムネをどうぞ",
             new Rearguard(RearguardKind.Recovery),
@@ -37893,6 +39145,7 @@ public record Memoria(
             103,
             "リワード・マイセルフ",
             "リワード・マイセルフ",
+            "リワード・マイセルフ",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -37921,6 +39174,7 @@ public record Memoria(
         ),
         new Memoria(
             102,
+            "リワード・マイセルフ",
             "リワード・マイセルフ",
             "リワード・マイセルフ",
             new Vanguard(VanguardKind.NormalRange),
@@ -37953,6 +39207,7 @@ public record Memoria(
             101,
             "トライング・オン",
             "トライング・オン",
+            "トライング・オン",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
             [
@@ -37981,6 +39236,7 @@ public record Memoria(
         ),
         new Memoria(
             100,
+            "トライング・オン",
             "トライング・オン",
             "トライング・オン",
             new Rearguard(RearguardKind.Interference),
@@ -38013,6 +39269,7 @@ public record Memoria(
             99,
             "気まぐれのツーショット",
             "気まぐれのツーショット",
+            "気まぐれのツーショット",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -38041,6 +39298,7 @@ public record Memoria(
         ),
         new Memoria(
             98,
+            "藍の宝物",
             "藍の宝物",
             "藍の宝物",
             new Rearguard(RearguardKind.Support),
@@ -38073,6 +39331,7 @@ public record Memoria(
             97,
             "藍の宝物",
             "藍の宝物",
+            "藍の宝物",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -38101,6 +39360,7 @@ public record Memoria(
         ),
         new Memoria(
             96,
+            "指先と白いペン",
             "指先と白いペン",
             "指先と白いペン",
             new Vanguard(VanguardKind.NormalRange),
@@ -38134,6 +39394,7 @@ public record Memoria(
             95,
             "指先と白いペン",
             "指先と白いペン",
+            "指先と白いペン",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -38165,6 +39426,7 @@ public record Memoria(
             94,
             "エレクトロンバウト",
             "エレクトロンバウト！",
+            "エレクトロンバウト！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -38193,6 +39455,7 @@ public record Memoria(
         ),
         new Memoria(
             93,
+            "悲壮の華",
             "悲壮の華",
             "悲壮の華",
             new Rearguard(RearguardKind.Support),
@@ -38225,6 +39488,7 @@ public record Memoria(
             92,
             "悲壮の華",
             "悲壮の華",
+            "悲壮の華",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -38253,6 +39517,7 @@ public record Memoria(
         ),
         new Memoria(
             91,
+            "鬼さんズ、こちら",
             "鬼さんズ、こちら",
             "鬼さんズ、こちら",
             new Vanguard(VanguardKind.NormalSingle),
@@ -38285,6 +39550,7 @@ public record Memoria(
             90,
             "鬼さんズ、こちら",
             "鬼さんズ、こちら",
+            "鬼さんズ、こちら",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -38313,6 +39579,7 @@ public record Memoria(
         ),
         new Memoria(
             89,
+            "優美なる舞",
             "優美なる舞",
             "優美なる舞",
             new Vanguard(VanguardKind.SpecialRange),
@@ -38345,6 +39612,7 @@ public record Memoria(
             88,
             "優美なる舞",
             "優美なる舞",
+            "優美なる舞",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -38373,6 +39641,7 @@ public record Memoria(
         ),
         new Memoria(
             87,
+            "美しき鉄糸の舞",
             "美しき鉄糸の舞",
             "美しき鉄糸の舞",
             new Rearguard(RearguardKind.Support),
@@ -38405,6 +39674,7 @@ public record Memoria(
             86,
             "美しき鉄糸の舞",
             "美しき鉄糸の舞",
+            "美しき鉄糸の舞",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -38435,6 +39705,7 @@ public record Memoria(
             85,
             "駆けろエージェント",
             "駆けろ！エージェント",
+            "駆けろ！エージェント",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -38463,6 +39734,7 @@ public record Memoria(
         ),
         new Memoria(
             84,
+            "スピード☆スター",
             "スピード☆スター",
             "スピード☆スター",
             new Rearguard(RearguardKind.Support),
@@ -38495,6 +39767,7 @@ public record Memoria(
             83,
             "電光石火でご到着",
             "電光石火でご到着！",
+            "電光石火でご到着！",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -38523,6 +39796,7 @@ public record Memoria(
         ),
         new Memoria(
             82,
+            "街角の寡黙な花",
             "街角の寡黙な花",
             "街角の寡黙な花",
             new Vanguard(VanguardKind.SpecialRange),
@@ -38555,6 +39829,7 @@ public record Memoria(
             81,
             "アクアプラクティス",
             "アクアプラクティス",
+            "アクアプラクティス",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Fire,
             [
@@ -38583,6 +39858,7 @@ public record Memoria(
         ),
         new Memoria(
             80,
+            "アクアプラクティス",
             "アクアプラクティス",
             "アクアプラクティス",
             new Rearguard(RearguardKind.Support),
@@ -38615,6 +39891,7 @@ public record Memoria(
             79,
             "二水のヘイムスクリングラ体験",
             "二水のヘイムスクリングラ体験",
+            "二水のヘイムスクリングラ体験",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -38643,6 +39920,7 @@ public record Memoria(
         ),
         new Memoria(
             78,
+            "勝利の女神が微笑む時",
             "勝利の女神が微笑む時",
             "勝利の女神が微笑む時",
             new Rearguard(RearguardKind.Recovery),
@@ -38675,6 +39953,7 @@ public record Memoria(
             77,
             "プレシャス・モーニング",
             "プレシャス・モーニング",
+            "プレシャス・モーニング",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -38703,6 +39982,7 @@ public record Memoria(
         ),
         new Memoria(
             76,
+            "プレシャス・モーニング",
             "プレシャス・モーニング",
             "プレシャス・モーニング",
             new Vanguard(VanguardKind.NormalRange),
@@ -38735,6 +40015,7 @@ public record Memoria(
             75,
             "フォール・ダウン・アタック",
             "フォール・ダウン・アタック",
+            "フォール・ダウン・アタック",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -38764,6 +40045,7 @@ public record Memoria(
         new Memoria(
             74,
             "ホワイト・ラビット・マジック",
+            "ホワイト・ラビット・マジック！",
             "ホワイト・ラビット・マジック！",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
@@ -38795,6 +40077,7 @@ public record Memoria(
             73,
             "プレ・ハロウィンパーティー",
             "プレ・ハロウィンパーティー！",
+            "プレ・ハロウィンパーティー！",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -38825,6 +40108,7 @@ public record Memoria(
             72,
             "ようこそふしぎの国へ",
             "ようこそ！ふしぎの国へ",
+            "ようこそ！ふしぎの国へ",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -38853,6 +40137,7 @@ public record Memoria(
         ),
         new Memoria(
             71,
+            "おいでよ☆ハロウィン",
             "おいでよ☆ハロウィン",
             "おいでよ☆ハロウィン",
             new Vanguard(VanguardKind.NormalRange),
@@ -38885,6 +40170,7 @@ public record Memoria(
             70,
             "一直線上のストラテジー",
             "一直線上のストラテジー",
+            "一直線上のストラテジー",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Wind,
             [
@@ -38913,6 +40199,7 @@ public record Memoria(
         ),
         new Memoria(
             69,
+            "この空の下で",
             "この空の下で",
             "この空の下で",
             new Rearguard(RearguardKind.Interference),
@@ -38945,6 +40232,7 @@ public record Memoria(
             68,
             "追跡者",
             "追跡者",
+            "追跡者",
             new Vanguard(VanguardKind.NormalRange),
             Element.Wind,
             [
@@ -38973,6 +40261,7 @@ public record Memoria(
         ),
         new Memoria(
             67,
+            "花を束ねる者",
             "花を束ねる者",
             "花を束ねる者",
             new Vanguard(VanguardKind.SpecialRange),
@@ -39005,6 +40294,7 @@ public record Memoria(
             66,
             "姉妹の休息",
             "姉妹の休息",
+            "姉妹の休息",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -39033,6 +40323,7 @@ public record Memoria(
         ),
         new Memoria(
             65,
+            "凛々しい花々",
             "凛々しい花々",
             "凛々しい花々",
             new Vanguard(VanguardKind.NormalRange),
@@ -39065,6 +40356,7 @@ public record Memoria(
             64,
             "わたしたちの魔法",
             "わたしたちの魔法",
+            "わたしたちの魔法",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -39093,6 +40385,7 @@ public record Memoria(
         ),
         new Memoria(
             63,
+            "貫く想いの一撃",
             "貫く想いの一撃",
             "貫く想いの一撃",
             new Vanguard(VanguardKind.SpecialRange),
@@ -39125,6 +40418,7 @@ public record Memoria(
             62,
             "プリンセスひめひめ",
             "プリンセスひめひめ",
+            "プリンセスひめひめ",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -39153,6 +40447,7 @@ public record Memoria(
         ),
         new Memoria(
             61,
+            "いつかみんなと見る景色",
             "いつかみんなと見る景色",
             "いつかみんなと見る景色",
             new Vanguard(VanguardKind.NormalRange),
@@ -39185,6 +40480,7 @@ public record Memoria(
             60,
             "繋げたい言葉",
             "繋げたい言葉",
+            "繋げたい言葉",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -39213,6 +40509,7 @@ public record Memoria(
         ),
         new Memoria(
             59,
+            "夏祭りのスナイパー",
             "夏祭りのスナイパー",
             "夏祭りのスナイパー",
             new Vanguard(VanguardKind.NormalRange),
@@ -39245,6 +40542,7 @@ public record Memoria(
             58,
             "もう何も奪わせない",
             "もう何も奪わせない",
+            "もう何も奪わせない",
             new Rearguard(RearguardKind.Recovery),
             Element.Water,
             [
@@ -39273,6 +40571,7 @@ public record Memoria(
         ),
         new Memoria(
             57,
+            "夜空に咲く約束の花",
             "夜空に咲く約束の花",
             "夜空に咲く約束の花",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -39305,6 +40604,7 @@ public record Memoria(
             56,
             "のびのびトレーニング",
             "のびのびトレーニング！",
+            "のびのびトレーニング！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -39333,6 +40633,7 @@ public record Memoria(
         ),
         new Memoria(
             55,
+            "神宿りの暴走",
             "神宿りの暴走",
             "神宿りの暴走",
             new Vanguard(VanguardKind.NormalSingle),
@@ -39365,6 +40666,7 @@ public record Memoria(
             54,
             "信頼の背中",
             "信頼の背中",
+            "信頼の背中",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -39393,6 +40695,7 @@ public record Memoria(
         ),
         new Memoria(
             53,
+            "単騎無双",
             "単騎無双",
             "単騎無双",
             new Vanguard(VanguardKind.NormalRange),
@@ -39425,6 +40728,7 @@ public record Memoria(
             52,
             "ラプラスの発動",
             "ラプラスの発動",
+            "ラプラスの発動",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -39453,6 +40757,7 @@ public record Memoria(
         ),
         new Memoria(
             51,
+            "顕現する脅威",
             "顕現する脅威",
             "顕現する脅威",
             new Vanguard(VanguardKind.NormalRange),
@@ -39485,6 +40790,7 @@ public record Memoria(
             50,
             "スーパーかわいいジャンプ",
             "スーパーかわいいジャンプ！",
+            "スーパーかわいいジャンプ！",
             new Rearguard(RearguardKind.Support),
             Element.Wind,
             [
@@ -39513,6 +40819,7 @@ public record Memoria(
         ),
         new Memoria(
             49,
+            "きみとぼくの創作世界",
             "きみとぼくの創作世界",
             "きみとぼくの創作世界",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -39545,6 +40852,7 @@ public record Memoria(
             48,
             "グリーンライフ",
             "グリーンライフ",
+            "グリーンライフ",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -39573,6 +40881,7 @@ public record Memoria(
         ),
         new Memoria(
             47,
+            "馳せたる海辺",
             "馳せたる海辺",
             "馳せたる海辺",
             new Vanguard(VanguardKind.SpecialRange),
@@ -39605,6 +40914,7 @@ public record Memoria(
             46,
             "エスコートナイト",
             "エスコートナイト",
+            "エスコートナイト",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -39633,6 +40943,7 @@ public record Memoria(
         ),
         new Memoria(
             45,
+            "おもちゃのプール",
             "おもちゃのプール",
             "おもちゃのプール",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -39665,6 +40976,7 @@ public record Memoria(
             44,
             "ランペイジクラフト",
             "ランペイジクラフト",
+            "ランペイジクラフト",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -39693,6 +41005,7 @@ public record Memoria(
         ),
         new Memoria(
             43,
+            "あなたと甘いひとときを",
             "あなたと甘いひとときを",
             "あなたと甘いひとときを",
             new Vanguard(VanguardKind.NormalSingle),
@@ -39725,6 +41038,7 @@ public record Memoria(
             42,
             "水の車窓",
             "水の車窓",
+            "水の車窓",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -39753,6 +41067,7 @@ public record Memoria(
         ),
         new Memoria(
             41,
+            "ラ・ヴァカンス・パルフェ",
             "ラ・ヴァカンス・パルフェ",
             "ラ・ヴァカンス・パルフェ",
             new Rearguard(RearguardKind.Recovery),
@@ -39785,6 +41100,7 @@ public record Memoria(
             40,
             "ウォーター・レイルウェイ",
             "ウォーター・レイルウェイ",
+            "ウォーター・レイルウェイ",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Water,
             [
@@ -39813,6 +41129,7 @@ public record Memoria(
         ),
         new Memoria(
             39,
+            "アナザーワールド",
             "アナザーワールド",
             "アナザーワールド",
             new Vanguard(VanguardKind.SpecialRange),
@@ -39845,6 +41162,7 @@ public record Memoria(
             38,
             "勝負の鍵は",
             "勝負の鍵は",
+            "勝負の鍵は",
             new Vanguard(VanguardKind.NormalRange),
             Element.Water,
             [
@@ -39873,6 +41191,7 @@ public record Memoria(
         ),
         new Memoria(
             37,
+            "アンブレイカブル",
             "アンブレイカブル",
             "アンブレイカブル",
             new Vanguard(VanguardKind.NormalRange),
@@ -39905,6 +41224,7 @@ public record Memoria(
             36,
             "ひとりはみんなのために",
             "ひとりはみんなのために",
+            "ひとりはみんなのために",
             new Rearguard(RearguardKind.Interference),
             Element.Wind,
             [
@@ -39933,6 +41253,7 @@ public record Memoria(
         ),
         new Memoria(
             35,
+            "文武両道の乙女",
             "文武両道の乙女",
             "文武両道の乙女",
             new Vanguard(VanguardKind.NormalSingle),
@@ -39965,6 +41286,7 @@ public record Memoria(
             34,
             "アーセナルの絆",
             "アーセナルの絆",
+            "アーセナルの絆",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -39993,6 +41315,7 @@ public record Memoria(
         ),
         new Memoria(
             33,
+            "未来を切り開く武器",
             "未来を切り開く武器",
             "未来を切り開く武器",
             new Vanguard(VanguardKind.NormalRange),
@@ -40025,6 +41348,7 @@ public record Memoria(
             32,
             "この地にて芽吹く",
             "この地にて芽吹く",
+            "この地にて芽吹く",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -40053,6 +41377,7 @@ public record Memoria(
         ),
         new Memoria(
             31,
+            "おこづかいのゆくえ",
             "おこづかいのゆくえ",
             "おこづかいのゆくえ",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -40085,6 +41410,7 @@ public record Memoria(
             30,
             "カワイイのシャッターチャンス",
             "カワイイのシャッターチャンス",
+            "カワイイのシャッターチャンス",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -40113,6 +41439,7 @@ public record Memoria(
         ),
         new Memoria(
             29,
+            "不滅のホワイトナイト",
             "不滅のホワイトナイト",
             "不滅のホワイトナイト",
             new Vanguard(VanguardKind.SpecialRange),
@@ -40145,6 +41472,7 @@ public record Memoria(
             28,
             "果断なる漆黒の騎士",
             "果断なる漆黒の騎士",
+            "果断なる漆黒の騎士",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -40173,6 +41501,7 @@ public record Memoria(
         ),
         new Memoria(
             27,
+            "不完全ゆえに愛おしく",
             "不完全ゆえに愛おしく",
             "不完全ゆえに愛おしく",
             new Rearguard(RearguardKind.Support),
@@ -40205,6 +41534,7 @@ public record Memoria(
             26,
             "甘いスイーツでおもてなし♪",
             "甘いスイーツでおもてなし♪",
+            "甘いスイーツでおもてなし♪",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,
             [
@@ -40233,6 +41563,7 @@ public record Memoria(
         ),
         new Memoria(
             25,
+            "見切れ希望女子",
             "見切れ希望女子",
             "見切れ希望女子",
             new Vanguard(VanguardKind.NormalRange),
@@ -40265,6 +41596,7 @@ public record Memoria(
             24,
             "ハッピーハッピー☆タピオカ",
             "ハッピーハッピー☆タピオカ",
+            "ハッピーハッピー☆タピオカ",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Water,
             [
@@ -40293,6 +41625,7 @@ public record Memoria(
         ),
         new Memoria(
             23,
+            "レンズに咲く百合の花",
             "レンズに咲く百合の花",
             "レンズに咲く百合の花",
             new Vanguard(VanguardKind.NormalRange),
@@ -40325,6 +41658,7 @@ public record Memoria(
             22,
             "不器用なお姉様",
             "不器用なお姉様",
+            "不器用なお姉様",
             new Rearguard(RearguardKind.Support),
             Element.Fire,
             [
@@ -40353,6 +41687,7 @@ public record Memoria(
         ),
         new Memoria(
             21,
+            "ワンショット",
             "ワンショット",
             "ワンショット",
             new Rearguard(RearguardKind.Recovery),
@@ -40385,6 +41720,7 @@ public record Memoria(
             20,
             "ふたつのふれあい",
             "ふたつのふれあい",
+            "ふたつのふれあい",
             new Rearguard(RearguardKind.Interference),
             Element.Water,
             [
@@ -40413,6 +41749,7 @@ public record Memoria(
         ),
         new Memoria(
             19,
+            "アイドルリリィをつかまえて",
             "アイドルリリィをつかまえて",
             "アイドルリリィをつかまえて",
             new Vanguard(VanguardKind.NormalRange),
@@ -40445,6 +41782,7 @@ public record Memoria(
             18,
             "うさぎになったカメ",
             "うさぎになったカメ",
+            "うさぎになったカメ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Water,
             [
@@ -40473,6 +41811,7 @@ public record Memoria(
         ),
         new Memoria(
             17,
+            "迷子のクマ",
             "迷子のクマ",
             "迷子のクマ",
             new Vanguard(VanguardKind.NormalSingle),
@@ -40505,6 +41844,7 @@ public record Memoria(
             16,
             "晴れのちラムネ",
             "晴れのちラムネ",
+            "晴れのちラムネ",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Wind,
             [
@@ -40533,6 +41873,7 @@ public record Memoria(
         ),
         new Memoria(
             15,
+            "湯けむりの園",
             "湯けむりの園",
             "湯けむりの園",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -40565,6 +41906,7 @@ public record Memoria(
             14,
             "姫歌イメチェン大作戦",
             "姫歌イメチェン大作戦!!",
+            "姫歌イメチェン大作戦!!",
             new Rearguard(RearguardKind.Recovery),
             Element.Wind,
             [
@@ -40593,6 +41935,7 @@ public record Memoria(
         ),
         new Memoria(
             13,
+            "ガラスの中の大切な世界",
             "ガラスの中の大切な世界",
             "ガラスの中の大切な世界",
             new Rearguard(RearguardKind.Interference),
@@ -40625,6 +41968,7 @@ public record Memoria(
             12,
             "あたしがこの手で守るもの",
             "あたしがこの手で守るもの",
+            "あたしがこの手で守るもの",
             new Rearguard(RearguardKind.Support),
             Element.Water,
             [
@@ -40655,6 +41999,7 @@ public record Memoria(
             11,
             "charmにお疲れ様",
             "CHARMにお疲れ様",
+            "CHARMにお疲れ様",
             new Vanguard(VanguardKind.SpecialRange),
             Element.Fire,
             [
@@ -40683,6 +42028,7 @@ public record Memoria(
         ),
         new Memoria(
             10,
+            "一柳隊の知恵袋",
             "一柳隊の知恵袋",
             "一柳隊の知恵袋",
             new Vanguard(VanguardKind.NormalSingle),
@@ -40715,6 +42061,7 @@ public record Memoria(
             9,
             "ロイヤル・ホスピタリティ",
             "ロイヤル・ホスピタリティ",
+            "ロイヤル・ホスピタリティ",
             new Rearguard(RearguardKind.Interference),
             Element.Fire,
             [
@@ -40743,6 +42090,7 @@ public record Memoria(
         ),
         new Memoria(
             8,
+            "わたしにできること",
             "わたしにできること",
             "わたしにできること",
             new Vanguard(VanguardKind.SpecialSingle),
@@ -40775,6 +42123,7 @@ public record Memoria(
             7,
             "安らぎの帰り道",
             "安らぎの帰り道",
+            "安らぎの帰り道",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -40803,6 +42152,7 @@ public record Memoria(
         ),
         new Memoria(
             6,
+            "猫の誘惑",
             "猫の誘惑",
             "猫の誘惑",
             new Vanguard(VanguardKind.SpecialRange),
@@ -40835,6 +42185,7 @@ public record Memoria(
             5,
             "星降る夜の約束",
             "星降る夜の約束",
+            "星降る夜の約束",
             new Rearguard(RearguardKind.Recovery),
             Element.Fire,
             [
@@ -40863,6 +42214,7 @@ public record Memoria(
         ),
         new Memoria(
             4,
+            "私たちの正義",
             "私たちの正義",
             "私たちの正義",
             new Rearguard(RearguardKind.Interference),
@@ -40895,6 +42247,7 @@ public record Memoria(
             3,
             "放課後ファンタズム",
             "放課後ファンタズム",
+            "放課後ファンタズム",
             new Vanguard(VanguardKind.NormalRange),
             Element.Fire,
             [
@@ -40923,6 +42276,7 @@ public record Memoria(
         ),
         new Memoria(
             2,
+            "雨上がりの朝稽古",
             "雨上がりの朝稽古",
             "雨上がりの朝稽古",
             new Rearguard(RearguardKind.Interference),
@@ -40955,6 +42309,7 @@ public record Memoria(
             1,
             "アフタヌーンティー",
             "アフタヌーンティー",
+            "アフタヌーンティー",
             new Vanguard(VanguardKind.SpecialSingle),
             Element.Fire,
             [
@@ -40984,6 +42339,7 @@ public record Memoria(
         new Memoria(
             0,
             "dearschutzengel",
+            "Dear Schutzengel",
             "Dear Schutzengel",
             new Vanguard(VanguardKind.NormalSingle),
             Element.Wind,

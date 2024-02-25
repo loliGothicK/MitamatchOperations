@@ -13,11 +13,6 @@ using WinRT;
 
 namespace mitama.Pages.LegionSheet;
 
-internal abstract class GridViewModel<T>
-{
-    internal virtual ObservableCollection<T> Data { get; }
-}
-
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>

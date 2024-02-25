@@ -21,6 +21,7 @@ namespace mitama.Pages
 
             CostumeLibraryFrame.Navigate(typeof(CostumeLibraryPage));
             CharmLibraryFrame.Navigate(typeof(CharmLibraryPage));
+            MemoriaLibraryFrame.Navigate(typeof(MemoriaLibrary));
             CostumeManagerFrame.Navigate(typeof(CostumeManagePage));
         }
     }

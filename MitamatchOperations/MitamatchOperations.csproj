@@ -38,6 +38,7 @@
     <None Remove="Pages\Library\CharmLibraryPage.xaml" />
     <None Remove="Pages\Library\CostumeLibraryPage.xaml" />
     <None Remove="Pages\Library\CostumeManagePage.xaml" />
+    <None Remove="Pages\Library\MemoriaLibrary.xaml" />
     <None Remove="Pages\OrderConsole\AutoAssignmentDialogContent.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +91,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Library\MemoriaLibrary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\LegionSheetPage.xaml">

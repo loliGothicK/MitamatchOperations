@@ -23,6 +23,12 @@
                     </TabViewItem.IconSource>
                     <Frame x:Name="CharmLibraryFrame" />
                 </TabViewItem>
+                <TabViewItem Header="Memoria Library" IsClosable="False">
+                    <TabViewItem.IconSource>
+                        <SymbolIconSource Symbol="Bullets" />
+                    </TabViewItem.IconSource>
+                    <Frame x:Name="MemoriaLibraryFrame" />
+                </TabViewItem>
                 <TabViewItem Header="Costume Manager" IsClosable="False">
                     <TabViewItem.IconSource>
                         <SymbolIconSource Symbol="Bullets" />
