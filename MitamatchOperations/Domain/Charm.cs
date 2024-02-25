@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace mitama.Domain;
+namespace Mitama.Domain;
 
 public record Charm(
     string Name,

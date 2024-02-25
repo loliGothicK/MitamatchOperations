@@ -7,11 +7,11 @@ using System.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using mitama.Domain;
-using mitama.Pages.Common;
+using Mitama.Domain;
+using Mitama.Pages.Common;
 using WinRT;
 
-namespace mitama.Pages.LegionConsole;
+namespace Mitama.Pages.LegionConsole;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.

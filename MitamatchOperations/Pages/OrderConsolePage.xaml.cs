@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Navigation;
-using mitama.Pages.OrderConsole;
+using Mitama.Pages.OrderConsole;
 
-namespace mitama.Pages;
+namespace Mitama.Pages;
 
 /// <summary>
 /// Order Console Page navigated to within a Main Page.

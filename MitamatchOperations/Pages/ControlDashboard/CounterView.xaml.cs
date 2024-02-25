@@ -1,6 +1,6 @@
-﻿using mitama.Domain;
+﻿using Mitama.Domain;
 
-namespace mitama.Pages.ControlDashboard;
+namespace Mitama.Pages.ControlDashboard;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.

@@ -10,18 +10,18 @@ using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using mitama.Algorithm.IR;
-using mitama.Domain;
-using mitama.Models;
-using mitama.Pages.Common;
+using Mitama.Algorithm.IR;
+using Mitama.Domain;
+using Mitama.Models;
+using Mitama.Pages.Common;
 using SimdLinq;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
 using Windows.UI;
 using WinRT;
-using static mitama.Pages.Common.ObservableCollectionExtensions;
+using static Mitama.Pages.Common.ObservableCollectionExtensions;
 
-namespace mitama.Pages.DeckBuilder
+namespace Mitama.Pages.DeckBuilder
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

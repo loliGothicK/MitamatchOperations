@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using mitama.Domain;
+using Mitama.Domain;
 
-namespace mitama.Models.DataGrid;
+namespace Mitama.Models.DataGrid;
 
 public class MemoriaData(Memoria memoria)
 {

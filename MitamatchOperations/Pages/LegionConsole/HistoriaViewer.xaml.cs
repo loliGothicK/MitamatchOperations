@@ -8,18 +8,17 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using mitama.Domain;
-using mitama.Models;
-using mitama.Pages.Common;
-using mitama.Pages.LegionConsole.Views;
-using MitamatchOperations.Lib;
+using Mitama.Domain;
+using Mitama.Lib;
+using Mitama.Models;
+using Mitama.Pages.Common;
 using Syncfusion.UI.Xaml.Editors;
 using WinRT;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace mitama.Pages.LegionConsole;
+namespace Mitama.Pages.LegionConsole;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
@@ -37,24 +36,27 @@ public sealed partial class HistoriaViewer : Page
     public HistoriaViewer()
     {
         InitializeComponent();
-        var logDir = @$"{Director.ProjectDir()}\{Director.ReadCache().Legion}\BattleLog";
+        var logDir = Director.LogDir(Director.ReadCache().Legion);
         var directories = Directory.GetDirectories(logDir);
-        // directoriesのうち最初と最後の日付を取得
-        var first = DateTime.Parse(directories.First().Split("\\").Last());
-        var last = DateTime.Parse(directories.Last().Split("\\").Last());
-        Calendar.MinDate = first;
-        Calendar.MaxDate = last;
-        // directoriesに含まれる日付以外をBlackoutDatesに追加
-        var dates = directories.Select(d => DateTime.Parse(d.Split("\\").Last())).ToArray();
-        var blackoutDates = new List<DateTime>();
-        for (var date = first; date <= last; date = date.AddDays(1))
+        if (directories.Length != 0)
         {
-            if (!dates.Contains(date))
+            // directoriesのうち最初と最後の日付を取得
+            var first = DateTime.Parse(directories.First().Split("\\").Last());
+            var last = DateTime.Parse(directories.Last().Split("\\").Last());
+            Calendar.MinDate = first;
+            Calendar.MaxDate = last;
+            // directoriesに含まれる日付以外をBlackoutDatesに追加
+            var dates = directories.Select(d => DateTime.Parse(d.Split("\\").Last())).ToArray();
+            var blackoutDates = new List<DateTime>();
+            for (var date = first; date <= last; date = date.AddDays(1))
             {
-                blackoutDates.Add(date);
+                if (!dates.Contains(date))
+                {
+                    blackoutDates.Add(date);
+                }
             }
+            Calendar.BlackoutDates = [.. blackoutDates];
         }
-        Calendar.BlackoutDates = [.. blackoutDates];
     }
 
     private void Load_Click(object _, RoutedEventArgs _e)
@@ -114,7 +116,7 @@ public sealed partial class HistoriaViewer : Page
             }
         }
         var players = new ObservableCollection<PlayerModel>([
-            ..summary.Allies.Select(p => new PlayerModel(p.Name, p.Legion))
+            .. summary.Allies.Select(p => new PlayerModel(p.Name, p.Legion))
                 .Concat(summary.Opponents.Select(p => new PlayerModel(p.Name, p.Legion)))
         ]);
         PlayersCollection.Source = players.GroupBy(player => player.Legion);

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MitamatchOperations.Lib
+namespace Mitama.Lib
 {
     public record Result<T, E>;
     public record Ok<T, E>(T Value) : Result<T, E>;

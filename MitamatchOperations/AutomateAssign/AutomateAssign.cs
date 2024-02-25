@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using mitama.Pages.Common;
-using mitama.Pages.OrderConsole;
+using Mitama.Pages.Common;
+using Mitama.Pages.OrderConsole;
 
-namespace mitama.AutomateAssign;
+namespace Mitama.AutomateAssign;
 
 internal abstract record AutomateAssignResult
 {

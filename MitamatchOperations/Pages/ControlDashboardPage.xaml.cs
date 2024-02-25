@@ -17,14 +17,14 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
-using mitama.Algorithm;
-using mitama.Domain;
-using mitama.Domain.OrderKinds;
-using mitama.Pages.Capture;
-using mitama.Pages.Common;
-using mitama.Pages.ControlDashboard;
-using mitama.Pages.OrderConsole;
-using MitamatchOperations.Lib;
+using Mitama.Algorithm;
+using Mitama.Domain;
+using Mitama.Domain.OrderKinds;
+using Mitama.Lib;
+using Mitama.Pages.Capture;
+using Mitama.Pages.Common;
+using Mitama.Pages.ControlDashboard;
+using Mitama.Pages.OrderConsole;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
 using SimdLinq;
@@ -33,7 +33,7 @@ using Windows.Storage;
 using Windows.System;
 using WinRT;
 
-namespace mitama.Pages;
+namespace Mitama.Pages;
 
 internal enum WindowPicker
 {

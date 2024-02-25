@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Controls;
-using mitama.Pages.Common;
+using Mitama.Pages.Common;
 
-namespace mitama.Pages.OrderConsole;
+namespace Mitama.Pages.OrderConsole;
 
 /// <summary>
 /// Save Dialog Content used in the Save button flyout in Deck Editor Page.

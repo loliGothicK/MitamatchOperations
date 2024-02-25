@@ -4,10 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using DynamicData.Kernel;
-using mitama.Algorithm;
-using mitama.Domain;
+using Mitama.Algorithm;
+using Mitama.Domain;
 
-namespace mitama.Pages.LegionConsole;
+namespace Mitama.Pages.LegionConsole;
 
 internal partial class BattleLogParser
 {

@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using mitama.Domain;
+using Mitama.Domain;
 using WinRT;
 
-namespace mitama.Pages.Main;
+namespace Mitama.Pages.Main;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.

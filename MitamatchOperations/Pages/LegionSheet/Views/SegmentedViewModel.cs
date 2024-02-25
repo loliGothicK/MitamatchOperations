@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace mitama.Pages.LegionSheet.Views;
+namespace Mitama.Pages.LegionSheet.Views;
 
 public class SegmentedViewModel
 {

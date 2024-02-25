@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using mitama.Pages.LegionConsole;
+using Mitama.Pages.LegionConsole;
 
-namespace mitama.Domain;
+namespace Mitama.Domain;
 
 public record struct Player(string Legion, string Name);
 public record struct UnitChangePoint(string Name, TimeOnly Time);

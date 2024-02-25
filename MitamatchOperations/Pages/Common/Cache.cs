@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
 
-namespace mitama.Pages.Common;
+namespace Mitama.Pages.Common;
 
 internal record struct Cache(string Legion, string User = null)
 {

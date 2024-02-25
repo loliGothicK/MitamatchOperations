@@ -4,7 +4,7 @@ using System.Linq;
 using DynamicData.Kernel;
 using Microsoft.UI.Xaml;
 
-namespace mitama.Domain;
+namespace Mitama.Domain;
 
 public abstract record CostumeType
 {

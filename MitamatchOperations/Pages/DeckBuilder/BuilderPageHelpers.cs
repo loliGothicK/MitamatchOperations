@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using mitama.Domain;
-using mitama.Pages.DeckBuilder;
+using Mitama.Domain;
+using Mitama.Pages.DeckBuilder;
 
 internal static class BuilderPageHelpers
 {

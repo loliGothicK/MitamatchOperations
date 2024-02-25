@@ -5,12 +5,12 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using MathNet.Numerics.Statistics;
-using mitama.Domain;
+using Mitama.Domain;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
 using Windows.Storage;
 
-namespace mitama.Algorithm.IR;
+namespace Mitama.Algorithm.IR;
 
 internal class CostumeSearch
 {

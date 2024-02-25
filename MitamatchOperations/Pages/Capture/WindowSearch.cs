@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using static mitama.Pages.Capture.Interop;
-
-namespace mitama.Pages.Capture;
-
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using MitamatchOperations.Lib;
+using Mitama.Lib;
+using static Mitama.Pages.Capture.Interop;
+
+namespace Mitama.Pages.Capture;
 
 public partial class Interop
 {

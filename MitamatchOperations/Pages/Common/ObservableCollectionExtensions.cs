@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace mitama.Pages.Common;
+namespace Mitama.Pages.Common;
 
 public static class ObservableCollectionExtensions
 {

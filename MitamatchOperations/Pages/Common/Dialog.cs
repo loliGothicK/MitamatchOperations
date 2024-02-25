@@ -2,7 +2,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace mitama.Pages.Common;
+namespace Mitama.Pages.Common;
 
 internal class Dialog
 {

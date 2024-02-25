@@ -10,17 +10,17 @@ using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.VisualBasic.FileIO;
-using mitama.Domain;
-using mitama.Pages.Common;
-using MitamatchOperations.Lib;
+using Mitama.Domain;
+using Mitama.Lib;
+using Mitama.Pages.Common;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using static mitama.Pages.LegionConsole.BattleLogParser;
+using static Mitama.Pages.LegionConsole.BattleLogParser;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace mitama.Pages.LegionConsole
+namespace Mitama.Pages.LegionConsole
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

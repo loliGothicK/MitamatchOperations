@@ -19,7 +19,7 @@ using MitamatchOperations;
 using Windows.Storage;
 using WinRT.Interop;
 
-namespace mitama.Pages.Common;
+namespace Mitama.Pages.Common;
 
 // Helper class to allow the app to find the Window that contains an
 // arbitrary UIElement (GetWindowForElement).  To do this, we keep track

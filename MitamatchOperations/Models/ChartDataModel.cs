@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using mitama.Domain;
+using Mitama.Domain;
 using static Google.Apis.Bigquery.v2.Data.TableDataInsertAllRequest;
 
-namespace mitama.Models;
+namespace Mitama.Models;
 
 public class DataModel(int xValue, int yValue)
 {

@@ -6,7 +6,7 @@ using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel;
 using Windows.System;
 
-namespace mitama.Pages;
+namespace Mitama.Pages;
 
 /// <summary>
 /// Settings Page navigated to within a Main Page.

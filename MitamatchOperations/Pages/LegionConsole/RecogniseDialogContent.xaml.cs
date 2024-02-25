@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using mitama.Domain;
+using Mitama.Domain;
 
-namespace mitama.Pages.LegionConsole;
+namespace Mitama.Pages.LegionConsole;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.

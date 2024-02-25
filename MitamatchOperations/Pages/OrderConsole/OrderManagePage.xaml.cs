@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
-using mitama.Domain;
-using mitama.Domain.OrderKinds;
-using mitama.Pages.Common;
-using MitamatchOperations.Lib;
+using Mitama.Domain;
+using Mitama.Domain.OrderKinds;
+using Mitama.Lib;
+using Mitama.Pages.Common;
 using Windows.ApplicationModel.DataTransfer;
 using WinRT;
 
-namespace mitama.Pages.OrderConsole;
+namespace Mitama.Pages.OrderConsole;
 
 /// <summary>
 /// Order Manager Page navigated to within a Order Console Tab.

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using mitama.Domain.OrderKinds;
+using Mitama.Domain.OrderKinds;
 
-namespace mitama.Domain
+namespace Mitama.Domain
 {
     public abstract record Kind;
 

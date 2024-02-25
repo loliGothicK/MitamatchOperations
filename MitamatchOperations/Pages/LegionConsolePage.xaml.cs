@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Navigation;
-using mitama.Pages.LegionConsole;
+using Mitama.Pages.LegionConsole;
 
-namespace mitama.Pages;
+namespace Mitama.Pages;
 
 /// <summary>
 /// Legion Console Page navigated to within a Main Page.

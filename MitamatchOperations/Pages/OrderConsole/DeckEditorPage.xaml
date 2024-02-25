@@ -1,11 +1,11 @@
 ﻿<Page
-    x:Class="mitama.Pages.OrderConsole.DeckEditorPage"
+    x:Class="Mitama.Pages.OrderConsole.DeckEditorPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:console="using:mitama.Pages.OrderConsole" 
-    xmlns:domain="using:mitama.Domain"
+    xmlns:console="using:Mitama.Pages.OrderConsole" 
+    xmlns:domain="using:Mitama.Domain"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 

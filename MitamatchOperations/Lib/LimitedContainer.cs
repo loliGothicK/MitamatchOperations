@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+namespace Mitama.Lib;
+
 public class LimitedContainer<T>
 {
     private readonly int _capacity;

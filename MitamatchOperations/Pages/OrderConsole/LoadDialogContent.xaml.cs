@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.UI.Xaml.Controls;
-using mitama.Pages.Common;
+using Mitama.Pages.Common;
 
-namespace mitama.Pages.OrderConsole;
+namespace Mitama.Pages.OrderConsole;
 
 /// <summary>
 /// Load Dialog Content used in the Load button flyout in Deck Editor Page.

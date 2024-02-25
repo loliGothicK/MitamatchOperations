@@ -1,6 +1,6 @@
-﻿using mitama.Domain;
+﻿using Mitama.Domain;
 
-namespace mitama.Models.DataGrid;
+namespace Mitama.Models.DataGrid;
 
 public class MemoriaInfo(MemoriaIdAndConcentration raw)
 {

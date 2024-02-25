@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Syncfusion.UI.Xaml.Core;
 
-namespace mitama.Models;
+namespace Mitama.Models;
 
 public class CheckBoxModel : NotificationObject
 {

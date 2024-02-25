@@ -10,14 +10,14 @@ using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using mitama.Domain;
-using mitama.Pages.Common;
-using mitama.Pages.Main;
-using mitama.Pages.OrderConsole;
-using MitamatchOperations.Lib;
+using Mitama.Domain;
+using Mitama.Lib;
+using Mitama.Pages.Common;
+using Mitama.Pages.Main;
+using Mitama.Pages.OrderConsole;
 using WinRT;
 
-namespace mitama.Pages.LegionConsole;
+namespace Mitama.Pages.LegionConsole;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 
-namespace mitama.Domain;
+namespace Mitama.Domain;
 
 public abstract record Position : IComparable<Position>
 {

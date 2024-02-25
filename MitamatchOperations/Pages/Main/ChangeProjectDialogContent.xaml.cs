@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.UI.Xaml.Controls;
-using mitama.Pages.Common;
+using Mitama.Pages.Common;
 
-namespace mitama.Pages.Main;
+namespace Mitama.Pages.Main;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.

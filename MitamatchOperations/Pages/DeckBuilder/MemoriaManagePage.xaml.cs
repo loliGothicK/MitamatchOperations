@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using mitama.Algorithm.IR;
-using mitama.Domain;
-using mitama.Pages.Common;
-using MitamatchOperations.Lib;
+using Mitama.Algorithm.IR;
+using Mitama.Domain;
+using Mitama.Lib;
+using Mitama.Pages.Common;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage.Pickers;
 using WinRT;
@@ -18,7 +18,7 @@ using WinRT;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace mitama.Pages.DeckBuilder;
+namespace Mitama.Pages.DeckBuilder;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.

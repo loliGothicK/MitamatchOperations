@@ -12,16 +12,16 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using mitama.AutomateAssign;
-using mitama.Domain;
-using mitama.Domain.OrderKinds;
-using mitama.Pages.Common;
-using MitamatchOperations.Lib;
+using Mitama.AutomateAssign;
+using Mitama.Domain;
+using Mitama.Domain.OrderKinds;
+using Mitama.Lib;
+using Mitama.Pages.Common;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI;
 using WinRT;
 
-namespace mitama.Pages.OrderConsole;
+namespace Mitama.Pages.OrderConsole;
 
 /// <summary>
 /// Deck Editor Page navigated to within a Order Console Tab.

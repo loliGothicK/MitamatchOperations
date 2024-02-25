@@ -1,5 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
-using mitama.Pages;
+using Mitama.Pages;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.

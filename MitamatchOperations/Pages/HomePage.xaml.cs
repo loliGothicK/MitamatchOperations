@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 
-namespace mitama.Pages;
+namespace Mitama.Pages;
 
 /// <summary>
 /// Home Page navigated to within a Main Page.

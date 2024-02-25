@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="mitama.Pages.Library.MemoriaLibrary"
+    x:Class="Mitama.Pages.Library.MemoriaLibrary"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:mitama.Pages.Library"
+    xmlns:local="using:Mitama.Pages.Library"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dataGrid="using:Syncfusion.UI.Xaml.DataGrid"

@@ -2,7 +2,7 @@
 <!-- Licensed under the MIT License. See LICENSE in the project root for license information. -->
 
 <Page
-    x:Class="mitama.Pages.LegionConsole.MemberManageConsole"
+    x:Class="Mitama.Pages.LegionConsole.MemberManageConsole"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
@@ -10,8 +10,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:domain="using:mitama.Domain"
-    xmlns:orderConsole="using:mitama.Pages.OrderConsole" 
+    xmlns:domain="using:Mitama.Domain"
+    xmlns:orderConsole="using:Mitama.Pages.OrderConsole" 
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
  

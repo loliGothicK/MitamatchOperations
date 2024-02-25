@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Web;
 using Microsoft.UI.Xaml;
 
-namespace mitama.Domain;
+namespace Mitama.Domain;
 
 public record struct IdAndConcentration(int Id, int Concentration);
 

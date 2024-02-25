@@ -11,7 +11,7 @@ using Windows.Graphics.Imaging;
 using Windows.Media.Ocr;
 using Size = OpenCvSharp.Size;
 
-namespace mitama.Pages.Capture;
+namespace Mitama.Pages.Capture;
 
 internal abstract record OrderStat;
 

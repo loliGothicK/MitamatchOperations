@@ -1,4 +1,4 @@
-﻿namespace mitama.Algorithm;
+﻿namespace Mitama.Algorithm;
 
 internal class Algo
 {

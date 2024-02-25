@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="mitama.Pages.SettingsPage"
+    x:Class="Mitama.Pages.SettingsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:controls="using:CommunityToolkit.WinUI.Controls"

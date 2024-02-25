@@ -4,11 +4,11 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using mitama.Domain;
+using Mitama.Domain;
 using static System.Environment;
 using static System.IO.Directory;
 
-namespace mitama.Pages.Common;
+namespace Mitama.Pages.Common;
 
 internal class Util
 {

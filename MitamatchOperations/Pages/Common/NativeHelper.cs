@@ -10,7 +10,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace mitama.Pages.Common;
+namespace Mitama.Pages.Common;
 
 internal class NativeHelper
 {

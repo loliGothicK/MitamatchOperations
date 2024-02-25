@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using mitama.Pages.Common;
-using mitama.Pages.Main;
-using MitamatchOperations.Lib;
+using Mitama.Lib;
+using Mitama.Pages.Common;
+using Mitama.Pages.Main;
 
-namespace mitama.Pages;
+namespace Mitama.Pages;
 /// <summary>
 /// Top Page
 /// </summary>
@@ -92,13 +92,13 @@ public sealed partial class MainPage
         var mapping = new Dictionary<string, Type>()
         {
             ["home"] = typeof(HomePage),
-            ["Legion console"] = typeof(LegionConsolePage),
+            ["library"] = typeof(LibraryPage),
             ["Managements"] = typeof(ManagementPage),
             ["Legion Sheet"] = typeof(LegionSheetPage),
-            ["order console"] = typeof(OrderConsolePage),
-            ["control dashboard"] = typeof(ControlDashboardPage),
             ["deck builder"] = typeof(DeckBuilderPage),
-            ["library"] = typeof(LibraryPage),
+            ["order console"] = typeof(OrderConsolePage),
+            ["Legion console"] = typeof(LegionConsolePage),
+            ["control dashboard"] = typeof(ControlDashboardPage),
         };
 
         var pageType = mapping[(string)item.Tag];
