@@ -57,13 +57,13 @@
     <PackageReference Include="DynamicData" Version="8.3.27" />
     <PackageReference Include="Google.Apis.Auth" Version="1.67.0" />
     <PackageReference Include="Google.Cloud.BigQuery.V2" Version="3.6.0" />
-    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
+    <PackageReference Include="MathNet.Numerics" Version="6.0.0-beta1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0-preview.1.24081.2" />
     <PackageReference Include="Microsoft.ML" Version="3.0.1" />
     <PackageReference Include="Microsoft.ML.TensorFlow" Version="3.0.1" />
     <PackageReference Include="Microsoft.ML.Vision" Version="3.0.1" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.240211001" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.2428" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240205001-preview1" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26031-preview" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OpenCvSharp4" Version="4.9.0.20240103" />
     <PackageReference Include="OpenCvSharp4.Extensions" Version="4.9.0.20240103" />
@@ -80,9 +80,9 @@
     <PackageReference Include="Syncfusion.Licensing" Version="24.2.7" />
     <PackageReference Include="Syncfusion.Ribbon.WinUI" Version="24.2.7" />
     <PackageReference Include="Syncfusion.TreeView.WinUI" Version="24.2.7" />
-    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
-    <PackageReference Include="System.Reactive" Version="6.0.0" />
-    <PackageReference Include="System.Reactive.Linq" Version="6.0.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="9.0.0-preview.1.24080.9" />
+    <PackageReference Include="System.Reactive" Version="6.0.1-preview.1" />
+    <PackageReference Include="System.Reactive.Linq" Version="6.0.1-preview.1" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
   <!-- 
