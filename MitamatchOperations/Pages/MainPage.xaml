@@ -67,6 +67,7 @@
                     <NavigationView.MenuItems>
                         <NavigationViewItem Icon="Home" Content ="ホーム" Tag="home"/>
                         <NavigationViewItem x:Name="LegionView" Icon="People" Content ="レギオン コンソール" Tag="Legion console"/>
+                        <NavigationViewItem Icon="Manage" Content ="マネジメント" Tag="Managements"/>
                         <NavigationViewItem Icon="TwoPage" Content ="レギオン シート" Tag="Legion Sheet"/>
                         <NavigationViewItem Icon="XboxOneConsole" Content ="オーダー コンソール" Tag="order console"/>
                         <NavigationViewItem Icon="Bookmarks" Content ="デッキ ビルダー" Tag="deck builder"/>

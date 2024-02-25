@@ -89,15 +89,16 @@ public sealed partial class MainPage
 
     private void NavView_Navigate(FrameworkElement item)
     {
-        var mapping = new Dictionary<string, System.Type>()
+        var mapping = new Dictionary<string, Type>()
         {
-            {"home", typeof(HomePage)},
-            {"Legion console",typeof(LegionConsolePage)},
-            {"Legion Sheet",typeof(LegionSheetPage)},
-            {"order console", typeof(OrderConsolePage)},
-            {"control dashboard", typeof(ControlDashboardPage)},
-            {"deck builder", typeof(DeckBuilderPage)},
-            {"library", typeof(LibraryPage)},
+            ["home"] = typeof(HomePage),
+            ["Legion console"] = typeof(LegionConsolePage),
+            ["Managements"] = typeof(ManagementPage),
+            ["Legion Sheet"] = typeof(LegionSheetPage),
+            ["order console"] = typeof(OrderConsolePage),
+            ["control dashboard"] = typeof(ControlDashboardPage),
+            ["deck builder"] = typeof(DeckBuilderPage),
+            ["library"] = typeof(LibraryPage),
         };
 
         var pageType = mapping[(string)item.Tag];

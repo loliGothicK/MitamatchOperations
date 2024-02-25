@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="mitama.Pages.LibraryPage"
+    x:Class="mitama.Pages.ManagementPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:mitama.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -15,19 +16,19 @@
                     <TabViewItem.IconSource>
                         <SymbolIconSource Symbol="People" />
                     </TabViewItem.IconSource>
-                    <Frame x:Name="CostumeLibraryFrame" />
+                    <Frame x:Name="CostumeManagerFrame" />
                 </TabViewItem>
-                <TabViewItem Header="Charm" IsClosable="False">
+                <TabViewItem Header="Memoria" IsClosable="False">
                     <TabViewItem.IconSource>
                         <SymbolIconSource Symbol="Bullets" />
                     </TabViewItem.IconSource>
-                    <Frame x:Name="CharmLibraryFrame" />
+                    <Frame x:Name="MemoriaManagerFrame" />
                 </TabViewItem>
-                <TabViewItem Header="Memoria Library" IsClosable="False">
+                <TabViewItem Header="Order" IsClosable="False">
                     <TabViewItem.IconSource>
-                        <SymbolIconSource Symbol="Bullets" />
+                        <SymbolIconSource Symbol="Bookmarks" />
                     </TabViewItem.IconSource>
-                    <Frame x:Name="MemoriaLibraryFrame" />
+                    <Frame x:Name="OrderManagerFrame" />
                 </TabViewItem>
             </TabView.TabItems>
         </TabView>

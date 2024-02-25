@@ -14,7 +14,6 @@ public sealed partial class OrderConsolePage
         NavigationCacheMode = NavigationCacheMode.Enabled;
 
         EditFrame.Navigate(typeof(DeckEditorPage));
-        ManageFrame.Navigate(typeof(OrderManagerPage));
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -23,6 +22,5 @@ public sealed partial class OrderConsolePage
         {
             EditFrame.Navigate(typeof(DeckEditorPage), parameter);
         }
-        ManageFrame.Navigate(typeof(OrderManagerPage), e);
     }
 }

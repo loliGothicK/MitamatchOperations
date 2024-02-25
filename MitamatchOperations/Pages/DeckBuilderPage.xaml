@@ -17,12 +17,6 @@
                     </TabViewItem.IconSource>
                     <Frame x:Name="EditFrame" />
                 </TabViewItem>
-                <TabViewItem Header="Memoria Manager" IsClosable="False">
-                    <TabViewItem.IconSource>
-                        <SymbolIconSource Symbol="Manage" />
-                    </TabViewItem.IconSource>
-                    <Frame x:Name="ManageFrame" />
-                </TabViewItem>
             </TabView.TabItems>
         </TabView>
     </Grid>
