@@ -154,14 +154,6 @@ public sealed partial class MainPage
         await dialog.ShowAsync();
     }
 
-    private async Task SuccessInfo(string msg)
-    {
-        InfoBar.IsOpen = true;
-        InfoBar.Severity = InfoBarSeverity.Success;
-        InfoBar.Title = msg;
-        await Task.Delay(2000);
-        InfoBar.IsOpen = false;
-    }
     private async Task FailureInfo(string msg)
     {
         InfoBar.IsOpen = true;

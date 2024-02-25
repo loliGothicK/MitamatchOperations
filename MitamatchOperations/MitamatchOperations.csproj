@@ -80,6 +80,7 @@
     <PackageReference Include="Syncfusion.GridExport.WinUI" Version="24.2.7" />
     <PackageReference Include="Syncfusion.Licensing" Version="24.2.7" />
     <PackageReference Include="Syncfusion.Ribbon.WinUI" Version="24.2.7" />
+    <PackageReference Include="Syncfusion.Scheduler.WinUI" Version="24.2.7" />
     <PackageReference Include="Syncfusion.TreeView.WinUI" Version="24.2.7" />
     <PackageReference Include="System.Collections.Immutable" Version="9.0.0-preview.1.24080.9" />
     <PackageReference Include="System.Reactive" Version="6.0.1-preview.1" />

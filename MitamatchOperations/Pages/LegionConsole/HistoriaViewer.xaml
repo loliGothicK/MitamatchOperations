@@ -9,6 +9,7 @@
     xmlns:domain="using:mitama.Domain"
     xmlns:chart="using:Syncfusion.UI.Xaml.Charts"
     xmlns:calendar="using:Syncfusion.UI.Xaml.Calendar"
+    xmlns:editors="using:Syncfusion.UI.Xaml.Editors" xmlns:views="using:mitama.Pages.LegionConsole.Views"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -129,22 +130,38 @@
                 </PivotItem>
                 <PivotItem Header="Charts">
                     <Grid Margin="10">
+                        <Grid.Resources>
+                            <CollectionViewSource x:Name="PlayersCollection" IsSourceGrouped="True"/>
+                        </Grid.Resources>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox x:Name="AllyOrOpponent"
-                                      SelectionChanged="AllyOrOpponent_SelectionChanged"
-                                      SelectedIndex="0"
-                                      Margin="5">
-                                <ComboBoxItem Content="Ally" />
-                                <ComboBoxItem Content="Opponent" />
-                            </ComboBox>
-                            <ComboBox x:Name="PlayerSelect"
-                                      SelectionChanged="PlayerSelect_SelectionChanged"
-                                      ItemTemplate="{StaticResource PlayerNameTemplate}" 
-                                      Margin="5"/>
+                            <editors:SfComboBox x:Name="PlayerSelect"
+                                              Width="200"
+                                              Margin="5"
+                                              DisplayMemberPath="Name"
+                                              TextMemberPath="Name"
+                                              ItemsSource="{x:Bind PlayersCollection.View, Mode=OneWay}"
+                                              SelectionChanged="PlayerSelect_SelectionChanged">
+                                <editors:SfComboBox.GroupStyle>
+                                    <GroupStyle>
+                                        <GroupStyle.HeaderTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <TextBlock
+                                                        FontWeight="SemiBold"
+                                                        FontSize="14"
+                                                        FontFamily="{ThemeResource ContentControlThemeFontFamily}"
+                                                        VerticalAlignment="Center"
+                                                        Text="{Binding Key}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GroupStyle.HeaderTemplate>
+                                    </GroupStyle>
+                                </editors:SfComboBox.GroupStyle>
+                            </editors:SfComboBox>
                             <ComboBox x:Name="StautsSelect"
                                       SelectionChanged="StautsSelect_SelectionChanged"
                                       SelectedIndex="0"

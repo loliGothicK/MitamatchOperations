@@ -11,7 +11,9 @@ using Microsoft.UI.Xaml.Controls;
 using mitama.Domain;
 using mitama.Models;
 using mitama.Pages.Common;
+using mitama.Pages.LegionConsole.Views;
 using MitamatchOperations.Lib;
+using Syncfusion.UI.Xaml.Editors;
 using WinRT;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -111,12 +113,11 @@ public sealed partial class HistoriaViewer : Page
                 unitChanges.Add(new(name, time));
             }
         }
-        PlayerSelect.Items.Clear();
-        foreach (var player in summary.Allies)
-        {
-            PlayerSelect.Items.Add(player);
-        }
-        PlayerSelect.SelectedIndex = 0;
+        var players = new ObservableCollection<PlayerModel>([
+            ..summary.Allies.Select(p => new PlayerModel(p.Name, p.Legion))
+                .Concat(summary.Opponents.Select(p => new PlayerModel(p.Name, p.Legion)))
+        ]);
+        PlayersCollection.Source = players.GroupBy(player => player.Legion);
 
         var statusPath = $@"{logDir}\{Calendar.SelectedDate:yyyy-MM-dd}\Ally\[{summary.Allies[0].Name}]\status.json";
         var history = JsonSerializer.Deserialize<SortedDictionary<TimeOnly, AllStatus>>(File.ReadAllText(statusPath));
@@ -162,15 +163,14 @@ public sealed partial class HistoriaViewer : Page
         }
     }
 
-    private void PlayerSelect_SelectionChanged(object sender, SelectionChangedEventArgs _)
+    private void PlayerSelect_SelectionChanged(object sender, ComboBoxSelectionChangedEventArgs _)
     {
-        if (sender is not ComboBox comboBox) return;
-        if (comboBox.SelectedValue is null) return;
-        var selected = comboBox.SelectedValue.As<Player>().Name;
-        var legion = AllyOrOpponent.SelectedIndex == 0 ? Director.ReadCache().Legion : Summary.Opponents[0].Legion;
-        legion = ToRemoveRegex().Replace(legion, string.Empty);
+        if (sender is not SfComboBox comboBox) return;
+        if (comboBox.SelectedValue is not PlayerModel) return;
+        var selected = comboBox.SelectedValue.As<PlayerModel>();
+        var legion = ToRemoveRegex().Replace(selected.Legion, string.Empty);
         var logDir = @$"{Director.ProjectDir()}\{legion}\BattleLog";
-        var statusPath = $@"{logDir}\{Calendar.SelectedDate:yyyy-MM-dd}\Ally\[{selected}]\status.json";
+        var statusPath = $@"{logDir}\{Calendar.SelectedDate:yyyy-MM-dd}\Ally\[{selected.Name}]\status.json";
         var history = JsonSerializer.Deserialize<SortedDictionary<TimeOnly, AllStatus>>(File.ReadAllText(statusPath));
         chartView = new ChartViewModel(history);
         Line.ItemsSource = chartView.Data;
@@ -199,7 +199,6 @@ public sealed partial class HistoriaViewer : Page
 
     [GeneratedRegex(@"\.|!|！|\?|？|\s+|")]
     private static partial Regex ToRemoveRegex();
-
 }
 
 internal record struct OrderLog(Order Order, string Time);
