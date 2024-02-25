@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using mitama.Domain;
@@ -128,6 +129,13 @@ public sealed partial class HistoriaViewer : Page
             var dialog = new DialogBuilder(XamlRoot)
                 .WithTitle(text)
                 .WithBody(new UnitViewDialog(unit))
+                .WithPrimary("copy to clipboard", new Defer(delegate
+                {
+                    var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
+                    dataPackage.SetText(string.Join("\n", unit.Memorias.Select(m => m.Memoria.Name)));
+                    Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+                    return Task.CompletedTask;
+                }))
                 .WithCancel("閉じる")
                 .Build();
 
