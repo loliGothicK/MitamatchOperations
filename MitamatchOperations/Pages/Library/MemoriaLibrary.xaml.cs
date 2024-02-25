@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using Microsoft.UI.Xaml.Controls;
 using mitama.Domain;
 using mitama.Models.DataGrid;
-using System.Collections.ObjectModel;
 using MitamatchOperations.Lib;
 
 // To learn more about WinUI, the WinUI project structure,
