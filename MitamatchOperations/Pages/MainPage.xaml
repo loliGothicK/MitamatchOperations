@@ -66,6 +66,26 @@
                                     <SymbolIcon Symbol="Permissions"/>
                                 </ribbon:RibbonButton.Icon>
                             </ribbon:RibbonButton>
+                            <ribbon:RibbonButton Content="Edit"
+                                                 AllowedSizeModes="Small">
+                                <ribbon:RibbonButton.Icon>
+                                    <SymbolIcon Symbol="Edit"/>
+                                </ribbon:RibbonButton.Icon>
+                            </ribbon:RibbonButton>
+                        </ribbon:RibbonGroup>
+                        <ribbon:RibbonGroup Header="Data">
+                            <ribbon:RibbonButton Content="Import"
+                                                 AllowedSizeModes="Large">
+                                <ribbon:RibbonButton.Icon>
+                                    <SymbolIcon Symbol="Import"/>
+                                </ribbon:RibbonButton.Icon>
+                            </ribbon:RibbonButton>
+                            <ribbon:RibbonButton Content="Export"
+                                                 AllowedSizeModes="Large">
+                                <ribbon:RibbonButton.Icon>
+                                    <SymbolIcon Symbol="Share"/>
+                                </ribbon:RibbonButton.Icon>
+                            </ribbon:RibbonButton>
                         </ribbon:RibbonGroup>
                     </ribbon:RibbonTab>
                     <ribbon:RibbonTab Header="View" />
