@@ -22,7 +22,6 @@ public enum Badge
 
 public record struct Control(string Name, Badge Badge, Symbol Icon)
 {
-    public static Control Home => new("Home", Badge.None, Symbol.Home);
     public static Control Library => new("Library", Badge.Updated, Symbol.Bookmarks);
     public static Control Managements => new("Management", Badge.New, Symbol.Manage);
     public static Control LegionSheet => new("Legion Sheet", Badge.New, Symbol.Page2);
@@ -32,7 +31,6 @@ public record struct Control(string Name, Badge Badge, Symbol Icon)
     public static Control ControlDashboard => new("Control Dashboard", Badge.Preview, Symbol.VideoChat);
 
     public static Control[] All => [
-        Home,
         LegionConsole,
         Managements,
         LegionSheet,
@@ -67,7 +65,7 @@ public sealed partial class MainPage
         InitializeComponent();
         NavigationCacheMode = NavigationCacheMode.Enabled;
         LoadCache();
-        RootFrame.Navigate(typeof(HomePage));
+        RootFrame.Navigate(typeof(LegionConsolePage));
     }
 
     private void LoadCache()
@@ -130,7 +128,6 @@ public sealed partial class MainPage
     {
         var mapping = new Dictionary<string, Type>()
         {
-            [Control.Home.Name] = typeof(HomePage),
             [Control.Library.Name] = typeof(LibraryPage),
             [Control.Managements.Name] = typeof(ManagementPage),
             [Control.LegionSheet.Name] = typeof(LegionSheetPage),

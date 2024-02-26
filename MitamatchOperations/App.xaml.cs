@@ -1,4 +1,5 @@
 using Microsoft.UI.Xaml;
+using mitama;
 using Mitama.Pages.Common;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -27,8 +28,8 @@ namespace MitamatchOperations
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            m_window = WindowHelper.CreateWindow();
-            m_window.Activate();
+            var splash = new SplashScreen(typeof(MainWindow));
+            splash.Completed += (s, e) => m_window = e;
         }
 
         private Window m_window;

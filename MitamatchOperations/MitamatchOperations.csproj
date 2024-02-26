@@ -41,6 +41,7 @@
     <None Remove="Pages\Library\MemoriaLibrary.xaml" />
     <None Remove="Pages\ManagementPage.xaml" />
     <None Remove="Pages\OrderConsole\AutoAssignmentDialogContent.xaml" />
+    <None Remove="SplashScreen.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -87,6 +88,7 @@
     <PackageReference Include="System.Collections.Immutable" Version="9.0.0-preview.1.24080.9" />
     <PackageReference Include="System.Reactive" Version="6.0.1-preview.1" />
     <PackageReference Include="System.Reactive.Linq" Version="6.0.1-preview.1" />
+    <PackageReference Include="WinUIEx" Version="2.3.4" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
   <!-- 
@@ -98,6 +100,9 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="SplashScreen.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="Pages\ManagementPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

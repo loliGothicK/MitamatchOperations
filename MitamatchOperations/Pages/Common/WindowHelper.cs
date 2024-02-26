@@ -15,7 +15,7 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
-using MitamatchOperations;
+using mitama;
 using Windows.Storage;
 using WinRT.Interop;
 
