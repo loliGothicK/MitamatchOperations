@@ -6,6 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:gauge="using:Syncfusion.UI.Xaml.Gauges"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -13,10 +14,44 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <InfoBar x:Name="AnalyticsProgressBar">
+            <gauge:SfLinearGauge>
+                <gauge:SfLinearGauge.Axis>
+                    <gauge:LinearAxis ShowLabels="False"
+                          ShowTicks="False"
+                          CornerStyle="BothCurve"
+                          AxisLineStrokeThickness="30">
+
+                        <gauge:LinearAxis.BarPointers>
+                            <gauge:BarPointer
+                                  x:Name="BarPoint"
+                                  Value="0"
+                                  PointerSize="30"
+                                  Background="#683ab7"
+                                  CornerStyle="BothCurve"
+                                  EnableAnimation="True">
+                                <gauge:BarPointer.AnimationEasingFunction>
+                                    <CircleEase EasingMode="EaseOut" />
+                                </gauge:BarPointer.AnimationEasingFunction>
+                                <gauge:BarPointer.Child>
+                                    <TextBlock x:Name="BarText"
+                                               Text="0%"
+                                               Foreground="White"
+                                               Margin="15,0,0,0"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left" />
+                                </gauge:BarPointer.Child>
+                            </gauge:BarPointer>
+                        </gauge:LinearAxis.BarPointers>
+                    </gauge:LinearAxis>
+                </gauge:SfLinearGauge.Axis>
+            </gauge:SfLinearGauge>
+        </InfoBar>
         <InfoBar x:Name="GeneralInfoBar" />
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <CommandBar>
                 <!-- Pick Open -->
                 <AppBarButton>
@@ -58,7 +93,7 @@
                 </AppBarButton>
             </CommandBar>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

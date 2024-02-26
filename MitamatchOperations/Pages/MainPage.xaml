@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ribbon="using:Syncfusion.UI.Xaml.Ribbon"
+    xmlns:notification="using:Syncfusion.UI.Xaml.Notifications"
+    xmlns:local="using:Mitama.Pages"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -24,7 +26,7 @@
                            VerticalAlignment="Center"
                            Width="30" Height="30"
                            Margin="5 0"/>
-                    <TextBlock Text="Mitamatch Operations -Osmanthus-"
+                    <TextBlock Text="Mitamatch Operations -Strongylodon-"
                                TextWrapping="NoWrap"
                                Style="{StaticResource CaptionTextBlockStyle}" 
                                VerticalAlignment="Center"
@@ -71,17 +73,42 @@
             </ribbon:SfRibbon>
 
             <Grid Grid.Row="3">
-                <NavigationView ItemInvoked="NavView_ItemInvoked" >
-                    <NavigationView.MenuItems>
-                        <NavigationViewItem Icon="Home" Content ="ホーム" Tag="home"/>
-                        <NavigationViewItem x:Name="LegionView" Icon="People" Content ="レギオン コンソール" Tag="Legion console"/>
-                        <NavigationViewItem Icon="Manage" Content ="マネジメント" Tag="Managements"/>
-                        <NavigationViewItem Icon="TwoPage" Content ="レギオン シート" Tag="Legion Sheet"/>
-                        <NavigationViewItem Icon="XboxOneConsole" Content ="オーダー コンソール" Tag="order console"/>
-                        <NavigationViewItem Icon="Bookmarks" Content ="デッキ ビルダー" Tag="deck builder"/>
-                        <NavigationViewItem Icon="PhoneBook" Content ="ライブラリ" Tag="library"/>
-                        <NavigationViewItem Icon="Remote" Content ="コントロール ダッシュボード" Tag="control dashboard"/>
-                    </NavigationView.MenuItems>
+                <Grid.DataContext>
+                    <local:ViewModel/>
+                </Grid.DataContext>
+                <NavigationView ItemInvoked="NavView_ItemInvoked" MenuItemsSource="{Binding Controls}" >
+                    <NavigationView.MenuItemTemplate>
+                        <DataTemplate x:DataType="local:Control">
+                            <NavigationViewItem>
+                                <NavigationViewItem.Content>
+                                    <StackPanel Orientation="Horizontal" AccessKey="{x:Bind Name}">
+                                        <TextBlock Text="{x:Bind Name}" HorizontalAlignment="Left" Margin="0,0,10,0"/>
+                                        <notification:SfBadge Content="New"
+                                                              HorizontalAlignment="Right"
+                                                              VerticalAlignment="Top"
+                                                              Shape="Oval"
+                                                              Fill="Success"
+                                                              Visibility="{x:Bind NewVisible}"/>
+                                        <notification:SfBadge Content="Updated"
+                                                              HorizontalAlignment="Right"
+                                                              VerticalAlignment="Top"
+                                                              Shape="Oval"
+                                                              Fill="Accent"
+                                                              Visibility="{x:Bind UpdatedVisible}"/>
+                                        <notification:SfBadge Content="Preview"
+                                                              HorizontalAlignment="Right"
+                                                              VerticalAlignment="Top"
+                                                              Shape="Oval"
+                                                              Fill="Warning"
+                                                              Visibility="{x:Bind PreviewVisible}"/>
+                                    </StackPanel>
+                                </NavigationViewItem.Content>
+                                <NavigationViewItem.Icon>
+                                    <SymbolIcon Symbol="{x:Bind Icon}"/>
+                                </NavigationViewItem.Icon>
+                            </NavigationViewItem>
+                        </DataTemplate>
+                    </NavigationView.MenuItemTemplate>
                     <Frame x:Name="RootFrame" Navigated="OnRootFrameNavigated" Navigating="OnRootFrameNavigating"/>
                 </NavigationView>
             </Grid>

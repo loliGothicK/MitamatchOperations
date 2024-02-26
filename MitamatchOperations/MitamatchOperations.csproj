@@ -75,10 +75,12 @@
     <PackageReference Include="Syncfusion.Chart.WinUI" Version="24.2.7" />
     <PackageReference Include="Syncfusion.Core.WinUI" Version="24.2.7" />
     <PackageReference Include="Syncfusion.Editors.WinUI" Version="24.2.7" />
+    <PackageReference Include="Syncfusion.Gauge.WinUI" Version="24.2.7" />
     <PackageReference Include="Syncfusion.Grid.WinUI" Version="24.2.7" />
     <PackageReference Include="Syncfusion.GridCommon.WinUI" Version="24.2.7" />
     <PackageReference Include="Syncfusion.GridExport.WinUI" Version="24.2.7" />
     <PackageReference Include="Syncfusion.Licensing" Version="24.2.7" />
+    <PackageReference Include="Syncfusion.Notifications.WinUI" Version="24.2.7" />
     <PackageReference Include="Syncfusion.Ribbon.WinUI" Version="24.2.7" />
     <PackageReference Include="Syncfusion.Scheduler.WinUI" Version="24.2.7" />
     <PackageReference Include="Syncfusion.TreeView.WinUI" Version="24.2.7" />

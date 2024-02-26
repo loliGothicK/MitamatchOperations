@@ -6,8 +6,7 @@ namespace Mitama.Models.DataGrid;
 public class MemoriaData(Memoria memoria)
 {
     public int Id { get; } = memoria.Id;
-    public string Link { get; } = memoria.Link;
-    public string Name { get; } = memoria.Name;
+    public string Name { get; } = memoria.FullName;
     public string Kind { get; } = memoria.Kind switch
     {
         Vanguard(VanguardKind.NormalSingle) => "通常単体",
@@ -30,7 +29,5 @@ public class MemoriaData(Memoria memoria)
     };
     public int Cost { get; } = memoria.Cost;
     public string Skill { get; } = memoria.Skill.Name;
-    public string SkillDescription { get; } = memoria.Skill.Description;
     public string SupportSkill { get; } = memoria.SupportSkill.Name;
-    public string SupportSkillDescription { get; } = memoria.SupportSkill.Description;
 }

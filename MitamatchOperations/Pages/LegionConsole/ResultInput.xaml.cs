@@ -13,6 +13,7 @@ using Microsoft.VisualBasic.FileIO;
 using Mitama.Domain;
 using Mitama.Lib;
 using Mitama.Pages.Common;
+using Syncfusion.UI.Xaml.Gauges;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using static Mitama.Pages.LegionConsole.BattleLogParser;
@@ -168,6 +169,7 @@ namespace Mitama.Pages.LegionConsole
                 ])
             );
 
+            AnalyticsProgressBar.IsOpen = true;
             using TextFieldParser parser = new(log.Path);
             parser.TextFieldType = FieldType.Delimited;
             parser.SetDelimiters(",");
@@ -205,21 +207,29 @@ namespace Mitama.Pages.LegionConsole
                 Director.CreateDirectory(path);
             }
 
+            BarText.Text = $"{BarPoint.Value}% ... ログを読み込んでいます";
             BattleLog battleLog = new([.. battleLogMap.Values]);
             await JsonSerializer.SerializeAsync(new FileStream($@"{path}/all.json", FileMode.Create), battleLog);
-
+            // ここまでで 5% 進んだことにする
+            BarPoint.Value = 5;
+            GeneralInfoBar.Title = $"{BarPoint.Value}% ... プレイヤー情報を解析しています";
             var (allies, opponents) = battleLog.ExtractPlayers();
 
+            GeneralInfoBar.Title = $"解析中... ユニットを解析しています";
             await SaveUnits(logDir, battleLog, allies, "Ally");
             await SaveUnits(logDir, battleLog, opponents, "Opponent");
+            GeneralInfoBar.Title = $"解析中... バフ/デバフを解析しています";
             await SaveStatusInfo(logDir, battleLog, allies, "Ally");
             await SaveStatusInfo(logDir, battleLog, opponents, "Opponent");
             await SaveSummary(logDir, battleLog);
+            BarText.Text = $"{BarPoint.Value}%";
             await SaveUnitChanges(logDir, battleLog);
-
+            await Task.Delay(1000);
+            AnalyticsProgressBar.IsOpen = false;
             GeneralInfoBar.Title = $"解析が完了しました。";
             GeneralInfoBar.Severity = InfoBarSeverity.Success;
-            await Task.Delay(3000);
+            GeneralInfoBar.IsOpen = true;
+            await Task.Delay(1000);
             GeneralInfoBar.IsOpen = false;
         }
 
@@ -272,6 +282,8 @@ namespace Mitama.Pages.LegionConsole
                     using var unitFile = File.Create($@"{path}\Unit-{index + 1}.json");
                     await unitFile.WriteAsync(new UTF8Encoding(true).GetBytes(unit.ToJson()));
                 }
+                BarPoint.Value += 2;
+                BarText.Text = $"{BarPoint.Value}%";
             }
         }
 
@@ -293,6 +305,8 @@ namespace Mitama.Pages.LegionConsole
                     isStandBy = Update(ref history, time, stat, isStandBy);
                 }
                 await playerFile.WriteAsync(new UTF8Encoding(true).GetBytes(JsonSerializer.Serialize(history)));
+                BarPoint.Value += 2;
+                BarText.Text = $"{BarPoint.Value}%";
             }
         }
 
