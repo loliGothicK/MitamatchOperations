@@ -44,7 +44,7 @@
                             </gauge:BarPointer.AnimationEasingFunction>
                             <gauge:BarPointer.Child>
                                 <TextBlock x:Name="Status"
-                                           Foreground="White"
+                                           Foreground="Black"
                                            Margin="15,0,0,0"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Left" />
