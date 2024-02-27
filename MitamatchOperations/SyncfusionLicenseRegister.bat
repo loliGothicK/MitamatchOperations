@@ -1,5 +1,4 @@
 @echo on&setlocal
-echo "log01"
     setlocal enableextensions disabledelayedexpansion
  
     ::Arguments of either PreBuild or PostBuild
@@ -24,17 +23,17 @@ echo "log01"
     )
 
     ::Replacement string
-    set DummyCREDENCIALS=##GOOGLE_CLOUD_CREDENCIALS##
-    set CREDENCIALS=%GOOGLE_CLOUD_CREDENCIALS%
-         
+    set DummyPrivateKey=##GOOGLE_CLOUD_PRIVATE_KEY##
+    set PrivateKey=%GOOGLE_CLOUD_PRIVATE_KEY%
+
     ::Replacement statement
-    if NOT "%CREDENCIALS%" == "" (
+    if NOT "%PrivateKey%" == "" (
     
         if "%buildType%" == "PostBuild" (
-        powershell -Command "(gc %sourceFile%) -Replace '%CREDENCIALS%','%DummyCREDENCIALS%'|SC %sourceFile%"
+        powershell -Command "(gc %sourceFile%) -Replace '%PrivateKey%','%DummyPrivateKey%'|SC %sourceFile%"
         )
         if "%buildType%" == "PreBuild" (
-        powershell -Command "(gc %sourceFile%) -Replace '%DummyCREDENCIALS%','%CREDENCIALS%'|SC %sourceFile%"
+        powershell -Command "(gc %sourceFile%) -Replace '%DummyPrivateKey%','%PrivateKey%'|SC %sourceFile%"
         )
         powershell -Command "cat %sourceFile%"
     )

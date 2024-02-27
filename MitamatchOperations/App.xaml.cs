@@ -109,25 +109,34 @@ namespace MitamatchOperations
             }
         }
 
-        private void Upsert(DiscordUser user)
+        private static void Upsert(DiscordUser user)
         {
-            var cred = Google.Apis.Auth.OAuth2.GoogleCredential.FromJson(@"##GOOGLE_CLOUD_CREDENCIALS##");
+            var json = new {
+                type = "service_account",
+                project_id = "assaultlily",
+                private_key_id = "13b3e809d5e493489d67018ac1d69d5c2e2eaa04",
+                private_key = "##GOOGLE_CLOUD_PRIVATE_KEY##",
+                client_email = "mitamatch@assaultlily.iam.gserviceaccount.com",
+                client_id = "116107053801726389433",
+                auth_uri = "https://accounts.google.com/o/oauth2/auth",
+                token_uri = "https://oauth2.googleapis.com/token",
+                auth_provider_x509_cert_url = "https://www.googleapis.com/oauth2/v1/certs",
+                client_x509_cert_url = "https://www.googleapis.com/robot/v1/metadata/x509/mitamatch%40assaultlily.iam.gserviceaccount.com",
+                universe_domain = "googleapis.com"
+            };
+
+            var cred = Google.Apis.Auth.OAuth2.GoogleCredential.FromJson(JsonConvert.SerializeObject(json));
 
             BigQueryClient client = BigQueryClient.Create("asaultlily", cred);
-            var dataset = client.GetDataset("mitamatch");
-            var table = dataset.GetTable("users");
+            var table = client.GetTable("assaultlily", "mitamatch", "users");
 
-            var rows = new BigQueryInsertRow[]
+            _ = table.InsertRows(new BigQueryInsertRow()
             {
-                new() {
-                    { "id", user.id },
-                    { "name", user.global_name },
-                    { "email", user.email },
-                    { "avatar", user.avatar },
-                    { "updated_at", DateTime.Now },
-                }
-            };
-            table.InsertRows(rows);
+                { "id", user.id },
+                { "name", user.global_name },
+                { "email", user.email },
+                { "avatar", user.avatar },
+            });
         }
 
         private Window m_window;
