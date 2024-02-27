@@ -14,18 +14,28 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!--LOGO-->
         <Image Source="Assets\Images\MO_DARK.png" Margin="100,100,100,10"/>
         <!--CODE NAME-->
-        <TextBlock Grid.Row="1"
+        <TextBlock x:Name="CodeName"
+                   Grid.Row="1"
                    Foreground="White"
                    FontSize="20"
                    Margin="0,0,0,90"
                    HorizontalAlignment="Center">
             <Bold><Italic>Strongylodon</Italic></Bold>
         </TextBlock>
-        <gauge:SfLinearGauge Grid.Row="2">
+        <!--Login-->
+        <Button x:Name="Login"
+                Grid.Row="2"
+                Content="Login"
+                FontSize="20"
+                Margin="0,0,0,90"
+                HorizontalAlignment="Center"/>
+        <!--PROGRESS BAR-->
+        <gauge:SfLinearGauge Grid.Row="3">
             <gauge:SfLinearGauge.Axis>
                 <gauge:LinearAxis ShowLabels="False"
                           ShowTicks="False"

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace mitama;
 
@@ -7,14 +8,24 @@ namespace mitama;
 /// </summary>
 public sealed partial class SplashScreen : WinUIEx.SplashScreen
 {
-    public SplashScreen(System.Type window) : base(window)
+    private readonly Func<Task<bool>> PerformLogin;
+    public SplashScreen(Type window, Func<Task<bool>> IO) : base(window)
     {
         InitializeComponent();
+        PerformLogin = IO;
+        Login.Click += async (_, _) =>
+        {
+            // open the mitamatch login page by default in the default browser
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("http://localhost:3000/api/auth"));
+        };
     }
 
     protected override async Task OnLoading()
     {
-        //TODO: Do some actual work
+        while (!await PerformLogin())
+        {
+            await Task.Delay(1000);
+        }
         for (int i = 0; i < 100; i += 5)
         {
             Status.Text = $"Loading {i}%...";
