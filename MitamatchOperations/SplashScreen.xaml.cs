@@ -27,6 +27,7 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
         var jwt = Director.ReadCache().JWT;
         if (jwt is not null && App.DecodeJwt(jwt) is Ok<string, string>)
         {
+            await Task.Delay(1000);
             return;
         }
 
