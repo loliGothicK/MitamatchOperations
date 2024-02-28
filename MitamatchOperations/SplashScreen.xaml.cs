@@ -25,7 +25,7 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
     protected override async Task OnLoading()
     {
         var jwt = Director.ReadCache().JWT;
-        if (jwt is not null && App.DecodeJwt(jwt) is Ok<string, string> ok)
+        if (jwt is not null && App.DecodeJwt(jwt) is Ok<string, string>)
         {
             return;
         }
