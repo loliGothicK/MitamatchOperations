@@ -19,15 +19,15 @@
         <Grid Grid.Row="1">
             <StackPanel Spacing="4">
                 <controls:SettingsCard Description="{x:Bind appVersion}"
-                               Header="Mitamatch Operations -Myosotis-"
-                               HeaderIcon="{ui:FontIcon Glyph=&#xE745;}">
+                                       Header="Mitamatch Operations -Strongylodon-"
+                                       HeaderIcon="{ui:FontIcon Glyph=&#xE745;}">
                     <controls:SettingsCard.Resources>
                         <x:Double x:Key="SettingsCardWrapThreshold">800</x:Double>
                         <x:Double x:Key="SettingsCardWrapNoIconThreshold">600</x:Double>
                     </controls:SettingsCard.Resources>
                     <Button Content="Check for update"
-                    Style="{StaticResource AccentButtonStyle}"
-                    Click="Button_Click"/>
+                            Style="{StaticResource AccentButtonStyle}"
+                            Click="Button_Click"/>
                 </controls:SettingsCard>
             </StackPanel>
         </Grid>
