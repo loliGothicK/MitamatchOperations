@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using mitama.Domain;
+using Mitama.Lib;
+using Mitama.Pages.Common;
+using Newtonsoft.Json;
 
 namespace mitama;
 
@@ -22,15 +26,15 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
 
     protected override async Task OnLoading()
     {
+        var jwt = Director.ReadCache().JWT;
+        if (jwt is not null && App.DecodeJwt(jwt) is Ok<string, string> ok)
+        {
+            return;
+        }
+
         while (!await PerformLogin())
         {
             await Task.Delay(1000);
-        }
-        for (int i = 0; i < 100; i += 5)
-        {
-            Status.Text = $"Loading {i}%...";
-            ProgressBar.Value = i;
-            await Task.Delay(50);
         }
     }
 }

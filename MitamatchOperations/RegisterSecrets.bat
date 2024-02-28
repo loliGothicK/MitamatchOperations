@@ -37,3 +37,19 @@
         )
         powershell -Command "cat %sourceFile%"
     )
+
+    ::Replacement string
+    set DummyJwtSecret=##MITAMA_AUTH_JWT_SECRET##
+    set JwtSecret=%MITAMA_AUTH_JWT_SECRET%
+
+    ::Replacement statement
+    if NOT "%JwtSecret%" == "" (
+    
+        if "%buildType%" == "PostBuild" (
+        powershell -Command "(gc %sourceFile%) -Replace '%JwtSecret%','%DummyJwtSecret%'|SC %sourceFile%"
+        )
+        if "%buildType%" == "PreBuild" (
+        powershell -Command "(gc %sourceFile%) -Replace '%DummyJwtSecret%','%JwtSecret%'|SC %sourceFile%"
+        )
+        powershell -Command "cat %sourceFile%"
+    )

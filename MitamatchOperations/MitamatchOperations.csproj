@@ -186,9 +186,9 @@
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="cd &quot;$(ProjectDir)&quot; &#xD;&#xA;SyncfusionLicenseRegister.bat PreBuild App.xaml.cs" />
+    <Exec Command="cd &quot;$(ProjectDir)&quot;&#xD;&#xA;RegisterSecrets.bat PreBuild App.xaml.cs" />
   </Target>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="cd &quot;$(ProjectDir)&quot; &#xD;&#xA;SyncfusionLicenseRegister.bat PostBuild App.xaml.cs" />
+    <Exec Command="cd &quot;$(ProjectDir)&quot; &#xD;&#xA;RegisterSecrets.bat PostBuild App.xaml.cs" />
   </Target>
 </Project>
