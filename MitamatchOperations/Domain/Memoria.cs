@@ -220,10 +220,10 @@ public record Vanguard(VanguardKind Kind) : MemoriaKind
 {
     public override string Icon => Kind switch
     {
-        VanguardKind.NormalSingle => "/Assets/Images/NormalSingle.png",
-        VanguardKind.NormalRange => "/Assets/Images/NormalRange.png",
+        VanguardKind.NormalSingle  => "/Assets/Images/NormalSingle.png",
+        VanguardKind.NormalRange   => "/Assets/Images/NormalRange.png",
         VanguardKind.SpecialSingle => "/Assets/Images/SpecialSingle.png",
-        VanguardKind.SpecialRange => "/Assets/Images/SpecialRange.png",
+        VanguardKind.SpecialRange  => "/Assets/Images/SpecialRange.png",
         _ => throw new NotImplementedException(),
     };
 }
@@ -232,9 +232,9 @@ public record Rearguard(RearguardKind Kind) : MemoriaKind
 {
     public override string Icon => Kind switch
     {
-        RearguardKind.Support => "/Assets/Images/Assist.png",
+        RearguardKind.Support      => "/Assets/Images/Assist.png",
         RearguardKind.Interference => "/Assets/Images/Interference.png",
-        RearguardKind.Recovery => "/Assets/Images/Recovery.png",
+        RearguardKind.Recovery     => "/Assets/Images/Recovery.png",
         _ => throw new NotImplementedException(),
     };
 }
