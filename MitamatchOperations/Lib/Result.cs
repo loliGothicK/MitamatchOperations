@@ -10,6 +10,9 @@ namespace Mitama.Lib
     {
         public static Result<T, E> Ok<T, E>(this T value) => new Ok<T, E>(value);
         public static Result<T, E> Err<T, E>(this E error) => new Err<T, E>(error);
+        public static bool IsErr<T, E>(this Result<T, E> result) => result is Err<T, E>;
+        public static bool IsOk<T, E>(this Result<T, E> result) => result is Ok<T, E>;
+#pragma warning disable CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
         public static Result<U, E> Map<T, E, U>(this Result<T, E> result, Func<T, U> f) => result switch
         {
             Ok<T, E> ok => f(ok.Value).Ok<U, E>(),
@@ -40,5 +43,6 @@ namespace Mitama.Lib
             Ok<T, E> ok => g(ok.Value).Ok<U, F>(),
             Err<T, E> err => f(err.Error).Ok<U, F>()
         };
+#pragma warning restore CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
     }
 }

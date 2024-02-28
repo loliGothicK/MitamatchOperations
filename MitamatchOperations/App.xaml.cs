@@ -5,7 +5,7 @@ using Google.Cloud.BigQuery.V2;
 using JWT.Builder;
 using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppLifecycle;
-using mitama.Domain;
+using Mitama.Domain;
 using Mitama.Lib;
 using Mitama.Pages.Common;
 using Newtonsoft.Json;
@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace mitama;
+namespace Mitama;
 
 /// <summary>
 /// Provides application-specific behavior to supplement the default Application class.

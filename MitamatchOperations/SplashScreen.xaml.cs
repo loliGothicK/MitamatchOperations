@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Mitama.Lib;
 using Mitama.Pages.Common;
 
-namespace mitama;
+namespace Mitama;
 
 /// <summary>
 /// An empty window that can be used on its own or navigated to within a Frame.
@@ -25,7 +25,7 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
     protected override async Task OnLoading()
     {
         var jwt = Director.ReadCache().JWT;
-        if (jwt is not null && App.DecodeJwt(jwt) is Ok<string, string>)
+        if (jwt is not null && App.DecodeJwt(jwt).IsOk())
         {
             Login.IsEnabled = false;
             await Task.Delay(1000);

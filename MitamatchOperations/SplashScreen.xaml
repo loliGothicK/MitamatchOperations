@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <winuiex:SplashScreen
-    x:Class="mitama.SplashScreen"
+    x:Class="Mitama.SplashScreen"
     xmlns:winuiex="using:WinUIEx"
     xmlns:gauge="using:Syncfusion.UI.Xaml.Gauges"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

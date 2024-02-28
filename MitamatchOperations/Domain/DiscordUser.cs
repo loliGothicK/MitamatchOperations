@@ -1,4 +1,4 @@
-﻿namespace mitama.Domain;
+﻿namespace Mitama.Domain;
 
 public struct DiscordUser
 {
