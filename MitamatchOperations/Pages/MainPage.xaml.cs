@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
+using Mitama.Domain;
 using Mitama.Lib;
 using Mitama.Pages.Common;
 using Mitama.Pages.Main;
+using Newtonsoft.Json;
 using WinRT;
 
 namespace Mitama.Pages;
@@ -57,6 +62,7 @@ public sealed partial class MainPage
 {
     public string Project = "新規プロジェクト";
     public string User = "不明なユーザー";
+    public DiscordUser DiscordUser { get; set; }
 
     public UIElement GetAppTitleBar => AppTitleBar;
 
@@ -75,7 +81,14 @@ public sealed partial class MainPage
         var exists = File.Exists(cache);
         if (exists)
         {
-            Project = Director.ReadCache().Legion;
+            Director.ReadCache().Deconstruct(out Project, out User, out var JWT);
+            DiscordUser = JsonConvert.DeserializeObject<DiscordUser>(App.DecodeJwt(JWT).Unwrap());
+            LoginLegion.Text = Project;
+            UserDisplay.Text = User;
+            if (DiscordUser.avatar is not null)
+            {
+                Avatar.ImageSource = new BitmapImage(new Uri(@$"https://cdn.discordapp.com/avatars/{DiscordUser.id}/{DiscordUser.avatar}"));
+            }
         }
         else
         {
@@ -87,7 +100,7 @@ public sealed partial class MainPage
     }
 
     public void Navigate(
-        Type pageType,
+        System.Type pageType,
         object targetPageArguments = null,
         Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo navigationTransitionInfo = null)
     {
@@ -126,7 +139,7 @@ public sealed partial class MainPage
 
     private void NavView_Navigate(string item)
     {
-        var mapping = new Dictionary<string, Type>()
+        var mapping = new Dictionary<string, System.Type>()
         {
             [Control.Library.Name] = typeof(LibraryPage),
             [Control.Managements.Name] = typeof(ManagementPage),

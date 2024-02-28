@@ -7,6 +7,7 @@
     xmlns:ribbon="using:Syncfusion.UI.Xaml.Ribbon"
     xmlns:notification="using:Syncfusion.UI.Xaml.Notifications"
     xmlns:local="using:Mitama.Pages"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Core"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -37,6 +38,37 @@
                             <SymbolIcon Symbol="People"/>
                             <TextBlock x:Name="LoginLegion" Text="{x:Bind Project}" Margin="28 0 0 0"/>
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE73E;" Margin="28 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="8">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock x:Name="UserDisplay" Margin="10,0,10,0"/>
+                            <notification:BadgeContainer>
+                                <notification:BadgeContainer.Content>
+                                    <syncfusion:SfAvatarView x:Name="Avatar" AvatarSize="ExtraSmall"/>
+                                </notification:BadgeContainer.Content>
+                                <notification:BadgeContainer.Badge>
+                                    <notification:SfBadge Shape="None"
+                                                  HorizontalPosition="0.85"
+                                                  VerticalPosition="0.85">
+                                        <Viewbox Height="10" Width="10">
+                                            <Grid Height="10" Width="10">
+                                                <Ellipse x:Name="ellipse"
+                                                         Fill="LimeGreen"
+                                                         Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                                                         StrokeThickness="1">
+                                                </Ellipse>
+                                                <TextBlock FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                                           Text="&#xE930;"
+                                                           Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center">
+                                                </TextBlock>
+                                            </Grid>
+                                        </Viewbox>
+                                    </notification:SfBadge>
+                                </notification:BadgeContainer.Badge>
+                            </notification:BadgeContainer>
                         </StackPanel>
                     </Button>
                 </StackPanel>
