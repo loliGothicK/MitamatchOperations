@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using mitama.Domain;
 using Mitama.Lib;
 using Mitama.Pages.Common;
-using Newtonsoft.Json;
 
 namespace mitama;
 
