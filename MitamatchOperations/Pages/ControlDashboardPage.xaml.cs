@@ -459,15 +459,24 @@ public sealed partial class ControlDashboardPage
                                 }
                                 break;
                             }
+                        // オーダー準備中はオーダーが検知されなくても
+                        // MP回復やフェーズ遷移のために準備中の状態を維持する必要がある
                         case Nothing:
                             {
+                                // 準備開始が検知されていて
+                                // OCR結果がある場合は準備時間を過ぎたら発動中に遷移する
                                 if (_preparePoint is not null
                                     && _ocrResult is not null
                                     && (DateTime.Now - _preparePoint.Value) > TimeSpan.FromSeconds(_ocrResult.Value.PrepareTime))
                                 {
+                                    // が、準備中が残っている場合があるので
+                                    // 時間ピッタリの場合のみ遷移する
                                     if (Math.Abs((DateTime.Now - _preparePoint.Value - TimeSpan.FromSeconds(_ocrResult.Value.PrepareTime)).Seconds) <= 1)
                                     {
+                                        failSafe.Add(new Active_());
                                         _orderStat = new Active(_ocrResult, DateTime.Now);
+                                        _ocrResult = null;
+                                        _preparePoint = null;
                                     }
                                 }
                                 break;
