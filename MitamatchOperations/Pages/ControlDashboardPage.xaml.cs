@@ -246,6 +246,7 @@ public sealed partial class ControlDashboardPage
                                 foreach (var (caption, handle) in Search.GetWindowList())
                                 {
                                     if (caption == string.Empty) continue;
+                                    if (caption.Contains("Grammarly")) continue;
                                     var item = new MenuFlyoutItem
                                     {
                                         Text = caption,
@@ -458,16 +459,25 @@ public sealed partial class ControlDashboardPage
                                 }
                                 break;
                             }
-                        default:
+                        case Nothing:
                             {
                                 if (_preparePoint is not null
-                                    && _ocrResult is not null
                                     && (DateTime.Now - _preparePoint.Value) > TimeSpan.FromSeconds(_ocrResult.Value.PrepareTime))
                                 {
-                                    _orderStat = new Active(_ocrResult, DateTime.Now);
+                                    if (_ocrResult is not null && Math.Abs((DateTime.Now - _preparePoint.Value - TimeSpan.FromSeconds(_ocrResult.Value.PrepareTime)).Seconds) <= 1)
+                                    {
+                                        _orderStat = new Active(_ocrResult, DateTime.Now);
+                                    }
+                                    else
+                                    {
+                                        _orderStat = new None();
+                                        _preparePoint = null;
+                                        _ocrResult = null;
+                                    }
                                 }
                                 break;
                             }
+                        default:break;
                     }
                     switch (_capture!.IsActivating())
                     {
