@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Mitama.Domain;
-using static Google.Apis.Bigquery.v2.Data.TableDataInsertAllRequest;
 
 namespace Mitama.Models;
 

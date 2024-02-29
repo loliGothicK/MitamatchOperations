@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Channels;
-using Google.Cloud.BigQuery.V2;
+using Google.Cloud.Datastore.V1;
 using JWT.Builder;
 using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppLifecycle;
@@ -120,38 +120,6 @@ public partial class App : Application
 
     private static void Upsert(DiscordUser user)
     {
-        if (Director.ReadCache().JWT is null)
-        {
-            var json = new
-            {
-                type = "service_account",
-                project_id = "assaultlily",
-                private_key_id = "13b3e809d5e493489d67018ac1d69d5c2e2eaa04",
-                private_key = "##GOOGLE_CLOUD_PRIVATE_KEY##",
-                client_email = "mitamatch@assaultlily.iam.gserviceaccount.com",
-                client_id = "116107053801726389433",
-                auth_uri = "https://accounts.google.com/o/oauth2/auth",
-                token_uri = "https://oauth2.googleapis.com/token",
-                auth_provider_x509_cert_url = "https://www.googleapis.com/oauth2/v1/certs",
-                client_x509_cert_url = "https://www.googleapis.com/robot/v1/metadata/x509/mitamatch%40assaultlily.iam.gserviceaccount.com",
-                universe_domain = "googleapis.com"
-            };
-            var cred = Google.Apis.Auth.OAuth2.GoogleCredential.FromJson(JsonConvert.SerializeObject(json));
-            var client = BigQueryClient.Create("asaultlily", cred);
-            var table = client.GetTable("assaultlily", "mitamatch", "users");
-            _ = table.InsertRows(new BigQueryInsertRow()
-            {
-                { "id", user.id },
-                { "name", user.global_name },
-                { "email", user.email },
-                { "avatar", user.avatar },
-            });
-        }
-    }
-
-    // DO NOT CALL THIS METHOD
-    internal static void Update(DiscordUser user)
-    {
         var json = new
         {
             type = "service_account",
@@ -166,15 +134,42 @@ public partial class App : Application
             client_x509_cert_url = "https://www.googleapis.com/robot/v1/metadata/x509/mitamatch%40assaultlily.iam.gserviceaccount.com",
             universe_domain = "googleapis.com"
         };
+        var credential = Google.Apis.Auth.OAuth2.GoogleCredential.FromJson(JsonConvert.SerializeObject(json));
+        var client = new DatastoreClientBuilder() { Credential = credential }.Build();
+        DatastoreDb db = DatastoreDb.Create("assaultlily", string.Empty, client);
 
-        var cred = Google.Apis.Auth.OAuth2.GoogleCredential.FromJson(JsonConvert.SerializeObject(json));
+        var key = db.CreateKeyFactory("user").CreateKey(user.id);
+        var result = db.Lookup(key);
+        if (result is not null)
+        {
+            var entity = new Entity()
+            {
+                Key = key,
+                ["id"] = user.id,
+                ["avatar"] = user.avatar,
+                ["global_name"] = user.global_name,
+                ["email"] = user.email,
+                ["created_at"] = result["created_at"],
+                ["updated_at"] = DateTime.UtcNow
+            };
 
-        BigQueryClient client = BigQueryClient.Create("asaultlily", cred);
-        var avatar = user.avatar is null ? $"'{user.avatar}'" : "null";
-        string queryUpdate = $"UPDATE `assaultlily.mitamatch.users` SET avatar = {avatar}, updated_at = CURRENT_DATETIME WHERE id = '{user.id}'";
+            db.Upsert(entity);
+        }
+        else
+        {
+            var entity = new Entity()
+            {
+                Key = key,
+                ["id"] = user.id,
+                ["avatar"] = user.avatar,
+                ["global_name"] = user.global_name,
+                ["email"] = user.email,
+                ["created_at"] = DateTime.UtcNow,
+                ["updated_at"] = DateTime.UtcNow
+            };
 
-        // クエリを実行して更新
-        client.ExecuteQuery(queryUpdate, parameters: null);
+            db.Upsert(entity);
+        }
     }
 
     private Window m_window;
