@@ -391,12 +391,12 @@ public sealed partial class ControlDashboardPage
                         case ActiveStat(var image):
                             {
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\wait_or_active\\active\\debug{_debugCounter++}.png");
-                                if (_ocrResult is null)
+                                if (_ocrResult is null && _orderStat is Active active)
                                 {
                                     var result = PredictOrder(image);
                                     image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\order_classification\\{result.Name}\\debug{_debugCounter++}.png");
                                     _predictResult = result;
-                                    _orderStat = (Active)_orderStat with { Order = result };
+                                    _orderStat = active with { Order = result };
                                 }
                                 break;
                             }
@@ -462,17 +462,12 @@ public sealed partial class ControlDashboardPage
                         case Nothing:
                             {
                                 if (_preparePoint is not null
+                                    && _ocrResult is not null
                                     && (DateTime.Now - _preparePoint.Value) > TimeSpan.FromSeconds(_ocrResult.Value.PrepareTime))
                                 {
-                                    if (_ocrResult is not null && Math.Abs((DateTime.Now - _preparePoint.Value - TimeSpan.FromSeconds(_ocrResult.Value.PrepareTime)).Seconds) <= 1)
+                                    if (Math.Abs((DateTime.Now - _preparePoint.Value - TimeSpan.FromSeconds(_ocrResult.Value.PrepareTime)).Seconds) <= 1)
                                     {
                                         _orderStat = new Active(_ocrResult, DateTime.Now);
-                                    }
-                                    else
-                                    {
-                                        _orderStat = new None();
-                                        _preparePoint = null;
-                                        _ocrResult = null;
                                     }
                                 }
                                 break;
@@ -484,6 +479,7 @@ public sealed partial class ControlDashboardPage
                         case ActiveStat(var image):
                             {
                                 image.Save($"{Director.MitamatchDir()}\\Debug\\dataset\\is_activating\\True\\debug{_debugCounter++}.png");
+                                failSafe.Add(new Active_());
                                 if (_ocrResult?.ActiveTime == 0)
                                 {
                                     _orderStat = new None();
