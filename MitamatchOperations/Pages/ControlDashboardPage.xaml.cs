@@ -481,7 +481,7 @@ public sealed partial class ControlDashboardPage
                                 }
                                 break;
                             }
-                        default:break;
+                        default: break;
                     }
                     switch (_capture!.IsActivating())
                     {
