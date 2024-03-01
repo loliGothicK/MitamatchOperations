@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using Mitama.Domain;
@@ -184,7 +182,7 @@ public sealed partial class MainPage
                 return;
             }
             LoginLegion.Text = Project = selected;
-            Director.CacheWrite(new Cache(Project, User).ToJsonBytes());
+            Director.CacheWrite((Director.ReadCache() with { Legion = Project, User = User }).ToJsonBytes());
             Navigate(typeof(LegionConsolePage), Project);
             await LoginInfo();
         });
@@ -195,7 +193,7 @@ public sealed partial class MainPage
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}");
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Decks");
             Director.CreateDirectory($@"{Director.ProjectDir()}\{Project}\Members");
-            Director.CacheWrite(new Cache(Project, User).ToJsonBytes());
+            Director.CacheWrite((Director.ReadCache() with { Legion = Project, User = User }).ToJsonBytes());
             Navigate(typeof(LegionConsolePage), Project);
             await LoginInfo();
         });
@@ -216,7 +214,7 @@ public sealed partial class MainPage
         InfoBar.IsOpen = true;
         InfoBar.Severity = InfoBarSeverity.Success;
         InfoBar.Title = "Successfully logged in!";
-        Director.CacheWrite(new Cache(Project, User).ToJsonBytes());
+        Director.CacheWrite((Director.ReadCache() with { Legion = Project, User = User }).ToJsonBytes());
         await Task.Delay(2000);
         InfoBar.IsOpen = false;
     }
