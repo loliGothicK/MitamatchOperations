@@ -61,7 +61,7 @@ namespace Mitama.Pages.LegionConsole
             }
         }
 
-        private async void PickOpenButton_Click(object sender, RoutedEventArgs e)
+        private async void PickOpenButton_Click(object _, RoutedEventArgs e)
         {
             // Create a file picker
             var openPicker = new FileOpenPicker();

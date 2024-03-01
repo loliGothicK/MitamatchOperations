@@ -52,7 +52,7 @@
                     <AppBarButton.Flyout>
                         <Flyout>
                             <StackPanel>
-                                <calendar:SfCalendar x:Name="Calendar"/>
+                                <calendar:SfCalendar x:Name="Calendar" Loaded="Calendar_Loaded"/>
                                 <Button Content="Load" Click="Load_Click" Margin="2"/>
                             </StackPanel>
                         </Flyout>

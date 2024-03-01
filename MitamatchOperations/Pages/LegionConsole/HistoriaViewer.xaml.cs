@@ -36,27 +36,6 @@ public sealed partial class HistoriaViewer : Page
     public HistoriaViewer()
     {
         InitializeComponent();
-        var logDir = Director.LogDir(Director.ReadCache().Legion);
-        var directories = Directory.GetDirectories(logDir);
-        if (directories.Length != 0)
-        {
-            // directoriesのうち最初と最後の日付を取得
-            var first = DateTime.Parse(directories.First().Split("\\").Last());
-            var last = DateTime.Parse(directories.Last().Split("\\").Last());
-            Calendar.MinDate = first;
-            Calendar.MaxDate = last;
-            // directoriesに含まれる日付以外をBlackoutDatesに追加
-            var dates = directories.Select(d => DateTime.Parse(d.Split("\\").Last())).ToArray();
-            var blackoutDates = new List<DateTime>();
-            for (var date = first; date <= last; date = date.AddDays(1))
-            {
-                if (!dates.Contains(date))
-                {
-                    blackoutDates.Add(date);
-                }
-            }
-            Calendar.BlackoutDates = [.. blackoutDates];
-        }
     }
 
     private void Load_Click(object _, RoutedEventArgs _e)
@@ -201,6 +180,31 @@ public sealed partial class HistoriaViewer : Page
 
     [GeneratedRegex(@"\.|!|！|\?|？|\s+|")]
     private static partial Regex ToRemoveRegex();
+
+    private void Calendar_Loaded(object _, RoutedEventArgs _e)
+    {
+        var logDir = Director.LogDir(Director.ReadCache().Legion);
+        var directories = Directory.GetDirectories(logDir);
+        if (directories.Length != 0)
+        {
+            // directoriesのうち最初と最後の日付を取得
+            var first = DateTime.Parse(directories.First().Split("\\").Last());
+            var last = DateTime.Parse(directories.Last().Split("\\").Last());
+            Calendar.MinDate = first;
+            Calendar.MaxDate = last;
+            // directoriesに含まれる日付以外をBlackoutDatesに追加
+            var dates = directories.Select(d => DateTime.Parse(d.Split("\\").Last())).ToArray();
+            var blackoutDates = new List<DateTime>();
+            for (var date = first; date <= last; date = date.AddDays(1))
+            {
+                if (!dates.Contains(date))
+                {
+                    blackoutDates.Add(date);
+                }
+            }
+            Calendar.BlackoutDates = [.. blackoutDates];
+        }
+    }
 }
 
 internal record struct OrderLog(Order Order, string Time);
