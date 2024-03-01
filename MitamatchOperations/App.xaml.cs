@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppLifecycle;
 using Mitama.Domain;
 using Mitama.Lib;
+using Mitama.Pages;
 using Mitama.Pages.Common;
 using Newtonsoft.Json;
 
@@ -152,6 +153,7 @@ public partial class App : Application
                 ["discriminator"] = user.discriminator,
                 ["global_name"] = user.global_name,
                 ["email"] = user.email,
+                ["version"] = SettingsPage.appVersion,
                 ["created_at"] = result["created_at"],
                 ["updated_at"] = DateTime.UtcNow
             };
@@ -169,6 +171,7 @@ public partial class App : Application
                 ["discriminator"] = user.discriminator,
                 ["global_name"] = user.global_name,
                 ["email"] = user.email,
+                ["version"] = SettingsPage.appVersion,
                 ["created_at"] = DateTime.UtcNow,
                 ["updated_at"] = DateTime.UtcNow
             };

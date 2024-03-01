@@ -13,7 +13,7 @@ namespace Mitama.Pages;
 /// </summary>
 public sealed partial class SettingsPage
 {
-    private readonly string appVersion = string.Format("Version: {0}.{1}.{2}.{3}",
+    public static readonly string appVersion = string.Format("Version: {0}.{1}.{2}.{3}",
                     Package.Current.Id.Version.Major,
                     Package.Current.Id.Version.Minor,
                     Package.Current.Id.Version.Build,
