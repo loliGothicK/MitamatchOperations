@@ -440,51 +440,6 @@ namespace Mitama.Pages.DeckBuilder
                         }
                         break;
                     }
-                case "属性":
-                    {
-                        if ((bool)e.Node.IsChecked)
-                        {
-                            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsElementFilter))
-                            {
-                                _currentFilters.Add(type);
-                            }
-                        }
-                        else
-                        {
-                            _currentFilters.RemoveWhere(IsElementFilter);
-                        }
-                        break;
-                    }
-                case "範囲":
-                    {
-                        if ((bool)e.Node.IsChecked)
-                        {
-                            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsRangeFilter))
-                            {
-                                _currentFilters.Add(type);
-                            }
-                        }
-                        else
-                        {
-                            _currentFilters.RemoveWhere(IsRangeFilter);
-                        }
-                        break;
-                    }
-                case "効果量":
-                    {
-                        if ((bool)e.Node.IsChecked)
-                        {
-                            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsLevelFilter))
-                            {
-                                _currentFilters.Add(type);
-                            }
-                        }
-                        else
-                        {
-                            _currentFilters.RemoveWhere(IsLevelFilter);
-                        }
-                        break;
-                    }
                 case "通常単体":
                     {
                         if ((bool)e.Node.IsChecked)
@@ -566,6 +521,267 @@ namespace Mitama.Pages.DeckBuilder
                         else
                         {
                             _currentFilters.Remove(FilterType.Recovery);
+                        }
+                        break;
+                    }
+                case "属性":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsElementFilter))
+                            {
+                                _currentFilters.Add(type);
+                            }
+                        }
+                        else
+                        {
+                            _currentFilters.RemoveWhere(IsElementFilter);
+                        }
+                        break;
+                    }
+                case "火":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Fire);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Fire);
+                        }
+                        break;
+                    }
+                case "水":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Water);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Water);
+                        }
+                        break;
+                    }
+                case "風":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Wind);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Wind);
+                        }
+                        break;
+                    }
+                case "光":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Light);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Light);
+                        }
+                        break;
+                    }
+                case "闇":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Dark);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Dark);
+                        }
+                        break;
+                    }
+                case "範囲":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsRangeFilter))
+                            {
+                                _currentFilters.Add(type);
+                            }
+                        }
+                        else
+                        {
+                            _currentFilters.RemoveWhere(IsRangeFilter);
+                        }
+                        break;
+                    }
+                case "A":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.A);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.A);
+                        }
+                        break;
+                    }
+                case "B":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.B);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.B);
+                        }
+                        break;
+                    }
+                case "C":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.C);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.C);
+                        }
+                        break;
+                    }
+                case "D":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.D);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.D);
+                        }
+                        break;
+                    }
+                case "E":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.E);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.E);
+                        }
+                        break;
+                    }
+                case "効果量":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            foreach (var type in Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(IsLevelFilter))
+                            {
+                                _currentFilters.Add(type);
+                            }
+                        }
+                        else
+                        {
+                            _currentFilters.RemoveWhere(IsLevelFilter);
+                        }
+                        break;
+                    }
+                case "Ⅰ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.One);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.One);
+                        }
+                        break;
+                    }
+                case "Ⅱ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Two);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Two);
+                        }
+                        break;
+                    }
+                case "Ⅲ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Three);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Three);
+                        }
+                        break;
+                    }
+                case "Ⅲ+":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.ThreePlus);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.ThreePlus);
+                        }
+                        break;
+                    }
+                case "Ⅳ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Four);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Four);
+                        }
+                        break;
+                    }
+                case "Ⅳ+":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FourPlus);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FourPlus);
+                        }
+                        break;
+                    }
+                case "Ⅴ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.Five);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.Five);
+                        }
+                        break;
+                    }
+                case "Ⅴ+":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FivePlus);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FivePlus);
                         }
                         break;
                     }
