@@ -7,9 +7,9 @@ using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppLifecycle;
 using Mitama.Domain;
 using Mitama.Lib;
-using Mitama.Pages;
 using Mitama.Pages.Common;
 using Newtonsoft.Json;
+using Windows.ApplicationModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -40,10 +40,10 @@ public partial class App : Application
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         // Get the activation args
-        var appArgs = AppInstance.GetCurrent().GetActivatedEventArgs();
+        var appArgs = Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
 
         // Get or register the main instance
-        var mainInstance = AppInstance.FindOrRegisterForKey("main");
+        var mainInstance = Microsoft.Windows.AppLifecycle.AppInstance.FindOrRegisterForKey("main");
 
         // If the main instance isn't this current instance
         if (!mainInstance.IsCurrent)
@@ -61,7 +61,7 @@ public partial class App : Application
         }
 
         // Otherwise, register for activation redirection
-        AppInstance.GetCurrent().Activated += On_Activated;
+        Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().Activated += On_Activated;
 
         var splash = new SplashScreen(typeof(MainWindow), async () =>
             await channel.Reader.ReadAsync() switch
@@ -142,6 +142,12 @@ public partial class App : Application
 
         var key = db.CreateKeyFactory("user").CreateKey(user.id);
         var result = db.Lookup(key);
+        var appVersion = string.Format("Version: {0}.{1}.{2}.{3}",
+                    Package.Current.Id.Version.Major,
+                    Package.Current.Id.Version.Minor,
+                    Package.Current.Id.Version.Build,
+                    Package.Current.Id.Version.Revision);
+
         if (result is not null)
         {
             var entity = new Entity()
@@ -153,7 +159,7 @@ public partial class App : Application
                 ["discriminator"] = user.discriminator,
                 ["global_name"] = user.global_name,
                 ["email"] = user.email,
-                ["version"] = SettingsPage.appVersion,
+                ["version"] = appVersion,
                 ["created_at"] = result["created_at"],
                 ["updated_at"] = DateTime.UtcNow
             };
@@ -171,7 +177,7 @@ public partial class App : Application
                 ["discriminator"] = user.discriminator,
                 ["global_name"] = user.global_name,
                 ["email"] = user.email,
-                ["version"] = SettingsPage.appVersion,
+                ["version"] = appVersion,
                 ["created_at"] = DateTime.UtcNow,
                 ["updated_at"] = DateTime.UtcNow
             };

@@ -53,8 +53,16 @@ jobs:
         $certificatePath = "GitHubActionsWorkflow.pfx"
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
 
-    # Create the app package by building and packaging the project
-    - name: Create the app package
+    # download 
+    - name: download register_secrets
+      run: |
+        cd docs
+        curl -s https://api.github.com/repos/loliGothicK/register_secrets/releases \
+          | jq -r '.[0].assets[] | select(.name | test("register_secrets.zip")) | .browser_download_url' \
+          | xargs -n1 curl -LOk
+        unzip register_secrets.zip
+
+    - name: Build
       run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:Platform=$env:Platform /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:AppxPackageDir="$env:Appx_Package_Dir" /p:GenerateAppxPackageOnBuild=false
       env:
         Appx_Bundle: Never
