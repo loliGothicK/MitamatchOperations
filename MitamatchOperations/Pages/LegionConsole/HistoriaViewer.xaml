@@ -9,7 +9,7 @@
     xmlns:domain="using:Mitama.Domain"
     xmlns:chart="using:Syncfusion.UI.Xaml.Charts"
     xmlns:calendar="using:Syncfusion.UI.Xaml.Calendar"
-    xmlns:editors="using:Syncfusion.UI.Xaml.Editors" xmlns:views="using:Mitama.Pages.LegionConsole.Views"
+    xmlns:editors="using:Syncfusion.UI.Xaml.Editors"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
