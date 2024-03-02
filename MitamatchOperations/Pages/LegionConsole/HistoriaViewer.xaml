@@ -196,7 +196,7 @@
                                 </chart:SfCartesianChart.XAxes>
 
                                 <chart:SfCartesianChart.YAxes>
-                                    <chart:NumericalAxis Maximum="1000000" Minimum="-1000000" Interval="100000">
+                                    <chart:NumericalAxis Maximum="600000" Minimum="-600000" Interval="100000">
                                         <chart:NumericalAxis.LabelStyle>
                                             <chart:LabelStyle FontSize="13"/>
                                         </chart:NumericalAxis.LabelStyle>
