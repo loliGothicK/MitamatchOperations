@@ -17,7 +17,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <InfoBar x:Name="AnalyticsProgressBar">
+        <InfoBar x:Name="GeneralInfoBar" Grid.Row="0"/>
+        <InfoBar x:Name="AnalyticsProgressBar" Grid.Row="1">
             <gauge:SfLinearGauge>
                 <gauge:SfLinearGauge.Axis>
                     <gauge:LinearAxis ShowLabels="False"
@@ -50,7 +51,6 @@
                 </gauge:SfLinearGauge.Axis>
             </gauge:SfLinearGauge>
         </InfoBar>
-        <InfoBar x:Name="GeneralInfoBar" />
         <Grid Grid.Row="2">
             <CommandBar>
                 <!-- Pick Open -->
