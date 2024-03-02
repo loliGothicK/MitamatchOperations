@@ -103,6 +103,7 @@
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Opponent" FontSize="20"/>
                             <ListView Grid.Column="0"
+                                      MaxHeight="500"
                                       ItemsSource="{x:Bind unitChanges}"
                                       ItemTemplate="{StaticResource UnitChangeTemplate}"/>
                         </StackPanel>
