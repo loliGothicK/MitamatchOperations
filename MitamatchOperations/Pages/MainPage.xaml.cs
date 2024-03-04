@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using Mitama.Domain;
@@ -137,7 +138,7 @@ public sealed partial class MainPage
     public void Navigate(
         System.Type pageType,
         object targetPageArguments = null,
-        Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo navigationTransitionInfo = null)
+        NavigationTransitionInfo navigationTransitionInfo = null)
     {
         var args = new NavigationRootPageProps
         {
@@ -246,6 +247,7 @@ public sealed partial class MainPage
         await Task.Delay(2000);
         InfoBar.IsOpen = false;
     }
+
     private async Task LoginInfo()
     {
         InfoBar.IsOpen = true;
