@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -11,6 +12,8 @@ using Mitama.Lib;
 using Mitama.Pages.Common;
 using Mitama.Pages.Main;
 using Newtonsoft.Json;
+using Windows.ApplicationModel;
+using Windows.System;
 using WinRT;
 
 namespace Mitama.Pages;
@@ -70,6 +73,40 @@ public sealed partial class MainPage
         NavigationCacheMode = NavigationCacheMode.Enabled;
         LoadCache();
         RootFrame.Navigate(typeof(LegionConsolePage));
+        Task.Run(UpdateCheck);
+    }
+
+    private async Task UpdateCheck()
+    {
+        string owner = "LoliGothick";
+        string repo = "MitamatchOperations";
+
+        string apiUrl = $"https://api.github.com/repos/{owner}/{repo}/releases/latest";
+
+        using HttpClient client = new();
+        client.DefaultRequestHeaders.Add("User-Agent", "request"); // GitHub APIへのリクエストにはUser-Agentヘッダーが必要
+
+        HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+        if (response.IsSuccessStatusCode)
+        {
+            string json = await response.Content.ReadAsStringAsync();
+
+            string version = System.Text.Json.JsonDocument.Parse(json).RootElement.GetProperty("tag_name").GetString();
+
+            if (version != $"v{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}")
+            {
+                InfoBar.Title = $"{version}が利用可能です";
+                InfoBar.Severity = InfoBarSeverity.Informational;
+                var link = new Button
+                {
+                    Content = $"https://github.com/LoliGothick/MitamatchOperations/releases/tag/{version}",
+                };
+                link.Click += (_, _) => { _ = Launcher.LaunchUriAsync(new Uri(link.Content.ToString())); };
+                InfoBar.ActionButton = link;
+                InfoBar.IsOpen = true;
+            }
+        }
     }
 
     private void LoadCache()
