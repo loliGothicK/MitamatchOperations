@@ -73,7 +73,7 @@ public sealed partial class MainPage
         NavigationCacheMode = NavigationCacheMode.Enabled;
         LoadCache();
         RootFrame.Navigate(typeof(LegionConsolePage));
-        Task.Run(UpdateCheck);
+        Loaded += async (_, _) => await UpdateCheck();
     }
 
     private async Task UpdateCheck()
