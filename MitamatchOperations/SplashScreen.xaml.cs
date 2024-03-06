@@ -29,12 +29,13 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
         {
             Login.IsEnabled = false;
             await Task.Delay(1000);
-            return;
         }
-
-        while (!await PerformLogin())
+        else
         {
-            await Task.Delay(1000);
+            while (!await PerformLogin())
+            {
+                await Task.Delay(1000);
+            }
         }
     }
 }

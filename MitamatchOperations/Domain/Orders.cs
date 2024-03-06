@@ -53,6 +53,8 @@ namespace Mitama.Domain
 
     public readonly record struct BasicStatus(int Atk = 0, int SpAtk = 0, int Def = 0, int SpDef = 0)
     {
+        public int[] ToArray() => [Atk, SpAtk, Def, SpDef];
+
         public static implicit operator BasicStatus(ValueTuple<int, int, int, int> from) => new()
         {
             Atk = from.Item1,
@@ -100,7 +102,7 @@ namespace Mitama.Domain
 
         public static Order Of(int index) => List[^(index + 1)];
 
-        public readonly static Order[] List = [
+        public static readonly Order[] List = [
             new Order(
                 157,
                 "水刃縛りの大棘蔦",
