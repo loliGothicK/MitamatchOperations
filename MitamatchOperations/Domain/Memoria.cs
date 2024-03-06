@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Web;
 using Microsoft.UI.Xaml;
+using Mitama.Lib;
 
 namespace Mitama.Domain;
 
@@ -296,7 +297,12 @@ public record Memoria(
     public string Path = $"/Assets/memoria/{Name}.png";
     public string ToJson()
     {
-        return $@"{{ ""link"": ""{HttpUtility.UrlEncode(Link)}"", ""name"": ""{HttpUtility.UrlEncode(Name)}"" }}";
+        return new Indoc($$"""
+            {
+                "link": "{{HttpUtility.UrlEncode(Link)}}",
+                "name": "{{HttpUtility.UrlEncode(Name)}}"
+            }
+        """).Text;
     }
 
     public virtual bool Equals(Memoria other) => Id == other?.Id;
