@@ -59,24 +59,34 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
         };
         var credential = Google.Apis.Auth.OAuth2.GoogleCredential.FromJson(JsonConvert.SerializeObject(json));
         var client = StorageClient.Create(credential);
-        await Task.Run(() =>
+        var cache = Director.ReadCache();
+        if (cache.FetchDate is null || cache.FetchDate < client.ListObjects("mitamatch", "data").First().TimeStorageClassUpdatedDateTimeOffset)
         {
-            using var stream = File.OpenWrite($@"{Director.DatabaseDir()}\data");
-            client.DownloadObject("mitamatch", "data", stream);
-        });
-        {
-            var cache = Director.ReadCache();
-            var index = cache.MemoriaIndex ?? 0;
-            foreach (var chunk in Memoria.List.Value.Where(m => m.Id >= index).Chunk(40))
+            await Task.Run(() =>
             {
-                using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
-                foreach (var memoria in chunk)
+                using var stream = File.OpenWrite($@"{Director.DatabaseDir()}\data");
+                client.DownloadObject("mitamatch", "data", stream);
+            });
+            {
+                var index = cache.MemoriaIndex ?? 0;
+                foreach (var chunk in Memoria.List.Value.Where(m => m.Id > index).Chunk(40))
                 {
-                    db.FileStorage.FindById($"$/memoria/{memoria.Name}.png").SaveAs($@"{Director.MemoriaImageDir()}\{memoria.Name}.png");
+                    using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
+                    foreach (var memoria in chunk)
+                    {
+                        db.FileStorage.FindById($"$/memoria/{memoria.Name}.png").SaveAs($@"{Director.MemoriaImageDir()}\{memoria.Name}.png");
+                    }
+                    await Task.Delay(50);
                 }
-                await Task.Delay(50);
+                Director.CacheWrite((cache with {
+                    MemoriaIndex = Memoria.List.Value[0].Id,
+                    FetchDate = DateTimeOffset.UtcNow,
+                }).ToJsonBytes());
             }
-            Director.CacheWrite((cache with { MemoriaIndex = Memoria.List.Value[0].Id }).ToJsonBytes());
+        }
+        else
+        {
+            await Task.Delay(500);
         }
     }
 }

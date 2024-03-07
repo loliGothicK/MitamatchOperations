@@ -117,7 +117,7 @@ public sealed partial class MainPage
         var exists = File.Exists(cache);
         if (exists)
         {
-            Director.ReadCache().Deconstruct(out Project, out User, out var JWT, out _);
+            Director.ReadCache().Deconstruct(out Project, out User, out var JWT, out _, out _);
             DiscordUser = JsonConvert.DeserializeObject<DiscordUser>(App.DecodeJwt(JWT).Unwrap());
             LoginLegion.Text = Project;
             UserDisplay.Text = User;

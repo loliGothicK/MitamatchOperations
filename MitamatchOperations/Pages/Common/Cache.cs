@@ -1,9 +1,16 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Text.Json;
 
 namespace Mitama.Pages.Common;
 
-internal record struct Cache(string Legion, string User = null, string JWT = null, int? MemoriaIndex = null)
+internal record struct Cache(
+    string Legion,
+    string User = null,
+    string JWT = null,
+    int? MemoriaIndex = null,
+    DateTimeOffset? FetchDate = null
+)
 {
     internal static Cache FromJson(string json) => JsonSerializer.Deserialize<Cache>(json);
 
