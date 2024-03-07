@@ -6,9 +6,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using MathNet.Numerics.Statistics;
 using Mitama.Domain;
+using Mitama.Lib;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
-using Mitama.Lib;
 
 namespace Mitama.Algorithm.IR;
 

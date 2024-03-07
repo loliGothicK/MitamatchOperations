@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Web;
 using LiteDB;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Media.Imaging;
 using Mitama.Lib;
 using Mitama.Pages.Common;
 using Mitama.Repository;

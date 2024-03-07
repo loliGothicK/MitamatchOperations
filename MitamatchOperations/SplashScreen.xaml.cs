@@ -78,7 +78,8 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
                     }
                     await Task.Delay(50);
                 }
-                Director.CacheWrite((cache with {
+                Director.CacheWrite((cache with
+                {
                     MemoriaIndex = Memoria.List.Value[0].Id,
                     FetchDate = DateTimeOffset.UtcNow,
                 }).ToJsonBytes());
