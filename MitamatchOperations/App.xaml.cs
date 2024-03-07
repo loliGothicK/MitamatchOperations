@@ -88,7 +88,7 @@ public partial class App : Application
                         var user = JsonConvert.DeserializeObject<DiscordUser>(json);
                         Upsert(user);
                         // Cache に JWT token を保存
-                        var cache = Director.ReadCache() with { JWT = jwtToken };
+                        var cache = Director.ReadCache() with { JWT = jwtToken, User = user.global_name };
                         Director.CacheWrite(cache.ToJsonBytes());
                         await channel.Writer.WriteAsync(new Ok<DiscordUser, string>(user));
                         break;
