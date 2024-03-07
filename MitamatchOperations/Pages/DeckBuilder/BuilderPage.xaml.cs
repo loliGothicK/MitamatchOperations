@@ -36,8 +36,8 @@ namespace Mitama.Pages.DeckBuilder
 
         private ObservableCollection<MemoriaWithConcentration> Deck { get; set; } = [];
         private ObservableCollection<MemoriaWithConcentration> LegendaryDeck { get; set; } = [];
-        private List<MemoriaWithConcentration> OriginalPool { get; set; } = [.. Memoria.List.Select(x => new MemoriaWithConcentration(x, 4))];
-        private ObservableCollection<MemoriaWithConcentration> Pool { get; set; } = [.. Memoria.List.Select(x => new MemoriaWithConcentration(x, 4))];
+        private List<MemoriaWithConcentration> OriginalPool { get; set; } = [.. Memoria.List.Value.Select(x => new MemoriaWithConcentration(x, 4))];
+        private ObservableCollection<MemoriaWithConcentration> Pool { get; set; } = [.. Memoria.List.Value.Where(Costume.DummyRearguard.CanBeEquipped).Select(x => new MemoriaWithConcentration(x, 4))];
         private HashSet<FilterType> _currentFilters = [];
         private string Legion = "";
         private MemberInfo[] members = [];
@@ -790,6 +790,7 @@ namespace Mitama.Pages.DeckBuilder
             if ((bool)e.Node.IsChecked)
             {
                 foreach (var memoria in OriginalPool
+                        .Where(m => (Switch.IsOn ? Costume.DummyVanguard : Costume.DummyRearguard).CanBeEquipped(m.Memoria))
                         .Where(memoria => !Pool.Contains(memoria))
                         .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
                         .Where(ApplyFilter))
@@ -1640,6 +1641,7 @@ namespace Mitama.Pages.DeckBuilder
             else
             {
                 foreach (var memoria in OriginalPool
+                        .Where(m => (Switch.IsOn ? Costume.DummyVanguard : Costume.DummyRearguard).CanBeEquipped(m.Memoria))
                         .Where(memoria => !Pool.Contains(memoria))
                         .Where(memoria => !Deck.Concat(LegendaryDeck).Select(m => m.Memoria.Name).Contains(memoria.Memoria.Name))
                         .Where(ApplyFilter))
@@ -2505,10 +2507,13 @@ namespace Mitama.Pages.DeckBuilder
 
             if (selected == "All")
             {
-                foreach (var memoria in Memoria.List.Select(m => new MemoriaWithConcentration(m, 4)))
+                foreach (var memoria in Memoria.List.Value.Select(m => new MemoriaWithConcentration(m, 4)))
                 {
                     OriginalPool.Add(memoria);
-                    Pool.Add(memoria);
+                    if ((Switch.IsOn ? Costume.DummyVanguard : Costume.DummyRearguard).CanBeEquipped(memoria.Memoria))
+                    {
+                        Pool.Add(memoria);
+                    }
                 }
                 return;
             }
@@ -2529,6 +2534,7 @@ namespace Mitama.Pages.DeckBuilder
                 // 覚醒/超覚醒のうちひとつしか登録されていないため
                 var idToMemoria = Memoria
                     .List
+                    .Value
                     .ToDictionary(m => m.Id);
                 Switch.IsOn = info.Position is Front;
 
@@ -2538,6 +2544,7 @@ namespace Mitama.Pages.DeckBuilder
                     .Memorias
                     .SelectMany(m => Memoria
                         .List
+                        .Value
                         .Where(s => s.Name == idToMemoria[m.Id].Name)
                         .Select(s => new MemoriaWithConcentration(s, m.Concentration)))
                     .Where(m => (info.Position is Front ? Costume.DummyVanguard : Costume.DummyRearguard).CanBeEquipped(m.Memoria)))

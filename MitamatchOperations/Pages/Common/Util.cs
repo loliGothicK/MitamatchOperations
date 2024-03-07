@@ -140,6 +140,12 @@ internal class Director
         if (!Exists(dir)) CreateDirectory(dir);
         return dir;
     }
+    internal static string MemoriaImageDir()
+    {
+        var dir = $@"{MitamatchDir()}\Images\Memoria";
+        if (!Exists(dir)) CreateDirectory(dir);
+        return dir;
+    }
     internal static string DatabaseDir()
     {
         var dir = $@"{MitamatchDir()}\Database";

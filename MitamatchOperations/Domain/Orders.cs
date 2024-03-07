@@ -63,6 +63,14 @@ namespace Mitama.Domain
             SpDef = from.Item4,
         };
 
+        public static BasicStatus FromRaw(int[] from) => new()
+        {
+            Atk = from[0],
+            SpAtk = from[1],
+            Def = from[2],
+            SpDef = from[3],
+        };
+
         public int ASA => Atk + SpAtk;
         public int DSD => Def + SpDef;
 

@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using MathNet.Numerics.Statistics;
 using Mitama.Domain;
+using Mitama.Lib;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
 using Windows.Storage;
@@ -51,12 +52,11 @@ internal class Match
         foreach (var rect in rects) Cv2.Rectangle(target, rect, Scalar.Aquamarine, 5);
 
         {
-            var templates = await Task.WhenAll(Memoria.List.Where(dummyCostume.CanBeEquipped).Select(async memoria =>
+            var templates = await Task.WhenAll(Memoria.List.Value.Where(dummyCostume.CanBeEquipped).Select(async memoria =>
             {
                 try
                 {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(memoria.Uri);
-                    var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
+                    var image = new Bitmap(memoria.Path);
                     var descriptors = new Mat();
                     akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
                     return (memoria, descriptors);

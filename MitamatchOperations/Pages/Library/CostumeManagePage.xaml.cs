@@ -154,6 +154,7 @@ public sealed partial class CostumeManagePage : Page
                 var info = MemberInfo.FromJson(readJson);
                 var idToName = Memoria
                     .List
+                    .Value
                     .ToDictionary(m => m.Id, m => m.Name);
                 List<CostumeIndexAndEx> costumes
                     = info.Costumes == null

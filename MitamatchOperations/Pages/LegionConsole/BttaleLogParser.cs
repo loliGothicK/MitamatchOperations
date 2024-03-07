@@ -95,9 +95,11 @@ internal partial class BattleLogParser
             var skill = match.Groups["skill"].Value;
             var memoriaCandidate = Memoria
                     .List
+                    .Value
                     .MinBy(memoria => Algo.LevenshteinRate(memoria.Link, name));
             var memoria = Memoria
                 .List
+                .Value
                 .Where(memoria => memoria.Name == memoriaCandidate.Name)
                 .MinBy(memoria => Algo.LevenshteinDistance(memoria.Skill.Name, skill));
             var concentration = match.Groups["level"].Value switch
@@ -160,9 +162,11 @@ internal partial class BattleLogParser
                 var skill = match.Groups["skill"].Value;
                 var memoriaCandidate = Memoria
                         .List
+                        .Value
                         .MinBy(memoria => Algo.LevenshteinRate(memoria.Link, name));
                 var memoria = Memoria
                     .List
+                    .Value
                     .Where(dummyCostume.CanBeEquipped)
                     .Where(memoria => memoria.Name == memoriaCandidate.Name)
                     .MinBy(memoria => Algo.LevenshteinDistance(memoria.Skill.Name, skill));

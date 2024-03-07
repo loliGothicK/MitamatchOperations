@@ -60,6 +60,7 @@
     <PackageReference Include="DynamicData" Version="8.3.27" />
     <PackageReference Include="Google.Apis.Auth" Version="1.67.0" />
     <PackageReference Include="Google.Cloud.Datastore.V1" Version="4.8.0" />
+    <PackageReference Include="Google.Cloud.Storage.V1" Version="4.8.0" />
     <PackageReference Include="JWT" Version="10.1.1" />
     <PackageReference Include="LiteDB" Version="5.0.19" />
     <PackageReference Include="MathNet.Numerics" Version="6.0.0-beta1" />
@@ -186,9 +187,9 @@
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="cd &quot;$(ProjectDir)&quot;&#xD;&#xA;regiter_secrets.exe --input App.xaml.cs --type PreBuild " />
+    <Exec Command="cd &quot;$(ProjectDir)&quot;&#xD;&#xA;regiter_secrets.exe --input App.xaml.cs --type PreBuild&#xD;&#xA;regiter_secrets.exe --input SplashScreen.xaml.cs --type PreBuild" />
   </Target>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="cd &quot;$(ProjectDir)&quot; &#xD;&#xA;regiter_secrets.exe --input App.xaml.cs --type PostBuild" />
+    <Exec Command="cd &quot;$(ProjectDir)&quot; &#xD;&#xA;regiter_secrets.exe --input App.xaml.cs --type PostBuild&#xD;&#xA;regiter_secrets.exe --input SplashScreen.xaml.cs --type PostBuild" />
   </Target>
 </Project>

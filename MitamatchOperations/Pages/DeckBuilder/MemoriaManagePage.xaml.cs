@@ -29,7 +29,7 @@ public sealed partial class MemoriaManagePage : Page
     private int verticalCount = 3;
     private int horizontalCount = 8;
     private readonly ObservableCollection<MemoriaWithConcentration> Memorias = [];
-    private readonly ObservableCollection<Memoria> Pool = [.. Memoria.List.DistinctBy(x => x.Name)];
+    private readonly ObservableCollection<Memoria> Pool = [.. Memoria.List.Value.DistinctBy(x => x.Name)];
     private List<Memoria> selectedMemorias = [];
     private readonly HashSet<FilterType> currentFilters = [.. Enum.GetValues(typeof(FilterType)).Cast<FilterType>().Where(x => !IsOthreFiler(x))];
     private readonly Dictionary<FilterType, Func<Memoria, bool>> Filters = [];
@@ -127,6 +127,7 @@ public sealed partial class MemoriaManagePage : Page
     {
         foreach (var toAdd in Memoria
             .List
+            .Value
             .Where(m => selectedMemorias.Select(s => s.Name).Contains(m.Name))
             .DistinctBy(m => m.Name))
         {
@@ -143,6 +144,7 @@ public sealed partial class MemoriaManagePage : Page
     {
         foreach (var toRemove in Memoria
             .List
+            .Value
             .Where(m => selectedMemorias.Select(s => s.Name).Contains(m.Name)))
         {
             Pool.Remove(toRemove);
@@ -178,6 +180,7 @@ public sealed partial class MemoriaManagePage : Page
                 var info = MemberInfo.FromJson(readJson);
                 var idToName = Memoria
                     .List
+                    .Value
                     .ToDictionary(m => m.Id, m => m.Name);
                 List<MemoriaIdAndConcentration> memorias
                     = info.Memorias == null
@@ -282,6 +285,7 @@ public sealed partial class MemoriaManagePage : Page
 
         foreach (var memoria in Memoria
                 .List
+                .Value
                 .DistinctBy(x => x.Name)
                 .Where(memoria => !Pool.Contains(memoria))
                 .Where(memoria => !Memorias.Select(m => m.Memoria.Name).Contains(memoria.Name))
@@ -435,6 +439,7 @@ public sealed partial class MemoriaManagePage : Page
 
         foreach (var memoria in Memoria
                 .List
+                .Value
                 .DistinctBy(x => x.Name)
                 .Where(memoria => !Pool.Contains(memoria))
                 .Where(memoria => !Memorias.Select(m => m.Memoria.Name).Contains(memoria.Name))
@@ -449,36 +454,43 @@ public sealed partial class MemoriaManagePage : Page
     {
         Filters.Add(FilterType.NormalSingle, memoria => Memoria
             .List
+            .Value
             .Where(x => x.Name == memoria.Name)
             .Any(x => x.Kind is Vanguard(VanguardKind.NormalSingle))
         );
         Filters.Add(FilterType.NormalRange, memoria => Memoria
             .List
+            .Value
             .Where(x => x.Name == memoria.Name)
             .Any(x => x.Kind is Vanguard(VanguardKind.NormalRange))
         );
         Filters.Add(FilterType.SpecialSingle, memoria => Memoria
             .List
+            .Value
             .Where(x => x.Name == memoria.Name)
             .Any(x => x.Kind is Vanguard(VanguardKind.SpecialSingle))
         );
         Filters.Add(FilterType.SpecialRange, memoria => Memoria
             .List
+            .Value
             .Where(x => x.Name == memoria.Name)
             .Any(x => x.Kind is Vanguard(VanguardKind.SpecialRange))
         );
         Filters.Add(FilterType.Support, memoria => Memoria
             .List
+            .Value
             .Where(x => x.Name == memoria.Name)
             .Any(x => x.Kind is Rearguard(RearguardKind.Support))
         );
         Filters.Add(FilterType.Interference, memoria => Memoria
             .List
+            .Value
             .Where(x => x.Name == memoria.Name)
             .Any(x => x.Kind is Rearguard(RearguardKind.Interference))
         );
         Filters.Add(FilterType.Recovery, memoria => Memoria
             .List
+            .Value
             .Where(x => x.Name == memoria.Name)
             .Any(x => x.Kind is Rearguard(RearguardKind.Recovery))
         );

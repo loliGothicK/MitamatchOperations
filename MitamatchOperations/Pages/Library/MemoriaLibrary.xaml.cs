@@ -15,7 +15,7 @@ namespace Mitama.Pages.Library;
 /// </summary>
 public sealed partial class MemoriaLibrary : Page
 {
-    public ObservableCollection<MemoriaData> MemoriaList { get; } = new([.. Memoria.List.Select(m => new MemoriaData(m))]);
+    public ObservableCollection<MemoriaData> MemoriaList { get; } = new([.. Memoria.List.Value.Select(m => new MemoriaData(m))]);
     public MemoriaLibrary()
     {
         InitializeComponent();
