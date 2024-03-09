@@ -7,7 +7,6 @@ using LiteDB;
 using Microsoft.UI.Xaml;
 using Mitama.Lib;
 using Mitama.Pages.Common;
-using Mitama.Repository;
 using Syncfusion.UI.Xaml.Data;
 
 namespace Mitama.Domain;
@@ -288,7 +287,7 @@ public enum Label
     Ultimate,
 }
 
-public record Memoria(
+public partial record Memoria(
     int Id,
     string Link,
     string FullName,
@@ -366,7 +365,7 @@ public record Memoria(
     public static readonly Lazy<Memoria[]> List = new(() =>
     {
         // local function: POCO -> List<Label>
-        static Label[] Labels(MemoriaPOCO poco)
+        static Label[] Labels(Repository.Memoria.POCO poco)
         {
             var list = new List<Label>();
             if (poco.labels.Contains("legendary")) list.Add(Label.Legendary);
@@ -376,11 +375,11 @@ public record Memoria(
 
         List<Memoria> list = [];
         using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
-        var data = db.GetCollection<MemoriaPOCO>("memoria").FindAll().ToList();
+        var data = db.GetCollection<Repository.Memoria.POCO>("memoria").FindAll().ToList();
         foreach (var poco in data)
         {
-            var skill = SkillDto.FromJson(poco.skill);
-            var support = SupportDto.FromJson(poco.support);
+            var skill = Repository.Memoria.SkillDto.FromJson(poco.skill);
+            var support = Repository.Memoria.SupportDto.FromJson(poco.support);
             list.Add(new Memoria(
                 poco.id - 1,
                 poco.link,

@@ -29,7 +29,7 @@ public sealed partial class CostumeManagePage : Page
     private int verticalCount = 3;
     private int horizontalCount = 7;
     private readonly ObservableCollection<CostumeWithEx> Costumes = [];
-    private readonly ObservableCollection<CostumeWithEx> Pool = [.. Costume.List];
+    private readonly ObservableCollection<CostumeWithEx> Pool = [.. Costume.List.Value];
     private List<CostumeWithEx> selectedCostumes = [];
     private readonly HashSet<FilterType> currentFilters = [.. Enum.GetValues(typeof(FilterType)).Cast<FilterType>()];
     private readonly Dictionary<FilterType, Func<CostumeWithEx, bool>> Filters = [];
@@ -67,10 +67,10 @@ public sealed partial class CostumeManagePage : Page
         }
     }
 
-    private async void RecognizeButton_Click(object sender, RoutedEventArgs e)
+    private void RecognizeButton_Click(object sender, RoutedEventArgs e)
     {
         using var img = new System.Drawing.Bitmap(imgPath);
-        var (result, detected) = await CostumeSearch.Recognise(img, v: verticalCount, h: horizontalCount);
+        var (result, detected) = CostumeSearch.Recognise(img, v: verticalCount, h: horizontalCount);
         result.Save($@"{Director.MitamatchDir()}/result.png");
         foreach (var item in detected)
         {
@@ -104,6 +104,7 @@ public sealed partial class CostumeManagePage : Page
     {
         foreach (var toAdd in Costume
             .List
+            .Value
             .Where(m => selectedCostumes.Select(s => s.Costume.Name).Contains(m.Name)))
         {
             Pool.Add(toAdd);
@@ -119,6 +120,7 @@ public sealed partial class CostumeManagePage : Page
     {
         foreach (var toRemove in Costume
             .List
+            .Value
             .Where(m => selectedCostumes.Select(s => s.Costume.Name).Contains(m.Name)))
         {
             Pool.Remove(toRemove);
@@ -234,6 +236,7 @@ public sealed partial class CostumeManagePage : Page
 
         foreach (var costume in Costume
                 .List
+                .Value
                 .DistinctBy(x => x.Name)
                 .Where(costume => !Pool.Contains(costume))
                 .Where(costume => !Costumes.Select(m => m.Costume.Index).Contains(costume.Index))
@@ -372,6 +375,7 @@ public sealed partial class CostumeManagePage : Page
                 var info = MemberInfo.FromJson(readJson);
                 var indexToCostume = Costume
                     .List
+                    .Value
                     .ToDictionary(m => m.Index);
                 List<CostumeIndexAndEx> costumes
                     = info.Costumes == null

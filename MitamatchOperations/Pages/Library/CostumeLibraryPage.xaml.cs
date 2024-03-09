@@ -17,7 +17,7 @@ namespace Mitama.Pages.Library
     /// </summary>
     public sealed partial class CostumeLibraryPage : Page
     {
-        private readonly ObservableCollection<Costume> _costumes = new(Costume.List);
+        private readonly ObservableCollection<Costume> _costumes = new(Costume.List.Value);
         private readonly MemberInfo[] Info = Util.LoadMembersInfo(Director.ReadCache().Legion);
 
         public CostumeLibraryPage()
@@ -153,7 +153,7 @@ namespace Mitama.Pages.Library
         {
             SuggestingBox.Clear();
             _costumes.Clear();
-            foreach (var costume in Costume.List)
+            foreach (var costume in Costume.List.Value)
             {
                 _costumes.Add(costume);
             }

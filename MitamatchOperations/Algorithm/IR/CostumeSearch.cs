@@ -14,7 +14,7 @@ namespace Mitama.Algorithm.IR;
 
 internal class CostumeSearch
 {
-    public static async Task<(Bitmap, Costume[])> Recognise(Bitmap img, int v, int h)
+    public static (Bitmap, Costume[]) Recognise(Bitmap img, int v, int h)
     {
         var target = img.ToMat();
         var grayMat = target.CvtColor(ColorConversionCodes.BGR2GRAY);
@@ -49,21 +49,25 @@ internal class CostumeSearch
         foreach (var rect in rects) Cv2.Rectangle(target, rect, Scalar.Aquamarine, 5);
 
         {
-            var templates = await Task.WhenAll(Costume.List.Select(async costume =>
-            {
-                try
+            var templates = Costume
+                .List
+                .Value
+                .AsParallel()
+                .Select(costume =>
                 {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(costume.Uri);
-                    var image = new Bitmap((await FileIO.ReadBufferAsync(file)).AsStream());
-                    var descriptors = new Mat();
-                    akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
-                    return (costume, descriptors);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"「{costume.Lily}/{costume.Name}」が見つかりません:\n{ex}");
-                }
-            }));
+                    try
+                    {
+                        var image = new Bitmap(costume.Path);
+                        var descriptors = new Mat();
+                        akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
+                        return (costume, descriptors);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception($"「{costume.Lily}/{costume.Name}」が見つかりません:\n{ex}");
+                    }
+                })
+                .ToList();
 
             var detected = rects.AsParallel()
                 .Select(target.Clone)

@@ -9,7 +9,9 @@ internal record struct Cache(
     string User = null,
     string JWT = null,
     int? MemoriaIndex = null,
-    DateTimeOffset? FetchDate = null
+    int? CostumeIndex = null,
+    DateTimeOffset? FetchDate = null,
+    Version? version = null
 )
 {
     internal static Cache FromJson(string json) => JsonSerializer.Deserialize<Cache>(json);

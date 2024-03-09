@@ -67,7 +67,7 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
                 using var stream = File.OpenWrite($@"{Director.DatabaseDir()}\data");
                 client.DownloadObject("mitamatch", "data", stream);
             });
-            {
+            {   // Extract Memoria images
                 var index = cache.MemoriaIndex ?? 0;
                 foreach (var chunk in Memoria.List.Value.Where(m => m.Id > index).Chunk(40))
                 {
@@ -78,12 +78,25 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
                     }
                     await Task.Delay(50);
                 }
-                Director.CacheWrite((cache with
-                {
-                    MemoriaIndex = Memoria.List.Value[0].Id,
-                    FetchDate = DateTimeOffset.UtcNow,
-                }).ToJsonBytes());
             }
+            {   // Extract Costume images
+                var index = cache.CostumeIndex ?? 0;
+                foreach (var chunk in Costume.List.Value.Where(c => c.Index > index).Chunk(40))
+                {
+                    using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
+                    foreach (var costume in chunk)
+                    {
+                        db.FileStorage.FindById($"$/costume/{costume.Lily}/{costume.Name}.png").SaveAs($@"{Director.CostumeImageDir(costume.Lily)}\{costume.Name}.png");
+                    }
+                    await Task.Delay(50);
+                }
+            }
+            Director.CacheWrite((cache with
+            {
+                MemoriaIndex = Memoria.List.Value[0].Id,
+                CostumeIndex = Costume.List.Value[0].Index,
+                FetchDate = DateTimeOffset.UtcNow,
+            }).ToJsonBytes());
         }
         else
         {

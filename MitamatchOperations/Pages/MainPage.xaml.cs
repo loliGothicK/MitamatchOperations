@@ -113,13 +113,13 @@ public sealed partial class MainPage
     private void LoadCache()
     {
         var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var cache = $@"{desktop}\MitamatchOperations\Cache\cache.json";
-        var exists = File.Exists(cache);
+        var cacheFile = $@"{desktop}\MitamatchOperations\Cache\cache.json";
+        var exists = File.Exists(cacheFile);
         if (exists)
         {
-            Director.ReadCache().Deconstruct(out Project, out User, out var JWT, out _, out _);
-            DiscordUser = JsonConvert.DeserializeObject<DiscordUser>(App.DecodeJwt(JWT).Unwrap());
-            LoginLegion.Text = Project;
+            var cache = Director.ReadCache();
+            DiscordUser = JsonConvert.DeserializeObject<DiscordUser>(App.DecodeJwt(cache.JWT).Unwrap());
+            LoginLegion.Text = cache.Legion;
             UserDisplay.Text = User = DiscordUser.global_name;
             if (DiscordUser.avatar is not null)
             {

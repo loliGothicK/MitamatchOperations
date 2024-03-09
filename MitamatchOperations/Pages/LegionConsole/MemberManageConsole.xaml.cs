@@ -74,19 +74,19 @@ public sealed partial class MemberManageConsole
 
     private void RareSkill_Loaded(object sender, RoutedEventArgs _)
     {
-        sender.As<ComboBox>().ItemsSource = Costume.List.Select(x => x.Lily).Distinct();
+        sender.As<ComboBox>().ItemsSource = Costume.List.Value.Select(x => x.Lily).Distinct();
     }
 
     private void ComboBox1_SelectionChanged(object sender, SelectionChangedEventArgs _)
     {
         chara1 = sender.As<ComboBox>().SelectedItem.As<string>();
-        Skill1.ItemsSource = Costume.List.Where(x => x.Lily == chara1).Select(x => x.RareSkill.Name).Distinct();
+        Skill1.ItemsSource = Costume.List.Value.Where(x => x.Lily == chara1).Select(x => x.RareSkill.Name).Distinct();
     }
 
     private void ComboBox2_SelectionChanged(object sender, SelectionChangedEventArgs _)
     {
         chara2 = sender.As<ComboBox>().SelectedItem.As<string>();
-        Skill2.ItemsSource = Costume.List.Where(x => x.Lily == chara2).Select(x => x.RareSkill.Name).Distinct();
+        Skill2.ItemsSource = Costume.List.Value.Where(x => x.Lily == chara2).Select(x => x.RareSkill.Name).Distinct();
     }
 
     private void Skill1_SelectionChanged(object sender, SelectionChangedEventArgs _)
