@@ -63,6 +63,13 @@ namespace Mitama.Pages.DeckBuilder
         {
             SkillSearchOptionView = new(new Dictionary<string, Dictionary<string, string[]>>
             {
+                ["その他"] = new()
+                {
+                    ["ラベル"] = [
+                        "レジェンダリー",
+                        "アルティメット",
+                    ]
+                },
                 ["レギオンマッチスキル"] = new()
                 {
                     ["基礎バフ"] = [
@@ -156,13 +163,6 @@ namespace Mitama.Pages.DeckBuilder
                         "獲得マッチPtUP/特殊単体",
                         "MP消費DOWN",
                     ],
-                },
-                ["その他"] = new()
-                {
-                    ["ラベル"] = [
-                        "レジェンダリー",
-                        "アルティメット",
-                    ]
                 },
             });
         }
@@ -316,11 +316,11 @@ namespace Mitama.Pages.DeckBuilder
 
         private void Deck_Drop(object sender, DragEventArgs e)
         {
-            foreach (var memoria in selectedMemorias.Where(m => !m.IsLegendary))
+            foreach (var memoria in selectedMemorias.Where(m => !m.Labels.Contains(Label.Legendary)))
             {
                 Deck.Add(new MemoriaWithConcentration(memoria, 4));
             }
-            foreach (var memoria in selectedMemorias.Where(m => m.IsLegendary))
+            foreach (var memoria in selectedMemorias.Where(m => m.Labels.Contains(Label.Legendary)))
             {
                 LegendaryDeck.Add(new MemoriaWithConcentration(memoria, 4));
             }
@@ -2068,8 +2068,8 @@ namespace Mitama.Pages.DeckBuilder
             Filters.Add(FilterType.RangeUp, memoria => memoria.SupportSkill.Effects.Any(eff => eff is RangeUp));
 
             // Others
-            Filters.Add(FilterType.Legendary, memoria => memoria.IsLegendary);
-            Filters.Add(FilterType.Ultimate, memoria => memoria.Link.Contains("ultimate"));
+            Filters.Add(FilterType.Legendary, memoria => memoria.Labels.Contains(Label.Legendary));
+            Filters.Add(FilterType.Ultimate, memoria => memoria.Labels.Contains(Label.Ultimate));
         }
 
         bool ApplyFilter(MemoriaWithConcentration memoriaWith)
@@ -2370,11 +2370,11 @@ namespace Mitama.Pages.DeckBuilder
             }
             LegendaryDeck.Clear();
             Deck.Clear();
-            foreach (var memoria in unit.Memorias.Where(m => m.Memoria.IsLegendary))
+            foreach (var memoria in unit.Memorias.Where(m => m.Memoria.Labels.Contains(Label.Legendary)))
             {
                 LegendaryDeck.Add(memoria);
             }
-            foreach (var memoria in unit.Memorias.Where(m => !m.Memoria.IsLegendary))
+            foreach (var memoria in unit.Memorias.Where(m => !m.Memoria.Labels.Contains(Label.Legendary)))
             {
                 Deck.Add(memoria);
             }
@@ -2437,11 +2437,11 @@ namespace Mitama.Pages.DeckBuilder
                 var (result, detected) = await Match.Recognise(img, Switch.IsOn);
                 LegendaryDeck.Clear();
                 Deck.Clear();
-                foreach (var memoria in detected.Where(m => m.IsLegendary))
+                foreach (var memoria in detected.Where(m => m.Labels.Contains(Label.Legendary)))
                 {
                     LegendaryDeck.Add(new MemoriaWithConcentration(memoria, 4));
                 }
-                foreach (var memoria in detected.Where(m => !m.IsLegendary))
+                foreach (var memoria in detected.Where(m => !m.Labels.Contains(Label.Legendary)))
                 {
                     Deck.Add(new MemoriaWithConcentration(memoria, 4));
                 }

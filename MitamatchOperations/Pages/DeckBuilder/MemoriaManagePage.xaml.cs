@@ -501,8 +501,8 @@ public sealed partial class MemoriaManagePage : Page
         Filters.Add(FilterType.Light, memoria => memoria.Element is Element.Light);
         Filters.Add(FilterType.Dark, memoria => memoria.Element is Element.Dark);
 
-        Filters.Add(FilterType.Legendary, memoria => memoria.IsLegendary);
-        Filters.Add(FilterType.Ultimate, memoria => memoria.Link.Contains("ultimate"));
+        Filters.Add(FilterType.Legendary, memoria => memoria.Labels.Contains(Label.Legendary));
+        Filters.Add(FilterType.Ultimate, memoria => memoria.Labels.Contains(Label.Ultimate));
     }
 
     bool ApplyFilter(Memoria memoria)

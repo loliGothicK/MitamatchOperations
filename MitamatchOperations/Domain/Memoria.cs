@@ -9,6 +9,7 @@ using Mitama.Lib;
 using Mitama.Pages.Common;
 using Mitama.Repository;
 using Syncfusion.UI.Xaml.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Mitama.Domain;
 
@@ -282,6 +283,12 @@ public record MemoriaWithConcentration(Memoria Memoria, int Concentration)
         && Concentration == other.Concentration;
 }
 
+public enum Label
+{
+    Legendary,
+    Ultimate,
+}
+
 public record Memoria(
     int Id,
     string Link,
@@ -293,7 +300,7 @@ public record Memoria(
     int Cost,
     Skill Skill,
     SupportSkill SupportSkill,
-    bool IsLegendary = false
+    Label[] Labels
 )
 {
     public string Path = $@"{Director.MitamatchDir()}\Images\Memoria\{Name}.png";
@@ -347,7 +354,7 @@ public record Memoria(
                 SupportSkill.Name,
                 SupportSkill.Description,
             },
-            IsLegendary,
+            Labels = Labels.Select(label => label.ToString()).ToArray(),
         };
         return System.Text.Json.JsonSerializer.Serialize(json, options: new() { WriteIndented = true });
     }
@@ -359,6 +366,15 @@ public record Memoria(
 
     public static readonly Lazy<Memoria[]> List = new(() =>
     {
+        // local function: POCO -> List<Label>
+        static Label[] Labels(MemoriaPOCO poco)
+        {
+            var list = new List<Label>();
+            if (poco.is_legendary) list.Add(Label.Legendary);
+            if (poco.full_name.Contains("Ultimate")) list.Add(Label.Ultimate);
+            return [.. list];
+        }
+
         List<Memoria> list = [];
         using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
         var data = db.GetCollection<MemoriaPOCO>("memoria").FindAll().ToList();
@@ -395,7 +411,7 @@ public record Memoria(
                 poco.cost,
                 skill.IntoSkill,
                 support.IntoSupportSkill,
-                poco.is_legendary
+                Labels(poco)
             ));
         }
         list.Sort((a, b) => b.Id.CompareTo(a.Id));
