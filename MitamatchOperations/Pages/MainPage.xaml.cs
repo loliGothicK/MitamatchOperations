@@ -120,7 +120,7 @@ public sealed partial class MainPage
             Director.ReadCache().Deconstruct(out Project, out User, out var JWT, out _, out _);
             DiscordUser = JsonConvert.DeserializeObject<DiscordUser>(App.DecodeJwt(JWT).Unwrap());
             LoginLegion.Text = Project;
-            UserDisplay.Text = User;
+            UserDisplay.Text = User = DiscordUser.global_name;
             if (DiscordUser.avatar is not null)
             {
                 Avatar.ImageSource = new BitmapImage(new Uri(@$"https://cdn.discordapp.com/avatars/{DiscordUser.id}/{DiscordUser.avatar}"));
