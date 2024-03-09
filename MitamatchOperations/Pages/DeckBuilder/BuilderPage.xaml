@@ -227,13 +227,6 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <CommandBar x:Name="DeckCommandBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                        <AppBarButton Icon="Share" Label="Share" AllowFocusOnInteraction="True">
-                            <AppBarButton.Flyout>
-                                <Flyout>
-                                    <Button Content="リンクを生成" Click="GenerateLink_Click"/>
-                                </Flyout>
-                            </AppBarButton.Flyout>
-                        </AppBarButton>
                         <AppBarButton Icon="Import" Label="Import" AllowFocusOnInteraction="True" Click="ImportButton_Click" />
                         <AppBarButton Icon="OpenFile" Label="Load" AllowFocusOnInteraction="True">
                             <AppBarButton.Flyout>
