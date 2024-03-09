@@ -2539,7 +2539,7 @@ namespace Mitama.Pages.DeckBuilder
             try
             {
                 using var img = new System.Drawing.Bitmap(items[0].As<StorageFile>()!.Path);
-                var (result, detected) = await Match.Recognise(img, Switch.IsOn);
+                var (result, detected) = Match.Recognise(img, Switch.IsOn);
                 LegendaryDeck.Clear();
                 Deck.Clear();
                 foreach (var memoria in detected.Where(m => m.Labels.Contains(Label.Legendary)))

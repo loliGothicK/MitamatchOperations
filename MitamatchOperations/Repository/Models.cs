@@ -175,6 +175,7 @@ public record SupportDto(
             "RecoveryUp" => new RecoveryUp(),
             "MpCostDown" => new MpCostDown(),
             "RangeUp" => new RangeUp(1),
+            _ => throw new NotImplementedException($"{effect}"),
         }).ToArray(),
         level switch
         {

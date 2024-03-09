@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using MathNet.Numerics.Statistics;
 using Mitama.Domain;
-using Mitama.Lib;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
 
@@ -14,7 +12,7 @@ namespace Mitama.Algorithm.IR;
 
 internal class MemoriaSearch
 {
-    public static async Task<(Bitmap, Memoria[])> Recognise(Bitmap img, int v, int h)
+    public static (Bitmap, Memoria[]) Recognise(Bitmap img, int v, int h)
     {
         var target = img.ToMat();
         var grayMat = target.CvtColor(ColorConversionCodes.BGR2GRAY);
@@ -49,20 +47,25 @@ internal class MemoriaSearch
         foreach (var rect in rects) Cv2.Rectangle(target, rect, Scalar.Aquamarine, 5);
 
         {
-            var templates = await Task.WhenAll(Memoria.List.Value.DistinctBy(m => m.Name).Select(async memoria =>
-            {
-                try
+            var templates = Memoria
+                .List
+                .Value
+                .AsParallel()
+                .Select(memoria =>
                 {
-                    var image = new Bitmap(memoria.Path);
-                    var descriptors = new Mat();
-                    akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
-                    return (memoria, descriptors);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"「{memoria.Name}」が見つかりません:\n{ex}");
-                }
-            }));
+                    try
+                    {
+                        var image = new Bitmap(memoria.Path);
+                        var descriptors = new Mat();
+                        akaze.DetectAndCompute(image.ToMat(), null, out _, descriptors);
+                        return (memoria, descriptors);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception($"「{memoria.Name}」が見つかりません:\n{ex}");
+                    }
+                })
+                .ToList();
 
             var detected = rects.AsParallel()
                 .Select(target.Clone)

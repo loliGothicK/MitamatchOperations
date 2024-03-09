@@ -186,5 +186,7 @@ public partial class App : Application
         }
     }
 
+#pragma warning disable IDE0052 // Remove unread private members
     private Window m_window;
+#pragma warning restore IDE0052 // Remove unread private members
 }

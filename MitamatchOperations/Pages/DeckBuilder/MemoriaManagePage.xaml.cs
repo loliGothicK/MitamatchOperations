@@ -67,10 +67,10 @@ public sealed partial class MemoriaManagePage : Page
         }
     }
 
-    private async void RecognizeButton_Click(object sender, RoutedEventArgs e)
+    private void RecognizeButton_Click(object sender, RoutedEventArgs e)
     {
         using var img = new System.Drawing.Bitmap(imgPath);
-        var (result, detected) = await MemoriaSearch.Recognise(img, v: verticalCount, h: horizontalCount);
+        var (result, detected) = MemoriaSearch.Recognise(img, v: verticalCount, h: horizontalCount);
         foreach (var item in detected.Select(x => new MemoriaWithConcentration(x, 4)))
         {
             Memorias.Add(item);

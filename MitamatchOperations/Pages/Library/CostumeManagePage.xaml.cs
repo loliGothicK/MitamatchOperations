@@ -388,7 +388,7 @@ public sealed partial class CostumeManagePage : Page
                     {
                         ExInfo.Active => @"あり",
                         ExInfo.Inactive => @"なし",
-                        ExInfo.None => string.Empty,
+                        _ => string.Empty,
                     };
                     csv.AppendLine($"{indexToCostume[costume.Index].Lily},{indexToCostume[costume.Index].Name},{ex}");
                 }
