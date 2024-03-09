@@ -17,7 +17,7 @@ public record MemoriaPOCO(
     int cost,
     string skill,
     string support,
-    bool is_legendary
+    string[] labels
 );
 
 public record SkillDto(

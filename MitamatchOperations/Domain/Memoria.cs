@@ -9,7 +9,6 @@ using Mitama.Lib;
 using Mitama.Pages.Common;
 using Mitama.Repository;
 using Syncfusion.UI.Xaml.Data;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Mitama.Domain;
 
@@ -370,7 +369,7 @@ public record Memoria(
         static Label[] Labels(MemoriaPOCO poco)
         {
             var list = new List<Label>();
-            if (poco.is_legendary) list.Add(Label.Legendary);
+            if (poco.labels.Contains("legendary")) list.Add(Label.Legendary);
             if (poco.full_name.Contains("Ultimate")) list.Add(Label.Ultimate);
             return [.. list];
         }
