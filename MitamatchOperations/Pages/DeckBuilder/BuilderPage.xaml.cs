@@ -1050,6 +1050,126 @@ namespace Mitama.Pages.DeckBuilder
                         }
                         break;
                     }
+                case "火属性防御力アップ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FGu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FGu);
+                        }
+                        break;
+                    }
+                case "火属性防御力ダウン":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.FGd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.FGd);
+                        }
+                        break;
+                    }
+                case "水属性防御力アップ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WaGu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WaGu);
+                        }
+                        break;
+                    }
+                case "水属性防御力ダウン":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WaGd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WaGd);
+                        }
+                        break;
+                    }
+                case "風属性防御力アップ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WiGu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WiGu);
+                        }
+                        break;
+                    }
+                case "風属性防御力ダウン":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.WiGd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.WiGd);
+                        }
+                        break;
+                    }
+                case "光属性防御力アップ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.LGu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.LGu);
+                        }
+                        break;
+                    }
+                case "光属性防御力ダウン":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.LGd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.LGd);
+                        }
+                        break;
+                    }
+                case "闇属性防御力アップ":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.DGu);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.DGu);
+                        }
+                        break;
+                    }
+                case "闇属性防御力ダウン":
+                    {
+                        if ((bool)e.Node.IsChecked)
+                        {
+                            _currentFilters.Add(FilterType.DGd);
+                        }
+                        else
+                        {
+                            _currentFilters.Remove(FilterType.DGd);
+                        }
+                        break;
+                    }
                 case "火効果アップ":
                     {
                         if ((bool)e.Node.IsChecked)
