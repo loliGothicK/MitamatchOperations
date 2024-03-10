@@ -112,11 +112,25 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
                 await Task.Delay(50);
             }
         }
+        {   // Extract Charm images
+            var index = cache.CharmIndex ?? 0;
+            foreach (var chunk in Charm.List.Value.Where(c => c.Index > index).Chunk(40))
+            {
+                using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
+                foreach (var charm in chunk)
+                {
+                    db.FileStorage.FindById($"$/charm/{charm.Name}.png").SaveAs($@"{Director.CharmImageDir()}\{charm.Name}.png");
+                }
+                await Task.Delay(50);
+            }
+
+        }
         Director.CacheWrite((cache with
         {
             MemoriaIndex = MaxId<Repository.Memoria.POCO>("memoria"),
             CostumeIndex = MaxId<Repository.Costume.POCO>("costume"),
             OrderIndex = MaxId<Repository.Order.POCO>("order"),
+            CharmIndex = MaxId<Repository.Charm.POCO>("charm"),
         }).ToJsonBytes());
     }
     private static int MaxId<T>(string table)

@@ -152,6 +152,12 @@ internal class Director
         if (!Exists(dir)) CreateDirectory(dir);
         return dir;
     }
+    internal static string CharmImageDir()
+    {
+        var dir = $@"{MitamatchDir()}\Images\Charm";
+        if (!Exists(dir)) CreateDirectory(dir);
+        return dir;
+    }
     internal static string CostumeImageDir(string lily)
     {
         var dir = $@"{MitamatchDir()}\Images\Costume\{lily}";

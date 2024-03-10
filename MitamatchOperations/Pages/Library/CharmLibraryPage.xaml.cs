@@ -15,7 +15,7 @@ namespace Mitama.Pages.Library;
 /// </summary>
 public sealed partial class CharmLibraryPage : Page
 {
-    private readonly ObservableCollection<Charm> _charms = new(Charm.List);
+    private readonly ObservableCollection<Charm> _charms = new(Charm.List.Value);
     public CharmLibraryPage()
     {
         InitializeComponent();
@@ -55,7 +55,7 @@ public sealed partial class CharmLibraryPage : Page
     {
         SuggestingBox.Clear();
         _charms.Clear();
-        foreach (var charm in Charm.List)
+        foreach (var charm in Charm.List.Value)
         {
             _charms.Add(charm);
         }

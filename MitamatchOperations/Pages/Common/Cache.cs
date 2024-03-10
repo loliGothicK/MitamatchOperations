@@ -11,6 +11,7 @@ internal record struct Cache(
     int? MemoriaIndex = null,
     int? CostumeIndex = null,
     int? OrderIndex = null,
+    int? CharmIndex = null,
     DateTimeOffset? FetchDate = null,
     Version? version = null
 )

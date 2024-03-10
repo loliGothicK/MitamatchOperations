@@ -264,3 +264,14 @@ public class Order
         bool has_template
     );
 }
+
+public class Charm
+{
+    public record POCO(
+        int id,
+        string name,
+        string ability,
+        int[] status,
+        DateTime date
+    );
+}
