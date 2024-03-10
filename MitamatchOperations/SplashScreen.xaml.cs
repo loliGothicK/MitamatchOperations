@@ -133,5 +133,4 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
             return 0;
         }
     }
-
 }

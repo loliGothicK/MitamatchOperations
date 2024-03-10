@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 
 namespace Mitama.Domain;
 
@@ -9,8 +10,19 @@ public record Charm(
     DateOnly Date
 )
 {
-    public Uri Uri => new($"ms-appx:///Assets/charm/{Name}.png");
     public string Path = $"/Assets/charm/{Name}.png";
+
+    public string ToPrettyJSON()
+    {
+        var json = new
+        {
+            name = Name,
+            ability = Ability,
+            status = Status.ToArray(),
+            date = Date.ToString("yyyy-MM-dd"),
+        };
+        return JsonSerializer.Serialize(json, options: new() { WriteIndented = true });
+    }
 
     public static readonly Charm[] List = [
         new Charm(
