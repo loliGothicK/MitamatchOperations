@@ -281,11 +281,11 @@ public sealed partial class ControlDashboardPage
 
         _ = MitamatchOperations.MLOrderModel.Predict(new()
         {
-            ImageSource = File.ReadAllBytes((await Package.Current.InstalledLocation.GetFileAsync(@"Assets\ML\DataSet\wait_or_active\active\0001.png")).Path)
+            ImageSource = File.ReadAllBytes((await Package.Current.InstalledLocation.GetFileAsync(@"Assets\OrderTemplates\暗黒業火.png")).Path)
         });
         _ = MitamatchOperations.MLActivatingModel.Predict(new()
         {
-            ImageSource = File.ReadAllBytes((await Package.Current.InstalledLocation.GetFileAsync(@"Assets\ML\DataSet\is_activating\True\0001.png")).Path)
+            ImageSource = File.ReadAllBytes((await Package.Current.InstalledLocation.GetFileAsync(@"Assets\OrderTemplates\暗黒業火.png")).Path)
         });
 
         // IOのタイミングをずらすために 40 ms ずつずらす

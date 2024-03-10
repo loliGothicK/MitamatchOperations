@@ -123,7 +123,6 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
                 }
                 await Task.Delay(50);
             }
-
         }
         Director.CacheWrite((cache with
         {
@@ -133,6 +132,7 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
             CharmIndex = MaxId<Repository.Charm.POCO>("charm"),
         }).ToJsonBytes());
     }
+
     private static int MaxId<T>(string table)
     {
         try
