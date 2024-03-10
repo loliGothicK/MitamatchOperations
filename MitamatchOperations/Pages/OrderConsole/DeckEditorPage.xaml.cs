@@ -31,7 +31,7 @@ public sealed partial class DeckEditorPage
     public static readonly int[] TimeSource = Enumerable.Range(0, 12).Select(t => t * 5).ToArray();
     private ObservableCollection<TimeTableItem> _deck = [];
     private readonly ObservableCollection<TimeTableItem> _referDeck = [];
-    private ObservableCollection<Order> Sources = [.. Order.List.Where(o => o.Payed)];
+    private ObservableCollection<Order> Sources = [.. Order.List.Value.Where(o => o.Payed)];
     private new int Margin { get; set; } = 5;
     private MemberInfo[] _members = [];
     private readonly List<HoldOn> _holdOns = [];
@@ -438,7 +438,7 @@ public sealed partial class DeckEditorPage
         {
             case "無課金":
                 {
-                    foreach (var item in Order.List.Where(item => !item.Payed))
+                    foreach (var item in Order.List.Value.Where(item => !item.Payed))
                         Sources.Add(item);
                     break;
                 }
@@ -617,7 +617,7 @@ public sealed partial class DeckEditorPage
         var deck = DeckLoadBox.SelectedItem.As<DeckJson>();
         _deck.Clear();
         Sources.Clear();
-        Sources = [.. ((bool)NotPayedCheckBox.IsChecked ? Order.List : Order.List.Where(o => o.Payed))];
+        Sources = [.. ((bool)NotPayedCheckBox.IsChecked ? Order.List.Value : Order.List.Value.Where(o => o.Payed))];
         foreach (var item in deck.Items.Select(item => (TimeTableItem)item))
         {
             _deck.Add(item);
@@ -898,6 +898,7 @@ internal record struct DeckJsonProxy(int Index, int Delay, int Start, int End, s
 {
     private readonly static Dictionary<int, int> LegacyToV2 = Order
         .List
+        .Value
         .Where(o => o.Payed)
         .Reverse()
         .Select((order, index) => (order, index))

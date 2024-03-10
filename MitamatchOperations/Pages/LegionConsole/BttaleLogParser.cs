@@ -117,13 +117,13 @@ internal partial class BattleLogParser
         {
             var match = prepareOrderRegex.Match(content);
             var order = match.Groups["order"].Value;
-            return new PrepareOrder(Order.List.MinBy(o => Algo.LevenshteinRate(order, o.Name)));
+            return new PrepareOrder(Order.List.Value.MinBy(o => Algo.LevenshteinRate(order, o.Name)));
         }
         else if (activateOrderRegex.IsMatch(content))
         {
             var match = activateOrderRegex.Match(content);
             var order = match.Groups["order"].Value;
-            return new ActivateOrder(Order.List.MinBy(o => Algo.LevenshteinRate(order, o.Name)));
+            return new ActivateOrder(Order.List.Value.MinBy(o => Algo.LevenshteinRate(order, o.Name)));
         }
         else if (rareSkillRegex.IsMatch(content))
         {

@@ -37,6 +37,7 @@ public sealed partial class DataGrid : Page
                     {
                         var legacyToV2 = Order
                             .List
+                            .Value
                             .Where(o => o.Payed)
                             .Reverse()
                             .Select((order, index) => (order, index))

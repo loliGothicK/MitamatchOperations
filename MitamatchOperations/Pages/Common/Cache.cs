@@ -10,6 +10,7 @@ internal record struct Cache(
     string JWT = null,
     int? MemoriaIndex = null,
     int? CostumeIndex = null,
+    int? OrderIndex = null,
     DateTimeOffset? FetchDate = null,
     Version? version = null
 )

@@ -248,3 +248,19 @@ public class Costume
         };
     }
 }
+
+public class Order
+{
+    public record POCO(
+        int id,
+        string name,
+        int[] status,
+        string effect,
+        string description,
+        int prepare_time,
+        int active_time,
+        bool payed,
+        string kind,
+        bool has_template
+    );
+}

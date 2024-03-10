@@ -72,6 +72,7 @@ public sealed partial class HistoriaViewer : Page
         OpponentOrders.Clear();
         var legacyToV2 = Order
             .List
+            .Value
             .Where(o => o.Payed)
             .Reverse()
             .Select((order, index) => (order, index))

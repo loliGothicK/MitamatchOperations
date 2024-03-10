@@ -116,6 +116,7 @@ public sealed partial class ControlDashboardPage
             // テンプレートマッチングのための準備
             Templates = await Task.WhenAll(Order
                 .List
+                .Value
                 .Where(order => order.HasTemplate)
                 .Select(async order =>
                 {
@@ -149,7 +150,9 @@ public sealed partial class ControlDashboardPage
                 _captureEvent.Wait();
                 // オーダー情報を読取る
                 var cap = await _capture!.CaptureOrderInfo();
-                var info = Order.List
+                var info = Order
+                        .List
+                        .Value
                         .Select(order => (order, Algo.LevenshteinRate(order.Name, cap)))
                         .Where(item => item.Item2 < 0.6)
                         .ToArray();
@@ -170,7 +173,7 @@ public sealed partial class ControlDashboardPage
                     case SuccessResult(var user, var order):
                         {
                             if (_reminds.Count == 0) break;
-                            var ordered = Order.List.MinBy(o => Algo.LevenshteinRate(o.Name, order));
+                            var ordered = Order.List.Value.MinBy(o => Algo.LevenshteinRate(o.Name, order));
                             if (_deck.Select(e => e.Order.Index).ToArray().Contains(ordered.Index)
                                 && !_results.Select(r => r.Order.Index).ToArray().Contains(ordered.Index))
                             {
