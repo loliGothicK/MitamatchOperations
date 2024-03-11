@@ -145,7 +145,7 @@
                     MinHeight="500"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    ItemsSource="{x:Bind domain:Order.List}"
+                    ItemsSource="{x:Bind domain:Order.List.Value}"
                     ItemTemplate="{StaticResource OrderItemTemplate}"
                     IsItemClickEnabled="True"
                     CanDragItems="True"

@@ -22,8 +22,8 @@ namespace Mitama.Pages.OrderConsole;
 /// </summary>
 public sealed partial class OrderManagerPage
 {
-    private ObservableCollection<Order> Sources { get; } = new();
-    private ObservableCollection<Order> OrdersInPossession { get; } = new();
+    private ObservableCollection<Order> Sources { get; } = [];
+    private ObservableCollection<Order> OrdersInPossession { get; } = [];
 
     public OrderManagerPage()
     {
