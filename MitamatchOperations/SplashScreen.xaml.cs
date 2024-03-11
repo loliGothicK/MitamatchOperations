@@ -78,7 +78,7 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
             await Task.Delay(500);
         }
         {   // Extract Memoria images
-            var index = cache.MemoriaIndex ?? 0;
+            var index = cache.MemoriaIndex ?? -1;
             foreach (var chunk in Memoria.List.Value.Where(m => m.Id > index).Chunk(40))
             {
                 using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
@@ -90,7 +90,7 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
             }
         }
         {   // Extract Costume images
-            var index = cache.CostumeIndex ?? 0;
+            var index = cache.CostumeIndex ?? -1;
             foreach (var chunk in Costume.List.Value.Where(c => c.Index > index).Chunk(40))
             {
                 using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
@@ -102,7 +102,7 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
             }
         }
         {   // Extract Order images
-            var index = cache.OrderIndex ?? 0;
+            var index = cache.OrderIndex ?? -1;
             foreach (var chunk in Order.List.Value.Where(o => o.Index > index).Chunk(40))
             {
                 using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
@@ -114,7 +114,7 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
             }
         }
         {   // Extract Charm images
-            var index = cache.CharmIndex ?? 0;
+            var index = cache.CharmIndex ?? -1;
             foreach (var chunk in Charm.List.Value.Where(c => c.Index > index).Chunk(40))
             {
                 using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
