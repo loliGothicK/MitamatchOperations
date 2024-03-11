@@ -119,7 +119,7 @@ public sealed partial class MainPage
         {
             var cache = Director.ReadCache();
             DiscordUser = JsonConvert.DeserializeObject<DiscordUser>(App.DecodeJwt(cache.JWT).Unwrap());
-            LoginLegion.Text = cache.Legion;
+            LoginLegion.Text = Project = cache.Legion;
             UserDisplay.Text = User = DiscordUser.global_name;
             if (DiscordUser.avatar is not null)
             {
