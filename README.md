@@ -9,7 +9,7 @@ _MitamatchOperations_ はオーダー順を組んだり、ユニットを編成�
 実はレギオンマッチの画面をキャプチャしてリアルタイムで解析して情報を表示してくれる機能もあります（preview版）.
 
 > [!NOTE]
-> この機能は preview 版です.
+> Control Dashboard は preview 版です.
 > キャプチャーするラスバレの画面サイズが 1920 × 1080 ではない場合うまく動きません.
 
 ## How to install
@@ -61,7 +61,7 @@ _MitamatchOperations_ はオーダー順を組んだり、ユニットを編成�
 
 ![](/README/Library.png)
 
-### Control Dashboard
+### Control Dashboard (preview)
 
 ![](/README/ControlDashboard.png)
 
