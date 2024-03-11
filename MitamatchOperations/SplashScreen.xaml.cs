@@ -17,6 +17,7 @@ namespace Mitama;
 public sealed partial class SplashScreen : WinUIEx.SplashScreen
 {
     private readonly Func<Task<bool>> PerformLogin;
+
     public SplashScreen(System.Type window, Func<Task<bool>> IO) : base(window)
     {
         InitializeComponent();
