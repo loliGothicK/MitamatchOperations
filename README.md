@@ -18,11 +18,29 @@ _MitamatchOperations_ はオーダー順を組んだり、ユニットを編成�
 ## Features
 
 - Legion Console
-    - レギオンメンバーの登録
+    - レギオンメンバーの追加/削除
+
+    ![](/README/LegionConsole_Top.png)
+
     - 編成の管理
+
+    ![](/README/LegionConsole_UnitViewer.png)
+
     - バトルログの解析
+
+    ![](/README/LegionConsole_Input.png)
+
+    - 解析結果の閲覧
+
+    ![](/README/LegionConsole_Historia.png)
+
 - Management
     - 持ち物の登録
+
+    ![](/README/Management_Costume.png)
+    ![](/README/Management_Memoria.png)
+    ![](/README/Management_Order.png)
+
 - Legion Sheet
     - 持ち物の確認
 - Order Console
