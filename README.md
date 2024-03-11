@@ -9,48 +9,61 @@ _MitamatchOperations_ はオーダー順を組んだり、ユニットを編成�
 実はレギオンマッチの画面をキャプチャしてリアルタイムで解析して情報を表示してくれる機能もあります（preview版）.
 
 > [!NOTE]
-> この機能は作者の環境に合わせて作ってあるので、ユーザーが使うと画面サイズが 1920 × 1080 ではない場合うまく動きません）.
+> この機能は preview 版です.
+> キャプチャーするラスバレの画面サイズが 1920 × 1080 ではない場合うまく動きません.
 
 ## How to install
 
-[インストール方法 | user's manual](https://zenn.dev/mitama/books/42e439d9a9e358/viewer/9d57d4) を参照してください.
+[インストール方法](https://zenn.dev/mitama/books/42e439d9a9e358/viewer/9d57d4) を参照してください.
 
 ## Features
 
-- Legion Console
-    - レギオンメンバーの追加/削除
+### Legion Console
 
-    ![](/README/LegionConsole_Top.png)
+#### レギオンメンバーの追加/削除
 
-    - 編成の管理
+![](/README/LegionConsole_Top.png)
 
-    ![](/README/LegionConsole_UnitViewer.png)
+#### 編成の管理
 
-    - バトルログの解析
+![](/README/LegionConsole_UnitViewer.png)
 
-    ![](/README/LegionConsole_Input.png)
+#### バトルログの解析
 
-    - 解析結果の閲覧
+![](/README/LegionConsole_Input.png)
 
-    ![](/README/LegionConsole_Historia.png)
+#### 解析結果の閲覧
 
-- Management
-    - 持ち物の登録
+![](/README/LegionConsole_Historia.png)
 
-    ![](/README/Management_Costume.png)
-    ![](/README/Management_Memoria.png)
-    ![](/README/Management_Order.png)
+### Management
+   
+#### 持ち物の登録
 
-- Legion Sheet
-    - 持ち物の確認
-- Order Console
-    - オーダータイムラインの作成
-- Deck Builder
-    - ユニットの作成（高度な検索オプションあります）
-- Library
-    - データを検索
-- Control Dashboard
-    - 秘密の機能だよ
+![](/README/Management_Costume.png)
+![](/README/Management_Memoria.png)
+![](/README/Management_Order.png)
+
+### Legion Sheet
+
+![](/README/Sheet.png)
+
+### Order Console
+
+![](/README/OrderConsole.png)
+
+
+### Deck Builder
+
+![](/README/DeckBuilder.png)
+
+### Library
+
+![](/README/Library.png)
+
+### Control Dashboard
+
+![](/README/ControlDashboard.png)
 
 ## Reference
 
