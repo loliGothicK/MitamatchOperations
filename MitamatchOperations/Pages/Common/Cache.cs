@@ -13,7 +13,7 @@ internal record struct Cache(
     int? OrderIndex = null,
     int? CharmIndex = null,
     DateTimeOffset? FetchDate = null,
-    Version? version = null
+    Version? Version = null
 )
 {
     internal static Cache FromJson(string json) => JsonSerializer.Deserialize<Cache>(json);

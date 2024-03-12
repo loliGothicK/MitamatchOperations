@@ -61,17 +61,14 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
         var credential = Google.Apis.Auth.OAuth2.GoogleCredential.FromJson(JsonConvert.SerializeObject(json));
         var client = StorageClient.Create(credential);
         var cache = Director.ReadCache();
-        if (cache.FetchDate is null || cache.FetchDate < client.ListObjects("mitamatch", "data").First().TimeStorageClassUpdatedDateTimeOffset)
+        if (cache.FetchDate is null || cache.FetchDate < client.ListObjects("mitamatch", "data").First().UpdatedDateTimeOffset)
         {
+            cache.FetchDate = DateTimeOffset.Now;
             await Task.Run(() =>
             {
                 using var stream = File.OpenWrite($@"{Director.DatabaseDir()}\data");
                 client.DownloadObject("mitamatch", "data", stream);
             });
-            Director.CacheWrite((cache with
-            {
-                FetchDate = DateTimeOffset.UtcNow,
-            }).ToJsonBytes());
         }
         else
         {
@@ -131,6 +128,7 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
             CostumeIndex = MaxId<Repository.Costume.POCO>("costume"),
             OrderIndex = MaxId<Repository.Order.POCO>("order"),
             CharmIndex = MaxId<Repository.Charm.POCO>("charm"),
+            Version = Pages.Common.Version.Current,
         }).ToJsonBytes());
     }
 

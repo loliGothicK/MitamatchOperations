@@ -212,7 +212,7 @@ public partial record struct Costume(
                 [.. skills],
                 poco.ex is null
                     ? Optional<ExSkill>.None
-                    : new ExSkill(poco.rare.Split(":::").First(), poco.rare.Split(":::").Last())
+                    : new ExSkill(poco.ex.Split(":::").First(), poco.ex.Split(":::").Last())
             ));
         }
         list.Sort((a, b) => b.Index.CompareTo(a.Index));
