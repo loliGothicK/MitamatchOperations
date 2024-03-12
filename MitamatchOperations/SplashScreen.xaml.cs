@@ -141,11 +141,11 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
             using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
             var col = db.GetCollection<T>(table);
             var max = col.Max("_id");
-            return max.RawValue is null ? 0 : (int)max.RawValue;
+            return max.RawValue is null ? -1 : (int)max.RawValue;
         }
         catch
         {
-            return 0;
+            return -1;
         }
     }
 }
