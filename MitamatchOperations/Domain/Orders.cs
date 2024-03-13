@@ -146,9 +146,7 @@ namespace Mitama.Domain
         public static readonly Lazy<Order[]> List = new(() =>
         {
             List<Order> list = [];
-            using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
-            var data = db.GetCollection<Repository.Order.POCO>("order").FindAll().ToList();
-            foreach (var poco in data)
+            foreach (var poco in Repository.Repository.LiteDB.List<Repository.Order.POCO>())
             {
                 list.Add(new Order(
                     poco.id - 1,

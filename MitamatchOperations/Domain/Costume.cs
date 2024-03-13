@@ -198,9 +198,7 @@ public partial record struct Costume(
         }
 
         List<Costume> list = [];
-        using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
-        var data = db.GetCollection<Repository.Costume.POCO>("costume").FindAll().ToList();
-        foreach (var poco in data)
+        foreach (var poco in Repository.Repository.LiteDB.List<Repository.Costume.POCO>())
         {
             var skills = poco.skills.Select(skill => Repository.Costume.SkillDto.FromJson(skill).IntoLilySkill);
             list.Add(new Costume(

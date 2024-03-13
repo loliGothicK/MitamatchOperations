@@ -374,9 +374,7 @@ public partial record Memoria(
         }
 
         List<Memoria> list = [];
-        using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
-        var data = db.GetCollection<Repository.Memoria.POCO>("memoria").FindAll().ToList();
-        foreach (var poco in data)
+        foreach (var poco in Repository.Repository.LiteDB.List<Repository.Memoria.POCO>())
         {
             var skill = Repository.Memoria.SkillDto.FromJson(poco.skill);
             var support = Repository.Memoria.SupportDto.FromJson(poco.support);

@@ -187,9 +187,9 @@
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="cd &quot;$(ProjectDir)&quot;&#xD;&#xA;regiter_secrets.exe --input App.xaml.cs --type PreBuild&#xD;&#xA;regiter_secrets.exe --input SplashScreen.xaml.cs --type PreBuild" />
+    <Exec Command="cd &quot;$(ProjectDir)&quot;&#xD;&#xA;regiter_secrets.exe --input App.xaml.cs --type PreBuild&#xD;&#xA;regiter_secrets.exe --input Repository/Repository.cs --type PreBuild" />
   </Target>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="cd &quot;$(ProjectDir)&quot; &#xD;&#xA;regiter_secrets.exe --input App.xaml.cs --type PostBuild&#xD;&#xA;regiter_secrets.exe --input SplashScreen.xaml.cs --type PostBuild" />
+    <Exec Command="cd &quot;$(ProjectDir)&quot; &#xD;&#xA;regiter_secrets.exe --input App.xaml.cs --type PostBuild&#xD;&#xA;regiter_secrets.exe --input Repository/Repository.cs --type PostBuild" />
   </Target>
 </Project>

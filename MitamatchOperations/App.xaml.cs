@@ -10,6 +10,7 @@ using Mitama.Lib;
 using Mitama.Pages.Common;
 using Newtonsoft.Json;
 using Windows.ApplicationModel;
+using static Mitama.Repository.Repository;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -86,7 +87,7 @@ public partial class App : Application
                 case Ok<string, string>(var json):
                     {
                         var user = JsonConvert.DeserializeObject<DiscordUser>(json);
-                        Upsert(user);
+                        DataStore.Upsert(user);
                         // Cache に JWT token を保存
                         var cache = Director.ReadCache() with { JWT = jwtToken, User = user.global_name };
                         Director.CacheWrite(cache.ToJsonBytes());
@@ -119,73 +120,6 @@ public partial class App : Application
             return new Err<string, string>(ex.Message);
         }
     }
-
-    private static void Upsert(DiscordUser user)
-    {
-        var json = new
-        {
-            type = "service_account",
-            project_id = "assaultlily",
-            private_key_id = "13b3e809d5e493489d67018ac1d69d5c2e2eaa04",
-            private_key = "GOOGLE_CLOUD_PRIVATE_KEY",
-            client_email = "mitamatch@assaultlily.iam.gserviceaccount.com",
-            client_id = "116107053801726389433",
-            auth_uri = "https://accounts.google.com/o/oauth2/auth",
-            token_uri = "https://oauth2.googleapis.com/token",
-            auth_provider_x509_cert_url = "https://www.googleapis.com/oauth2/v1/certs",
-            client_x509_cert_url = "https://www.googleapis.com/robot/v1/metadata/x509/mitamatch%40assaultlily.iam.gserviceaccount.com",
-            universe_domain = "googleapis.com"
-        };
-        var credential = Google.Apis.Auth.OAuth2.GoogleCredential.FromJson(JsonConvert.SerializeObject(json));
-        var client = new DatastoreClientBuilder() { Credential = credential }.Build();
-        DatastoreDb db = DatastoreDb.Create("assaultlily", string.Empty, client);
-
-        var key = db.CreateKeyFactory("user").CreateKey(user.id);
-        var result = db.Lookup(key);
-        var appVersion = string.Format("Version: {0}.{1}.{2}.{3}",
-                    Package.Current.Id.Version.Major,
-                    Package.Current.Id.Version.Minor,
-                    Package.Current.Id.Version.Build,
-                    Package.Current.Id.Version.Revision);
-
-        if (result is not null)
-        {
-            var entity = new Entity()
-            {
-                Key = key,
-                ["id"] = user.id,
-                ["avatar"] = user.avatar,
-                ["username"] = user.username,
-                ["discriminator"] = user.discriminator,
-                ["global_name"] = user.global_name,
-                ["email"] = user.email,
-                ["version"] = appVersion,
-                ["created_at"] = result["created_at"],
-                ["updated_at"] = DateTime.UtcNow
-            };
-
-            db.Upsert(entity);
-        }
-        else
-        {
-            var entity = new Entity()
-            {
-                Key = key,
-                ["id"] = user.id,
-                ["avatar"] = user.avatar,
-                ["username"] = user.username,
-                ["discriminator"] = user.discriminator,
-                ["global_name"] = user.global_name,
-                ["email"] = user.email,
-                ["version"] = appVersion,
-                ["created_at"] = DateTime.UtcNow,
-                ["updated_at"] = DateTime.UtcNow
-            };
-
-            db.Upsert(entity);
-        }
-    }
-
 #pragma warning disable IDE0052 // Remove unread private members
     private Window m_window;
 #pragma warning restore IDE0052 // Remove unread private members

@@ -6,8 +6,14 @@ using Range = Mitama.Domain.Range;
 
 namespace Mitama.Repository;
 
+interface IModel
+{
+    public static abstract string Name();
+}
+
 public class Memoria
 {
+
     public record POCO(
         int id,
         string link,
@@ -20,7 +26,10 @@ public class Memoria
         string skill,
         string support,
         string[] labels
-    );
+    ) : IModel
+    {
+        public static string Name() => "memoria";
+    }
 
     public record SkillDto(
         string name,
@@ -208,7 +217,10 @@ public class Costume
         string rare,
         string ex,
         string[] skills
-    );
+    ) : IModel
+    {
+        public static string Name() => "costume";
+    }
 
     public record struct SkillItemDto(string type, double value);
 
@@ -262,7 +274,10 @@ public class Order
         bool payed,
         string kind,
         bool has_template
-    );
+    ) : IModel
+    {
+        public static string Name() => "order";
+    }
 }
 
 public class Charm
@@ -273,5 +288,8 @@ public class Charm
         string ability,
         int[] status,
         DateTime date
-    );
+    ) : IModel
+    {
+        public static string Name() => "charm";
+    }
 }

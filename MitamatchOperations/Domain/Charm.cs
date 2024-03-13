@@ -31,9 +31,7 @@ public record Charm(
     public static readonly Lazy<Charm[]> List = new(() =>
     {
         List<Charm> list = [];
-        using var db = new LiteDatabase(@$"{Director.DatabaseDir()}\data");
-        var data = db.GetCollection<Repository.Charm.POCO>("charm").FindAll().ToList();
-        foreach (var poco in data)
+        foreach (var poco in Repository.Repository.LiteDB.List<Repository.Charm.POCO>())
         {
             list.Add(new Charm(
                 poco.id - 1,
