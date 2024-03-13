@@ -148,22 +148,22 @@ internal class Repository
 
             Director.CacheWrite((cache with
             {
-                MemoriaIndex = MaxId<Memoria.POCO>("memoria"),
-                CostumeIndex = MaxId<Costume.POCO>("costume"),
-                OrderIndex = MaxId<Order.POCO>("order"),
-                CharmIndex = MaxId<Charm.POCO>("charm"),
+                MemoriaIndex = MaxId<Memoria.POCO>(),
+                CostumeIndex = MaxId<Costume.POCO>(),
+                OrderIndex = MaxId<Order.POCO>(),
+                CharmIndex = MaxId<Charm.POCO>(),
                 Version = Pages.Common.Version.Current,
             }).ToJsonBytes());
 
             return Task.CompletedTask;
         }
 
-        private static int MaxId<T>(string table)
+        private static int MaxId<T>() where T : IModel
         {
             try
             {
                 using var database = new LiteDatabase($@"{Director.DatabaseDir()}\data");
-                var col = database.GetCollection<T>(table);
+                var col = database.GetCollection<T>(T.Name());
                 var max = col.Max("_id");
                 return max.RawValue is null ? -1 : (int)max.RawValue;
             }
