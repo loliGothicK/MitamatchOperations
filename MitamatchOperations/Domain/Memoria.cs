@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using LiteDB;
 using Microsoft.UI.Xaml;
-using Mitama.Lib;
+using static Mitama.Lib.Indoc;
 using Mitama.Pages.Common;
 using Syncfusion.UI.Xaml.Data;
 
@@ -304,12 +304,12 @@ public partial record Memoria(
     public string Path = $@"{Director.MitamatchDir()}\Images\Memoria\{Name}.png";
     public string ToJson()
     {
-        return new Indoc($$"""
+        return Unindent($$"""
             {
                 "link": "{{HttpUtility.UrlEncode(Link)}}",
                 "name": "{{HttpUtility.UrlEncode(Name)}}"
             }
-        """).Text;
+        """);
     }
 
     public string ToPrettyJson()

@@ -16,6 +16,7 @@ using Mitama.Pages.Common;
 using Mitama.Pages.Main;
 using Mitama.Pages.OrderConsole;
 using WinRT;
+using static Mitama.Lib.Indoc;
 
 namespace Mitama.Pages.LegionConsole;
 
@@ -213,7 +214,7 @@ public sealed partial class MemberManageConsole
 
         Remarks.Document.GetText(TextGetOptions.UseCrlf, out var remarks);
 
-        var text = new Indoc($"""
+        var text = Unindent($"""
         # {opponent}({kousei})
 
         ## Rare Skills
@@ -231,17 +232,17 @@ public sealed partial class MemberManageConsole
         
         {order}
 
-        """).Text;
+        """);
         if (remarks != "")
         {
-            text += new Indoc($"""
+            text += Unindent($"""
 
                 ## Remarks
 
                 ```
                 {remarks}
                 ```
-            """).Text;
+            """);
         }
         System.Windows.Clipboard.SetText(text);
     }
