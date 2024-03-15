@@ -107,7 +107,7 @@ internal class Repository
             var cache = Director.ReadCache();
 
             var index = cache.MemoriaIndex ?? -1;
-            foreach (var chunk in Domain.Memoria.List.Value.Where(m => m.Id > index).Chunk(40))
+            foreach (var chunk in Domain.Memoria.List.Value.Where(m => m.Id >= index).Chunk(40))
             {
                 using var database = new LiteDatabase($@"{Director.DatabaseDir()}\data");
                 foreach (var memoria in chunk)
@@ -117,7 +117,7 @@ internal class Repository
             }
 
             index = cache.CostumeIndex ?? -1;
-            foreach (var chunk in Domain.Costume.List.Value.Where(c => c.Index > index).Chunk(40))
+            foreach (var chunk in Domain.Costume.List.Value.Where(c => c.Index >= index).Chunk(40))
             {
                 using var database = new LiteDatabase($@"{Director.DatabaseDir()}\data");
                 foreach (var costume in chunk)
@@ -137,7 +137,7 @@ internal class Repository
             }
 
             index = cache.CharmIndex ?? -1;
-            foreach (var chunk in Domain.Charm.List.Value.Where(c => c.Index > index).Chunk(40))
+            foreach (var chunk in Domain.Charm.List.Value.Where(c => c.Index >= index).Chunk(40))
             {
                 using var database = new LiteDatabase($@"{Director.DatabaseDir()}\data");
                 foreach (var charm in chunk)
