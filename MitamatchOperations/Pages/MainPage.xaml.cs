@@ -11,6 +11,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Mitama.Domain;
 using Mitama.Lib;
 using Mitama.Pages.Common;
+using Mitama.Pages.Common.Operations;
 using Mitama.Pages.Main;
 using Newtonsoft.Json;
 using Windows.ApplicationModel;
@@ -65,6 +66,7 @@ public sealed partial class MainPage
     public string Project = "新規プロジェクト";
     public string User = "不明なユーザー";
     public DiscordUser DiscordUser { get; set; }
+    private System.Type currentFrame = typeof(LegionConsolePage);
 
     public UIElement GetAppTitleBar => AppTitleBar;
 
@@ -186,7 +188,7 @@ public sealed partial class MainPage
             [Control.ControlDashboard.Name] = typeof(ControlDashboardPage),
         };
 
-        var pageType = mapping[item];
+        var pageType = currentFrame = mapping[item];
         if (RootFrame.CurrentSourcePageType == pageType) return;
         Navigate(pageType);
     }
@@ -256,6 +258,16 @@ public sealed partial class MainPage
         Director.CacheWrite((Director.ReadCache() with { Legion = Project, User = User }).ToJsonBytes());
         await Task.Delay(2000);
         InfoBar.IsOpen = false;
+    }
+
+    private void UndoButton_Click(object _, RoutedEventArgs e)
+    {
+        RootFrame.Navigate(currentFrame, new Undo());
+    }
+
+    private void RedoButton_Click(object _, RoutedEventArgs e)
+    {
+        RootFrame.Navigate(currentFrame, new Redo());
     }
 }
 

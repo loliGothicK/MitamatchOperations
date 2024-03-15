@@ -105,6 +105,28 @@
                                 </ribbon:RibbonButton.Icon>
                             </ribbon:RibbonButton>
                         </ribbon:RibbonGroup>
+                        <ribbon:RibbonGroup Header="Edit">
+                            <ribbon:RibbonButton Content="Undo"
+                                                 AllowedSizeModes="Normal"
+                                                 Click="UndoButton_Click">
+                                <ribbon:RibbonButton.Icon>
+                                    <SymbolIcon Symbol="Undo"/>
+                                </ribbon:RibbonButton.Icon>
+                                <ribbon:RibbonButton.KeyboardAccelerators>
+                                    <KeyboardAccelerator Key="Z" Modifiers="Control"/>
+                                </ribbon:RibbonButton.KeyboardAccelerators>
+                            </ribbon:RibbonButton>
+                            <ribbon:RibbonButton Content="Redo"
+                                                 AllowedSizeModes="Normal"
+                                                 Click="RedoButton_Click">
+                                <ribbon:RibbonButton.Icon>
+                                    <SymbolIcon Symbol="Redo"/>
+                                </ribbon:RibbonButton.Icon>
+                                <ribbon:RibbonButton.KeyboardAccelerators>
+                                    <KeyboardAccelerator Key="Z" Modifiers="Control,Shift"/>
+                                </ribbon:RibbonButton.KeyboardAccelerators>
+                            </ribbon:RibbonButton>
+                        </ribbon:RibbonGroup>
                         <ribbon:RibbonGroup Header="Data">
                             <ribbon:RibbonButton Content="Import"
                                                  AllowedSizeModes="Large">

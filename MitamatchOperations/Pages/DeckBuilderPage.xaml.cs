@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using Mitama.Pages.Common.Operations;
 using Mitama.Pages.DeckBuilder;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -21,7 +22,7 @@ namespace Mitama.Pages
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is string parameter && !string.IsNullOrWhiteSpace(parameter))
+            if (e.Parameter is Edit parameter)
             {
                 EditFrame.Navigate(typeof(BuilderPage), parameter);
             }
