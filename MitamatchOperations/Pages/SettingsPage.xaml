@@ -29,6 +29,17 @@
                             Style="{StaticResource AccentButtonStyle}"
                             Click="Button_Click"/>
                 </controls:SettingsCard>
+                <controls:SettingsCard Description="キャッシュ削除"
+                                       Header="キャッシュ"
+                                       HeaderIcon="{ui:FontIcon Glyph=&#xE894;}">
+                    <controls:SettingsCard.Resources>
+                        <x:Double x:Key="SettingsCardWrapThreshold">800</x:Double>
+                        <x:Double x:Key="SettingsCardWrapNoIconThreshold">600</x:Double>
+                    </controls:SettingsCard.Resources>
+                    <Button Content="Delete cache"
+                            Style="{StaticResource AccentButtonStyle}"
+                            Click="Button_Click_1"/>
+                </controls:SettingsCard>
             </StackPanel>
         </Grid>
     </Grid>

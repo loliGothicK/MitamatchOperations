@@ -3,8 +3,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Mitama.Pages.Common;
 using Windows.ApplicationModel;
 using Windows.System;
+using Version = Mitama.Pages.Common.Version;
 
 namespace Mitama.Pages;
 
@@ -42,7 +44,7 @@ public sealed partial class SettingsPage
 
                 string version = System.Text.Json.JsonDocument.Parse(json).RootElement.GetProperty("tag_name").GetString();
 
-                if (version == $"v{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}")
+                if (Version.Parse(version) < Version.Current)
                 {
                     InfoBar.Title = "このバージョンは最新です";
                     InfoBar.Severity = InfoBarSeverity.Informational;
@@ -58,11 +60,17 @@ public sealed partial class SettingsPage
                     {
                         Content = $"https://github.com/LoliGothick/MitamatchOperations/releases/tag/{version}",
                     };
-                    link.Click += (_s, _e) => { _ = Launcher.LaunchUriAsync(new Uri(link.Content.ToString())); };
+                    link.Click += (_, _) => { _ = Launcher.LaunchUriAsync(new Uri(link.Content.ToString())); };
                     InfoBar.ActionButton = link;
                     InfoBar.IsOpen = true;
                 }
             }
         }
+    }
+
+    private void Button_Click_1(object _, RoutedEventArgs _e)
+    {
+        var cache = Director.ReadCache();
+        Director.CacheWrite(new Cache(cache.Legion, cache.User, cache.JWT).ToJsonBytes());
     }
 }
