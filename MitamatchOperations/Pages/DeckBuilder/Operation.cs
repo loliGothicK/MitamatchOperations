@@ -30,7 +30,7 @@ internal class OperationHistory
         ref ObservableCollection<MemoriaWithConcentration> Deck,
         ref ObservableCollection<MemoriaWithConcentration> LegendaryDeck)
     {
-        if (cursor == operations.Count) return;
+        if (cursor == operations.Count - 1) return;
         operations[cursor + 1].Redo(ref Deck, ref LegendaryDeck);
         cursor++;
     }
