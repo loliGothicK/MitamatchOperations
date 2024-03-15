@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using LiteDB;
 using Mitama.Pages.Common;
 
 namespace Mitama.Domain;
 
-public record Charm(
+public record struct Charm(
     int Index,
     string Name,
     string Ability,
@@ -14,9 +12,9 @@ public record Charm(
     DateOnly Date
 )
 {
-    public string Path => $@"{Director.CharmImageDir()}\{Name}.png";
+    public readonly string Path => $@"{Director.CharmImageDir()}\{Name}.png";
 
-    public string ToPrettyJSON()
+    public readonly string ToPrettyJSON()
     {
         var json = new
         {
@@ -41,7 +39,7 @@ public record Charm(
                 DateOnly.FromDateTime(poco.date)
             ));
         }
-        list.Sort((a, b) => b.Index.CompareTo(a.Index));
+        list.Sort((a, b) => b.Date.CompareTo(a.Date));
         return [.. list];
     });
 }

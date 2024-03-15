@@ -13,7 +13,6 @@ interface IModel
 
 public class Memoria
 {
-
     public record POCO(
         int id,
         string link,
