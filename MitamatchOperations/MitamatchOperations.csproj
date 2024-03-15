@@ -50,6 +50,14 @@
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="ML\MLActivatingModel.consumption.cs" />
+    <Content Include="ML\MLActivatingModel.mbconfig" />
+    <Content Include="ML\MLActivatingModel.mlnet" />
+    <Content Include="ML\MLActivatingModel.training.cs" />
+    <Content Include="ML\MLOrderModel.consumption.cs" />
+    <Content Include="ML\MLOrderModel.mbconfig" />
+    <Content Include="ML\MLOrderModel.mlnet" />
+    <Content Include="ML\MLOrderModel.training.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.0.240109" />
@@ -177,6 +185,18 @@
     <Page Update="Pages\DeckBuilder\MemoriaManagePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup Label="MLActivatingModel">
+    <None Update="ML\MLActivatingModel.mlnet">
+      <Link>Assets\ML\MLActivatingModel.mlnet</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="ML\MLOrderModel.mlnet">
+      <Link>Assets\ML\MLOrderModel.mlnet</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <!-- 
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution 

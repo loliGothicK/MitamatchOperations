@@ -7,14 +7,8 @@ namespace Mitama.Pages.DeckBuilder;
 
 internal class OperationHistory
 {
-    private ObservableCollection<Operation> operations;
-    private int cursor;
-
-    public OperationHistory()
-    {
-        operations = [];
-        cursor = -1;
-    }
+    private ObservableCollection<Operation> operations = [];
+    private int cursor = -1;
 
     public void Push(Operation operation)
     {
