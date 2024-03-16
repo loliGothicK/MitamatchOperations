@@ -39,7 +39,7 @@ public sealed partial class BuilderPage : Page
     private ObservableCollection<MemoriaWithConcentration> Deck = [];
     private ObservableCollection<MemoriaWithConcentration> LegendaryDeck = [];
     private List<MemoriaWithConcentration> OriginalPool { get; set; } = [.. Memoria.List.Value.Select(x => new MemoriaWithConcentration(x, 4))];
-    private ObservableCollection<MemoriaWithConcentration> Pool { get; set; } = [.. Memoria.List.Value.Where(Costume.DummyRearguard.CanBeEquipped).Select(x => new MemoriaWithConcentration(x, 4))];
+    private ObservableCollection<MemoriaWithConcentration> Pool = [.. Memoria.List.Value.Where(Costume.DummyRearguard.CanBeEquipped).Select(x => new MemoriaWithConcentration(x, 4))];
     private HashSet<FilterType> _currentFilters = [];
     private string Legion = "";
     private MemberInfo[] members = [];
@@ -71,12 +71,14 @@ public sealed partial class BuilderPage : Page
         {
             case Undo:
                 {
-                    history.Value.Undo(ref Deck, ref LegendaryDeck);
+                    history.Value.Undo(ref Deck, ref LegendaryDeck, ref Pool);
+                    Cleanup();
                     break;
                 }
             case Redo:
                 {
-                    history.Value.Redo(ref Deck, ref LegendaryDeck);
+                    history.Value.Redo(ref Deck, ref LegendaryDeck, ref Pool);
+                    Cleanup();
                     break;
                 }
         }
@@ -327,6 +329,8 @@ public sealed partial class BuilderPage : Page
                 Width = 120,
             });
         }
+
+        Sort(SortOption.SelectedIndex);
     }
 
     private void Deck_Drop(object sender, DragEventArgs e)
