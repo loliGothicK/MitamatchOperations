@@ -150,9 +150,9 @@ public sealed partial class HistoriaViewer : Page
         if (sender is not SfComboBox comboBox) return;
         if (comboBox.SelectedValue is not PlayerModel) return;
         var selected = comboBox.SelectedValue.As<PlayerModel>();
-        var legion = ToRemoveRegex().Replace(selected.Legion, string.Empty);
-        var logDir = @$"{Director.ProjectDir()}\{legion}\BattleLog";
-        var statusPath = $@"{logDir}\{Calendar.SelectedDate:yyyy-MM-dd}\Ally\[{selected.Name}]\status.json";
+        var aoro = selected.Legion == AllyMembers[0].Legion ? "Ally" : "Opponent";
+        var logDir = @$"{Director.ProjectDir()}\{Director.ReadCache().Legion}\BattleLog";
+        var statusPath = $@"{logDir}\{Calendar.SelectedDate:yyyy-MM-dd}\{aoro}\[{selected.Name}]\status.json";
         var history = JsonSerializer.Deserialize<SortedDictionary<TimeOnly, AllStatus>>(File.ReadAllText(statusPath));
         chartView = new ChartViewModel(history);
         Line.ItemsSource = chartView.Data;
