@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -164,23 +163,6 @@ public sealed partial class HistoriaViewer : Page
         chartView.SwithcTo(Line.Label = sender.As<ComboBox>().SelectedValue.As<ComboBoxItem>().Content.As<string>());
         Line.ItemsSource = chartView.Data;
     }
-
-    private void AllyOrOpponent_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (sender is not ComboBox) return;
-        if (Summary is null || PlayerSelect is null) return;
-        if (sender.As<ComboBox>().SelectedIndex == 0)
-        {
-            PlayerSelect.ItemsSource = Summary.Allies;
-        }
-        else
-        {
-            PlayerSelect.ItemsSource = Summary.Opponents;
-        }
-    }
-
-    [GeneratedRegex(@"\.|!|！|\?|？|\s+|")]
-    private static partial Regex ToRemoveRegex();
 
     private void Calendar_Loaded(object _, RoutedEventArgs _e)
     {

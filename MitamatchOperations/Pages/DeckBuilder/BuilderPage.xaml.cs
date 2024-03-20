@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -19,8 +20,10 @@ using Mitama.Pages.Common.Operations;
 using SimdLinq;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
+using Windows.System;
 using Windows.UI;
 using WinRT;
+using static Microsoft.EntityFrameworkCore.Query.Internal.ExpressionTreeFuncletizer;
 using static Mitama.Pages.Common.ObservableCollectionExtensions;
 
 namespace Mitama.Pages.DeckBuilder;
@@ -2694,6 +2697,18 @@ public sealed partial class BuilderPage : Page
             .GetDirectories($@"{Director.ProjectDir()}\{Director.ReadCache().Legion}\Members")
             .Select(d => new DirectoryInfo(d).Name));
         TargetMemberSelect.ItemsSource = items;
+    }
+
+    private void ShareButton_Click(object sender, RoutedEventArgs e)
+    {
+        var json = new
+        {
+            sw = Switch.IsOn ? "sword" : "shield",
+            deck = Deck.Select(m => new[] { m.Memoria.Id, m.Concentration }).ToArray(),
+            legendaryDeck = LegendaryDeck.Select(m => new[] { m.Memoria.Id, m.Concentration }).ToArray(),
+        };
+        var base64 = Convert.ToBase64String(new UTF8Encoding(true).GetBytes(JsonSerializer.Serialize(json)));
+        _ = Launcher.LaunchUriAsync(new Uri($@"https://mitama.io/deck-builder?deck={base64}"));
     }
 }
 
