@@ -7,6 +7,7 @@ using System.Text.Json;
 using Mitama.Domain;
 using static System.Environment;
 using static System.IO.Directory;
+using static Tensorflow.TensorShapeProto.Types;
 
 namespace Mitama.Pages.Common;
 
@@ -211,6 +212,9 @@ internal class Director
 
     internal static Cache ReadCache()
     {
+        var cacheDir = @$"{MitamatchDir()}\Cache";
+        if (!Exists(cacheDir)) CreateDirectory(cacheDir);
+        if (!File.Exists($@"{cacheDir}\cache.json")) CacheWrite(new Cache().ToJsonBytes());
         using var sr = new StreamReader($@"{MitamatchDir()}\Cache\cache.json", Encoding.GetEncoding("UTF-8"));
         var json = sr.ReadToEnd();
         return JsonSerializer.Deserialize<Cache>(json.Replace("\"Region\"", "\"Legion\""));
