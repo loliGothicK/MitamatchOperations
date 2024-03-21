@@ -44,7 +44,7 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
         var cache = Director.ReadCache();
         if (cache.FetchDate is null || cache.FetchDate < Storage.ListObjects("data").First().UpdatedDateTimeOffset)
         {
-            Login.Content = "リソースをダウンロードしています";
+            Login.Content = "リソースをダウンロードしています...";
             Login.IsEnabled = false;
             await Task.Run(() =>
             {
