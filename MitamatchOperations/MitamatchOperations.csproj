@@ -67,7 +67,7 @@
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.0.240109" />
     <PackageReference Include="DynamicData" Version="8.4.1" />
     <PackageReference Include="Google.Apis.Auth" Version="1.67.0" />
-    <PackageReference Include="Google.Cloud.Datastore.V1" Version="4.9.0" />
+    <PackageReference Include="Google.Cloud.Datastore.V1" Version="4.10.0" />
     <PackageReference Include="Google.Cloud.Storage.V1" Version="4.9.0" />
     <PackageReference Include="JWT" Version="10.1.1" />
     <PackageReference Include="LiteDB" Version="5.0.19" />
