@@ -302,12 +302,19 @@ public sealed partial class OrderManagerPage
             using var sr = new StreamReader(path, Encoding.GetEncoding("UTF-8"));
             var json = sr.ReadToEnd();
             OrdersInPossession.Clear();
-            foreach (var index in MemberInfo.FromJson(json).OrderIndices)
-            {
-                Sources.Remove(Order.Of(index));
-                OrdersInPossession.Add(Order.Of(index));
-            }
-
+            var legacyToV2 = Order
+                .List
+                .Value
+                .Where(o => o.Payed)
+                .Reverse()
+                .Select((order, index) => (order, index))
+                .ToDictionary(pair => pair.index, pair => pair.order.Index);
+            var info = MemberInfo.FromJson(json);
+            var orders = info.Version != 2
+                ? info.OrderIndices.Select(index => Order.Of(legacyToV2[index])).ToArray()
+                : info.OrderIndices.Select(Order.Of).ToArray();
+            OrdersInPossession.AddRange(orders);
+            Sources.RemoveWhere(orders.Contains);
             Update();
             return Task.CompletedTask;
         });
