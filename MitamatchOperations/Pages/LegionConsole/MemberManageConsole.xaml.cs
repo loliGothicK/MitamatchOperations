@@ -334,8 +334,7 @@ public sealed partial class MemberManageConsole
                 var json = File.ReadAllText($@"{newDir}\info.json");
                 var info = MemberInfo.FromJson(json);
                 info = info with { Name = newName, UpdatedAt = DateTime.Now };
-                var newJson = JsonSerializer.Serialize(info);
-                File.WriteAllText($@"{newDir}\info.json", newJson);
+                File.WriteAllText($@"{newDir}\info.json", info.ToJson());
                 return Task.CompletedTask;
             }))
             .WithCancel("Cancel")
