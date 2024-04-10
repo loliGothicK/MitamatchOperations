@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Mitama.Pages.LegionConsole;
+using WinRT;
 
 namespace Mitama.Domain;
 
@@ -128,8 +129,8 @@ public partial record BattleLog(List<BattleLogItem> Data)
 
         foreach (var (time, source, order) in Data
             .Select(item => (item.Time, item.Source, BattleLogParser.ParseEvent(item.Fragments[0].Content)))
-            .Where(pair => pair.Item3 is PrepareOrder)
-            .Select(pair => (pair.Time, pair.Source, (pair.Item3 as PrepareOrder).Order)))
+            .Where(pair => pair.Item3 is PrepareOrder or ActivateOrder)
+            .Select(pair => (pair.Time, pair.Source, (pair.Item3 is PrepareOrder ? pair.Item3.As<PrepareOrder>().Order : pair.Item3.As<ActivateOrder>().Order))))
         {
             switch (source.Kind)
             {
