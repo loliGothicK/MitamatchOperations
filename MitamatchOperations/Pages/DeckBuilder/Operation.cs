@@ -61,7 +61,7 @@ internal record AddMemoria(MemoriaIdAndConcentration[] items) : Operation
     {
         foreach (var item in items)
         {
-            Deck.RemoveWhere(m =>  m.Memoria.Id == item.Id);
+            Deck.RemoveWhere(m => m.Memoria.Id == item.Id);
             LegendaryDeck.RemoveWhere(m => m.Memoria.Id == item.Id);
             Pool.Add(new(Memoria.Of(item.Id), item.Concentration));
         }

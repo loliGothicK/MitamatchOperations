@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using LiteDB;
 using Microsoft.UI.Xaml;
-using static Mitama.Lib.Indoc;
 using Mitama.Pages.Common;
 using Syncfusion.UI.Xaml.Data;
+using static Mitama.Lib.Indoc;
 
 namespace Mitama.Domain;
 
