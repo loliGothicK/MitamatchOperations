@@ -23,7 +23,11 @@ public sealed partial class SplashScreen : WinUIEx.SplashScreen
         Login.Click += async (_, _) =>
         {
             // open the mitamatch login page by default in the default browser
-            _ = await Windows.System.Launcher.LaunchUriAsync(new Uri("https://mitama-oauth.vercel.app"));
+            _ = await Windows.System.Launcher.LaunchUriAsync(
+                    new Uri("https://mitama-oauth.vercel.app"),
+                    new() {
+                        DisplayApplicationPicker = true,
+                    });
         };
     }
 
