@@ -84,18 +84,18 @@
     <PackageReference Include="OpenCvSharp4.Windows" Version="4.9.0.20240103" />
     <PackageReference Include="SciSharp.TensorFlow.Redist" Version="2.3.1" />
     <PackageReference Include="SimdLinq" Version="1.3.2" />
-    <PackageReference Include="Syncfusion.Chart.WinUI" Version="25.1.40" />
-    <PackageReference Include="Syncfusion.Core.WinUI" Version="25.1.40" />
-    <PackageReference Include="Syncfusion.Editors.WinUI" Version="25.1.40" />
-    <PackageReference Include="Syncfusion.Gauge.WinUI" Version="25.1.40" />
-    <PackageReference Include="Syncfusion.Grid.WinUI" Version="25.1.40" />
-    <PackageReference Include="Syncfusion.GridCommon.WinUI" Version="25.1.40" />
-    <PackageReference Include="Syncfusion.GridExport.WinUI" Version="25.1.40" />
-    <PackageReference Include="Syncfusion.Licensing" Version="25.1.40" />
-    <PackageReference Include="Syncfusion.Notifications.WinUI" Version="25.1.40" />
-    <PackageReference Include="Syncfusion.Ribbon.WinUI" Version="25.1.40" />
-    <PackageReference Include="Syncfusion.Scheduler.WinUI" Version="25.1.40" />
-    <PackageReference Include="Syncfusion.TreeView.WinUI" Version="25.1.40" />
+    <PackageReference Include="Syncfusion.Chart.WinUI" Version="25.2.7" />
+    <PackageReference Include="Syncfusion.Core.WinUI" Version="25.2.7" />
+    <PackageReference Include="Syncfusion.Editors.WinUI" Version="25.2.7" />
+    <PackageReference Include="Syncfusion.Gauge.WinUI" Version="25.2.7" />
+    <PackageReference Include="Syncfusion.Grid.WinUI" Version="25.2.7" />
+    <PackageReference Include="Syncfusion.GridCommon.WinUI" Version="25.2.7" />
+    <PackageReference Include="Syncfusion.GridExport.WinUI" Version="25.2.7" />
+    <PackageReference Include="Syncfusion.Licensing" Version="25.2.7" />
+    <PackageReference Include="Syncfusion.Notifications.WinUI" Version="25.2.7" />
+    <PackageReference Include="Syncfusion.Ribbon.WinUI" Version="25.2.7" />
+    <PackageReference Include="Syncfusion.Scheduler.WinUI" Version="25.2.7" />
+    <PackageReference Include="Syncfusion.TreeView.WinUI" Version="25.2.7" />
     <PackageReference Include="System.Collections.Immutable" Version="9.0.0-preview.2.24128.5" />
     <PackageReference Include="System.Reactive" Version="6.0.1-preview.1" />
     <PackageReference Include="System.Reactive.Linq" Version="6.0.1-preview.1" />
