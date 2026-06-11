@@ -70,7 +70,7 @@
     <PackageReference Include="Google.Cloud.Datastore.V1" Version="4.10.0" />
     <PackageReference Include="Google.Cloud.Storage.V1" Version="4.10.0" />
     <PackageReference Include="JWT" Version="10.1.1" />
-    <PackageReference Include="LiteDB" Version="5.0.19" />
+    <PackageReference Include="LiteDB" Version="5.0.21" />
     <PackageReference Include="MathNet.Numerics" Version="6.0.0-beta1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0-preview.2.24128.4" />
     <PackageReference Include="Microsoft.ML" Version="4.0.0-preview.24162.2" />
